@@ -1,0 +1,260 @@
+{
+  "status": "success",
+  "backgrounds": [
+    {
+      "uuid": "459ff051-baaa-5444-8f6c-1e6448febd0b",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/047fc82cc97ca9c393a99d728605836c6433d3c5.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/047fc82cc97ca9c393a99d728605836c6433d3c5.jpg"
+    },
+    {
+      "uuid": "d201cc0f-d4f8-5d0a-9a9c-cd71a2157bd1",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/12fdab83f07c7a07a8984c7391026197db11dbda.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/12fdab83f07c7a07a8984c7391026197db11dbda.jpg"
+    },
+    {
+      "uuid": "43a3dc7f-8654-596d-b248-b9a8ce9573cd",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/19095dbb612cb7b3eccd22cd70aa3cc3150a47e0.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/19095dbb612cb7b3eccd22cd70aa3cc3150a47e0.jpg"
+    },
+    {
+      "uuid": "5de144fe-4656-5a64-9599-7222eafd479b",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/1d43787f6c58188ebf99ea7e2155c79d6b190d23.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/1d43787f6c58188ebf99ea7e2155c79d6b190d23.jpg"
+    },
+    {
+      "uuid": "c748bcc9-96ea-5227-b7ce-7c98c6aaa889",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/2164e8fa525ffba4084a0ea4cf5d6f0a53971c4e.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/2164e8fa525ffba4084a0ea4cf5d6f0a53971c4e.jpg"
+    },
+    {
+      "uuid": "3a9e1168-ab8a-5b8e-9235-64e5fd1e2907",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/216d1ec1089652b50210930154b31b4243087bf3.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/216d1ec1089652b50210930154b31b4243087bf3.jpg"
+    },
+    {
+      "uuid": "c0777a67-d4a2-5c08-baa8-cbf290c3c94c",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/28f3afd8059ff2292db257eb964f31206d6658d3.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/28f3afd8059ff2292db257eb964f31206d6658d3.jpg"
+    },
+    {
+      "uuid": "c7efd752-d179-5119-b7ea-5761b374f729",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/2dff745d2c4edd4e466a2a0e1986c4a3365f45d3.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/2dff745d2c4edd4e466a2a0e1986c4a3365f45d3.jpg"
+    },
+    {
+      "uuid": "0224a8de-d358-5d6a-97b7-ea6015671f9b",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/3421ffffdd6bf0ea571143f5622924a1c7fba788.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/3421ffffdd6bf0ea571143f5622924a1c7fba788.jpg"
+    },
+    {
+      "uuid": "64ae9ca9-7f04-5f6a-830a-2c1273444327",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/3ab76c91909a5b9ab0c9be14c48ba1657e9058af.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/3ab76c91909a5b9ab0c9be14c48ba1657e9058af.jpg"
+    },
+    {
+      "uuid": "6edae2b7-fcb9-57b4-a945-8149328a5b1a",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/42722d20fc76798a89b719cb0f1d482ed069a613.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/42722d20fc76798a89b719cb0f1d482ed069a613.jpg"
+    },
+    {
+      "uuid": "50eb7331-db5a-5177-8ee1-e8fe65c9e43e",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/4e7b3da750e9ec92f624d5bef11395fe3f10f6d3.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/4e7b3da750e9ec92f624d5bef11395fe3f10f6d3.jpg"
+    },
+    {
+      "uuid": "273eea50-0da3-51a0-b56a-d24a8daba172",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/527677512e6eb9da6b8559385190cb029ae15e9e.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/527677512e6eb9da6b8559385190cb029ae15e9e.jpg"
+    },
+    {
+      "uuid": "3bf79cf3-66b9-55a5-8f67-156dd6d46fe5",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/5a3b1af4824cd56f57c36be07f201d30eadbc0f8.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/5a3b1af4824cd56f57c36be07f201d30eadbc0f8.jpg"
+    },
+    {
+      "uuid": "a123c432-4339-5143-8ebc-dafe144b27c2",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/666c479bdb5dd0913c9242a6b980f100bb3d4536.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/666c479bdb5dd0913c9242a6b980f100bb3d4536.jpg"
+    },
+    {
+      "uuid": "7187ae52-98bb-5407-a6d4-d21cc4c8f0b7",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/6f0c560c724f09a845946a8044f0ee7d1a74702e.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/6f0c560c724f09a845946a8044f0ee7d1a74702e.jpg"
+    },
+    {
+      "uuid": "3578e5af-10cc-51b5-93cc-6562afff7495",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/78d0d507c38a61eeb8bacfd02bbc1dc3faa47d0a.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/78d0d507c38a61eeb8bacfd02bbc1dc3faa47d0a.jpg"
+    },
+    {
+      "uuid": "5d00dc86-7b8a-5e01-9afa-fcf33c310069",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/78de835fb25d1496542c13c9e639961b054c5ae4.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/78de835fb25d1496542c13c9e639961b054c5ae4.jpg"
+    },
+    {
+      "uuid": "88b1c1fb-cbc6-53cb-9f34-a0c5bb46521d",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/79ddc8b59ecfa58a7aac1003dc3f9c4b49eda51c.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/79ddc8b59ecfa58a7aac1003dc3f9c4b49eda51c.jpg"
+    },
+    {
+      "uuid": "916127b9-71ac-5667-b2c7-73b37b3c2cdf",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/7f512188efaa51f7753ffa0801361bbaf877975d.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/7f512188efaa51f7753ffa0801361bbaf877975d.jpg"
+    },
+    {
+      "uuid": "a142e941-b00f-5517-a1cf-610d3d90a1d9",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/89b0195bc4f98136486f184a9a706eb53b4f05d9.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/89b0195bc4f98136486f184a9a706eb53b4f05d9.jpg"
+    },
+    {
+      "uuid": "a3c693f9-9ff5-5bf2-90ee-3eb5796cced8",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/8a76cafe1a17838d175684e1ebe4e38dca112b1b.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/8a76cafe1a17838d175684e1ebe4e38dca112b1b.jpg"
+    },
+    {
+      "uuid": "54ec832d-d0df-5b8d-ac6b-d15fc968e052",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/8cf5d9b01baf7da79e7856e3254cd4e73e281863.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/8cf5d9b01baf7da79e7856e3254cd4e73e281863.jpg"
+    },
+    {
+      "uuid": "c690ccdd-3bc1-5989-93ed-5a130f529308",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/90cf853dbf1ae8116aeb80caa0b2e5d55d7b1247.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/90cf853dbf1ae8116aeb80caa0b2e5d55d7b1247.jpg"
+    },
+    {
+      "uuid": "218744ca-e9b8-5ed5-873a-c8ee59ed01e1",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/947dbd43e877a6ed0384ac228f7d47cda9ec98bc.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/947dbd43e877a6ed0384ac228f7d47cda9ec98bc.jpg"
+    },
+    {
+      "uuid": "294b2a21-4053-5773-96bb-eff5cd7a35ea",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/97f2b2c3818ee4c9054f83c1f888ba1ce5775231.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/97f2b2c3818ee4c9054f83c1f888ba1ce5775231.jpg"
+    },
+    {
+      "uuid": "1781ec96-2b75-5ff8-ba34-42e2186c8e64",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/995d9d083bdf135c2f6e0265b7aa16a74f6c6c92.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/995d9d083bdf135c2f6e0265b7aa16a74f6c6c92.jpg"
+    },
+    {
+      "uuid": "00cf6f07-62f4-5af8-b00b-bd3f32434718",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/9b2b5d46811e067d18da3054de8e9a11e20e4ea6.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/9b2b5d46811e067d18da3054de8e9a11e20e4ea6.jpg"
+    },
+    {
+      "uuid": "8d6fce87-b34d-51cc-8e5e-53beed9b0c52",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/9b8179a320e52a90b3f7076a45323430279da76f.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/9b8179a320e52a90b3f7076a45323430279da76f.jpg"
+    },
+    {
+      "uuid": "288947a1-ccb2-58d6-821e-3b6f9200832a",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/9d333b64514ad285c0f150ec5e2c5242fd6dd394.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/9d333b64514ad285c0f150ec5e2c5242fd6dd394.jpg"
+    },
+    {
+      "uuid": "03828ec9-4ed8-5be6-b95c-6294c84ad608",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a0f01f609eca0f73fd3388aadca6a01ceef351e8.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a0f01f609eca0f73fd3388aadca6a01ceef351e8.jpg"
+    },
+    {
+      "uuid": "f1945fe2-d6ac-59b0-85c1-540cda7a2895",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a1876d5a8420cadf59f9237555d0f62d0a4b3d04.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a1876d5a8420cadf59f9237555d0f62d0a4b3d04.jpg"
+    },
+    {
+      "uuid": "374fa467-b431-5427-a5b4-adc4ba6f06ca",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a5e79c9abe6688b1d76417e2b9a89f20139f6b6b.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a5e79c9abe6688b1d76417e2b9a89f20139f6b6b.jpg"
+    },
+    {
+      "uuid": "f6a44bac-86c3-54b8-8230-774e84918f94",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a8690b34824a6de515b9fb0ee1265a54cb72229c.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a8690b34824a6de515b9fb0ee1265a54cb72229c.jpg"
+    },
+    {
+      "uuid": "921c074e-7b00-573f-8664-f3b23f0c041f",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a8a662aad4f9fc8d2f32ba63f546e0190b51573b.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a8a662aad4f9fc8d2f32ba63f546e0190b51573b.jpg"
+    },
+    {
+      "uuid": "34b7f582-bde2-5efc-af22-2e586d0e3a44",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a9f4d4855ef12a71c10cfe9f6199c734fceb7a8c.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/a9f4d4855ef12a71c10cfe9f6199c734fceb7a8c.jpg"
+    },
+    {
+      "uuid": "7d3a8626-fbad-505d-a37e-57df91130083",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/aba714c832a199609742278f721c95a29f1d8bbe.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/aba714c832a199609742278f721c95a29f1d8bbe.jpg"
+    },
+    {
+      "uuid": "6a2472e2-c7d3-5f49-b6d7-7ec1331770f0",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/addc0617f367d0e44195c8d507063b7fdbaa476c.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/addc0617f367d0e44195c8d507063b7fdbaa476c.jpg"
+    },
+    {
+      "uuid": "b8ad6c5f-6d35-5127-9c6c-3e2962824ecd",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/b657730ea94bee20041322aaaf6a37644683079e.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/b657730ea94bee20041322aaaf6a37644683079e.jpg"
+    },
+    {
+      "uuid": "ea808186-ba49-5ecd-bd68-aac4de85cc9a",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/b6a9243048fb52cd366bfc6005bc7a5eb9308b15.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/b6a9243048fb52cd366bfc6005bc7a5eb9308b15.jpg"
+    },
+    {
+      "uuid": "8b0019ec-408f-56cd-a00b-c709e2bc1d66",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/b8c540213e3c2310d5bbe5717e803673914a5c82.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/b8c540213e3c2310d5bbe5717e803673914a5c82.jpg"
+    },
+    {
+      "uuid": "7cd26305-8be3-5be0-a63a-b27351003050",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/ba7346ec7afb2be2f0e9ff9b0cb28caf5dd7646f.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/ba7346ec7afb2be2f0e9ff9b0cb28caf5dd7646f.jpg"
+    },
+    {
+      "uuid": "3ef4117b-5dfc-5943-934f-338392fffe0e",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/c203072787d71888a870cca2a1bcf926b4d4e1dd.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/c203072787d71888a870cca2a1bcf926b4d4e1dd.jpg"
+    },
+    {
+      "uuid": "20812669-7222-57f5-9dca-26d113606d50",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/c37ac164b4113f8f03404be4774d203b0462165d.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/c37ac164b4113f8f03404be4774d203b0462165d.jpg"
+    },
+    {
+      "uuid": "8f4e2b4d-b29a-5d3a-9ba1-54bdc0ba67bc",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/c95abe0d7c45a10ce764df5d8402eb6afd711ec4.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/c95abe0d7c45a10ce764df5d8402eb6afd711ec4.jpg"
+    },
+    {
+      "uuid": "3fd7063b-7daf-5c71-a0fd-907ad630484e",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/d85b242e845f0c9469087a850b469a4ae140e783.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/d85b242e845f0c9469087a850b469a4ae140e783.jpg"
+    },
+    {
+      "uuid": "7137a4ca-f9c4-515a-900d-952f350019a0",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/e0d55520546e7556091974ebd593c4db76578e7c.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/e0d55520546e7556091974ebd593c4db76578e7c.jpg"
+    },
+    {
+      "uuid": "1dddb149-e2af-5622-99f8-bd607ae720c2",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/ec92a26ddc464856c71bc37e106c72ea432e9f3c.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/ec92a26ddc464856c71bc37e106c72ea432e9f3c.jpg"
+    },
+    {
+      "uuid": "f1252dae-cbbd-5636-8f20-5a8315592401",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/ee921af95cafb785ebf3f2f77797d9d26e5ce7bf.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/ee921af95cafb785ebf3f2f77797d9d26e5ce7bf.jpg"
+    },
+    {
+      "uuid": "8f5a87e9-7ea2-56a4-bcd4-ea0e38034ec7",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/f456048aedf7ec0fb7d40bdee5a9f3b957b988db.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/f456048aedf7ec0fb7d40bdee5a9f3b957b988db.jpg"
+    },
+    {
+      "uuid": "29fec303-ef2d-5e00-98d5-b3fbc86f14a7",
+      "url_public": "http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/f95b90a30467c05f53e92253e0f2319ebe63ce55.jpg",
+      "url_preview": "http:\/\/scaleflex.cloudimg.io\/resize\/83x50\/x\/http:\/\/jolipage-public-assets.airstore.io\/Backgrounds\/v1\/f95b90a30467c05f53e92253e0f2319ebe63ce55.jpg"
+    }
+  ]
+}

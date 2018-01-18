@@ -1,0 +1,9 @@
+{
+  "presets": ["env", "react", "stage-2"],
+  "plugins": [
+    "react-hot-loader/babel",
+    "dynamic-import-webpack",
+    "transform-decorators-legacy",
+    "transform-class-properties"
+  ]
+}
