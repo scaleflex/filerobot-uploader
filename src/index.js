@@ -24,7 +24,7 @@ function init(options = {}) {
   options.settings.uploadPath = options.settings.uploadPath || null;
   options.settings.uploadParams = options.settings.uploadParams || {};
   options.settings.uploadParams.opt_auth_upload_key = options.settings.uploadParams.opt_auth_upload_key || null;
-  options.on_upload = options.on_upload || function(files = []) {
+  options.onUpload = options.onUpload || function(files = []) {
     const [file] = files;
     const result = document.querySelector('.result');
 

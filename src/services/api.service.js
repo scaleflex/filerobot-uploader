@@ -30,7 +30,7 @@ export const send = (url, method = 'GET', data = null, headers = {"X-Token": "te
  * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler uploadPath)
  * @returns {Promise}
  */
-export const uploadFiles = (uploadPath = config.uploadPath, uploadParams = {}, files = [], data_type = 'files[]') => {
+export const uploadFiles = (files = [], {uploadPath = config.uploadPath, uploadParams = {}}, data_type = 'files[]') => {
   let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   const ajaxData = new FormData();
 

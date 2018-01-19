@@ -1,7 +1,7 @@
 export default {
-  modules: ['USER_UPLOAD', 'ICONS'], // 'USER_UPLOAD', 'ICONS', SEARCH, BACKGROUNDS ...
-  on_upload_src: 'https://opendocs-content.api.airstore.io/v1/get/_/',
-  on_upload: null, // handler
+  modules: ['USER_UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'], // 'USER_UPLOAD', 'ICONS', SEARCH, BACKGROUNDS ...
+  onUploadSrc: 'https://opendocs-content.api.airstore.io/v1/get/_/',
+  onUpload: null, // handler
   image_only: true,
   settings:   {
     uploadPath: 'https://opendocs-content.api.airstore.io/upload',

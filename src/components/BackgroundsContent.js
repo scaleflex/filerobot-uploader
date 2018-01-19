@@ -7,7 +7,7 @@ class BackgroundsContent extends Component {
   render() {
     return (
       <div style={[{ width: '100%' }]}>
-        <AirstoreBackgroundLibrary onUploaded={this.props.uploadFiles}/>
+        <AirstoreBackgroundLibrary/>
       </div>
     );
   }

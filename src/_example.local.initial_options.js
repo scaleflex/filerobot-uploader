@@ -5,9 +5,9 @@
  * When you are developing and work on localhost:8080 you can manage options here
  */
 export default {
-  modules: ['USER_UPLOAD', 'ICONS'],
-  on_upload_src: null,
-  on_upload: null,
+  modules: ['USER_UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
+  onUploadSrc: null,
+  onUpload: null,
   image_only: true,
   settings:   {
     uploadPath: null,

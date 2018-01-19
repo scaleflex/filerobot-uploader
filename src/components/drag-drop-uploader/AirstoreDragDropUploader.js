@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import styles from './styles.css';
+import {connect} from "react-redux";
+import {uploadFilesFromUrls, uploadFiles} from "../../actions";
 
 const STEP = {
   DEFAULT: 'DEFAULT',
@@ -23,11 +25,11 @@ class AirstoreDragDropUploader extends Component {
   fileDropHandler = event => {
     event.preventDefault();
     this.changeFile((event.dataTransfer || event.originalEvent.dataTransfer).files);
-  }
+  };
 
   fileChangeHandler = ({target}) => {
     this.changeFile(target.files);
-  }
+  };
 
   changeFile = (files = []) => {
     this.setState({ files });
@@ -35,48 +37,38 @@ class AirstoreDragDropUploader extends Component {
     setTimeout(() => {
       if (files && this.isFilesValid(files)) this.upload();
     });
-  }
+  };
 
-  changeStep = step => { this.setState({ step }) }
+  changeStep = step => this.setState({ step });
+  uploadStart = () => this.setState({ step: STEP.UPLOADING });
+  uploadSuccess = uploadedFiles => this.setState({ step: STEP.UPLOADED, uploadedFiles });
+  uploadError = (msg, timer = null) => {
+    this.setState({ step: STEP.ERROR, errorMsg: msg || 'Error' });
+    if (timer) setTimeout(() => this.changeStep(STEP.DEFAULT), timer);
+  };
 
   upload = (isUploadFromUrl = false, url = null) => {
-    if (typeof this.props.onUploaded === 'function') {
-      this.changeStep(STEP.UPLOADING);
+    // if (this.state.isLoading) return;
 
-      (isUploadFromUrl
-          ? this.props.onUploaded([url], 'files_url[]')
-          : this.props.onUploaded(this.state.files)
-      ).then(
-        (uploadedFiles = []) => {
-          if (uploadedFiles === false) return;
-
-          this.changeStep(STEP.UPLOADED);
-          this.setState({ uploadedFiles });
-        },
-        (error) => {
-          this.changeStep(STEP.ERROR);
-          this.setState({ errorMsg: error.msg || 'Error' });
-        }
-      );
-    }
-    else console.warn('this.props.onUploaded is not defined (AirstoreDragDropUploader)');
+    this.uploadStart();
+    (
+      isUploadFromUrl
+        ? this.props.onFileUploadFromUrl(url, this.props.uploaderConfig)
+        : this.props.onFilesUpload(this.state.files, this.props.uploaderConfig)
+    ).then(files => this.uploadSuccess(files), error => this.uploadError(error.msg));
   };
 
   uploadFromWeb = () => {
     const value = this.refs.uploadFromWebField.value;
     const isValid = value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
-    const errorHandler = () => {
-      this.changeStep(STEP.ERROR);
-      this.setState({ errorMsg: value ? 'URL not valid!' : 'Empty URL!' });
-      setTimeout(() => this.changeStep(STEP.DEFAULT), 4000);
-    };
 
     if (isValid) this.upload(true, value);
-    else errorHandler();
+    else this.uploadError(value ? 'URL not valid!' : 'Empty URL!', 4000);
   };
 
   render() {
     const { step, uploadedFiles = [], errorMsg = '' } = this.state;
+    const uploadBlock_style = styles.container.uploadBlock;
 
     return (
       <div style={[styles.container]}>
@@ -88,16 +80,16 @@ class AirstoreDragDropUploader extends Component {
             onDragLeave={e => { e.preventDefault(); this.setState({ isDragOver: false }) }}
             onDragEnd={e => { e.preventDefault(); this.setState({ isDragOver: false }) }}
             onDrop={this.fileDropHandler}
-            style={[styles.container.uploadBlock, this.state.isDragOver && { background: "rgba(210, 253, 207, 0.5)" }]}
+            style={[uploadBlock_style, this.state.isDragOver && { background: "rgba(210, 253, 207, 0.5)" }]}
             method={'post'}
             encType="multipart/form-data"
           >
 
             {
               (step === STEP.DEFAULT || step === STEP.ERROR) &&
-              <div style={[styles.container.uploadBlock.inputBox]}>
+              <div style={[uploadBlock_style.inputBox]}>
                 <input
-                  style={[styles.container.uploadBlock.inputBox.file]}
+                  style={[uploadBlock_style.inputBox.file]}
                   type="file"
                   name="files[]"
                   ref="fileInput"
@@ -106,14 +98,14 @@ class AirstoreDragDropUploader extends Component {
                   onChange={this.fileChangeHandler}
                 />
 
-                <j-label style={[styles.container.uploadBlock.inputBox.label]}>
-                  <j-span style={[styles.container.uploadBlock.inputBox.label.dragDropText]}>Drag file here</j-span>
-                  <div style={[styles.container.uploadBlock.inputBox.label.orText]}>OR</div>
+                <j-label style={[uploadBlock_style.inputBox.label]}>
+                  <j-span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</j-span>
+                  <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
                   <a
-                    style={[styles.container.uploadBlock.inputBox.label.uploadBtn]}
+                    style={[uploadBlock_style.inputBox.label.uploadBtn]}
                     onClick={() => { this.refs.fileInput.click() }}
                   >Browse your computer</a>
-                  <div style={[styles.container.uploadBlock.inputBox.label.orText]}>OR</div>
+                  <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
                   <div style={[{display: 'flex'}]}>
                     <input
                       type="text"
@@ -126,7 +118,7 @@ class AirstoreDragDropUploader extends Component {
                       }}
                     />
                     <button
-                      style={[styles.container.uploadBlock.inputBox.label.uploadBtn]}
+                      style={[uploadBlock_style.inputBox.label.uploadBtn]}
                       onClick={this.uploadFromWeb}
                     >OK</button>
                   </div>
@@ -135,13 +127,13 @@ class AirstoreDragDropUploader extends Component {
                   </div>
                 </j-label>
 
-                <div ref="submitBtn" style={[styles.container.uploadBlock.inputBox.submitBtn]} type="submit">Upload</div>
+                <div ref="submitBtn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">Upload</div>
               </div>
             }
 
             {
               step === STEP.UPLOADING &&
-              <div style={[styles.container.uploadBlock.uploadingBox]}>
+              <div style={[uploadBlock_style.uploadingBox]}>
                 <j-i
                   style={[
                     styles.fa, styles.faSpin, styles.faFw,
@@ -154,8 +146,8 @@ class AirstoreDragDropUploader extends Component {
 
             {
               step === STEP.ERROR &&
-              <div style={[styles.container.uploadBlock.errorBox]}>
-                <j-span style={[styles.container.uploadBlock.errorBox.errorMsg]}>{errorMsg}</j-span>
+              <div style={[uploadBlock_style.errorBox]}>
+                <j-span style={[uploadBlock_style.errorBox.errorMsg]}>{errorMsg}</j-span>
               </div>
             }
           </div>
@@ -180,4 +172,10 @@ class AirstoreDragDropUploader extends Component {
   }
 }
 
-export default Radium(AirstoreDragDropUploader);
+export default connect(
+  ({uploader: {uploaderConfig}}) => ({uploaderConfig}),
+  dispatch => ({
+    onFilesUpload: (files, uploaderConfig) => dispatch(uploadFiles(files, uploaderConfig)),
+    onFileUploadFromUrl: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig))
+  })
+)(Radium(AirstoreDragDropUploader));

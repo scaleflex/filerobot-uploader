@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import styles from '../styles.css';
 import { AirstoreModal, UserUploadContent, IconsContent, BackgroundsContent } from './';
-import {getBackgrounds, modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules} from '../actions'
+import { AirstoreSearchLibrary } from './search';
+import {
+  modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs
+} from '../actions'
 import { uploadFiles } from '../services/api.service'
 import { connect } from 'react-redux';
 
@@ -11,15 +14,19 @@ class AirstoreUploader extends Component {
   tabs = [
     {
       id: 'USER_UPLOAD', fullName: 'Upload from my computer', shortName: 'Upload', icon: '\uf0ee',
-      getContent: () => <UserUploadContent uploadFiles={this.onUploadFiles.bind(this)}/>
+      getContent: () => <UserUploadContent/>
+    },
+    {
+      id: 'SEARCH', fullName: 'Search', shortName: 'Search', icon: '\uf0ee',
+      getContent: () => <div style={[{ width: '100%' }]}><AirstoreSearchLibrary/></div>
     },
     {
       id: 'ICONS', fullName: 'Icons Library', shortName: 'Icons', icon: '\uf1a0',
-      getContent: () => <IconsContent uploadFiles={this.onUploadFiles.bind(this)}/>
+      getContent: () => <IconsContent/>
     },
     {
       id: 'BACKGROUNDS', fullName: 'Backgrounds Library', shortName: 'Backgrounds', icon: '\uf1a0',
-      getContent: () => <BackgroundsContent uploadFiles={this.onUploadFiles.bind(this)}/>
+      getContent: () => <BackgroundsContent/>
     }
   ];
 
@@ -27,41 +34,13 @@ class AirstoreUploader extends Component {
 
   closeModal = () => this.props.onModalClose();
 
-  onUploadFiles = (files, data_type = 'files[]') => {
-    const { initialOptions, uploaderConfig } = this.props;
-    const onUpload = initialOptions.on_upload;
-    const { uploadPath, uploadParams } = uploaderConfig;
-
-    return uploadFiles(uploadPath, uploadParams, files, data_type).then(
-      files => {
-        if (typeof onUpload === 'function') onUpload(files);
-        else console.warn('onUpload() is not defined (AirstoreUploader)');
-
-        this.closeModal();
-
-        return false; // Correct to return "files" here, but we run closeModal() and our modal is removed that's why
-                      // we return FALSE, and in promise.resolve handler we will do nothing in this case
-        //return files;
-      },
-
-      error => error
-    );
-  };
-
-  getFilteredTabs = () => this.tabs.filter(tab => tab.id && this.props.activeModules.indexOf(tab.id) !== -1);
-
   componentDidMount() {
-    const { initialOptions, onActivateTab, onSetUploaderConfig, onSetActiveModules} = this.props;
+    const { initialOptions, onSetUploaderConfig, onSetActiveModules, onSetUploadHandler, onSetTabs} = this.props;
 
     onSetUploaderConfig(initialOptions.settings || {});
     onSetActiveModules(initialOptions.modules || []);
-
-    setTimeout(() => {
-      const filteredTabs = this.getFilteredTabs();
-      if (filteredTabs && filteredTabs.length) onActivateTab(filteredTabs[0]);
-
-      if (this.props.activeModules.indexOf('BACKGROUNDS') !== -1) this.props.onGetBackgrounds();
-    });
+    onSetUploadHandler(initialOptions.onUpload || null);
+    onSetTabs(this.tabs);
   }
 
   render() {
@@ -75,14 +54,14 @@ class AirstoreUploader extends Component {
   }
 
   renderModalContent() {
-    const { activeTab } = this.props;
+    const { activeTab, filteredTabs } = this.props;
 
     return (
       <div style={[{ height: 550 }]}>
 
         <div style={[styles.tabs.header]}>
           <div style={[styles.tabs.header.container]}>
-            {this.getFilteredTabs().map((tab, index) => (
+            {filteredTabs.map((tab, index) => (
               <a
                 href="#"
                 key={`tab-${index}`}
@@ -103,7 +82,7 @@ class AirstoreUploader extends Component {
           </div>
         </div>
 
-        <div style={[styles.tabs.content]}>
+        <div style={[styles.tabs.content, activeTab && activeTab.id === 'ICONS' && {overflow: 'hidden'}]}>
           {activeTab && activeTab.getContent.call(this)}
         </div>
       </div>
@@ -113,14 +92,15 @@ class AirstoreUploader extends Component {
 
 export default connect(
   ({
-     uploader: {backgrounds, isVisible, activeTab, uploaderConfig, activeModules}
-  }) => ({backgrounds, isVisible, activeTab, uploaderConfig, activeModules}),
+     uploader: {backgrounds, isVisible, activeTab, uploaderConfig, activeModules, tabs, filteredTabs}
+  }) => ({backgrounds, isVisible, activeTab, uploaderConfig, activeModules, tabs, filteredTabs}),
   dispatch => ({
-    onGetBackgrounds: () => dispatch(getBackgrounds()),
     onModalOpen: () => dispatch(modalOpen()),
     onModalClose: () => dispatch(modalClose()),
-    onActivateTab: (active) => dispatch(activateTab(active)),
-    onSetUploaderConfig: (_config) => dispatch(setUploaderConfig(_config)),
-    onSetActiveModules: (modules) => dispatch(setActiveModules(modules))
+    onActivateTab: active => dispatch(activateTab(active)),
+    onSetUploaderConfig: _config => dispatch(setUploaderConfig(_config)),
+    onSetActiveModules: modules => dispatch(setActiveModules(modules)),
+    onSetUploadHandler: handler => dispatch(setUploadHandler(handler)),
+    onSetTabs: tabs => dispatch(setTabs(tabs))
   })
 )(Radium(AirstoreUploader));
