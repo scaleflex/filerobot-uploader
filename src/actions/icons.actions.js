@@ -1,5 +1,4 @@
-import * as IconAPI from '../components/icon-library/api.service';
-import * as API from "../services/api.service";
+import * as IconAPI from '../services/iconsApi.service';
 
 export const getIconsCategories = () => dispatch =>
   IconAPI.getCategories().then(categories => {
@@ -13,14 +12,14 @@ export const activateIconsCategory = category => dispatch => {
 };
 
 export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 36) => dispatch => {
-  const successHandler = response => dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, ...response} });
+  const successHandler = response => dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, limit, ...response} });
 
   switch (categorySlug) {
     case 'custom-famous': return IconAPI.searchIcons(page, '', limit).then(successHandler);
     case 'custom-search':
       if (!q) {
-        dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page: 0, q: '', icons: [], count: 0} });
-        return;
+        dispatch({ type: 'ICONS_CLEAN', payload: null });
+        return new Promise(resolve => resolve());
       }
       return IconAPI.searchIcons(page, q, limit).then(successHandler);
     default: return IconAPI.getCategoryIcons(categorySlug, page, limit).then(successHandler);

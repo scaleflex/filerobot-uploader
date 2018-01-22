@@ -1,33 +1,21 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import styles from '../styles.css';
-import { AirstoreModal, UserUploadContent, IconsContent, BackgroundsContent } from './';
-import { AirstoreSearchLibrary } from './search';
+import {CSS} from '../assets/styles';
+import {
+  Modal, IconTab, BackgroundTab, UserUploaderTab, SearchTab
+} from './';
 import {
   modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs
 } from '../actions'
-import { uploadFiles } from '../services/api.service'
 import { connect } from 'react-redux';
 
 
 class AirstoreUploader extends Component {
   tabs = [
-    {
-      id: 'USER_UPLOAD', fullName: 'Upload from my computer', shortName: 'Upload', icon: '\uf0ee',
-      getContent: () => <UserUploadContent/>
-    },
-    {
-      id: 'SEARCH', fullName: 'Search', shortName: 'Search', icon: '\uf0ee',
-      getContent: () => <div style={[{ width: '100%' }]}><AirstoreSearchLibrary/></div>
-    },
-    {
-      id: 'ICONS', fullName: 'Icons Library', shortName: 'Icons', icon: '\uf1a0',
-      getContent: () => <IconsContent/>
-    },
-    {
-      id: 'BACKGROUNDS', fullName: 'Backgrounds Library', shortName: 'Backgrounds', icon: '\uf1a0',
-      getContent: () => <BackgroundsContent/>
-    }
+    {id: 'USER_UPLOAD', fullName: 'Upload', shortName: 'Upload', icon: '\uf0ee', getContent: () => <UserUploaderTab/>},
+    {id: 'SEARCH', fullName: 'Search', shortName: 'Search', icon: '\uf0ee', getContent: () => <SearchTab/>},
+    {id: 'ICONS', fullName: 'Icons Library', shortName: 'Icons', icon: '\uf1a0', getContent: () => <IconTab/>},
+    {id: 'BACKGROUNDS', fullName: 'Backgrounds', shortName: 'Backgrounds', icon: '\uf1a0', getContent: () => <BackgroundTab/>}
   ];
 
   openModal = () => this.props.onModalOpen();
@@ -47,7 +35,7 @@ class AirstoreUploader extends Component {
     return (
       <div>
         {this.props.isVisible &&
-          <AirstoreModal onClose={this.closeModal} content={this.renderModalContent()} style={this.props.style}/>
+          <Modal onClose={this.closeModal} content={this.renderModalContent()} style={this.props.style}/>
         }
       </div>
     );
@@ -57,33 +45,35 @@ class AirstoreUploader extends Component {
     const { activeTab, filteredTabs } = this.props;
 
     return (
-      <div style={[{ height: 550 }]}>
+      <div style={[{ height: 550, display: 'flex', flexDirection: 'column' }]}>
 
-        <div style={[styles.tabs.header]}>
-          <div style={[styles.tabs.header.container]}>
+        <div style={[CSS.tabs.header]}>
+          <div style={[CSS.tabs.header.container]}>
             {filteredTabs.map((tab, index) => (
               <a
                 href="#"
                 key={`tab-${index}`}
                 className="tab-header-item selected"
                 style={[
-                  styles.tabs.header.container.item,
-                  activeTab && activeTab.id === tab.id && styles.tabs.header.container.item.selected
+                  CSS.tabs.header.container.item,
+                  activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected
                 ]}
                 onClick={event => {
                   event.preventDefault();
                   this.props.onActivateTab(tab);
                 }}
               >
-                <j-i style={[styles.fa, styles.tabs.header.container.item.i]}>{tab.icon}</j-i>
-                <j-span title={tab.fullName}>{tab.shortName}</j-span>
+                <i style={[CSS.fa, CSS.tabs.header.container.item.i]}>{tab.icon}</i>
+                <span title={tab.fullName}>{tab.shortName}</span>
               </a>
             ))}
           </div>
         </div>
 
-        <div style={[styles.tabs.content, activeTab && activeTab.id === 'ICONS' && {overflow: 'hidden'}]}>
-          {activeTab && activeTab.getContent.call(this)}
+        <div style={[CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && {overflow: 'hidden'}]}>
+          {activeTab &&
+            <div style={[{ width: '100%' }]}>{activeTab.getContent.call(this)}</div>
+          }
         </div>
       </div>
     );

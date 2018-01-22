@@ -19,3 +19,5 @@ export const cursorToEnd = contentEditableElement => {
     range.select(); // Select the range (make it the visible selection
   }
 };
+
+export const isEnterClick = event => event && (event.which || event.keyCode) === 13;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import styles from './styles.css';
+import {CSS, DragDropCss as styles} from '../assets/styles';
 import {connect} from "react-redux";
-import {uploadFilesFromUrls, uploadFiles} from "../../actions";
+import {uploadFilesFromUrls, uploadFiles} from '../actions';
+import {isEnterClick} from '../utils';
 
 const STEP = {
   DEFAULT: 'DEFAULT',
@@ -11,7 +12,7 @@ const STEP = {
   UPLOADED: 'UPLOADED',
 };
 
-class AirstoreDragDropUploader extends Component {
+class UserUploaderTab extends Component {
   state = {
     step: STEP.DEFAULT,
     errorMsg: '',
@@ -98,34 +99,28 @@ class AirstoreDragDropUploader extends Component {
                   onChange={this.fileChangeHandler}
                 />
 
-                <j-label style={[uploadBlock_style.inputBox.label]}>
-                  <j-span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</j-span>
+                <label style={[uploadBlock_style.inputBox.label]}>
+                  <span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</span>
                   <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
-                  <a
-                    style={[uploadBlock_style.inputBox.label.uploadBtn]}
+                  <button
+                    style={[CSS.button, {margin: 'auto'}]}
                     onClick={() => { this.refs.fileInput.click() }}
-                  >Browse your computer</a>
+                  >Browse your computer</button>
                   <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
                   <div style={[{display: 'flex'}]}>
                     <input
                       type="text"
-                      style={[styles.formControl, {border: '1px solid rgb(204, 204, 204)', marginRight: 10, outline: 0}]}
+                      style={[CSS.field, {width: '100%'}]}
                       placeholder="Enter URL to upload from web"
                       ref="uploadFromWebField"
-                      onKeyDown={ev => {
-                        const isEnterClick = (ev.which || ev.keyCode) === 13;
-                        if (isEnterClick) this.uploadFromWeb();
-                      }}
+                      onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
                     />
-                    <button
-                      style={[uploadBlock_style.inputBox.label.uploadBtn]}
-                      onClick={this.uploadFromWeb}
-                    >OK</button>
+                    <button style={[CSS.button]} onClick={this.uploadFromWeb}>OK</button>
                   </div>
                   <div style={[{"fontSize":"12px","color":"rgb(186, 186, 186)","fontWeight":"200","marginTop":"5px"}]}>
                     Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.
                   </div>
-                </j-label>
+                </label>
 
                 <div ref="submitBtn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">Upload</div>
               </div>
@@ -134,20 +129,20 @@ class AirstoreDragDropUploader extends Component {
             {
               step === STEP.UPLOADING &&
               <div style={[uploadBlock_style.uploadingBox]}>
-                <j-i
+                <i
                   style={[
                     styles.fa, styles.faSpin, styles.faFw,
                     { font: 'normal normal normal 20px/1 FontAwesome'}
                   ]}
-                >&#61712;</j-i>
-                <j-span>Uploading</j-span>
+                >&#61712;</i>
+                <span>Uploading</span>
               </div>
             }
 
             {
               step === STEP.ERROR &&
               <div style={[uploadBlock_style.errorBox]}>
-                <j-span style={[uploadBlock_style.errorBox.errorMsg]}>{errorMsg}</j-span>
+                <span style={[uploadBlock_style.errorBox.errorMsg]}>{errorMsg}</span>
               </div>
             }
           </div>
@@ -178,4 +173,4 @@ export default connect(
     onFilesUpload: (files, uploaderConfig) => dispatch(uploadFiles(files, uploaderConfig)),
     onFileUploadFromUrl: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig))
   })
-)(Radium(AirstoreDragDropUploader));
+)(Radium(UserUploaderTab));

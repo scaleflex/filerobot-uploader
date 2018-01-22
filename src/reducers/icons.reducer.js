@@ -19,6 +19,8 @@ const icons = (state = initialState, action) => {
       return _activateCategory(state, payload);
     case 'ICONS_FETCH_SUCCESS':
       return _fetchSuccess(state, payload);
+    case 'ICONS_CLEAN':
+      return _iconsClean(state, payload);
     case 'MODAL_CLOSE':
       return _visibilityClose(state, payload);
     default:
@@ -37,19 +39,38 @@ const _fetchSuccess = (state, result = {}) => {
   const categories = Object.assign([], state.categories || []);
   let {count = 0, icons = [], page = 1, q = ''} = result || {};
 
-  if (active.slug === 'custom-search') {
-    // TODO
-  }
+  q = q || '';
+  page = +page;
+  icons = icons || [];
 
-  Object.assign(active, {count, page, q});
-  active.icons = [...(active.icons || []), ...(icons || [])];
+  let isLastPage = !icons.length || icons.length < result.limit;
 
+  Object.assign(active, {count, q, isLastPage});
+
+  active.icons = active.icons || [];
+  active.icons = [...(page > 1 ? active.icons : []), ...icons];
+
+  if (!isLastPage) active.page = page; // don't change page if we have empty icons
+
+  // Update category.count
   const category = categories.find(_c => _c.slug === active.slug);
   if (category) category.count = count;
 
   return {...state, active, categories};
 };
 
-const _visibilityClose = (state) => ({...state, active: null});
+const _iconsClean = (state) => {
+  const active = Object.assign({}, state.active || {});
+  const categories = [...state.categories];
+
+  Object.assign(active, {page: 0, q: '', icons: [], count: 0});
+
+  const category = categories.find(_c => _c.slug === 'custom-search');
+  if (category) category.count = 0;
+
+  return {...state, active, categories};
+};
+
+const _visibilityClose = (state) => ({...state, ..._iconsClean(state), active: null});
 
 export default icons;

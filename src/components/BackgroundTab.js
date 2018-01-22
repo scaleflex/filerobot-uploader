@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import {getBackgrounds, uploadFilesFromUrls} from '../../actions';
+import {CSS, BgCss as styles} from '../assets/styles';
+import {getBackgrounds, uploadFilesFromUrls} from '../actions';
 import { connect } from 'react-redux';
 
-class AirstoreBackgroundLibrary extends Component {
+class BackgroundTab extends Component {
   state = { isLoading: false, uploadingUuid: null };
 
   uploadStart = uuid => this.setState({ uploadingUuid: uuid, isLoading: true });
@@ -24,15 +25,15 @@ class AirstoreBackgroundLibrary extends Component {
 
   render() {
     const { isLoading, uploadingUuid } = this.state;
+    const itemStyles = styles.container.item;
 
-    return <div style={[{display: 'flex', flexWrap: 'wrap'}]}>
+    return <div style={[styles.container]}>
       {this.props.backgrounds.map(bg =>
         <div
           style={[
-            {width: '16.66%', padding: 1},
-            !isLoading && {cursor: 'pointer'},
-            isLoading && uploadingUuid === bg.uuid && {cursor: 'progress'},
-            isLoading && uploadingUuid !== bg.uuid && {opacity: 0.1}
+            itemStyles,
+            isLoading && uploadingUuid === bg.uuid && itemStyles.loading.active,
+            isLoading && uploadingUuid !== bg.uuid && itemStyles.loading.notActive
           ]}
           key={`bg-${bg.uuid}`}
           onClick={this.upload.bind(this, bg)}
@@ -50,4 +51,4 @@ export default connect(
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
     onGetBackgrounds: () => dispatch(getBackgrounds())
   })
-)(Radium(AirstoreBackgroundLibrary));
+)(Radium(BackgroundTab));

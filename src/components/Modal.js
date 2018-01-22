@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Radium from 'radium';
-import styles from './styles.css';
+import {CSS, ModalCss as styles} from '../assets/styles';
 
 
-class AirstoreModal extends Component {
+class Modal extends Component {
   initModal = () => {
     const { width = null, height = null } = this.props;
     const modal = ReactDOM.findDOMNode(this.refs.modal);
@@ -16,7 +16,7 @@ class AirstoreModal extends Component {
       if (prop !== null) modal.style.setProperty(prop, customStyles[prop], 'important');
 
     document.body.classList.add('modal-open');
-  }
+  };
 
   close = ({ target }) => {
     const container = ReactDOM.findDOMNode(this.refs.container);
@@ -26,7 +26,7 @@ class AirstoreModal extends Component {
     if (target !== container && target !== removeBtn) return;
 
     if (onClose) onClose();
-  }
+  };
 
   componentDidMount() {
     this.initModal();
@@ -57,4 +57,4 @@ class AirstoreModal extends Component {
   }
 }
 
-export default Radium(AirstoreModal);
+export default Radium(Modal);

@@ -1,19 +1,16 @@
-import AirstoreModal from './modal/AirstoreModal';
+import Modal from './Modal';
 import AirstoreUploader from './AirstoreUploader';
-import UserUploadContent from './UserUploadContent';
-import IconsContent from './IconsContent';
-import BackgroundsContent from './BackgroundsContent';
-import { AirstoreDragDropUploader } from './drag-drop-uploader';
-import config from '../config';
+import IconTab from './IconTab';
+import BackgroundTab from './BackgroundTab';
+import UserUploaderTab from './UserUploaderTab';
+import SearchTab from './SearchTab';
 import { uploadFiles } from '../services/api.service';
 
 export {
-  AirstoreModal,
+  Modal,
   AirstoreUploader,
-  BackgroundsContent,
-  UserUploadContent,
-  IconsContent,
-  AirstoreDragDropUploader,
-  config,
-  uploadFiles
+  BackgroundTab,
+  IconTab,
+  UserUploaderTab,
+  SearchTab
 }

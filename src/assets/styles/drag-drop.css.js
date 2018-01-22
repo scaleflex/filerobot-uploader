@@ -26,23 +26,31 @@ export default {
     "position": "relative",
     "fontWeight": "300",
     "margin": "0 auto",
+    "padding": 3,
 
     uploadBlock: {
       "textAlign": "center",
-      "border": "4px dashed #d8d8d8",
+      "border": "2px dashed #d8d8d8",
       "background": "#f5f5f5",
-      "position": "absolute",
-      "top": "5px",
-      "left": "5px",
-      "right": "5px",
-      "bottom": "5px",
-      "display": "flex",
+      // "position": "absolute",
+      // "top": "5px",
+      // "left": "5px",
+      // "right": "5px",
+      // "bottom": "5px",
+      // "display": "flex",
+      // "alignItems": "center",
+      // "justifyContent": "center",
+      "height": "100%",
       "alignItems": "center",
       "justifyContent": "center",
+      "display": "flex",
 
       inputBox: {
-        "width": "100%",
-        "display": "block",
+        // "width": "100%",
+        // "display": "block",
+        // "display": "flex",
+        // "flex-direction": "column",
+
 
         file: {
           "width": ".1px",
@@ -54,14 +62,16 @@ export default {
         },
 
         label: {
-          "maxWidth": "80%",
-          "minWidth": "50%",
-          "textOverflow": "ellipsis",
-          "whiteSpace": "nowrap",
-          "display": "inline-block",
-          "overflow": "hidden",
-          "marginBottom": "5px",
-          "fontWeight": "700",
+          // "maxWidth": "80%",
+          // "minWidth": "50%",
+          // "textOverflow": "ellipsis",
+          // "whiteSpace": "nowrap",
+          // "display": "inline-block",
+          // "overflow": "hidden",
+          // "marginBottom": "5px",
+          // "fontWeight": "700",
+          "display": "flex",
+          "flexDirection": "column",
 
           dragDropText: {
             "display": "inline-block",
@@ -72,8 +82,9 @@ export default {
 
           orText: {
             "color": "#bababa",
-            "padding": "15px 0",
-            "fontWeight": "300"
+            "padding": "15px",
+            "fontWeight": "200",
+            "fontSize": 12
           },
 
           uploadBtn: {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import bgResponse from './backgrounds.mock';
+import bgResponse from '../mocks/backgrounds.mock';
 
 const api_endpoint = '//xxx.airstore.api/';
 

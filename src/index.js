@@ -27,8 +27,10 @@ function init(options = {}) {
   options.onUpload = options.onUpload || function(files = []) {
     const [file] = files;
     const result = document.querySelector('.result');
+    const resultImg = document.querySelector('.result-img');
 
     if (result) result.innerHTML = JSON.stringify(file || {}, null, 2);
+    if (resultImg) resultImg.src = file && file.public_link ? file.public_link : '';
   };
 
   // window.AirstoreUploader = render(<AirstoreUploader initialOptions={options} />, editor);
