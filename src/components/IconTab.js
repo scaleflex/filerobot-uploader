@@ -45,10 +45,6 @@ class IconTab extends Component {
 
   componentDidMount() {
     this.props.onGetCategories();
-
-    // const {searchField} = this.refs;
-    //
-    // if (searchField) searchField.focus();
   }
 
   render() {

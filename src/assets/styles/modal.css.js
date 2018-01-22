@@ -60,9 +60,9 @@ export default {
       removeBtn: {
         "zIndex": "3",
         "position": "absolute",
-        "right": "16px",
-        "top": "6px",
-        "fontSize": "30px",
+        "right": "12px",
+        "top": "9px",
+        "fontSize": "20px",
         "cursor": "pointer"
       }
     }
