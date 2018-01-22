@@ -12,7 +12,7 @@ export const activateIconsCategory = category => dispatch => {
 };
 
 export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 36) => dispatch => {
-  const successHandler = response => dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, limit, ...response} });
+  const successHandler = response => dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, limit, categorySlug, ...response} });
 
   switch (categorySlug) {
     case 'custom-famous': return IconAPI.searchIcons(page, '', limit).then(successHandler);
