@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import config from './config';
+import config from './AirstoreUploaderPlugin/config';
 import { AppContainer } from 'react-hot-loader';
-import AirstoreUploaderWrapper from './lib/components/AirstoreUploaderWrapper';
+import AirstoreUploaderWrapper from './AirstoreUploaderPlugin/components/AirstoreUploaderWrapper';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -18,7 +18,7 @@ function init(options = {}) {
   options.settings.uploadPath = options.settings.uploadPath || null;
   options.settings.uploadParams = options.settings.uploadParams || {};
   options.settings.uploadParams.opt_auth_upload_key = options.settings.uploadParams.opt_auth_upload_key || null;
-  options.onUpload = options.onUpload || function(files = []) {
+  options.onUpload = options.onUpload || function (files = []) {
     const [file] = files;
     const result = document.querySelector('.result');
     const resultImg = document.querySelector('.result-img');
@@ -40,7 +40,10 @@ function init(options = {}) {
 
   // Webpack Hot Module Replacement API
   if (module.hot) {
-    module.hot.accept('./lib/components/AirstoreUploaderWrapper', () => { render(AirstoreUploaderWrapper); });
+    module.hot.accept(
+      './AirstoreUploaderPlugin/components/AirstoreUploaderWrapper',
+      () => { render(AirstoreUploaderWrapper); }
+    );
   }
 
   registerServiceWorker();

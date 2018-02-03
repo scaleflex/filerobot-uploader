@@ -1,0 +1,1 @@
+export { default as AirsotreUploader } from './components/AirstoreUploaderWrapper';
