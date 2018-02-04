@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import {CSS} from '../assets/styles';
-import { Modal, IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
+import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
+import { Modal } from 'scaleflex-react-modules/dist';
 import {
   modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs
 } from '../actions'
@@ -33,7 +34,9 @@ class AirstoreUploader extends Component {
     return (
       <div>
         {this.props.isVisible &&
-          <Modal onClose={this.closeModal} content={this.renderModalContent()} style={this.props.style}/>
+        <Modal fullScreen={'lg'} onClose={this.closeModal}>
+          {this.renderModalContent()}
+        </Modal>
         }
       </div>
     );
@@ -43,7 +46,7 @@ class AirstoreUploader extends Component {
     const { activeTab, filteredTabs } = this.props;
 
     return (
-      <div style={[{ height: 550, display: 'flex', flexDirection: 'column' }]}>
+      <div style={[{ display: 'flex', flexDirection: 'column', height: '100%' }]}>
 
         <div style={[CSS.tabs.header]}>
           <div style={[CSS.tabs.header.container]}>

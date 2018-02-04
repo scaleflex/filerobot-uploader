@@ -63,7 +63,7 @@ export default {
         flexWrap: 'wrap',
 
         icon: {
-          width: '16.66%',
+          width: '16.0%',
           height: 'auto',
           margin: 0,
           padding: 2,

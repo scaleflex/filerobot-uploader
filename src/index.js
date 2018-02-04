@@ -4,6 +4,9 @@ import config from './AirstoreUploaderPlugin/config';
 import { AppContainer } from 'react-hot-loader';
 import AirstoreUploaderWrapper from './AirstoreUploaderPlugin/components/AirstoreUploaderWrapper';
 import registerServiceWorker from './registerServiceWorker';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme } from 'scaleflex-react-modules/dist';
+import 'scaleflex-react-modules/dist/styledComponents/assets/styles/scaleflex-icon-font.css';
 
 
 window.AirstoreUploader = window.AirstoreUploader || {};
@@ -30,7 +33,9 @@ function init(options = {}) {
   window.AirstoreUploader.component = Component => {
     return render(
       <AppContainer>
-        <Component {...options}/>
+        <ThemeProvider theme={darkTheme}>
+          <Component {...options}/>
+        </ThemeProvider>
       </AppContainer>,
       document.getElementById('airstore-uploader'),
     )
