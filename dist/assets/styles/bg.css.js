@@ -2,18 +2,18 @@ export default {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
     alignItems: 'stretch',
-    padding: 10,
+    padding: '1% 0 1% 1%',
 
     item: {
-      //width: '16.66%',
-      height: 100,
-      marginBottom: 10,
+      width: 'calc(15.3%)',
+      marginBottom: '1%',
+      marginRight: '1%',
       padding: 1,
       cursor: 'pointer',
       //flex: '1 15%',
-      background: '#34444c',
+      background: '#e7e9ee',
 
       alignmentBlock: {
         display: 'inline-block',

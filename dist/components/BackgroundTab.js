@@ -71,7 +71,8 @@ var BackgroundTab = function (_Component) {
               key: 'bg-' + bg.uuid,
               onClick: _this2.upload.bind(_this2, bg)
             },
-            React.createElement('img', { style: [styles.container.item.img], src: bg.url_preview, width: 'auto', height: '100%' })
+            React.createElement('span', { style: [styles.container.item.alignmentBlock] }),
+            React.createElement('img', { style: [styles.container.item.img], src: bg.url_preview, width: '100%', height: 'auto' })
           );
         })
       );

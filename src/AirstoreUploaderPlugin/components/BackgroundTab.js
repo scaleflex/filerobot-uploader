@@ -38,7 +38,8 @@ class BackgroundTab extends Component {
           key={`bg-${bg.uuid}`}
           onClick={this.upload.bind(this, bg)}
         >
-          <img style={[styles.container.item.img]} src={bg.url_preview} width="auto" height="100%" />
+          <span style={[styles.container.item.alignmentBlock]}/>
+          <img style={[styles.container.item.img]} src={bg.url_preview} width="100%" height="auto" />
         </div>
       )}
     </div>
