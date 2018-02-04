@@ -9,9 +9,9 @@ import AirstoreUploader from './AirstoreUploader';
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
-export default (options) => (
+export default ({initialOptions, opened = false }) => (
   <Provider store={store}>
-    <AirstoreUploader initialOptions={options} />
+    <AirstoreUploader opened={opened} initialOptions={initialOptions} />
   </Provider>
 )
 

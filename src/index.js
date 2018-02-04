@@ -12,7 +12,7 @@ import 'scaleflex-react-modules/dist/styledComponents/assets/styles/scaleflex-ic
 window.AirstoreUploader = window.AirstoreUploader || {};
 window.AirstoreUploader.init = init;
 
-function init(options = {}) {
+function init(options = {}, isOpened = false) {
   const editor = document.querySelector('airstore-uploader');
   options = Object.assign({}, config || {}, options || {});
 
@@ -34,7 +34,7 @@ function init(options = {}) {
     return render(
       <AppContainer>
         <ThemeProvider theme={darkTheme}>
-          <Component {...options}/>
+          <Component opened={isOpened} initialOptions={options}/>
         </ThemeProvider>
       </AppContainer>,
       document.getElementById('airstore-uploader'),

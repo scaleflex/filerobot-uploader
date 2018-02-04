@@ -28,6 +28,7 @@ class AirstoreUploader extends Component {
     this.props.onSetActiveModules(initialOptions.modules || []);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
     this.props.onSetTabs(this.tabs);
+    if (this.props.opened) this.openModal();
   }
 
   render() {

@@ -53,6 +53,7 @@ var AirstoreUploader = function (_Component) {
       this.props.onSetActiveModules(initialOptions.modules || []);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);
       this.props.onSetTabs(this.tabs);
+      if (this.props.opened) this.openModal();
     }
   }, {
     key: 'render',
