@@ -19,7 +19,11 @@ class AirstoreUploader extends Component {
 
   openModal = () => this.props.onModalOpen();
 
-  closeModal = () => this.props.onModalClose();
+  closeModal = () => {
+    const { onClose } = this.props;
+    if (onClose) onClose();
+    this.props.onModalClose();
+  }
 
   componentDidMount() {
     const { initialOptions } = this.props;

@@ -39,7 +39,10 @@ var AirstoreUploader = function (_Component) {
       } }], _this.openModal = function () {
       return _this.props.onModalOpen();
     }, _this.closeModal = function () {
-      return _this.props.onModalClose();
+      var onClose = _this.props.onClose;
+
+      if (onClose) onClose();
+      _this.props.onModalClose();
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
