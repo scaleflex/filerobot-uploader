@@ -125,7 +125,7 @@ class UserUploaderTab extends Component {
                   <div style={[{ display: 'flex' }]}>
                     <input
                       type="text"
-                      style={[CSS.field, { width: '100%', height: 20 }]}
+                      style={[CSS.field, { width: '100%', height: 'auto' }]}
                       placeholder="Enter URL to upload from web"
                       ref="uploadFromWebField"
                       onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
