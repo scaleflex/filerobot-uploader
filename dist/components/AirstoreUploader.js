@@ -28,15 +28,39 @@ var AirstoreUploader = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AirstoreUploader.__proto__ || Object.getPrototypeOf(AirstoreUploader)).call.apply(_ref, [this].concat(args))), _this), _this.tabs = [{ id: 'USER_UPLOAD', fullName: 'Upload', shortName: 'Upload', icon: '\uF0EE', getContent: function getContent() {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AirstoreUploader.__proto__ || Object.getPrototypeOf(AirstoreUploader)).call.apply(_ref, [this].concat(args))), _this), _this.tabs = [{
+      id: 'USER_UPLOAD',
+      fullName: 'Upload',
+      shortName: 'Upload',
+      iconClass: 'sfi-airstore-upload',
+      getContent: function getContent() {
         return React.createElement(UserUploaderTab, null);
-      } }, { id: 'SEARCH', fullName: 'Search', shortName: 'Search', icon: '\uF0EE', getContent: function getContent() {
+      }
+    }, {
+      id: 'SEARCH',
+      fullName: 'Search',
+      shortName: 'Search',
+      iconClass: 'sfi-airstore-search',
+      getContent: function getContent() {
         return React.createElement(SearchTab, null);
-      } }, { id: 'ICONS', fullName: 'Icons Library', shortName: 'Icons', icon: '\uF1A0', getContent: function getContent() {
+      }
+    }, {
+      id: 'ICONS',
+      fullName: 'Icons Library',
+      shortName: 'Icons',
+      iconClass: 'sfi-airstore-icon',
+      getContent: function getContent() {
         return React.createElement(IconTab, null);
-      } }, { id: 'BACKGROUNDS', fullName: 'Backgrounds', shortName: 'Backgrounds', icon: '\uF1A0', getContent: function getContent() {
+      }
+    }, {
+      id: 'BACKGROUNDS',
+      fullName: 'Backgrounds',
+      shortName: 'Backgrounds',
+      iconClass: 'sfi-airstore-bg',
+      getContent: function getContent() {
         return React.createElement(BackgroundTab, null);
-      } }], _this.openModal = function () {
+      }
+    }], _this.openModal = function () {
       return _this.props.onModalOpen();
     }, _this.closeModal = function () {
       var onClose = _this.props.onClose;
@@ -61,14 +85,11 @@ var AirstoreUploader = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      if (!this.props.isVisible) return null;
       return React.createElement(
-        'div',
-        null,
-        this.props.isVisible && React.createElement(
-          Modal,
-          { fullScreen: 'lg', onClose: this.closeModal },
-          this.renderModalContent()
-        )
+        Modal,
+        { fullScreen: 'lg', onClose: this.closeModal },
+        this.renderModalContent()
       );
     }
   }, {
@@ -83,7 +104,7 @@ var AirstoreUploader = function (_Component) {
 
       return React.createElement(
         'div',
-        { style: [{ display: 'flex', flexDirection: 'column', height: '100%' }] },
+        { style: [{ display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif' }] },
         React.createElement(
           'div',
           { style: [CSS.tabs.header] },
@@ -103,11 +124,7 @@ var AirstoreUploader = function (_Component) {
                     _this2.props.onActivateTab(tab);
                   }
                 },
-                React.createElement(
-                  'i',
-                  { style: [CSS.fa, CSS.tabs.header.container.item.i] },
-                  tab.icon
-                ),
+                React.createElement('i', { className: tab.iconClass, style: [CSS.tabs.header.container.item.i] }),
                 React.createElement(
                   'span',
                   { title: tab.fullName },

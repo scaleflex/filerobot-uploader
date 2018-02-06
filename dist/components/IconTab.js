@@ -76,6 +76,29 @@ var IconTab = function (_Component) {
       _this.loadIcons(slug, 1, q, function () {
         return _this.setState({ isSearching: false });
       });
+    }, _this.renderCategory = function (itemStyles, _c, active) {
+      return React.createElement(
+        'div',
+        {
+          key: 'category-' + _c.slug,
+          style: [itemStyles, active && _c.slug === active.slug && itemStyles.active],
+          onClick: function onClick() {
+            return _this.props.onActivateCategory(_c);
+          }
+        },
+        React.createElement(
+          'div',
+          { style: [itemStyles.name] },
+          _c.cat
+        ),
+        'count' in _c && React.createElement(
+          'div',
+          { style: [itemStyles.count] },
+          '(',
+          _c.count,
+          ')'
+        )
+      );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -116,29 +139,13 @@ var IconTab = function (_Component) {
         React.createElement(
           'div',
           { style: [styles.container.sidebarWrap.sidebar] },
-          categories && categories.map(function (_c) {
-            return React.createElement(
-              'div',
-              {
-                key: 'category-' + _c.slug,
-                style: [itemStyles, active && _c.slug === active.slug && itemStyles.active],
-                onClick: function onClick() {
-                  return _this2.props.onActivateCategory(_c);
-                }
-              },
-              React.createElement(
-                'div',
-                { style: [itemStyles.name] },
-                _c.cat
-              ),
-              'count' in _c && React.createElement(
-                'div',
-                { style: [itemStyles.count] },
-                '(',
-                _c.count,
-                ')'
-              )
-            );
+          this.renderCategory(itemStyles, categories.find(function (category) {
+            return category.slug === 'custom-search';
+          }), active),
+          categories && categories.filter(function (category) {
+            return category.slug !== 'custom-search';
+          }).map(function (_c) {
+            return _this2.renderCategory(itemStyles, _c, active);
           })
         )
       );
@@ -209,7 +216,7 @@ var IconTab = function (_Component) {
               { style: [CSS.button], onClick: function onClick() {
                   return _this3.search(_this3.refs.searchField.value);
                 } },
-              isSearching ? 'Searching..' : 'Search'
+              isSearching ? 'Searching...' : 'Search'
             )
           )
         ),
@@ -241,7 +248,7 @@ var IconTab = function (_Component) {
         isVisibleLoadingBlock && React.createElement(
           'div',
           { style: [contentStyles.loading, !isLoading && { visibility: 'hidden' }] },
-          'Loading..'
+          'Loading...'
         )
       );
     }

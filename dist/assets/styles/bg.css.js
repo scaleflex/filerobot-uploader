@@ -2,17 +2,14 @@ export default {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    //justifyContent: 'space-between',
     alignItems: 'stretch',
-    padding: '1% 0 1% 1%',
+    paddingRight: 10,
+    fontFamily: 'Roboto, sans-serif',
 
     item: {
-      width: 'calc(15.3%)',
-      marginBottom: '1%',
-      marginRight: '1%',
-      padding: 1,
+      width: 'calc(100% / 6 - 10px)',
+      margin: '10px 0 0 10px',
       cursor: 'pointer',
-      //flex: '1 15%',
       background: '#e7e9ee',
 
       alignmentBlock: {

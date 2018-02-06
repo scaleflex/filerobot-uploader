@@ -5,4 +5,7 @@ import IconsCss from './icons.css';
 import ModalCss from './modal.css';
 import SearchCss from './search.css';
 
+import './main.css';
+import '../fonts/sf-airstore-uploader-font.css';
+
 export { CSS, DragDropCss, BgCss, IconsCss, ModalCss, SearchCss };

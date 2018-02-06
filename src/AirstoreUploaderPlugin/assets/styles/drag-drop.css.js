@@ -19,39 +19,28 @@ export default {
 
 
   container: {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: 'Roboto, sans-serif',
     "minHeight": "200px",
-    "width": "100%",
-    "height": "100%",
     "position": "relative",
     "fontWeight": "300",
     "margin": "0 auto",
+    height: 'calc(100% - 6px)',
+    color: '#5D636B',
     "padding": 3,
 
     uploadBlock: {
+      width: 'calc(100% - 6px)',
+      minHeight: 240,
       "textAlign": "center",
       "border": "2px dashed #d8d8d8",
       "background": "#f5f5f5",
-      // "position": "absolute",
-      // "top": "5px",
-      // "left": "5px",
-      // "right": "5px",
-      // "bottom": "5px",
-      // "display": "flex",
-      // "alignItems": "center",
-      // "justifyContent": "center",
-      "height": "100%",
+      "height": "calc(100% - 6px)",
       "alignItems": "center",
       "justifyContent": "center",
       "display": "flex",
+      color: '#5D636B',
 
       inputBox: {
-        // "width": "100%",
-        // "display": "block",
-        // "display": "flex",
-        // "flex-direction": "column",
-
-
         file: {
           "width": ".1px",
           "height": ".1px",
@@ -62,26 +51,17 @@ export default {
         },
 
         label: {
-          // "maxWidth": "80%",
-          // "minWidth": "50%",
-          // "textOverflow": "ellipsis",
-          // "whiteSpace": "nowrap",
-          // "display": "inline-block",
-          // "overflow": "hidden",
-          // "marginBottom": "5px",
-          // "fontWeight": "700",
           "display": "flex",
           "flexDirection": "column",
+          color: '#5D636B',
 
           dragDropText: {
             "display": "inline-block",
             "fontSize": "25px",
-            "color": "#878787",
             "fontWeight": "300"
           },
 
           orText: {
-            "color": "#bababa",
             "padding": "15px",
             "fontWeight": "200",
             "fontSize": 12
@@ -90,8 +70,8 @@ export default {
           uploadBtn: {
             "display": "inline-block",
             "zoom": "1",
-            "color": "#444",
-            "backgroundColor": "#ddd",
+            "color": "#fff",
+            "backgroundColor": '#5D636B',
             "backgroundRepeat": "repeat-x",
             "backgroundImage": "linear-gradient(to bottom,#f4f4f4,#ddd)",
             "filter": "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f4f4', endColorstr='#dddddd', GradientType=0)",
@@ -146,8 +126,6 @@ export default {
     "lineHeight": "1.42857143",
     "color": "#555",
     "background": "#fff",
-    //"backgroundImage": "none",
-    //"border": "1px solid #ccc",
     "borderRadius": "4px",
     "WebkitBoxShadow": "inset 0 1px 1px rgba(0,0,0,.075)",
     "boxShadow": "inset 0 1px 1px rgba(0,0,0,.075)",

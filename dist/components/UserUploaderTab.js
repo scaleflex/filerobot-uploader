@@ -111,16 +111,20 @@ var UserUploaderTab = function (_Component) {
           'div',
           {
             onDragOver: function onDragOver(e) {
-              e.preventDefault();_this2.setState({ isDragOver: true });
+              e.preventDefault();
+              _this2.setState({ isDragOver: true });
             },
             onDragEnter: function onDragEnter(e) {
-              e.preventDefault();_this2.setState({ isDragOver: true });
+              e.preventDefault();
+              _this2.setState({ isDragOver: true });
             },
             onDragLeave: function onDragLeave(e) {
-              e.preventDefault();_this2.setState({ isDragOver: false });
+              e.preventDefault();
+              _this2.setState({ isDragOver: false });
             },
             onDragEnd: function onDragEnd(e) {
-              e.preventDefault();_this2.setState({ isDragOver: false });
+              e.preventDefault();
+              _this2.setState({ isDragOver: false });
             },
             onDrop: this.fileDropHandler,
             style: [uploadBlock_style, this.state.isDragOver && { background: "rgba(210, 253, 207, 0.5)" }],
@@ -155,6 +159,7 @@ var UserUploaderTab = function (_Component) {
               React.createElement(
                 'button',
                 {
+                  key: 'browse-your-computer',
                   style: [CSS.button, { margin: 'auto' }],
                   onClick: function onClick() {
                     _this2.refs.fileInput.click();
@@ -181,13 +186,18 @@ var UserUploaderTab = function (_Component) {
                 }),
                 React.createElement(
                   'button',
-                  { style: [CSS.button], onClick: this.uploadFromWeb },
+                  { key: 'ok', style: [CSS.button], onClick: this.uploadFromWeb },
                   'OK'
                 )
               ),
               React.createElement(
                 'div',
-                { style: [{ "fontSize": "12px", "color": "rgb(186, 186, 186)", "fontWeight": "200", "marginTop": "5px" }] },
+                { style: [{
+                    fontSize: "12px",
+                    color: '#5D636B',
+                    fontWeight: "200",
+                    marginTop: "5px"
+                  }] },
                 'Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.'
               )
             ),
@@ -200,13 +210,10 @@ var UserUploaderTab = function (_Component) {
           step === STEP.UPLOADING && React.createElement(
             'div',
             { style: [uploadBlock_style.uploadingBox] },
-            React.createElement(
-              'i',
-              {
-                style: [styles.fa, styles.faSpin, styles.faFw, { font: 'normal normal normal 20px/1 FontAwesome' }]
-              },
-              '\uF110'
-            ),
+            React.createElement('i', {
+              className: 'sfi-airstore-loader',
+              style: [styles.faSpin, styles.faFw, { marginRight: 5 }]
+            }),
             React.createElement(
               'span',
               null,

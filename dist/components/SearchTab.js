@@ -83,6 +83,7 @@ var SearchTab = function (_Component) {
             style: [CSS.field],
             type: 'search',
             ref: 'searchField',
+            placeholder: 'e.g. nature',
             autoFocus: true,
             defaultValue: query || '',
             onKeyDown: function onKeyDown(ev) {
@@ -121,10 +122,11 @@ var SearchTab = function (_Component) {
             'div',
             {
               style: [resultStyles.item, isLoading && uploadingUuid === image.original_url && resultStyles.item.loading.active, isLoading && uploadingUuid !== image.original_url && resultStyles.item.loading.notActive],
-              key: 'image-' + index,
+              key: 'image-' + image.original_url,
               onClick: _this3.upload.bind(_this3, image.original_url)
             },
-            React.createElement('img', { src: image.thumb_url, width: '100%', height: '100%' })
+            React.createElement('span', { style: [resultStyles.item.alignmentBlock] }),
+            React.createElement('img', { style: resultStyles.item.img, src: image.thumb_url, width: '100%', height: 'auto' })
           );
         })
       );

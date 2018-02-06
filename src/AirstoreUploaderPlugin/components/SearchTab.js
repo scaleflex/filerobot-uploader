@@ -42,6 +42,7 @@ class SearchTab extends Component {
           style={[CSS.field]}
           type="search"
           ref="searchField"
+          placeholder={'e.g. nature'}
           autoFocus={true}
           defaultValue={query || ''}
           onKeyDown={ev => isEnterClick(ev) && this.search(this.refs.searchField.value)}
@@ -68,10 +69,11 @@ class SearchTab extends Component {
             isLoading && uploadingUuid === image.original_url && resultStyles.item.loading.active,
             isLoading && uploadingUuid !== image.original_url && resultStyles.item.loading.notActive
           ]}
-          key={`image-${index}`}
+          key={`image-${image.original_url}`}
           onClick={this.upload.bind(this, image.original_url)}
         >
-          <img src={image.thumb_url} width="100%" height="100%" />
+          <span style={[resultStyles.item.alignmentBlock]}/>
+          <img style={resultStyles.item.img} src={image.thumb_url} width="100%" height="auto" />
         </div>
       )}
     </div>

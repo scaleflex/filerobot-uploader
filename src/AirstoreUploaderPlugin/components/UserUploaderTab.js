@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import {CSS, DragDropCss as styles} from '../assets/styles';
-import {connect} from "react-redux";
-import {uploadFilesFromUrls, uploadFiles} from '../actions';
-import {isEnterClick} from '../utils/index';
+import { CSS, DragDropCss as styles } from '../assets/styles';
+import { connect } from "react-redux";
+import { uploadFilesFromUrls, uploadFiles } from '../actions';
+import { isEnterClick } from '../utils/index';
+
 
 const STEP = {
   DEFAULT: 'DEFAULT',
@@ -28,7 +29,7 @@ class UserUploaderTab extends Component {
     this.changeFile((event.dataTransfer || event.originalEvent.dataTransfer).files);
   };
 
-  fileChangeHandler = ({target}) => {
+  fileChangeHandler = ({ target }) => {
     this.changeFile(target.files);
   };
 
@@ -76,10 +77,22 @@ class UserUploaderTab extends Component {
         {
           step !== STEP.UPLOADED &&
           <div
-            onDragOver={e => { e.preventDefault(); this.setState({ isDragOver: true }) }}
-            onDragEnter={e => { e.preventDefault(); this.setState({ isDragOver: true }) }}
-            onDragLeave={e => { e.preventDefault(); this.setState({ isDragOver: false }) }}
-            onDragEnd={e => { e.preventDefault(); this.setState({ isDragOver: false }) }}
+            onDragOver={e => {
+              e.preventDefault();
+              this.setState({ isDragOver: true })
+            }}
+            onDragEnter={e => {
+              e.preventDefault();
+              this.setState({ isDragOver: true })
+            }}
+            onDragLeave={e => {
+              e.preventDefault();
+              this.setState({ isDragOver: false })
+            }}
+            onDragEnd={e => {
+              e.preventDefault();
+              this.setState({ isDragOver: false })
+            }}
             onDrop={this.fileDropHandler}
             style={[uploadBlock_style, this.state.isDragOver && { background: "rgba(210, 253, 207, 0.5)" }]}
             method={'post'}
@@ -103,11 +116,13 @@ class UserUploaderTab extends Component {
                   <span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</span>
                   <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
                   <button
-                    style={[CSS.button, {margin: 'auto'}]}
+                    key="browse-your-computer"
+                    style={[CSS.button, { margin: 'auto' }]}
                     onClick={() => { this.refs.fileInput.click() }}
-                  >Browse your computer</button>
+                  >Browse your computer
+                  </button>
                   <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
-                  <div style={[{display: 'flex'}]}>
+                  <div style={[{ display: 'flex' }]}>
                     <input
                       type="text"
                       style={[CSS.field, { width: '100%', height: 20 }]}
@@ -115,9 +130,14 @@ class UserUploaderTab extends Component {
                       ref="uploadFromWebField"
                       onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
                     />
-                    <button style={[CSS.button]} onClick={this.uploadFromWeb}>OK</button>
+                    <button key="ok" style={[CSS.button]} onClick={this.uploadFromWeb}>OK</button>
                   </div>
-                  <div style={[{"fontSize":"12px","color":"rgb(186, 186, 186)","fontWeight":"200","marginTop":"5px"}]}>
+                  <div style={[{
+                    fontSize: "12px",
+                    color: '#5D636B',
+                    fontWeight: "200",
+                    marginTop: "5px"
+                  }]}>
                     Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.
                   </div>
                 </label>
@@ -130,11 +150,9 @@ class UserUploaderTab extends Component {
               step === STEP.UPLOADING &&
               <div style={[uploadBlock_style.uploadingBox]}>
                 <i
-                  style={[
-                    styles.fa, styles.faSpin, styles.faFw,
-                    { font: 'normal normal normal 20px/1 FontAwesome'}
-                  ]}
-                >&#61712;</i>
+                  className="sfi-airstore-loader"
+                  style={[styles.faSpin, styles.faFw, { marginRight: 5 }]}
+                />
                 <span>Uploading</span>
               </div>
             }
@@ -168,7 +186,7 @@ class UserUploaderTab extends Component {
 }
 
 export default connect(
-  ({uploader: {uploaderConfig}}) => ({uploaderConfig}),
+  ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
   dispatch => ({
     onFilesUpload: (files, uploaderConfig) => dispatch(uploadFiles(files, uploaderConfig)),
     onFileUploadFromUrl: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig))

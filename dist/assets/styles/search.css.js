@@ -1,5 +1,7 @@
 export default {
   container: {
+    fontFamily: 'Roboto, sans-serif',
+
     empty: {
       "height": "100%",
       "justifyContent": "center",
@@ -9,9 +11,10 @@ export default {
     },
 
     title: {
-      "textTransform": "uppercase",
       "fontWeight": "200",
-      "marginTop": "-10%"
+      "marginTop": "-10%",
+      fontSize: 25,
+      color: '#5D636B'
     },
 
     searchBlock: {
@@ -23,11 +26,25 @@ export default {
     resultBlock: {
       display: 'flex',
       flexWrap: 'wrap',
+      alignItems: 'stretch',
+      paddingRight: 10,
 
       item: {
-        width: '16.66%',
-        padding: 1,
+        width: 'calc(100% / 6 - 10px)',
+        margin: '10px 0 0 10px',
         cursor: 'pointer',
+        background: '#e7e9ee',
+
+        alignmentBlock: {
+          display: 'inline-block',
+          verticalAlign: 'middle',
+          height: '100%'
+        },
+
+        img: {
+          display: 'inline-block',
+          verticalAlign: 'middle'
+        },
 
         loading: {
           active: { cursor: 'progress' },

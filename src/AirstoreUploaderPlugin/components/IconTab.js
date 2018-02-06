@@ -58,6 +58,19 @@ class IconTab extends Component {
     );
   }
 
+  renderCategory = (itemStyles, _c, active) => {
+    return (
+      <div
+        key={`category-${_c.slug}`}
+        style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
+        onClick={() => this.props.onActivateCategory(_c)}
+      >
+        <div style={[itemStyles.name]}>{_c.cat}</div>
+        {'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}
+      </div>
+    )
+  }
+
   renderSidebar() {
     const { categories, active } = this.props;
     const itemStyles = styles.container.sidebarWrap.sidebar.categoryItem;
@@ -67,15 +80,9 @@ class IconTab extends Component {
     return (
       <div style={[styles.container.sidebarWrap]}>
         <div style={[styles.container.sidebarWrap.sidebar]}>
-          {categories && categories.map(_c =>
-            <div
-              key={`category-${_c.slug}`}
-              style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
-              onClick={() => this.props.onActivateCategory(_c)}
-            >
-              <div style={[itemStyles.name]}>{_c.cat}</div>
-              {'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}
-            </div>
+          {this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}
+          {categories && categories.filter(category => category.slug !== 'custom-search').map(_c =>
+            this.renderCategory(itemStyles, _c, active)
           )}
         </div>
       </div>
@@ -122,7 +129,7 @@ class IconTab extends Component {
               />
 
               <button style={[CSS.button]} onClick={() => this.search(this.refs.searchField.value)}>
-                {isSearching ? 'Searching..' : 'Search'}
+                {isSearching ? 'Searching...' : 'Search'}
               </button>
             </div>
           </div>
@@ -153,7 +160,7 @@ class IconTab extends Component {
         </div>
 
         {isVisibleLoadingBlock &&
-          <div style={[contentStyles.loading, !isLoading && {visibility: 'hidden'}]}>Loading..</div>
+          <div style={[contentStyles.loading, !isLoading && {visibility: 'hidden'}]}>Loading...</div>
         }
       </div>
     );

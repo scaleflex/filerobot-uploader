@@ -2,6 +2,7 @@ export default {
   container: {
     display: 'flex',
     height: '100%',
+    fontFamily: 'Roboto, sans-serif',
 
     // Sidebar
     sidebarWrap: {
@@ -27,7 +28,7 @@ export default {
           cursor: 'pointer',
 
           active: {
-            background: 'rgb(51, 122, 183)',
+            background: '#5D636B',
             color: 'rgb(255, 255, 255)'
           },
 
@@ -50,6 +51,7 @@ export default {
     content: {
       flex: 1,
       overflow: 'auto',
+      color: '#5D636B',
 
       loading: {
         textAlign: 'center',
@@ -61,12 +63,13 @@ export default {
       results: {
         display: 'flex',
         flexWrap: 'wrap',
+        alignItems: 'stretch',
+        paddingRight: 10,
 
         icon: {
-          width: '16.0%',
+          width: 'calc(100% / 6 - 10px)',
+          margin: '10px 0 0 10px',
           height: 'auto',
-          margin: 0,
-          padding: 2,
 
           loading: {
             active: { cursor: 'progress' },
@@ -95,9 +98,9 @@ export default {
     },
 
     title: {
-      "textTransform": "uppercase",
-      "fontWeight": "200",
-      "marginTop": "-10%"
+      fontSize: 24,
+      "marginTop": "-10%",
+      fontWeight: 200
     },
 
     searchBlock: {
