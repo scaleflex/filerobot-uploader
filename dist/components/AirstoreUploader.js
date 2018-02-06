@@ -7,7 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
 import { Modal } from 'scaleflex-react-modules/dist';
@@ -89,7 +89,11 @@ var AirstoreUploader = function (_Component) {
       return React.createElement(
         Modal,
         { fullScreen: 'lg', onClose: this.closeModal },
-        this.renderModalContent()
+        React.createElement(
+          StyleRoot,
+          { style: { width: '100%', height: '100%' } },
+          this.renderModalContent()
+        )
       );
     }
   }, {
@@ -127,7 +131,7 @@ var AirstoreUploader = function (_Component) {
                 React.createElement('i', { className: tab.iconClass, style: [CSS.tabs.header.container.item.i] }),
                 React.createElement(
                   'span',
-                  { title: tab.fullName },
+                  { title: tab.fullName, style: CSS.tabs.header.container.item.text },
                   tab.shortName
                 )
               );

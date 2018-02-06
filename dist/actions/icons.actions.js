@@ -24,7 +24,7 @@ export var fetchIcons = function fetchIcons() {
   var categorySlug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var q = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  var limit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 36;
+  var limit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 60;
   return function (dispatch) {
     var successHandler = function successHandler(response) {
       return dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: _extends({ page: page, q: q, limit: limit, categorySlug: categorySlug }, response) });

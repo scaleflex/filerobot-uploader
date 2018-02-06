@@ -73,6 +73,12 @@ export default {
             marginRight: 5,
             display: 'inline-block',
             verticalAlign: 'top'
+          },
+
+          text: {
+            '@media screen and (max-width: 600px)': {
+              display: 'none'
+            }
           }
         }
       }

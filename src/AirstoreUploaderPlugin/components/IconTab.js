@@ -109,7 +109,7 @@ class IconTab extends Component {
           if (!isVisibleLoadingBlock) return;
 
           const { scrollTop, scrollHeight, clientHeight } = target;
-          const scrolledToBottom = scrollHeight ===  scrollTop + clientHeight;
+          const scrolledToBottom = scrollHeight < (scrollTop + clientHeight + 100);
           if (scrolledToBottom) this.showMore();
         }}
       >

@@ -186,7 +186,7 @@ var IconTab = function (_Component) {
                 scrollHeight = target.scrollHeight,
                 clientHeight = target.clientHeight;
 
-            var scrolledToBottom = scrollHeight === scrollTop + clientHeight;
+            var scrolledToBottom = scrollHeight < scrollTop + clientHeight + 100;
             if (scrolledToBottom) _this3.showMore();
           }
         },

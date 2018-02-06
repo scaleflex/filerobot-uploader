@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
 import { Modal } from 'scaleflex-react-modules/dist';
@@ -63,7 +63,7 @@ class AirstoreUploader extends Component {
     if (!this.props.isVisible) return null;
     return (
       <Modal fullScreen={'lg'} onClose={this.closeModal}>
-        {this.renderModalContent()}
+        <StyleRoot style={{ width: '100%', height: '100%'}}>{this.renderModalContent()}</StyleRoot>
       </Modal>
     );
   }
@@ -92,7 +92,7 @@ class AirstoreUploader extends Component {
                 }}
               >
                 <i className={tab.iconClass} style={[CSS.tabs.header.container.item.i]}/>
-                <span title={tab.fullName}>{tab.shortName}</span>
+                <span title={tab.fullName} style={CSS.tabs.header.container.item.text}>{tab.shortName}</span>
               </a>
             ))}
           </div>

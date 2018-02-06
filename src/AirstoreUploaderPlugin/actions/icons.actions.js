@@ -11,7 +11,7 @@ export const activateIconsCategory = category => dispatch => {
   setTimeout(() => dispatch(fetchIcons(category.slug)));
 };
 
-export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 36) => dispatch => {
+export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 60) => dispatch => {
   const successHandler = response => dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, limit, categorySlug, ...response} });
 
   switch (categorySlug) {
