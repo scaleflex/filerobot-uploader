@@ -8,13 +8,14 @@ export default {
   },
 
   faSpin: {
-    "WebkitAnimation": "fa-spin 2s infinite linear",
-    "animation": "fa-spin 2s infinite linear"
+    display: 'inline-block',
+    WebkitAnimation: "fa-spin 2s infinite linear",
+    animation: "fa-spin 2s infinite linear"
   },
 
   faFw: {
-    "width": "1.28571429em",
-    "textAlign": "center"
+    width: "1.28571429em",
+    textAlign: "center"
   },
 
   container: {
