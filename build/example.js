@@ -16,9 +16,9 @@
     //UPLOAD_PARAMS: {
     //  dir: '/cities/minsk'  // optional
     //},
+    //ELEMENT_ID: 'airstore-uploader', // optional
     UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132',
     CONTAINER: 'example',
-    //ELEMENT_ID: 'airstore-uploader', // optional
     onUpload: onUploadHandler
   };
 
