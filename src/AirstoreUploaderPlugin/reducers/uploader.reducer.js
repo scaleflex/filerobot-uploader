@@ -44,7 +44,7 @@ const _visibilityOpen = (state, activeTabName) => {
   let activeTab = Object.assign({}, state.activeTab = {}, nextTab);
 
   if (!activeTab.id && state.filteredTabs.length) activeTab = state.filteredTabs[0];
-console.log(activeTab);
+
   return {...state, isVisible: true, activeTab };
 };
 

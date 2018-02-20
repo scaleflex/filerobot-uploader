@@ -12,6 +12,7 @@ import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
 import { Modal } from 'scaleflex-react-modules/dist';
 import { modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs } from '../actions';
+import config from '../config';
 import { connect } from 'react-redux';
 
 var AirstoreUploader = function (_Component) {
@@ -78,8 +79,8 @@ var AirstoreUploader = function (_Component) {
           initialTab = _props.initialTab;
 
 
-      this.props.onSetUploaderConfig(initialOptions || {});
-      this.props.onSetActiveModules(initialOptions.MODULES || []);
+      this.props.onSetUploaderConfig(initialOptions || config || {});
+      this.props.onSetActiveModules(initialOptions.MODULES || config.MODULES || []);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);
       this.props.onSetTabs(this.tabs);
       if (this.props.opened) this.openModal(initialTab);

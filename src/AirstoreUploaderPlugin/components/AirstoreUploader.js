@@ -6,6 +6,7 @@ import { Modal } from 'scaleflex-react-modules/dist';
 import {
   modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs
 } from '../actions'
+import config from '../config';
 import { connect } from 'react-redux';
 
 
@@ -44,8 +45,8 @@ class AirstoreUploader extends Component {
   componentDidMount() {
     const { initialOptions, initialTab } = this.props;
 
-    this.props.onSetUploaderConfig(initialOptions || {});
-    this.props.onSetActiveModules(initialOptions.MODULES || []);
+    this.props.onSetUploaderConfig(initialOptions || config || {});
+    this.props.onSetActiveModules(initialOptions.MODULES ||config.MODULES || []);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
     this.props.onSetTabs(this.tabs);
     if (this.props.opened) this.openModal(initialTab);

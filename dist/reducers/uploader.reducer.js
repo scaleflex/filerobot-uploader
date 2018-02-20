@@ -57,7 +57,7 @@ var _visibilityOpen = function _visibilityOpen(state, activeTabName) {
   var activeTab = Object.assign({}, state.activeTab = {}, nextTab);
 
   if (!activeTab.id && state.filteredTabs.length) activeTab = state.filteredTabs[0];
-  console.log(activeTab);
+
   return _extends({}, state, { isVisible: true, activeTab: activeTab });
 };
 
