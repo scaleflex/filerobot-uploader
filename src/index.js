@@ -13,14 +13,8 @@ window.AirstoreUploader = window.AirstoreUploader || {};
 window.AirstoreUploader.init = init;
 
 function init(options = {}, isOpened = false) {
-  const editor = document.querySelector('airstore-uploader');
-  options = Object.assign({}, config || {}, options || {});
-
-  options.modules = options.modules || [];
-  options.settings = Object.assign({}, config.settings || {}, options.settings || {});
-  options.settings.uploadPath = options.settings.uploadPath || null;
-  options.settings.uploadParams = options.settings.uploadParams || {};
-  options.settings.uploadParams.opt_auth_upload_key = options.settings.uploadParams.opt_auth_upload_key || null;
+  const editor = document.getElementById(options.ELEMENT_ID || 'airstore-uploader');
+  options = Object.assign(config || {}, options || {});
   options.onUpload = options.onUpload || function() {};
 
   window.AirstoreUploader.component = Component => {
@@ -30,7 +24,7 @@ function init(options = {}, isOpened = false) {
           <Component opened={isOpened} initialOptions={options}/>
         </ThemeProvider>
       </AppContainer>,
-      document.getElementById('airstore-uploader'),
+      editor,
     )
   };
 

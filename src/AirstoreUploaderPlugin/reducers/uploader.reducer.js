@@ -1,17 +1,11 @@
 const initialState = {
   isVisible: false,
   backgrounds: [],
-  modules: ['USER_UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
+  modules: ['UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
   activeModules: [],
   tabs: [],
   filteredTabs: [],
   activeTab: null,
-  uploaderConfig: {
-    uploadPath: null,
-    uploadParams: {
-      opt_auth_upload_key: null
-    }
-  },
   uploadHandler: (files = []) => console.warn('Uploaded!', files)
 };
 
@@ -45,10 +39,11 @@ const uploader = (state = initialState, action) => {
 
 const _fetchBgSuccess = (state, backgrounds = []) => ({...state, backgrounds });
 
-const _visibilityOpen = state => {
-  let activeTab = Object.assign({}, state.activeTab || {});
+const _visibilityOpen = (state, activeTabName) => {
+  const nextTab = state.filteredTabs.find(tab => tab.id === activeTabName) || {};
+  let activeTab = Object.assign({}, state.activeTab = {}, nextTab, {});
 
-  if (state.filteredTabs.length) activeTab = state.filteredTabs[0];
+  if (!activeTab.id && state.filteredTabs.length) activeTab = state.filteredTabs[0];
 
   return {...state, isVisible: true, activeTab };
 };
@@ -57,8 +52,12 @@ const _visibilityClose = state => ({...state, isVisible: false, activeTab: null 
 
 const _activateTab = (state, activeTab) => ({...state, activeTab });
 
-const _setUploaderConfig = (state, newUploaderConfig = {}) => {
-  const uploaderConfig = Object.assign({}, state.uploaderConfig, newUploaderConfig);
+const _setUploaderConfig = (state, config = {}) => {
+
+  const uploaderConfig = {
+    uploadPath: `https://${config.CONTAINER}.api.airstore.io/upload`,
+    uploadParams: config.UPLOAD_PARAMS
+  };
 
   return {...state, uploaderConfig };
 };

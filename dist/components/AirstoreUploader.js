@@ -29,7 +29,7 @@ var AirstoreUploader = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AirstoreUploader.__proto__ || Object.getPrototypeOf(AirstoreUploader)).call.apply(_ref, [this].concat(args))), _this), _this.tabs = [{
-      id: 'USER_UPLOAD',
+      id: 'UPLOAD',
       fullName: 'Upload',
       shortName: 'Upload',
       iconClass: 'sfi-airstore-upload',
@@ -73,14 +73,16 @@ var AirstoreUploader = function (_Component) {
   _createClass(AirstoreUploader, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var initialOptions = this.props.initialOptions;
+      var _props = this.props,
+          initialOptions = _props.initialOptions,
+          initialTab = _props.initialTab;
 
 
-      this.props.onSetUploaderConfig(initialOptions.settings || {});
-      this.props.onSetActiveModules(initialOptions.modules || []);
+      this.props.onSetUploaderConfig(initialOptions || {});
+      this.props.onSetActiveModules(initialOptions.MODULES || []);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);
       this.props.onSetTabs(this.tabs);
-      if (this.props.opened) this.openModal();
+      if (this.props.opened) this.openModal(initialTab);
     }
   }, {
     key: 'render',
@@ -101,9 +103,9 @@ var AirstoreUploader = function (_Component) {
     value: function renderModalContent() {
       var _this2 = this;
 
-      var _props = this.props,
-          activeTab = _props.activeTab,
-          filteredTabs = _props.filteredTabs;
+      var _props2 = this.props,
+          activeTab = _props2.activeTab,
+          filteredTabs = _props2.filteredTabs;
 
 
       return React.createElement(
@@ -166,8 +168,8 @@ export default connect(function (_ref2) {
   return { backgrounds: backgrounds, isVisible: isVisible, activeTab: activeTab, uploaderConfig: uploaderConfig, activeModules: activeModules, tabs: tabs, filteredTabs: filteredTabs };
 }, function (dispatch) {
   return {
-    onModalOpen: function onModalOpen() {
-      return dispatch(modalOpen());
+    onModalOpen: function onModalOpen(tabName) {
+      return dispatch(modalOpen(tabName));
     },
     onModalClose: function onModalClose() {
       return dispatch(modalClose());

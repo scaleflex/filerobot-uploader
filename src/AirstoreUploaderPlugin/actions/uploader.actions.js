@@ -8,7 +8,7 @@ export const getBackgrounds = () => dispatch =>
     }
   });
 
-export const modalOpen = () => dispatch => dispatch({ type: 'MODAL_OPEN', payload: null });
+export const modalOpen = (tabName) => dispatch => dispatch({ type: 'MODAL_OPEN', payload: tabName });
 
 export const modalClose = () => dispatch => dispatch({ type: 'MODAL_CLOSE', payload: null });
 

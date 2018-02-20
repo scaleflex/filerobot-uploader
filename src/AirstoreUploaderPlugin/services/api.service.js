@@ -3,7 +3,7 @@ import config from '../config';
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
 
-export const send = (url, method = 'GET', data = null, headers = {"X-Token": "test-token"}, responseType = "json") =>
+export const send = (url, method = 'GET', data = null, headers = { 'X-Airstore-Secret-Key': config.UPLOAD_KEY }, responseType = "json") =>
   axios({
     url: url,
     method: method,
@@ -30,11 +30,11 @@ export const send = (url, method = 'GET', data = null, headers = {"X-Token": "te
  * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler uploadPath)
  * @returns {Promise}
  */
-export const uploadFiles = (files = [], {uploadPath = config.uploadPath, uploadParams = {}}, data_type = 'files[]') => {
+export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {} }, data_type = 'files[]') => {
   let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   const ajaxData = new FormData();
 
-  uploadParams = Object.assign({}, config.uploadParams, uploadParams);
+  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams);
 
   // generate params string
   const paramsStr = Object.keys(uploadParams)

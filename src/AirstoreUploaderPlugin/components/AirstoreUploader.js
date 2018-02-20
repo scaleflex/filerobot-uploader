@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 class AirstoreUploader extends Component {
   tabs = [
     {
-      id: 'USER_UPLOAD',
+      id: 'UPLOAD',
       fullName: 'Upload',
       shortName: 'Upload',
       iconClass: 'sfi-airstore-upload',
@@ -41,22 +41,22 @@ class AirstoreUploader extends Component {
     }
   ];
 
+  componentDidMount() {
+    const { initialOptions, initialTab } = this.props;
+
+    this.props.onSetUploaderConfig(initialOptions || {});
+    this.props.onSetActiveModules(initialOptions.MODULES || []);
+    this.props.onSetUploadHandler(initialOptions.onUpload || null);
+    this.props.onSetTabs(this.tabs);
+    if (this.props.opened) this.openModal(initialTab);
+  }
+
   openModal = () => this.props.onModalOpen();
 
   closeModal = () => {
     const { onClose } = this.props;
     if (onClose) onClose();
     this.props.onModalClose();
-  }
-
-  componentDidMount() {
-    const { initialOptions } = this.props;
-
-    this.props.onSetUploaderConfig(initialOptions.settings || {});
-    this.props.onSetActiveModules(initialOptions.modules || []);
-    this.props.onSetUploadHandler(initialOptions.onUpload || null);
-    this.props.onSetTabs(this.tabs);
-    if (this.props.opened) this.openModal();
   }
 
   render() {
@@ -113,7 +113,7 @@ export default connect(
      uploader: { backgrounds, isVisible, activeTab, uploaderConfig, activeModules, tabs, filteredTabs }
    }) => ({ backgrounds, isVisible, activeTab, uploaderConfig, activeModules, tabs, filteredTabs }),
   dispatch => ({
-    onModalOpen: () => dispatch(modalOpen()),
+    onModalOpen: (tabName) => dispatch(modalOpen(tabName)),
     onModalClose: () => dispatch(modalClose()),
     onActivateTab: active => dispatch(activateTab(active)),
     onSetUploaderConfig: _config => dispatch(setUploaderConfig(_config)),

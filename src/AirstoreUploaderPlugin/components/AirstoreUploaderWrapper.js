@@ -9,15 +9,16 @@ import AirstoreUploader from './AirstoreUploader';
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
-export default ({initialOptions, opened = false, onClose = null }) => (
+export default ({initialOptions, opened = false, onClose = null, initialTab = null }) => (
   <Provider store={store}>
     <AirstoreUploader
       opened={opened}
       onClose={onClose}
+      initialTab={initialTab}
       initialOptions={initialOptions}
     />
   </Provider>
 )
 
 window.AirstoreUploader = window.AirstoreUploader || {};
-window.AirstoreUploader.open = () => store.dispatch({type: 'MODAL_OPEN'});
+window.AirstoreUploader.open = tabName => store.dispatch({ type: 'MODAL_OPEN', payload: tabName });

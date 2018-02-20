@@ -1,39 +1,34 @@
 (function() {
-  let options = {
-    modules: ['USER_UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'], // 'USER_UPLOAD', 'ICONS', SEARCH, BACKGROUNDS ...
-    onUploadSrc: 'https://opendocs-content.api.airstore.io/v1/get/_/',
-    onUpload: function (files = []) { // handler
-      const [file] = files;
-      const result = document.querySelector('.result');
-      const resultImg = document.querySelector('.result-img');
+  let onUploadHandler = function (files = []) { // handler on upload images
+    const [file] = files;
+    const result = document.querySelector('.result');
+    const resultImg = document.querySelector('.result-img');
 
-      if (result) result.innerHTML = JSON.stringify(file || {}, null, 2);
-      if (resultImg) {
-        resultImg.src = file && file.public_link ? file.public_link : '';
-        resultImg.style.display = 'inline-block';
-      }
-    },
-    image_only: true,
-    settings: {
-      uploadPath: 'https://opendocs-content.api.airstore.io/upload',
-      uploadParams: { opt_auth_upload_key: 'intpriv_997ab790fd93c0a9a7b471df561c276a373bc030&dir=_GENERATED' } /* HACK */
+    if (result) result.innerHTML = JSON.stringify(file || {}, null, 2);
+    if (resultImg) {
+      resultImg.src = file && file.public_link ? file.public_link : '';
+      resultImg.style.display = 'inline-block';
     }
   };
 
-  try {
-    const localOptions = require('/local.initial_options.js');
-
-    if (localOptions && localOptions.default && typeof localOptions.default === 'object')
-      options = { ...options, ...localOptions.default };
-
-  } catch (e) {}
+  let options = {
+    //MODULES: ['UPLOAD', 'ICONS', 'BACKGROUNDS', 'ICONS'], // optional 'UPLOAD', 'ICONS', 'SEARCH', 'BACKGROUNDS'
+    //UPLOAD_PARAMS: {
+    //  dir: '/cities/minsk'  // optional
+    //},
+    UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132',
+    CONTAINER: 'example',
+    //ELEMENT_ID: 'airstore-uploader', // optional
+    onUpload: onUploadHandler
+  };
 
   window.onload = function() {
     if (window.AirstoreUploader) {
       window.AirstoreUploader.init(options);
 
       const openBtn = document.querySelector('.open-modal-btn');
-      if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open();
+      const initialTab = 'BACKGROUNDS';
+      if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open(initialTab);
     }
   }
 })();

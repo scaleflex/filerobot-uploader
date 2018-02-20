@@ -3,17 +3,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var initialState = {
   isVisible: false,
   backgrounds: [],
-  modules: ['USER_UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
+  modules: ['UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
   activeModules: [],
   tabs: [],
   filteredTabs: [],
   activeTab: null,
-  uploaderConfig: {
-    uploadPath: null,
-    uploadParams: {
-      opt_auth_upload_key: null
-    }
-  },
   uploadHandler: function uploadHandler() {
     var files = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     return console.warn('Uploaded!', files);
@@ -56,10 +50,13 @@ var _fetchBgSuccess = function _fetchBgSuccess(state) {
   return _extends({}, state, { backgrounds: backgrounds });
 };
 
-var _visibilityOpen = function _visibilityOpen(state) {
-  var activeTab = Object.assign({}, state.activeTab || {});
+var _visibilityOpen = function _visibilityOpen(state, activeTabName) {
+  var nextTab = state.filteredTabs.find(function (tab) {
+    return tab.id === activeTabName;
+  }) || {};
+  var activeTab = Object.assign({}, state.activeTab = {}, nextTab, {});
 
-  if (state.filteredTabs.length) activeTab = state.filteredTabs[0];
+  if (!activeTab.id && state.filteredTabs.length) activeTab = state.filteredTabs[0];
 
   return _extends({}, state, { isVisible: true, activeTab: activeTab });
 };
@@ -73,9 +70,13 @@ var _activateTab = function _activateTab(state, activeTab) {
 };
 
 var _setUploaderConfig = function _setUploaderConfig(state) {
-  var newUploaderConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var uploaderConfig = Object.assign({}, state.uploaderConfig, newUploaderConfig);
+
+  var uploaderConfig = {
+    uploadPath: 'https://' + config.CONTAINER + '.api.airstore.io/upload',
+    uploadParams: config.UPLOAD_PARAMS
+  };
 
   return _extends({}, state, { uploaderConfig: uploaderConfig });
 };

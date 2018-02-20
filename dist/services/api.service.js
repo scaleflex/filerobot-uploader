@@ -8,7 +8,7 @@ var independentProtocolRegex = /^[https|http]+\:\/\//g;
 export var send = function send(url) {
   var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
   var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { "X-Token": "test-token" };
+  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { 'X-Airstore-Secret-Key': config.UPLOAD_KEY };
   var responseType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "json";
   return axios({
     url: url,
@@ -45,7 +45,7 @@ export var uploadFiles = function uploadFiles() {
   var files = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var _ref3 = arguments[1];
   var _ref3$uploadPath = _ref3.uploadPath,
-      uploadPath = _ref3$uploadPath === undefined ? config.uploadPath : _ref3$uploadPath,
+      uploadPath = _ref3$uploadPath === undefined ? '' : _ref3$uploadPath,
       _ref3$uploadParams = _ref3.uploadParams,
       uploadParams = _ref3$uploadParams === undefined ? {} : _ref3$uploadParams;
   var data_type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
@@ -53,7 +53,7 @@ export var uploadFiles = function uploadFiles() {
   var url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   var ajaxData = new FormData();
 
-  uploadParams = Object.assign({}, config.uploadParams, uploadParams);
+  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams);
 
   // generate params string
   var paramsStr = Object.keys(uploadParams).filter(function (paramName) {

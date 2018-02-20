@@ -14,9 +14,9 @@ export var getBackgrounds = function getBackgrounds() {
   };
 };
 
-export var modalOpen = function modalOpen() {
+export var modalOpen = function modalOpen(tabName) {
   return function (dispatch) {
-    return dispatch({ type: 'MODAL_OPEN', payload: null });
+    return dispatch({ type: 'MODAL_OPEN', payload: tabName });
   };
 };
 
