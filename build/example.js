@@ -12,14 +12,14 @@
   };
 
   let options = {
-    //MODULES: ['UPLOAD', 'ICONS', 'BACKGROUNDS', 'ICONS'], // optional 'UPLOAD', 'ICONS', 'SEARCH', 'BACKGROUNDS'
-    //UPLOAD_PARAMS: {
-    //  dir: '/cities/minsk'  // optional
+    //MODULES: ['UPLOAD', 'SEARCH'],   // optional default: 'UPLOAD', 'ICONS', 'SEARCH', 'BACKGROUNDS'
+    //UPLOAD_PARAMS: {                 // optional default: {}
+    //  dir: '/cities/minsk'
     //},
-    //ELEMENT_ID: 'airstore-uploader', // optional
-    UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132',
-    CONTAINER: 'example',
-    onUpload: onUploadHandler
+    //ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
+    UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
+    CONTAINER: 'example',                           // required
+    onUpload: onUploadHandler                       // required
   };
 
   window.onload = function() {
