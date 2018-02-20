@@ -2,7 +2,17 @@
   let options = {
     modules: ['USER_UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'], // 'USER_UPLOAD', 'ICONS', SEARCH, BACKGROUNDS ...
     onUploadSrc: 'https://opendocs-content.api.airstore.io/v1/get/_/',
-    onUpload: null, // handler
+    onUpload: function (files = []) { // handler
+      const [file] = files;
+      const result = document.querySelector('.result');
+      const resultImg = document.querySelector('.result-img');
+
+      if (result) result.innerHTML = JSON.stringify(file || {}, null, 2);
+      if (resultImg) {
+        resultImg.src = file && file.public_link ? file.public_link : '';
+        resultImg.style.display = 'inline-block';
+      }
+    },
     image_only: true,
     settings: {
       uploadPath: 'https://opendocs-content.api.airstore.io/upload',

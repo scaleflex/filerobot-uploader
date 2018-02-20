@@ -21,14 +21,7 @@ function init(options = {}, isOpened = false) {
   options.settings.uploadPath = options.settings.uploadPath || null;
   options.settings.uploadParams = options.settings.uploadParams || {};
   options.settings.uploadParams.opt_auth_upload_key = options.settings.uploadParams.opt_auth_upload_key || null;
-  options.onUpload = options.onUpload || function (files = []) {
-    const [file] = files;
-    const result = document.querySelector('.result');
-    const resultImg = document.querySelector('.result-img');
-
-    if (result) result.innerHTML = JSON.stringify(file || {}, null, 2);
-    if (resultImg) resultImg.src = file && file.public_link ? file.public_link : '';
-  };
+  options.onUpload = options.onUpload || function() {};
 
   window.AirstoreUploader.component = Component => {
     return render(
