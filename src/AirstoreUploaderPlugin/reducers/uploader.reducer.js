@@ -41,10 +41,10 @@ const _fetchBgSuccess = (state, backgrounds = []) => ({...state, backgrounds });
 
 const _visibilityOpen = (state, activeTabName) => {
   const nextTab = state.filteredTabs.find(tab => tab.id === activeTabName) || {};
-  let activeTab = Object.assign({}, state.activeTab = {}, nextTab, {});
+  let activeTab = Object.assign({}, state.activeTab = {}, nextTab);
 
   if (!activeTab.id && state.filteredTabs.length) activeTab = state.filteredTabs[0];
-
+console.log(activeTab);
   return {...state, isVisible: true, activeTab };
 };
 

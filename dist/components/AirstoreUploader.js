@@ -60,8 +60,8 @@ var AirstoreUploader = function (_Component) {
       getContent: function getContent() {
         return React.createElement(BackgroundTab, null);
       }
-    }], _this.openModal = function () {
-      return _this.props.onModalOpen();
+    }], _this.openModal = function (initialTab) {
+      return _this.props.onModalOpen(initialTab);
     }, _this.closeModal = function () {
       var onClose = _this.props.onClose;
 
