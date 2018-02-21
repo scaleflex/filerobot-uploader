@@ -44,7 +44,7 @@ class AirstoreUploader extends Component {
 
   componentDidMount() {
     const { initialOptions, initialTab } = this.props;
-
+console.log(initialOptions);
     this.props.onSetUploaderConfig(initialOptions || config || {});
     this.props.onSetActiveModules(initialOptions.MODULES ||config.MODULES || []);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
