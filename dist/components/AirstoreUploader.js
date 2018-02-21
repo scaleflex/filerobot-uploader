@@ -78,7 +78,7 @@ var AirstoreUploader = function (_Component) {
           initialOptions = _props.initialOptions,
           initialTab = _props.initialTab;
 
-      console.log(initialOptions);
+
       this.props.onSetUploaderConfig(initialOptions || config || {});
       this.props.onSetActiveModules(initialOptions.MODULES || config.MODULES || []);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);

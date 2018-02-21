@@ -3,7 +3,7 @@ import config from '../config';
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
 
-export const send = (url, method = 'GET', data = null, headers = { 'X-Airstore-Secret-Key': config.UPLOAD_KEY }, responseType = "json") =>
+export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   axios({
     url: url,
     method: method,
@@ -27,10 +27,11 @@ export const send = (url, method = 'GET', data = null, headers = { 'X-Airstore-S
  * @param uploadPath    {string}  Airstore upload url (like: "//jolipage001.api.airstore.io/upload") or custom handler
  * @param uploadParams  {object}  Params which we need to send to uploadPath
  * @param files         {array}   Array with files
+ * @param uploadKey     {string}  = secret key
  * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler uploadPath)
  * @returns {Promise}
  */
-export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {} }, data_type = 'files[]') => {
+export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, uploadKey = ''  }, data_type = 'files[]') => {
   let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   const ajaxData = new FormData();
 
@@ -49,7 +50,7 @@ export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {} }, 
     [...files].forEach(file => ajaxData.append(data_type, file)); // fill FormData
 
   return new Promise((resolve, reject) => {
-    send(url, 'POST', ajaxData).then(
+    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.UPLOAD_KEY }).then(
       response => {
         const { status = 'success', files = [] } = response;
 
