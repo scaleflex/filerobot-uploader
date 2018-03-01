@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
-import { Modal } from 'scaleflex-react-modules/dist';
+import { Modal } from 'scaleflex-react-ui-kit/dist';
 import {
   modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs
 } from '../actions'

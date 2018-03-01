@@ -10,7 +10,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "scaleflex-react-modules": "git+ssh://git@code.scaleflex.cloud:scaleflex/scaleflex-react-modules.git"
+    "scaleflex-react-ui-kit": "git+ssh://git@code.scaleflex.cloud:scaleflex/scaleflex-react-ui-kit.git"
   },
   "peerDependencies": {
     "styled-components": "^3.1.6"
