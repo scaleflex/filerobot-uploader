@@ -28,10 +28,11 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
  * @param uploadParams  {object}  Params which we need to send to uploadPath
  * @param files         {array}   Array with files
  * @param uploadKey     {string}  = secret key
- * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler uploadPath)
+ * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
+ *   uploadPath)
  * @returns {Promise}
  */
-export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, uploadKey = ''  }, data_type = 'files[]') => {
+export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, uploadKey = '' }, data_type = 'files[]') => {
   let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   const ajaxData = new FormData();
 
@@ -56,11 +57,13 @@ export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, up
 
         if (status === 'success' && files && files.length)
           resolve(
-            files.map(file => {
-              file.public_link = file.public_link.replace(independentProtocolRegex, '//');
+            files
+              .filter(file => file.status === 'success')
+              .map(file => {
+                file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
-              return file;
-            })
+                return file;
+              })
           );
         else
           reject(response);
