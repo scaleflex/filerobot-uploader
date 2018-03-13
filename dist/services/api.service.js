@@ -39,7 +39,8 @@ export var send = function send(url) {
  * @param uploadParams  {object}  Params which we need to send to uploadPath
  * @param files         {array}   Array with files
  * @param uploadKey     {string}  = secret key
- * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler uploadPath)
+ * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
+ *   uploadPath)
  * @returns {Promise}
  */
 export var uploadFiles = function uploadFiles() {
@@ -80,7 +81,9 @@ export var uploadFiles = function uploadFiles() {
           files = _response$files === undefined ? [] : _response$files;
 
 
-      if (status === 'success' && files && files.length) resolve(files.map(function (file) {
+      if (status === 'success' && files && files.length) resolve(files.filter(function (file) {
+        return file.status !== 'error';
+      }).map(function (file) {
         file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
         return file;

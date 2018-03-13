@@ -58,7 +58,7 @@ export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, up
         if (status === 'success' && files && files.length)
           resolve(
             files
-              .filter(file => file.status === 'success')
+              .filter(file => file.status !== 'error')
               .map(file => {
                 file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
