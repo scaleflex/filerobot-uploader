@@ -74,7 +74,7 @@ class AirstoreUploader extends Component {
 
     return (
       <div style={[
-        { display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif' }
+        { display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif', background: '#181830' }
       ]}>
         <div style={[CSS.tabs.header]}>
           <div style={[CSS.tabs.header.container]}>

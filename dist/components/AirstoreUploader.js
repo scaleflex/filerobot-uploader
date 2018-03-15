@@ -111,7 +111,7 @@ var AirstoreUploader = function (_Component) {
 
       return React.createElement(
         'div',
-        { style: [{ display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif' }] },
+        { style: [{ display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif', background: '#181830' }] },
         React.createElement(
           'div',
           { style: [CSS.tabs.header] },

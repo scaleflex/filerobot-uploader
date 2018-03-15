@@ -5,7 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import AirstoreUploaderWrapper from './AirstoreUploaderPlugin/components/AirstoreUploaderWrapper';
 import registerServiceWorker from './registerServiceWorker';
 import { ThemeProvider } from 'styled-components';
-import { getTheme } from 'scaleflex-react-ui-kit/dist';
+import { getDesignSystem } from 'scaleflex-react-ui-kit/dist';
 import 'scaleflex-react-ui-kit/dist/styledComponents/assets/styles/scaleflex-icon-font.css';
 
 
@@ -20,7 +20,7 @@ function init(options = {}, isOpened = false) {
   window.AirstoreUploader.component = Component => {
     return render(
       <AppContainer>
-        <ThemeProvider theme={getTheme('dark')}>
+        <ThemeProvider theme={getDesignSystem('dark')}>
           <Component opened={isOpened} initialOptions={options}/>
         </ThemeProvider>
       </AppContainer>,
