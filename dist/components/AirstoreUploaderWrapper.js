@@ -2,11 +2,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from '../reducers/index';
 import AirstoreUploader from './AirstoreUploader';
 
-var store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+var store = createStore(reducer, applyMiddleware(thunk));
 
 export default (function (_ref) {
   var initialOptions = _ref.initialOptions,
