@@ -2,7 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import config from './AirstoreUploaderPlugin/config';
 import { AppContainer } from 'react-hot-loader';
-import AirstoreUploaderWrapper from './AirstoreUploaderPlugin/components/AirstoreUploaderWrapper';
+import AirstoreUploaderWrapper, { AirstoreUploaderStore } from './AirstoreUploaderPlugin/components/AirstoreUploaderWrapper';
 import registerServiceWorker from './registerServiceWorker';
 import { ThemeProvider } from 'styled-components';
 import { getDesignSystem } from 'scaleflex-react-ui-kit/dist';
@@ -11,6 +11,7 @@ import 'scaleflex-react-ui-kit/dist/styledComponents/assets/styles/scaleflex-ico
 
 window.AirstoreUploader = window.AirstoreUploader || {};
 window.AirstoreUploader.init = init;
+window.AirstoreUploader.open = tabName => AirstoreUploaderStore.dispatch({ type: 'MODAL_OPEN', payload: tabName });
 
 function init(options = {}, isOpened = false) {
   const editor = document.getElementById(options.ELEMENT_ID || 'airstore-uploader');

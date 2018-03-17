@@ -86,6 +86,13 @@ var AirstoreUploader = function (_Component) {
       if (this.props.opened) this.openModal(initialTab);
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.opened !== this.props.opened) {
+        if (nextProps.opened) this.openModal(nextProps.initialTab);else this.closeModal();
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (!this.props.isVisible) return null;

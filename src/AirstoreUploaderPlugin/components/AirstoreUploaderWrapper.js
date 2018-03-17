@@ -5,11 +5,11 @@ import thunk from 'redux-thunk';
 import reducer from '../reducers/index';
 import AirstoreUploader from './AirstoreUploader';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const AirstoreUploaderStore = createStore(reducer, applyMiddleware(thunk));
 
 
 export default ({initialOptions, opened = false, onClose = null, initialTab = null }) => (
-  <Provider store={store}>
+  <Provider store={AirstoreUploaderStore}>
     <AirstoreUploader
       opened={opened}
       onClose={onClose}
@@ -19,5 +19,4 @@ export default ({initialOptions, opened = false, onClose = null, initialTab = nu
   </Provider>
 )
 
-window.AirstoreUploader = window.AirstoreUploader || {};
-window.AirstoreUploader.open = tabName => store.dispatch({ type: 'MODAL_OPEN', payload: tabName });
+export { AirstoreUploaderStore };

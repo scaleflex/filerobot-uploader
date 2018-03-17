@@ -52,6 +52,15 @@ class AirstoreUploader extends Component {
     if (this.props.opened) this.openModal(initialTab);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.opened !== this.props.opened) {
+      if (nextProps.opened)
+        this.openModal(nextProps.initialTab);
+      else
+        this.closeModal();
+    }
+  }
+
   openModal = (initialTab) => this.props.onModalOpen(initialTab);
 
   closeModal = () => {
