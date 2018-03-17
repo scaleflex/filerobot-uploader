@@ -5,8 +5,6 @@ import thunk from 'redux-thunk';
 import reducer from '../reducers/index';
 import AirstoreUploader from './AirstoreUploader';
 
-var AirstoreUploaderStore = createStore(reducer, applyMiddleware(thunk));
-
 export default (function (_ref) {
   var initialOptions = _ref.initialOptions,
       _ref$opened = _ref.opened,
@@ -14,7 +12,11 @@ export default (function (_ref) {
       _ref$onClose = _ref.onClose,
       onClose = _ref$onClose === undefined ? null : _ref$onClose,
       _ref$initialTab = _ref.initialTab,
-      initialTab = _ref$initialTab === undefined ? null : _ref$initialTab;
+      initialTab = _ref$initialTab === undefined ? null : _ref$initialTab,
+      AirstoreUploaderStore = _ref.AirstoreUploaderStore;
+
+  AirstoreUploaderStore = AirstoreUploaderStore || createStore(reducer, applyMiddleware(thunk));
+
   return React.createElement(
     Provider,
     { store: AirstoreUploaderStore },
@@ -27,4 +29,8 @@ export default (function (_ref) {
   );
 });
 
-export { AirstoreUploaderStore };
+var createAirstoreUploaderStore = function createAirstoreUploaderStore() {
+  return createStore(reducer, applyMiddleware(thunk));
+};
+
+export { createAirstoreUploaderStore };

@@ -5,18 +5,22 @@ import thunk from 'redux-thunk';
 import reducer from '../reducers/index';
 import AirstoreUploader from './AirstoreUploader';
 
-const AirstoreUploaderStore = createStore(reducer, applyMiddleware(thunk));
 
+export default ({ initialOptions, opened = false, onClose = null, initialTab = null, AirstoreUploaderStore }) => {
+  AirstoreUploaderStore = AirstoreUploaderStore || createStore(reducer, applyMiddleware(thunk));
 
-export default ({initialOptions, opened = false, onClose = null, initialTab = null }) => (
-  <Provider store={AirstoreUploaderStore}>
-    <AirstoreUploader
-      opened={opened}
-      onClose={onClose}
-      initialTab={initialTab}
-      initialOptions={initialOptions}
-    />
-  </Provider>
-)
+  return (
+    <Provider store={AirstoreUploaderStore}>
+      <AirstoreUploader
+        opened={opened}
+        onClose={onClose}
+        initialTab={initialTab}
+        initialOptions={initialOptions}
+      />
+    </Provider>
+  );
+}
 
-export { AirstoreUploaderStore };
+const createAirstoreUploaderStore = () => createStore(reducer, applyMiddleware(thunk));
+
+export { createAirstoreUploaderStore };
