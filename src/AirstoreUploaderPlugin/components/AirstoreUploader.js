@@ -72,7 +72,7 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.isVisible) return null;
     return (
-      <Modal fullScreen={'lg'} onClose={this.closeModal}>
+      <Modal noBorder fullScreen={'lg'} onClose={this.closeModal}>
         <StyleRoot style={{ width: '100%', height: '100%'}}>{this.renderModalContent()}</StyleRoot>
       </Modal>
     );

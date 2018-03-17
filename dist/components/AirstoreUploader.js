@@ -98,7 +98,7 @@ var AirstoreUploader = function (_Component) {
       if (!this.props.isVisible) return null;
       return React.createElement(
         Modal,
-        { fullScreen: 'lg', onClose: this.closeModal },
+        { noBorder: true, fullScreen: 'lg', onClose: this.closeModal },
         React.createElement(
           StyleRoot,
           { style: { width: '100%', height: '100%' } },

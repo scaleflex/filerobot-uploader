@@ -27,18 +27,20 @@ export default {
     height: 'calc(100% - 6px)',
     color: '#5D636B',
     "padding": 3,
+    boxSizing: 'content-box',
 
     uploadBlock: {
-      width: 'calc(100% - 6px)',
+      width: '100%',
       minHeight: 240,
       "textAlign": "center",
       "border": "2px dashed #d8d8d8",
       "background": "#f5f5f5",
-      "height": "calc(100% - 6px)",
+      "height": "100%",
       "alignItems": "center",
       "justifyContent": "center",
       "display": "flex",
       color: '#5D636B',
+      boxSizing: 'border-box',
 
       inputBox: {
         file: {
