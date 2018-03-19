@@ -1,8 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducer from '../reducers/index';
+import configureStore from '../../module.hot';
 import AirstoreUploader from './AirstoreUploader';
 
 export default (function (_ref) {
@@ -15,7 +13,7 @@ export default (function (_ref) {
       initialTab = _ref$initialTab === undefined ? null : _ref$initialTab,
       AirstoreUploaderStore = _ref.AirstoreUploaderStore;
 
-  AirstoreUploaderStore = AirstoreUploaderStore || createStore(reducer, applyMiddleware(thunk));
+  AirstoreUploaderStore = AirstoreUploaderStore || configureStore();
 
   return React.createElement(
     Provider,
@@ -30,7 +28,7 @@ export default (function (_ref) {
 });
 
 var createAirstoreUploaderStore = function createAirstoreUploaderStore() {
-  return createStore(reducer, applyMiddleware(thunk));
+  return configureStore();
 };
 
 export { createAirstoreUploaderStore };

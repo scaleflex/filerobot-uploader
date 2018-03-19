@@ -1,13 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducer from '../reducers/index';
+import configureStore from '../../module.hot';
 import AirstoreUploader from './AirstoreUploader';
 
 
 export default ({ initialOptions, opened = false, onClose = null, initialTab = null, AirstoreUploaderStore }) => {
-  AirstoreUploaderStore = AirstoreUploaderStore || createStore(reducer, applyMiddleware(thunk));
+  AirstoreUploaderStore = AirstoreUploaderStore || configureStore();
 
   return (
     <Provider store={AirstoreUploaderStore}>
@@ -21,6 +19,6 @@ export default ({ initialOptions, opened = false, onClose = null, initialTab = n
   );
 }
 
-const createAirstoreUploaderStore = () => createStore(reducer, applyMiddleware(thunk));
+const createAirstoreUploaderStore = () => configureStore();
 
 export { createAirstoreUploaderStore };
