@@ -4,7 +4,7 @@ import configureStore from '../module.hot';
 import AirstoreUploader from './AirstoreUploader';
 
 
-export default ({ initialOptions, opened = false, onClose = null, initialTab = null, AirstoreUploaderStore }) => {
+export default ({ initialOptions, opened = false, onClose = null, initialTab = null, AirstoreUploaderStore, ...otherProps }) => {
   AirstoreUploaderStore = AirstoreUploaderStore || configureStore();
 
   return (
@@ -14,6 +14,7 @@ export default ({ initialOptions, opened = false, onClose = null, initialTab = n
         onClose={onClose}
         initialTab={initialTab}
         initialOptions={initialOptions}
+        {...otherProps}
       />
     </Provider>
   );
