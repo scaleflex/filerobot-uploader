@@ -81,7 +81,10 @@ class IconTab extends Component {
       <div style={[styles.container.sidebarWrap]}>
         <div style={[styles.container.sidebarWrap.sidebar]}>
           {this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}
-          {categories && categories.filter(category => category.slug !== 'custom-search').map(_c =>
+          {categories && categories
+            .filter(category => category.slug !== 'custom-search')
+            .sort((a, b) => a.cat > b.cat ? 1 : -1)
+            .map(_c =>
             this.renderCategory(itemStyles, _c, active)
           )}
         </div>
