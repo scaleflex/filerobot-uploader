@@ -41,6 +41,13 @@ var BackgroundTab = function (_Component) {
       }, function () {
         return _this.uploadStop();
       });
+    }, _this.onKeyDown = function (event, bg) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        _this.upload(bg);
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -63,16 +70,27 @@ var BackgroundTab = function (_Component) {
       return React.createElement(
         'div',
         { style: [styles.container] },
-        this.props.backgrounds.map(function (bg) {
+        this.props.backgrounds.map(function (bg, index) {
           return React.createElement(
             'div',
             {
               style: [itemStyles, isLoading && uploadingUuid === bg.uuid && itemStyles.loading.active, isLoading && uploadingUuid !== bg.uuid && itemStyles.loading.notActive],
               key: 'bg-' + bg.uuid,
-              onClick: _this2.upload.bind(_this2, bg)
+              onClick: _this2.upload.bind(_this2, bg),
+              role: 'button',
+              tabIndex: 0,
+              onKeyDown: function onKeyDown(event) {
+                return _this2.onKeyDown(event, bg);
+              }
             },
             React.createElement('span', { style: [styles.container.item.alignmentBlock] }),
-            React.createElement('img', { style: [styles.container.item.img], src: bg.url_preview, width: '100%', height: 'auto' })
+            React.createElement('img', {
+              style: [styles.container.item.img],
+              src: bg.url_preview,
+              alt: bg.alt || 'background ' + (index + 1),
+              width: '100%',
+              height: 'auto'
+            })
           );
         })
       );

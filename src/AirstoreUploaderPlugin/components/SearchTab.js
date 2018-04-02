@@ -28,7 +28,14 @@ class SearchTab extends Component {
      this.props.onSearchImages(q).then(done, done);
   };
 
-  componentDidMount() {}
+  onKeyDown = (event, original_url) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.upload(original_url);
+    }
+  }
 
   render() {
     const { isSearching } = this.state;
@@ -58,7 +65,7 @@ class SearchTab extends Component {
 
   renderResults() {
     const { isLoading, uploadingUuid } = this.state;
-    const { images = [] } = this.props;
+    const { images = [], query } = this.props;
     const resultStyles = styles.container.resultBlock;
 
     return <div style={[resultStyles]}>
@@ -70,10 +77,18 @@ class SearchTab extends Component {
             isLoading && uploadingUuid !== image.original_url && resultStyles.item.loading.notActive
           ]}
           key={`image-${image.original_url}`}
+          onKeyDown={event => this.onKeyDown(event, image.original_url)}
           onClick={this.upload.bind(this, image.original_url)}
+          tabIndex={1}
         >
           <span style={[resultStyles.item.alignmentBlock]}/>
-          <img style={resultStyles.item.img} src={image.thumb_url} width="100%" height="auto" />
+          <img
+            style={resultStyles.item.img}
+            src={image.thumb_url}
+            alt={image.alt || `${query} ${index + 1}`}
+            width="100%"
+            height="auto"
+          />
         </div>
       )}
     </div>

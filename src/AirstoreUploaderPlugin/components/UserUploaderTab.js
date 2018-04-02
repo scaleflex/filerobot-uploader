@@ -109,14 +109,16 @@ class UserUploaderTab extends Component {
                   ref="fileInput"
                   data-multiple-caption="{count} files selected"
                   defaultValue={''}
+                  tabIndex={-1}
                   onChange={this.fileChangeHandler}
                 />
 
-                <label style={[uploadBlock_style.inputBox.label]}>
+                <div style={[uploadBlock_style.inputBox.label]}>
                   <span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</span>
                   <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
                   <button
                     key="browse-your-computer"
+                    autoFocus={true}
                     style={[CSS.button, { margin: 'auto' }]}
                     onClick={() => { this.refs.fileInput.click() }}
                   >Browse your computer
@@ -130,7 +132,7 @@ class UserUploaderTab extends Component {
                       ref="uploadFromWebField"
                       onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
                     />
-                    <button key="ok" style={[CSS.button]} onClick={this.uploadFromWeb}>OK</button>
+                    <button key="ok" style={[CSS.button]} onClick={this.uploadFromWeb}>Upload</button>
                   </div>
                   <div style={[{
                     fontSize: "12px",
@@ -140,7 +142,7 @@ class UserUploaderTab extends Component {
                   }]}>
                     Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.
                   </div>
-                </label>
+                </div>
 
                 <div ref="submitBtn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">Upload</div>
               </div>
@@ -160,7 +162,7 @@ class UserUploaderTab extends Component {
             {
               step === STEP.ERROR &&
               <div style={[uploadBlock_style.errorBox]}>
-                <span style={[uploadBlock_style.errorBox.errorMsg]}>{errorMsg}</span>
+                <span style={[uploadBlock_style.errorBox.errorMsg]} role="alert">{errorMsg}</span>
               </div>
             }
           </div>

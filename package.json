@@ -1,19 +1,20 @@
 {
   "name": "airstore-uploader-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
     "radium": "^0.21.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-focus-lock": "^1.8.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "scaleflex-react-ui-kit": "git+ssh://git@code.scaleflex.cloud:scaleflex/scaleflex-react-ui-kit.git"
+    "redux-thunk": "^2.2.0"
   },
   "peerDependencies": {
-    "styled-components": "^3.1.6"
+    "styled-components": "^3.1.6",
+    "scaleflex-react-ui-kit": "git+ssh://git@code.scaleflex.cloud:scaleflex/scaleflex-react-ui-kit.git"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",

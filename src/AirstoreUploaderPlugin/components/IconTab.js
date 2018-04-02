@@ -8,6 +8,17 @@ import {isEnterClick} from '../utils/index';
 class IconTab extends Component {
   state = { height: '114px', isLoading: false, isUploading: false, uploadingIcon: null, isSearching: false };
 
+  componentDidMount() {
+    this.props.onGetCategories().then(() => {
+      setTimeout(() => {
+        const iconBox = document
+          .querySelector('#airstore-uploader-categories-box .airstore-uploader-category-item:nth-child(2)');
+
+        if (iconBox) iconBox.focus();
+      })
+    })
+  }
+
   uploadStart = url => this.setState({ uploadingIcon: url, isUploading: true });
   uploadStop = () => this.setState({ uploadingIcon: null, isUploading: false });
 
@@ -43,8 +54,12 @@ class IconTab extends Component {
     this.loadIcons(slug, 1, q, () => this.setState({isSearching: false}));
   };
 
-  componentDidMount() {
-    this.props.onGetCategories();
+  activateCategory = (_c) => {
+    this.props.onActivateCategory(_c, () => {
+      const iconBox = document
+        .querySelector('#airstore-uploader-icons-box .airstore-uploader-icon-item:first-child');
+      if (iconBox) iconBox.focus();
+    });
   }
 
   render() {
@@ -62,8 +77,11 @@ class IconTab extends Component {
     return (
       <div
         key={`category-${_c.slug}`}
+        tabIndex={0}
+        className="airstore-uploader-category-item"
         style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
-        onClick={() => this.props.onActivateCategory(_c)}
+        onKeyDown={event => { event.keyCode === 13 && this.activateCategory(_c); }}
+        onClick={() => this.activateCategory(_c)}
       >
         <div style={[itemStyles.name]}>{_c.cat}</div>
         {'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}
@@ -79,14 +97,13 @@ class IconTab extends Component {
 
     return (
       <div style={[styles.container.sidebarWrap]}>
-        <div style={[styles.container.sidebarWrap.sidebar]}>
+        <div style={[styles.container.sidebarWrap.sidebar]} id="airstore-uploader-categories-box">
           {this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}
           {categories && categories
             .filter(category => category.slug !== 'custom-search')
             .sort((a, b) => a.cat > b.cat ? 1 : -1)
-            .map(_c =>
-            this.renderCategory(itemStyles, _c, active)
-          )}
+            .map(_c => this.renderCategory(itemStyles, _c, active))
+          }
         </div>
       </div>
     );
@@ -139,21 +156,27 @@ class IconTab extends Component {
         }
 
 
-        <div style={[contentStyles.results]}>
+        <div style={[contentStyles.results]} id="airstore-uploader-icons-box" ref={node => this._iconsWrapper = node}>
           {active && active.icons &&
             active.icons.map((icon, index) =>
               <div
                 key={`icon-${icon.desc}-${index}`}
+                className="airstore-uploader-icon-item"
                 style={[
                   iconStyles, {height},
                   isUploading && uploadingIcon === icon.src && iconStyles.loading.active,
                   isUploading && uploadingIcon !== icon.src && iconStyles.loading.notActive
                 ]}
                 onClick={this.upload.bind(this, icon.src)}
+                onKeyDown={event => { event.keyCode === 13 && this.upload(icon.src) }}
+                tabIndex={0}
               >
                 <div style={[iconStyles.imageWrap]}>
                   <img
-                    src={icon.src} width="100%" height="100%"
+                    src={icon.src}
+                    width="100%"
+                    height="100%"
+                    alt={icon.desc}
                     onLoad={({target: {width}}) => {if (width && width !== height) this.setState({height: `${width}px`})}}
                   />
                 </div>
@@ -175,7 +198,7 @@ export default connect(
     ({uploaderConfig, categories, active}),
   dispatch => ({
     onGetCategories: () => dispatch(getIconsCategories()),
-    onActivateCategory: category => dispatch(activateIconsCategory(category)),
+    onActivateCategory: (category, onSuccess) => dispatch(activateIconsCategory(category, onSuccess)),
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
     onShowMore: (categorySlug, page = 1, q = '') => dispatch(fetchIcons(categorySlug, page, q))
   })

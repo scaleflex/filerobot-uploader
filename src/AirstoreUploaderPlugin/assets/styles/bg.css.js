@@ -30,6 +30,13 @@ export default {
         active: {cursor: 'progress'},
 
         notActive: {opacity: 0.1}
+      },
+
+      ':focus': {
+        outlineColor: 'rgb(77, 144, 254)',
+        outlineOffset: -2,
+        outlineStyle: 'auto',
+        outlineWidth: 5
       }
     }
   }

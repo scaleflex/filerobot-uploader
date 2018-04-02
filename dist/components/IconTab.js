@@ -76,14 +76,24 @@ var IconTab = function (_Component) {
       _this.loadIcons(slug, 1, q, function () {
         return _this.setState({ isSearching: false });
       });
+    }, _this.activateCategory = function (_c) {
+      _this.props.onActivateCategory(_c, function () {
+        var iconBox = document.querySelector('#airstore-uploader-icons-box .airstore-uploader-icon-item:first-child');
+        if (iconBox) iconBox.focus();
+      });
     }, _this.renderCategory = function (itemStyles, _c, active) {
       return React.createElement(
         'div',
         {
           key: 'category-' + _c.slug,
+          tabIndex: 0,
+          className: 'airstore-uploader-category-item',
           style: [itemStyles, active && _c.slug === active.slug && itemStyles.active],
+          onKeyDown: function onKeyDown(event) {
+            event.keyCode === 13 && _this.activateCategory(_c);
+          },
           onClick: function onClick() {
-            return _this.props.onActivateCategory(_c);
+            return _this.activateCategory(_c);
           }
         },
         React.createElement(
@@ -105,7 +115,13 @@ var IconTab = function (_Component) {
   _createClass(IconTab, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.onGetCategories();
+      this.props.onGetCategories().then(function () {
+        setTimeout(function () {
+          var iconBox = document.querySelector('#airstore-uploader-categories-box .airstore-uploader-category-item:nth-child(2)');
+
+          if (iconBox) iconBox.focus();
+        });
+      });
     }
   }, {
     key: 'render',
@@ -138,12 +154,14 @@ var IconTab = function (_Component) {
         { style: [styles.container.sidebarWrap] },
         React.createElement(
           'div',
-          { style: [styles.container.sidebarWrap.sidebar] },
+          { style: [styles.container.sidebarWrap.sidebar], id: 'airstore-uploader-categories-box' },
           this.renderCategory(itemStyles, categories.find(function (category) {
             return category.slug === 'custom-search';
           }), active),
           categories && categories.filter(function (category) {
             return category.slug !== 'custom-search';
+          }).sort(function (a, b) {
+            return a.cat > b.cat ? 1 : -1;
           }).map(function (_c) {
             return _this2.renderCategory(itemStyles, _c, active);
           })
@@ -222,20 +240,30 @@ var IconTab = function (_Component) {
         ),
         React.createElement(
           'div',
-          { style: [contentStyles.results] },
+          { style: [contentStyles.results], id: 'airstore-uploader-icons-box', ref: function ref(node) {
+              return _this3._iconsWrapper = node;
+            } },
           active && active.icons && active.icons.map(function (icon, index) {
             return React.createElement(
               'div',
               {
                 key: 'icon-' + icon.desc + '-' + index,
+                className: 'airstore-uploader-icon-item',
                 style: [iconStyles, { height: height }, isUploading && uploadingIcon === icon.src && iconStyles.loading.active, isUploading && uploadingIcon !== icon.src && iconStyles.loading.notActive],
-                onClick: _this3.upload.bind(_this3, icon.src)
+                onClick: _this3.upload.bind(_this3, icon.src),
+                onKeyDown: function onKeyDown(event) {
+                  event.keyCode === 13 && _this3.upload(icon.src);
+                },
+                tabIndex: 0
               },
               React.createElement(
                 'div',
                 { style: [iconStyles.imageWrap] },
                 React.createElement('img', {
-                  src: icon.src, width: '100%', height: '100%',
+                  src: icon.src,
+                  width: '100%',
+                  height: '100%',
+                  alt: icon.desc,
                   onLoad: function onLoad(_ref3) {
                     var width = _ref3.target.width;
                     if (width && width !== height) _this3.setState({ height: width + 'px' });
@@ -268,8 +296,8 @@ export default connect(function (_ref4) {
     onGetCategories: function onGetCategories() {
       return dispatch(getIconsCategories());
     },
-    onActivateCategory: function onActivateCategory(category) {
-      return dispatch(activateIconsCategory(category));
+    onActivateCategory: function onActivateCategory(category, onSuccess) {
+      return dispatch(activateIconsCategory(category, onSuccess));
     },
     onFileUpload: function onFileUpload(file, uploaderConfig) {
       return dispatch(uploadFilesFromUrls([file], uploaderConfig));

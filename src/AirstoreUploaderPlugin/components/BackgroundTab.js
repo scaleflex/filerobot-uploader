@@ -23,12 +23,21 @@ class BackgroundTab extends Component {
     this.props.onGetBackgrounds();
   }
 
+  onKeyDown = (event, bg) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.upload(bg);
+    }
+  }
+
   render() {
     const { isLoading, uploadingUuid } = this.state;
     const itemStyles = styles.container.item;
 
     return <div style={[styles.container]}>
-      {this.props.backgrounds.map(bg =>
+      {this.props.backgrounds.map((bg, index) =>
         <div
           style={[
             itemStyles,
@@ -37,9 +46,18 @@ class BackgroundTab extends Component {
           ]}
           key={`bg-${bg.uuid}`}
           onClick={this.upload.bind(this, bg)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={event => this.onKeyDown(event, bg)}
         >
           <span style={[styles.container.item.alignmentBlock]}/>
-          <img style={[styles.container.item.img]} src={bg.url_preview} width="100%" height="auto" />
+          <img
+            style={[styles.container.item.img]}
+            src={bg.url_preview}
+            alt={bg.alt || `background ${index + 1}`}
+            width="100%"
+            height="auto"
+          />
         </div>
       )}
     </div>

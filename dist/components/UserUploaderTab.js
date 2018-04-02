@@ -141,10 +141,11 @@ var UserUploaderTab = function (_Component) {
               ref: 'fileInput',
               'data-multiple-caption': '{count} files selected',
               defaultValue: '',
+              tabIndex: -1,
               onChange: this.fileChangeHandler
             }),
             React.createElement(
-              'label',
+              'div',
               { style: [uploadBlock_style.inputBox.label] },
               React.createElement(
                 'span',
@@ -160,6 +161,7 @@ var UserUploaderTab = function (_Component) {
                 'button',
                 {
                   key: 'browse-your-computer',
+                  autoFocus: true,
                   style: [CSS.button, { margin: 'auto' }],
                   onClick: function onClick() {
                     _this2.refs.fileInput.click();
@@ -187,7 +189,7 @@ var UserUploaderTab = function (_Component) {
                 React.createElement(
                   'button',
                   { key: 'ok', style: [CSS.button], onClick: this.uploadFromWeb },
-                  'OK'
+                  'Upload'
                 )
               ),
               React.createElement(
@@ -225,7 +227,7 @@ var UserUploaderTab = function (_Component) {
             { style: [uploadBlock_style.errorBox] },
             React.createElement(
               'span',
-              { style: [uploadBlock_style.errorBox.errorMsg] },
+              { style: [uploadBlock_style.errorBox.errorMsg], role: 'alert' },
               errorMsg
             )
           )

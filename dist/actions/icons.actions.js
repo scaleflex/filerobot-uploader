@@ -10,12 +10,12 @@ export var getIconsCategories = function getIconsCategories() {
   };
 };
 
-export var activateIconsCategory = function activateIconsCategory(category) {
+export var activateIconsCategory = function activateIconsCategory(category, onSuccess) {
   return function (dispatch) {
     dispatch({ type: 'ICONS_ACTIVATE_CATEGORY', payload: category });
 
     setTimeout(function () {
-      return dispatch(fetchIcons(category.slug));
+      return dispatch(fetchIcons(category.slug, 1, '', 60, onSuccess));
     });
   };
 };
@@ -25,8 +25,12 @@ export var fetchIcons = function fetchIcons() {
   var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   var q = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var limit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 60;
+  var onSuccess = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : function () {};
   return function (dispatch) {
     var successHandler = function successHandler(response) {
+      setTimeout(function () {
+        return onSuccess();
+      });
       return dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: _extends({ page: page, q: q, limit: limit, categorySlug: categorySlug }, response) });
     };
 

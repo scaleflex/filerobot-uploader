@@ -35,7 +35,6 @@ export default {
         "lineHeight": "1",
         "height": "100%",
         "display": "flex",
-        "transform": "translate(0, 1px)",
 
         item: {
           fontFamily: 'Roboto, sans-serif',
@@ -46,11 +45,11 @@ export default {
           "padding": "11px 20px 13px",
           "cursor": "pointer",
           "borderRadius": "3px 3px 0 0",
-          "borderLeft": "1px solid transparent",
-          "borderRight": "1px solid transparent",
-          "borderTop": "1px solid transparent",
-          // "border": "1px solid transparent",
-          //"borderBottomWidth": "0",
+          //"borderLeft": "2px solid transparent",
+          //"borderRight": "2px solid transparent",
+          //"borderTop": "2px solid transparent",
+          "border": "2px solid transparent",
+          "borderBottomWidth": "0",
           "textTransform": "uppercase",
           "fontWeight": "400",
           "display": "inline-block",
@@ -67,6 +66,12 @@ export default {
           ':hover': {
             "color": "#fff"
           },
+
+          //':focus': {
+          //  outline: 'none',
+          //  border: '2px solid #4D90FE',
+          //  boxShadow: '0px 0px 5px  #4D90FE'
+          //},
 
           i: {
             fontSize: 16,
@@ -142,6 +147,13 @@ export default {
 
     ':hover': {
       backgroundColor: '#6D737B'
+    },
+
+    ':focus': {
+      outlineColor: 'rgb(77, 144, 254)',
+      outlineOffset: -2,
+      outlineStyle: 'auto',
+      outlineWidth: 5
     }
   }
 }

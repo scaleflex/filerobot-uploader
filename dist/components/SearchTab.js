@@ -50,13 +50,17 @@ var SearchTab = function (_Component) {
 
       _this.setState({ isSearching: true });
       _this.props.onSearchImages(q).then(done, done);
+    }, _this.onKeyDown = function (event, original_url) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        _this.upload(original_url);
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(SearchTab, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -109,8 +113,10 @@ var SearchTab = function (_Component) {
       var _state = this.state,
           isLoading = _state.isLoading,
           uploadingUuid = _state.uploadingUuid;
-      var _props$images2 = this.props.images,
-          images = _props$images2 === undefined ? [] : _props$images2;
+      var _props2 = this.props,
+          _props2$images = _props2.images,
+          images = _props2$images === undefined ? [] : _props2$images,
+          query = _props2.query;
 
       var resultStyles = styles.container.resultBlock;
 
@@ -123,10 +129,20 @@ var SearchTab = function (_Component) {
             {
               style: [resultStyles.item, isLoading && uploadingUuid === image.original_url && resultStyles.item.loading.active, isLoading && uploadingUuid !== image.original_url && resultStyles.item.loading.notActive],
               key: 'image-' + image.original_url,
-              onClick: _this3.upload.bind(_this3, image.original_url)
+              onKeyDown: function onKeyDown(event) {
+                return _this3.onKeyDown(event, image.original_url);
+              },
+              onClick: _this3.upload.bind(_this3, image.original_url),
+              tabIndex: 1
             },
             React.createElement('span', { style: [resultStyles.item.alignmentBlock] }),
-            React.createElement('img', { style: resultStyles.item.img, src: image.thumb_url, width: '100%', height: 'auto' })
+            React.createElement('img', {
+              style: resultStyles.item.img,
+              src: image.thumb_url,
+              alt: image.alt || query + ' ' + (index + 1),
+              width: '100%',
+              height: 'auto'
+            })
           );
         })
       );

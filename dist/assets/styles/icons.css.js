@@ -82,6 +82,13 @@ export default {
             height: '100%',
             background: 'rgb(248, 248, 248)',
             cursor: 'pointer'
+          },
+
+          ':focus': {
+            outlineColor: 'rgb(77, 144, 254)',
+            outlineOffset: -2,
+            outlineStyle: 'auto',
+            outlineWidth: 5
           }
         }
       }

@@ -3,6 +3,7 @@ import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
+import FocusLock from 'react-focus-lock';
 import {
   modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs
 } from '../actions'
@@ -46,7 +47,7 @@ class AirstoreUploader extends Component {
     const { initialOptions, initialTab } = this.props;
 
     this.props.onSetUploaderConfig(initialOptions || config || {});
-    this.props.onSetActiveModules(initialOptions.MODULES ||config.MODULES || []);
+    this.props.onSetActiveModules(initialOptions.MODULES || config.MODULES || []);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
     this.props.onSetTabs(this.tabs);
     if (this.props.opened) this.openModal(initialTab);
@@ -68,49 +69,65 @@ class AirstoreUploader extends Component {
 
   render() {
     if (!this.props.isVisible) return null;
+
     return (
       <Modal noBorder fullScreen={'lg'} onClose={this.closeModal}>
-        <StyleRoot style={{ width: '100%', height: '100%'}}>{this.renderModalContent()}</StyleRoot>
+        <StyleRoot className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
+          {this.renderModalContent()}
+        </StyleRoot>
       </Modal>
     );
   }
 
   renderModalContent() {
-    const { activeTab, filteredTabs } = this.props;
+    const { activeTab, filteredTabs = [] } = this.props;
 
     return (
-      <div style={[
-        { display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif', background: '#181830' }
-      ]}>
-        <div style={[CSS.tabs.header]}>
-          <div style={[CSS.tabs.header.container]}>
-            {filteredTabs.map((tab, index) => (
-              <a
-                href="#"
-                key={`tab-${index}`}
-                className="tab-header-item selected"
-                style={[
-                  CSS.tabs.header.container.item,
-                  activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected
-                ]}
-                onClick={event => {
-                  event.preventDefault();
-                  this.props.onActivateTab(tab);
-                }}
-              >
-                <i className={tab.iconClass} style={[CSS.tabs.header.container.item.i]}/>
-                <span title={tab.fullName} style={CSS.tabs.header.container.item.text}>{tab.shortName}</span>
-              </a>
-            ))}
-          </div>
-        </div>
+      <FocusLock>
+        <div
+          role="dialog"
+          style={[{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            fontFamily: 'Roboto, sans-serif',
+            background: '#181830'
+          }]}
+        >
+          <div style={[CSS.tabs.header]}>
+            <nav
+              ref={node => this._nav = node} className="airstore-uploader-navigation"
+              style={[CSS.tabs.header.container]}
+            >
 
-        <div style={[CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }]}>
-          {activeTab &&
-          <div style={[{ width: '100%' }]}>{activeTab.getContent.call(this)}</div>
-          }
+              {filteredTabs.map((tab, index) => (
+                <a
+                  href="javascript:void(0)"
+                  role="menuitem"
+                  id={`tab-${tab.id}`}
+                  key={`tab-${tab.id}`}
+                  className="tab-header-item selected"
+                  style={[
+                    CSS.tabs.header.container.item,
+                    activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected
+                  ]}
+                  onClick={event => {
+                    event.preventDefault();
+                    this.props.onActivateTab(tab);
+                  }}
+                >
+                  <i className={tab.iconClass} style={[CSS.tabs.header.container.item.i]}/>
+                  <span title={tab.fullName} style={CSS.tabs.header.container.item.text}>{tab.shortName}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+          <div style={[CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }]}>
+            {activeTab && <div style={[{ width: '100%' }]}>{activeTab.getContent.call(this)}</div>}
+          </div>
+
         </div>
-      </div>
+      </FocusLock>
     );
   }
 }

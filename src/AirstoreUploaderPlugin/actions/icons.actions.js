@@ -5,14 +5,17 @@ export const getIconsCategories = () => dispatch =>
     dispatch({ type: 'ICONS_FETCH_CATEGORIES_SUCCESS', payload: categories });
   });
 
-export const activateIconsCategory = category => dispatch => {
+export const activateIconsCategory = (category, onSuccess) => dispatch => {
   dispatch({ type: 'ICONS_ACTIVATE_CATEGORY', payload: category });
 
-  setTimeout(() => dispatch(fetchIcons(category.slug)));
+  setTimeout(() => dispatch(fetchIcons(category.slug, 1, '', 60, onSuccess)));
 };
 
-export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 60) => dispatch => {
-  const successHandler = response => dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, limit, categorySlug, ...response} });
+export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 60, onSuccess = () => {}) => dispatch => {
+  const successHandler = response => {
+    setTimeout(() => onSuccess());
+    return dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: {page, q, limit, categorySlug, ...response} });
+  }
 
   switch (categorySlug) {
     case 'custom-famous': return IconAPI.searchIcons(page, '', limit).then(successHandler);

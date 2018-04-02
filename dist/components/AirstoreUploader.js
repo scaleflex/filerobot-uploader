@@ -11,6 +11,7 @@ import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
+import FocusLock from 'react-focus-lock';
 import { modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs } from '../actions';
 import config from '../config';
 import { connect } from 'react-redux';
@@ -94,12 +95,13 @@ var AirstoreUploader = function (_Component) {
     key: 'render',
     value: function render() {
       if (!this.props.isVisible) return null;
+
       return React.createElement(
         Modal,
         { noBorder: true, fullScreen: 'lg', onClose: this.closeModal },
         React.createElement(
           StyleRoot,
-          { style: { width: '100%', height: '100%' } },
+          { className: 'airstore-root-box', style: { width: '100%', height: '100%' } },
           this.renderModalContent()
         )
       );
@@ -111,48 +113,69 @@ var AirstoreUploader = function (_Component) {
 
       var _props2 = this.props,
           activeTab = _props2.activeTab,
-          filteredTabs = _props2.filteredTabs;
+          _props2$filteredTabs = _props2.filteredTabs,
+          filteredTabs = _props2$filteredTabs === undefined ? [] : _props2$filteredTabs;
 
 
       return React.createElement(
-        'div',
-        { style: [{ display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'Roboto, sans-serif', background: '#181830' }] },
+        FocusLock,
+        null,
         React.createElement(
           'div',
-          { style: [CSS.tabs.header] },
+          {
+            role: 'dialog',
+            style: [{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              fontFamily: 'Roboto, sans-serif',
+              background: '#181830'
+            }]
+          },
           React.createElement(
             'div',
-            { style: [CSS.tabs.header.container] },
-            filteredTabs.map(function (tab, index) {
-              return React.createElement(
-                'a',
-                {
-                  href: '#',
-                  key: 'tab-' + index,
-                  className: 'tab-header-item selected',
-                  style: [CSS.tabs.header.container.item, activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected],
-                  onClick: function onClick(event) {
-                    event.preventDefault();
-                    _this2.props.onActivateTab(tab);
-                  }
-                },
-                React.createElement('i', { className: tab.iconClass, style: [CSS.tabs.header.container.item.i] }),
-                React.createElement(
-                  'span',
-                  { title: tab.fullName, style: CSS.tabs.header.container.item.text },
-                  tab.shortName
-                )
-              );
-            })
-          )
-        ),
-        React.createElement(
-          'div',
-          { style: [CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
-          activeTab && React.createElement(
+            { style: [CSS.tabs.header] },
+            React.createElement(
+              'nav',
+              {
+                ref: function ref(node) {
+                  return _this2._nav = node;
+                }, className: 'airstore-uploader-navigation',
+                style: [CSS.tabs.header.container]
+              },
+              filteredTabs.map(function (tab, index) {
+                return React.createElement(
+                  'a',
+                  {
+                    href: 'javascript:void(0)',
+                    role: 'menuitem',
+                    id: 'tab-' + tab.id,
+                    key: 'tab-' + tab.id,
+                    className: 'tab-header-item selected',
+                    style: [CSS.tabs.header.container.item, activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected],
+                    onClick: function onClick(event) {
+                      event.preventDefault();
+                      _this2.props.onActivateTab(tab);
+                    }
+                  },
+                  React.createElement('i', { className: tab.iconClass, style: [CSS.tabs.header.container.item.i] }),
+                  React.createElement(
+                    'span',
+                    { title: tab.fullName, style: CSS.tabs.header.container.item.text },
+                    tab.shortName
+                  )
+                );
+              })
+            )
+          ),
+          React.createElement(
             'div',
-            { style: [{ width: '100%' }] },
-            activeTab.getContent.call(this)
+            { style: [CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
+            activeTab && React.createElement(
+              'div',
+              { style: [{ width: '100%' }] },
+              activeTab.getContent.call(this)
+            )
           )
         )
       );
