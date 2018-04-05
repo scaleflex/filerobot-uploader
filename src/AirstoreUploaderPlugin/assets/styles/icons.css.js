@@ -17,31 +17,49 @@ export default {
         position: 'absolute',
         width: '100%',
 
+        colorType: {
+          marginBottom: 15,
+          marginTop: 15
+        },
+
         categoryItem: {
-          padding: '10px 15px',
+          padding: '5px 5px',
           fontSize: 12,
           color: 'rgb(85, 85, 85)',
           background: '#fff',
-          borderBottom: '1px solid rgb(221, 221, 221)',
+          borderLeft: '2px solid transparent',
+          borderRight: '2px solid transparent',
+          borderTop: '2px solid transparent',
+          borderBottom: '2px solid transparent',
           textTransform: 'capitalize',
           display: 'flex',
           cursor: 'pointer',
 
           active: {
-            background: '#5D636B',
-            color: 'rgb(255, 255, 255)'
+            //background: '#5D636B',
+            //color: 'rgb(255, 255, 255)'
           },
 
           name: {
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis'
+            marginLeft: 5
+            //whiteSpace: 'nowrap',
+            //overflow: 'hidden',
+            //textOverflow: 'ellipsis'
           },
 
           count: {
             flex: 1,
             marginLeft: 5,
             fontSize: 10
+          },
+
+          ':focus': {
+            outline: 'none',
+            borderBottom: '2px solid #4D90FE',
+            borderLeft: '2px solid #4D90FE',
+            borderRight: '2px solid #4D90FE',
+            borderTop: '2px solid #4D90FE',
+            boxShadow: '0px 0px 5px  #4D90FE'
           }
         }
       }

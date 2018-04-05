@@ -6,16 +6,25 @@ import {uploadFilesFromUrls, getIconsCategories, activateIconsCategory, fetchIco
 import {isEnterClick} from '../utils/index';
 
 class IconTab extends Component {
-  state = { height: '114px', isLoading: false, isUploading: false, uploadingIcon: null, isSearching: false };
+  state = {
+    height: '114px',
+    isLoading: false,
+    isUploading: false,
+    uploadingIcon: null,
+    isSearching: false,
+    isMonoColor: false,
+    isMultiColor: true
+  };
 
   componentDidMount() {
     this.props.onGetCategories().then(() => {
-      setTimeout(() => {
-        const iconBox = document
-          .querySelector('#airstore-uploader-categories-box .airstore-uploader-category-item:nth-child(2)');
-
-        if (iconBox) iconBox.focus();
-      })
+      //setTimeout(() => {
+      //  const iconBox = document
+      //    .querySelector('#airstore-uploader-categories-box .airstore-uploader-category-item:nth-child(2)');
+      //
+      //  if (iconBox) iconBox.focus();
+      //})
+      if (this.refs.searchField) this.refs.searchField.focus();
     })
   }
 
@@ -48,17 +57,17 @@ class IconTab extends Component {
   };
 
   search = (q = '') => {
-    const {slug} = this.props.active;
-
     this.setState({isSearching: true});
-    this.loadIcons(slug, 1, q, () => this.setState({isSearching: false}));
+    this.loadIcons('custom-search', 1, q, () => this.setState({isSearching: false}));
   };
 
   activateCategory = (_c) => {
+    this.setState({ [_c.slug]: !this.state[_c.slug], isSearching: true });
     this.props.onActivateCategory(_c, () => {
-      const iconBox = document
-        .querySelector('#airstore-uploader-icons-box .airstore-uploader-icon-item:first-child');
-      if (iconBox) iconBox.focus();
+      //const iconBox = document
+      //  .querySelector('#airstore-uploader-icons-box .airstore-uploader-icon-item:first-child');
+      //if (iconBox) iconBox.focus();
+      this.setState({ isSearching: false });
     });
   }
 
@@ -77,28 +86,56 @@ class IconTab extends Component {
     return (
       <div
         key={`category-${_c.slug}`}
-        tabIndex={0}
         className="airstore-uploader-category-item"
         style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
-        onKeyDown={event => { event.keyCode === 13 && this.activateCategory(_c); }}
-        onClick={() => this.activateCategory(_c)}
+        //onKeyDown={event => { event.keyCode === 13 && this.activateCategory(_c); }}
+        //onClick={() => this.activateCategory(_c)}
       >
-        <div style={[itemStyles.name]}>{_c.cat}</div>
-        {'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}
+        <input
+          id={_c.slug}
+          type="checkbox"
+          defaultChecked={this.state[_c.slug]}
+          onChange={() => { this.activateCategory(_c) }}
+        />
+        <label htmlFor={_c.slug} style={[itemStyles.name]}>{_c.cat}</label>
+        {/*{'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}*/}
       </div>
     )
   }
 
   renderSidebar() {
     const { categories, active } = this.props;
+    const { isMultiColor, isMonoColor } = this.state;
     const itemStyles = styles.container.sidebarWrap.sidebar.categoryItem;
 
-    if (!active && categories.length) this.props.onActivateCategory(categories[0]);
+    //if (!active && categories.length) this.props.onActivateCategory(categories[0]);
 
     return (
       <div style={[styles.container.sidebarWrap]}>
         <div style={[styles.container.sidebarWrap.sidebar]} id="airstore-uploader-categories-box">
-          {this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}
+          <div style={[styles.container.sidebarWrap.sidebar.colorType]}>
+            <div style={[itemStyles]} key="multi-color-wrapper">
+              <input
+                id="multi-color"
+                type="checkbox"
+                defaultChecked={isMultiColor}
+                onChange={() => { this.setState({ isMultiColor: !isMultiColor }); }}
+              />
+              <label htmlFor="multi-color" style={[itemStyles.name]}>Multi color</label>
+            </div>
+
+            <div style={[itemStyles]} key="mono-color-wrapper">
+              <input
+                id="mono-color"
+                type="checkbox"
+                defaultChecked={isMonoColor}
+                onChange={() => { this.setState({ isMonoColor: !isMonoColor }); }}
+              />
+              <label htmlFor="mono-color" style={[itemStyles.name]}>Mono color</label>
+            </div>
+          </div>
+
+          {/*{this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}*/}
           {categories && categories
             .filter(category => category.slug !== 'custom-search')
             .sort((a, b) => a.cat > b.cat ? 1 : -1)
@@ -134,27 +171,24 @@ class IconTab extends Component {
         }}
       >
 
-        {isSearch &&
-          <div style={[searchStyles, isEmptyIcons && searchStyles.empty]}>
-            {isEmptyIcons && <h3 style={[searchStyles.title]}>You can search icons here</h3>}
+        <div style={[searchStyles, (isEmptyIcons && !isSearching) && searchStyles.empty]}>
+          {(isEmptyIcons && !isSearching) && <h3 style={[searchStyles.title]}>You can search icons here</h3>}
 
-            <div style={[searchStyles.searchBlock]}>
-              <input
-                style={[CSS.field]}
-                type="search"
-                ref="searchField"
-                autoFocus={true}
-                defaultValue={''}
-                onKeyDown={ev => isEnterClick(ev) && this.search(this.refs.searchField.value)}
-              />
+          <div style={[searchStyles.searchBlock]}>
+            <input
+              style={[CSS.field]}
+              type="search"
+              ref="searchField"
+              autoFocus={true}
+              defaultValue={''}
+              onKeyDown={ev => isEnterClick(ev) && this.search(this.refs.searchField.value)}
+            />
 
-              <button style={[CSS.button]} onClick={() => this.search(this.refs.searchField.value)}>
-                {isSearching ? 'Searching...' : 'Search'}
-              </button>
-            </div>
+            <button style={[CSS.button]} onClick={() => this.search(this.refs.searchField.value)}>
+              {isSearching ? 'Searching...' : 'Search'}
+            </button>
           </div>
-        }
-
+        </div>
 
         <div style={[contentStyles.results]} id="airstore-uploader-icons-box" ref={node => this._iconsWrapper = node}>
           {active && active.icons &&

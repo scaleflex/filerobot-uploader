@@ -4,7 +4,10 @@ const defaultCategories = [
 ];
 
 const initialState = {
-  active: null,
+  active: {
+    slug: 'custom-search',
+    icons: []
+  },
   categories: [...defaultCategories]
 };
 
@@ -39,9 +42,9 @@ const _fetchSuccess = (state, result = {}) => {
   const categories = Object.assign([], state.categories || []);
   let {count = 0, icons = [], page = 1, q = '', categorySlug} = result || {};
 
-  let needCancelHandler = false;
-  if (active && active.slug && active.slug !== categorySlug) needCancelHandler = true;
-  if (needCancelHandler) return {...state};
+  //let needCancelHandler = false;
+  //if (active && active.slug && active.slug !== categorySlug) needCancelHandler = true;
+  //if (needCancelHandler) return {...state};
 
   q = q || '';
   page = +page;

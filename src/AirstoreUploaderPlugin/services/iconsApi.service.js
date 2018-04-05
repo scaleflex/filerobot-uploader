@@ -6,14 +6,14 @@ const _send = (url, method = 'GET', data = null, headers = {}, responseType = "j
   new Promise((resolve, reject) => {
 
     // check in cache
-    if (method.toLowerCase() === 'get') {
-      const cacheResponse = sessionStorage.getItem(url);
-
-      if (cacheResponse) {
-        resolve(JSON.parse(cacheResponse));
-        return;
-      }
-    }
+    //if (method.toLowerCase() === 'get') {
+    //  const cacheResponse = sessionStorage.getItem(url);
+    //
+    //  if (cacheResponse) {
+    //    resolve(JSON.parse(cacheResponse));
+    //    return;
+    //  }
+    //}
 
     axios({
       url: url,

@@ -27,7 +27,7 @@
       window.AirstoreUploader.init(options);
 
       const openBtn = document.querySelector('.open-modal-btn');
-      const initialTab = 'BACKGROUNDS';
+      const initialTab = 'ICONS';
       if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open(initialTab);
     }
   }

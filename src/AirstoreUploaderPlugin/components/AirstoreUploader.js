@@ -99,7 +99,6 @@ class AirstoreUploader extends Component {
               ref={node => this._nav = node} className="airstore-uploader-navigation"
               style={[CSS.tabs.header.container]}
             >
-
               {filteredTabs.map((tab, index) => (
                 <a
                   href="javascript:void(0)"

@@ -20,8 +20,8 @@ export const fetchIcons = (categorySlug = '', page = 1, q = '', limit = 60, onSu
   switch (categorySlug) {
     case 'custom-famous': return IconAPI.searchIcons(page, '', limit).then(successHandler);
     case 'custom-search':
+      dispatch({ type: 'ICONS_CLEAN', payload: null });
       if (!q) {
-        dispatch({ type: 'ICONS_CLEAN', payload: null });
         return new Promise(resolve => resolve());
       }
       return IconAPI.searchIcons(page, q, limit).then(successHandler);

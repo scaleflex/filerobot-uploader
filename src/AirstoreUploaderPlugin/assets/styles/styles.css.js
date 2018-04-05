@@ -45,10 +45,9 @@ export default {
           "padding": "11px 20px 13px",
           "cursor": "pointer",
           "borderRadius": "3px 3px 0 0",
-          //"borderLeft": "2px solid transparent",
-          //"borderRight": "2px solid transparent",
-          //"borderTop": "2px solid transparent",
-          "border": "2px solid transparent",
+          "borderLeft": "2px solid transparent",
+          "borderRight": "2px solid transparent",
+          "borderTop": "2px solid transparent",
           "borderBottomWidth": "0",
           "textTransform": "uppercase",
           "fontWeight": "400",
@@ -124,7 +123,11 @@ export default {
     "outline": "0px",
 
     ':focus': {
-      border: '1px solid #5D636B'
+      border: '1px solid #5D636B',
+      outlineColor: 'rgb(77, 144, 254)',
+      outlineOffset: -2,
+      outlineStyle: 'auto',
+      outlineWidth: 5
     }
   },
 
