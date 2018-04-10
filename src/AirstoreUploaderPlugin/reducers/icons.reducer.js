@@ -6,7 +6,8 @@ const defaultCategories = [
 const initialState = {
   active: {
     slug: 'custom-search',
-    icons: []
+    icons: [],
+    related_tags: []
   },
   categories: [...defaultCategories]
 };
@@ -38,32 +39,32 @@ const _activateCategory = (state, active = null) =>
   ({...state, active: active && active.slug ? active : null});
 
 const _fetchSuccess = (state, result = {}) => {
-  const active = Object.assign({}, state.active || {});
-  const categories = Object.assign([], state.categories || []);
-  let {count = 0, icons = [], page = 1, q = '', categorySlug} = result || {};
+ // const active = {};
+  //const categories = Object.assign([], state.categories || []);
+  let {count = 0, icons = [], related_tags = []} = result || {};
 
   //let needCancelHandler = false;
   //if (active && active.slug && active.slug !== categorySlug) needCancelHandler = true;
   //if (needCancelHandler) return {...state};
 
-  q = q || '';
-  page = +page;
-  icons = icons || [];
+  //q = q || '';
+  //page = +page;
+  //icons = icons || [];
 
-  let isLastPage = !icons.length || icons.length < result.limit;
+  //let isLastPage = !icons.length || icons.length < result.limit;
 
-  Object.assign(active, {count, q, isLastPage});
+  //Object.assign(active, {count, q, isLastPage});
 
-  active.icons = active.icons || [];
-  active.icons = [...(page > 1 ? active.icons : []), ...icons];
+  //active.icons = active.icons || [];
+  //active.icons = [...(page > 1 ? active.icons : []), ...icons];
 
-  if (!isLastPage) active.page = page; // don't change page if we have empty icons
+  //if (!isLastPage) active.page = page; // don't change page if we have empty icons
 
   // Update category.count
-  const category = categories.find(_c => _c.slug === active.slug);
-  if (category) category.count = count;
+  //const category = categories.find(_c => _c.slug === active.slug);
+  //if (category) category.count = count;
 
-  return {...state, active, categories};
+  return {...state, active: { icons, related_tags }, count};
 };
 
 const _iconsClean = (state) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api_endpoint = '//api.icons.rest/v1/';
+const api_endpoint = '//api.imagesearch.rest/v3/icons/';
 
 const _send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   new Promise((resolve, reject) => {
@@ -48,15 +48,15 @@ export const getCategories = () =>
       ({ categories = [] }) => categories
     );
 
-export const getCategoryIcons = (category_slug = '', page = 1, limit = 36) =>
-  _send(`${api_endpoint}category/${category_slug}?limit=${limit}&page=${page}`)
+export const getCategoryIcons = (category_slug = '') =>
+  _send(`${api_endpoint}category/${category_slug}`)
     .then(
       ({ icons = [], count = 0 }) => ({ icons: icons || [], count })
     );
 
-export const searchIcons = (page = 1, q = '', limit = 36) =>
-  _send(`${api_endpoint}search?limit=${limit}&page=${page}&q=${q}`)
+export const searchIcons = (q = '', relevantActiveTags = []) =>
+  _send(`${api_endpoint}?&q[]=${q}${relevantActiveTags.map(tag => `&q[]=${tag}`).join('')}`)
     .then(
-      ({ icons = [], count = 0 }) => ({ icons: icons || [], count })
+      ({ icons = [], count = 0, related_tags }) => ({ icons: icons || [], count, related_tags })
     );
 

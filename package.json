@@ -8,6 +8,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-focus-lock": "^1.8.1",
+    "react-lazy-load": "^3.0.13",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

@@ -79,26 +79,34 @@ export default {
       },
 
       results: {
+        position: 'relative',
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'stretch',
-        paddingRight: 10,
+        justifyContent: 'center',
+        height: '100%',
 
         icon: {
-          width: 'calc(100% / 6 - 10px)',
-          margin: '10px 0 0 10px',
-          height: 'auto',
+          width: 60,
+          padding: 20,
+          margin: 2,
+          height: 60,
+          background: '#fff',
 
           loading: {
-            active: {cursor: 'progress'},
-            notActive: {opacity: 0.1}
+            active: {
+              cursor: 'progress'
+            },
+            notActive: {
+              opacity: 0.1
+            }
           },
 
           imageWrap: {
-            padding: 5,
+            //padding: 5,
             width: '100%',
             height: '100%',
-            background: 'rgb(248, 248, 248)',
+            //background: 'rgb(248, 248, 248)',
             cursor: 'pointer'
           },
 
@@ -114,6 +122,8 @@ export default {
   },
 
   search: {
+    justifyContent: '',
+
     empty: {
       "height": "100%",
       "justifyContent": "center",
