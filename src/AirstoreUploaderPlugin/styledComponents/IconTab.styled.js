@@ -198,4 +198,5 @@ export const ActiveItem = styled.div`
   width: 3px;
   height: 100%;
   background-color: #00707c;
+  display: ${props => props.active ? 'block' : 'none'};
 `;

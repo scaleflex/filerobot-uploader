@@ -54,8 +54,7 @@ class IconTab extends Component {
     isUploading: false,
     uploadingIcon: null,
     isSearching: false,
-    isMonoColor: false,
-    isMultiColor: true,
+    activeColorType: 'multi',
 
     activeTags: {}
   };
@@ -86,30 +85,30 @@ class IconTab extends Component {
       .then(() => this.uploadStop(), () => this.uploadStop());
   };
 
-  loadIcons = (slug, q = '', relevantActiveTags, cb = null) => {
+  loadIcons = (slug, searchParams, relevantActiveTags, cb = null) => {
     const done = () => {
       this.setState({ isLoading: false });
       typeof cb === 'function' && cb();
     };
 
     this.setState({ isLoading: true });
-    setTimeout(() => this.props.onShowMore(slug, q, relevantActiveTags).then(done, done));
+    setTimeout(() => this.props.onShowMore(slug, searchParams, relevantActiveTags).then(done, done));
   };
 
-  showMore = () => {
-    if (this.state.isLoading) return;
-    const { slug, page = 0, q = '' } = this.props.active;
+  //showMore = () => {
+  //  if (this.state.isLoading) return;
+  //  const { slug, page = 0, q = '' } = this.props.active;
+  //
+  //  this.loadIcons(slug, page + 1, q);
+  //};
 
-    this.loadIcons(slug, page + 1, q);
-  };
-
-  search = (q = '', refreshTags) => {
+  search = ({ value = '', type }, refreshTags) => {
     const { related_tags } = this.props.active;
     const activeTags = refreshTags ? {} : this.state.activeTags;
     this.setState({ isSearching: true, activeTags });
 
     const relevantActiveTags = this.getRelevantActiveTags(activeTags, related_tags);
-    this.loadIcons('custom-search', q, relevantActiveTags, () => this.setState({ isSearching: false }));
+    this.loadIcons('custom-search', { value, type }, relevantActiveTags, () => this.setState({ isSearching: false }));
   };
 
   getRelevantActiveTags = (activeTags, related_tags) => {
@@ -133,6 +132,29 @@ class IconTab extends Component {
     });
   }
 
+  toggleColorType = (type) => {
+    this.setState({ activeColorType: type });
+
+    if (this.searchField.value)
+      this.search({ value: this.searchField.value, type });
+  }
+
+  onLoadImage = (target) => {
+    target.style.opacity = 1;
+    target.style.background = '#fff';
+  }
+
+  toggleTag = (tag) => {
+    const { activeTags, activeColorType } = this.state;
+
+    activeTags[tag] = !activeTags[tag];
+    this.setState({ activeTags });
+
+    setTimeout(() => {
+      this.search({ value: this.searchField.value, type: activeColorType });
+    });
+  }
+
   render() {
     const { active } = this.props;
 
@@ -147,64 +169,52 @@ class IconTab extends Component {
   renderCategory = (itemStyles, _c, active) => {
     return (
       <ColorItem
-        // active={isMultiColor}
         key={`category-${_c.slug}`}
         style={[active && _c.slug === active.slug && itemStyles.active]}
       >
-        {/*{isMultiColor && <ActiveItem/>}*/}
         <ColorItemName>{_c.cat}</ColorItemName>
       </ColorItem>
-      // <div
-      //   key={`category-${_c.slug}`}
-      //   className="airstore-uploader-category-item"
-      //   style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
-      //   //onKeyDown={event => { event.keyCode === 13 && this.activateCategory(_c); }}
-      //   //onClick={() => this.activateCategory(_c)}
-      // >
-      //   <input
-      //     id={_c.slug}
-      //     type="checkbox"
-      //     defaultChecked={this.state[_c.slug]}
-      //     onChange={() => { this.activateCategory(_c) }}
-      //   />
-      //   <label htmlFor={_c.slug} style={[itemStyles.name]}>{_c.cat}</label>
-      //   {/*{'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}*/}
-      // </div>
     )
   }
 
   renderSidebar() {
     const { categories, active } = this.props;
-    const { isMultiColor, isMonoColor } = this.state;
+    const { activeColorType } = this.state;
     const itemStyles = styles.container.sidebarWrap.sidebar.categoryItem;
-
-    //if (!active && categories.length) this.props.onActivateCategory(categories[0]);
 
     return (
       <SidebarWrap>
         <SideBar id="airstore-uploader-categories-box">
           <ColorType>
             <ColorItem
-              active={isMultiColor}
-              key="multi-color-wrapper"
-              onClick={() => { this.setState({ isMultiColor: !isMultiColor }); }}
+              active={activeColorType === 'all'}
+              key="all-color-wrapper"
+              onClick={this.toggleColorType.bind(this, 'all')}
             >
-              {isMultiColor && <ActiveItem/>}
+              <ActiveItem active={activeColorType === 'all'}/>
+              <ColorItemName>All</ColorItemName>
+            </ColorItem>
+
+            <ColorItem
+              active={activeColorType === 'multi'}
+              key="multi-color-wrapper"
+              onClick={this.toggleColorType.bind(this, 'multi')}
+            >
+              <ActiveItem active={activeColorType === 'multi'}/>
               <ColorItemName>Multi color</ColorItemName>
             </ColorItem>
 
             <ColorItem
-              active={isMonoColor}
+              active={activeColorType === 'mono'}
               key="mono-color-wrapper"
-              onClick={() => { this.setState({ isMonoColor: !isMonoColor }); }}
+              onClick={this.toggleColorType.bind(this, 'mono')}
             >
-              {isMonoColor && <ActiveItem/>}
+              <ActiveItem active={activeColorType === 'mono'}/>
               <ColorItemName>Mono color</ColorItemName>
             </ColorItem>
 
           </ColorType>
 
-          {/*{this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}*/}
           {categories && categories
             .filter(category => category.slug !== 'custom-search')
             .sort((a, b) => a.cat > b.cat ? 1 : -1)
@@ -215,28 +225,11 @@ class IconTab extends Component {
     );
   }
 
-  onLoadImage = (target) => {
-    target.style.opacity = 1;
-    target.style.background = '#fff';
-  }
-
-  toggleTag = (tag) => {
-    const { activeTags } = this.state;
-
-    activeTags[tag] = !activeTags[tag];
-    this.setState({ activeTags });
-
-    setTimeout(() => {
-      this.search(this.searchField.value);
-    });
-  }
-
   renderContent() {
     const { active } = this.props;
-    const { height, isUploading, uploadingIcon, isLoading, isSearching } = this.state;
+    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType } = this.state;
     const contentStyles = styles.container.content;
     const iconStyles = contentStyles.results.icon;
-    const searchStyles = styles.search;
     const isEmptyIcons = (!active || !active.icons || !active.icons.length);
     const isSearch = active && active.slug && active.slug === 'custom-search';
     let isVisibleLoadingBlock = true;
@@ -245,16 +238,7 @@ class IconTab extends Component {
     if (isSearch && this.searchField && !this.searchField.value) isVisibleLoadingBlock = false;
 
     return (
-      <div
-        style={[contentStyles]}
-        //onScroll={({target}) => {
-        //  if (!isVisibleLoadingBlock) return;
-        //
-        //  const { scrollTop, scrollHeight, clientHeight } = target;
-        //  const scrolledToBottom = scrollHeight < (scrollTop + clientHeight + 100);
-        //  if (scrolledToBottom) this.showMore();
-        //}}
-      >
+      <div style={[contentStyles]}>
 
         <SearchWrapper empty={isEmptyIcons && !isSearching}>
           <SearchTitle show={isEmptyIcons && !isSearching}>You can search icons here</SearchTitle>
@@ -264,16 +248,18 @@ class IconTab extends Component {
               innerRef={node => this.searchField = node}
               autoFocus={true}
               defaultValue={''}
-              onKeyDown={ev => isEnterClick(ev) && this.search(this.searchField.value, true)}
+              onKeyDown={ev => isEnterClick(ev) && this.search({ value: this.searchField.value, type: activeColorType }, true)}
             />
-            <ButtonSearch onClick={() => this.search(this.searchField.value, true)}>Search</ButtonSearch>
+            <ButtonSearch
+              onClick={() => this.search({ value: this.searchField.value, type: activeColorType }, true)}
+            >Search</ButtonSearch>
           </SearchGroup>
         </SearchWrapper>
 
         <TagsWrapper>
           {active.related_tags.map(item => (
             <Tag
-              hide={this.searchField.value === item.tag}
+              hide={this.searchField.value.includes(item.tag)}
               key={item.tag}
               active={this.state.activeTags[item.tag]}
               onClick={() => { this.toggleTag(item.tag) }}
@@ -332,6 +318,6 @@ export default connect(
     onGetCategories: () => dispatch(getIconsCategories()),
     onActivateCategory: (category, onSuccess) => dispatch(activateIconsCategory(category, onSuccess)),
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onShowMore: (categorySlug, q = '', relevantActiveTags) => dispatch(fetchIcons(categorySlug, q, relevantActiveTags))
+    onShowMore: (categorySlug, searchParams, relevantActiveTags) => dispatch(fetchIcons(categorySlug, searchParams, relevantActiveTags))
   })
 )(Radium(IconTab));

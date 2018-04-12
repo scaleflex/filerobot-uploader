@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const api_endpoint = '//api.imagesearch.rest/v3/icons/';
 
 const _send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
@@ -48,15 +49,24 @@ export const getCategories = () =>
       ({ categories = [] }) => categories
     );
 
-export const getCategoryIcons = (category_slug = '') =>
-  _send(`${api_endpoint}category/${category_slug}`)
-    .then(
-      ({ icons = [], count = 0 }) => ({ icons: icons || [], count })
-    );
+//export const getCategoryIcons = (category_slug = '') =>
+//  _send(`${api_endpoint}category/${category_slug}`)
+//    .then(
+//      ({ icons = [], count = 0 }) => ({ icons: icons || [], count })
+//    );
 
-export const searchIcons = (q = '', relevantActiveTags = []) =>
-  _send(`${api_endpoint}?&q[]=${q}${relevantActiveTags.map(tag => `&q[]=${tag}`).join('')}`)
-    .then(
-      ({ icons = [], count = 0, related_tags }) => ({ icons: icons || [], count, related_tags })
-    );
+export const searchIcons = (searchParams, relevantActiveTags = []) => {
+  const { typeQuery } = searchParams;
+  const splittedString = searchParams.value.trim().split(' ');
+  const value = `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
+  const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
+
+  return (
+    _send(`${api_endpoint}?${value}${tags}${typeQuery}`)
+      .then(
+        ({ icons = [], count = 0, related_tags }) => ({ icons: icons || [], count, related_tags })
+      )
+  );
+}
+
 
