@@ -1,7 +1,7 @@
 const initialState = {
   isVisible: false,
   backgrounds: [],
-  modules: ['UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
+  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'BACKGROUNDS', 'ICONS'], //, 'SEARCH'
   activeModules: [],
   tabs: [],
   filteredTabs: [],

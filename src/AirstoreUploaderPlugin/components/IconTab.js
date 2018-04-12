@@ -6,8 +6,8 @@ import { uploadFilesFromUrls, getIconsCategories, activateIconsCategory, fetchIc
 import { isEnterClick } from '../utils/index';
 import LazyLoad from 'react-lazy-load';
 import {
-  IconImage, SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon
-} from '../styledComponents/IconTab.styled';
+  IconImage, SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
+  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem } from '../styledComponents/IconTab.styled';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
 
@@ -146,22 +146,30 @@ class IconTab extends Component {
 
   renderCategory = (itemStyles, _c, active) => {
     return (
-      <div
+      <ColorItem
+        // active={isMultiColor}
         key={`category-${_c.slug}`}
-        className="airstore-uploader-category-item"
-        style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
-        //onKeyDown={event => { event.keyCode === 13 && this.activateCategory(_c); }}
-        //onClick={() => this.activateCategory(_c)}
+        style={[active && _c.slug === active.slug && itemStyles.active]}
       >
-        <input
-          id={_c.slug}
-          type="checkbox"
-          defaultChecked={this.state[_c.slug]}
-          onChange={() => { this.activateCategory(_c) }}
-        />
-        <label htmlFor={_c.slug} style={[itemStyles.name]}>{_c.cat}</label>
-        {/*{'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}*/}
-      </div>
+        {/*{isMultiColor && <ActiveItem/>}*/}
+        <ColorItemName>{_c.cat}</ColorItemName>
+      </ColorItem>
+      // <div
+      //   key={`category-${_c.slug}`}
+      //   className="airstore-uploader-category-item"
+      //   style={[itemStyles, active && _c.slug === active.slug && itemStyles.active]}
+      //   //onKeyDown={event => { event.keyCode === 13 && this.activateCategory(_c); }}
+      //   //onClick={() => this.activateCategory(_c)}
+      // >
+      //   <input
+      //     id={_c.slug}
+      //     type="checkbox"
+      //     defaultChecked={this.state[_c.slug]}
+      //     onChange={() => { this.activateCategory(_c) }}
+      //   />
+      //   <label htmlFor={_c.slug} style={[itemStyles.name]}>{_c.cat}</label>
+      //   {/*{'count' in _c && <div style={[itemStyles.count]}>({_c.count})</div>}*/}
+      // </div>
     )
   }
 
@@ -173,29 +181,28 @@ class IconTab extends Component {
     //if (!active && categories.length) this.props.onActivateCategory(categories[0]);
 
     return (
-      <div style={[styles.container.sidebarWrap]}>
-        <div style={[styles.container.sidebarWrap.sidebar]} id="airstore-uploader-categories-box">
-          <div style={[styles.container.sidebarWrap.sidebar.colorType]}>
-            <div style={[itemStyles]} key="multi-color-wrapper">
-              <input
-                id="multi-color"
-                type="checkbox"
-                defaultChecked={isMultiColor}
-                onChange={() => { this.setState({ isMultiColor: !isMultiColor }); }}
-              />
-              <label htmlFor="multi-color" style={[itemStyles.name]}>Multi color</label>
-            </div>
+      <SidebarWrap>
+        <SideBar id="airstore-uploader-categories-box">
+          <ColorType>
+            <ColorItem
+              active={isMultiColor}
+              key="multi-color-wrapper"
+              onClick={() => { this.setState({ isMultiColor: !isMultiColor }); }}
+            >
+              {isMultiColor && <ActiveItem/>}
+              <ColorItemName>Multi color</ColorItemName>
+            </ColorItem>
 
-            <div style={[itemStyles]} key="mono-color-wrapper">
-              <input
-                id="mono-color"
-                type="checkbox"
-                defaultChecked={isMonoColor}
-                onChange={() => { this.setState({ isMonoColor: !isMonoColor }); }}
-              />
-              <label htmlFor="mono-color" style={[itemStyles.name]}>Mono color</label>
-            </div>
-          </div>
+            <ColorItem
+              active={isMonoColor}
+              key="mono-color-wrapper"
+              onClick={() => { this.setState({ isMonoColor: !isMonoColor }); }}
+            >
+              {isMonoColor && <ActiveItem/>}
+              <ColorItemName>Mono color</ColorItemName>
+            </ColorItem>
+
+          </ColorType>
 
           {/*{this.renderCategory(itemStyles, categories.find(category => category.slug === 'custom-search'), active)}*/}
           {categories && categories
@@ -203,8 +210,8 @@ class IconTab extends Component {
             .sort((a, b) => a.cat > b.cat ? 1 : -1)
             .map(_c => this.renderCategory(itemStyles, _c, active))
           }
-        </div>
-      </div>
+        </SideBar>
+      </SidebarWrap>
     );
   }
 

@@ -26,7 +26,7 @@ export default {
     "margin": "0 auto",
     height: 'calc(100% - 6px)',
     color: '#5D636B',
-    "padding": 3,
+    "padding": 10,
     boxSizing: 'content-box',
 
     uploadBlock: {
@@ -64,7 +64,7 @@ export default {
           },
 
           orText: {
-            "padding": "15px",
+            "padding": "10px",
             "fontWeight": "200",
             "fontSize": 12
           },

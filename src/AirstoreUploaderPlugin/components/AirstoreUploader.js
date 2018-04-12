@@ -21,23 +21,30 @@ class AirstoreUploader extends Component {
       getContent: () => <UserUploaderTab/>
     },
     {
-      id: 'SEARCH',
-      fullName: 'Search',
-      shortName: 'Search',
-      iconClass: 'sfi-airstore-search',
-      getContent: () => <SearchTab/>
+      id: 'UPLOADED_IMAGES',
+      fullName: 'Uploaded Images',
+      shortName: 'Upload Images',
+      iconClass: 'sfi-airstore-upload',
+      // getContent: () => <UserUploaderTab/>
     },
+    // {
+    //   id: 'SEARCH',
+    //   fullName: 'Search',
+    //   shortName: 'Search',
+    //   iconClass: 'sfi-airstore-search',
+    //   getContent: () => <SearchTab/>
+    // },
     {
       id: 'ICONS',
-      fullName: 'Icons Library',
-      shortName: 'Icons',
+      fullName: 'Icons Gallery',
+      shortName: 'Icons Gallery',
       iconClass: 'sfi-airstore-icon',
       getContent: () => <IconTab/>
     },
     {
       id: 'BACKGROUNDS',
-      fullName: 'Backgrounds',
-      shortName: 'Backgrounds',
+      fullName: 'Images Gallery',
+      shortName: 'Images Gallery',
       iconClass: 'sfi-airstore-bg',
       getContent: () => <BackgroundTab/>
     }
@@ -71,7 +78,7 @@ class AirstoreUploader extends Component {
     if (!this.props.isVisible) return null;
 
     return (
-      <Modal noBorder fullScreen={'lg'} onClose={this.closeModal}>
+      <Modal noBorder fullScreen={'md'} onClose={this.closeModal} style={{ borderRadius: 5 }}>
         <StyleRoot className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
           {this.renderModalContent()}
         </StyleRoot>

@@ -42,7 +42,7 @@ export default {
           "textDecoration": "none",
           "fontSize": "12px",
           lineHeight: '16px',
-          "padding": "11px 20px 13px",
+          "padding": "11px 12px 13px",
           "cursor": "pointer",
           "borderRadius": "3px 3px 0 0",
           "borderLeft": "2px solid transparent",
@@ -59,7 +59,8 @@ export default {
           },
 
           selected: {
-            "color": "#fff"
+            "color": "#fff",
+            "backgroundColor": "rgb(64, 84, 91)"
           },
 
           ':hover': {
@@ -137,19 +138,20 @@ export default {
     "padding": "6px 12px",
     "lineHeight": "1.42857",
     "textTransform": 'uppercase',
-    "color": "#fff",
-    "backgroundColor": "#5D636B",
+    "color": "#5D636B",
+    "backgroundColor": "transparent",
     "backgroundRepeat": "repeat-x",
     "textShadow": "rgb(255, 255, 255) 0px 1px",
-    "border": "1px solid rgb(204, 204, 204)",
+    "border": "1px solid #5D636B",
     "borderRadius": "5px",
     "cursor": "pointer",
-    "fontWeight": "300",
+    "fontWeight": "500",
     "outline": "0",
     "fontSize": 12,
 
     ':hover': {
-      backgroundColor: '#6D737B'
+      "backgroundColor": '#6D737B',
+      "color": "#fff"
     },
 
     ':focus': {

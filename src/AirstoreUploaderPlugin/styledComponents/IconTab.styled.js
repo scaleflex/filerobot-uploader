@@ -52,9 +52,9 @@ export const ButtonSearch = styled.button`
   line-height: 1.42857;
   text-transform: uppercase;
   color: #fff;
-  background-color: #5D636B;
+  background-color: #00707C;
   background-repeat: repeat-x;
-  border: 1px solid #5D636B;
+  border: 1px solid #00707C;
   border-left: 0px solid transparent;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
@@ -104,6 +104,15 @@ export const TagsWrapper = styled.div`
   overflow-x: auto;
   padding-bottom: 8px;
   padding: 10px;
+  
+  ::-webkit-scrollbar {
+    height: 10px !important;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #3b4d54;
+    border-radius: 5px;
+  }
 `;
 
 export const Tag = styled.div`
@@ -145,4 +154,48 @@ export const CloseIcon = CloseBtn.extend`
   ${props => props.active && `
     display: block;
   `}
+`;
+
+export const SidebarWrap = styled.div`
+  width: 160px;
+  border-right: 1px solid rgb(221, 221, 221);
+  position: relative;
+`;
+
+export const SideBar = styled.div`
+  overflow: auto;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  width: 100%;
+`;
+
+export const ColorType = styled.div`
+  margin-bottom: 15;
+  margin-top: 15;
+`;
+
+export const ColorItem = styled.div`
+  position: relative
+  padding: 10px 5px;
+  // border-left: ${props => props.active ? '3px solid #00707c' : 'none'};
+  font-size: 12px;
+  color: #1e262c;
+  background: ${props => props.active ? '#fff' : 'none'};;
+  text-transform: capitalize;
+  display: flex;
+  cursor: pointer;
+`;
+
+export const ColorItemName = styled.span`
+  margin-left: 5px;
+`;
+
+export const ActiveItem = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #00707c;
 `;

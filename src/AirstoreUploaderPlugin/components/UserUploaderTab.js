@@ -4,6 +4,7 @@ import { CSS, DragDropCss as styles } from '../assets/styles';
 import { connect } from "react-redux";
 import { uploadFilesFromUrls, uploadFiles } from '../actions';
 import { isEnterClick } from '../utils/index';
+import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../styledComponents/IconTab.styled';
 
 
 const STEP = {
@@ -115,7 +116,7 @@ class UserUploaderTab extends Component {
 
                 <div style={[uploadBlock_style.inputBox.label]}>
                   <span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</span>
-                  <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
+                  <div style={[uploadBlock_style.inputBox.label.orText]}>or</div>
                   <button
                     key="browse-your-computer"
                     autoFocus={true}
@@ -123,17 +124,30 @@ class UserUploaderTab extends Component {
                     onClick={() => { this.refs.fileInput.click() }}
                   >Browse your computer
                   </button>
-                  <div style={[uploadBlock_style.inputBox.label.orText]}>OR</div>
-                  <div style={[{ display: 'flex' }]}>
-                    <input
-                      type="text"
-                      style={[CSS.field, { width: '100%', height: 'auto' }]}
-                      placeholder="Enter URL to upload from web"
-                      ref="uploadFromWebField"
-                      onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
-                    />
-                    <button key="ok" style={[CSS.button]} onClick={this.uploadFromWeb}>Upload</button>
-                  </div>
+                  <div style={[uploadBlock_style.inputBox.label.orText, {paddingBottom: 0}]}>or</div>
+                  <SearchWrapper>
+                    <SearchTitle>You can search icons here</SearchTitle>
+                    <SearchGroup>
+                      <InputSearch
+                        type="search"
+                        innerRef={node => this.searchField = node}
+                        autoFocus={true}
+                        defaultValue={''}
+                        onKeyDown={ev => isEnterClick(ev) && this.search(this.searchField.value, true)}
+                      />
+                      <ButtonSearch onClick={() => this.search(this.searchField.value, true)}>Search</ButtonSearch>
+                    </SearchGroup>
+                  </SearchWrapper>
+                  {/*<div style={[{ display: 'flex' }]}>*/}
+                    {/*<input*/}
+                      {/*type="text"*/}
+                      {/*style={[CSS.field, { width: '100%', height: 'auto' }]}*/}
+                      {/*placeholder="Enter URL to upload from web"*/}
+                      {/*ref="uploadFromWebField"*/}
+                      {/*onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}*/}
+                    {/*/>*/}
+                    {/*<button key="ok" style={[CSS.button]} onClick={this.uploadFromWeb}>Upload</button>*/}
+                  {/*</div>*/}
                   <div style={[{
                     fontSize: "12px",
                     color: '#5D636B',
