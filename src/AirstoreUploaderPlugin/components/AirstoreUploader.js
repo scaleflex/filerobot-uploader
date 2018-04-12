@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
-import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
+import { IconTab, BackgroundTab, UserUploaderTab, SearchTab, UploadedImagesTab } from './index';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
 import FocusLock from 'react-focus-lock';
 import {
@@ -24,8 +24,8 @@ class AirstoreUploader extends Component {
       id: 'UPLOADED_IMAGES',
       fullName: 'Uploaded Images',
       shortName: 'Upload Images',
-      iconClass: 'sfi-airstore-upload',
-      // getContent: () => <UserUploaderTab/>
+      iconClass: 'sfi-airstore-uploaded-images',
+      getContent: () => <UploadedImagesTab/>
     },
     // {
     //   id: 'SEARCH',
@@ -38,14 +38,14 @@ class AirstoreUploader extends Component {
       id: 'ICONS',
       fullName: 'Icons Gallery',
       shortName: 'Icons Gallery',
-      iconClass: 'sfi-airstore-icon',
+      iconClass: 'sfi-airstore-gallery',
       getContent: () => <IconTab/>
     },
     {
       id: 'BACKGROUNDS',
       fullName: 'Images Gallery',
       shortName: 'Images Gallery',
-      iconClass: 'sfi-airstore-bg',
+      iconClass: 'sfi-airstore-image-gallery',
       getContent: () => <BackgroundTab/>
     }
   ];

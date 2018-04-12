@@ -4,7 +4,7 @@ import { CSS, DragDropCss as styles } from '../assets/styles';
 import { connect } from "react-redux";
 import { uploadFilesFromUrls, uploadFiles } from '../actions';
 import { isEnterClick } from '../utils/index';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../styledComponents/IconTab.styled';
+import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../styledComponents';
 
 
 const STEP = {

@@ -84,9 +84,9 @@ export default {
         flexWrap: 'wrap',
         alignItems: 'stretch',
         justifyContent: 'center',
-        height: '100%',
 
         icon: {
+          position: 'relative',
           width: 60,
           padding: 20,
           margin: 2,

@@ -7,7 +7,8 @@ import { isEnterClick } from '../utils/index';
 import LazyLoad from 'react-lazy-load';
 import {
   IconImage, SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
-  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem } from '../styledComponents/IconTab.styled';
+  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, HoverIcon
+} from '../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
 
@@ -55,6 +56,7 @@ class IconTab extends Component {
     uploadingIcon: null,
     isSearching: false,
     activeColorType: 'multi',
+    isHover: false,
 
     activeTags: {}
   };
@@ -155,6 +157,8 @@ class IconTab extends Component {
     });
   }
 
+  hoverToggle(name, isHover) { this.setState({ [name]: isHover }) }
+
   render() {
     const { active } = this.props;
 
@@ -227,7 +231,7 @@ class IconTab extends Component {
 
   renderContent() {
     const { active } = this.props;
-    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType } = this.state;
+    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType, isHover } = this.state;
     const contentStyles = styles.container.content;
     const iconStyles = contentStyles.results.icon;
     const isEmptyIcons = (!active || !active.icons || !active.icons.length);
@@ -254,8 +258,16 @@ class IconTab extends Component {
               onClick={() => this.search({ value: this.searchField.value, type: activeColorType }, true)}
             >Search</ButtonSearch>
           </SearchGroup>
+
+          <AmountIcons empty={isEmptyIcons}>
+            <Label>Found:</Label>
+            {active.icons.length}
+          </AmountIcons>
         </SearchWrapper>
 
+
+
+        {(active && active.related_tags.length > 0) &&
         <TagsWrapper>
           {active.related_tags.map(item => (
             <Tag
@@ -268,7 +280,7 @@ class IconTab extends Component {
               <CloseIcon active={this.state.activeTags[item.tag]}/>
             </Tag>
           ))}
-        </TagsWrapper>
+        </TagsWrapper>}
 
         {active && active.icons &&
         <div
@@ -288,8 +300,11 @@ class IconTab extends Component {
               ]}
               onClick={this.upload.bind(this, icon.src)}
               onKeyDown={event => { event.keyCode === 13 && this.upload(icon.src) }}
+              onMouseOver={ this.hoverToggle.bind(this, 'isHover', true)}
+              onMouseLeave={ this.hoverToggle.bind(this, 'isHover', false)}
               tabIndex={0}
             >
+              { isHover && <HoverIcon> </HoverIcon>}
               <div style={[iconStyles.imageWrap]}>
                 <LazyLoad height={60} offsetVertical={30} throttle={200} key={icon.uid}>
                   <IconImage

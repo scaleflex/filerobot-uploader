@@ -5,9 +5,12 @@ export default {
     alignItems: 'stretch',
     paddingRight: 10,
     fontFamily: 'Roboto, sans-serif',
-    height: 1,
+    // height: 1,
+    flex: '1 1 0%',
+    overflow: 'auto',
 
     item: {
+      position: 'relative',
       width: 'calc(100% / 6 - 10px)',
       margin: '10px 0 0 10px',
       cursor: 'pointer',

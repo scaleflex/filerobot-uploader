@@ -19,6 +19,15 @@ export const SearchGroup = styled.div`
   padding: 10px;
   justify-content: left;
 `;
+export const AmountIcons = styled.div`
+  display: ${props => props.empty ? 'none' : 'flex'};
+  align-items: center;
+  padding: 10px;
+  font-size: 13px;
+`;
+export const Label = styled.span`
+  margin-right: 5px;
+`;
 export const InputSearch = styled.input.attrs({
   autoFocus: true
 })`
@@ -57,6 +66,7 @@ export const ButtonSearch = styled.button`
   border: 1px solid #00707C;
   border-left: 0px solid transparent;
   border-radius: 0 4px 4px 0;
+  border-radius: ${props => props.fullBr ? props.fullBr : '0 4px 4px 0'};
   cursor: pointer;
   font-weight: 300;
   outline: 0;
@@ -64,7 +74,7 @@ export const ButtonSearch = styled.button`
   box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;
 
   :hover {
-    background-color: #6D737B;
+    background-color: #096868;
   }
 
   :focus {
@@ -76,7 +86,8 @@ export const ButtonSearch = styled.button`
 `;
 
 export const SearchWrapper = styled.div`
-  justify-content: left;
+  display: flex;
+  justify-content: space-between;
   
   ${props => props.empty && `
     height: 100%;
@@ -102,11 +113,11 @@ export const TagsWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   overflow-x: auto;
-  padding-bottom: 8px;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 2px;
   
   ::-webkit-scrollbar {
-    height: 10px !important;
+    height: 6px !important;
   }
    
   ::-webkit-scrollbar-thumb {
@@ -156,47 +167,12 @@ export const CloseIcon = CloseBtn.extend`
   `}
 `;
 
-export const SidebarWrap = styled.div`
-  width: 160px;
-  border-right: 1px solid rgb(221, 221, 221);
-  position: relative;
-`;
-
-export const SideBar = styled.div`
-  overflow: auto;
-  height: 100%;
-  top: 0;
-  position: absolute;
-  width: 100%;
-`;
-
-export const ColorType = styled.div`
-  margin-bottom: 15;
-  margin-top: 15;
-`;
-
-export const ColorItem = styled.div`
-  position: relative
-  padding: 10px 5px;
-  // border-left: ${props => props.active ? '3px solid #00707c' : 'none'};
-  font-size: 12px;
-  color: #1e262c;
-  background: ${props => props.active ? '#fff' : 'none'};;
-  text-transform: capitalize;
-  display: flex;
-  cursor: pointer;
-`;
-
-export const ColorItemName = styled.span`
-  margin-left: 5px;
-`;
-
-export const ActiveItem = styled.div`
+export const HoverIcon = styled.div`
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
-  width: 3px;
-  height: 100%;
-  background-color: #00707c;
-  display: ${props => props.active ? 'block' : 'none'};
+  right: 0;
+  background-color: #70777f;
+  opacity: .5;
 `;

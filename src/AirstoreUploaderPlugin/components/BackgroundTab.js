@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import {CSS, BgCss as styles} from '../assets/styles';
-import {getBackgrounds, uploadFilesFromUrls} from '../actions';
+import { CSS, BgCss as styles } from '../assets/styles';
+import { getBackgrounds, uploadFilesFromUrls } from '../actions';
 import { connect } from 'react-redux';
+import { SidebarWrap, ColorItem, ColorItemName, ActiveItem, TabWrap, SideBar, ColorType } from '../styledComponents';
 
 class BackgroundTab extends Component {
   state = { isLoading: false, uploadingUuid: null };
@@ -33,41 +34,79 @@ class BackgroundTab extends Component {
   }
 
   render() {
+    return (
+      <TabWrap>
+        { this.renderSidebar() }
+        { this.renderContent() }
+      </TabWrap>
+    )
+  }
+
+  renderSidebar = () => {
+    return (
+      <SidebarWrap>
+        <SideBar>
+          <ColorType>
+            <ColorItem
+              active={false}
+              key="type-of-background-one"
+              // onClick={}
+            >
+              <ActiveItem active={false}/>
+              <ColorItemName>Transport</ColorItemName>
+            </ColorItem>
+            <ColorItem
+              active={true}
+              key="type-of-background-two"
+              // onClick={}
+            >
+              <ActiveItem active={true}/>
+              <ColorItemName>Interface</ColorItemName>
+            </ColorItem>
+          </ColorType>
+        </SideBar>
+      </SidebarWrap>
+    )
+  };
+
+  renderContent = () => {
     const { isLoading, uploadingUuid } = this.state;
     const itemStyles = styles.container.item;
 
-    return <div style={[styles.container]}>
-      {this.props.backgrounds.map((bg, index) =>
-        <div
-          style={[
-            itemStyles,
-            isLoading && uploadingUuid === bg.uuid && itemStyles.loading.active,
-            isLoading && uploadingUuid !== bg.uuid && itemStyles.loading.notActive
-          ]}
-          key={`bg-${bg.uuid}`}
-          onClick={this.upload.bind(this, bg)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={event => this.onKeyDown(event, bg)}
-        >
-          <span style={[styles.container.item.alignmentBlock]}/>
-          <img
-            style={[styles.container.item.img]}
-            src={bg.url_preview}
-            alt={bg.alt || `background ${index + 1}`}
-            width="100%"
-            height="auto"
-          />
-        </div>
-      )}
-    </div>
+    return (
+      <div style={[ styles.container ]}>
+        {this.props.backgrounds.map((bg, index) =>
+          <div
+            style={[
+              itemStyles,
+              isLoading && uploadingUuid === bg.uuid && itemStyles.loading.active,
+              isLoading && uploadingUuid !== bg.uuid && itemStyles.loading.notActive
+            ]}
+            key={`bg-${bg.uuid}`}
+            onClick={this.upload.bind(this, bg)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={event => this.onKeyDown(event, bg)}
+          >
+            <span style={[ styles.container.item.alignmentBlock ]}/>
+            <img
+              style={[ styles.container.item.img ]}
+              src={bg.url_preview}
+              alt={bg.alt || `background ${index + 1}`}
+              width="100%"
+              height="auto"
+            />
+          </div>
+        )}
+      </div>
+    )
   }
 }
 
 export default connect(
-  ({uploader: {backgrounds, uploaderConfig}}) => ({backgrounds, uploaderConfig}),
+  ({ uploader: { backgrounds, uploaderConfig } }) => ({ backgrounds, uploaderConfig }),
   dispatch => ({
-    onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
+    onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([ file ], uploaderConfig)),
     onGetBackgrounds: () => dispatch(getBackgrounds())
   })
 )(Radium(BackgroundTab));

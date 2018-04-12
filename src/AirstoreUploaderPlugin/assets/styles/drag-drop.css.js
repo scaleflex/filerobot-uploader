@@ -24,10 +24,10 @@ export default {
     "position": "relative",
     "fontWeight": "300",
     "margin": "0 auto",
-    height: 'calc(100% - 6px)',
+    height: '100%',
     color: '#5D636B',
     "padding": 10,
-    boxSizing: 'content-box',
+    boxSizing: 'border-box',
 
     uploadBlock: {
       width: '100%',
