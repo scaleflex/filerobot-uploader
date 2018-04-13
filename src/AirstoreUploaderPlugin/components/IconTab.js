@@ -4,50 +4,16 @@ import { CSS, IconsCss as styles } from '../assets/styles';
 import { connect } from "react-redux";
 import { uploadFilesFromUrls, getIconsCategories, activateIconsCategory, fetchIcons } from '../actions';
 import { isEnterClick } from '../utils/index';
-import LazyLoad from 'react-lazy-load';
 import {
   IconImage, SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
   SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, HoverWrapper, ControlIcon,
   MonoIconSettings, ColorIcon
 } from '../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
+import LazyLoad from 'react-lazy-load';
 
+import { VirtualizedImagesGrid } from './';
 
-const presetTags = [
-  'accessibility',
-  'arrows',
-  'Audio & Video',
-  'Business',
-  'Charity',
-  'Chat',
-  'Chess',
-  'Code',
-  'Communication',
-  'Computers',
-  'Currency',
-  'Date & Time',
-  'Design',
-  'Editors',
-  'Files',
-  'Genders',
-  'Hands',
-  'Health',
-  'Images',
-  'Interfaces',
-  'Logistics',
-  'Maps',
-  'Medical',
-  'Moving',
-  'Objects',
-  'Payments & Shopping',
-  'Shapes',
-  'Spinners',
-  'Sports',
-  'Status',
-  'Users & People',
-  'Vehicles',
-  'Writing'
-]
 
 const colors = [
   'red',
@@ -332,11 +298,11 @@ class IconTab extends Component {
               // onClick={this.upload.bind(this, icon.src)}
               onClick={this.onIconClick.bind(this, icon.src)}
               onKeyDown={event => { event.keyCode === 13 && this.upload(icon.src) }}
-              onMouseOver={this.hoverToggle.bind(this, 'isHover', true)}
-              onMouseLeave={this.hoverToggle.bind(this, 'isHover', false)}
+              onMouseOver={ this.hoverToggle.bind(this, `isHover-${icon.uid}`, true)}
+              onMouseLeave={ this.hoverToggle.bind(this, `isHover-${icon.uid}`, false)}
               tabIndex={0}
             >
-              <HoverWrapper isShow={isHover}>
+              <HoverWrapper isShow={this.state[`isHover-${icon.uid}`]}>
                 <ControlIcon className={'sfi-airstore-cross'}/>
                 <ControlIcon className={'sfi-airstore-tick'}/>
                 <ControlIcon className={'sfi-airstore-plus'}/>
@@ -362,6 +328,42 @@ class IconTab extends Component {
     );
   }
 }
+
+const presetTags = [
+  'accessibility',
+  'arrows',
+  'Audio & Video',
+  'Business',
+  'Charity',
+  'Chat',
+  'Chess',
+  'Code',
+  'Communication',
+  'Computers',
+  'Currency',
+  'Date & Time',
+  'Design',
+  'Editors',
+  'Files',
+  'Genders',
+  'Hands',
+  'Health',
+  'Images',
+  'Interfaces',
+  'Logistics',
+  'Maps',
+  'Medical',
+  'Moving',
+  'Objects',
+  'Payments & Shopping',
+  'Shapes',
+  'Spinners',
+  'Sports',
+  'Status',
+  'Users & People',
+  'Vehicles',
+  'Writing'
+]
 
 export default connect(
   ({ uploader: { uploaderConfig }, icons: { categories, active } }) =>

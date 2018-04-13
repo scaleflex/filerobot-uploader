@@ -168,7 +168,6 @@ export const CloseIcon = CloseBtn.extend`
 `;
 
 export const HoverWrapper = styled.div`
-  display: ${props => props.isShow ? 'display' : 'none'}
   position: absolute;
   top: 0;
   bottom: 0;
@@ -176,7 +175,7 @@ export const HoverWrapper = styled.div`
   right: 0;
   background-color: #1e262c;
   opacity: .5;
-  display: flex;
+  display: ${props => props.isShow ? 'flex' : 'none'};
   align-items: flex-end;
   justify-content: space-between;
   padding: 6px;
