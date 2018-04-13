@@ -90,6 +90,10 @@ class IconTab extends Component {
     this.loadIcons('custom-search', { value, type }, relevantActiveTags, () => this.setState({ isSearching: false }));
   };
 
+  onSearch = () => {
+    this.search({ value: (this.searchField.value || '').toLowerCase(), type: this.state.activeColorType }, true)
+  }
+
   getRelevantActiveTags = (activeTags, related_tags) => {
     const result = [];
 
@@ -112,20 +116,24 @@ class IconTab extends Component {
   }
 
   toggleColorType = (type) => {
-    this.setState({ activeColorType: type });
+    if (!this.searchField) return;
 
-    if (this.searchField.value)
-      this.search({ value: this.searchField.value, type });
+    this.setState({ activeColorType: type });
+    const value = (this.searchField.value || '').toLowerCase();
+
+    if (value)
+      this.search({ value, type });
   }
 
   toggleTag = (tag) => {
     const { activeTags, activeColorType } = this.state;
+    const value = (this.searchField.value || '').toLowerCase();
 
     activeTags[tag] = !activeTags[tag];
     this.setState({ activeTags });
 
     setTimeout(() => {
-      this.search({ value: this.searchField.value, type: activeColorType });
+      this.search({ value, type: activeColorType });
     });
   };
 
@@ -232,10 +240,10 @@ class IconTab extends Component {
               innerRef={node => this.searchField = node}
               autoFocus={true}
               defaultValue={''}
-              onKeyDown={ev => isEnterClick(ev) && this.search({ value: this.searchField.value, type: activeColorType }, true)}
+              onKeyDown={ev => { isEnterClick(ev) && this.onSearch() }}
             />
             <ButtonSearch
-              onClick={() => this.search({ value: this.searchField.value, type: activeColorType }, true)}
+              onClick={this.onSearch}
             >Search</ButtonSearch>
           </SearchGroup>
 
