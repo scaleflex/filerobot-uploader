@@ -246,7 +246,7 @@ class IconTab extends Component {
 
 
 
-        {(active && active.related_tags.length > 0) &&
+        {(active && active.related_tags.length > 0) && this.searchField &&
         <TagsWrapper>
           {active.related_tags.map(item => (
             <Tag
