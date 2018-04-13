@@ -23,7 +23,7 @@ class AirstoreUploader extends Component {
     {
       id: 'UPLOADED_IMAGES',
       fullName: 'Uploaded Images',
-      shortName: 'Upload Images',
+      shortName: 'Uploaded Images',
       iconClass: 'sfi-airstore-uploaded-images',
       getContent: () => <UploadedImagesTab/>
     },
