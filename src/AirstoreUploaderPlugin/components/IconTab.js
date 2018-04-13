@@ -6,8 +6,8 @@ import { uploadFilesFromUrls, getIconsCategories, activateIconsCategory, fetchIc
 import { isEnterClick } from '../utils/index';
 import {
   SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
-  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, MonoIconSettings,
-  ColorIcon, ColorsWrapper, ControlIcon, Opacity
+  SidebarWrap, SideBar, ColorWrapper, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, MonoIconSettings,
+  ColorIcon, ColorsWrapper, Opacity, SettingsIcon
 } from '../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { IconItem } from './';
@@ -18,7 +18,7 @@ const colors = [
   'yellow',
   'black',
   'green',
-  'grey',
+  'orange',
   'brown',
   'grey',
   'purple'
@@ -178,7 +178,8 @@ class IconTab extends Component {
     return (
       <SidebarWrap>
         <SideBar id="airstore-uploader-categories-box">
-          <ColorType>
+          <Label fs={'14px'} ml={8} color={'black'}>Color filter</Label>
+          <ColorWrapper>
             <ColorItem
               active={activeColorType === 'all'}
               key="all-color-wrapper"
@@ -205,9 +206,9 @@ class IconTab extends Component {
               <ActiveItem active={activeColorType === 'mono'}/>
               <ColorItemName>Mono color</ColorItemName>
             </ColorItem>
+          </ColorWrapper>
 
-          </ColorType>
-
+          <Label fs={'14px'} ml={8} color={'black'}>Categories</Label>
           {categories && categories
             .filter(category => category.slug !== 'custom-search')
             .sort((a, b) => a.cat > b.cat ? 1 : -1)
@@ -270,11 +271,11 @@ class IconTab extends Component {
           ))}
         </TagsWrapper>}
 
-        <Opacity isShow={isShowMonoIconSettings}/>
+        <Opacity isShow={isShowMonoIconSettings} onClick={() => this.setState({ isShowMonoIconSettings: false })}/>
 
         <MonoIconSettings isShow={isShowMonoIconSettings}>
-          <ControlIcon fs={100} color={'purple'} pb={20} className={'sfi-airstore-image'}/>
-          <Label color={'bl'}>Customize your icon</Label>
+          <SettingsIcon src={activeIconSrc}/>
+          <Label color={'black'}>Customize your icon</Label>
           <ColorsWrapper>
             {colors.map((color, index) => <ColorIcon bgColor={color} key={`color-${index}`}> </ColorIcon>)}
           </ColorsWrapper>

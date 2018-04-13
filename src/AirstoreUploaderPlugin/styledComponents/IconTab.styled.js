@@ -27,7 +27,9 @@ export const AmountIcons = styled.div`
 `;
 export const Label = styled.span`
   margin-right: 5px;
-  color: ${props => props.bl ? '#1e262c' : ''};
+  margin-left: ${props => props.ml ? props.ml : ''}px;
+  font-size: ${props => props.fs ? props.fs : 'inherit'};
+  color: ${props => props.color === 'black' ? '#1e262c' : ''};
 `;
 export const InputSearch = styled.input.attrs({
   autoFocus: true
@@ -155,6 +157,10 @@ export const Tag = styled.div`
   ${props => props.hide && `display: none;`}
 `;
 
+export const ColorWrapper = styled.div`
+  padding-bottom: 10px;
+`;
+
 export const CloseIcon = CloseBtn.extend`
   display: none;
   color: #fff;
@@ -232,4 +238,9 @@ export const ColorIcon = styled.div`
   background-color: ${props => props.bgColor ? props.bgColor : ''}
   border-radius: 50%;
   margin-right: 5px;
+`;
+
+export const SettingsIcon = styled.img`
+  width: 60%;
+  height: auto;
 `;

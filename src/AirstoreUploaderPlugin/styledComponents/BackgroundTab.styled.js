@@ -13,6 +13,8 @@ export const SideBar = styled.div`
   top: 0;
   position: absolute;
   width: 100%;
+  padding-top: 5px;
+  box-sizing: border-box;
 `;
 
 export const ColorType = styled.div`
