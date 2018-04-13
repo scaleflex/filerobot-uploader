@@ -35,14 +35,14 @@ class AirstoreUploader extends Component {
     //   getContent: () => <SearchTab/>
     // },
     {
-      id: 'ICONS',
+      id: 'ICONS_GALLERY',
       fullName: 'Icons Gallery',
       shortName: 'Icons Gallery',
       iconClass: 'sfi-airstore-gallery',
       getContent: () => <IconTab/>
     },
     {
-      id: 'BACKGROUNDS',
+      id: 'IMAGES_GALLERY',
       fullName: 'Images Gallery',
       shortName: 'Images Gallery',
       iconClass: 'sfi-airstore-image-gallery',

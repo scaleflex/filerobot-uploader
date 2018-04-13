@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list id="f191acbd-eb84-43e5-ac02-057368ede39f" name="working on icons tab" comment="" />
     <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/_example.local.initial_options.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/_example.local.initial_options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/reducers/uploader.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/reducers/uploader.reducer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,11 +29,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IconTab.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IconTab.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="184">
+              <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AirstoreUploader.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2286">
+              <caret line="137" column="3" lean-forward="true" selection-start-line="137" selection-start-column="3" selection-end-line="137" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="73" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -49,7 +71,7 @@
       <file leaf-file-name="IconItem.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-702">
+            <state relative-caret-position="252">
               <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -76,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IconTab.styled.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IconTab.styled.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="195" column="15" lean-forward="true" selection-start-line="195" selection-start-column="15" selection-end-line="195" selection-end-column="15" />
+            <state relative-caret-position="3546">
+              <caret line="199" column="15" lean-forward="true" selection-start-line="199" selection-start-column="15" selection-end-line="199" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -100,7 +122,7 @@
       <file leaf-file-name="VirtualizedImagesGrid.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/VirtualizedImagesGrid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
+            <state relative-caret-position="1944">
               <caret line="108" selection-start-line="108" selection-end-line="108" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -113,12 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>filteredTabs</find>
-      <find>,</find>
-      <find>isMultiColor</find>
-      <find>this.search(</find>
-      <find>this.loadIcons(</find>
-      <find>ICONS_FETCH_SUCCESS</find>
       <find>toggleColorType</find>
       <find>searchStyles</find>
       <find>height</find>
@@ -141,8 +157,14 @@
       <find>HoverWra</find>
       <find>HoverWrapper</find>
       <find>IconItem</find>
-      <find>MonoIconSettings</find>
       <find>ControlIcon</find>
+      <find>MonoIconSettings</find>
+      <find>MODULES</find>
+      <find>searchField</find>
+      <find>search</find>
+      <find>search(</find>
+      <find>activeColorType</find>
+      <find>onSearch</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -168,22 +190,22 @@
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/reducers/icons.reducer.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/icons.css.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploaderWrapper.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/reducers/uploader.reducer.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/main.css" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/styles.css.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/drag-drop.css.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UserUploaderTab.js" />
-        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/actions/icons.actions.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/iconsApi.service.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/VirtualizedImagesGrid.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/index.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconItem.js" />
-        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js" />
+        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js" />
+        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" />
+        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js" />
       </list>
     </option>
   </component>
@@ -273,6 +295,8 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/icons.css.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconItem.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js</PATH>
         </FILE-GROUP>
@@ -407,7 +431,8 @@
       <workItem from="1523541161719" duration="183000" />
       <workItem from="1523541373686" duration="373000" />
       <workItem from="1523541761634" duration="108000" />
-      <workItem from="1523541927892" duration="7415000" />
+      <workItem from="1523541927892" duration="8874000" />
+      <workItem from="1523614519711" duration="441000" />
     </task>
     <task id="LOCAL-00001" summary="working on icon tab">
       <created>1522912068286</created>
@@ -437,28 +462,41 @@
       <option name="project" value="LOCAL" />
       <updated>1523610414946</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="work on icons logic">
+      <created>1523612670509</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1523612670509</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix bug with loosing node">
+      <created>1523613846462</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1523613846462</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63917000" />
+    <option name="totallyTimeSpent" value="65817000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="508" y="1296" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14799154" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23749119" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5045807" side_tool="true" weight="0.14339152" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49541932" weight="0.2543641" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49541932" weight="0.27057356" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49753347" visible="true" weight="0.3703242" />
-      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49753347" visible="true" weight="0.3703242" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -467,6 +505,7 @@
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +544,8 @@
     <MESSAGE value="working on icon tab" />
     <MESSAGE value="add logic for color types" />
     <MESSAGE value="work on icons logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="work on icons logic" />
+    <MESSAGE value="fix bug with loosing node" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug with loosing node" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/api.service.js">
@@ -742,13 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/icons.css.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="966">
@@ -760,13 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="123" column="64" selection-start-line="123" selection-start-column="64" selection-end-line="123" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -807,7 +833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/VirtualizedImagesGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
+        <state relative-caret-position="1944">
           <caret line="108" selection-start-line="108" selection-end-line="108" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -841,18 +867,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-702">
+        <state relative-caret-position="252">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -865,8 +884,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="195" column="15" lean-forward="true" selection-start-line="195" selection-start-column="15" selection-end-line="195" selection-end-column="15" />
+        <state relative-caret-position="3546">
+          <caret line="199" column="15" lean-forward="true" selection-start-line="199" selection-start-column="15" selection-end-line="199" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="73" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2286">
+          <caret line="137" column="3" lean-forward="true" selection-start-line="137" selection-start-column="3" selection-end-line="137" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
