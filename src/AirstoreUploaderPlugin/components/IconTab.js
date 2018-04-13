@@ -7,7 +7,8 @@ import { isEnterClick } from '../utils/index';
 import LazyLoad from 'react-lazy-load';
 import {
   IconImage, SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
-  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, HoverIcon
+  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, HoverWrapper, ControlIcon,
+  MonoIconSettings, ColorIcon
 } from '../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
@@ -47,6 +48,13 @@ const presetTags = [
   'Vehicles',
   'Writing'
 ]
+
+const colors = [
+  'red',
+  'yellow',
+  'black',
+  'green'
+];
 
 class IconTab extends Component {
   state = {
@@ -144,7 +152,7 @@ class IconTab extends Component {
   onLoadImage = (target) => {
     target.style.opacity = 1;
     target.style.background = '#fff';
-  }
+  };
 
   toggleTag = (tag) => {
     const { activeTags, activeColorType } = this.state;
@@ -155,7 +163,20 @@ class IconTab extends Component {
     setTimeout(() => {
       this.search({ value: this.searchField.value, type: activeColorType });
     });
-  }
+  };
+
+  onIconClick = (src) => {
+    const { activeColorType } = this.state;
+
+    if (activeColorType === 'mono')
+      this.onMonoIconClick(src);
+    else
+      this.upload(src);
+  };
+
+  onMonoIconClick = (src) => {
+    this.setState({ isShowMonoIconSettings: true })
+  };
 
   hoverToggle(name, isHover) { this.setState({ [name]: isHover }) }
 
@@ -231,7 +252,7 @@ class IconTab extends Component {
 
   renderContent() {
     const { active } = this.props;
-    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType, isHover } = this.state;
+    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType, isHover, isShowMonoIconSettings } = this.state;
     const contentStyles = styles.container.content;
     const iconStyles = contentStyles.results.icon;
     const isEmptyIcons = (!active || !active.icons || !active.icons.length);
@@ -288,6 +309,16 @@ class IconTab extends Component {
           id="airstore-uploader-icons-box"
           ref={node => this._iconsWrapper = node}
         >
+          {isShowMonoIconSettings && (
+            <MonoIconSettings>
+              <ControlIcon fs={100} color={'purple'} className={'sfi-airstore-image'}/>
+              <Label>Customize your icon</Label>
+              colors.map(() =>
+              <ColorIcon>
+
+              </ColorIcon>)
+            </MonoIconSettings>
+          )}
 
           {active.icons.map((icon, index) =>
             <div
@@ -298,13 +329,19 @@ class IconTab extends Component {
                 isUploading && uploadingIcon === icon.src && iconStyles.loading.active,
                 isUploading && uploadingIcon !== icon.src && iconStyles.loading.notActive
               ]}
-              onClick={this.upload.bind(this, icon.src)}
+              // onClick={this.upload.bind(this, icon.src)}
+              onClick={this.onIconClick.bind(this, icon.src)}
               onKeyDown={event => { event.keyCode === 13 && this.upload(icon.src) }}
-              onMouseOver={ this.hoverToggle.bind(this, 'isHover', true)}
-              onMouseLeave={ this.hoverToggle.bind(this, 'isHover', false)}
+              onMouseOver={this.hoverToggle.bind(this, 'isHover', true)}
+              onMouseLeave={this.hoverToggle.bind(this, 'isHover', false)}
               tabIndex={0}
             >
-              { isHover && <HoverIcon> </HoverIcon>}
+              <HoverWrapper isShow={isHover}>
+                <ControlIcon className={'sfi-airstore-cross'}/>
+                <ControlIcon className={'sfi-airstore-tick'}/>
+                <ControlIcon className={'sfi-airstore-plus'}/>
+              </HoverWrapper>
+
               <div style={[iconStyles.imageWrap]}>
                 <LazyLoad height={60} offsetVertical={30} throttle={200} key={icon.uid}>
                   <IconImage

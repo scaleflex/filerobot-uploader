@@ -167,12 +167,44 @@ export const CloseIcon = CloseBtn.extend`
   `}
 `;
 
-export const HoverIcon = styled.div`
+export const HoverWrapper = styled.div`
+  display: ${props => props.isShow ? 'display' : 'none'}
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #70777f;
+  background-color: #1e262c;
   opacity: .5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6px;
+`;
+
+export const ControlIcon = styled.span`
+  color: ${props => props.color ? props.color : '#f2f2f2'};
+  font-size: ${props => props.fs ? props.fs : 25}px;
+  cursor: pointer;
+`;
+
+export const MonoIconSettings = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  margin-left: -150px;
+  width: 300px;
+  height: 300px;
+  background-color: #fff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ColorIcon = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: red
 `;
