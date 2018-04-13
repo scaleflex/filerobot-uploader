@@ -179,6 +179,7 @@ export const HoverWrapper = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   padding: 6px;
+  cursor: pointer;
 `;
 
 export const ControlIcon = styled.span`

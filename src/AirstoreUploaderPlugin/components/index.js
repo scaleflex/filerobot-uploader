@@ -6,6 +6,7 @@ import UserUploaderTab from './UserUploaderTab';
 import SearchTab from './SearchTab';
 import UploadedImagesTab from './UploadedImagesTab';
 import VirtualizedImagesGrid from './VirtualizedImagesGrid';
+import IconItem from './IconItem';
 
 export {
   Modal,
@@ -15,5 +16,6 @@ export {
   UserUploaderTab,
   SearchTab,
   UploadedImagesTab,
-  VirtualizedImagesGrid
+  VirtualizedImagesGrid,
+  IconItem
 }

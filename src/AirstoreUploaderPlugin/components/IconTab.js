@@ -5,14 +5,11 @@ import { connect } from "react-redux";
 import { uploadFilesFromUrls, getIconsCategories, activateIconsCategory, fetchIcons } from '../actions';
 import { isEnterClick } from '../utils/index';
 import {
-  IconImage, SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
-  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, HoverWrapper, ControlIcon,
-  MonoIconSettings, ColorIcon
+  SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
+  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, MonoIconSettings, ColorIcon
 } from '../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
-import LazyLoad from 'react-lazy-load';
-
-import { VirtualizedImagesGrid } from './';
+import { IconItem } from './';
 
 
 const colors = [
@@ -114,11 +111,6 @@ class IconTab extends Component {
     if (this.searchField.value)
       this.search({ value: this.searchField.value, type });
   }
-
-  onLoadImage = (target) => {
-    target.style.opacity = 1;
-    target.style.background = '#fff';
-  };
 
   toggleTag = (tag) => {
     const { activeTags, activeColorType } = this.state;
@@ -286,41 +278,17 @@ class IconTab extends Component {
             </MonoIconSettings>
           )}
 
-          {active.icons.map((icon, index) =>
-            <div
+          {active.icons.map((icon, index) => (
+            <IconItem
               key={`icon-${icon.desc}-${index}`}
-              className="airstore-uploader-icon-item"
-              style={[
-                iconStyles,
-                isUploading && uploadingIcon === icon.src && iconStyles.loading.active,
-                isUploading && uploadingIcon !== icon.src && iconStyles.loading.notActive
-              ]}
-              // onClick={this.upload.bind(this, icon.src)}
-              onClick={this.onIconClick.bind(this, icon.src)}
-              onKeyDown={event => { event.keyCode === 13 && this.upload(icon.src) }}
-              onMouseOver={ this.hoverToggle.bind(this, `isHover-${icon.uid}`, true)}
-              onMouseLeave={ this.hoverToggle.bind(this, `isHover-${icon.uid}`, false)}
-              tabIndex={0}
-            >
-              <HoverWrapper isShow={this.state[`isHover-${icon.uid}`]}>
-                <ControlIcon className={'sfi-airstore-cross'}/>
-                <ControlIcon className={'sfi-airstore-tick'}/>
-                <ControlIcon className={'sfi-airstore-plus'}/>
-              </HoverWrapper>
-
-              <div style={[iconStyles.imageWrap]}>
-                <LazyLoad height={60} offsetVertical={30} throttle={200} key={icon.uid}>
-                  <IconImage
-                    src={icon.src}
-                    width="100%"
-                    height="100%"
-                    alt={icon.desc}
-                    onLoad={({ target }) => this.onLoadImage(target)}
-                  />
-                </LazyLoad>
-              </div>
-            </div>
-          )}
+              icon={icon}
+              index={index}
+              isUploading={isUploading}
+              uploadingIcon={uploadingIcon}
+              onIconClick={this.onIconClick}
+              upload={this.upload}
+            />
+          ))}
         </div>
         }
         <Spinner overlay show={isVisibleLoadingBlock && isLoading}/>
