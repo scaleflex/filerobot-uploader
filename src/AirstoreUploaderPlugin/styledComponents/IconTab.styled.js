@@ -27,6 +27,7 @@ export const AmountIcons = styled.div`
 `;
 export const Label = styled.span`
   margin-right: 5px;
+  color: ${props => props.bl ? '#1e262c' : ''};
 `;
 export const InputSearch = styled.input.attrs({
   autoFocus: true
@@ -186,25 +187,49 @@ export const ControlIcon = styled.span`
   color: ${props => props.color ? props.color : '#f2f2f2'};
   font-size: ${props => props.fs ? props.fs : 25}px;
   cursor: pointer;
+  padding-bottom: ${props => props.pb ? props.pb : ''}px;
 `;
 
 export const MonoIconSettings = styled.div`
+  display: ${props => props.isShow ? 'flex' : 'none'};
+  flex-direction: column;
   position: absolute;
-  top: 20px;
+  top: 50%;
   left: 50%;
-  margin-left: -150px;
-  width: 300px;
-  height: 300px;
+  margin-top: -140px;
+  margin-left: -140px;
   background-color: #fff;
   z-index: 1;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px;
+`;
+
+export const Opacity = styled.div`
+  display: ${props => props.isShow ? 'block': 'none'};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: .5;
+  z-index: 1;
+`;
+
+export const ColorsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 10px;
+  margin-bottom: 30px;
 `;
 
 export const ColorIcon = styled.div`
   width: 20px;
   height: 20px;
-  background-color: red
+  background-color: ${props => props.bgColor ? props.bgColor : ''}
+  border-radius: 50%;
+  margin-right: 5px;
 `;

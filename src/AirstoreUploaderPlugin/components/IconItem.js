@@ -30,7 +30,6 @@ class IconItem extends Component {
           isUploading && uploadingIcon === icon.src && iconStyles.loading.active,
           isUploading && uploadingIcon !== icon.src && iconStyles.loading.notActive
         ]}
-        // onClick={this.upload.bind(this, icon.src)}
         onClick={() => { onIconClick(icon.src); }}
         onKeyDown={event => { event.keyCode === 13 && upload(icon.src); }}
         onMouseOver={ this.hoverToggle.bind(this, 'isHover', true)}

@@ -6,7 +6,8 @@ import { uploadFilesFromUrls, getIconsCategories, activateIconsCategory, fetchIc
 import { isEnterClick } from '../utils/index';
 import {
   SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, TagsWrapper, Tag, CloseIcon,
-  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, MonoIconSettings, ColorIcon
+  SidebarWrap, SideBar, ColorType, ColorItem, ColorItemName, ActiveItem, AmountIcons, Label, MonoIconSettings,
+  ColorIcon, ColorsWrapper, ControlIcon, Opacity
 } from '../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { IconItem } from './';
@@ -16,7 +17,11 @@ const colors = [
   'red',
   'yellow',
   'black',
-  'green'
+  'green',
+  'grey',
+  'brown',
+  'grey',
+  'purple'
 ];
 
 class IconTab extends Component {
@@ -28,6 +33,7 @@ class IconTab extends Component {
     isSearching: false,
     activeColorType: 'multi',
     isHover: false,
+    isShowMonoIconSettings: false,
 
     activeTags: {}
   };
@@ -127,13 +133,9 @@ class IconTab extends Component {
     const { activeColorType } = this.state;
 
     if (activeColorType === 'mono')
-      this.onMonoIconClick(src);
+      this.setState({ activeIconSrc: src, isShowMonoIconSettings: true });
     else
       this.upload(src);
-  };
-
-  onMonoIconClick = (src) => {
-    this.setState({ isShowMonoIconSettings: true })
   };
 
   hoverToggle(name, isHover) { this.setState({ [name]: isHover }) }
@@ -210,9 +212,8 @@ class IconTab extends Component {
 
   renderContent() {
     const { active } = this.props;
-    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType, isHover, isShowMonoIconSettings } = this.state;
+    const { isUploading, uploadingIcon, isLoading, isSearching, activeColorType, isShowMonoIconSettings, activeIconSrc } = this.state;
     const contentStyles = styles.container.content;
-    const iconStyles = contentStyles.results.icon;
     const isEmptyIcons = (!active || !active.icons || !active.icons.length);
     const isSearch = active && active.slug && active.slug === 'custom-search';
     let isVisibleLoadingBlock = true;
@@ -261,22 +262,23 @@ class IconTab extends Component {
           ))}
         </TagsWrapper>}
 
+        <Opacity isShow={isShowMonoIconSettings}/>
+
+        <MonoIconSettings isShow={isShowMonoIconSettings}>
+          <ControlIcon fs={100} color={'purple'} pb={20} className={'sfi-airstore-image'}/>
+          <Label color={'bl'}>Customize your icon</Label>
+          <ColorsWrapper>
+            {colors.map((color, index) => <ColorIcon bgColor={color} key={`color-${index}`}> </ColorIcon>)}
+          </ColorsWrapper>
+          <ButtonSearch fullBr={'4px'} onClick={this.upload.bind(this, activeIconSrc)}>Apply</ButtonSearch>
+        </MonoIconSettings>
+
         {active && active.icons &&
         <div
           style={[contentStyles.results]}
           id="airstore-uploader-icons-box"
           ref={node => this._iconsWrapper = node}
         >
-          {isShowMonoIconSettings && (
-            <MonoIconSettings>
-              <ControlIcon fs={100} color={'purple'} className={'sfi-airstore-image'}/>
-              <Label>Customize your icon</Label>
-              colors.map(() =>
-              <ColorIcon>
-
-              </ColorIcon>)
-            </MonoIconSettings>
-          )}
 
           {active.icons.map((icon, index) => (
             <IconItem
