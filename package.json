@@ -6,10 +6,12 @@
     "axios": "^0.17.1",
     "radium": "^0.21.2",
     "react": "^16.2.0",
+    "react-color": "^2.14.1",
     "react-dom": "^16.2.0",
     "react-focus-lock": "^1.8.1",
     "react-lazy-load": "^3.0.13",
     "react-redux": "^5.0.6",
+    "react-toastr": "^3.0.0",
     "react-virtualized": "^9.18.5",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

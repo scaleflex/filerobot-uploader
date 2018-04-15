@@ -46,5 +46,5 @@ const _send = (url, method = 'GET', data = null, headers = {}, responseType = "j
 export const getBackgrounds = () => new Promise(resolve => resolve(bgResponse));
   // _send(`${api_endpoint}list?dir=backgrounds`)
   //   .then(
-  //     ({ categories = [] }) => categories
+  //     ({ tags = [] }) => tags
   //   );

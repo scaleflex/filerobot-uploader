@@ -6,16 +6,6 @@ const api_endpoint = '//api.imagesearch.rest/v3/icons/';
 const _send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   new Promise((resolve, reject) => {
 
-    // check in cache
-    //if (method.toLowerCase() === 'get') {
-    //  const cacheResponse = sessionStorage.getItem(url);
-    //
-    //  if (cacheResponse) {
-    //    resolve(JSON.parse(cacheResponse));
-    //    return;
-    //  }
-    //}
-
     axios({
       url: url,
       method: method,
@@ -43,10 +33,10 @@ const _send = (url, method = 'GET', data = null, headers = {}, responseType = "j
   })
 
 
-export const getCategories = () =>
-  _send(`${api_endpoint}categories`)
+export const getTags = () =>
+  _send(`${api_endpoint}tags`)
     .then(
-      ({ categories = [] }) => categories
+      ({ tags = [] }) => tags
     );
 
 //export const getCategoryIcons = (category_slug = '') =>
@@ -69,4 +59,23 @@ export const searchIcons = (searchParams, relevantActiveTags = []) => {
   );
 }
 
+export const addTag = (uid, tagName) => {
+  return _send(`${api_endpoint}retag?uid=${uid}&op=ADD&tag=${tagName}`);
+}
 
+export const setAsNotRelevant = (searchParams, relevantActiveTags = [], uid) => {
+  const splittedString = searchParams.value.trim().split(' ');
+  const value = `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
+  const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
+
+  return _send(`${api_endpoint}improve/relevancy?${value}${tags}&uid=${uid}`);
+}
+
+export const sendSelectionData = (searchParams, relevantActiveTags = [], uid, shownIcons) => {
+  const splittedString = searchParams.value.trim().split(' ');
+  const value = `q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
+  const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
+  const data = `${value}${tags}&chosen_uid=${uid}&shown_icons_uid[]=${shownIcons.map(icon => icon.uid).join('&shown_icons_uid[]=')}`;
+
+  return _send(`${api_endpoint}improve/selection`, 'POST', data, {}, 'application/x-www-form-urlencoded');
+}

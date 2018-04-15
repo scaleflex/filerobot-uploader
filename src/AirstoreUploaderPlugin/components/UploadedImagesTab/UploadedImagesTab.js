@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, Content, UploadBoxWrapper, UploadBox, Label,
-  UploadBoxIcon } from '../styledComponents';
+  UploadBoxIcon } from '../../styledComponents/index';
 
 
 class UploadedImagesTab extends Component {

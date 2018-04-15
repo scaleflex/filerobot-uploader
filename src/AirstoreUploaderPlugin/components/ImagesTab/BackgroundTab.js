@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import { CSS, BgCss as styles } from '../assets/styles';
-import { getBackgrounds, uploadFilesFromUrls } from '../actions';
+import { CSS, BgCss as styles } from '../../assets/styles/index';
+import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
-import { SidebarWrap, ColorItem, ColorItemName, ActiveItem, TabWrap, SideBar, ColorType } from '../styledComponents';
+import { SidebarWrap, ColorItem, ColorItemName, ActiveItem, TabWrap, SideBar, ColorType } from '../../styledComponents/index';
 
 class BackgroundTab extends Component {
   state = { isLoading: false, uploadingUuid: null };
@@ -52,7 +52,6 @@ class BackgroundTab extends Component {
               key="type-of-background-one"
               // onClick={}
             >
-              <ActiveItem active={false}/>
               <ColorItemName>Transport</ColorItemName>
             </ColorItem>
             <ColorItem
@@ -60,7 +59,6 @@ class BackgroundTab extends Component {
               key="type-of-background-two"
               // onClick={}
             >
-              <ActiveItem active={true}/>
               <ColorItemName>Interface</ColorItemName>
             </ColorItem>
           </ColorType>

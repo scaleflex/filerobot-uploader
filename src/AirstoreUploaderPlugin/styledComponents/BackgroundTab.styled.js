@@ -25,27 +25,21 @@ export const ColorType = styled.div`
 export const ColorItem = styled.div`
   position: relative
   padding: 10px 5px;
-  // border-left: ${props => props.active ? '3px solid #00707c' : 'none'};
+  border-left: ${props => props.active ? '6px solid #00707c' : '6px solid transparent'};
   font-size: 12px;
   color: #1e262c;
-  background: ${props => props.active ? '#fff' : 'none'};;
   text-transform: capitalize;
   display: flex;
   cursor: pointer;
+  background: ${props => props.active ? '#fff' : 'transparent'}
+  
+  :hover {
+    background: #fff;
+  }
 `;
 
 export const ColorItemName = styled.span`
   margin-left: 5px;
-`;
-
-export const ActiveItem = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background-color: #00707c;
-  display: ${props => props.active ? 'block' : 'none'};
 `;
 
 export const TabWrap = styled.div`

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import { CSS, DragDropCss as styles } from '../assets/styles';
+import { CSS, DragDropCss as styles } from '../../assets/styles/index';
 import { connect } from "react-redux";
-import { uploadFilesFromUrls, uploadFiles } from '../actions';
-import { isEnterClick } from '../utils/index';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../styledComponents';
+import { uploadFilesFromUrls, uploadFiles } from '../../actions/index';
+import { isEnterClick } from '../../utils/index';
+import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
+import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
 
 const STEP = {
@@ -62,7 +63,7 @@ class UserUploaderTab extends Component {
   };
 
   uploadFromWeb = () => {
-    const value = this.refs.uploadFromWebField.value;
+    const value = this._uploadFromWebField.value;
     const isValid = value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
 
     if (isValid) this.upload(true, value);
@@ -124,30 +125,23 @@ class UserUploaderTab extends Component {
                     onClick={() => { this.refs.fileInput.click() }}
                   >Browse your computer
                   </button>
-                  <div style={[uploadBlock_style.inputBox.label.orText, {paddingBottom: 0}]}>or</div>
+                  <div style={[uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }]}>or</div>
                   <SearchWrapper>
-                    <SearchTitle>You can search icons here</SearchTitle>
                     <SearchGroup>
                       <InputSearch
                         type="search"
-                        innerRef={node => this.searchField = node}
+                        innerRef={node => this._uploadFromWebField = node}
                         autoFocus={true}
                         defaultValue={''}
-                        onKeyDown={ev => isEnterClick(ev) && this.search(this.searchField.value, true)}
+                        placeholder={'Enter URL to upload from web'}
+                        onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
                       />
-                      <ButtonSearch onClick={() => this.search(this.searchField.value, true)}>Search</ButtonSearch>
+                      <ButtonSearch
+                        key="ok"
+                        onClick={this.uploadFromWeb}
+                      >Upload</ButtonSearch>
                     </SearchGroup>
                   </SearchWrapper>
-                  {/*<div style={[{ display: 'flex' }]}>*/}
-                    {/*<input*/}
-                      {/*type="text"*/}
-                      {/*style={[CSS.field, { width: '100%', height: 'auto' }]}*/}
-                      {/*placeholder="Enter URL to upload from web"*/}
-                      {/*ref="uploadFromWebField"*/}
-                      {/*onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}*/}
-                    {/*/>*/}
-                    {/*<button key="ok" style={[CSS.button]} onClick={this.uploadFromWeb}>Upload</button>*/}
-                  {/*</div>*/}
                   <div style={[{
                     fontSize: "12px",
                     color: '#5D636B',
@@ -162,38 +156,16 @@ class UserUploaderTab extends Component {
               </div>
             }
 
-            {
-              step === STEP.UPLOADING &&
-              <div style={[uploadBlock_style.uploadingBox]}>
-                <i
-                  className="sfi-airstore-loader"
-                  style={[styles.faSpin, styles.faFw, { marginRight: 5 }]}
-                />
-                <span>Uploading</span>
-              </div>
-            }
+            {step === STEP.UPLOADING &&
+            <div style={[uploadBlock_style.uploadingBox]}>
+              <Spinner overlay show={true}/>
+              <span>Uploading</span>
+            </div>}
 
-            {
-              step === STEP.ERROR &&
-              <div style={[uploadBlock_style.errorBox]}>
-                <span style={[uploadBlock_style.errorBox.errorMsg]} role="alert">{errorMsg}</span>
-              </div>
-            }
-          </div>
-        }
-
-        {
-          step === STEP.UPLOADED &&
-          <div className="image-wrapper text-center empty-background-image">
-            <div className="image-block">
-              {
-                uploadedFiles.length &&
-                <img src={uploadedFiles[0].public_link}/>
-              }
-            </div>
-            <div className="replace-image">
-              <a className="replace-image-btn" href="#">Replace image</a>
-            </div>
+            {step === STEP.ERROR &&
+            <div style={[uploadBlock_style.errorBox]}>
+              <span style={[uploadBlock_style.errorBox.errorMsg]} role="alert">{errorMsg}</span>
+            </div>}
           </div>
         }
       </div>

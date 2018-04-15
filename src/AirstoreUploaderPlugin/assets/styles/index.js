@@ -6,6 +6,8 @@ import ModalCss from './modal.css';
 import SearchCss from './search.css';
 
 import './main.css';
+import './toastr.css';
+import './toastr.animation.css';
 import '../fonts/sf-airstore-uploader-font.css';
 
 export {

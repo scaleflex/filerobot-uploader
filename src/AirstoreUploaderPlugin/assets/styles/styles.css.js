@@ -91,7 +91,7 @@ export default {
 
     // CONTENT
     content: {
-      // "position": "absolute",
+      position: "relative",
       "zIndex": "1",
       // "bottom": "0",
       // "right": "0",

@@ -53,7 +53,6 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     const { images, isUploading, uploadingIcon, upload } = this.props;
     const { columnWidth } = this.state;
     const image = images[index];
-    console.log('image', image);
 
     return (
       <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
@@ -64,8 +63,8 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
             isUploading && uploadingIcon === image.src && iconStyles.loading.active,
             isUploading && uploadingIcon !== image.src && iconStyles.loading.notActive
           ]}
-          onClick={() => { upload(image.src) }}
-          onKeyDown={event => { event.keyCode === 13 && upload(image.src); }}
+          onClick={() => { upload(image) }}
+          onKeyDown={event => { event.keyCode === 13 && upload(image); }}
           tabIndex={0}
         >
           <div style={[iconStyles.imageWrap]}>
@@ -120,9 +119,6 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
     const { imagesNumber } = this.props;
     const { height, overscanByPixels, windowScrollerEnabled } = this.state;
-console.log('imagesNumber:', imagesNumber);
-console.log('width', width);
-console.log('height', this._height || height);
 
     return (
       <Masonry

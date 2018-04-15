@@ -1,9 +1,9 @@
 import * as IconAPI from '../services/iconsApi.service';
 
 
-export const getIconsCategories = () => dispatch =>
-  IconAPI.getCategories().then(categories => {
-    dispatch({ type: 'ICONS_FETCH_CATEGORIES_SUCCESS', payload: categories });
+export const getIconsTags = () => dispatch =>
+  IconAPI.getTags().then(tags => {
+    dispatch({ type: 'ICONS_FETCH_TAGS_SUCCESS', payload: tags });
   });
 
 export const activateIconsCategory = (category, onSuccess) => dispatch => {

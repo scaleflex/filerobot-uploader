@@ -1,24 +1,25 @@
-const defaultCategories = [
-  {slug: 'custom-famous', cat: 'Famous'},
-  {slug: 'custom-search', cat: 'Search', count: 0}
+const defaultTags = [
+  { slug: 'custom-famous', cat: 'Famous' },
+  { slug: 'custom-search', cat: 'Search', count: 0 }
 ];
 
-const initialState = {
-  active: {
-    slug: 'custom-search',
-    icons: [],
-    related_tags: []
-  },
-  categories: [...defaultCategories]
+const activeDafault = {
+  slug: 'custom-search',
+  icons: [],
+  related_tags: []
 };
 
+const initialState = {
+  active: activeDafault,
+  tags: [...defaultTags]
+};
 
 const icons = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case 'ICONS_FETCH_CATEGORIES_SUCCESS':
-      return _fetchCategoriesSuccess(state, payload);
+    case 'ICONS_FETCH_TAGS_SUCCESS':
+      return _fetchTagsSuccess(state, payload);
     case 'ICONS_ACTIVATE_CATEGORY':
       return _activateCategory(state, payload);
     case 'ICONS_FETCH_SUCCESS':
@@ -32,16 +33,16 @@ const icons = (state = initialState, action) => {
   }
 };
 
-const _fetchCategoriesSuccess = (state, categories = []) =>
-  ({...state, categories: [...defaultCategories, ...categories] });
+const _fetchTagsSuccess = (state, tags = []) =>
+  ({ ...state, tags: [...defaultTags, ...tags] });
 
-const _activateCategory = (state, active = null) =>
-  ({...state, active: active && active.slug ? active : null});
+const _activateCategory = (state, active = activeDafault) =>
+  ({ ...state, active: active && active.slug ? active : activeDafault });
 
 const _fetchSuccess = (state, result = {}) => {
- // const active = {};
-  //const categories = Object.assign([], state.categories || []);
-  let {count = 0, icons = [], related_tags = []} = result || {};
+  // const active = {};
+  //const tags = Object.assign([], state.tags || []);
+  let { count = 0, icons = [], related_tags = [] } = result || {};
 
   //let needCancelHandler = false;
   //if (active && active.slug && active.slug !== categorySlug) needCancelHandler = true;
@@ -61,24 +62,24 @@ const _fetchSuccess = (state, result = {}) => {
   //if (!isLastPage) active.page = page; // don't change page if we have empty icons
 
   // Update category.count
-  //const category = categories.find(_c => _c.slug === active.slug);
+  //const category = tags.find(_c => _c.slug === active.slug);
   //if (category) category.count = count;
 
-  return {...state, active: { icons, related_tags }, count};
+  return { ...state, active: { icons, related_tags }, count };
 };
 
 const _iconsClean = (state) => {
   const active = Object.assign({}, state.active || {});
-  const categories = [...state.categories];
+  const tags = [...state.tags];
 
-  Object.assign(active, {page: 0, q: '', icons: [], count: 0});
+  Object.assign(active, { page: 0, q: '', icons: [], count: 0 });
 
-  const category = categories.find(_c => _c.slug === 'custom-search');
+  const category = tags.find(_c => _c.slug === 'custom-search');
   if (category) category.count = 0;
 
-  return {...state, active, categories};
+  return { ...state, active, tags };
 };
 
-const _visibilityClose = (state) => ({...state, ..._iconsClean(state), active: null});
+const _visibilityClose = (state) => ({ ...state, ..._iconsClean(state), active: activeDafault });
 
 export default icons;

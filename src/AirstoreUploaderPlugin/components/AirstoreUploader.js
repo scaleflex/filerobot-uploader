@@ -9,6 +9,9 @@ import {
 } from '../actions'
 import config from '../config';
 import { connect } from 'react-redux';
+import { ToastContainer, ToastMessageAnimated} from 'react-toastr';
+
+const ToastMessageFactory = React.createFactory(ToastMessageAnimated);
 
 
 class AirstoreUploader extends Component {
@@ -18,14 +21,14 @@ class AirstoreUploader extends Component {
       fullName: 'Upload',
       shortName: 'Upload',
       iconClass: 'sfi-airstore-upload',
-      getContent: () => <UserUploaderTab/>
+      getContent: (props) => <UserUploaderTab {...props}/>
     },
     {
       id: 'UPLOADED_IMAGES',
       fullName: 'Uploaded Images',
       shortName: 'Uploaded Images',
       iconClass: 'sfi-airstore-uploaded-images',
-      getContent: () => <UploadedImagesTab/>
+      getContent: (props) => <UploadedImagesTab {...props}/>
     },
     // {
     //   id: 'SEARCH',
@@ -39,14 +42,14 @@ class AirstoreUploader extends Component {
       fullName: 'Icons Gallery',
       shortName: 'Icons Gallery',
       iconClass: 'sfi-airstore-gallery',
-      getContent: () => <IconTab/>
+      getContent: (props) => <IconTab {...props}/>
     },
     {
       id: 'IMAGES_GALLERY',
       fullName: 'Images Gallery',
       shortName: 'Images Gallery',
       iconClass: 'sfi-airstore-image-gallery',
-      getContent: () => <BackgroundTab/>
+      getContent: (props) => <BackgroundTab {...props}/>
     }
   ];
 
@@ -74,6 +77,17 @@ class AirstoreUploader extends Component {
     this.props.onModalClose();
   }
 
+  showAlert = (title, msg, type = 'success', timeOut = 4000) => {
+    this.refs.container[type](
+      msg,
+      title, {
+        timeOut,
+        extendedTimeOut: 2000,
+        showAnimation: `animated fadeIn`,
+        hideAnimation: `animated fadeOut`
+      });
+  }
+
   render() {
     if (!this.props.isVisible) return null;
 
@@ -88,6 +102,7 @@ class AirstoreUploader extends Component {
 
   renderModalContent() {
     const { activeTab, filteredTabs = [] } = this.props;
+    const contentProps = { showAlert: this.showAlert };
 
     return (
       <FocusLock>
@@ -129,9 +144,13 @@ class AirstoreUploader extends Component {
             </nav>
           </div>
           <div style={[CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }]}>
-            {activeTab && <div style={[{ width: '100%' }]}>{activeTab.getContent.call(this)}</div>}
+            {activeTab && <div style={[{ width: '100%' }]}>{activeTab.getContent.call(this, contentProps)}</div>}
+            <ToastContainer
+              ref="container"
+              toastMessageFactory={ToastMessageFactory}
+              className="toast-top-right"
+            />
           </div>
-
         </div>
       </FocusLock>
     );

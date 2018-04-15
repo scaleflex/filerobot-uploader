@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CloseBtn } from 'scaleflex-react-ui-kit/dist';
+import { CloseBtn, Button } from 'scaleflex-react-ui-kit/dist';
 
 
 export const IconImage = styled.img`
@@ -12,6 +12,10 @@ export const IconImage = styled.img`
   background: rgba(255, 255, 255, 1);
   -moz-transform: scale(1);
   transition: all 200ms ease-in;
+  
+  ${props => props.isHover && `
+    transform: scale(1.2);
+  `}
 `;
 
 export const SearchGroup = styled.div`
@@ -25,11 +29,11 @@ export const AmountIcons = styled.div`
   padding: 10px;
   font-size: 13px;
 `;
-export const Label = styled.span`
-  margin-right: 5px;
-  margin-left: ${props => props.ml ? props.ml : ''}px;
+export const Label = styled.div`
+  padding: 10px 8px;
   font-size: ${props => props.fs ? props.fs : 'inherit'};
   color: ${props => props.color === 'black' ? '#1e262c' : ''};
+  border-bottom: ${ props => props.nb ? 'none' : '1px solid rgb(221, 221, 221)'};
 `;
 export const InputSearch = styled.input.attrs({
   autoFocus: true
@@ -117,7 +121,7 @@ export const TagsWrapper = styled.div`
   overflow: hidden;
   overflow-x: auto;
   padding: 10px 10px 0 10px;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
   
   ::-webkit-scrollbar {
     height: 6px !important;
@@ -180,13 +184,30 @@ export const HoverWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #1e262c;
-  opacity: .5;
   display: ${props => props.isShow ? 'flex' : 'none'};
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: top;
   padding: 6px;
   cursor: pointer;
+`;
+
+export const AddTagBtn = Button.extend`
+  padding: 0 5px;
+  font-size: 10px;
+  margin-right: 2px;
+`
+
+export const ActionsIconWrapper = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 2;
+  text-align: right;
+`;
+
+export const NotRelevantBtn = Button.extend`
+  padding: 0 5px;
+  font-size: 10px;
 `;
 
 export const ControlIcon = styled.span`
@@ -202,14 +223,15 @@ export const MonoIconSettings = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -140px;
+  margin-top: -160px;
   margin-left: -140px;
-  background-color: #fff;
-  z-index: 1;
+  background-color: rgb(245, 245, 245);
+  z-index: 3;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 40px;
+  border-radius: 4px;
 `;
 
 export const Opacity = styled.div`
@@ -230,17 +252,55 @@ export const ColorsWrapper = styled.div`
   width: 100%;
   padding-top: 10px;
   margin-bottom: 30px;
+  position: relative;
 `;
 
 export const ColorIcon = styled.div`
   width: 20px;
   height: 20px;
-  background-color: ${props => props.bgColor ? props.bgColor : ''}
+  background-color: ${props => props.bgColor ? props.bgColor : ''};
+  background-image: ${props => props.bgImage ? 'url(' + props.bgImage + ')' : ''};
+  background-size: cover;
   border-radius: 50%;
   margin-right: 5px;
+  cursor: pointer;
 `;
 
 export const SettingsIcon = styled.img`
-  width: 60%;
-  height: auto;
+  width: auto;
+  height: 140px;
+`;
+
+export const SettingsIconWrapper = styled.div`
+  width: 100%;
+  height: 140px;
+  position: relative;
+  text-align: center;
+`;
+
+export const IconsWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: left;
+`;
+
+export const IconTabWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  position: relative;
+  font-family: Roboto, sans-serif;
+`;
+
+export const IconMain = styled.div`
+  flex: 1;
+  overflow: auto;
+  color: #5D636B;
+`;
+
+export const Input = InputSearch.extend`
+  height: 26px;
+  margin-bottom: 20px;
+  margin-top: 10px;
 `;

@@ -33,7 +33,7 @@ class SearchTab extends Component {
       event.preventDefault();
       event.stopPropagation();
 
-      this.upload(original_url);
+      this.upload({ src: original_url });
     }
   }
 

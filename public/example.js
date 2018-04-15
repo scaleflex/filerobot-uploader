@@ -19,7 +19,9 @@
     //ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
     UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
     CONTAINER: 'example',                           // required
-    onUpload: onUploadHandler                       // required
+    IS_SHOW_ADD_TAG_BTN: true,                      // optional
+    IS_SHOW_NOT_RELEVANT_BTN: true,                 // optional
+    onUpload: onUploadHandler,                      // required
   };
 
   window.onload = function() {
