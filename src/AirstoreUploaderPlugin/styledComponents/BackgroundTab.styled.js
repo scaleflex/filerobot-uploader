@@ -101,3 +101,7 @@ export const ImageContainer = styled.div`
   flex: 1 1 0%;
   overflow: auto;
 `;
+
+export const ImagesListContainer = styled.div`
+  padding: 0 10px;  
+`;

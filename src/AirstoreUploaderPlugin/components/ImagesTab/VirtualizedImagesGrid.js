@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Masonry, CellMeasurer, CellMeasurerCache, AutoSizer, WindowScroller } from 'react-virtualized';
 import { createCellPositioner } from 'react-virtualized/dist/es/Masonry';
-import { Img, ImageWrapper } from '../styledComponents';
-import * as ImageGridService from '../services/imageGrid.service';
+import { Img, ImageWrapper } from '../../styledComponents/index';
+import * as ImageGridService from '../../services/imageGrid.service';
 
 
 class ReactVirtualizedImagesGrid extends React.PureComponent {

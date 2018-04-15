@@ -3,11 +3,13 @@ import Radium from 'radium';
 import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
-  SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, ColorType, ImageContainer
+  SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, ColorType, ImageContainer, ImagesListContainer
 } from '../../styledComponents';
-import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
+import { SearchBar, IconTags } from '../';
+import VirtualizedImagesGrid from './VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
+import { fetchImages } from '../../actions'
 
 
 class ImagesTab extends Component {
@@ -18,7 +20,12 @@ class ImagesTab extends Component {
       uploadingUuid: null,
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
-      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 }
+      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 },
+
+      isSearching: false,
+      searchPhrase: '',
+      activePresetTag: '',
+      activeTags: {}
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -33,7 +40,7 @@ class ImagesTab extends Component {
       this.updateImageGridColumnWidth();
   }
 
-  getImageGridWrapperWidth = () => this.imageGridWrapperRef.current.getBoundingClientRect().width;
+  getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.current.getBoundingClientRect().width - 20);
   getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height;
 
   updateImageGridColumnWidth = () => {
@@ -60,6 +67,63 @@ class ImagesTab extends Component {
       .then(() => this.uploadStop(), () => this.uploadStop());
   };
 
+  onChangeSearchPhrase = ({ target }) => { this.setState({ searchPhrase: target.value }); }
+
+  search = ({ value = '', type }, refreshTags) => {
+    const self = this;
+    const { related_tags } = this.props;
+    const activeTags = refreshTags ? {} : this.state.activeTags;
+    const relevantActiveTags = this.getRelevantActiveTags(activeTags, related_tags);
+    this.setState({ isSearching: true, activeTags, relevantActiveTags });
+    const onSuccess = (response) => {
+      const { payload = {} } = response;
+      const { images = [] } = payload;
+      if (!images.length) this.props.showAlert('0 images was found :(', '', 'warning');
+      self.setState({ isSearching: false });
+    }
+
+    this.loadIcons({ value, type }, relevantActiveTags, onSuccess);
+    this.loadedIcons = [];
+  };
+
+  onSearch = () => {
+    this.setState({ activePresetTag: null });
+    this.search({ value: (this.state.searchPhrase || '').toLowerCase(), type: this.state.activeColorType }, true);
+  }
+
+  loadIcons = (searchParams, relevantActiveTags, cb = null) => {
+    const done = (response) => {
+      this.setState({ isLoading: false });
+      typeof cb === 'function' && cb(response);
+    };
+
+    this.setState({ isLoading: true });
+    setTimeout(() => this.props.onSearchImages(searchParams, relevantActiveTags).then(done, done));
+  };
+
+  toggleTag = (tag) => {
+    const { activeTags, activeColorType, searchPhrase, activePresetTag } = this.state;
+    const value = (searchPhrase || activePresetTag || '').toLowerCase();
+
+    activeTags[tag] = !activeTags[tag];
+    this.setState({ activeTags });
+
+    setTimeout(() => {
+      this.search({ value, type: activeColorType });
+    });
+  };
+
+  getRelevantActiveTags = (activeTags, related_tags) => {
+    const result = [];
+
+    for (let tag in activeTags) {
+      if (activeTags[tag] && related_tags.find(item => item.tag === tag) && activeTags.hasOwnProperty(tag))
+        result.push(tag);
+    }
+
+    return result;
+  }
+
   render() {
     const { isLoading } = this.state;
 
@@ -77,18 +141,10 @@ class ImagesTab extends Component {
       <SidebarWrap>
         <SideBar>
           <ColorType>
-            <ColorItem
-              active={false}
-              key="type-of-background-one"
-              // onClick={}
-            >
-              <ColorItemName>Transport</ColorItemName>
+            <ColorItem active={false} key="type-of-background-one">
+              <ColorItemName>Backgrounds</ColorItemName>
             </ColorItem>
-            <ColorItem
-              active={true}
-              key="type-of-background-two"
-              // onClick={}
-            >
+            <ColorItem active={true} key="type-of-background-two">
               <ColorItemName>Interface</ColorItemName>
             </ColorItem>
           </ColorType>
@@ -98,29 +154,52 @@ class ImagesTab extends Component {
   };
 
   renderContent = () => {
-    const { imageGrid, imageContainerHeight } = this.state;
+    const { related_tags, images } = this.props;
+    const { imageGrid, imageContainerHeight, isLoading, isSearching, searchPhrase, activeTags } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
 
     return (
       <ImageContainer innerRef={this.imageGridWrapperRef}>
-        {this.props.backgrounds.length && imageContainerHeight && columnWidth &&
-        <VirtualizedImagesGrid
-          imageContainerHeight={imageContainerHeight}
-          columnWidth={columnWidth}
-          gutterSize={gutterSize}
-          imagesNumber={this.props.backgrounds.length}
-          images={this.props.backgrounds}
-          upload={this.upload}
-        />}
+        <SearchBar
+          title={"You can search images here"}
+          items={images}
+          isLoading={isLoading}
+          onSearch={this.onSearch}
+          isSearching={isSearching}
+          searchPhrase={searchPhrase}
+          onChangeSearchPhrase={this.onChangeSearchPhrase}
+        />
+
+        <IconTags
+          tagsList={related_tags}
+          searchPhrase={searchPhrase}
+          activeTags={activeTags}
+          toggleTag={this.toggleTag}
+        />
+
+        {(images.length && imageContainerHeight && columnWidth && !isLoading) ?
+          <ImagesListContainer>
+            <VirtualizedImagesGrid
+              imageContainerHeight={imageContainerHeight}
+              columnWidth={columnWidth}
+              gutterSize={gutterSize}
+              imagesNumber={images.length}
+              images={images}
+              upload={this.upload}
+            />
+          </ImagesListContainer>
+         : null}
       </ImageContainer>
     )
   }
 }
 
 export default connect(
-  ({ uploader: { backgrounds, uploaderConfig } }) => ({ backgrounds, uploaderConfig }),
+  ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags } }) =>
+    ({ backgrounds, uploaderConfig, images, related_tags }),
   dispatch => ({
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onGetBackgrounds: () => dispatch(getBackgrounds())
+    onGetBackgrounds: () => dispatch(getBackgrounds()),
+    onSearchImages: (searchParams, relevantActiveTags) => dispatch(fetchImages(searchParams, relevantActiveTags))
   })
 )(Radium(ImagesTab));

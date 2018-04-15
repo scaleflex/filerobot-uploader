@@ -3,13 +3,13 @@ import { TagsWrapper, Tag, CloseIcon } from '../../styledComponents';
 
 
 const IconTags = (props) => {
-  const { active, searchPhrase, activeTags, toggleTag } = props;
+  const { tagsList, searchPhrase, activeTags, toggleTag } = props;
 
-  if (!(active && active.related_tags.length > 0)) return null;
+  if (!(tagsList.length > 0)) return null;
 
   return (
     <TagsWrapper>
-      {active.related_tags.filter(item => !item.tag.includes('sf-')).map(item => (
+      {tagsList.filter(item => item.tag && !item.tag.includes('sf-')).map(item => (
         <Tag
           hide={searchPhrase.includes(item.tag)}
           key={item.tag}

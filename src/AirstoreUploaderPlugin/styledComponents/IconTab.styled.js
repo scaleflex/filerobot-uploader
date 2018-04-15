@@ -28,6 +28,7 @@ export const AmountIcons = styled.div`
   align-items: center;
   padding: 10px;
   font-size: 13px;
+  color: #3f3f3f;
 `;
 export const Label = styled.div`
   padding: 10px 8px;
@@ -110,6 +111,7 @@ export const SearchTitle = styled.h3`
   margin-top: -10%;
   font-weight: 200;
   display: none;
+  color: #3f3f3f;
   
   ${props => props.show && `
     display: block;
@@ -120,8 +122,7 @@ export const TagsWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   overflow-x: auto;
-  padding: 10px 10px 0 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   
   ::-webkit-scrollbar {
     height: 6px !important;
@@ -284,6 +285,7 @@ export const IconsWrapper = styled.div`
   flex-wrap: wrap;
   align-items: stretch;
   justify-content: left;
+  padding: 0 8px;
 `;
 
 export const IconTabWrapper = styled.div`

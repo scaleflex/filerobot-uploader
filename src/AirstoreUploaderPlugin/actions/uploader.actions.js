@@ -1,4 +1,4 @@
-import * as BgAPI from '../services/bgApi.service';
+import * as BgAPI from '../services/imagesApi.service';
 import * as API from "../services/api.service";
 
 export const getBackgrounds = () => dispatch =>

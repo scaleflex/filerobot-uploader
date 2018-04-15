@@ -12,12 +12,12 @@ export const activateIconsCategory = (category, onSuccess) => dispatch => {
   setTimeout(() => dispatch(fetchIcons(category.slug, '', onSuccess)));
 };
 
-export const fetchIcons = (categorySlug = '', searchParams, relevantActiveTags, onSuccess = () => {}) => dispatch => {
+export const fetchIcons = (searchParams, relevantActiveTags, onSuccess = () => {}) => dispatch => {
   const successHandler = response => {
     setTimeout(() => onSuccess());
     return dispatch({
       type: 'ICONS_FETCH_SUCCESS',
-      payload: { searchParams, categorySlug, relevantActiveTags, ...response }
+      payload: { searchParams, relevantActiveTags, ...response }
     });
   }
 
@@ -34,17 +34,8 @@ export const fetchIcons = (categorySlug = '', searchParams, relevantActiveTags, 
   }
 
 
-  switch (categorySlug) {
-    case 'custom-famous':
-      return IconAPI.searchIcons('', relevantActiveTags).then(successHandler);
-    case 'custom-search':
-      //dispatch({ type: 'ICONS_CLEAN', payload: null });
-      if (!searchParams.value) {
-        return new Promise(resolve => resolve());
-      }
-      return IconAPI.searchIcons(searchParams, relevantActiveTags).then(successHandler);
-    default:
-      return null;
-      //return IconAPI.getCategoryIcons(categorySlug, relevantActiveTags).then(successHandler);
+  if (!searchParams.value) {
+    return new Promise(resolve => resolve());
   }
+  return IconAPI.searchIcons(searchParams, relevantActiveTags).then(successHandler);
 };

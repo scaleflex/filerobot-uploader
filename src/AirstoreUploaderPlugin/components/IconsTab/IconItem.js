@@ -71,6 +71,6 @@ export default connect(
     onGetTags: () => dispatch(getIconsTags()),
     onActivateCategory: (category, onSuccess) => dispatch(activateIconsCategory(category, onSuccess)),
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onShowMore: (categorySlug, searchParams, relevantActiveTags) => dispatch(fetchIcons(categorySlug, searchParams, relevantActiveTags))
+    onSearchIcons: (categorySlug, searchParams, relevantActiveTags) => dispatch(fetchIcons(categorySlug, searchParams, relevantActiveTags))
   })
 )(Radium(IconItem));

@@ -40,8 +40,9 @@ class IconTab extends Component {
 
   _calculateWidthOfImageWrapper = () => {
     if (!this._IconsBox) return;
+    const IconsBoxPadding = 16;
     const IconsBoxClientRect = this._IconsBox.getBoundingClientRect();
-    const IconsBoxWidth = IconsBoxClientRect.width;
+    const IconsBoxWidth = IconsBoxClientRect.width - IconsBoxPadding;
     const columnsNumber = Math.floor(IconsBoxWidth / DEFAULT_ICON_SIZE);
     const restWidth = IconsBoxWidth % DEFAULT_ICON_SIZE;
     this.setState({ iconSize: DEFAULT_ICON_SIZE + (restWidth / columnsNumber) });
@@ -68,14 +69,14 @@ class IconTab extends Component {
     this.setState({ isShowIconAddTagModal: true, activeIcon });
   }
 
-  loadIcons = (slug, searchParams, relevantActiveTags, cb = null) => {
+  loadIcons = (searchParams, relevantActiveTags, cb = null) => {
     const done = (response) => {
       this.setState({ isLoading: false });
       typeof cb === 'function' && cb(response);
     };
 
     this.setState({ isLoading: true });
-    setTimeout(() => this.props.onShowMore(slug, searchParams, relevantActiveTags).then(done, done));
+    setTimeout(() => this.props.onSearchIcons(searchParams, relevantActiveTags).then(done, done));
   };
 
   search = ({ value = '', type }, refreshTags) => {
@@ -87,11 +88,16 @@ class IconTab extends Component {
     const onSuccess = (response) => {
       const { payload = {} } = response;
       const { icons = [] } = payload;
-      if (!icons.length) this.props.showAlert('0 images was found :(', '', 'warning');
+      if (!icons.length && relevantActiveTags.length) {
+        this.search({ value, type }, true);
+        return;
+      }
+      else if (!icons.length) this.props.showAlert('0 images was found :(', '', 'warning');
+
       self.setState({ isSearching: false });
     }
 
-    this.loadIcons('custom-search', { value, type }, relevantActiveTags, onSuccess);
+    this.loadIcons({ value, type }, relevantActiveTags, onSuccess);
     this.loadedIcons = [];
   };
 
@@ -193,6 +199,8 @@ class IconTab extends Component {
 
         <IconMain>
           <SearchBar
+            title={"You can search icons here"}
+            items={active.icons}
             isLoading={isLoading}
             onSearch={this.onSearch}
             isSearching={isSearching}
@@ -201,7 +209,7 @@ class IconTab extends Component {
           />
 
           <IconTags
-            active={active}
+            tagsList={active.related_tags}
             searchPhrase={searchPhrase}
             activeTags={activeTags}
             toggleTag={this.toggleTag}
@@ -262,6 +270,6 @@ export default connect(
     onGetTags: () => dispatch(getIconsTags()),
     onActivateCategory: (category, onSuccess) => dispatch(activateIconsCategory(category, onSuccess)),
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onShowMore: (categorySlug, searchParams, relevantActiveTags) => dispatch(fetchIcons(categorySlug, searchParams, relevantActiveTags))
+    onSearchIcons: (searchParams, relevantActiveTags) => dispatch(fetchIcons(searchParams, relevantActiveTags))
   })
 )(IconTab);

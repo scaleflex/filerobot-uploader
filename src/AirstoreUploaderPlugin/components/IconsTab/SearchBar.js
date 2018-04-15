@@ -19,12 +19,12 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { active, isSearching, searchPhrase, onSearch, onChangeSearchPhrase } = this.props;
-    const isEmptyIcons = (!active || !active.icons || !active.icons.length);
+    const { items, isSearching, searchPhrase, onSearch, onChangeSearchPhrase, title } = this.props;
+    const isEmptyIcons = (!items || !items.length);
 
     return (
       <SearchWrapper empty={isEmptyIcons && !isSearching}>
-        <SearchTitle show={isEmptyIcons && !isSearching}>You can search icons here</SearchTitle>
+        <SearchTitle show={isEmptyIcons && !isSearching}>{title}</SearchTitle>
         <SearchGroup>
           <InputSearch
             type="search"
@@ -37,13 +37,10 @@ class SearchBar extends Component {
           <ButtonSearch onClick={onSearch}>Search</ButtonSearch>
         </SearchGroup>
 
-        <AmountIcons empty={isEmptyIcons}>Found: {active.icons.length}</AmountIcons>
+        <AmountIcons empty={isEmptyIcons}>Found: {items.length}</AmountIcons>
       </SearchWrapper>
     );
   }
 }
 
-export default connect(
-  ({ icons: { active } }) => ({ active }),
-  null
-)(SearchBar);
+export default connect(null, null)(SearchBar);
