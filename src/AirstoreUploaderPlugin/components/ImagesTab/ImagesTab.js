@@ -3,13 +3,15 @@ import Radium from 'radium';
 import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
-  SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, ColorType, ImageContainer, ImagesListContainer, Label
+  SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label,
+  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem
 } from '../../styledComponents';
 import { SearchBar, IconTags } from '../';
 import VirtualizedImagesGrid from './VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { fetchImages, getImagesTags } from '../../actions';
+import { SketchPicker } from 'react-color'
 
 
 class ImagesTab extends Component {
@@ -26,7 +28,11 @@ class ImagesTab extends Component {
       searchPhrase: '',
       activePresetTag: '',
       activeTags: {},
-      isBackground: true
+      isBackground: true,
+      activeColorFilters: [],
+      defaultColor: '#00ff00',
+      displayColorPicker: false,
+      activeColorFilterIndex: null
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -41,6 +47,54 @@ class ImagesTab extends Component {
     if (this.imageGridWrapperRef.current && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth)
       this.updateImageGridColumnWidth();
   }
+
+  onChangeColorFilter = (index) => {
+    this.setState({ displayColorPicker: true, activeColorFilterIndex: index });
+  }
+
+  onRemoveColorFilter = (index) => {
+    const { activeColorFilters } = this.state;
+
+    this.setState({
+      activeColorFilters:  [...activeColorFilters.slice(0, index), ...activeColorFilters.slice(index + 1)]
+    });
+    setTimeout(() => {
+      const { activeColorFilters, searchPhrase, activePresetTag } = this.state;
+      const value = searchPhrase || activePresetTag || '';
+
+      if (!value) return;
+      this.search({ value, colorFilters: activeColorFilters }, false);
+    })
+  }
+
+  addColorFilter = () => {
+    const { activeColorFilters } = this.state;
+
+    activeColorFilters.push({ value: this.state.defaultColor });
+    this.setState({
+      displayColorPicker: !this.state.displayColorPicker,
+      activeColorFilters,
+      activeColorFilterIndex: activeColorFilters.length - 1
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ displayColorPicker: false, activeColorFilterIndex: null });
+
+    setTimeout(() => {
+      const { activeColorFilters, searchPhrase, activePresetTag } = this.state;
+      const value = searchPhrase || activePresetTag || '';
+
+      if (!value) return;
+      this.search({ value, colorFilters: activeColorFilters }, false);
+    })
+  };
+
+  handleChange = (color) => {
+    const { activeColorFilters, activeColorFilterIndex } = this.state;
+    activeColorFilters[activeColorFilterIndex].value = color.hex;
+    this.setState({ activeColorFilters });
+  };
 
   getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.current.getBoundingClientRect().width - 20);
   getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height;
@@ -71,7 +125,7 @@ class ImagesTab extends Component {
 
   onChangeSearchPhrase = ({ target }) => { this.setState({ searchPhrase: target.value }); }
 
-  search = ({ value = '', type }, refreshTags) => {
+  search = ({ value = '', colorFilters }, refreshTags) => {
     const self = this;
     const { related_tags } = this.props;
     const activeTags = refreshTags ? {} : this.state.activeTags;
@@ -84,14 +138,18 @@ class ImagesTab extends Component {
       self.setState({ isSearching: false });
     }
 
-    this.loadIcons({ value, type }, relevantActiveTags, onSuccess);
+    if (!value) return;
+
+    this.loadIcons({ value, colorFilters }, relevantActiveTags, onSuccess);
     this.loadedIcons = [];
   };
 
   onSearch = () => {
     if (!this.state.searchPhrase && !this.state.activePresetTag) return;
     this.setState({ activePresetTag: null });
-    this.search({ value: (this.state.searchPhrase || '').toLowerCase(), type: this.state.activeColorType }, true);
+    this.search(
+      { value: (this.state.searchPhrase || '').toLowerCase(), colorFilters: this.state.activeColorFilters }, true
+    );
   }
 
   loadIcons = (searchParams, relevantActiveTags, cb = null) => {
@@ -105,7 +163,7 @@ class ImagesTab extends Component {
   };
 
   toggleTag = (tag) => {
-    const { activeTags, activeColorType } = this.state;
+    const { activeTags, activeColorFilters } = this.state;
     let { activePresetTag, searchPhrase } = this.state;
     if (activePresetTag === 'backgrounds') {
       activePresetTag = '';
@@ -117,7 +175,7 @@ class ImagesTab extends Component {
     this.setState({ activeTags, searchPhrase, activePresetTag });
 
     setTimeout(() => {
-      this.search({ value, type: activeColorType });
+      this.search({ value, colorFilters: activeColorFilters });
     });
   };
 
@@ -133,31 +191,50 @@ class ImagesTab extends Component {
   }
 
   onActivatePresetTag = (activePresetTag) => {
-    const { activeColorType } = this.state;
+    const { activeColorFilters } = this.state;
     this.setState({ activePresetTag, searchPhrase: '' });
-    this.search({ value: activePresetTag, type: activeColorType }, true);
+    this.search({ value: activePresetTag, colorFilters: activeColorFilters }, true);
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, displayColorPicker, activeColorFilters, activeColorFilterIndex } = this.state;
+    const colorFilter = activeColorFilters[activeColorFilterIndex] || {};
 
     return (
       <TabWrap>
         {this.renderSidebar()}
         {this.renderContent()}
+
+        {displayColorPicker &&
+        <SketchPickerWrapper>
+          <SketchPickerOverlay onClick={this.handleClose}/>
+          <SketchPicker color={colorFilter.value} onChange={this.handleChange}/>
+        </SketchPickerWrapper>}
+
         <Spinner overlay show={isLoading}/>
       </TabWrap>
     )
   }
 
   renderSidebar = () => {
-    const { activePresetTag } = this.state;
+    const { activePresetTag, activeColorFilters = [] } = this.state;
     const { tags } = this.props;
 
     return (
       <SidebarWrap>
         <SideBar>
           <Label fs={'14px'} color={'black'}>Color filter</Label>
+
+          {activeColorFilters.map((colorFilter, index) => (
+            <ColorFilterItem
+              index={index}
+              key={`colorFilter-${index}`}
+              color={colorFilter.value}
+              onChangeColorFilter={this.onChangeColorFilter}
+              onRemoveColorFilter={this.onRemoveColorFilter}
+            />
+          ))}
+          <div><AddColorBtn onClick={this.addColorFilter}>Add Color</AddColorBtn></div>
 
           <Label fs={'14px'} color={'black'}>Categories</Label>
 
@@ -227,7 +304,7 @@ class ImagesTab extends Component {
               upload={this.upload}
             />
           </ImagesListContainer>
-         : null}
+          : null}
       </ImageContainer>
     )
   }

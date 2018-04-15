@@ -14,18 +14,8 @@ export const fetchImages = (searchParams, relevantActiveTags, onSuccess = () => 
     });
   }
 
-  switch (searchParams.type) {
-    case 'all':
-      searchParams.typeQuery = '&style[]=FLAT&style[]=MONOCOLOR';
-      break;
-    case 'multi':
-      searchParams.typeQuery = '&style[]=FLAT';
-      break;
-    case 'mono':
-      searchParams.typeQuery = '&style[]=MONOCOLOR';
-      break;
-  }
-
+  searchParams.colorFiltersQuery = searchParams.colorFilters
+    .map(item => `&colors[]=${item.value}:1`).join('').replace(/#/g, '');
 
   if (!searchParams.value) {
     return new Promise(resolve => resolve());

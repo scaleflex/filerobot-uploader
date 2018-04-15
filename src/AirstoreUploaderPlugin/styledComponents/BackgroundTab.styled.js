@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CloseBtn } from 'scaleflex-react-ui-kit/dist';
 
 export const SidebarWrap = styled.div`
   width: 160px;
@@ -105,3 +106,66 @@ export const ImageContainer = styled.div`
 export const ImagesListContainer = styled.div`
   padding: 0 10px;  
 `;
+
+export const AddColorBtn = styled.div`
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  margin: 5px 4px;
+  border-radius: 4px;
+  color: #70777f;
+  cursor: pointer;
+  position: relative;
+  font-size: 13px;
+  
+  :hover {
+    border: 1px solid #7f7f7f;
+    color: #3f3f3f;
+  }
+    
+  ${props => props.hide && `display: none;`}
+`;
+
+export const SketchPickerWrapper = styled.div`
+  position: absolute;
+  z-index: 5;
+`;
+
+export const SketchPickerOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`;
+
+export const ColorFilterItemWrapper = styled.div`
+  display: inline-block;
+  padding: 2px;
+  padding-right: 15px;
+  border-radius: 2px;
+  background-color: #fff;
+  position: relative;
+  margin-top: 4px;
+  margin-left: 4px;
+  border: 1px solid #ccc;
+`;
+
+export const ColorFilterBox = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  background-color: ${props => props.color};
+  border-radius: 2px;
+`;
+
+export const ColorFilterItem = (props) => (
+  <ColorFilterItemWrapper>
+    <ColorFilterBox color={props.color} onClick={() => { props.onChangeColorFilter(props.index) }}/>
+    <CloseBtn
+      onClick={() => { props.onRemoveColorFilter(props.index) }}
+      style={{ top: 3, right: -2, color: '#ccc', zIndex: 4 }}
+    />
+  </ColorFilterItemWrapper>
+);
