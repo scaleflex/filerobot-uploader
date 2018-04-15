@@ -48,3 +48,5 @@ export const searchImages = (searchParams, relevantActiveTags = []) => {
       )
   );
 }
+
+export const getImagesTags = () => _send(`${api_endpoint}pictures/tags`).then(({ tags }) => tags);

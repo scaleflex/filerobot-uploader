@@ -3,13 +3,13 @@ import Radium from 'radium';
 import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
-  SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, ColorType, ImageContainer, ImagesListContainer
+  SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, ColorType, ImageContainer, ImagesListContainer, Label
 } from '../../styledComponents';
 import { SearchBar, IconTags } from '../';
 import VirtualizedImagesGrid from './VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
-import { fetchImages } from '../../actions'
+import { fetchImages, getImagesTags } from '../../actions';
 
 
 class ImagesTab extends Component {
@@ -25,12 +25,14 @@ class ImagesTab extends Component {
       isSearching: false,
       searchPhrase: '',
       activePresetTag: '',
-      activeTags: {}
+      activeTags: {},
+      isBackground: true
     };
     this.imageGridWrapperRef = React.createRef();
   }
 
   componentDidMount() {
+    this.props.onGetImagesTags();
     this.props.onGetBackgrounds();
     this.updateImageGridColumnWidth();
   }
@@ -87,6 +89,7 @@ class ImagesTab extends Component {
   };
 
   onSearch = () => {
+    if (!this.state.searchPhrase && !this.state.activePresetTag) return;
     this.setState({ activePresetTag: null });
     this.search({ value: (this.state.searchPhrase || '').toLowerCase(), type: this.state.activeColorType }, true);
   }
@@ -102,11 +105,16 @@ class ImagesTab extends Component {
   };
 
   toggleTag = (tag) => {
-    const { activeTags, activeColorType, searchPhrase, activePresetTag } = this.state;
+    const { activeTags, activeColorType } = this.state;
+    let { activePresetTag, searchPhrase } = this.state;
+    if (activePresetTag === 'backgrounds') {
+      activePresetTag = '';
+      searchPhrase = 'backgrounds';
+    }
     const value = (searchPhrase || activePresetTag || '').toLowerCase();
 
     activeTags[tag] = !activeTags[tag];
-    this.setState({ activeTags });
+    this.setState({ activeTags, searchPhrase, activePresetTag });
 
     setTimeout(() => {
       this.search({ value, type: activeColorType });
@@ -124,6 +132,12 @@ class ImagesTab extends Component {
     return result;
   }
 
+  onActivatePresetTag = (activePresetTag) => {
+    const { activeColorType } = this.state;
+    this.setState({ activePresetTag, searchPhrase: '' });
+    this.search({ value: activePresetTag, type: activeColorType }, true);
+  }
+
   render() {
     const { isLoading } = this.state;
 
@@ -137,26 +151,51 @@ class ImagesTab extends Component {
   }
 
   renderSidebar = () => {
+    const { activePresetTag } = this.state;
+    const { tags } = this.props;
+
     return (
       <SidebarWrap>
         <SideBar>
-          <ColorType>
-            <ColorItem active={false} key="type-of-background-one">
-              <ColorItemName>Backgrounds</ColorItemName>
-            </ColorItem>
-            <ColorItem active={true} key="type-of-background-two">
-              <ColorItemName>Interface</ColorItemName>
-            </ColorItem>
-          </ColorType>
+          <Label fs={'14px'} color={'black'}>Color filter</Label>
+
+          <Label fs={'14px'} color={'black'}>Categories</Label>
+
+          <ColorItem
+            key={`category-background`}
+            active={'backgrounds' === activePresetTag}
+            onClick={() => { this.onActivatePresetTag('backgrounds'); }}
+          >
+            <ColorItemName>Backgrounds</ColorItemName>
+          </ColorItem>
+          {tags.slice(0, 20).map((item, index) => this.renderItem(item, index))}
         </SideBar>
       </SidebarWrap>
     )
   };
 
+  renderItem = ({ tag, label }, index) => {
+    const { activePresetTag } = this.state;
+
+    return (
+      <ColorItem
+        key={`category-${tag}`}
+        active={tag === activePresetTag}
+        onClick={() => { this.onActivatePresetTag(tag); }}
+      >
+        <ColorItemName>{label || tag.replace(/_/g, ' ').trim()}</ColorItemName>
+      </ColorItem>
+    )
+  }
+
   renderContent = () => {
-    const { related_tags, images } = this.props;
-    const { imageGrid, imageContainerHeight, isLoading, isSearching, searchPhrase, activeTags } = this.state;
+    const { related_tags, images, backgrounds } = this.props;
+    const {
+      imageGrid, imageContainerHeight, isLoading, isSearching, searchPhrase, activeTags, activePresetTag
+    } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
+    const isBackground = activePresetTag === 'backgrounds';
+    const imagesList = isBackground ? [...backgrounds, ...images] : images;
 
     return (
       <ImageContainer innerRef={this.imageGridWrapperRef}>
@@ -177,14 +216,14 @@ class ImagesTab extends Component {
           toggleTag={this.toggleTag}
         />
 
-        {(images.length && imageContainerHeight && columnWidth && !isLoading) ?
+        {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
           <ImagesListContainer>
             <VirtualizedImagesGrid
               imageContainerHeight={imageContainerHeight}
               columnWidth={columnWidth}
               gutterSize={gutterSize}
-              imagesNumber={images.length}
-              images={images}
+              imagesNumber={imagesList.length}
+              images={imagesList}
               upload={this.upload}
             />
           </ImagesListContainer>
@@ -195,9 +234,10 @@ class ImagesTab extends Component {
 }
 
 export default connect(
-  ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags } }) =>
-    ({ backgrounds, uploaderConfig, images, related_tags }),
+  ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags, tags } }) =>
+    ({ backgrounds, uploaderConfig, images, related_tags, tags }),
   dispatch => ({
+    onGetImagesTags: () => dispatch(getImagesTags()),
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
     onGetBackgrounds: () => dispatch(getBackgrounds()),
     onSearchImages: (searchParams, relevantActiveTags) => dispatch(fetchImages(searchParams, relevantActiveTags))

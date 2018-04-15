@@ -74,8 +74,8 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
           onKeyDown={(event) => { this.onKeyDown(event, image); } }
         >
           <Img
-            height={columnWidth / 1.6}
-            src={ImageGridService.getCropImageUrl(image.src, columnWidth, columnWidth / 1.6)}
+            height={columnWidth / (image.ratio || 1.6)}
+            src={ImageGridService.getCropImageUrl(image.src, columnWidth, columnWidth / (image.ratio || 1.6))}
           />
         </ImageWrapper>
       </CellMeasurer>

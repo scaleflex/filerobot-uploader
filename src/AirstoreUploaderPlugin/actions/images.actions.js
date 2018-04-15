@@ -1,5 +1,9 @@
 import * as ImagesAPI from '../services/imagesApi.service';
 
+export const getImagesTags = () => dispatch =>
+  ImagesAPI.getImagesTags().then(tags => {
+    dispatch({ type: 'IMAGES_FETCH_TAGS_SUCCESS', payload: tags });
+  });
 
 export const fetchImages = (searchParams, relevantActiveTags, onSuccess = () => {}) => dispatch => {
   const successHandler = response => {
