@@ -55,6 +55,7 @@ export const ImageWrapper = styled.div`
   overflow: hidden;
   position: relative;
   transition: all 200ms ease-in;
+  cursor: pointer;
   
   :hover img {
     transform: scale(1.1);
@@ -88,6 +89,7 @@ export const Img = styled.img`
   background: rgba(155, 155, 155, .15);
   -moz-transform: scale(1);
   transition: all 200ms ease-in;
+  cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`

@@ -24,7 +24,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
       height: props.imageContainerHeight || 300,
       gutterSize: this._gutterSize,
       overscanByPixels: 0,
-      windowScrollerEnabled: false,
+      windowScrollerEnabled: false
     };
   }
 
@@ -50,17 +50,32 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     this._columnCount = ImageGridService.getColumnCount(this._width, columnWidth, gutterSize);
   };
 
+  onKeyDown = (event, image) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.setState({ isSelected: true });
+      this.forceUpdate();
+      this.props.upload(image);
+    }
+  }
+
   _cellRenderer = ({ index, key, parent, style }) => {
-    const { images } = this.props;
+    const { images, upload } = this.props;
     const { columnWidth } = this.state;
     const image = images[index];
 
     return (
       <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
-        <ImageWrapper style={{ ...style, width: columnWidth }}>
+        <ImageWrapper
+          style={{ ...style, width: columnWidth }}
+          onClick={() => { this.setState({ isSelected: true }); upload(image); }}
+          onKeyDown={(event) => { this.onKeyDown(event, image); } }
+        >
           <Img
-            height={columnWidth / 1.4}
-            src={ImageGridService.getCropImageUrl(image.src, columnWidth, columnWidth / 1.4)}
+            height={columnWidth / 1.6}
+            src={ImageGridService.getCropImageUrl(image.src, columnWidth, columnWidth / 1.6)}
           />
         </ImageWrapper>
       </CellMeasurer>
