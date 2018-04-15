@@ -47,7 +47,7 @@ class IconItem extends Component {
         </HoverWrapper>
 
         <div style={[iconStyles.imageWrap, { width: 60, height: 60 }]}>
-          <LazyLoad height={60} offsetVertical={30} throttle={200} key={icon.uid}>
+          <LazyLoad height={60} offsetVertical={30} throttle={0} key={icon.uid}>
             <IconImage
               isHover={isHover}
               src={icon.src}

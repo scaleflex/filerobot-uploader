@@ -17,6 +17,7 @@ class ImagesTab extends Component {
       isLoading: false,
       uploadingUuid: null,
       imageGridWrapperWidth: 0,
+      imageContainerHeight: 0,
       imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 }
     };
     this.imageGridWrapperRef = React.createRef();
@@ -105,7 +106,7 @@ class ImagesTab extends Component {
     const { imageGrid, imageContainerHeight } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const itemStyles = styles.container.item;
-    console.log(this.props.backgrounds, columnWidth, gutterSize, this.props.backgrounds.length);
+
     return (
       <ImageContainer innerRef={this.imageGridWrapperRef}>
         {this.props.backgrounds.length &&
