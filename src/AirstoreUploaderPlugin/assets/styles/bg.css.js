@@ -11,12 +11,10 @@ export default {
 
     item: {
       position: 'relative',
-      width: 'calc(100% / 6 - 10px)',
+      display: 'inline-block',
       margin: '10px 0 0 10px',
       cursor: 'pointer',
       background: '#e7e9ee',
-      display: 'flex',
-      alignItems: 'center',
 
       alignmentBlock: {
         display: 'inline-block',
@@ -25,8 +23,8 @@ export default {
       },
 
       img: {
-        display: 'inline-block',
-        verticalAlign: 'middle'
+        //display: 'inline-block',
+        //verticalAlign: 'middle'
       },
 
       loading: {

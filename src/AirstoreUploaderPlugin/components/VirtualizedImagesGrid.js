@@ -1,82 +1,68 @@
 import * as React from 'react';
-import { CellMeasurer, CellMeasurerCache, AutoSizer, WindowScroller } from 'react-virtualized';
-import { createCellPositioner, Masonry } from 'react-virtualized/dist/es/Masonry';
-import { IconsCss as styles } from '../assets/styles'
-import { IconImage } from '../styledComponents/IconTab.styled';
-
-
-const contentStyles = styles.container.content;
-const iconStyles = contentStyles.results.icon;
+import { Masonry, CellMeasurer, CellMeasurerCache, AutoSizer, WindowScroller } from 'react-virtualized';
+import { createCellPositioner } from 'react-virtualized/dist/es/Masonry';
+import { Img, ImageWrapper } from '../styledComponents';
+import * as ImageGridService from '../services/imageGrid.service';
 
 
 class ReactVirtualizedImagesGrid extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._columnWidth = props.columnWidth || 100;
+    this._columnWidth = props.columnWidth || 200;
     this._gutterSize = props.gutterSize || 10;
-    this._columnCount = 3;
+    this._columnCount = 0;
 
     this._cache = new CellMeasurerCache({
-      defaultHeight: 100,
+      defaultHeight: props.imageContainerHeight || 300,
       defaultWidth: this._columnWidth,
       fixedWidth: false,
     });
 
     this.state = {
       columnWidth: this._columnWidth,
-      height: 300,
+      height: props.imageContainerHeight || 300,
       gutterSize: this._gutterSize,
       overscanByPixels: 0,
-      windowScrollerEnabled: true,
+      windowScrollerEnabled: false,
     };
   }
 
   render() {
     const { overscanByPixels, windowScrollerEnabled, height } = this.state;
+    let child;
 
-    return <div>{this._renderAutoSizer({ height })}</div>;
+    if (windowScrollerEnabled) {
+      child = (
+        <WindowScroller overscanByPixels={overscanByPixels}>
+          {this._renderAutoSizer}
+        </WindowScroller>
+      );
+    } else {
+      child = this._renderAutoSizer({ height });
+    }
+
+    return <div>{child}</div>;
   }
 
   _calculateColumnCount = () => {
     const { columnWidth, gutterSize } = this.state;
-    //this._columnCount = ImageGridService.getColumnCount(this._width, columnWidth, gutterSize);
-    this._columnCount = 4;
+    this._columnCount = ImageGridService.getColumnCount(this._width, columnWidth, gutterSize);
   };
 
-  onLoadImage = (target) => {
-    target.style.opacity = 1;
-    target.style.background = '#fff';
-  }
-
   _cellRenderer = ({ index, key, parent, style }) => {
-    const { images, isUploading, uploadingIcon, upload } = this.props;
+    const { images } = this.props;
     const { columnWidth } = this.state;
     const image = images[index];
 
     return (
       <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
-        <div
-          className="airstore-uploader-icon-item"
-          style={[
-            iconStyles,
-            isUploading && uploadingIcon === image.src && iconStyles.loading.active,
-            isUploading && uploadingIcon !== image.src && iconStyles.loading.notActive
-          ]}
-          onClick={() => { upload(image) }}
-          onKeyDown={event => { event.keyCode === 13 && upload(image); }}
-          tabIndex={0}
-        >
-          <div style={[iconStyles.imageWrap]}>
-            <IconImage
-              src={image.src}
-              width="100%"
-              height="100%"
-              alt={image.desc}
-              onLoad={({ target }) => this.onLoadImage(target)}
-            />
-          </div>
-        </div>
+        <ImageWrapper style={{ ...style, width: columnWidth }}>
+          <Img
+            height={columnWidth / 1.4}
+            src={ImageGridService.getCropImageUrl(image.src, columnWidth, columnWidth / 1.4)}
+          />
+        </ImageWrapper>
       </CellMeasurer>
     );
   };
@@ -108,7 +94,17 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
     const { overscanByPixels } = this.state;
 
-    return this._renderMasonry({ width: '100%' });
+    return (
+      <AutoSizer
+        disableHeight
+        height={height}
+        onResize={this._onResize}
+        overscanByPixels={overscanByPixels}
+        scrollTop={this._scrollTop}
+      >
+        {this._renderMasonry}
+      </AutoSizer>
+    );
   };
 
   _renderMasonry = ({ width }) => {
@@ -122,16 +118,16 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
     return (
       <Masonry
+        autoHeight={windowScrollerEnabled}
         cellCount={imagesNumber}
         cellMeasurerCache={this._cache}
         cellPositioner={this._cellPositioner}
         cellRenderer={this._cellRenderer}
-       // autoHeight={windowScrollerEnabled}
-        //overscanByPixels={overscanByPixels}
-        ref={this._setMasonryRef}
-        //scrollTop={this._scrollTop}
-        width={width}
         height={windowScrollerEnabled ? this._height : height}
+        overscanByPixels={overscanByPixels}
+        ref={this._setMasonryRef}
+        scrollTop={this._scrollTop}
+        width={width}
       />
     );
   };

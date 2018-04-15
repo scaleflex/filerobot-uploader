@@ -37,7 +37,16 @@ const uploader = (state = initialState, action) => {
   }
 };
 
-const _fetchBgSuccess = (state, backgrounds = []) => ({...state, backgrounds });
+const _fetchBgSuccess = (state, { files = [] }) => {
+  const backgrounds = files.map((file = {}) => ({
+    src: file.url_public || file.url_permalink,
+    id: file.uuid,
+    name: file.name,
+    alt: ''
+  }));
+
+  return {...state, backgrounds };
+};
 
 const _visibilityOpen = (state, activeTabName) => {
   const nextTab = state.filteredTabs.find(tab => tab.id === activeTabName) || {};

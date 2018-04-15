@@ -2,9 +2,9 @@ import * as BgAPI from '../services/bgApi.service';
 import * as API from "../services/api.service";
 
 export const getBackgrounds = () => dispatch =>
-  BgAPI.getBackgrounds().then(({ status, backgrounds }) => {
-    if (status === 'success' && backgrounds) {
-      dispatch({ type: 'FETCH_BACKGROUNDS_SUCCESS', payload: backgrounds });
+  BgAPI.getBackgrounds().then((files) => {
+    if (files) {
+      dispatch({ type: 'FETCH_BACKGROUNDS_SUCCESS', payload: files });
     }
   });
 
