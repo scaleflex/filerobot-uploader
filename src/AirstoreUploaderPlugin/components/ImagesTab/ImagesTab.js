@@ -24,8 +24,8 @@ class ImagesTab extends Component {
   }
 
   componentDidMount() {
-    this.updateImageGridColumnWidth();
     this.props.onGetBackgrounds();
+    this.updateImageGridColumnWidth();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -103,7 +103,7 @@ class ImagesTab extends Component {
 
     return (
       <ImageContainer innerRef={this.imageGridWrapperRef}>
-        {this.props.backgrounds.length &&
+        {this.props.backgrounds.length && imageContainerHeight && columnWidth &&
         <VirtualizedImagesGrid
           imageContainerHeight={imageContainerHeight}
           columnWidth={columnWidth}
