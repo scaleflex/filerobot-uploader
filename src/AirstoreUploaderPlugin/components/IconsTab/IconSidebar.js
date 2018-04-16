@@ -22,7 +22,7 @@ class IconSidebar extends Component {
     return (
       <SidebarWrap>
         <SideBar id="airstore-uploader-tags-box">
-          <Label fs={'14px'} color={'black'}>Color filter</Label>
+          <Label fs={'16px'} color={'black'}>Color filter</Label>
           <ColorWrapper>
             <ColorItem
               key="all-color-wrapper"
@@ -49,7 +49,7 @@ class IconSidebar extends Component {
             </ColorItem>
           </ColorWrapper>
 
-          <Label fs={'14px'} color={'black'}>Categories</Label>
+          <Label fs={'16px'} color={'black'}>Categories</Label>
           {tags && tags
             //.sort((a, b) => a.cat > b.cat ? 1 : -1)
             .map(tag => this.renderTag(tag))

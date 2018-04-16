@@ -41,14 +41,14 @@ export default {
           "color": "#c0c1c1",
           "textDecoration": "none",
           "fontSize": "12px",
-          lineHeight: '16px',
-          "padding": "11px 12px 13px",
+          lineHeight: '21px',
+          "padding": "9px 12px",
           "cursor": "pointer",
           "borderRadius": "3px 3px 0 0",
           "borderLeft": "2px solid transparent",
           "borderRight": "2px solid transparent",
           "borderTop": "2px solid transparent",
-          "borderBottomWidth": "0",
+          "borderBottom": "2px solid transparent",
           "textTransform": "uppercase",
           "fontWeight": "400",
           "display": "inline-block",
@@ -74,13 +74,16 @@ export default {
           //},
 
           i: {
-            fontSize: 16,
+            fontSize: 21,
+            lineHeight: '21px',
             marginRight: 5,
             display: 'inline-block',
-            verticalAlign: 'top'
+            verticalAlign: 'middle'
           },
 
           text: {
+            display: 'inline-block',
+            verticalAlign: 'middle',
             '@media screen and (max-width: 600px)': {
               display: 'none'
             }
@@ -143,7 +146,7 @@ export default {
     "backgroundRepeat": "repeat-x",
     "textShadow": "rgb(255, 255, 255) 0px 1px",
     "border": "1px solid #5D636B",
-    "borderRadius": "5px",
+    "borderRadius": "4px",
     "cursor": "pointer",
     "fontWeight": "500",
     "outline": "0",

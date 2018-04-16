@@ -34,7 +34,7 @@ export const Label = styled.div`
   padding: 10px 8px;
   font-size: ${props => props.fs ? props.fs : 'inherit'};
   color: ${props => props.color === 'black' ? '#1e262c' : ''};
-  border-bottom: ${ props => props.nb ? 'none' : '1px solid rgb(221, 221, 221)'};
+  border-top: ${ props => props.bt ? '1px solid rgb(221, 221, 221)' : 'none'};
 `;
 export const InputSearch = styled.input.attrs({
   autoFocus: true
@@ -66,14 +66,12 @@ export const ButtonSearch = styled.button`
   font-family: Roboto, sans-serif;
   height: 34px;
   padding: 6px 12px;
-  line-height: 1.42857;
+  line-height: 23px;
   text-transform: uppercase;
   color: #fff;
   background-color: #00707C;
   background-repeat: repeat-x;
-  border: 1px solid #00707C;
-  border-left: 0px solid transparent;
-  border-radius: 0 4px 4px 0;
+  border: none;
   border-radius: ${props => props.fullBr ? props.fullBr : '0 4px 4px 0'};
   cursor: pointer;
   font-weight: 300;
@@ -107,11 +105,11 @@ export const SearchWrapper = styled.div`
 `;
 
 export const SearchTitle = styled.h3`
-  font-size: 24px;
+  font-size: 25px;
   margin-top: -10%;
   font-weight: 200;
   display: none;
-  color: #3f3f3f;
+  color: rgb(93, 99, 107);
   
   ${props => props.show && `
     display: block;
@@ -129,7 +127,7 @@ export const TagsWrapper = styled.div`
   }
    
   ::-webkit-scrollbar-thumb {
-    background: #3b4d54;
+    background: rgb(221,221,221);
     border-radius: 5px;
   }
 `;

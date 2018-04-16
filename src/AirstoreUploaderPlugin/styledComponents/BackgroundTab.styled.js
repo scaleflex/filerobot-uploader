@@ -117,6 +117,8 @@ export const AddColorBtn = styled.div`
   cursor: pointer;
   position: relative;
   font-size: 13px;
+  width: calc(100% - 32px);
+  text-align: center;
   
   :hover {
     border: 1px solid #7f7f7f;
@@ -142,7 +144,7 @@ export const SketchPickerOverlay = styled.div`
 export const ColorFilterItemWrapper = styled.div`
   display: inline-block;
   padding: 2px;
-  padding-right: 15px;
+  padding-right: 18px;
   border-radius: 2px;
   background-color: #fff;
   position: relative;
@@ -165,7 +167,7 @@ export const ColorFilterItem = (props) => (
     <ColorFilterBox color={props.color} onClick={() => { props.onChangeColorFilter(props.index) }}/>
     <CloseBtn
       onClick={() => { props.onRemoveColorFilter(props.index) }}
-      style={{ top: 3, right: -2, color: '#ccc', zIndex: 4 }}
+      style={{ top: 4, right: 1, color: '#747981', zIndex: 4, fontSize: 16 }}
     />
   </ColorFilterItemWrapper>
 );

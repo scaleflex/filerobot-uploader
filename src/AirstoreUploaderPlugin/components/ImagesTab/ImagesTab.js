@@ -223,20 +223,25 @@ class ImagesTab extends Component {
     return (
       <SidebarWrap>
         <SideBar>
-          <Label fs={'14px'} color={'black'}>Color filter</Label>
+          <Label fs={'16px'} color={'black'}>Color filter</Label>
 
-          {activeColorFilters.map((colorFilter, index) => (
-            <ColorFilterItem
-              index={index}
-              key={`colorFilter-${index}`}
-              color={colorFilter.value}
-              onChangeColorFilter={this.onChangeColorFilter}
-              onRemoveColorFilter={this.onRemoveColorFilter}
-            />
-          ))}
-          <div><AddColorBtn onClick={this.addColorFilter}>Add Color</AddColorBtn></div>
+          <div style={{ margin: '0 10px'}}>
+            {activeColorFilters.map((colorFilter, index) => (
+              <ColorFilterItem
+                index={index}
+                key={`colorFilter-${index}`}
+                color={colorFilter.value}
+                onChangeColorFilter={this.onChangeColorFilter}
+                onRemoveColorFilter={this.onRemoveColorFilter}
+              />
+            ))}
+          </div>
 
-          <Label fs={'14px'} color={'black'}>Categories</Label>
+          <div style={{ padding: '5px 10px 12px' }}>
+            <AddColorBtn onClick={this.addColorFilter}>+ add color</AddColorBtn>
+          </div>
+
+          <Label fs={'16px'} color={'black'}>Categories</Label>
 
           <ColorItem
             key={`category-background`}
