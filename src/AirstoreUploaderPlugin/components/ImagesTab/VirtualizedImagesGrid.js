@@ -26,6 +26,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
       overscanByPixels: 0,
       windowScrollerEnabled: false
     };
+    this.child = React.createRef();
   }
 
   render() {
@@ -42,7 +43,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
       child = this._renderAutoSizer({ height });
     }
 
-    return <div>{child}</div>;
+    return child;
   }
 
   _calculateColumnCount = () => {
@@ -70,8 +71,11 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
       <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
         <ImageWrapper
           style={{ ...style, width: columnWidth }}
-          onClick={() => { this.setState({ isSelected: true }); upload(image); }}
-          onKeyDown={(event) => { this.onKeyDown(event, image); } }
+          onClick={() => {
+            this.setState({ isSelected: true });
+            upload(image);
+          }}
+          onKeyDown={(event) => { this.onKeyDown(event, image); }}
         >
           <Img
             height={columnWidth / (image.ratio || 1.6)}
@@ -96,11 +100,11 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
   };
 
   _onResize = ({ width }) => {
-    this._width = width;
+    if (width) this._width = width;
 
     this._calculateColumnCount();
     this._resetCellPositioner();
-    this._masonry.recomputeCellPositions();
+    this._setMasonryRef.recomputeCellPositions();
   };
 
   _renderAutoSizer = ({ height, scrollTop }) => {
@@ -111,6 +115,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
     return (
       <AutoSizer
+        ref={this.child}
         disableHeight
         height={height}
         onResize={this._onResize}
@@ -121,6 +126,23 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
       </AutoSizer>
     );
   };
+
+  onScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
+    const self = this;
+    const { isShowMoreImages } = this.props;
+
+    if ((clientHeight + scrollTop + 600 >= scrollHeight) && !isShowMoreImages) {
+      this.props.onShowMoreImages(() => {
+        const resizeTriggers = document.querySelector('div.resize-triggers').parentNode;
+        if (resizeTriggers.style.paddingLeft === '9px') resizeTriggers.style.paddingLeft = '10px';
+        else resizeTriggers.style.paddingLeft = '9px';
+        if (resizeTriggers.style.paddingRight === '9px') resizeTriggers.style.paddingRight = '10px';
+        else resizeTriggers.style.paddingRight = '9px';
+
+        self.child.current._onResize();
+      });
+    }
+  }
 
   _renderMasonry = ({ width }) => {
     this._width = width;
@@ -140,9 +162,10 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
         cellRenderer={this._cellRenderer}
         height={windowScrollerEnabled ? this._height : height}
         overscanByPixels={overscanByPixels}
-        ref={this._setMasonryRef}
+        ref={ref => this._setMasonryRef = ref}
         scrollTop={this._scrollTop}
         width={width}
+        onScroll={this.onScroll}
       />
     );
   };

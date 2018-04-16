@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CloseBtn } from 'scaleflex-react-ui-kit/dist';
+import { CloseBtn, Spinner } from 'scaleflex-react-ui-kit/dist';
 
 export const SidebarWrap = styled.div`
   width: 160px;
@@ -100,11 +100,24 @@ export const ImageContainer = styled.div`
   padding-right: 10;
   font-family: Roboto, sans-serif;
   flex: 1 1 0%;
-  overflow: auto;
+  overflow: hidden;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
 `;
 
 export const ImagesListContainer = styled.div`
-  padding: 0 10px;  
+  padding: 0 10px;
+  height: calc(100% - 119px);
+  position: relative;
+  
+  > div {
+    height: 100%;
+    
+    > div {
+      height: 100% !important;
+    }
+  }
 `;
 
 export const AddColorBtn = styled.div`
@@ -171,3 +184,26 @@ export const ColorFilterItem = (props) => (
     />
   </ColorFilterItemWrapper>
 );
+
+export const ShowMoreResultsSpinnerWrapper = styled.div`
+  display: ${props => props.show ? 'block' : 'none'};
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px !important;
+  
+  > div:first-child {
+    opacity: 0.6;
+  }
+  
+  > div:last-child {
+    height: 1em !important;
+  }
+`;
+
+export const ShowMoreResultsSpinner = ({ show }) => show ? (
+  <ShowMoreResultsSpinnerWrapper show={show}>
+    <Spinner overlay show={show} style={{ fontSize: 10 }}/>
+  </ShowMoreResultsSpinnerWrapper>
+) : null;

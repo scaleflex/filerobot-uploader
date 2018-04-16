@@ -19,7 +19,7 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { items, isSearching, searchPhrase, onSearch, onChangeSearchPhrase, title } = this.props;
+    const { items, isSearching, searchPhrase, onSearch, onChangeSearchPhrase, title, count = 0 } = this.props;
     const isEmptyIcons = (!items || !items.length);
 
     return (
@@ -37,7 +37,7 @@ class SearchBar extends Component {
           <ButtonSearch onClick={onSearch}>Search</ButtonSearch>
         </SearchGroup>
 
-        <AmountIcons empty={isEmptyIcons}>Found: {items.length}</AmountIcons>
+        <AmountIcons empty={isEmptyIcons}>Found: {count}</AmountIcons>
       </SearchWrapper>
     );
   }

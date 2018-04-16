@@ -36,13 +36,15 @@ const _send = (url, method = 'GET', data = null, headers = {}, responseType = "j
 export const getBackgrounds = () => send(`${backgroundsAPI}`).then(({ status, files = [] }) => ({ status, files }));
 
 export const searchImages = (searchParams, relevantActiveTags = []) => {
-  const { colorFiltersQuery } = searchParams;
+  const { colorFiltersQuery, limit, offset } = searchParams;
   const splittedString = searchParams.value.trim().split(' ');
   const value = `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
   const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
+  const limitQuery = `&limit=${limit}`;
+  const offsetQuery = `&offset=${offset}`;
 
   return (
-    _send(`${api_endpoint}search?${value}${tags}${colorFiltersQuery}`)
+    _send(`${api_endpoint}search?${value}${tags}${colorFiltersQuery}${limitQuery}${offsetQuery}`)
       .then(
         ({ related_tags = [], related_top_colors = [], images = [], count = 0 }) =>
           ({ images: images, count, related_tags, related_top_colors })

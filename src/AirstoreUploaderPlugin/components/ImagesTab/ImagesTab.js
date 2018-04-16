@@ -4,14 +4,14 @@ import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
   SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label,
-  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem
+  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner
 } from '../../styledComponents';
 import { SearchBar, IconTags } from '../';
 import VirtualizedImagesGrid from './VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { fetchImages, getImagesTags } from '../../actions';
-import { SketchPicker } from 'react-color'
+import { SketchPicker } from 'react-color';
 
 
 class ImagesTab extends Component {
@@ -32,7 +32,8 @@ class ImagesTab extends Component {
       activeColorFilters: [],
       defaultColor: '#00ff00',
       displayColorPicker: false,
-      activeColorFilterIndex: null
+      activeColorFilterIndex: null,
+      isShowMoreImages: false
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -125,7 +126,7 @@ class ImagesTab extends Component {
 
   onChangeSearchPhrase = ({ target }) => { this.setState({ searchPhrase: target.value }); }
 
-  search = ({ value = '', colorFilters }, refreshTags) => {
+  search = ({ value = '', colorFilters, offset = 0 }, refreshTags, resizeOnSuccess) => {
     const self = this;
     const { related_tags } = this.props;
     const activeTags = refreshTags ? {} : this.state.activeTags;
@@ -136,30 +137,50 @@ class ImagesTab extends Component {
       const { images = [] } = payload;
       if (!images.length) this.props.showAlert('0 images was found :(', '', 'warning');
       self.setState({ isSearching: false });
+      typeof resizeOnSuccess === 'function' && resizeOnSuccess();
     }
 
     if (!value) return;
 
-    this.loadIcons({ value, colorFilters }, relevantActiveTags, onSuccess);
-    this.loadedIcons = [];
+    return this.loadIcons({ value, colorFilters, offset }, relevantActiveTags, onSuccess);
   };
 
-  onSearch = () => {
+  onShowMoreImages = (resizeOnSuccess) => {
+    if (this.state.isShowMoreImages) return;
+
+    let { searchParams, count } = this.props;
+
+    if (count > (searchParams.offset + 100)) {
+      searchParams.offset = searchParams.offset + 100;
+      return this.onSearch(searchParams.offset, resizeOnSuccess);
+    }
+  }
+
+  onSearch = (offset = 0, resizeOnSuccess) => {
     if (!this.state.searchPhrase && !this.state.activePresetTag) return;
     this.setState({ activePresetTag: null });
-    this.search(
-      { value: (this.state.searchPhrase || '').toLowerCase(), colorFilters: this.state.activeColorFilters }, true
+
+    return this.search(
+      {
+        value: (this.state.searchPhrase || '').toLowerCase(),
+        colorFilters: this.state.activeColorFilters,
+        offset
+      }, true, resizeOnSuccess
     );
   }
 
-  loadIcons = (searchParams, relevantActiveTags, cb = null) => {
+  loadIcons = (searchParams = {}, relevantActiveTags, cb = null) => {
+    const { uploaderConfig } = this.props;
     const done = (response) => {
-      this.setState({ isLoading: false });
+      this.setState({ isLoading: false, isShowMoreImages: false });
       typeof cb === 'function' && cb(response);
     };
 
-    this.setState({ isLoading: true });
-    setTimeout(() => this.props.onSearchImages(searchParams, relevantActiveTags).then(done, done));
+    searchParams.limit = uploaderConfig.limit;
+
+    this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
+
+    return this.props.onSearchImages(searchParams, relevantActiveTags).then(done, done);
   };
 
   toggleTag = (tag) => {
@@ -271,9 +292,10 @@ class ImagesTab extends Component {
   }
 
   renderContent = () => {
-    const { related_tags, images, backgrounds } = this.props;
+    const { related_tags, images, backgrounds, count } = this.props;
     const {
-      imageGrid, imageContainerHeight, isLoading, isSearching, searchPhrase, activeTags, activePresetTag
+      imageGrid, imageContainerHeight, isLoading, isSearching, searchPhrase, activeTags, activePresetTag,
+      imageGridWrapperWidth, isShowMoreImages
     } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const isBackground = activePresetTag === 'backgrounds';
@@ -285,10 +307,11 @@ class ImagesTab extends Component {
           title={"You can search images here"}
           items={images}
           isLoading={isLoading}
-          onSearch={this.onSearch}
+          onSearch={() => { this.onSearch() }}
           isSearching={isSearching}
           searchPhrase={searchPhrase}
           onChangeSearchPhrase={this.onChangeSearchPhrase}
+          count={count}
         />
 
         <IconTags
@@ -301,13 +324,17 @@ class ImagesTab extends Component {
         {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
           <ImagesListContainer>
             <VirtualizedImagesGrid
+              imageGridWrapperWidth={imageGridWrapperWidth}
               imageContainerHeight={imageContainerHeight}
               columnWidth={columnWidth}
               gutterSize={gutterSize}
               imagesNumber={imagesList.length}
               images={imagesList}
               upload={this.upload}
+              onShowMoreImages={this.onShowMoreImages}
+              isShowMoreImages={isShowMoreImages}
             />
+            <ShowMoreResultsSpinner show={isShowMoreImages}/>
           </ImagesListContainer>
           : null}
       </ImageContainer>
@@ -316,8 +343,8 @@ class ImagesTab extends Component {
 }
 
 export default connect(
-  ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags, tags } }) =>
-    ({ backgrounds, uploaderConfig, images, related_tags, tags }),
+  ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags, tags, count, searchParams } }) =>
+    ({ backgrounds, uploaderConfig, images, related_tags, tags, count, searchParams }),
   dispatch => ({
     onGetImagesTags: () => dispatch(getImagesTags()),
     onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),

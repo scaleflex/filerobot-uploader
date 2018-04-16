@@ -75,7 +75,8 @@ const _setUploaderConfig = (state, config = {}) => {
     uploadKey: config.UPLOAD_KEY,
     container: config.CONTAINER,
     isShowAddTagBtn: config.IS_SHOW_ADD_TAG_BTN,
-    isShowNotRelevantBtn: config.IS_SHOW_NOT_RELEVANT_BTN
+    isShowNotRelevantBtn: config.IS_SHOW_NOT_RELEVANT_BTN,
+    limit: config.LIMIT_PER_RESPONSE || 100
   };
 
   return {...state, uploaderConfig };
