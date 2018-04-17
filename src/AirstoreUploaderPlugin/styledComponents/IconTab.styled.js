@@ -339,3 +339,8 @@ export const Icon = styled.img`
     transform: scale(1.2);
   `}
 `;
+
+export const CountTag = styled.span`
+  margin-left: 6px;
+  color: rgb(112, 118, 126);
+`;

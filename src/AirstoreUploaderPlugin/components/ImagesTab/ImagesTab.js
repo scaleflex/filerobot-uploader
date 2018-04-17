@@ -4,7 +4,8 @@ import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
   SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label,
-  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner, Img, ImageWrapper
+  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner, Img, ImageWrapper, ApplyColorBtn,
+  CountTag
 } from '../../styledComponents';
 import { SearchBar, IconTags } from '../';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
@@ -230,6 +231,11 @@ class ImagesTab extends Component {
         <SketchPickerWrapper>
           <SketchPickerOverlay onClick={this.handleClose}/>
           <SketchPicker color={colorFilter.value} onChange={this.handleChange}/>
+          <ApplyColorBtn
+            themeColor
+            onClick={this.handleClose}
+            style={{ zIndex: 5555, position: 'relative' }}
+          >Apply</ApplyColorBtn>
         </SketchPickerWrapper>}
 
         <Spinner overlay show={isLoading}/>
@@ -239,7 +245,7 @@ class ImagesTab extends Component {
 
   renderSidebar = () => {
     const { activePresetTag, activeColorFilters = [] } = this.state;
-    const { tags } = this.props;
+    const { tags, backgrounds } = this.props;
 
     return (
       <SidebarWrap>
@@ -264,20 +270,23 @@ class ImagesTab extends Component {
 
           <Label fs={'16px'} color={'black'}>Categories</Label>
 
+          {tags.length &&
           <ColorItem
             key={`category-background`}
             active={'backgrounds' === activePresetTag}
             onClick={() => { this.onActivatePresetTag('backgrounds'); }}
           >
-            <ColorItemName>Backgrounds</ColorItemName>
-          </ColorItem>
+            <ColorItemName>Backgrounds </ColorItemName>
+            <CountTag>({backgrounds.length})</CountTag>
+          </ColorItem>}
           {tags.slice(0, 20).map((item, index) => this.renderItem(item, index))}
+          {!tags.length ? <Spinner black show={true} style={{ fontSize: 8, top: 10, opacity: 0.4 }}/> : null}
         </SideBar>
       </SidebarWrap>
     )
   };
 
-  renderItem = ({ tag, label }, index) => {
+  renderItem = ({ tag, label, count }, index) => {
     const { activePresetTag } = this.state;
 
     return (
@@ -287,6 +296,7 @@ class ImagesTab extends Component {
         onClick={() => { this.onActivatePresetTag(tag); }}
       >
         <ColorItemName>{label || tag.replace(/_/g, ' ').trim()}</ColorItemName>
+        <CountTag>({count})</CountTag>
       </ColorItem>
     )
   }

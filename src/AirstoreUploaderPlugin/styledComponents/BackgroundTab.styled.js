@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CloseBtn, Spinner } from 'scaleflex-react-ui-kit/dist';
+import { CloseBtn, Spinner, Button } from 'scaleflex-react-ui-kit/dist';
 
 export const SidebarWrap = styled.div`
   width: 160px;
@@ -122,20 +122,21 @@ export const ImagesListContainer = styled.div`
 
 export const AddColorBtn = styled.div`
   display: inline-block;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
+  //padding: 6px 12px;
+  //border: 1px solid #ccc;
   margin: 5px 4px;
-  border-radius: 4px;
-  color: #70777f;
+  //border-radius: 4px;
+  //color: #70777f;
   cursor: pointer;
   position: relative;
   font-size: 13px;
-  width: calc(100% - 32px);
-  text-align: center;
+  //width: calc(100% - 32px);
+  //text-align: center;
+  color: #00707b;
   
   :hover {
-    border: 1px solid #7f7f7f;
-    color: #3f3f3f;
+    //border: 1px solid #7f7f7f;
+    color: #00505b;
   }
     
   ${props => props.hide && `display: none;`}
@@ -144,6 +145,11 @@ export const AddColorBtn = styled.div`
 export const SketchPickerWrapper = styled.div`
   position: absolute;
   z-index: 5;
+  left: 180px;
+  top: 10px;
+  background: #fff;
+  padding: 5px;
+  border-radius: 4px;
 `;
 
 export const SketchPickerOverlay = styled.div`
@@ -200,6 +206,11 @@ export const ShowMoreResultsSpinnerWrapper = styled.div`
   > div:last-child {
     height: 1em !important;
   }
+`;
+
+export const ApplyColorBtn = Button.extend`
+  margin-top: 5px;
+  width: 100%;
 `;
 
 export const ShowMoreResultsSpinner = ({ show }) => show ? (
