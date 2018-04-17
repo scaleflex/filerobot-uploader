@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import { connect } from "react-redux";
 import {
-  SidebarWrap, SideBar, ColorWrapper, ColorItem, ColorItemName, Label
+  SidebarWrap, SideBar, ColorWrapper, ColorItem, ColorItemName, Label, CountTag
 } from '../../styledComponents/index';
 
 const tags = [
-  { tag: 'sf-social', label: 'Social' },
-  { tag: 'arrows', label: 'Arrows' },
-  { tag: 'audio', label: 'Audio & Video' },
-  { tag: 'date', label: 'Date & Time' },
-  { tag: 'currency', label: 'Currency' },
-  { tag: 'business', label: 'Business' }
+  { tag: 'sf-social', label: 'Social', count: '23' },
+  { tag: 'arrows', label: 'Arrows', count: '2188' },
+  { tag: 'audio', label: 'Audio & Video', count: '2716' },
+  { tag: 'date', label: 'Date & Time', count: '1523' },
+  { tag: 'currency', label: 'Currency', count: '3531' },
+  { tag: 'business', label: 'Business', count: '1466' }
 ];
 
 
@@ -51,7 +51,7 @@ class IconSidebar extends Component {
 
           <Label fs={'16px'} color={'black'}>Categories</Label>
           {tags && tags
-            //.sort((a, b) => a.cat > b.cat ? 1 : -1)
+            .sort((a, b) => a.tag > b.tag ? 1 : -1)
             .map(tag => this.renderTag(tag))
           }
         </SideBar>
@@ -59,7 +59,7 @@ class IconSidebar extends Component {
     );
   }
 
-  renderTag = ({ tag, label }) => {
+  renderTag = ({ tag, label, count }) => {
     const { activePresetTag, onActivatePresetTag } = this.props;
 
     return (
@@ -69,6 +69,7 @@ class IconSidebar extends Component {
         onClick={() => { onActivatePresetTag(tag); }}
       >
         <ColorItemName>{label || tag.replace(/_/g, ' ').trim()}</ColorItemName>
+        <CountTag>({count})</CountTag>
       </ColorItem>
     )
   }

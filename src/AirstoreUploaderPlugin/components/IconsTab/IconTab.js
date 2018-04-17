@@ -14,7 +14,7 @@ class IconTab extends Component {
   state = {
     isLoading: false,
     isSearching: false,
-    activeColorType: 'multi',
+    activeColorType: 'all',
     isShowMonoIconSettings: false,
     isShowIconAddTagModal: false,
     searchPhrase: '',
@@ -164,9 +164,7 @@ class IconTab extends Component {
   };
 
   onIconClick = (icon) => {
-    const { activeColorType } = this.state;
-
-    if (activeColorType === 'mono')
+    if (icon.style === 'MONOCOLOR')
       this.setState({ activeIcon: icon, activeIconSrc: icon.src, isShowMonoIconSettings: true });
     else
       this.upload(icon);
@@ -176,7 +174,7 @@ class IconTab extends Component {
 
   onActivatePresetTag = (activePresetTag) => {
     const { activeColorType } = this.state;
-    this.setState({ activePresetTag, searchPhrase: '' });
+    this.setState({ activePresetTag, searchPhrase: '',  });
     this.search({ value: activePresetTag, type: activeColorType }, true);
   }
 
@@ -293,7 +291,7 @@ class IconTab extends Component {
             <ShowMoreResultsSpinner show={isShowMoreImages && active.icons.length}/>
           </IconsWrapper>
 
-          <Spinner overlay show={isVisibleLoadingBlock && isLoading}/>
+          <Spinner overlay show={isLoading}/>
         </IconMain>
       </IconTabWrapper>
     );

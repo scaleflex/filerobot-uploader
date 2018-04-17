@@ -214,7 +214,6 @@ export const MonoIconSettings = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
   border-radius: 4px;
 `;
 
@@ -235,7 +234,7 @@ export const ColorsWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   padding-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
 `;
 
@@ -252,7 +251,7 @@ export const ColorIcon = styled.div`
 
 export const SettingsIcon = styled.img`
   width: auto;
-  height: 140px;
+  height: 100%;
 `;
 
 export const SettingsIconWrapper = styled.div`
@@ -260,6 +259,17 @@ export const SettingsIconWrapper = styled.div`
   height: 140px;
   position: relative;
   text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+`;
+
+export const MonoActionBlock = styled.div`
+  padding: 20px;
+  background: rgb(242, 242, 242);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 0 0 4px 4px;
 `;
 
 export const IconsWrapper = styled.div`

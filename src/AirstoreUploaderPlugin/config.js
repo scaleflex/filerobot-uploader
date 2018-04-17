@@ -10,14 +10,13 @@ export default {
 export const DEFAULT_ICON_SIZE = 100;
 
 export const COLORS = [
-  '#ff0000',
-  '#fff000',
-  '#000000',
-  '#00ff00',
-  '#ff8000',
-  '#0000ff',
-  '#aaaaaa',
-  '#f000f0'
+  '#96dc52',
+  '#016df0',
+  '#943dc5',
+  '#feda48',
+  '#d90028',
+  '#ffffff',
+  '#000000'
 ];
 
 const DEFAULT_TAGS = [
