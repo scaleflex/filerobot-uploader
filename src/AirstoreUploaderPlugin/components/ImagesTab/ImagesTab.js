@@ -4,14 +4,15 @@ import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
   SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label,
-  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner
+  SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner, Img, ImageWrapper
 } from '../../styledComponents';
 import { SearchBar, IconTags } from '../';
-import VirtualizedImagesGrid from './VirtualizedImagesGrid';
+import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { fetchImages, getImagesTags } from '../../actions';
 import { SketchPicker } from 'react-color';
+import { Aux } from '../hoc';
 
 
 class ImagesTab extends Component {
@@ -19,7 +20,6 @@ class ImagesTab extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      uploadingUuid: null,
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
       imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 },
@@ -111,15 +111,15 @@ class ImagesTab extends Component {
     this.setState({ imageGridWrapperWidth, imageGrid, imageContainerHeight });
   };
 
-  uploadStart = uuid => this.setState({ uploadingUuid: uuid, isLoading: true });
+  uploadStart = () => this.setState({ isLoading: true });
 
-  uploadStop = () => this.setState({ uploadingUuid: null, isLoading: false });
+  uploadStop = () => this.setState({ isLoading: false });
 
   upload = (image = {}) => {
     if (this.state.isLoading) return;
 
     this.setState({ isLoading: true });
-    this.uploadStart(image.uid);
+    this.uploadStart();
     this.props.onFileUpload(image.src, this.props.uploaderConfig)
       .then(() => this.uploadStop(), () => this.uploadStop());
   };
@@ -172,8 +172,8 @@ class ImagesTab extends Component {
   loadIcons = (searchParams = {}, relevantActiveTags, cb = null) => {
     const { uploaderConfig } = this.props;
     const done = (response) => {
-      this.setState({ isLoading: false, isShowMoreImages: false });
       typeof cb === 'function' && cb(response);
+      this.setState({ isLoading: false, isShowMoreImages: false });
     };
 
     searchParams.limit = uploaderConfig.limit;
@@ -291,6 +291,17 @@ class ImagesTab extends Component {
     )
   }
 
+  onKeyDown = (event, image) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.setState({ isSelected: true });
+      this.forceUpdate();
+      this.props.upload(image);
+    }
+  }
+
   renderContent = () => {
     const { related_tags, images, backgrounds, count } = this.props;
     const {
@@ -302,7 +313,7 @@ class ImagesTab extends Component {
     const imagesList = isBackground ? [...backgrounds, ...images] : images;
 
     return (
-      <ImageContainer innerRef={this.imageGridWrapperRef}>
+      <ImageContainer>
         <SearchBar
           title={"You can search images here"}
           items={images}
@@ -320,23 +331,39 @@ class ImagesTab extends Component {
           activeTags={activeTags}
           toggleTag={this.toggleTag}
         />
-
-        {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
-          <ImagesListContainer>
-            <VirtualizedImagesGrid
-              imageGridWrapperWidth={imageGridWrapperWidth}
-              imageContainerHeight={imageContainerHeight}
-              columnWidth={columnWidth}
-              gutterSize={gutterSize}
-              imagesNumber={imagesList.length}
-              images={imagesList}
-              upload={this.upload}
-              onShowMoreImages={this.onShowMoreImages}
-              isShowMoreImages={isShowMoreImages}
-            />
-            <ShowMoreResultsSpinner show={isShowMoreImages}/>
+          <ImagesListContainer innerRef={this.imageGridWrapperRef}>
+            {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
+              <Aux>
+                <VirtualizedImagesGrid
+                  imageGridWrapperWidth={imageGridWrapperWidth}
+                  imageContainerHeight={imageContainerHeight}
+                  columnWidth={columnWidth}
+                  gutterSize={gutterSize}
+                  count={imagesList.length}
+                  list={imagesList}
+                  upload={this.upload}
+                  onShowMoreImages={this.onShowMoreImages}
+                  isShowMoreImages={isShowMoreImages}
+                  cellContent={({ style, columnWidth, item }) => (
+                    <ImageWrapper
+                      style={{ ...style, width: columnWidth }}
+                      onClick={() => {
+                        this.setState({ isSelected: true });
+                        this.upload(item);
+                      }}
+                      onKeyDown={(event) => { this.onKeyDown(event, item); }}
+                    >
+                      <Img
+                        height={columnWidth / (item.ratio || 1.6)}
+                        src={ImageGridService.getCropImageUrl(item.src, columnWidth, columnWidth / (item.ratio || 1.6))}
+                      />
+                    </ImageWrapper>
+                  )}
+                />
+                <ShowMoreResultsSpinner show={isShowMoreImages}/>
+              </Aux>
+              : null}
           </ImagesListContainer>
-          : null}
       </ImageContainer>
     )
   }

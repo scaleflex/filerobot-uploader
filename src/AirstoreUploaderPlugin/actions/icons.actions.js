@@ -13,13 +13,23 @@ export const activateIconsCategory = (category, onSuccess) => dispatch => {
 };
 
 export const fetchIcons = (searchParams, relevantActiveTags, onSuccess = () => {}) => dispatch => {
-  const successHandler = response => {
-    setTimeout(() => onSuccess());
-    return dispatch({
-      type: 'ICONS_FETCH_SUCCESS',
-      payload: { searchParams, relevantActiveTags, ...response }
-    });
-  }
+  const successHandler = !searchParams.offset ?
+    (response) => {
+      setTimeout(() => onSuccess({ payload: { searchParams, relevantActiveTags, ...response } }));
+
+      return dispatch({
+        type: 'ICONS_FETCH_SUCCESS',
+        payload: { searchParams, relevantActiveTags, ...response }
+      });
+    } :
+    (response) => {
+      setTimeout(() => onSuccess({ payload: { searchParams, relevantActiveTags, ...response } }));
+
+      return dispatch({
+        type: 'SHOW_MORE_ICONS_SUCCESS',
+        payload: { searchParams, relevantActiveTags, ...response }
+      });
+    };
 
   switch (searchParams.type) {
     case 'all':

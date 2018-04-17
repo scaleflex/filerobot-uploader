@@ -12,7 +12,7 @@ export const getActualColumnWidth = (containerWidth = 0, minColumnWidth = 200, g
   return getColumnWidth(containerWidth, columnCount, gutterSize);
 };
 
-export const getResizeImageUrl = (url = '', width = 300) => `//demo.cloudimg.io/width/${width}/s/${url}`;
+export const getResizeImageUrl = (url = '', width = 300) => `//scaleflex.cloudimg.io/width/${width}/s/${url}`;
 
 export const getCropImageUrl = (url = '', width = 300, height = 200) =>
-  `//demo.cloudimg.io/crop/${Math.round(width)}x${Math.round(height)}/s/${url}`;
+  `//scaleflex.cloudimg.io/crop/${Math.round(width)}x${Math.round(height)}/s/${url}`;

@@ -20,6 +20,8 @@ const icons = (state = initialState, action) => {
   switch (type) {
     case 'ICONS_FETCH_TAGS_SUCCESS':
       return _fetchTagsSuccess(state, payload);
+    case 'SHOW_MORE_ICONS_SUCCESS':
+      return _showMoreIconsSuccess(state, payload);
     case 'ICONS_ACTIVATE_CATEGORY':
       return _activateCategory(state, payload);
     case 'ICONS_FETCH_SUCCESS':
@@ -40,32 +42,15 @@ const _activateCategory = (state, active = activeDafault) =>
   ({ ...state, active: active && active.slug ? active : activeDafault });
 
 const _fetchSuccess = (state, result = {}) => {
-  // const active = {};
-  //const tags = Object.assign([], state.tags || []);
-  let { count = 0, icons = [], related_tags = [] } = result || {};
+  let { count = 0, icons = [], related_tags = [], searchParams } = result || {};
 
-  //let needCancelHandler = false;
-  //if (active && active.slug && active.slug !== categorySlug) needCancelHandler = true;
-  //if (needCancelHandler) return {...state};
+  return { ...state, active: { icons, related_tags }, count, searchParams };
+};
 
-  //q = q || '';
-  //page = +page;
-  //icons = icons || [];
+const _showMoreIconsSuccess = (state, result = {}) =>{
+  let { count = 0, icons = [], related_tags = [], searchParams = {} } = result || {};
 
-  //let isLastPage = !icons.length || icons.length < result.limit;
-
-  //Object.assign(active, {count, q, isLastPage});
-
-  //active.icons = active.icons || [];
-  //active.icons = [...(page > 1 ? active.icons : []), ...icons];
-
-  //if (!isLastPage) active.page = page; // don't change page if we have empty icons
-
-  // Update category.count
-  //const category = tags.find(_c => _c.slug === active.slug);
-  //if (category) category.count = count;
-
-  return { ...state, active: { icons, related_tags }, count };
+  return { ...state, active: { icons: [...state.active.icons,...icons], related_tags }, count, searchParams };
 };
 
 const _iconsClean = (state) => {

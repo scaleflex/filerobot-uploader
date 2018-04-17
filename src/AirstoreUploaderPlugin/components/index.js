@@ -3,9 +3,7 @@ import AirstoreUploader from './AirstoreUploader';
 import IconTab from './IconsTab/IconTab';
 import BackgroundTab from './ImagesTab/ImagesTab';
 import UserUploaderTab from './UploadedImagesTab/UserUploaderTab';
-import SearchTab from './SearchTab';
 import UploadedImagesTab from './UploadedImagesTab/UploadedImagesTab';
-import VirtualizedImagesGrid from './ImagesTab/VirtualizedImagesGrid';
 import IconItem from './IconsTab/IconItem';
 import IconSidebar from './IconsTab/IconSidebar';
 import SearchBar from './IconsTab/SearchBar';
@@ -19,9 +17,7 @@ export {
   BackgroundTab,
   IconTab,
   UserUploaderTab,
-  SearchTab,
   UploadedImagesTab,
-  VirtualizedImagesGrid,
   IconItem,
   IconSidebar,
   SearchBar,

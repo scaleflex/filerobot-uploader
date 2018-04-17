@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Masonry, CellMeasurer, CellMeasurerCache, AutoSizer, WindowScroller } from 'react-virtualized';
 import { createCellPositioner } from 'react-virtualized/dist/es/Masonry';
-import { Img, ImageWrapper } from '../../styledComponents/index';
-import * as ImageGridService from '../../services/imageGrid.service';
+import * as ImageGridService from '../services/imageGrid.service';
 
 
 class ReactVirtualizedImagesGrid extends React.PureComponent {
@@ -51,37 +50,14 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     this._columnCount = ImageGridService.getColumnCount(this._width, columnWidth, gutterSize);
   };
 
-  onKeyDown = (event, image) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      this.setState({ isSelected: true });
-      this.forceUpdate();
-      this.props.upload(image);
-    }
-  }
-
   _cellRenderer = ({ index, key, parent, style }) => {
-    const { images, upload } = this.props;
+    const { list, cellContent } = this.props;
     const { columnWidth } = this.state;
-    const image = images[index];
+    const item = list[index];
 
     return (
       <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
-        <ImageWrapper
-          style={{ ...style, width: columnWidth }}
-          onClick={() => {
-            this.setState({ isSelected: true });
-            upload(image);
-          }}
-          onKeyDown={(event) => { this.onKeyDown(event, image); }}
-        >
-          <Img
-            height={columnWidth / (image.ratio || 1.6)}
-            src={ImageGridService.getCropImageUrl(image.src, columnWidth, columnWidth / (image.ratio || 1.6))}
-          />
-        </ImageWrapper>
+        {cellContent({ style, columnWidth, item, index, key })}
       </CellMeasurer>
     );
   };
@@ -150,13 +126,13 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     this._calculateColumnCount();
     this._initCellPositioner();
 
-    const { imagesNumber } = this.props;
+    const { count } = this.props;
     const { height, overscanByPixels, windowScrollerEnabled } = this.state;
 
     return (
       <Masonry
         autoHeight={windowScrollerEnabled}
-        cellCount={imagesNumber}
+        cellCount={count}
         cellMeasurerCache={this._cache}
         cellPositioner={this._cellPositioner}
         cellRenderer={this._cellRenderer}

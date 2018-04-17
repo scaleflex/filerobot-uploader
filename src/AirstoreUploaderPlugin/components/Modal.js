@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Radium from 'radium';
-import {CSS, ModalCss as styles} from '../assets/styles';
+import {ModalCss as styles} from '../assets/styles';
 
 
 class Modal extends Component {

@@ -3,21 +3,6 @@ import styled from 'styled-components';
 import { CloseBtn, Button } from 'scaleflex-react-ui-kit/dist';
 
 
-export const IconImage = styled.img`
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-  opacity: 0.2;
-  transition: all 0.3s;
-  background: rgba(255, 255, 255, 1);
-  -moz-transform: scale(1);
-  transition: all 200ms ease-in;
-  
-  ${props => props.isHover && `
-    transform: scale(1.2);
-  `}
-`;
-
 export const SearchGroup = styled.div`
   display: flex;
   padding: 10px;
@@ -279,11 +264,20 @@ export const SettingsIconWrapper = styled.div`
 
 export const IconsWrapper = styled.div`
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: left;
-  padding: 0 8px;
+  //display: flex;
+  //flex-wrap: wrap;
+  //align-items: stretch;
+  //justify-content: left;
+  padding: 0 10px;
+  height: calc(100% - 119px);
+  
+  > div {
+    height: 100%;
+    
+    > div {
+      height: 100% !important;
+    }
+  }
 `;
 
 export const IconTabWrapper = styled.div`
@@ -295,12 +289,53 @@ export const IconTabWrapper = styled.div`
 
 export const IconMain = styled.div`
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
   color: #5D636B;
+  height: 100%;
+  min-height: 100%;
 `;
 
 export const Input = InputSearch.extend`
   height: 26px;
   margin-bottom: 20px;
   margin-top: 10px;
+`;
+export const IconBoxWrapper = styled.div`
+  position: relative;
+  background: #fff;
+  boxSizing: border-box;
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
+`;
+
+export const IconBoxWrapperInner = styled.div`
+  position: relative;
+
+  :focus {
+    outline-color: rgb(77, 144, 254);
+    outline-offset: -2px;
+    outline-style: auto;
+    outline-width: 5px;
+  }
+`;
+export const IconWrapper = styled.div`
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
+  cursor: pointer;
+  padding: 20px;
+  box-sizing: border-box;
+`;
+
+export const Icon = styled.img`
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 1);
+  -moz-transform: scale(1);
+  transition: all 200ms ease-in;
+  
+  ${props => props.isHover && `
+    transform: scale(1.2);
+  `}
 `;

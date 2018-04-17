@@ -39,20 +39,16 @@ export const getTags = () =>
       ({ tags = [] }) => tags
     );
 
-//export const getCategoryIcons = (category_slug = '') =>
-//  _send(`${api_endpoint}category/${category_slug}`)
-//    .then(
-//      ({ icons = [], count = 0 }) => ({ icons: icons || [], count })
-//    );
-
 export const searchIcons = (searchParams, relevantActiveTags = []) => {
-  const { typeQuery } = searchParams;
+  const { typeQuery, offset } = searchParams;
   const splittedString = searchParams.value.trim().split(' ');
   const value = `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
   const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
+  const limitQuery = `&limit=250`;
+  const offsetQuery = `&offset=${offset}`;
 
   return (
-    _send(`${api_endpoint}?${value}${tags}${typeQuery}`)
+    _send(`${api_endpoint}?${value}${tags}${typeQuery}${limitQuery}${offsetQuery}`)
       .then(
         ({ icons = [], count = 0, related_tags }) => ({ icons: icons || [], count, related_tags })
       )

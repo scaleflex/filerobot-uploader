@@ -7,7 +7,7 @@ export default {
   image_only: true
 };
 
-export const DEFAULT_ICON_SIZE = 104;
+export const DEFAULT_ICON_SIZE = 100;
 
 export const COLORS = [
   '#ff0000',

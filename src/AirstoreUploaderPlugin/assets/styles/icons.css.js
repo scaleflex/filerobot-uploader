@@ -85,39 +85,6 @@ export default {
         flexWrap: 'wrap',
         alignItems: 'stretch',
         justifyContent: 'center',
-
-        icon: {
-          position: 'relative',
-          width: 60,
-          padding: 20,
-          margin: 2,
-          height: 60,
-          background: '#fff',
-
-          loading: {
-            active: {
-              cursor: 'progress'
-            },
-            notActive: {
-              opacity: 0.1
-            }
-          },
-
-          imageWrap: {
-            //padding: 5,
-            width: '100%',
-            height: '100%',
-            //background: 'rgb(248, 248, 248)',
-            cursor: 'pointer'
-          },
-
-          ':focus': {
-            outlineColor: 'rgb(77, 144, 254)',
-            outlineOffset: -2,
-            outlineStyle: 'auto',
-            outlineWidth: 5
-          }
-        }
       }
     }
   },
