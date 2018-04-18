@@ -9,7 +9,8 @@ import {
 } from '../actions'
 import config from '../config';
 import { connect } from 'react-redux';
-import { ToastContainer, ToastMessageAnimated} from 'react-toastr';
+import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
+
 
 const ToastMessageFactory = React.createFactory(ToastMessageAnimated);
 
@@ -139,7 +140,10 @@ class AirstoreUploader extends Component {
             </nav>
           </div>
           <div style={[CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }]}>
-            {activeTab && <div style={[{ width: '100%' }]}>{activeTab.getContent.call(this, contentProps)}</div>}
+            {activeTab &&
+            <div style={[{ width: '100%', minWidth: 540, overflow: 'scroll' }]}>
+              {activeTab.getContent.call(this, contentProps)}
+            </div>}
             <ToastContainer
               ref="container"
               toastMessageFactory={ToastMessageFactory}

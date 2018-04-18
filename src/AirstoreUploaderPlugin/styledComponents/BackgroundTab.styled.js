@@ -210,6 +210,8 @@ export const ShowMoreResultsSpinnerWrapper = styled.div`
 export const ApplyColorBtn = Button.extend`
   margin-top: 5px;
   width: 100%;
+  font-weight: 400;
+  text-transform: none;
 `;
 
 export const ShowMoreResultsSpinner = ({ show }) => show ? (

@@ -42,7 +42,7 @@ class IconAddTagModal extends Component {
               onKeyDown={event => { event.keyCode === 13 && this.onAddTag(); }}
               onChange={({ target }) => { this.setState({ tagName: target.value }) } }
             />
-            <ButtonSearch fullBr={'4px'} onClick={this.onAddTag}>ADD TAG</ButtonSearch>
+            <ButtonSearch fullBr={'4px'} onClick={this.onAddTag}>Add tag</ButtonSearch>
           </IconAddTagInner>
         </MonoIconSettings>
       </Aux>

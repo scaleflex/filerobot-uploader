@@ -84,7 +84,7 @@ export default {
           text: {
             display: 'inline-block',
             verticalAlign: 'middle',
-            '@media screen and (max-width: 600px)': {
+            '@media screen and (max-width: 850px)': {
               display: 'none'
             }
           }

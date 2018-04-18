@@ -233,6 +233,7 @@ class ImagesTab extends Component {
           <SketchPickerOverlay onClick={this.handleClose}/>
           <SketchPicker color={colorFilter.value} onChange={this.handleChange}/>
           <ApplyColorBtn
+            sm
             themeColor
             onClick={this.handleClose}
             style={{ zIndex: 5555, position: 'relative' }}

@@ -74,7 +74,7 @@ class IconMonoColorSettings extends Component {
       <Aux>
         <Opacity isShow={true} onClick={() => { this.onOutsideClick(); }}/>
 
-        <MonoIconSettings isShow={true}>
+        <MonoIconSettings isShow={true} displayColorPicker={displayColorPicker}>
           <SettingsIconWrapper>
             <SettingsIcon src={this.getIconUrl(140)} onLoad={this.onLoad}/>
             <Spinner overlay show={isLoading} style={{ fontSize: 10 }}/>

@@ -121,7 +121,7 @@ class UserUploaderTab extends Component {
                   <button
                     key="browse-your-computer"
                     autoFocus={true}
-                    style={[CSS.button, { margin: 'auto' }]}
+                    style={[CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }]}
                     onClick={() => { this.refs.fileInput.click() }}
                   >Browse your computer
                   </button>

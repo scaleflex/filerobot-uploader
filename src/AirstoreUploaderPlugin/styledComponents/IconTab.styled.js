@@ -63,6 +63,8 @@ export const ButtonSearch = styled.button`
   outline: 0;
   font-size: 12px;
   box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;
+  font-weight: 400;
+  text-transform: none;
 
   :hover {
     background-color: #096868;
@@ -206,7 +208,7 @@ export const MonoIconSettings = styled.div`
   flex-direction: column;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: ${props => props.displayColorPicker ? 'calc(50% - 110px)' : '50%'};
   margin-top: -160px;
   margin-left: -140px;
   background-color: rgb(245, 245, 245);
@@ -316,7 +318,7 @@ export const Input = InputSearch.extend`
   height: 26px;
   margin-bottom: 20px;
   margin-top: 10px;
-  input: 200px;
+  width: 200px;
 `;
 export const IconBoxWrapper = styled.div`
   position: relative;
