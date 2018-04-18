@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/AirstoreUploader.styled.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/static/js/airstore-uploader-react.f814f501.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/static/js/airstore-uploader-react.f814f501.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/styledComponents/AirstoreUploader.styled.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -51,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/imagesApi.service.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
-              <caret line="45" column="10" lean-forward="true" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
+              <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -92,8 +92,8 @@
       <file leaf-file-name="AirstoreUploader.styled.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/AirstoreUploader.styled.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            <state relative-caret-position="216">
+              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -271,19 +271,6 @@
             <path>
               <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -406,7 +393,7 @@
       <workItem from="1523703635736" duration="105721000" />
       <workItem from="1523958591289" duration="31519000" />
       <workItem from="1524056207354" duration="2975000" />
-      <workItem from="1524062398135" duration="819000" />
+      <workItem from="1524062398135" duration="1237000" />
     </task>
     <task id="LOCAL-00001" summary="working on icon tab">
       <created>1522912068286</created>
@@ -618,15 +605,21 @@
       <option name="project" value="LOCAL" />
       <updated>1524059050689</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="fix some style problems">
+      <created>1524064031759</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1524064031760</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210228000" />
+    <option name="totallyTimeSpent" value="210646000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="508" y="1319" width="1440" height="877" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2184637" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -634,10 +627,10 @@
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5137421" side_tool="true" weight="0.35660848" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.48625794" weight="0.18361954" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48625794" visible="true" weight="0.58784676" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49330515" visible="true" weight="0.45706737" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49330515" weight="0.45706737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
@@ -683,7 +676,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix bug with loosing node" />
     <MESSAGE value="small fixes" />
     <MESSAGE value="update Readme" />
     <MESSAGE value="rectify Icon tab, add toastr, improve grid;" />
@@ -708,7 +700,8 @@
     <MESSAGE value="fix problem with no images first" />
     <MESSAGE value="fix problem if no folders specified" />
     <MESSAGE value="search by color even if there is no query" />
-    <option name="LAST_COMMIT_MESSAGE" value="search by color even if there is no query" />
+    <MESSAGE value="fix some style problems" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix some style problems" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1069,7 +1062,7 @@
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/imagesApi.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
-          <caret line="45" column="10" lean-forward="true" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
+          <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -1098,8 +1091,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/AirstoreUploader.styled.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        <state relative-caret-position="216">
+          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
         </state>
       </provider>
     </entry>
