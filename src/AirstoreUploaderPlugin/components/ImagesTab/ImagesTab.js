@@ -159,11 +159,11 @@ class ImagesTab extends Component {
 
   onSearch = (offset = 0, resizeOnSuccess) => {
     if (!this.state.searchPhrase && !this.state.activePresetTag) return;
-    this.setState({ activePresetTag: null });
+    this.setState({ activePresetTag: this.state.searchPhrase ? null : this.state.activePresetTag });
 
     return this.search(
       {
-        value: (this.state.searchPhrase || '').toLowerCase(),
+        value: (this.state.searchPhrase || this.state.activePresetTag || '').toLowerCase(),
         colorFilters: this.state.activeColorFilters,
         offset
       }, true, resizeOnSuccess
