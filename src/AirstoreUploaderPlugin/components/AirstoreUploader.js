@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab, UploadedImagesTab } from './index';
+import { Dialog } from '../styledComponents';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
 import FocusLock from 'react-focus-lock';
 import {
@@ -102,16 +103,7 @@ class AirstoreUploader extends Component {
 
     return (
       <FocusLock>
-        <div
-          role="dialog"
-          style={[{
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%',
-            fontFamily: 'Roboto, sans-serif',
-            background: '#181830'
-          }]}
-        >
+        <Dialog role="dialog">
           <div style={[CSS.tabs.header]}>
             <nav
               ref={node => this._nav = node} className="airstore-uploader-navigation"
@@ -141,7 +133,7 @@ class AirstoreUploader extends Component {
           </div>
           <div style={[CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }]}>
             {activeTab &&
-            <div style={[{ width: '100%', minWidth: 540, overflow: 'scroll' }]}>
+            <div style={[{ width: '100%', minWidth: 540, overflow: 'auto' }]}>
               {activeTab.getContent.call(this, contentProps)}
             </div>}
             <ToastContainer
@@ -150,7 +142,7 @@ class AirstoreUploader extends Component {
               className="toast-top-right"
             />
           </div>
-        </div>
+        </Dialog>
       </FocusLock>
     );
   }

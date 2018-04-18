@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
 import { IconTab, BackgroundTab, UserUploaderTab, SearchTab, UploadedImagesTab } from './index';
+import { Dialog } from '../styledComponents';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
 import FocusLock from 'react-focus-lock';
 import { modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs } from '../actions';
@@ -135,17 +136,8 @@ var AirstoreUploader = function (_Component) {
         FocusLock,
         null,
         React.createElement(
-          'div',
-          {
-            role: 'dialog',
-            style: [{
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%',
-              fontFamily: 'Roboto, sans-serif',
-              background: '#181830'
-            }]
-          },
+          Dialog,
+          { role: 'dialog' },
           React.createElement(
             'div',
             { style: [CSS.tabs.header] },
@@ -187,7 +179,7 @@ var AirstoreUploader = function (_Component) {
             { style: [CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
             activeTab && React.createElement(
               'div',
-              { style: [{ width: '100%', minWidth: 540, overflow: 'scroll' }] },
+              { style: [{ width: '100%', minWidth: 540, overflow: 'auto' }] },
               activeTab.getContent.call(this, contentProps)
             ),
             React.createElement(ToastContainer, {
