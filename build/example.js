@@ -14,12 +14,12 @@
   let options = {
     MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'],   // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
     UPLOAD_PARAMS: {                 // optional default: {}
-      dir: '/company/project'
+      dir: '/company_test/project_test'
     },
     //ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
     UPLOADED_FOLDERS: [
-      { dir: '/company', label: 'Company' },
-      { dir: '/company/project', label: 'Project' }
+      { dir: '/company_test', label: 'Company' },
+      { dir: '/company_test/project_test', label: 'Project' }
     ],
     UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
     CONTAINER: 'example',                           // required
