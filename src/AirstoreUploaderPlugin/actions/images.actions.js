@@ -28,7 +28,7 @@ export const fetchImages = (searchParams, relevantActiveTags, onSuccess = () => 
   searchParams.colorFiltersQuery = searchParams.colorFilters
     .map(item => `&colors[]=${item.value}:1`).join('').replace(/#/g, '');
 
-  if (!searchParams.value) {
+  if (!searchParams.value && !searchParams.colorFilters.length) {
     return new Promise(resolve => resolve());
   }
 

@@ -50,7 +50,6 @@ var ImagesTab = function (_Component) {
 
         var value = searchPhrase || activePresetTag || '';
 
-        if (!value) return;
         _this.search({ value: value, colorFilters: activeColorFilters }, false);
       });
     };
@@ -78,7 +77,6 @@ var ImagesTab = function (_Component) {
 
         var value = searchPhrase || activePresetTag || '';
 
-        if (!value) return;
         _this.search({ value: value, colorFilters: activeColorFilters }, false);
       });
     };
@@ -164,7 +162,7 @@ var ImagesTab = function (_Component) {
         typeof resizeOnSuccess === 'function' && resizeOnSuccess();
       };
 
-      if (!value) return;
+      if (!value && !colorFilters.length) return;
 
       return _this.loadIcons({ value: value, colorFilters: colorFilters, offset: offset }, relevantActiveTags, onSuccess);
     };

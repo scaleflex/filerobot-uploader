@@ -37,7 +37,7 @@ export var fetchImages = function fetchImages(searchParams, relevantActiveTags) 
       return '&colors[]=' + item.value + ':1';
     }).join('').replace(/#/g, '');
 
-    if (!searchParams.value) {
+    if (!searchParams.value && !searchParams.colorFilters.length) {
       return new Promise(function (resolve) {
         return resolve();
       });

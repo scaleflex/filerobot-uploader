@@ -38,7 +38,7 @@ export const getBackgrounds = () => send(`${backgroundsAPI}`).then(({ status, fi
 export const searchImages = (searchParams, relevantActiveTags = []) => {
   const { colorFiltersQuery, limit, offset } = searchParams;
   const splittedString = searchParams.value.trim().split(' ');
-  const value = `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
+  const value = searchParams.value ? `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}` : '';
   const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
   const limitQuery = `&limit=${limit}`;
   const offsetQuery = `&offset=${offset}`;

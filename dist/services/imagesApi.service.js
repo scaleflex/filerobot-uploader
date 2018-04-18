@@ -54,9 +54,9 @@ export var searchImages = function searchImages(searchParams) {
       offset = searchParams.offset;
 
   var splittedString = searchParams.value.trim().split(' ');
-  var value = '&q[]=' + splittedString.map(function (string) {
+  var value = searchParams.value ? '&q[]=' + splittedString.map(function (string) {
     return string.trim();
-  }).join('&q[]=');
+  }).join('&q[]=') : '';
   var tags = relevantActiveTags.map(function (tag) {
     return '&q[]=' + tag;
   }).join('');

@@ -65,7 +65,6 @@ class ImagesTab extends Component {
       const { activeColorFilters, searchPhrase, activePresetTag } = this.state;
       const value = searchPhrase || activePresetTag || '';
 
-      if (!value) return;
       this.search({ value, colorFilters: activeColorFilters }, false);
     })
   }
@@ -88,7 +87,6 @@ class ImagesTab extends Component {
       const { activeColorFilters, searchPhrase, activePresetTag } = this.state;
       const value = searchPhrase || activePresetTag || '';
 
-      if (!value) return;
       this.search({ value, colorFilters: activeColorFilters }, false);
     })
   };
@@ -142,7 +140,7 @@ class ImagesTab extends Component {
       typeof resizeOnSuccess === 'function' && resizeOnSuccess();
     }
 
-    if (!value) return;
+    if (!value && !colorFilters.length) return;
 
     return this.loadIcons({ value, colorFilters, offset }, relevantActiveTags, onSuccess);
   };
