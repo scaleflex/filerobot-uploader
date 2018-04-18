@@ -7,11 +7,11 @@ import {
 
 const tags = [
   { tag: 'sf-social', label: 'Social', count: '23' },
-  { tag: 'arrows', label: 'Arrows', count: '2188' },
+  { tag: 'arrows', label: 'Arrows', count: '5414' },
   { tag: 'audio', label: 'Audio & Video', count: '2716' },
   { tag: 'date', label: 'Date & Time', count: '1523' },
   { tag: 'currency', label: 'Currency', count: '3531' },
-  { tag: 'business', label: 'Business', count: '1466' }
+  { tag: 'business', label: 'Business', count: '8882' }
 ];
 
 

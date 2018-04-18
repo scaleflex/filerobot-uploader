@@ -217,6 +217,13 @@ export const MonoIconSettings = styled.div`
   border-radius: 4px;
 `;
 
+export const IconAddTagInner = styled.div`
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  width: 280px;
+`;
+
 export const Opacity = styled.div`
   display: ${props => props.isShow ? 'block': 'none'};
   position: absolute;
@@ -309,6 +316,7 @@ export const Input = InputSearch.extend`
   height: 26px;
   margin-bottom: 20px;
   margin-top: 10px;
+  input: 200px;
 `;
 export const IconBoxWrapper = styled.div`
   position: relative;

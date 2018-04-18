@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Aux } from '../hoc';
 import { addTag } from '../../services/iconsApi.service';
 import {
-  ButtonSearch, Label, MonoIconSettings, Opacity, Input
+  ButtonSearch, Label, MonoIconSettings, Opacity, Input, IconAddTagInner
 } from '../../styledComponents';
 
 
@@ -34,14 +34,16 @@ class IconAddTagModal extends Component {
         <Opacity isShow={true} onClick={onClose}/>
 
         <MonoIconSettings isShow={true}>
-          <Label color={'black'} nb>Would you like to add tag?</Label>
-          <Input
-            innerRef={node => this._input = node}
-            defaultValue={tagName}
-            onKeyDown={event => { event.keyCode === 13 && this.onAddTag(); }}
-            onChange={({ target }) => { this.setState({ tagName: target.value }) } }
-          />
-          <ButtonSearch fullBr={'4px'} onClick={this.onAddTag}>ADD TAG</ButtonSearch>
+          <IconAddTagInner>
+            <Label color={'black'} nb>Would you like to add tag?</Label>
+            <Input
+              innerRef={node => this._input = node}
+              defaultValue={tagName}
+              onKeyDown={event => { event.keyCode === 13 && this.onAddTag(); }}
+              onChange={({ target }) => { this.setState({ tagName: target.value }) } }
+            />
+            <ButtonSearch fullBr={'4px'} onClick={this.onAddTag}>ADD TAG</ButtonSearch>
+          </IconAddTagInner>
         </MonoIconSettings>
       </Aux>
     )
