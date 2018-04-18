@@ -40,15 +40,14 @@ export default {
           "color": "#c0c1c1",
           "textDecoration": "none",
           "fontSize": "12px",
-          lineHeight: '16px',
-          "padding": "11px 20px 13px",
+          lineHeight: '21px',
+          "padding": "9px 12px",
           "cursor": "pointer",
           "borderRadius": "3px 3px 0 0",
-          //"borderLeft": "2px solid transparent",
-          //"borderRight": "2px solid transparent",
-          //"borderTop": "2px solid transparent",
-          "border": "2px solid transparent",
-          "borderBottomWidth": "0",
+          "borderLeft": "2px solid transparent",
+          "borderRight": "2px solid transparent",
+          "borderTop": "2px solid transparent",
+          "borderBottom": "2px solid transparent",
           "textTransform": "uppercase",
           "fontWeight": "400",
           "display": "inline-block",
@@ -59,7 +58,8 @@ export default {
           },
 
           selected: {
-            "color": "#fff"
+            "color": "#fff",
+            "backgroundColor": "rgb(64, 84, 91)"
           },
 
           ':hover': {
@@ -73,14 +73,17 @@ export default {
           //},
 
           i: {
-            fontSize: 16,
+            fontSize: 21,
+            lineHeight: '21px',
             marginRight: 5,
             display: 'inline-block',
-            verticalAlign: 'top'
+            verticalAlign: 'middle'
           },
 
           text: {
-            '@media screen and (max-width: 600px)': {
+            display: 'inline-block',
+            verticalAlign: 'middle',
+            '@media screen and (max-width: 850px)': {
               display: 'none'
             }
           }
@@ -90,7 +93,7 @@ export default {
 
     // CONTENT
     content: {
-      // "position": "absolute",
+      position: "relative",
       "zIndex": "1",
       // "bottom": "0",
       // "right": "0",
@@ -123,7 +126,11 @@ export default {
     "outline": "0px",
 
     ':focus': {
-      border: '1px solid #5D636B'
+      border: '1px solid #5D636B',
+      outlineColor: 'rgb(77, 144, 254)',
+      outlineOffset: -2,
+      outlineStyle: 'auto',
+      outlineWidth: 5
     }
   },
 
@@ -133,19 +140,20 @@ export default {
     "padding": "6px 12px",
     "lineHeight": "1.42857",
     "textTransform": 'uppercase',
-    "color": "#fff",
-    "backgroundColor": "#5D636B",
+    "color": "#5D636B",
+    "backgroundColor": "transparent",
     "backgroundRepeat": "repeat-x",
     "textShadow": "rgb(255, 255, 255) 0px 1px",
-    "border": "1px solid rgb(204, 204, 204)",
-    "borderRadius": "5px",
+    "border": "1px solid #5D636B",
+    "borderRadius": "4px",
     "cursor": "pointer",
-    "fontWeight": "300",
+    "fontWeight": "500",
     "outline": "0",
     "fontSize": 12,
 
     ':hover': {
-      backgroundColor: '#6D737B'
+      "backgroundColor": '#6D737B',
+      "color": "#fff"
     },
 
     ':focus': {

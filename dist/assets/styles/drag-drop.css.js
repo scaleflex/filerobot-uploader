@@ -24,10 +24,10 @@ export default {
     "position": "relative",
     "fontWeight": "300",
     "margin": "0 auto",
-    height: 'calc(100% - 6px)',
+    height: '100%',
     color: '#5D636B',
-    "padding": 3,
-    boxSizing: 'content-box',
+    "padding": 10,
+    boxSizing: 'border-box',
 
     uploadBlock: {
       width: '100%',
@@ -64,7 +64,7 @@ export default {
           },
 
           orText: {
-            "padding": "15px",
+            "padding": "10px",
             "fontWeight": "200",
             "fontSize": 12
           },

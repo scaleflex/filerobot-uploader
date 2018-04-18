@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-var api_endpoint = '//api.icons.rest/v1/';
+var api_endpoint = '//api.imagesearch.rest/v3/icons/';
 
 var _send = function _send(url) {
   var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
@@ -8,16 +8,6 @@ var _send = function _send(url) {
   var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
   var responseType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "json";
   return new Promise(function (resolve, reject) {
-
-    // check in cache
-    if (method.toLowerCase() === 'get') {
-      var cacheResponse = sessionStorage.getItem(url);
-
-      if (cacheResponse) {
-        resolve(JSON.parse(cacheResponse));
-        return;
-      }
-    }
 
     axios({
       url: url,
@@ -47,36 +37,73 @@ var _send = function _send(url) {
   });
 };
 
-export var getCategories = function getCategories() {
-  return _send(api_endpoint + 'categories').then(function (_ref2) {
-    var _ref2$categories = _ref2.categories,
-        categories = _ref2$categories === undefined ? [] : _ref2$categories;
-    return categories;
+export var getTags = function getTags() {
+  return _send(api_endpoint + 'tags').then(function (_ref2) {
+    var _ref2$tags = _ref2.tags,
+        tags = _ref2$tags === undefined ? [] : _ref2$tags;
+    return tags;
   });
 };
 
-export var getCategoryIcons = function getCategoryIcons() {
-  var category_slug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var limit = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 36;
-  return _send(api_endpoint + 'category/' + category_slug + '?limit=' + limit + '&page=' + page).then(function (_ref3) {
+export var searchIcons = function searchIcons(searchParams) {
+  var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var typeQuery = searchParams.typeQuery,
+      offset = searchParams.offset;
+
+  var splittedString = searchParams.value.trim().split(' ');
+  var value = '&q[]=' + splittedString.map(function (string) {
+    return string.trim();
+  }).join('&q[]=');
+  var tags = relevantActiveTags.map(function (tag) {
+    return '&q[]=' + tag;
+  }).join('');
+  var limitQuery = '&limit=250';
+  var offsetQuery = '&offset=' + offset;
+
+  return _send(api_endpoint + '?' + value + tags + typeQuery + limitQuery + offsetQuery).then(function (_ref3) {
     var _ref3$icons = _ref3.icons,
         icons = _ref3$icons === undefined ? [] : _ref3$icons,
         _ref3$count = _ref3.count,
-        count = _ref3$count === undefined ? 0 : _ref3$count;
-    return { icons: icons || [], count: count };
+        count = _ref3$count === undefined ? 0 : _ref3$count,
+        related_tags = _ref3.related_tags;
+    return { icons: icons || [], count: count, related_tags: related_tags };
   });
 };
 
-export var searchIcons = function searchIcons() {
-  var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var q = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var limit = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 36;
-  return _send(api_endpoint + 'search?limit=' + limit + '&page=' + page + '&q=' + q).then(function (_ref4) {
-    var _ref4$icons = _ref4.icons,
-        icons = _ref4$icons === undefined ? [] : _ref4$icons,
-        _ref4$count = _ref4.count,
-        count = _ref4$count === undefined ? 0 : _ref4$count;
-    return { icons: icons || [], count: count };
-  });
+export var addTag = function addTag(uid, tagName) {
+  return _send(api_endpoint + 'retag?uid=' + uid + '&op=ADD&tag=' + tagName);
+};
+
+export var setAsNotRelevant = function setAsNotRelevant(searchParams) {
+  var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var uid = arguments[2];
+
+  var splittedString = searchParams.value.trim().split(' ');
+  var value = '&q[]=' + splittedString.map(function (string) {
+    return string.trim();
+  }).join('&q[]=');
+  var tags = relevantActiveTags.map(function (tag) {
+    return '&q[]=' + tag;
+  }).join('');
+
+  return _send(api_endpoint + 'improve/relevancy?' + value + tags + '&uid=' + uid);
+};
+
+export var sendSelectionData = function sendSelectionData(searchParams) {
+  var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var uid = arguments[2];
+  var shownIcons = arguments[3];
+
+  var splittedString = searchParams.value.trim().split(' ');
+  var value = 'q[]=' + splittedString.map(function (string) {
+    return string.trim();
+  }).join('&q[]=');
+  var tags = relevantActiveTags.map(function (tag) {
+    return '&q[]=' + tag;
+  }).join('');
+  var data = '' + value + tags + '&chosen_uid=' + uid + '&shown_icons_uid[]=' + shownIcons.map(function (icon) {
+    return icon.uid;
+  }).join('&shown_icons_uid[]=');
+
+  return _send(api_endpoint + 'improve/selection', 'POST', data, {}, 'application/x-www-form-urlencoded');
 };

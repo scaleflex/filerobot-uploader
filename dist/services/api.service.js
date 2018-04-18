@@ -4,6 +4,9 @@ import axios from 'axios';
 import config from '../config';
 
 var independentProtocolRegex = /^[https|http]+\:\/\//g;
+var getBaseUrl = function getBaseUrl(container) {
+  return '//' + container + '.api.airstore.io/v1/';
+};
 
 export var send = function send(url) {
   var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
@@ -41,6 +44,7 @@ export var send = function send(url) {
  * @param uploadKey     {string}  = secret key
  * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
  *   uploadPath)
+ * @param dir     {string}  = directory to upload files
  * @returns {Promise}
  */
 export var uploadFiles = function uploadFiles() {
@@ -53,12 +57,13 @@ export var uploadFiles = function uploadFiles() {
       _ref3$uploadKey = _ref3.uploadKey,
       uploadKey = _ref3$uploadKey === undefined ? '' : _ref3$uploadKey;
   var data_type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
+  var dir = arguments[3];
 
   var url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   var ajaxData = new FormData();
 
-  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams);
-
+  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir });
+  console.log(uploadParams);
   // generate params string
   var paramsStr = Object.keys(uploadParams).filter(function (paramName) {
     return uploadParams[paramName] !== null;
@@ -93,5 +98,22 @@ export var uploadFiles = function uploadFiles() {
 
       reject(error);
     });
+  });
+};
+
+export var getListFiles = function getListFiles(_ref4) {
+  var _ref4$dir = _ref4.dir,
+      dir = _ref4$dir === undefined ? '' : _ref4$dir,
+      _ref4$container = _ref4.container,
+      container = _ref4$container === undefined ? '' : _ref4$container;
+
+  var baseUrl = getBaseUrl(container);
+  var apiPath = 'list?';
+  var directoryPath = dir ? 'dir=' + dir : '';
+  var url = [baseUrl, apiPath, directoryPath].join('');
+
+  return send(url).then(function () {
+    var response = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return response.files;
   });
 };

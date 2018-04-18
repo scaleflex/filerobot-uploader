@@ -9,12 +9,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
-import { IconTab, BackgroundTab, UserUploaderTab, SearchTab } from './index';
+import { IconTab, BackgroundTab, UserUploaderTab, SearchTab, UploadedImagesTab } from './index';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
 import FocusLock from 'react-focus-lock';
 import { modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs } from '../actions';
 import config from '../config';
 import { connect } from 'react-redux';
+import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
+
+var ToastMessageFactory = React.createFactory(ToastMessageAnimated);
 
 var AirstoreUploader = function (_Component) {
   _inherits(AirstoreUploader, _Component);
@@ -35,40 +38,50 @@ var AirstoreUploader = function (_Component) {
       fullName: 'Upload',
       shortName: 'Upload',
       iconClass: 'sfi-airstore-upload',
-      getContent: function getContent() {
-        return React.createElement(UserUploaderTab, null);
+      getContent: function getContent(props) {
+        return React.createElement(UserUploaderTab, props);
       }
     }, {
-      id: 'SEARCH',
-      fullName: 'Search',
-      shortName: 'Search',
-      iconClass: 'sfi-airstore-search',
-      getContent: function getContent() {
-        return React.createElement(SearchTab, null);
+      id: 'UPLOADED_IMAGES',
+      fullName: 'Uploaded Images',
+      shortName: 'Uploaded Images',
+      iconClass: 'sfi-airstore-uploaded-images',
+      getContent: function getContent(props) {
+        return React.createElement(UploadedImagesTab, props);
       }
     }, {
-      id: 'ICONS',
-      fullName: 'Icons Library',
-      shortName: 'Icons',
-      iconClass: 'sfi-airstore-icon',
-      getContent: function getContent() {
-        return React.createElement(IconTab, null);
+      id: 'ICONS_GALLERY',
+      fullName: 'Icons Gallery',
+      shortName: 'Icons Gallery',
+      iconClass: 'sfi-airstore-gallery',
+      getContent: function getContent(props) {
+        return React.createElement(IconTab, props);
       }
     }, {
-      id: 'BACKGROUNDS',
-      fullName: 'Backgrounds',
-      shortName: 'Backgrounds',
-      iconClass: 'sfi-airstore-bg',
-      getContent: function getContent() {
-        return React.createElement(BackgroundTab, null);
+      id: 'IMAGES_GALLERY',
+      fullName: 'Images Gallery',
+      shortName: 'Images Gallery',
+      iconClass: 'sfi-airstore-image-gallery',
+      getContent: function getContent(props) {
+        return React.createElement(BackgroundTab, props);
       }
     }], _this.openModal = function (initialTab) {
-      return _this.props.onModalOpen(initialTab);
+      _this.props.onModalOpen(initialTab || _this.props.initialTab);
     }, _this.closeModal = function () {
       var onClose = _this.props.onClose;
 
       if (onClose) onClose();
       _this.props.onModalClose();
+    }, _this.showAlert = function (title, msg) {
+      var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+      var timeOut = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 4000;
+
+      _this.refs.container[type](msg, title, {
+        timeOut: timeOut,
+        extendedTimeOut: 2000,
+        showAnimation: 'animated fadeIn',
+        hideAnimation: 'animated fadeOut'
+      });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -98,7 +111,7 @@ var AirstoreUploader = function (_Component) {
 
       return React.createElement(
         Modal,
-        { noBorder: true, fullScreen: 'lg', onClose: this.closeModal },
+        { noBorder: true, fullScreen: 'md', onClose: this.closeModal, style: { borderRadius: 5 } },
         React.createElement(
           StyleRoot,
           { className: 'airstore-root-box', style: { width: '100%', height: '100%' } },
@@ -116,6 +129,7 @@ var AirstoreUploader = function (_Component) {
           _props2$filteredTabs = _props2.filteredTabs,
           filteredTabs = _props2$filteredTabs === undefined ? [] : _props2$filteredTabs;
 
+      var contentProps = { showAlert: this.showAlert };
 
       return React.createElement(
         FocusLock,
@@ -173,9 +187,14 @@ var AirstoreUploader = function (_Component) {
             { style: [CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
             activeTab && React.createElement(
               'div',
-              { style: [{ width: '100%' }] },
-              activeTab.getContent.call(this)
-            )
+              { style: [{ width: '100%', minWidth: 540, overflow: 'scroll' }] },
+              activeTab.getContent.call(this, contentProps)
+            ),
+            React.createElement(ToastContainer, {
+              ref: 'container',
+              toastMessageFactory: ToastMessageFactory,
+              className: 'toast-top-right'
+            })
           )
         )
       );

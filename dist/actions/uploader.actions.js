@@ -1,14 +1,11 @@
-import * as BgAPI from '../services/bgApi.service';
+import * as BgAPI from '../services/imagesApi.service';
 import * as API from "../services/api.service";
 
 export var getBackgrounds = function getBackgrounds() {
   return function (dispatch) {
-    return BgAPI.getBackgrounds().then(function (_ref) {
-      var status = _ref.status,
-          backgrounds = _ref.backgrounds;
-
-      if (status === 'success' && backgrounds) {
-        dispatch({ type: 'FETCH_BACKGROUNDS_SUCCESS', payload: backgrounds });
+    return BgAPI.getBackgrounds().then(function (files) {
+      if (files) {
+        dispatch({ type: 'FETCH_BACKGROUNDS_SUCCESS', payload: files });
       }
     });
   };
@@ -58,12 +55,25 @@ export var setUploadHandler = function setUploadHandler(handler) {
 
 export var uploadFiles = function uploadFiles(files, uploaderConfig) {
   var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
+  var dir = arguments[3];
   return function (dispatch) {
-    return API.uploadFiles(files, uploaderConfig, dataType).then(function (files) {
+    return API.uploadFiles(files, uploaderConfig, dataType, dir).then(function (files) {
       dispatch({ type: 'FILES_UPLOADED', payload: files });
       setTimeout(function () {
         return dispatch(modalClose());
       });
+
+      return files;
+    });
+  };
+};
+
+export var uploadFilesToDir = function uploadFilesToDir(files, uploaderConfig) {
+  var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
+  var dir = arguments[3];
+  return function (dispatch) {
+    return API.uploadFiles(files, uploaderConfig, dataType, dir).then(function (files) {
+      //dispatch({ type: 'FILES_UPLOADED', payload: files });
 
       return files;
     });

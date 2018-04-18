@@ -2,10 +2,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 import * as IconAPI from '../services/iconsApi.service';
 
-export var getIconsCategories = function getIconsCategories() {
+export var getIconsTags = function getIconsTags() {
   return function (dispatch) {
-    return IconAPI.getCategories().then(function (categories) {
-      dispatch({ type: 'ICONS_FETCH_CATEGORIES_SUCCESS', payload: categories });
+    return IconAPI.getTags().then(function (tags) {
+      dispatch({ type: 'ICONS_FETCH_TAGS_SUCCESS', payload: tags });
     });
   };
 };
@@ -15,38 +15,51 @@ export var activateIconsCategory = function activateIconsCategory(category, onSu
     dispatch({ type: 'ICONS_ACTIVATE_CATEGORY', payload: category });
 
     setTimeout(function () {
-      return dispatch(fetchIcons(category.slug, 1, '', 60, onSuccess));
+      return dispatch(fetchIcons(category.slug, '', onSuccess));
     });
   };
 };
 
-export var fetchIcons = function fetchIcons() {
-  var categorySlug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var q = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  var limit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 60;
-  var onSuccess = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : function () {};
+export var fetchIcons = function fetchIcons(searchParams, relevantActiveTags) {
+  var onSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
   return function (dispatch) {
-    var successHandler = function successHandler(response) {
+    var successHandler = !searchParams.offset ? function (response) {
       setTimeout(function () {
-        return onSuccess();
+        return onSuccess({ payload: _extends({ searchParams: searchParams, relevantActiveTags: relevantActiveTags }, response) });
       });
-      return dispatch({ type: 'ICONS_FETCH_SUCCESS', payload: _extends({ page: page, q: q, limit: limit, categorySlug: categorySlug }, response) });
+
+      return dispatch({
+        type: 'ICONS_FETCH_SUCCESS',
+        payload: _extends({ searchParams: searchParams, relevantActiveTags: relevantActiveTags }, response)
+      });
+    } : function (response) {
+      setTimeout(function () {
+        return onSuccess({ payload: _extends({ searchParams: searchParams, relevantActiveTags: relevantActiveTags }, response) });
+      });
+
+      return dispatch({
+        type: 'SHOW_MORE_ICONS_SUCCESS',
+        payload: _extends({ searchParams: searchParams, relevantActiveTags: relevantActiveTags }, response)
+      });
     };
 
-    switch (categorySlug) {
-      case 'custom-famous':
-        return IconAPI.searchIcons(page, '', limit).then(successHandler);
-      case 'custom-search':
-        if (!q) {
-          dispatch({ type: 'ICONS_CLEAN', payload: null });
-          return new Promise(function (resolve) {
-            return resolve();
-          });
-        }
-        return IconAPI.searchIcons(page, q, limit).then(successHandler);
-      default:
-        return IconAPI.getCategoryIcons(categorySlug, page, limit).then(successHandler);
+    switch (searchParams.type) {
+      case 'all':
+        searchParams.typeQuery = '&style[]=FLAT&style[]=MONOCOLOR';
+        break;
+      case 'multi':
+        searchParams.typeQuery = '&style[]=FLAT';
+        break;
+      case 'mono':
+        searchParams.typeQuery = '&style[]=MONOCOLOR';
+        break;
     }
+
+    if (!searchParams.value) {
+      return new Promise(function (resolve) {
+        return resolve();
+      });
+    }
+    return IconAPI.searchIcons(searchParams, relevantActiveTags).then(successHandler);
   };
 };

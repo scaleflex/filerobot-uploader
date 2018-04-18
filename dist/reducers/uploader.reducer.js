@@ -3,7 +3,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var initialState = {
   isVisible: false,
   backgrounds: [],
-  modules: ['UPLOAD', 'SEARCH', 'BACKGROUNDS', 'ICONS'],
+  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'],
   activeModules: [],
   tabs: [],
   filteredTabs: [],
@@ -45,8 +45,20 @@ var uploader = function uploader() {
   }
 };
 
-var _fetchBgSuccess = function _fetchBgSuccess(state) {
-  var backgrounds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+var _fetchBgSuccess = function _fetchBgSuccess(state, _ref) {
+  var _ref$files = _ref.files,
+      files = _ref$files === undefined ? [] : _ref$files;
+
+  var backgrounds = files.map(function () {
+    var file = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return {
+      src: file.url_public || file.url_permalink,
+      id: file.uuid,
+      name: file.name,
+      alt: ''
+    };
+  });
+
   return _extends({}, state, { backgrounds: backgrounds });
 };
 
@@ -82,7 +94,13 @@ var _setUploaderConfig = function _setUploaderConfig(state) {
   var uploaderConfig = {
     uploadPath: 'https://' + config.CONTAINER + '.api.airstore.io/upload',
     uploadParams: config.UPLOAD_PARAMS,
-    uploadKey: config.UPLOAD_KEY
+    uploadKey: config.UPLOAD_KEY,
+    container: config.CONTAINER,
+    isShowAddTagBtn: config.IS_SHOW_ADD_TAG_BTN,
+    isShowNotRelevantBtn: config.IS_SHOW_NOT_RELEVANT_BTN,
+    limit: config.LIMIT_IMAGES_PER_RESPONSE || 100,
+    folders: config.UPLOADED_FOLDERS || [],
+    uploadHandler: config.onUpload || function () {}
   };
 
   return _extends({}, state, { uploaderConfig: uploaderConfig });

@@ -2,11 +2,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var defaultCategories = [{ slug: 'custom-famous', cat: 'Famous' }, { slug: 'custom-search', cat: 'Search', count: 0 }];
+var defaultTags = [{ slug: 'custom-famous', cat: 'Famous' }, { slug: 'custom-search', cat: 'Search', count: 0 }];
+
+var activeDafault = {
+  slug: 'custom-search',
+  icons: [],
+  related_tags: []
+};
 
 var initialState = {
-  active: null,
-  categories: [].concat(defaultCategories)
+  active: activeDafault,
+  tags: [].concat(defaultTags)
 };
 
 var icons = function icons() {
@@ -17,8 +23,10 @@ var icons = function icons() {
 
 
   switch (type) {
-    case 'ICONS_FETCH_CATEGORIES_SUCCESS':
-      return _fetchCategoriesSuccess(state, payload);
+    case 'ICONS_FETCH_TAGS_SUCCESS':
+      return _fetchTagsSuccess(state, payload);
+    case 'SHOW_MORE_ICONS_SUCCESS':
+      return _showMoreIconsSuccess(state, payload);
     case 'ICONS_ACTIVATE_CATEGORY':
       return _activateCategory(state, payload);
     case 'ICONS_FETCH_SUCCESS':
@@ -32,75 +40,63 @@ var icons = function icons() {
   }
 };
 
-var _fetchCategoriesSuccess = function _fetchCategoriesSuccess(state) {
-  var categories = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  return _extends({}, state, { categories: [].concat(defaultCategories, _toConsumableArray(categories)) });
+var _fetchTagsSuccess = function _fetchTagsSuccess(state) {
+  var tags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  return _extends({}, state, { tags: [].concat(defaultTags, _toConsumableArray(tags)) });
 };
 
 var _activateCategory = function _activateCategory(state) {
-  var active = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  return _extends({}, state, { active: active && active.slug ? active : null });
+  var active = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : activeDafault;
+  return _extends({}, state, { active: active && active.slug ? active : activeDafault });
 };
 
 var _fetchSuccess = function _fetchSuccess(state) {
   var result = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  var active = Object.assign({}, state.active || {});
-  var categories = Object.assign([], state.categories || []);
 
   var _ref = result || {},
       _ref$count = _ref.count,
       count = _ref$count === undefined ? 0 : _ref$count,
       _ref$icons = _ref.icons,
       icons = _ref$icons === undefined ? [] : _ref$icons,
-      _ref$page = _ref.page,
-      page = _ref$page === undefined ? 1 : _ref$page,
-      _ref$q = _ref.q,
-      q = _ref$q === undefined ? '' : _ref$q,
-      categorySlug = _ref.categorySlug;
+      _ref$related_tags = _ref.related_tags,
+      related_tags = _ref$related_tags === undefined ? [] : _ref$related_tags,
+      searchParams = _ref.searchParams;
 
-  var needCancelHandler = false;
-  if (active && active.slug && active.slug !== categorySlug) needCancelHandler = true;
-  if (needCancelHandler) return _extends({}, state);
+  return _extends({}, state, { active: { icons: icons, related_tags: related_tags }, count: count, searchParams: searchParams });
+};
 
-  q = q || '';
-  page = +page;
-  icons = icons || [];
+var _showMoreIconsSuccess = function _showMoreIconsSuccess(state) {
+  var result = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var isLastPage = !icons.length || icons.length < result.limit;
+  var _ref2 = result || {},
+      _ref2$count = _ref2.count,
+      count = _ref2$count === undefined ? 0 : _ref2$count,
+      _ref2$icons = _ref2.icons,
+      icons = _ref2$icons === undefined ? [] : _ref2$icons,
+      _ref2$related_tags = _ref2.related_tags,
+      related_tags = _ref2$related_tags === undefined ? [] : _ref2$related_tags,
+      _ref2$searchParams = _ref2.searchParams,
+      searchParams = _ref2$searchParams === undefined ? {} : _ref2$searchParams;
 
-  Object.assign(active, { count: count, q: q, isLastPage: isLastPage });
-
-  active.icons = active.icons || [];
-  active.icons = [].concat(_toConsumableArray(page > 1 ? active.icons : []), _toConsumableArray(icons));
-
-  if (!isLastPage) active.page = page; // don't change page if we have empty icons
-
-  // Update category.count
-  var category = categories.find(function (_c) {
-    return _c.slug === active.slug;
-  });
-  if (category) category.count = count;
-
-  return _extends({}, state, { active: active, categories: categories });
+  return _extends({}, state, { active: { icons: [].concat(_toConsumableArray(state.active.icons), _toConsumableArray(icons)), related_tags: related_tags }, count: count, searchParams: searchParams });
 };
 
 var _iconsClean = function _iconsClean(state) {
   var active = Object.assign({}, state.active || {});
-  var categories = [].concat(_toConsumableArray(state.categories));
+  var tags = [].concat(_toConsumableArray(state.tags));
 
   Object.assign(active, { page: 0, q: '', icons: [], count: 0 });
 
-  var category = categories.find(function (_c) {
+  var category = tags.find(function (_c) {
     return _c.slug === 'custom-search';
   });
   if (category) category.count = 0;
 
-  return _extends({}, state, { active: active, categories: categories });
+  return _extends({}, state, { active: active, tags: tags });
 };
 
 var _visibilityClose = function _visibilityClose(state) {
-  return _extends({}, state, _iconsClean(state), { active: null });
+  return _extends({}, state, _iconsClean(state), { active: activeDafault });
 };
 
 export default icons;

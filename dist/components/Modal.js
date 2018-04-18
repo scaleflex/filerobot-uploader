@@ -9,7 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Radium from 'radium';
-import { CSS, ModalCss as styles } from '../assets/styles';
+import { ModalCss as styles } from '../assets/styles';
 
 var Modal = function (_Component) {
   _inherits(Modal, _Component);
