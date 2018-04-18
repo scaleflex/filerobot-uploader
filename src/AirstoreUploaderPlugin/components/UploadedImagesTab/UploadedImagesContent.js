@@ -81,7 +81,7 @@ class UploadedImagesContent extends Component {
             cellContent={(props) =>
               props.item.id !== 'uploaderBox' ? this.renderImage(props) : this.renderUploadBox(props)
             }
-          /> : null}
+          /> : this.renderUploadBox({})}
       </Content>
     )
   }
@@ -101,7 +101,7 @@ class UploadedImagesContent extends Component {
     );
   }
 
-  renderUploadBox = ({ style, columnWidth, item }) => {
+  renderUploadBox = ({ style = {}, columnWidth = 300, item = {} }) => {
     const { fileDropHandler } = this.props;
     const { isDragOver } = this.state;
 

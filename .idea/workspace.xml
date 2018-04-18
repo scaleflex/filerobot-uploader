@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="" />
+    <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UploadedImagesContent.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UploadedImagesContent.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
-              <caret line="122" column="3" selection-start-line="122" selection-start-column="3" selection-end-line="122" selection-end-column="3" />
+            <state relative-caret-position="171">
+              <caret line="85" column="5" lean-forward="true" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -37,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/ImagesTab/ImagesTab.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5958">
-              <caret line="346" column="23" lean-forward="true" selection-start-line="346" selection-start-column="23" selection-end-line="346" selection-end-column="23" />
+              <caret line="346" column="23" selection-start-line="346" selection-start-column="23" selection-end-line="346" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -69,14 +71,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AirstoreUploader.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AirstoreUploader.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="149" column="27" lean-forward="true" selection-start-line="149" selection-start-column="27" selection-end-line="149" selection-end-column="27" />
+              <caret line="149" column="27" selection-start-line="149" selection-start-column="27" selection-end-line="149" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/package.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -85,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/styles.css.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1494">
-              <caret line="83" column="17" lean-forward="true" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
+              <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -103,33 +119,9 @@
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3798">
-              <caret line="213" column="39" lean-forward="true" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
+              <caret line="213" column="39" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserUploaderTab.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadImagesTab/UserUploaderTab.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2232">
-              <caret line="131" column="36" lean-forward="true" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IconAddTagModal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconsTab/IconAddTagModal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="38" column="15" lean-forward="true" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MODAL_OPEN</find>
       <find>onModalOpen</find>
       <find>AirstoreUploader.open</find>
       <find>initialTab</find>
@@ -169,6 +160,7 @@
       <find>Upload ima</find>
       <find>Brow</find>
       <find>onFileUpload</find>
+      <find>react-lazy-load</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -229,7 +221,6 @@
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/index.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/Modal.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconsTab/IconTags.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/config.js" />
         <option value="$PROJECT_DIR$/cdn_problems.txt" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/actions/icons.actions.js" />
@@ -246,7 +237,6 @@
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/VirtualizedImagesGrid.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesTab.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/reducers/uploader.reducer.js" />
-        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/BackgroundTab.styled.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadImagesTab/UserUploaderTab.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconsTab/IconAddTagModal.js" />
@@ -255,6 +245,8 @@
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/styles.css.js" />
         <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js" />
       </list>
     </option>
   </component>
@@ -300,6 +292,24 @@
             <path>
               <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
@@ -417,7 +427,7 @@
       <workItem from="1523614519711" duration="3818000" />
       <workItem from="1523703635736" duration="105721000" />
       <workItem from="1523958591289" duration="31519000" />
-      <workItem from="1524056207354" duration="23000" />
+      <workItem from="1524056207354" duration="323000" />
     </task>
     <task id="LOCAL-00001" summary="working on icon tab">
       <created>1522912068286</created>
@@ -601,11 +611,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524055107095</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="update build">
+      <created>1524056371023</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1524056371023</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206457000" />
+    <option name="totallyTimeSpent" value="206757000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="508" y="1319" width="1440" height="877" extended-state="0" />
@@ -615,11 +632,12 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5137421" side_tool="true" weight="0.35660848" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48625794" visible="true" weight="0.24966975" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.48625794" weight="0.24966975" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49330515" weight="0.32668328" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49330515" visible="true" weight="0.32628798" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -630,7 +648,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -690,7 +707,8 @@
     <MESSAGE value="style fixes" />
     <MESSAGE value="implement Uploaded Images tab" />
     <MESSAGE value="make it more responsive" />
-    <option name="LAST_COMMIT_MESSAGE" value="make it more responsive" />
+    <MESSAGE value="update build" />
+    <option name="LAST_COMMIT_MESSAGE" value="update build" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -705,16 +723,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconsTab/IconAddTagModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="38" column="15" lean-forward="true" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2700">
@@ -801,13 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="18" column="103" selection-start-line="18" selection-start-column="103" selection-end-line="18" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cdn_problems.txt" />
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/IconsTab/SearchBar.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -846,6 +847,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="215" column="14" lean-forward="true" selection-start-line="215" selection-start-column="14" selection-end-line="215" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,7 +1008,7 @@
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/styledComponents/IconTab.styled.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3798">
-          <caret line="213" column="39" lean-forward="true" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
+          <caret line="213" column="39" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -1024,7 +1028,7 @@
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/ImagesTab/ImagesTab.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5958">
-          <caret line="346" column="23" lean-forward="true" selection-start-line="346" selection-start-column="23" selection-end-line="346" selection-end-column="23" />
+          <caret line="346" column="23" selection-start-line="346" selection-start-column="23" selection-end-line="346" selection-end-column="23" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1051,24 +1055,34 @@
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/assets/styles/styles.css.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1494">
-          <caret line="83" column="17" lean-forward="true" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="122" column="3" selection-start-line="122" selection-start-column="3" selection-end-line="122" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/AirstoreUploader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
-          <caret line="149" column="27" lean-forward="true" selection-start-line="149" selection-start-column="27" selection-end-line="149" selection-end-column="27" />
+          <caret line="149" column="27" selection-start-line="149" selection-start-column="27" selection-end-line="149" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadedImagesTab/UploadedImagesContent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="85" column="5" lean-forward="true" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

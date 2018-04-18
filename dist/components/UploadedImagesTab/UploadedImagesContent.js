@@ -80,9 +80,12 @@ var UploadedImagesContent = function (_Component) {
     };
 
     _this.renderUploadBox = function (_ref2) {
-      var style = _ref2.style,
-          columnWidth = _ref2.columnWidth,
-          item = _ref2.item;
+      var _ref2$style = _ref2.style,
+          style = _ref2$style === undefined ? {} : _ref2$style,
+          _ref2$columnWidth = _ref2.columnWidth,
+          columnWidth = _ref2$columnWidth === undefined ? 300 : _ref2$columnWidth,
+          _ref2$item = _ref2.item,
+          item = _ref2$item === undefined ? {} : _ref2$item;
       var fileDropHandler = _this.props.fileDropHandler;
       var isDragOver = _this.state.isDragOver;
 
@@ -177,7 +180,7 @@ var UploadedImagesContent = function (_Component) {
           cellContent: function cellContent(props) {
             return props.item.id !== 'uploaderBox' ? _this2.renderImage(props) : _this2.renderUploadBox(props);
           }
-        }) : null
+        }) : this.renderUploadBox({})
       );
     }
   }]);
