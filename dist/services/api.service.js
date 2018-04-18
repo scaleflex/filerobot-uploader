@@ -62,8 +62,8 @@ export var uploadFiles = function uploadFiles() {
   var url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   var ajaxData = new FormData();
 
-  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir });
-  console.log(uploadParams);
+  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
+
   // generate params string
   var paramsStr = Object.keys(uploadParams).filter(function (paramName) {
     return uploadParams[paramName] !== null;

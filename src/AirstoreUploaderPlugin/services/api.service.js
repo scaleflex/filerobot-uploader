@@ -41,8 +41,8 @@ export const uploadFiles = (
   let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   const ajaxData = new FormData();
 
-  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir });
-console.log(uploadParams);
+  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
+
   // generate params string
   const paramsStr = Object.keys(uploadParams)
     .filter(paramName => uploadParams[paramName] !== null) // do not use params with NULL value
