@@ -2,7 +2,7 @@ import Modal from './Modal';
 import AirstoreUploader from './AirstoreUploader';
 import IconTab from './IconsTab/IconTab';
 import BackgroundTab from './ImagesTab/ImagesTab';
-import UserUploaderTab from './UploadedImagesTab/UserUploaderTab';
+import UserUploaderTab from './UploadImagesTab/UserUploaderTab';
 import UploadedImagesTab from './UploadedImagesTab/UploadedImagesTab';
 import IconItem from './IconsTab/IconItem';
 import IconSidebar from './IconsTab/IconSidebar';

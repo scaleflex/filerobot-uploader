@@ -51,7 +51,6 @@ export const TabWrap = styled.div`
 export const ImageWrapper = styled.div`
   width: 100%;
   height: ${props => props.height}px;
-  margin-top: 8px;
   vertical-align: middle;
   overflow: hidden;
   position: relative;

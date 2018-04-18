@@ -1,7 +1,9 @@
 import axios from 'axios';
 import config from '../config';
 
+
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
+const getBaseUrl = (container) => `//${container}.api.airstore.io/v1/`;
 
 export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   axios({
@@ -30,14 +32,17 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
  * @param uploadKey     {string}  = secret key
  * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
  *   uploadPath)
+ * @param dir     {string}  = directory to upload files
  * @returns {Promise}
  */
-export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, uploadKey = '' }, data_type = 'files[]') => {
+export const uploadFiles = (
+  files = [], { uploadPath = '', uploadParams = {}, uploadKey = '' }, data_type = 'files[]', dir
+) => {
   let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
   const ajaxData = new FormData();
 
-  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams);
-
+  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir });
+console.log(uploadParams);
   // generate params string
   const paramsStr = Object.keys(uploadParams)
     .filter(paramName => uploadParams[paramName] !== null) // do not use params with NULL value
@@ -77,4 +82,13 @@ export const uploadFiles = (files = [], { uploadPath = '', uploadParams = {}, up
       }
     );
   });
+};
+
+export const getListFiles = ({ dir = '', container = '' }) => {
+  const baseUrl = getBaseUrl(container);
+  const apiPath = 'list?';
+  const directoryPath = dir ? 'dir=' + dir : '';
+  const url = [baseUrl, apiPath, directoryPath].join('')
+
+  return send(url).then((response = {}) => response.files);
 };

@@ -30,13 +30,6 @@ class AirstoreUploader extends Component {
       iconClass: 'sfi-airstore-uploaded-images',
       getContent: (props) => <UploadedImagesTab {...props}/>
     },
-    // {
-    //   id: 'SEARCH',
-    //   fullName: 'Search',
-    //   shortName: 'Search',
-    //   iconClass: 'sfi-airstore-search',
-    //   getContent: () => <SearchTab/>
-    // },
     {
       id: 'ICONS_GALLERY',
       fullName: 'Icons Gallery',
@@ -69,7 +62,9 @@ class AirstoreUploader extends Component {
       });
   }
 
-  openModal = (initialTab) => this.props.onModalOpen(initialTab);
+  openModal = (initialTab) => {
+    this.props.onModalOpen(initialTab || this.props.initialTab);
+  }
 
   closeModal = () => {
     const { onClose } = this.props;

@@ -17,8 +17,9 @@ import { Aux } from '../hoc';
 
 
 class ImagesTab extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
     this.state = {
       isLoading: false,
       imageGridWrapperWidth: 0,

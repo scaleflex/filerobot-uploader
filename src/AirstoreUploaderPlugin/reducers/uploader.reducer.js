@@ -76,7 +76,9 @@ const _setUploaderConfig = (state, config = {}) => {
     container: config.CONTAINER,
     isShowAddTagBtn: config.IS_SHOW_ADD_TAG_BTN,
     isShowNotRelevantBtn: config.IS_SHOW_NOT_RELEVANT_BTN,
-    limit: config.LIMIT_PER_RESPONSE || 100
+    limit: config.LIMIT_IMAGES_PER_RESPONSE || 100,
+    folders: config.UPLOADED_FOLDERS || [],
+    uploadHandler: config.onUpload || (() => {})
   };
 
   return {...state, uploaderConfig };

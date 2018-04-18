@@ -105,8 +105,9 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
   onScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
     const self = this;
-    const { isShowMoreImages } = this.props;
+    const { isShowMoreImages, onShowMoreImages } = this.props;
 
+    if (!onShowMoreImages) return;
     if ((clientHeight + scrollTop + 600 >= scrollHeight) && !isShowMoreImages) {
       this.props.onShowMoreImages(() => {
         const resizeTriggers = document.querySelector('div.resize-triggers').parentNode;

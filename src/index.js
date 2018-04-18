@@ -16,7 +16,7 @@ function init(options = {}, isOpened = false) {
   const editor = document.getElementById(options.ELEMENT_ID || 'airstore-uploader');
   const AirstoreUploaderStore = createAirstoreUploaderStore();
   window.AirstoreUploader.open = tabName =>
-    AirstoreUploaderStore.dispatch({ type: 'MODAL_OPEN', payload: tabName });
+    AirstoreUploaderStore.dispatch({ type: 'MODAL_OPEN', payload: tabName || options.INITIAL_TAB });
 
   options = Object.assign(config || {}, options || {});
   options.onUpload = options.onUpload || function() {};
@@ -25,7 +25,12 @@ function init(options = {}, isOpened = false) {
     return render(
       <AppContainer>
         <ThemeProvider theme={getDesignSystem('dark')}>
-          <Component opened={isOpened} initialOptions={options} AirstoreUploaderStore={AirstoreUploaderStore}/>
+          <Component
+            opened={isOpened}
+            initialOptions={options}
+            initialTab={options.INITIAL_TAB}
+            AirstoreUploaderStore={AirstoreUploaderStore}
+          />
         </ThemeProvider>
       </AppContainer>,
       editor,

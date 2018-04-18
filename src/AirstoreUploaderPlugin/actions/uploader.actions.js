@@ -22,10 +22,17 @@ export const setTabs = (tabs) => dispatch => dispatch({ type: 'SET_TABS', payloa
 
 export const setUploadHandler = (handler) => dispatch => dispatch({ type: 'SET_UPLOAD_HANDLER', payload: handler });
 
-export const uploadFiles = (files, uploaderConfig, dataType = 'files[]') => dispatch =>
-  API.uploadFiles(files, uploaderConfig, dataType).then(files => {
+export const uploadFiles = (files, uploaderConfig, dataType = 'files[]', dir) => dispatch =>
+  API.uploadFiles(files, uploaderConfig, dataType, dir).then(files => {
     dispatch({ type: 'FILES_UPLOADED', payload: files });
     setTimeout(() => dispatch(modalClose()));
+
+    return files;
+  });
+
+export const uploadFilesToDir = (files, uploaderConfig, dataType = 'files[]', dir) => dispatch =>
+  API.uploadFiles(files, uploaderConfig, dataType, dir).then(files => {
+    //dispatch({ type: 'FILES_UPLOADED', payload: files });
 
     return files;
   });
