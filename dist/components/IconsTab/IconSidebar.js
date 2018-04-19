@@ -43,7 +43,12 @@ var IconSidebar = function (_Component) {
           active: tag === activePresetTag,
           onClick: function onClick() {
             onActivatePresetTag(tag);
-          }
+          },
+          onKeyDown: function onKeyDown(event) {
+            event.keyCode === 13 && onActivatePresetTag(tag);
+          },
+          tabIndex: 0,
+          role: 'button'
         },
         React.createElement(
           ColorItemName,
@@ -92,7 +97,12 @@ var IconSidebar = function (_Component) {
                 active: activeColorType === 'all',
                 onClick: function onClick() {
                   toggleColorType('all');
-                }
+                },
+                onKeyDown: function onKeyDown(event) {
+                  event.keyCode === 13 && toggleColorType('all');
+                },
+                tabIndex: 0,
+                role: 'button'
               },
               React.createElement(
                 ColorItemName,
@@ -107,7 +117,12 @@ var IconSidebar = function (_Component) {
                 key: 'multi-color-wrapper',
                 onClick: function onClick() {
                   toggleColorType('multi');
-                }
+                },
+                onKeyDown: function onKeyDown(event) {
+                  event.keyCode === 13 && toggleColorType('multi');
+                },
+                tabIndex: 0,
+                role: 'button'
               },
               React.createElement(
                 ColorItemName,
@@ -122,7 +137,12 @@ var IconSidebar = function (_Component) {
                 key: 'mono-color-wrapper',
                 onClick: function onClick() {
                   toggleColorType('mono');
-                }
+                },
+                onKeyDown: function onKeyDown(event) {
+                  event.keyCode === 13 && toggleColorType('mono');
+                },
+                tabIndex: 0,
+                role: 'button'
               },
               React.createElement(
                 ColorItemName,

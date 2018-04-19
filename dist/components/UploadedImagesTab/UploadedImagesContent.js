@@ -47,6 +47,7 @@ var UploadedImagesContent = function (_Component) {
     };
 
     _this.onKeyDown = function (event, item) {
+      if (event !== 13) return;
       event.stopPropagation();
       _this.upload(item);
     };
@@ -59,7 +60,8 @@ var UploadedImagesContent = function (_Component) {
     _this.renderImage = function (_ref) {
       var style = _ref.style,
           columnWidth = _ref.columnWidth,
-          item = _ref.item;
+          item = _ref.item,
+          index = _ref.index;
 
       return React.createElement(
         ImageWrapper,
@@ -68,6 +70,8 @@ var UploadedImagesContent = function (_Component) {
           onClick: function onClick() {
             _this.upload(item);
           },
+          role: 'button',
+          tabIndex: index,
           onKeyDown: function onKeyDown(event) {
             _this.onKeyDown(event, item);
           }

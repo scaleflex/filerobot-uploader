@@ -17,6 +17,12 @@ class IconMonoColorSettings extends Component {
     displayColorPicker: false
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      if (this._buttonSearch) this._buttonSearch.focus();
+    })
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextState.activeColor !== this.state.activeColor ||
@@ -83,15 +89,30 @@ class IconMonoColorSettings extends Component {
             <Label color={'black'}>Customize your icon</Label>
             <ColorsWrapper>
               {COLORS.map((color, index) => (
-                <ColorIcon onClick={() => { this.setColor(color); }} bgColor={color} key={`color-${index}`}/>
+                <ColorIcon
+                  onClick={() => { this.setColor(color); }}
+                  onKeyDown={event => { event.keyCode === 13 && this.setColor(color); }}
+                  bgColor={color}
+                  key={`color-${index}`}
+                  tabIndex={10000}
+                  role="button"
+                />
               ))}
               <ColorIcon
                 onClick={this.handleClick}
+                onKeyDown={event => { event.keyCode === 13 && this.handleClick(); }}
                 bgColor="transparent"
                 bgImage={'//example.api.airstore.io/v1/get/a842b7b1-ae10-5e27-8838-fbc7796305fb'}
+                tabIndex={10000}
+                role="button"
               />
             </ColorsWrapper>
-            <ButtonSearch fullBr={'4px'} onClick={this.onApply}>Apply</ButtonSearch>
+            <ButtonSearch
+              innerRef={node => this._buttonSearch = node}
+              fullBr={'4px'}
+              onClick={this.onApply}
+              tabIndex={10001}
+            >Apply</ButtonSearch>
           </MonoActionBlock>
           {displayColorPicker ? <div style={popover}>
             <SketchPicker color={activeColor} onChange={this.handleChange}/>

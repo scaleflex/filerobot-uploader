@@ -272,11 +272,12 @@ class IconTab extends Component {
               upload={this.upload}
               onShowMoreImages={this.onShowMoreImages}
               isShowMoreImages={isShowMoreImages}
-              cellContent={({ style, columnWidth, item }) => (
+              cellContent={({ style, columnWidth, item, index }) => (
                 <IconBoxWrapper style={{ ...style, width: Math.floor(columnWidth) }}>
                   <IconItem
                     columnWidth={Math.floor(columnWidth)}
                     icon={item}
+                    index={index}
                     onIconClick={this.onIconClick}
                     upload={this.upload}
                     addTag={this.addTag}

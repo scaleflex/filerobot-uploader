@@ -143,6 +143,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
         scrollTop={this._scrollTop}
         width={width}
         onScroll={this.onScroll}
+        tabIndex={-1}
       />
     );
   };

@@ -60,6 +60,15 @@ var IconMonoColorSettings = function (_Component) {
   }
 
   _createClass(IconMonoColorSettings, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        if (_this2._buttonSearch) _this2._buttonSearch.focus();
+      });
+    }
+  }, {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
       return nextState.activeColor !== this.state.activeColor || nextState.isLoading !== this.state.isLoading || nextState.displayColorPicker !== this.state.displayColorPicker;
@@ -67,7 +76,7 @@ var IconMonoColorSettings = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _state = this.state,
           isLoading = _state.isLoading,
@@ -85,7 +94,7 @@ var IconMonoColorSettings = function (_Component) {
         Aux,
         null,
         React.createElement(Opacity, { isShow: true, onClick: function onClick() {
-            _this2.onOutsideClick();
+            _this3.onOutsideClick();
           } }),
         React.createElement(
           MonoIconSettings,
@@ -108,19 +117,40 @@ var IconMonoColorSettings = function (_Component) {
               ColorsWrapper,
               null,
               COLORS.map(function (color, index) {
-                return React.createElement(ColorIcon, { onClick: function onClick() {
-                    _this2.setColor(color);
-                  }, bgColor: color, key: 'color-' + index });
+                return React.createElement(ColorIcon, {
+                  onClick: function onClick() {
+                    _this3.setColor(color);
+                  },
+                  onKeyDown: function onKeyDown(event) {
+                    event.keyCode === 13 && _this3.setColor(color);
+                  },
+                  bgColor: color,
+                  key: 'color-' + index,
+                  tabIndex: 10000,
+                  role: 'button'
+                });
               }),
               React.createElement(ColorIcon, {
                 onClick: this.handleClick,
+                onKeyDown: function onKeyDown(event) {
+                  event.keyCode === 13 && _this3.handleClick();
+                },
                 bgColor: 'transparent',
-                bgImage: '//example.api.airstore.io/v1/get/a842b7b1-ae10-5e27-8838-fbc7796305fb'
+                bgImage: '//example.api.airstore.io/v1/get/a842b7b1-ae10-5e27-8838-fbc7796305fb',
+                tabIndex: 10000,
+                role: 'button'
               })
             ),
             React.createElement(
               ButtonSearch,
-              { fullBr: '4px', onClick: this.onApply },
+              {
+                innerRef: function innerRef(node) {
+                  return _this3._buttonSearch = node;
+                },
+                fullBr: '4px',
+                onClick: this.onApply,
+                tabIndex: 10001
+              },
               'Apply'
             )
           ),

@@ -45,7 +45,8 @@ var IconItem = function (_Component) {
           isShowNotRelevantBtn = _props.isShowNotRelevantBtn,
           setAsNotRelevant = _props.setAsNotRelevant,
           onLoadImage = _props.onLoadImage,
-          columnWidth = _props.columnWidth;
+          columnWidth = _props.columnWidth,
+          index = _props.index;
       var _state$isHover = this.state.isHover,
           isHover = _state$isHover === undefined ? false : _state$isHover;
 
@@ -57,11 +58,12 @@ var IconItem = function (_Component) {
             onIconClick(icon);
           },
           onKeyDown: function onKeyDown(event) {
-            event.keyCode === 13 && upload(icon);
+            event.keyCode === 13 && onIconClick(icon);
           },
+          role: 'button',
           onMouseOver: this.hoverToggle.bind(this, 'isHover', true),
           onMouseLeave: this.hoverToggle.bind(this, 'isHover', false),
-          tabIndex: 0
+          tabIndex: index
         },
         React.createElement(
           HoverWrapper,
@@ -71,14 +73,14 @@ var IconItem = function (_Component) {
             null,
             isShowAddTagBtn && React.createElement(
               AddTagBtn,
-              { sm: true, themeColor: true, onClick: function onClick(event) {
+              { tabIndex: -1, sm: true, themeColor: true, onClick: function onClick(event) {
                   addTag(event, icon);
                 } },
               '+'
             ),
             isShowNotRelevantBtn && React.createElement(
               NotRelevantBtn,
-              { sm: true, danger: true, onClick: function onClick(event) {
+              { tabIndex: -1, sm: true, danger: true, onClick: function onClick(event) {
                   setAsNotRelevant(event, icon);
                 } },
               'x'

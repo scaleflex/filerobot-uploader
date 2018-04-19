@@ -44,6 +44,7 @@ class UploadedImagesContent extends Component {
   };
 
   onKeyDown = (event, item) => {
+    if (event !== 13) return;
     event.stopPropagation();
     this.upload(item);
   }
@@ -86,11 +87,13 @@ class UploadedImagesContent extends Component {
     )
   }
 
-  renderImage = ({ style, columnWidth, item }) => {
+  renderImage = ({ style, columnWidth, item, index }) => {
     return (
       <ImageWrapper
         style={{ ...style, width: columnWidth }}
         onClick={() => { this.upload(item); }}
+        role="button"
+        tabIndex={index}
         onKeyDown={(event) => { this.onKeyDown(event, item); }}
       >
         <Img

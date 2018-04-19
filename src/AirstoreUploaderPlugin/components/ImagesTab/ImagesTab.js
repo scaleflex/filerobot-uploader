@@ -265,7 +265,12 @@ class ImagesTab extends Component {
           </div>
 
           <div style={{ padding: '5px 10px 12px' }}>
-            <AddColorBtn onClick={this.addColorFilter}>+ add color</AddColorBtn>
+            <AddColorBtn
+              onClick={this.addColorFilter}
+              onKeyDown={event => { event.keyCode === 13 && this.addColorFilter(); }}
+              tabIndex={0}
+              role="button"
+            >+ add color</AddColorBtn>
           </div>
 
           <Label fs={'16px'} color={'black'}>Categories</Label>
@@ -275,6 +280,8 @@ class ImagesTab extends Component {
             key={`category-background`}
             active={'backgrounds' === activePresetTag}
             onClick={() => { this.onActivatePresetTag('backgrounds'); }}
+            tabIndex={0}
+            role="button"
           >
             <ColorItemName>Backgrounds </ColorItemName>
             <CountTag>({backgrounds.length})</CountTag>
@@ -294,6 +301,9 @@ class ImagesTab extends Component {
         key={`category-${tag}`}
         active={tag === activePresetTag}
         onClick={() => { this.onActivatePresetTag(tag); }}
+        onKeyDown={event => { event.keyCode === 13 && this.onActivatePresetTag(tag); }}
+        tabIndex={0}
+        role="button"
       >
         <ColorItemName>{label || tag.replace(/_/g, ' ').trim()}</ColorItemName>
         <CountTag>({count})</CountTag>
@@ -306,9 +316,7 @@ class ImagesTab extends Component {
       event.preventDefault();
       event.stopPropagation();
 
-      this.setState({ isSelected: true });
-      this.forceUpdate();
-      this.props.upload(image);
+      this.upload(image);
     }
   }
 
@@ -354,13 +362,11 @@ class ImagesTab extends Component {
                   upload={this.upload}
                   onShowMoreImages={this.onShowMoreImages}
                   isShowMoreImages={isShowMoreImages}
-                  cellContent={({ style, columnWidth, item }) => (
+                  cellContent={({ style, columnWidth, item, index }) => (
                     <ImageWrapper
                       style={{ ...style, width: columnWidth }}
-                      onClick={() => {
-                        this.setState({ isSelected: true });
-                        this.upload(item);
-                      }}
+                      onClick={() => { this.upload(item); }}
+                      tabIndex={index}
                       onKeyDown={(event) => { this.onKeyDown(event, item); }}
                     >
                       <Img

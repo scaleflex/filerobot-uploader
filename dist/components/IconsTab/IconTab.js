@@ -339,13 +339,15 @@ var IconTab = function (_Component) {
               cellContent: function cellContent(_ref4) {
                 var style = _ref4.style,
                     columnWidth = _ref4.columnWidth,
-                    item = _ref4.item;
+                    item = _ref4.item,
+                    index = _ref4.index;
                 return React.createElement(
                   IconBoxWrapper,
                   { style: _extends({}, style, { width: Math.floor(columnWidth) }) },
                   React.createElement(IconItem, {
                     columnWidth: Math.floor(columnWidth),
                     icon: item,
+                    index: index,
                     onIconClick: _this2.onIconClick,
                     upload: _this2.upload,
                     addTag: _this2.addTag,

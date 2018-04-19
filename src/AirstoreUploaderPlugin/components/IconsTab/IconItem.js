@@ -10,24 +10,25 @@ class IconItem extends Component {
 
   render() {
     const { icon, onIconClick, upload, addTag, isShowAddTagBtn, isShowNotRelevantBtn, setAsNotRelevant,
-      onLoadImage, columnWidth
+      onLoadImage, columnWidth, index
     } = this.props;
     const { isHover = false } = this.state;
 
     return (
       <IconBoxWrapperInner
         onClick={() => { onIconClick(icon); }}
-        onKeyDown={event => { event.keyCode === 13 && upload(icon); }}
+        onKeyDown={event => { event.keyCode === 13 && onIconClick(icon); }}
+        role="button"
         onMouseOver={ this.hoverToggle.bind(this, 'isHover', true)}
         onMouseLeave={ this.hoverToggle.bind(this, 'isHover', false)}
-        tabIndex={0}
+        tabIndex={index}
       >
         <HoverWrapper isShow={isHover}>
           <ActionsIconWrapper>
             {isShowAddTagBtn &&
-            <AddTagBtn sm themeColor onClick={(event) => { addTag(event, icon); }}>+</AddTagBtn>}
+            <AddTagBtn tabIndex={-1} sm themeColor onClick={(event) => { addTag(event, icon); }}>+</AddTagBtn>}
             {isShowNotRelevantBtn &&
-            <NotRelevantBtn sm danger onClick={(event) => { setAsNotRelevant(event, icon); }}>x</NotRelevantBtn>}
+            <NotRelevantBtn tabIndex={-1} sm danger onClick={(event) => { setAsNotRelevant(event, icon); }}>x</NotRelevantBtn>}
           </ActionsIconWrapper>
         </HoverWrapper>
 

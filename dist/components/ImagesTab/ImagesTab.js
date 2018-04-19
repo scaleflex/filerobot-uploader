@@ -297,7 +297,14 @@ var ImagesTab = function (_Component) {
             { style: { padding: '5px 10px 12px' } },
             React.createElement(
               AddColorBtn,
-              { onClick: _this.addColorFilter },
+              {
+                onClick: _this.addColorFilter,
+                onKeyDown: function onKeyDown(event) {
+                  event.keyCode === 13 && _this.addColorFilter();
+                },
+                tabIndex: 0,
+                role: 'button'
+              },
               '+ add color'
             )
           ),
@@ -313,7 +320,9 @@ var ImagesTab = function (_Component) {
               active: 'backgrounds' === activePresetTag,
               onClick: function onClick() {
                 _this.onActivatePresetTag('backgrounds');
-              }
+              },
+              tabIndex: 0,
+              role: 'button'
             },
             React.createElement(
               ColorItemName,
@@ -350,7 +359,12 @@ var ImagesTab = function (_Component) {
           active: tag === activePresetTag,
           onClick: function onClick() {
             _this.onActivatePresetTag(tag);
-          }
+          },
+          onKeyDown: function onKeyDown(event) {
+            event.keyCode === 13 && _this.onActivatePresetTag(tag);
+          },
+          tabIndex: 0,
+          role: 'button'
         },
         React.createElement(
           ColorItemName,
@@ -372,9 +386,7 @@ var ImagesTab = function (_Component) {
         event.preventDefault();
         event.stopPropagation();
 
-        _this.setState({ isSelected: true });
-        _this.forceUpdate();
-        _this.props.upload(image);
+        _this.upload(image);
       }
     };
 
@@ -440,15 +452,16 @@ var ImagesTab = function (_Component) {
               cellContent: function cellContent(_ref4) {
                 var style = _ref4.style,
                     columnWidth = _ref4.columnWidth,
-                    item = _ref4.item;
+                    item = _ref4.item,
+                    index = _ref4.index;
                 return React.createElement(
                   ImageWrapper,
                   {
                     style: _extends({}, style, { width: columnWidth }),
                     onClick: function onClick() {
-                      _this.setState({ isSelected: true });
                       _this.upload(item);
                     },
+                    tabIndex: index,
                     onKeyDown: function onKeyDown(event) {
                       _this.onKeyDown(event, item);
                     }

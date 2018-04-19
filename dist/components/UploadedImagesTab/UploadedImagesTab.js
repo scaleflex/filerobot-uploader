@@ -125,6 +125,11 @@ var UploadedImagesTab = function (_Component) {
           return React.createElement(
             NavItem,
             {
+              role: 'menuitem',
+              tabIndex: 0,
+              onKeyDown: function onKeyDown(event) {
+                event.keyCode === 13 && _this.activateFolder(folder);
+              },
               onClick: _this.activateFolder.bind(_this, folder),
               active: folder.dir === (activeFolder && activeFolder.dir),
               key: folder.dir

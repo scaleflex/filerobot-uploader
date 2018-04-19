@@ -147,7 +147,8 @@ var ReactVirtualizedImagesGrid = function (_React$PureComponent) {
         },
         scrollTop: _this._scrollTop,
         width: width,
-        onScroll: _this.onScroll
+        onScroll: _this.onScroll,
+        tabIndex: -1
       });
     };
 

@@ -145,6 +145,9 @@ class UploadedImagesTab extends Component {
       <Nav>
         {folders.map(folder => (
           <NavItem
+            role="menuitem"
+            tabIndex={0}
+            onKeyDown={event => { event.keyCode === 13 && this.activateFolder(folder); }}
             onClick={this.activateFolder.bind(this, folder)}
             active={folder.dir === (activeFolder && activeFolder.dir)}
             key={folder.dir}
