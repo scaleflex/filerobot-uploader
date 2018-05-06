@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/build/static/js/airstore-uploader-react.96cbc560.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/static/js/airstore-uploader-react.96cbc560.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/airstore-uploader-react.745647cb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/airstore-uploader-react.745647cb.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/iconsApi.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/iconsApi.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/imagesApi.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/imagesApi.service.js" afterDir="false" />
-    </list>
+    <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -110,8 +99,8 @@
       <file leaf-file-name="imagesApi.service.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/imagesApi.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="51" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
+            <state relative-caret-position="216">
+              <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -426,7 +415,7 @@
       <workItem from="1524056207354" duration="2975000" />
       <workItem from="1524062398135" duration="6488000" />
       <workItem from="1524220295649" duration="51000" />
-      <workItem from="1525593169328" duration="1715000" />
+      <workItem from="1525593169328" duration="2134000" />
     </task>
     <task id="LOCAL-00001" summary="working on icon tab">
       <created>1522912068286</created>
@@ -666,14 +655,22 @@
       <option name="project" value="LOCAL" />
       <updated>1524125676212</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="change to new API">
+      <created>1525595289659</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1525595289659</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="217663000" />
+    <option name="totallyTimeSpent" value="218082000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="23" width="1399" height="836" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22496371" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -681,7 +678,7 @@
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5137421" side_tool="true" weight="0.35660848" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48625794" visible="true" weight="0.48743016" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48625794" visible="true" weight="0.23743017" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49330515" weight="0.3226257" />
@@ -730,7 +727,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working on Images Tab" />
     <MESSAGE value="small adjustments" />
     <MESSAGE value="rectify images tab add spinner on select image" />
     <MESSAGE value="fix problem with loosing data" />
@@ -755,7 +751,8 @@
     <MESSAGE value="upload missing files" />
     <MESSAGE value="fix problem with dir on single file upload" />
     <MESSAGE value="check all accessibility stuff for disabled" />
-    <option name="LAST_COMMIT_MESSAGE" value="check all accessibility stuff for disabled" />
+    <MESSAGE value="change to new API" />
+    <option name="LAST_COMMIT_MESSAGE" value="change to new API" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1121,8 +1118,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AirstoreUploaderPlugin/services/imagesApi.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="51" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
+        <state relative-caret-position="216">
+          <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

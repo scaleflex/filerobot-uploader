@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { send } from './api.service';
-var api_endpoint = '//api.imagesearch.rest/v3/';
+var api_endpoint = 'https://www.openpix.net/v3/';
 var backgroundsAPI = '//jolipage-public-assets.api.airstore.io/v1/list?dir=/Backgrounds/v1';
 
 var _send = function _send(url) {

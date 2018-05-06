@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-var api_endpoint = '//api.imagesearch.rest/v3/icons/';
+var api_endpoint = 'https://www.openpix.net/v3/icons';
 
 var _send = function _send(url) {
   var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
