@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const api_endpoint = '//api.imagesearch.rest/v3/icons/';
+const api_endpoint = 'https://www.openpix.net/v3/icons';
 
 const _send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   new Promise((resolve, reject) => {
