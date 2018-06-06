@@ -51,7 +51,8 @@ export var searchImages = function searchImages(searchParams) {
   var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var colorFiltersQuery = searchParams.colorFiltersQuery,
       limit = searchParams.limit,
-      offset = searchParams.offset;
+      offset = searchParams.offset,
+      openpixKey = searchParams.openpixKey;
 
   var splittedString = searchParams.value.trim().split(' ');
   var value = searchParams.value ? '&q[]=' + splittedString.map(function (string) {
@@ -62,8 +63,9 @@ export var searchImages = function searchImages(searchParams) {
   }).join('');
   var limitQuery = '&limit=' + limit;
   var offsetQuery = '&offset=' + offset;
+  var key = '&key=' + openpixKey;
 
-  return _send(api_endpoint + 'search?' + value + tags + colorFiltersQuery + limitQuery + offsetQuery).then(function (_ref3) {
+  return _send(api_endpoint + 'search?' + value + tags + colorFiltersQuery + limitQuery + offsetQuery + key).then(function (_ref3) {
     var _ref3$related_tags = _ref3.related_tags,
         related_tags = _ref3$related_tags === undefined ? [] : _ref3$related_tags,
         _ref3$related_top_col = _ref3.related_top_colors,

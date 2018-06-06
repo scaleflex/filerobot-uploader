@@ -200,6 +200,7 @@ var ImagesTab = function (_Component) {
       var relevantActiveTags = arguments[1];
       var cb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var uploaderConfig = _this.props.uploaderConfig;
+      var openpixKey = uploaderConfig.openpixKey;
 
       var done = function done(response) {
         typeof cb === 'function' && cb(response);
@@ -210,7 +211,7 @@ var ImagesTab = function (_Component) {
 
       _this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
-      return _this.props.onSearchImages(searchParams, relevantActiveTags).then(done, done);
+      return _this.props.onSearchImages(_extends({}, searchParams, { openpixKey: openpixKey }), relevantActiveTags).then(done, done);
     };
 
     _this.toggleTag = function (tag) {

@@ -79,7 +79,7 @@ export var uploadFiles = function uploadFiles() {
   }); // fill FormData
 
   return new Promise(function (resolve, reject) {
-    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.UPLOAD_KEY }).then(function (response) {
+    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY }).then(function (response) {
       var _response$status = response.status,
           status = _response$status === undefined ? 'success' : _response$status,
           _response$files = response.files,

@@ -48,7 +48,8 @@ export var getTags = function getTags() {
 export var searchIcons = function searchIcons(searchParams) {
   var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var typeQuery = searchParams.typeQuery,
-      offset = searchParams.offset;
+      offset = searchParams.offset,
+      openpixKey = searchParams.openpixKey;
 
   var splittedString = searchParams.value.trim().split(' ');
   var value = '&q[]=' + splittedString.map(function (string) {
@@ -57,10 +58,11 @@ export var searchIcons = function searchIcons(searchParams) {
   var tags = relevantActiveTags.map(function (tag) {
     return '&q[]=' + tag;
   }).join('');
+  var key = '&key=' + openpixKey;
   var limitQuery = '&limit=250';
   var offsetQuery = '&offset=' + offset;
 
-  return _send(api_endpoint + '?' + value + tags + typeQuery + limitQuery + offsetQuery).then(function (_ref3) {
+  return _send(api_endpoint + '?' + value + tags + typeQuery + limitQuery + offsetQuery + key).then(function (_ref3) {
     var _ref3$icons = _ref3.icons,
         icons = _ref3$icons === undefined ? [] : _ref3$icons,
         _ref3$count = _ref3.count,

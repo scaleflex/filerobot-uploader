@@ -91,6 +91,7 @@ var IconTab = function (_Component) {
       _this.setState({ isShowIconAddTagModal: true, activeIcon: activeIcon });
     }, _this.loadIcons = function (searchParams, relevantActiveTags) {
       var cb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var openpixKey = _this.props.uploaderConfig.openpixKey;
 
       var done = function done(response) {
         typeof cb === 'function' && cb(response);
@@ -99,7 +100,7 @@ var IconTab = function (_Component) {
 
       _this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
-      return _this.props.onSearchIcons(searchParams, relevantActiveTags, done);
+      return _this.props.onSearchIcons(_extends({}, searchParams, { openpixKey: openpixKey }), relevantActiveTags, done);
       //.then(done, done);
     }, _this.search = function (_ref2, refreshTags, resizeOnSuccess) {
       var _ref2$value = _ref2.value,
