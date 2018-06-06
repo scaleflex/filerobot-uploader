@@ -59,7 +59,7 @@ class ImagesTab extends Component {
     const { activeColorFilters } = this.state;
 
     this.setState({
-      activeColorFilters:  [...activeColorFilters.slice(0, index), ...activeColorFilters.slice(index + 1)]
+      activeColorFilters: [...activeColorFilters.slice(0, index), ...activeColorFilters.slice(index + 1)]
     });
     setTimeout(() => {
       const { activeColorFilters, searchPhrase, activePresetTag } = this.state;
@@ -171,6 +171,7 @@ class ImagesTab extends Component {
 
   loadIcons = (searchParams = {}, relevantActiveTags, cb = null) => {
     const { uploaderConfig } = this.props;
+    const { openpixKey } = uploaderConfig;
     const done = (response) => {
       typeof cb === 'function' && cb(response);
       this.setState({ isLoading: false, isShowMoreImages: false });
@@ -180,7 +181,7 @@ class ImagesTab extends Component {
 
     this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
-    return this.props.onSearchImages(searchParams, relevantActiveTags).then(done, done);
+    return this.props.onSearchImages({...searchParams, openpixKey }, relevantActiveTags).then(done, done);
   };
 
   toggleTag = (tag) => {
@@ -252,7 +253,7 @@ class ImagesTab extends Component {
         <SideBar>
           <Label fs={'16px'} color={'black'}>Color filter</Label>
 
-          <div style={{ margin: '0 10px'}}>
+          <div style={{ margin: '0 10px' }}>
             {activeColorFilters.map((colorFilter, index) => (
               <ColorFilterItem
                 index={index}
@@ -349,37 +350,37 @@ class ImagesTab extends Component {
           activeTags={activeTags}
           toggleTag={this.toggleTag}
         />
-          <ImagesListContainer innerRef={this.imageGridWrapperRef}>
-            {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
-              <Aux>
-                <VirtualizedImagesGrid
-                  imageGridWrapperWidth={imageGridWrapperWidth}
-                  imageContainerHeight={imageContainerHeight}
-                  columnWidth={columnWidth}
-                  gutterSize={gutterSize}
-                  count={imagesList.length}
-                  list={imagesList}
-                  upload={this.upload}
-                  onShowMoreImages={this.onShowMoreImages}
-                  isShowMoreImages={isShowMoreImages}
-                  cellContent={({ style, columnWidth, item, index }) => (
-                    <ImageWrapper
-                      style={{ ...style, width: columnWidth }}
-                      onClick={() => { this.upload(item); }}
-                      tabIndex={index}
-                      onKeyDown={(event) => { this.onKeyDown(event, item); }}
-                    >
-                      <Img
-                        height={columnWidth / (item.ratio || 1.6)}
-                        src={ImageGridService.getCropImageUrl(item.src, columnWidth, columnWidth / (item.ratio || 1.6))}
-                      />
-                    </ImageWrapper>
-                  )}
-                />
-                <ShowMoreResultsSpinner show={isShowMoreImages}/>
-              </Aux>
-              : null}
-          </ImagesListContainer>
+        <ImagesListContainer innerRef={this.imageGridWrapperRef}>
+          {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
+            <Aux>
+              <VirtualizedImagesGrid
+                imageGridWrapperWidth={imageGridWrapperWidth}
+                imageContainerHeight={imageContainerHeight}
+                columnWidth={columnWidth}
+                gutterSize={gutterSize}
+                count={imagesList.length}
+                list={imagesList}
+                upload={this.upload}
+                onShowMoreImages={this.onShowMoreImages}
+                isShowMoreImages={isShowMoreImages}
+                cellContent={({ style, columnWidth, item, index }) => (
+                  <ImageWrapper
+                    style={{ ...style, width: columnWidth }}
+                    onClick={() => { this.upload(item); }}
+                    tabIndex={index}
+                    onKeyDown={(event) => { this.onKeyDown(event, item); }}
+                  >
+                    <Img
+                      height={columnWidth / (item.ratio || 1.6)}
+                      src={ImageGridService.getCropImageUrl(item.src, columnWidth, columnWidth / (item.ratio || 1.6))}
+                    />
+                  </ImageWrapper>
+                )}
+              />
+              <ShowMoreResultsSpinner show={isShowMoreImages}/>
+            </Aux>
+            : null}
+        </ImagesListContainer>
       </ImageContainer>
     )
   }

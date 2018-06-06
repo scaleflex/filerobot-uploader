@@ -56,7 +56,7 @@ export const uploadFiles = (
     [...files].forEach(file => ajaxData.append(data_type, file)); // fill FormData
 
   return new Promise((resolve, reject) => {
-    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.UPLOAD_KEY }).then(
+    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY }).then(
       response => {
         const { status = 'success', files = [] } = response;
 

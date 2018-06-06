@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { isEnterClick } from '../../utils'
 import {
-  SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle,AmountIcons
+  SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, AmountIcons
 } from '../../styledComponents';
 import { connect } from 'react-redux'
 

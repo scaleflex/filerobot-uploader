@@ -74,6 +74,7 @@ class IconTab extends Component {
   }
 
   loadIcons = (searchParams, relevantActiveTags, cb = null) => {
+    const { openpixKey } = this.props.uploaderConfig;
     const done = (response) => {
       typeof cb === 'function' && cb(response);
       this.setState({ isLoading: false, isShowMoreImages: false });
@@ -81,7 +82,7 @@ class IconTab extends Component {
 
     this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
-    return this.props.onSearchIcons(searchParams, relevantActiveTags, done)
+    return this.props.onSearchIcons({ ...searchParams, openpixKey }, relevantActiveTags, done)
       //.then(done, done);
   };
 

@@ -40,15 +40,16 @@ export const getTags = () =>
     );
 
 export const searchIcons = (searchParams, relevantActiveTags = []) => {
-  const { typeQuery, offset } = searchParams;
+  const { typeQuery, offset, openpixKey } = searchParams;
   const splittedString = searchParams.value.trim().split(' ');
   const value = `&q[]=${splittedString.map(string => string.trim()).join('&q[]=')}`;
   const tags = relevantActiveTags.map(tag => `&q[]=${tag}`).join('');
+  const key = `&key=${openpixKey}`;
   const limitQuery = `&limit=250`;
   const offsetQuery = `&offset=${offset}`;
 
   return (
-    _send(`${api_endpoint}?${value}${tags}${typeQuery}${limitQuery}${offsetQuery}`)
+    _send(`${api_endpoint}?${value}${tags}${typeQuery}${limitQuery}${offsetQuery}${key}`)
       .then(
         ({ icons = [], count = 0, related_tags }) => ({ icons: icons || [], count, related_tags })
       )
