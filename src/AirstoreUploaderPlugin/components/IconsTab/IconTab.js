@@ -201,7 +201,7 @@ class IconTab extends Component {
   }
 
   render() {
-    const { active = {}, uploaderConfig, showAlert, count } = this.props;
+    const { active = {}, uploaderConfig, showAlert, count, themeColors } = this.props;
     const {
       isLoading, isSearching, activeTags, isShowMonoIconSettings, activeIconSrc, searchPhrase, activeColorType,
       isShowIconAddTagModal, activeIcon, activePresetTag, imageGridWrapperWidth, imageContainerHeight, imageGrid,
@@ -241,6 +241,7 @@ class IconTab extends Component {
 
           {isShowMonoIconSettings &&
           <IconMonoColorSettings
+            themeColors={themeColors}
             upload={this.upload}
             activeIconSrc={activeIconSrc}
             onClose={() => { this.setState({ isShowMonoIconSettings: false  }); }}

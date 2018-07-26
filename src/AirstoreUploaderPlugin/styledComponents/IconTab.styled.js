@@ -16,10 +16,11 @@ export const AmountIcons = styled.div`
   color: #3f3f3f;
 `;
 export const Label = styled.div`
-  padding: 10px 8px;
+  padding: ${props => props.p ? props.p : '10px 8px'};
   font-size: ${props => props.fs ? props.fs : 'inherit'};
   color: ${props => props.color === 'black' ? '#1e262c' : ''};
   border-top: ${ props => props.bt ? '1px solid rgb(221, 221, 221)' : 'none'};
+  margin-right: ${props => props.mr ? props.mr : 0};
 `;
 export const InputSearch = styled.input.attrs({
   autoFocus: true
@@ -243,7 +244,7 @@ export const ColorsWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   padding-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
 `;
 
@@ -363,4 +364,10 @@ export const Icon = styled.img`
 export const CountTag = styled.span`
   margin-left: 6px;
   color: rgb(112, 118, 126);
+`;
+
+export const ThemeColors = styled.div`
+  justify-content: center;
+  display: flex;
+  margin-bottom: 20px;
 `;
