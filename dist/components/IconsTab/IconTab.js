@@ -249,7 +249,8 @@ var IconTab = function (_Component) {
           active = _props$active === undefined ? {} : _props$active,
           uploaderConfig = _props.uploaderConfig,
           showAlert = _props.showAlert,
-          count = _props.count;
+          count = _props.count,
+          themeColors = _props.themeColors;
       var _state = this.state,
           isLoading = _state.isLoading,
           isSearching = _state.isSearching,
@@ -302,6 +303,7 @@ var IconTab = function (_Component) {
             toggleTag: this.toggleTag
           }),
           isShowMonoIconSettings && React.createElement(IconMonoColorSettings, {
+            themeColors: themeColors,
             upload: this.upload,
             activeIconSrc: activeIconSrc,
             onClose: function onClose() {

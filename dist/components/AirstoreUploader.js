@@ -128,9 +128,10 @@ var AirstoreUploader = function (_Component) {
       var _props2 = this.props,
           activeTab = _props2.activeTab,
           _props2$filteredTabs = _props2.filteredTabs,
-          filteredTabs = _props2$filteredTabs === undefined ? [] : _props2$filteredTabs;
+          filteredTabs = _props2$filteredTabs === undefined ? [] : _props2$filteredTabs,
+          initialOptions = _props2.initialOptions;
 
-      var contentProps = { showAlert: this.showAlert };
+      var contentProps = { showAlert: this.showAlert, themeColors: initialOptions.themeColors };
 
       return React.createElement(
         FocusLock,
