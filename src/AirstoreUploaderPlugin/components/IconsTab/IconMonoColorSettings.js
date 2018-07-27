@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Aux } from '../hoc';
 import {
   ButtonSearch, Label, MonoIconSettings, ColorIcon, ColorsWrapper, Opacity, SettingsIcon, SettingsIconWrapper,
-  MonoActionBlock
+  MonoActionBlock, ThemeColors
 } from '../../styledComponents';
 import { COLORS } from '../../config';
 import { guid } from '../../services/helper.service';
@@ -68,6 +68,7 @@ class IconMonoColorSettings extends Component {
   }
 
   render() {
+    const { themeColors } = this.props;
     const { isLoading, displayColorPicker, activeColor } = this.state;
     const popover = {
       position: 'absolute',
@@ -107,6 +108,11 @@ class IconMonoColorSettings extends Component {
                 role="button"
               />
             </ColorsWrapper>
+            <ThemeColors>
+              <Label color={'black'} mr={'5px'} p={'0px'}>Theme colors:</Label>
+              <ColorIcon onClick={() => { this.setColor(themeColors.primary); }} bgColor={themeColors.primary}/>
+              <ColorIcon onClick={() => { this.setColor(themeColors.secondary); }} bgColor={themeColors.secondary}/>
+            </ThemeColors>
             <ButtonSearch
               innerRef={node => this._buttonSearch = node}
               fullBr={'4px'}

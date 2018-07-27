@@ -98,8 +98,8 @@ class AirstoreUploader extends Component {
   }
 
   renderModalContent() {
-    const { activeTab, filteredTabs = [] } = this.props;
-    const contentProps = { showAlert: this.showAlert };
+    const { activeTab, filteredTabs = [], initialOptions } = this.props;
+    const contentProps = { showAlert: this.showAlert, themeColors: initialOptions.themeColors };
 
     return (
       <FocusLock>
