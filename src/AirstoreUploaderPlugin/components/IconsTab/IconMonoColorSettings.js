@@ -108,11 +108,11 @@ class IconMonoColorSettings extends Component {
                 role="button"
               />
             </ColorsWrapper>
-            <ThemeColors>
+            {themeColors && <ThemeColors>
               <Label color={'black'} mr={'5px'} p={'0px'}>Theme colors:</Label>
               <ColorIcon onClick={() => { this.setColor(themeColors.primary); }} bgColor={themeColors.primary}/>
               <ColorIcon onClick={() => { this.setColor(themeColors.secondary); }} bgColor={themeColors.secondary}/>
-            </ThemeColors>
+            </ThemeColors>}
             <ButtonSearch
               innerRef={node => this._buttonSearch = node}
               fullBr={'4px'}
