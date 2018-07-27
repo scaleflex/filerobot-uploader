@@ -368,6 +368,7 @@ export const CountTag = styled.span`
 
 export const ThemeColors = styled.div`
   justify-content: center;
+  align-items: center;
   display: flex;
   margin-bottom: 20px;
 `;
