@@ -1,6 +1,6 @@
 var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10px;\n  justify-content: left;\n'], ['\n  display: flex;\n  padding: 10px;\n  justify-content: left;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: ', ';\n  align-items: center;\n  padding: 10px;\n  font-size: 13px;\n  color: #3f3f3f;\n'], ['\n  display: ', ';\n  align-items: center;\n  padding: 10px;\n  font-size: 13px;\n  color: #3f3f3f;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  padding: 10px 8px;\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n'], ['\n  padding: 10px 8px;\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n'], ['\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  height: 34px;\n  width: 300px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: rgb(85, 85, 85);\n  background: rgb(255, 255, 255);\n  border-radius: 4px 0 0 4px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n  border: 1px solid transparent;\n  border-right: 0px solid transparent;\n  outline: 0;\n\n  :focus {\n    border: 1px solid #5D636B;\n    border-right: 0px solid transparent;\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n'], ['\n  height: 34px;\n  width: 300px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: rgb(85, 85, 85);\n  background: rgb(255, 255, 255);\n  border-radius: 4px 0 0 4px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n  border: 1px solid transparent;\n  border-right: 0px solid transparent;\n  outline: 0;\n\n  :focus {\n    border: 1px solid #5D636B;\n    border-right: 0px solid transparent;\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  font-family: Roboto, sans-serif;\n  height: 34px;\n  padding: 6px 12px;\n  line-height: 23px;\n  text-transform: uppercase;\n  color: #fff;\n  background-color: #00707C;\n  background-repeat: repeat-x;\n  border: none;\n  border-radius: ', ';\n  cursor: pointer;\n  font-weight: 300;\n  outline: 0;\n  font-size: 12px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  font-weight: 400;\n  text-transform: none;\n\n  :hover {\n    background-color: #096868;\n  }\n\n  :focus {\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n'], ['\n  font-family: Roboto, sans-serif;\n  height: 34px;\n  padding: 6px 12px;\n  line-height: 23px;\n  text-transform: uppercase;\n  color: #fff;\n  background-color: #00707C;\n  background-repeat: repeat-x;\n  border: none;\n  border-radius: ', ';\n  cursor: pointer;\n  font-weight: 300;\n  outline: 0;\n  font-size: 12px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  font-weight: 400;\n  text-transform: none;\n\n  :hover {\n    background-color: #096868;\n  }\n\n  :focus {\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: space-between;\n  \n  ', '\n'], ['\n  display: flex;\n  justify-content: space-between;\n  \n  ', '\n']),
@@ -17,7 +17,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10
     _templateObject17 = _taggedTemplateLiteral(['\n  display: ', ';\n  flex-direction: column;\n  position: absolute;\n  top: 50%;\n  left: ', ';\n  margin-top: -160px;\n  margin-left: -140px;\n  background-color: rgb(245, 245, 245);\n  z-index: 3;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n'], ['\n  display: ', ';\n  flex-direction: column;\n  position: absolute;\n  top: 50%;\n  left: ', ';\n  margin-top: -160px;\n  margin-left: -140px;\n  background-color: rgb(245, 245, 245);\n  z-index: 3;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n']),
     _templateObject18 = _taggedTemplateLiteral(['\n  padding: 20px;\n  box-sizing: border-box;\n  text-align: center;\n  width: 280px;\n'], ['\n  padding: 20px;\n  box-sizing: border-box;\n  text-align: center;\n  width: 280px;\n']),
     _templateObject19 = _taggedTemplateLiteral(['\n  display: ', ';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #000;\n  opacity: .5;\n  z-index: 1;\n'], ['\n  display: ', ';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #000;\n  opacity: .5;\n  z-index: 1;\n']),
-    _templateObject20 = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  padding-top: 10px;\n  margin-bottom: 20px;\n  position: relative;\n'], ['\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  padding-top: 10px;\n  margin-bottom: 20px;\n  position: relative;\n']),
+    _templateObject20 = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  padding-top: 10px;\n  margin-bottom: 10px;\n  position: relative;\n'], ['\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  padding-top: 10px;\n  margin-bottom: 10px;\n  position: relative;\n']),
     _templateObject21 = _taggedTemplateLiteral(['\n  width: 20px;\n  height: 20px;\n  background-color: ', ';\n  background-image: ', ';\n  background-size: cover;\n  border-radius: 50%;\n  margin-right: 5px;\n  cursor: pointer;\n'], ['\n  width: 20px;\n  height: 20px;\n  background-color: ', ';\n  background-image: ', ';\n  background-size: cover;\n  border-radius: 50%;\n  margin-right: 5px;\n  cursor: pointer;\n']),
     _templateObject22 = _taggedTemplateLiteral(['\n  width: auto;\n  height: 100%;\n'], ['\n  width: auto;\n  height: 100%;\n']),
     _templateObject23 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 140px;\n  position: relative;\n  text-align: center;\n  padding: 20px;\n  box-sizing: border-box;\n'], ['\n  width: 100%;\n  height: 140px;\n  position: relative;\n  text-align: center;\n  padding: 20px;\n  box-sizing: border-box;\n']),
@@ -30,7 +30,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10
     _templateObject30 = _taggedTemplateLiteral(['\n  position: relative;\n\n  :focus {\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n'], ['\n  position: relative;\n\n  :focus {\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n']),
     _templateObject31 = _taggedTemplateLiteral(['\n  width: ', 'px;\n  height: ', 'px;\n  cursor: pointer;\n  padding: 20px;\n  box-sizing: border-box;\n'], ['\n  width: ', 'px;\n  height: ', 'px;\n  cursor: pointer;\n  padding: 20px;\n  box-sizing: border-box;\n']),
     _templateObject32 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  transition: all 0.3s;\n  background: rgba(255, 255, 255, 1);\n  -moz-transform: scale(1);\n  transition: all 200ms ease-in;\n  \n  ', '\n'], ['\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  transition: all 0.3s;\n  background: rgba(255, 255, 255, 1);\n  -moz-transform: scale(1);\n  transition: all 200ms ease-in;\n  \n  ', '\n']),
-    _templateObject33 = _taggedTemplateLiteral(['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n'], ['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n']);
+    _templateObject33 = _taggedTemplateLiteral(['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n'], ['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n']),
+    _templateObject34 = _taggedTemplateLiteral(['\n  justify-content: center;\n  display: flex;\n  margin-bottom: 20px;\n'], ['\n  justify-content: center;\n  display: flex;\n  margin-bottom: 20px;\n']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -43,11 +44,15 @@ export var AmountIcons = styled.div(_templateObject2, function (props) {
   return props.empty ? 'none' : 'flex';
 });
 export var Label = styled.div(_templateObject3, function (props) {
+  return props.p ? props.p : '10px 8px';
+}, function (props) {
   return props.fs ? props.fs : 'inherit';
 }, function (props) {
   return props.color === 'black' ? '#1e262c' : '';
 }, function (props) {
   return props.bt ? '1px solid rgb(221, 221, 221)' : 'none';
+}, function (props) {
+  return props.mr ? props.mr : 0;
 });
 export var InputSearch = styled.input.attrs({
   autoFocus: true
@@ -147,3 +152,5 @@ export var Icon = styled.img(_templateObject32, function (props) {
 });
 
 export var CountTag = styled.span(_templateObject33);
+
+export var ThemeColors = styled.div(_templateObject34);

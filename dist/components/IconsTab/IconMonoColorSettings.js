@@ -8,7 +8,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { Aux } from '../hoc';
-import { ButtonSearch, Label, MonoIconSettings, ColorIcon, ColorsWrapper, Opacity, SettingsIcon, SettingsIconWrapper, MonoActionBlock } from '../../styledComponents';
+import { ButtonSearch, Label, MonoIconSettings, ColorIcon, ColorsWrapper, Opacity, SettingsIcon, SettingsIconWrapper, MonoActionBlock, ThemeColors } from '../../styledComponents';
 import { COLORS } from '../../config';
 import { guid } from '../../services/helper.service';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
@@ -78,6 +78,7 @@ var IconMonoColorSettings = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var themeColors = this.props.themeColors;
       var _state = this.state,
           isLoading = _state.isLoading,
           displayColorPicker = _state.displayColorPicker,
@@ -140,6 +141,21 @@ var IconMonoColorSettings = function (_Component) {
                 tabIndex: 10000,
                 role: 'button'
               })
+            ),
+            themeColors && React.createElement(
+              ThemeColors,
+              null,
+              React.createElement(
+                Label,
+                { color: 'black', mr: '5px', p: '0px' },
+                'Theme colors:'
+              ),
+              React.createElement(ColorIcon, { onClick: function onClick() {
+                  _this3.setColor(themeColors.primary);
+                }, bgColor: themeColors.primary }),
+              React.createElement(ColorIcon, { onClick: function onClick() {
+                  _this3.setColor(themeColors.secondary);
+                }, bgColor: themeColors.secondary })
             ),
             React.createElement(
               ButtonSearch,
