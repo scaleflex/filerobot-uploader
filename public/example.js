@@ -6,7 +6,7 @@
 
     if (result) result.innerHTML = JSON.stringify(file || {}, null, 2);
     if (resultImg) {
-      resultImg.src = file && file.public_link ? file.public_link : '';
+      resultImg.src = file && file.url_permalink ? file.url_permalink : '';
       resultImg.style.display = 'inline-block';
     }
   };

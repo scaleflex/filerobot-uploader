@@ -70,7 +70,7 @@ const _activateTab = (state, activeTab) => ({...state, activeTab });
 const _setUploaderConfig = (state, config = {}) => {
 
   const uploaderConfig = {
-    uploadPath: `https://${config.CONTAINER}.api.airstore.io/upload/v1`,
+    uploadPath: `https://${config.CONTAINER}.api.airstore.io/v1/upload`,
     uploadParams: config.UPLOAD_PARAMS,
     uploadKey: config.AIRSTORE_UPLOAD_KEY,
     openpixKey: config.OPENPIX_KEY,

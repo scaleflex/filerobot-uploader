@@ -58,20 +58,27 @@ export const uploadFiles = (
   return new Promise((resolve, reject) => {
     send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY }).then(
       response => {
-        const { status = 'success', files = [] } = response;
+        const { status = 'success', files = [], file } = response;
 
-        if (status === 'success' && files && files.length)
-          resolve(
-            files
-              .filter(file => file.status !== 'error')
-              .map(file => {
-                file.public_link = file.public_link.replace(independentProtocolRegex, '//');
+        if (status === 'success' && file) {
+          //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
-                return file;
-              })
-          );
-        else
+          resolve([file]);
+        } else
           reject(response);
+
+        //if (status === 'success' && files && files.length)
+        //  resolve(
+        //    files
+        //      .filter(file => file.status !== 'error')
+        //      .map(file => {
+        //        file.public_link = file.public_link.replace(independentProtocolRegex, '//');
+        //
+        //        return file;
+        //      })
+        //  );
+        //else
+        //  reject(response);
       },
 
       error => {
