@@ -5,7 +5,7 @@ import config from '../config';
 
 var independentProtocolRegex = /^[https|http]+\:\/\//g;
 var getBaseUrl = function getBaseUrl(container) {
-  return '//' + container + '.api.airstore.io/v1/';
+  return 'https://' + container + '.api.airstore.io/v1/';
 };
 
 export var send = function send(url) {
@@ -59,7 +59,7 @@ export var uploadFiles = function uploadFiles() {
   var data_type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
   var dir = arguments[3];
 
-  var url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
+  var url = uploadPath || ''; // use independent protocol
   var ajaxData = new FormData();
 
   uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { send } from './api.service';
 var api_endpoint = 'https://www.openpix.net/v3/';
-var backgroundsAPI = '//jolipage-public-assets.api.airstore.io/v1/list?dir=/Backgrounds/v1';
+var backgroundsAPI = 'https://jolipage-public-assets.api.airstore.io/v1/list?dir=/Backgrounds/v1';
 
 var _send = function _send(url) {
   var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
