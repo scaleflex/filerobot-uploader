@@ -31,7 +31,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10
     _templateObject31 = _taggedTemplateLiteral(['\n  width: ', 'px;\n  height: ', 'px;\n  cursor: pointer;\n  padding: 20px;\n  box-sizing: border-box;\n'], ['\n  width: ', 'px;\n  height: ', 'px;\n  cursor: pointer;\n  padding: 20px;\n  box-sizing: border-box;\n']),
     _templateObject32 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  transition: all 0.3s;\n  background: rgba(255, 255, 255, 1);\n  -moz-transform: scale(1);\n  transition: all 200ms ease-in;\n  \n  ', '\n'], ['\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  transition: all 0.3s;\n  background: rgba(255, 255, 255, 1);\n  -moz-transform: scale(1);\n  transition: all 200ms ease-in;\n  \n  ', '\n']),
     _templateObject33 = _taggedTemplateLiteral(['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n'], ['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n']),
-    _templateObject34 = _taggedTemplateLiteral(['\n  justify-content: center;\n  display: flex;\n  margin-bottom: 20px;\n'], ['\n  justify-content: center;\n  display: flex;\n  margin-bottom: 20px;\n']);
+    _templateObject34 = _taggedTemplateLiteral(['\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  margin-bottom: 20px;\n'], ['\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  margin-bottom: 20px;\n']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 

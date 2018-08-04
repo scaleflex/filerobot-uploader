@@ -92,7 +92,7 @@ var _setUploaderConfig = function _setUploaderConfig(state) {
 
 
   var uploaderConfig = {
-    uploadPath: 'https://' + config.CONTAINER + '.api.airstore.io/upload',
+    uploadPath: 'https://' + config.CONTAINER + '.api.airstore.io/upload/v1',
     uploadParams: config.UPLOAD_PARAMS,
     uploadKey: config.AIRSTORE_UPLOAD_KEY,
     openpixKey: config.OPENPIX_KEY,
