@@ -21,9 +21,9 @@
       { dir: '/company_test', label: 'Company' },
       { dir: '/company_test/project_test', label: 'Project' }
     ],
-    AIRSTORE_UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
+    AIRSTORE_UPLOAD_KEY: '197779631d2d46c4b67ff9757720391d', // required
     OPENPIX_KEY: 'a000000000000000000000000000000f',// required
-    CONTAINER: 'example',                           // required
+    CONTAINER: 'jolipage002-global',                           // required
     LIMIT_IMAGES_PER_RESPONSE: 100,                 // optional   default 100
     INITIAL_TAB: 'UPLOADED_IMAGES',                 // optional   default first tab
     IS_SHOW_ADD_TAG_BTN: true,                      // optional   default false

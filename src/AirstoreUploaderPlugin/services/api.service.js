@@ -3,7 +3,7 @@ import config from '../config';
 
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
-const getBaseUrl = (container) => `//${container}.api.airstore.io/v1/`;
+const getBaseUrl = (container) => `https://${container}.api.airstore.io/v1/`;
 
 export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   axios({
@@ -38,7 +38,7 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
 export const uploadFiles = (
   files = [], { uploadPath = '', uploadParams = {}, uploadKey = '' }, data_type = 'files[]', dir
 ) => {
-  let url = (uploadPath || '').replace(independentProtocolRegex, '//'); // use independent protocol
+  let url = (uploadPath || ''); // use independent protocol
   const ajaxData = new FormData();
 
   uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
