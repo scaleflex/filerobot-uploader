@@ -83,16 +83,28 @@ export var uploadFiles = function uploadFiles() {
       var _response$status = response.status,
           status = _response$status === undefined ? 'success' : _response$status,
           _response$files = response.files,
-          files = _response$files === undefined ? [] : _response$files;
+          files = _response$files === undefined ? [] : _response$files,
+          file = response.file;
 
 
-      if (status === 'success' && files && files.length) resolve(files.filter(function (file) {
-        return file.status !== 'error';
-      }).map(function (file) {
-        file.public_link = file.public_link.replace(independentProtocolRegex, '//');
+      if (status === 'success' && file) {
+        //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
-        return file;
-      }));else reject(response);
+        resolve([file]);
+      } else reject(response);
+
+      //if (status === 'success' && files && files.length)
+      //  resolve(
+      //    files
+      //      .filter(file => file.status !== 'error')
+      //      .map(file => {
+      //        file.public_link = file.public_link.replace(independentProtocolRegex, '//');
+      //
+      //        return file;
+      //      })
+      //  );
+      //else
+      //  reject(response);
     }, function (error) {
       if (error.code === 'ECONNABORTED') console.warn('Network seems not good :(');
 
