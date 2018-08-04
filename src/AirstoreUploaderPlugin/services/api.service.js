@@ -40,6 +40,8 @@ export const uploadFiles = (
 ) => {
   let url = (uploadPath || ''); // use independent protocol
   const ajaxData = new FormData();
+  const jsonData = { files_urls: [] };
+  const isJson = data_type === 'application/json';
 
   uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
 
@@ -52,11 +54,20 @@ export const uploadFiles = (
   if (paramsStr)
     url += `?${paramsStr}`
 
-  if (files)
+  if (files && isJson) {
+    [...files].forEach(file => { jsonData.files_urls.push(file); });
+  } else if (files)
     [...files].forEach(file => ajaxData.append(data_type, file)); // fill FormData
 
   return new Promise((resolve, reject) => {
-    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY }).then(
+    send(
+      url,
+      'POST',
+      isJson ? jsonData : ajaxData,
+      { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY,
+        'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
+      }
+      ).then(
       response => {
         const { status = 'success', files = [], file } = response;
 
