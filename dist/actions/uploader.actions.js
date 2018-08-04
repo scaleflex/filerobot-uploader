@@ -83,7 +83,7 @@ export var uploadFilesToDir = function uploadFilesToDir(files, uploaderConfig) {
 export var uploadFilesFromUrls = function uploadFilesFromUrls() {
   var filesUrls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var uploaderConfig = arguments[1];
-  var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files_url[]';
+  var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'application/json';
   return function (dispatch) {
     return dispatch(uploadFiles(Array.isArray(filesUrls) ? filesUrls : [filesUrls], uploaderConfig, dataType));
   };

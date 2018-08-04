@@ -61,6 +61,8 @@ export var uploadFiles = function uploadFiles() {
 
   var url = uploadPath || ''; // use independent protocol
   var ajaxData = new FormData();
+  var jsonData = { files_urls: [] };
+  var isJson = data_type === 'application/json';
 
   uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
 
@@ -74,12 +76,18 @@ export var uploadFiles = function uploadFiles() {
 
   if (paramsStr) url += '?' + paramsStr;
 
-  if (files) [].concat(_toConsumableArray(files)).forEach(function (file) {
+  if (files && isJson) {
+    [].concat(_toConsumableArray(files)).forEach(function (file) {
+      jsonData.files_urls.push(file);
+    });
+  } else if (files) [].concat(_toConsumableArray(files)).forEach(function (file) {
     return ajaxData.append(data_type, file);
   }); // fill FormData
 
   return new Promise(function (resolve, reject) {
-    send(url, 'POST', ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY }).then(function (response) {
+    send(url, 'POST', isJson ? jsonData : ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY,
+      'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
+    }).then(function (response) {
       var _response$status = response.status,
           status = _response$status === undefined ? 'success' : _response$status,
           _response$files = response.files,
