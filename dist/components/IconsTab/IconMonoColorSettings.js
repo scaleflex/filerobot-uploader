@@ -46,7 +46,7 @@ var IconMonoColorSettings = function (_Component) {
 
       var colorQuery = 'tpng.transparentwhite.level' + activeColor.replace('#', '');
 
-      return '//scaleflex.cloudimg.io/width/' + width + '/' + colorQuery + '/' + activeIconSrc + '&v=' + guid();
+      return 'https://scaleflex.cloudimg.io/width/' + width + '/' + colorQuery + '/' + activeIconSrc + '&v=' + guid();
     }, _this.onLoad = function () {
       _this.setState({ isLoading: false });
     }, _this.handleClick = function () {

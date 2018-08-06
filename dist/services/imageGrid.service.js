@@ -20,19 +20,19 @@ export var getActualColumnWidth = function getActualColumnWidth() {
 export var getResizeImageUrl = function getResizeImageUrl() {
   var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
-  return '//scaleflex.cloudimg.io/width/' + Math.round(width) + '/s/' + url;
+  return 'https://scaleflex.cloudimg.io/width/' + Math.round(width) + '/s/' + url;
 };
 
 export var getFitResizeImageUrl = function getFitResizeImageUrl() {
   var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
   var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
-  return '//scaleflex.cloudimg.io/fit/' + Math.round(width) + 'x' + Math.round(height) + '/ffffff/' + url;
+  return 'https://scaleflex.cloudimg.io/fit/' + Math.round(width) + 'x' + Math.round(height) + '/ffffff/' + url;
 };
 
 export var getCropImageUrl = function getCropImageUrl() {
   var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
   var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
-  return '//scaleflex.cloudimg.io/crop/' + Math.round(width) + 'x' + Math.round(height) + '/s/' + url;
+  return 'https://scaleflex.cloudimg.io/crop/' + Math.round(width) + 'x' + Math.round(height) + '/s/' + url;
 };
