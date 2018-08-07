@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'sf-airstore-uploader-font';
-  src:  url('//scaleflex.ultrafast.io/http://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.eot?qwu6zv');
-  src:  url('//scaleflex.ultrafast.io/http://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.eot?qwu6zv#iefix') format('embedded-opentype'),
-    url('//scaleflex.ultrafast.io/http://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.ttf?qwu6zv') format('truetype'),
-    url('//scaleflex.ultrafast.io/http://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.woff?qwu6zv') format('woff'),
-    url('//scaleflex.ultrafast.io/http://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.svg?qwu6zv#sf-airstore-uploader-font') format('svg');
+  src:  url('https://scaleflex.ultrafast.io/https://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.eot?qwu6zv');
+  src:  url('https://scaleflex.ultrafast.io/https://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.eot?qwu6zv#iefix') format('embedded-opentype'),
+    url('https://scaleflex.ultrafast.io/https://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.ttf?qwu6zv') format('truetype'),
+    url('https://scaleflex.ultrafast.io/https://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.woff?qwu6zv') format('woff'),
+    url('https://scaleflex.ultrafast.io/https://jolipage.airstore.io/v3/fonts/airstore-uploader-react/sf-airstore-uploader-font.svg?qwu6zv#sf-airstore-uploader-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }

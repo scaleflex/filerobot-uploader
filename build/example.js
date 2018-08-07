@@ -25,7 +25,7 @@
     OPENPIX_KEY: 'a000000000000000000000000000000f',// required
     CONTAINER: 'jolipage002-global',                           // required
     LIMIT_IMAGES_PER_RESPONSE: 100,                 // optional   default 100
-    INITIAL_TAB: 'UPLOADED_IMAGES',                 // optional   default first tab
+    INITIAL_TAB: 'UPLOAD',                 // optional   default first tab
     IS_SHOW_ADD_TAG_BTN: true,                      // optional   default false
     IS_SHOW_NOT_RELEVANT_BTN: true,                 // optional   default false
     onUpload: onUploadHandler,                      // required
@@ -36,8 +36,7 @@
       window.AirstoreUploader.init(options);
 
       const openBtn = document.querySelector('.open-modal-btn');
-      const initialTab = 'UPLOADED_IMAGES';
-      if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open(initialTab);
+      if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open();
     }
   }
 })();
