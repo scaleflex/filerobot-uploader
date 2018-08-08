@@ -26,13 +26,13 @@ var SearchBar = function (_Component) {
       var _this2 = this;
 
       setTimeout(function () {
-        if (_this2.searchField) _this2.searchField.focus();
+        if (_this2.searchField && _this2.searchField.focus) _this2.searchField.focus();
       });
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      if (!nextProps.isLoading && nextProps.isLoading !== this.props.isLoading && this.searchField) this.searchField.focus();
+      if (!nextProps.isLoading && nextProps.isLoading !== this.props.isLoading && this.searchField && this.searchField.focus) this.searchField.focus();
     }
   }, {
     key: 'render',

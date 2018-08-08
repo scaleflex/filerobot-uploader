@@ -9,12 +9,13 @@ import { connect } from 'react-redux'
 class SearchBar extends Component {
   componentDidMount() {
     setTimeout(() => {
-      if (this.searchField) this.searchField.focus();
+      if (this.searchField && this.searchField.focus) this.searchField.focus();
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.isLoading && (nextProps.isLoading !== this.props.isLoading) && this.searchField)
+    if (!nextProps.isLoading && (nextProps.isLoading !== this.props.isLoading) &&
+      this.searchField && this.searchField.focus)
       this.searchField.focus();
   }
 

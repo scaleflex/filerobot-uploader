@@ -11,7 +11,7 @@ class IconAddTagModal extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      if (this._input) this._input.focus();
+      if (this._input && this._input.focus) this._input.focus();
     })
   }
 

@@ -46,7 +46,7 @@ var IconAddTagModal = function (_Component) {
       var _this2 = this;
 
       setTimeout(function () {
-        if (_this2._input) _this2._input.focus();
+        if (_this2._input && _this2._input.focus) _this2._input.focus();
       });
     }
   }, {

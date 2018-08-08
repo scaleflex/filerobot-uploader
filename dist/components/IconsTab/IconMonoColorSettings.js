@@ -65,7 +65,7 @@ var IconMonoColorSettings = function (_Component) {
       var _this2 = this;
 
       setTimeout(function () {
-        if (_this2._buttonSearch) _this2._buttonSearch.focus();
+        if (_this2._buttonSearch && _this2._buttonSearch.focus) _this2._buttonSearch.focus();
       });
     }
   }, {

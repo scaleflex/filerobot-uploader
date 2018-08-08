@@ -73,7 +73,7 @@ var _visibilityOpen = function _visibilityOpen(state, activeTabName) {
   setTimeout(function () {
     var link = document.querySelector('.airstore-uploader-navigation #tab-' + activeTab.id);
 
-    link.focus();
+    if (link && link.focus) link.focus();
   });
 
   return _extends({}, state, { isVisible: true, activeTab: activeTab });

@@ -57,7 +57,7 @@ const _visibilityOpen = (state, activeTabName) => {
   setTimeout(() => {
     const link = document.querySelector(`.airstore-uploader-navigation #tab-${activeTab.id}`);
 
-    link.focus();
+    if (link && link.focus) link.focus();
   })
 
   return {...state, isVisible: true, activeTab };

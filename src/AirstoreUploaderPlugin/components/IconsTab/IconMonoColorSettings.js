@@ -19,7 +19,7 @@ class IconMonoColorSettings extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      if (this._buttonSearch) this._buttonSearch.focus();
+      if (this._buttonSearch && this._buttonSearch.focus) this._buttonSearch.focus();
     })
   }
 
