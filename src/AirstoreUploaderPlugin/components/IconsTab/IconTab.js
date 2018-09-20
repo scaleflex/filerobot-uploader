@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { uploadFilesFromUrls, getIconsTags, activateIconsCategory, fetchIcons } from '../../actions';
+import { uploadFilesFromUrls, getIconsTags, activateIconsCategory, fetchIcons, modalClose } from '../../actions';
 import { IconsWrapper, IconTabWrapper, IconMain, IconBoxWrapper, ShowMoreResultsSpinner } from '../../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { IconItem, IconSidebar, SearchBar, IconTags, IconMonoColorSettings, IconAddTagModal } from '../';
@@ -62,10 +62,17 @@ class IconTab extends Component {
     this.uploadStart();
     const { relevantActiveTags, searchPhrase, activePresetTag } = this.state;
 
-    sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid , this.loadedIcons);
-
+    sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, this.loadedIcons);
+    const self = this.props;
     this.props.onFileUpload(icon.src, this.props.uploaderConfig)
-      .then(() => this.uploadStop(), () => this.uploadStop());
+      .then((files) => {
+        this.uploadStop();
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      })
+      .catch(() => {
+        this.uploadStop();
+      })
   };
 
   addTag = (event, activeIcon) => {
@@ -83,7 +90,7 @@ class IconTab extends Component {
     this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
     return this.props.onSearchIcons({ ...searchParams, openpixKey }, relevantActiveTags, done)
-      //.then(done, done);
+    //.then(done, done);
   };
 
   search = ({ value = '', type, offset = 0 }, refreshTags, resizeOnSuccess) => {
@@ -114,8 +121,8 @@ class IconTab extends Component {
 
     this.setState({ activePresetTag: this.state.searchPhrase ? null : this.state.activePresetTag });
     this.search({
-      value: (this.state.searchPhrase || this.state.activePresetTag || '').toLowerCase(),
-      type: this.state.activeColorType,
+        value: (this.state.searchPhrase || this.state.activePresetTag || '').toLowerCase(),
+        type: this.state.activeColorType,
         offset
       },
       true,
@@ -175,7 +182,7 @@ class IconTab extends Component {
 
   onActivatePresetTag = (activePresetTag) => {
     const { activeColorType } = this.state;
-    this.setState({ activePresetTag, searchPhrase: '',  });
+    this.setState({ activePresetTag, searchPhrase: '', });
     this.search({ value: activePresetTag, type: activeColorType }, true);
   }
 
@@ -245,7 +252,7 @@ class IconTab extends Component {
             themeColors={themeColors}
             upload={this.upload}
             activeIconSrc={activeIconSrc}
-            onClose={() => { this.setState({ isShowMonoIconSettings: false  }); }}
+            onClose={() => { this.setState({ isShowMonoIconSettings: false }); }}
           />}
 
           {isShowIconAddTagModal &&
@@ -256,7 +263,7 @@ class IconTab extends Component {
             showAlert={showAlert}
             activeIconSrc={activeIconSrc}
             isShowMonoIconSettings={isShowMonoIconSettings}
-            onClose={() => { this.setState({ isShowIconAddTagModal: false  }); }}
+            onClose={() => { this.setState({ isShowIconAddTagModal: false }); }}
           />}
 
           <IconsWrapper
@@ -264,33 +271,33 @@ class IconTab extends Component {
             id="airstore-uploader-icons-box"
           >
             {active.icons.length && !isLoading && columnWidth ?
-            <VirtualizedImagesGrid
-              imageGridWrapperWidth={imageGridWrapperWidth}
-              imageContainerHeight={imageContainerHeight}
-              columnWidth={columnWidth}
-              gutterSize={gutterSize}
-              count={active.icons.length}
-              list={active.icons}
-              upload={this.upload}
-              onShowMoreImages={this.onShowMoreImages}
-              isShowMoreImages={isShowMoreImages}
-              cellContent={({ style, columnWidth, item, index }) => (
-                <IconBoxWrapper style={{ ...style, width: Math.floor(columnWidth) }}>
-                  <IconItem
-                    columnWidth={Math.floor(columnWidth)}
-                    icon={item}
-                    index={index}
-                    onIconClick={this.onIconClick}
-                    upload={this.upload}
-                    addTag={this.addTag}
-                    isShowAddTagBtn={uploaderConfig.isShowAddTagBtn}
-                    isShowNotRelevantBtn={uploaderConfig.isShowNotRelevantBtn}
-                    setAsNotRelevant={this.setAsNotRelevant}
-                    onLoadImage={this.onLoadImage}
-                  />
-                </IconBoxWrapper>
-              )}
-            /> : null}
+              <VirtualizedImagesGrid
+                imageGridWrapperWidth={imageGridWrapperWidth}
+                imageContainerHeight={imageContainerHeight}
+                columnWidth={columnWidth}
+                gutterSize={gutterSize}
+                count={active.icons.length}
+                list={active.icons}
+                upload={this.upload}
+                onShowMoreImages={this.onShowMoreImages}
+                isShowMoreImages={isShowMoreImages}
+                cellContent={({ style, columnWidth, item, index }) => (
+                  <IconBoxWrapper style={{ ...style, width: Math.floor(columnWidth) }}>
+                    <IconItem
+                      columnWidth={Math.floor(columnWidth)}
+                      icon={item}
+                      index={index}
+                      onIconClick={this.onIconClick}
+                      upload={this.upload}
+                      addTag={this.addTag}
+                      isShowAddTagBtn={uploaderConfig.isShowAddTagBtn}
+                      isShowNotRelevantBtn={uploaderConfig.isShowNotRelevantBtn}
+                      setAsNotRelevant={this.setAsNotRelevant}
+                      onLoadImage={this.onLoadImage}
+                    />
+                  </IconBoxWrapper>
+                )}
+              /> : null}
             <ShowMoreResultsSpinner show={isShowMoreImages && active.icons.length}/>
           </IconsWrapper>
 
@@ -304,10 +311,11 @@ class IconTab extends Component {
 export default connect(
   ({ uploader: { uploaderConfig }, icons: { tags, active, searchParams, count } }) =>
     ({ uploaderConfig, tags, active, count, searchParams }),
-  dispatch => ({
-    onGetTags: () => dispatch(getIconsTags()),
-    onActivateCategory: (category, onSuccess) => dispatch(activateIconsCategory(category, onSuccess)),
-    onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onSearchIcons: (searchParams, relevantActiveTags, done) => dispatch(fetchIcons(searchParams, relevantActiveTags, done))
-  })
+  {
+    onGetTags: () => dispatch => dispatch(getIconsTags()),
+    onActivateCategory: (category, onSuccess) => dispatch => dispatch(activateIconsCategory(category, onSuccess)),
+    onFileUpload: (file, uploaderConfig) => dispatch => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
+    onSearchIcons: (searchParams, relevantActiveTags, done) => dispatch => dispatch(fetchIcons(searchParams, relevantActiveTags, done)),
+    modalClose
+  }
 )(IconTab);

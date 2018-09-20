@@ -1,4 +1,4 @@
-(function() {
+(function () {
   let onUploadHandler = function (files = []) { // handler on upload images
     const [file] = files;
     const result = document.querySelector('.result');

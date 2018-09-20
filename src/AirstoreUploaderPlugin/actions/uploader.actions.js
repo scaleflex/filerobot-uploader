@@ -1,6 +1,7 @@
 import * as BgAPI from '../services/imagesApi.service';
 import * as API from "../services/api.service";
 
+
 export const getBackgrounds = () => dispatch =>
   BgAPI.getBackgrounds().then((files) => {
     if (files) {
@@ -24,9 +25,8 @@ export const setUploadHandler = (handler) => dispatch => dispatch({ type: 'SET_U
 
 export const uploadFiles = (files, uploaderConfig, dataType = 'files[]', dir) => dispatch => {
   return API.uploadFiles(files, uploaderConfig, dataType, dir).then(files => {
-    dispatch({ type: 'FILES_UPLOADED', payload: files });
-    setTimeout(() => dispatch(modalClose()));
-
+    //dispatch({ type: 'FILES_UPLOADED', payload: files });
+    //setTimeout(() => dispatch(modalClose()));
     return files;
   });
 }
