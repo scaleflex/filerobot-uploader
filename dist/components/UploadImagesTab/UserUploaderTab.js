@@ -10,9 +10,9 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import { CSS, DragDropCss as styles } from '../../assets/styles/index';
 import { connect } from "react-redux";
-import { uploadFilesFromUrls, uploadFiles } from '../../actions/index';
+import { uploadFilesFromUrls, uploadFiles, modalClose } from '../../actions/index';
 import { isEnterClick } from '../../utils/index';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
+import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper } from '../../styledComponents/index';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
 var STEP = {
@@ -77,12 +77,15 @@ var UserUploaderTab = function (_Component) {
       var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
       // if (this.state.isLoading) return;
+      var self = _this.props;
 
       _this.uploadStart();
       (isUploadFromUrl ? _this.props.onFileUploadFromUrl(url, _this.props.uploaderConfig) : _this.props.onFilesUpload(_this.state.files, _this.props.uploaderConfig)).then(function (files) {
-        return _this.uploadSuccess(files);
-      }, function (error) {
-        return _this.uploadError(error.msg);
+        _this.uploadSuccess(files);
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      }).catch(function (error) {
+        _this.uploadError(error.msg);
       });
     }, _this.uploadFromWeb = function () {
       var value = _this._uploadFromWebField.value;
@@ -251,13 +254,8 @@ var UserUploaderTab = function (_Component) {
 export default connect(function (_ref3) {
   var uploaderConfig = _ref3.uploader.uploaderConfig;
   return { uploaderConfig: uploaderConfig };
-}, function (dispatch) {
-  return {
-    onFilesUpload: function onFilesUpload(files, uploaderConfig) {
-      return dispatch(uploadFiles(files, uploaderConfig));
-    },
-    onFileUploadFromUrl: function onFileUploadFromUrl(file, uploaderConfig) {
-      return dispatch(uploadFilesFromUrls([file], uploaderConfig));
-    }
-  };
+}, {
+  onFilesUpload: uploadFiles,
+  onFileUploadFromUrl: uploadFilesFromUrls,
+  modalClose: modalClose
 })(Radium(UserUploaderTab));

@@ -12,7 +12,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import Radium from 'radium';
-import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
+import { getBackgrounds, uploadFilesFromUrls, modalClose } from '../../actions/index';
 import { connect } from 'react-redux';
 import { SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label, SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner, Img, ImageWrapper, ApplyColorBtn, CountTag } from '../../styledComponents';
 import { SearchBar, IconTags } from '../';
@@ -126,10 +126,15 @@ var ImagesTab = function (_Component) {
 
       _this.setState({ isLoading: true });
       _this.uploadStart();
-      _this.props.onFileUpload(image.src, _this.props.uploaderConfig).then(function () {
-        return _this.uploadStop();
-      }, function () {
-        return _this.uploadStop();
+
+      var self = _this.props;
+
+      _this.props.onFileUpload(image.src, _this.props.uploaderConfig).then(function (files) {
+        _this.uploadStop();
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      }).catch(function () {
+        _this.uploadStop();
       });
     };
 
@@ -564,19 +569,26 @@ export default connect(function (_ref5) {
       count = _ref5$images.count,
       searchParams = _ref5$images.searchParams;
   return { backgrounds: backgrounds, uploaderConfig: uploaderConfig, images: images, related_tags: related_tags, tags: tags, count: count, searchParams: searchParams };
-}, function (dispatch) {
-  return {
-    onGetImagesTags: function onGetImagesTags() {
+}, {
+  onGetImagesTags: function onGetImagesTags() {
+    return function (dispatch) {
       return dispatch(getImagesTags());
-    },
-    onFileUpload: function onFileUpload(file, uploaderConfig) {
+    };
+  },
+  onFileUpload: function onFileUpload(file, uploaderConfig) {
+    return function (dispatch) {
       return dispatch(uploadFilesFromUrls([file], uploaderConfig));
-    },
-    onGetBackgrounds: function onGetBackgrounds() {
+    };
+  },
+  onGetBackgrounds: function onGetBackgrounds() {
+    return function (dispatch) {
       return dispatch(getBackgrounds());
-    },
-    onSearchImages: function onSearchImages(searchParams, relevantActiveTags) {
+    };
+  },
+  onSearchImages: function onSearchImages(searchParams, relevantActiveTags) {
+    return function (dispatch) {
       return dispatch(fetchImages(searchParams, relevantActiveTags));
-    }
-  };
+    };
+  },
+  modalClose: modalClose
 })(Radium(ImagesTab));

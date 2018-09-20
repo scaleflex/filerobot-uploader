@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox } from '../../styledComponents/index';
 import { getListFiles } from '../../services/api.service';
 import { connect } from 'react-redux';
-import { uploadFilesToDir, uploadFilesFromUrls } from '../../actions';
+import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import UploadedImagesContent from './UploadedImagesContent';
 
@@ -68,12 +68,15 @@ var UploadedImagesTab = function (_Component) {
       // if (this.state.isLoading) return;
       var activeFolder = _this.state.activeFolder;
 
+      var self = _this.props;
 
       _this.uploadStart();
-      (isUploadFromUrl ? _this.props.onFileUploadFromUrl(url, _this.props.uploaderConfig) : _this.props.onFilesUpload(_this.state.filesToUpload, _this.props.uploaderConfig, 'files[]', activeFolder.dir)).then(function (filesToUpload) {
-        return _this.uploadSuccess(filesToUpload);
-      }, function (error) {
-        return _this.uploadError(error.msg);
+      (isUploadFromUrl ? _this.props.onFileUploadFromUrl(url, _this.props.uploaderConfig) : _this.props.onFilesUpload(_this.state.filesToUpload, _this.props.uploaderConfig, 'files[]', activeFolder.dir)).then(function (files) {
+        _this.uploadSuccess(files);
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      }).catch(function (error) {
+        _this.uploadError(error.msg);
       });
     };
 
@@ -221,13 +224,8 @@ var UploadedImagesTab = function (_Component) {
 export default connect(function (_ref2) {
   var uploaderConfig = _ref2.uploader.uploaderConfig;
   return { uploaderConfig: uploaderConfig };
-}, function (dispatch) {
-  return {
-    onFilesUpload: function onFilesUpload(files, uploaderConfig, dataType, dir) {
-      return dispatch(uploadFilesToDir(files, uploaderConfig, dataType, dir));
-    },
-    onFileUploadFromUrl: function onFileUploadFromUrl(file, uploaderConfig) {
-      return dispatch(uploadFilesFromUrls([file], uploaderConfig));
-    }
-  };
+}, {
+  onFilesUpload: uploadFilesToDir,
+  onFileUploadFromUrl: uploadFilesFromUrls,
+  modalClose: modalClose
 })(UploadedImagesTab);

@@ -197,12 +197,6 @@ export default connect(function (_ref3) {
   return { uploaderConfig: uploaderConfig };
 }, function (dispatch) {
   return {
-    onFilesUpload: function onFilesUpload(files, uploaderConfig, dataType, dir) {
-      return dispatch(uploadFilesToDir(files, uploaderConfig, dataType, dir));
-    },
-    onFileUploadFromUrl: function onFileUploadFromUrl(file, uploaderConfig) {
-      return dispatch(uploadFilesFromUrls([file], uploaderConfig));
-    },
     onModalClose: function onModalClose() {
       return dispatch(modalClose());
     }
