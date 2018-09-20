@@ -129,8 +129,6 @@ class UploadedImagesContent extends Component {
 export default connect(
   ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
   dispatch => ({
-    onFilesUpload: (files, uploaderConfig, dataType, dir) => dispatch(uploadFilesToDir(files, uploaderConfig, dataType, dir)),
-    onFileUploadFromUrl: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
     onModalClose: () => dispatch(modalClose())
   })
 )(UploadedImagesContent);

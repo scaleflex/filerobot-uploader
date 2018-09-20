@@ -4,9 +4,10 @@ import {
 } from '../../styledComponents/index';
 import { getListFiles } from '../../services/api.service';
 import { connect } from 'react-redux';
-import { uploadFilesToDir, uploadFilesFromUrls } from '../../actions';
+import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import UploadedImagesContent from './UploadedImagesContent';
+
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
 
@@ -64,13 +65,22 @@ class UploadedImagesTab extends Component {
   upload = (isUploadFromUrl = false, url = null) => {
     // if (this.state.isLoading) return;
     const { activeFolder } = this.state;
+    const self = this.props;
 
     this.uploadStart();
     (
       isUploadFromUrl
         ? this.props.onFileUploadFromUrl(url, this.props.uploaderConfig)
         : this.props.onFilesUpload(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', activeFolder.dir)
-    ).then(filesToUpload => this.uploadSuccess(filesToUpload), error => this.uploadError(error.msg));
+    )
+      .then((files) => {
+        this.uploadSuccess(files)
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      })
+      .catch((error) => {
+        this.uploadError(error.msg)
+      })
   };
 
   changeStep = step => this.setState({ step });
@@ -160,8 +170,9 @@ class UploadedImagesTab extends Component {
 
 export default connect(
   ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
-  dispatch => ({
-    onFilesUpload: (files, uploaderConfig, dataType, dir) => dispatch(uploadFilesToDir(files, uploaderConfig, dataType, dir)),
-    onFileUploadFromUrl: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig))
-  })
+  {
+    onFilesUpload: uploadFilesToDir,
+    onFileUploadFromUrl: uploadFilesFromUrls,
+    modalClose
+  }
 )(UploadedImagesTab);

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import { CSS, DragDropCss as styles } from '../../assets/styles/index';
 import { connect } from "react-redux";
-import { uploadFilesFromUrls, uploadFiles } from '../../actions/index';
+import { uploadFilesFromUrls, uploadFiles, modalClose } from '../../actions/index';
 import { isEnterClick } from '../../utils/index';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
+import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper } from '../../styledComponents/index';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
 
@@ -53,13 +53,22 @@ class UserUploaderTab extends Component {
 
   upload = (isUploadFromUrl = false, url = null) => {
     // if (this.state.isLoading) return;
+    const self = this.props;
 
     this.uploadStart();
     (
       isUploadFromUrl
         ? this.props.onFileUploadFromUrl(url, this.props.uploaderConfig)
         : this.props.onFilesUpload(this.state.files, this.props.uploaderConfig)
-    ).then(files => this.uploadSuccess(files), error => this.uploadError(error.msg));
+    )
+      .then((files) => {
+        this.uploadSuccess(files)
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      })
+      .catch((error) => {
+        this.uploadError(error.msg)
+      })
   };
 
   uploadFromWeb = () => {
@@ -175,8 +184,9 @@ class UserUploaderTab extends Component {
 
 export default connect(
   ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
-  dispatch => ({
-    onFilesUpload: (files, uploaderConfig) => dispatch(uploadFiles(files, uploaderConfig)),
-    onFileUploadFromUrl: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig))
-  })
+  {
+    onFilesUpload: uploadFiles,
+    onFileUploadFromUrl: uploadFilesFromUrls,
+    modalClose
+  }
 )(Radium(UserUploaderTab));

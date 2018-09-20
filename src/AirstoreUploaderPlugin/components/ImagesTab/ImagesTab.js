@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import { getBackgrounds, uploadFilesFromUrls } from '../../actions/index';
+import { getBackgrounds, uploadFilesFromUrls, modalClose } from '../../actions/index';
 import { connect } from 'react-redux';
 import {
   SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label,
@@ -120,8 +120,18 @@ class ImagesTab extends Component {
 
     this.setState({ isLoading: true });
     this.uploadStart();
+
+    const self = this.props;
+
     this.props.onFileUpload(image.src, this.props.uploaderConfig)
-      .then(() => this.uploadStop(), () => this.uploadStop());
+      .then((files) => {
+        this.uploadStop();
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      })
+      .catch(() => {
+        this.uploadStop();
+      })
   };
 
   onChangeSearchPhrase = ({ target }) => { this.setState({ searchPhrase: target.value }); }
@@ -389,10 +399,11 @@ class ImagesTab extends Component {
 export default connect(
   ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags, tags, count, searchParams } }) =>
     ({ backgrounds, uploaderConfig, images, related_tags, tags, count, searchParams }),
-  dispatch => ({
-    onGetImagesTags: () => dispatch(getImagesTags()),
-    onFileUpload: (file, uploaderConfig) => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onGetBackgrounds: () => dispatch(getBackgrounds()),
-    onSearchImages: (searchParams, relevantActiveTags) => dispatch(fetchImages(searchParams, relevantActiveTags))
-  })
+   {
+    onGetImagesTags: () => dispatch => dispatch(getImagesTags()),
+    onFileUpload: (file, uploaderConfig) => dispatch => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
+    onGetBackgrounds: () => dispatch => dispatch(getBackgrounds()),
+    onSearchImages: (searchParams, relevantActiveTags) => dispatch => dispatch(fetchImages(searchParams, relevantActiveTags)),
+    modalClose
+  }
 )(Radium(ImagesTab));
