@@ -58,11 +58,8 @@ export var uploadFiles = function uploadFiles(files, uploaderConfig) {
   var dir = arguments[3];
   return function (dispatch) {
     return API.uploadFiles(files, uploaderConfig, dataType, dir).then(function (files) {
-      dispatch({ type: 'FILES_UPLOADED', payload: files });
-      setTimeout(function () {
-        return dispatch(modalClose());
-      });
-
+      //dispatch({ type: 'FILES_UPLOADED', payload: files });
+      //setTimeout(() => dispatch(modalClose()));
       return files;
     });
   };

@@ -12,7 +12,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { uploadFilesFromUrls, getIconsTags, activateIconsCategory, fetchIcons } from '../../actions';
+import { uploadFilesFromUrls, getIconsTags, activateIconsCategory, fetchIcons, modalClose } from '../../actions';
 import { IconsWrapper, IconTabWrapper, IconMain, IconBoxWrapper, ShowMoreResultsSpinner } from '../../styledComponents';
 import { Spinner } from 'scaleflex-react-ui-kit/dist';
 import { IconItem, IconSidebar, SearchBar, IconTags, IconMonoColorSettings, IconAddTagModal } from '../';
@@ -80,11 +80,13 @@ var IconTab = function (_Component) {
 
 
       sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, _this.loadedIcons);
-
-      _this.props.onFileUpload(icon.src, _this.props.uploaderConfig).then(function () {
-        return _this.uploadStop();
-      }, function () {
-        return _this.uploadStop();
+      var self = _this.props;
+      _this.props.onFileUpload(icon.src, _this.props.uploaderConfig).then(function (files) {
+        _this.uploadStop();
+        self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
+      }).catch(function () {
+        _this.uploadStop();
       });
     }, _this.addTag = function (event, activeIcon) {
       event.stopPropagation();
@@ -381,19 +383,26 @@ export default connect(function (_ref5) {
       searchParams = _ref5$icons.searchParams,
       count = _ref5$icons.count;
   return { uploaderConfig: uploaderConfig, tags: tags, active: active, count: count, searchParams: searchParams };
-}, function (dispatch) {
-  return {
-    onGetTags: function onGetTags() {
+}, {
+  onGetTags: function onGetTags() {
+    return function (dispatch) {
       return dispatch(getIconsTags());
-    },
-    onActivateCategory: function onActivateCategory(category, onSuccess) {
+    };
+  },
+  onActivateCategory: function onActivateCategory(category, onSuccess) {
+    return function (dispatch) {
       return dispatch(activateIconsCategory(category, onSuccess));
-    },
-    onFileUpload: function onFileUpload(file, uploaderConfig) {
+    };
+  },
+  onFileUpload: function onFileUpload(file, uploaderConfig) {
+    return function (dispatch) {
       return dispatch(uploadFilesFromUrls([file], uploaderConfig));
-    },
-    onSearchIcons: function onSearchIcons(searchParams, relevantActiveTags, done) {
+    };
+  },
+  onSearchIcons: function onSearchIcons(searchParams, relevantActiveTags, done) {
+    return function (dispatch) {
       return dispatch(fetchIcons(searchParams, relevantActiveTags, done));
-    }
-  };
+    };
+  },
+  modalClose: modalClose
 })(IconTab);
