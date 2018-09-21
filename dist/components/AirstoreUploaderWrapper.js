@@ -6,6 +6,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from '../module.hot';
 import AirstoreUploader from './AirstoreUploader';
+import { getReducers } from '../reducers';
 
 export default (function (_ref) {
   var initialOptions = _ref.initialOptions,
@@ -20,20 +21,16 @@ export default (function (_ref) {
 
   AirstoreUploaderStore = AirstoreUploaderStore || configureStore();
 
-  return React.createElement(
-    Provider,
-    { store: AirstoreUploaderStore },
-    React.createElement(AirstoreUploader, _extends({
-      opened: opened,
-      onClose: onClose,
-      initialTab: initialTab,
-      initialOptions: initialOptions
-    }, otherProps))
-  );
+  return React.createElement(AirstoreUploader, _extends({
+    opened: opened,
+    onClose: onClose,
+    initialTab: initialTab,
+    initialOptions: initialOptions
+  }, otherProps));
 });
 
 var createAirstoreUploaderStore = function createAirstoreUploaderStore() {
   return configureStore();
 };
 
-export { createAirstoreUploaderStore };
+export { createAirstoreUploaderStore, getReducers };

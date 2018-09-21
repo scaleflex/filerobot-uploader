@@ -8,3 +8,16 @@ export default combineReducers({
   icons: icons,
   images: images
 });
+
+export var getReducers = function getReducers() {
+  return [{
+    name: 'uploader',
+    reducer: uploader
+  }, {
+    name: 'icons',
+    reducer: icons
+  }, {
+    name: 'images',
+    reducer: images
+  }];
+};

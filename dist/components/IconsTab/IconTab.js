@@ -83,8 +83,8 @@ var IconTab = function (_Component) {
       var self = _this.props;
       _this.props.onFileUpload(icon.src, _this.props.uploaderConfig).then(function (files) {
         _this.uploadStop();
-        self.uploaderConfig.uploadHandler(files);
         self.modalClose();
+        self.uploaderConfig.uploadHandler(files);
       }).catch(function () {
         _this.uploadStop();
       });
