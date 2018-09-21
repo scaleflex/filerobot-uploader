@@ -9,3 +9,18 @@ export default combineReducers({
   images
 });
 
+export const getReducers = () => ([
+  {
+    name: 'uploader',
+    reducer: uploader
+  },
+  {
+    name: 'icons',
+    reducer: icons
+  },
+  {
+    name: 'images',
+    reducer: images
+  }
+]);
+

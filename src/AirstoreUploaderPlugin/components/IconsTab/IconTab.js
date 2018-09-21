@@ -67,8 +67,8 @@ class IconTab extends Component {
     this.props.onFileUpload(icon.src, this.props.uploaderConfig)
       .then((files) => {
         this.uploadStop();
-        self.uploaderConfig.uploadHandler(files);
         self.modalClose();
+        self.uploaderConfig.uploadHandler(files);
       })
       .catch(() => {
         this.uploadStop();
