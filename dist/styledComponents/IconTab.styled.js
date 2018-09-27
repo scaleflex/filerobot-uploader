@@ -79,7 +79,7 @@ export var Tag = styled.div(_templateObject9, function (props) {
 
 export var ColorWrapper = styled.div(_templateObject10);
 
-export var CloseIcon = CloseBtn.extend(_templateObject11, function (props) {
+export var CloseIcon = styled(CloseBtn)(_templateObject11, function (props) {
   return props.active && '\n    display: block;\n  ';
 });
 
@@ -87,11 +87,11 @@ export var HoverWrapper = styled.div(_templateObject12, function (props) {
   return props.isShow ? 'flex' : 'none';
 });
 
-export var AddTagBtn = Button.extend(_templateObject13);
+export var AddTagBtn = styled(Button)(_templateObject13);
 
 export var ActionsIconWrapper = styled.div(_templateObject14);
 
-export var NotRelevantBtn = Button.extend(_templateObject15);
+export var NotRelevantBtn = styled(Button)(_templateObject15);
 
 export var ControlIcon = styled.span(_templateObject16, function (props) {
   return props.color ? props.color : '#f2f2f2';
@@ -133,7 +133,7 @@ export var IconTabWrapper = styled.div(_templateObject26);
 
 export var IconMain = styled.div(_templateObject27);
 
-export var Input = InputSearch.extend(_templateObject28);
+export var Input = styled(InputSearch)(_templateObject28);
 export var IconBoxWrapper = styled.div(_templateObject29, function (props) {
   return props.width;
 }, function (props) {

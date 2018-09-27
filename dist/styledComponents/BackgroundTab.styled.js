@@ -84,7 +84,7 @@ export var ShowMoreResultsSpinnerWrapper = styled.div(_templateObject16, functio
   return props.show ? 'block' : 'none';
 });
 
-export var ApplyColorBtn = Button.extend(_templateObject17);
+export var ApplyColorBtn = styled(Button)(_templateObject17);
 
 export var ShowMoreResultsSpinner = function ShowMoreResultsSpinner(_ref) {
   var show = _ref.show;

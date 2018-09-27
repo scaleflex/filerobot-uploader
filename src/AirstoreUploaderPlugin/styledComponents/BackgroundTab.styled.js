@@ -207,7 +207,7 @@ export const ShowMoreResultsSpinnerWrapper = styled.div`
   }
 `;
 
-export const ApplyColorBtn = Button.extend`
+export const ApplyColorBtn = styled(Button)`
   margin-top: 5px;
   width: 100%;
   font-weight: 400;

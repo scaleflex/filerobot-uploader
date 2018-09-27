@@ -152,7 +152,7 @@ export const ColorWrapper = styled.div`
   padding-bottom: 10px;
 `;
 
-export const CloseIcon = CloseBtn.extend`
+export const CloseIcon = styled(CloseBtn)`
   display: none;
   color: #fff;
   top: 50%;
@@ -178,7 +178,7 @@ export const HoverWrapper = styled.div`
   cursor: pointer;
 `;
 
-export const AddTagBtn = Button.extend`
+export const AddTagBtn = styled(Button)`
   padding: 0 5px;
   font-size: 10px;
   margin-right: 2px;
@@ -192,7 +192,7 @@ export const ActionsIconWrapper = styled.div`
   text-align: right;
 `;
 
-export const NotRelevantBtn = Button.extend`
+export const NotRelevantBtn = styled(Button)`
   padding: 0 5px;
   font-size: 10px;
 `;
@@ -315,7 +315,7 @@ export const IconMain = styled.div`
   min-height: 100%;
 `;
 
-export const Input = InputSearch.extend`
+export const Input = styled(InputSearch)`
   height: 26px;
   margin-bottom: 20px;
   margin-top: 10px;
