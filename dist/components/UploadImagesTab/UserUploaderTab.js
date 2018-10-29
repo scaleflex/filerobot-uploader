@@ -201,6 +201,7 @@ var UserUploaderTab = function (_Component) {
                     ButtonSearch,
                     {
                       key: 'ok',
+                      className: 'ae-btn',
                       onClick: this.uploadFromWeb
                     },
                     'Upload'
@@ -220,7 +221,7 @@ var UserUploaderTab = function (_Component) {
             ),
             React.createElement(
               'div',
-              { ref: 'submitBtn', style: [uploadBlock_style.inputBox.submitBtn], type: 'submit' },
+              { ref: 'submitBtn', className: 'ae-btn', style: [uploadBlock_style.inputBox.submitBtn], type: 'submit' },
               'Upload'
             )
           ),

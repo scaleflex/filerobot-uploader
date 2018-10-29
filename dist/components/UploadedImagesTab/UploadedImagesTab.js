@@ -199,6 +199,7 @@ var UploadedImagesTab = function (_Component) {
           React.createElement(
             ButtonSearch,
             {
+              className: 'ae-btn',
               fullBr: '4px',
               onClick: function onClick() {
                 _this2.fileInput.click();

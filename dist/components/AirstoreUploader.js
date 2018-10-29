@@ -9,7 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
-import { IconTab, BackgroundTab, UserUploaderTab, SearchTab, UploadedImagesTab } from './index';
+import { IconTab, BackgroundTab, UserUploaderTab, UploadedImagesTab } from './index';
 import { Dialog } from '../styledComponents';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
 import FocusLock from 'react-focus-lock';
@@ -138,10 +138,10 @@ var AirstoreUploader = function (_Component) {
         null,
         React.createElement(
           Dialog,
-          { role: 'dialog' },
+          { role: 'dialog', className: 'ae-dialog' },
           React.createElement(
             'div',
-            { style: [CSS.tabs.header] },
+            { style: [CSS.tabs.header], className: 'ae-tabs-header' },
             React.createElement(
               'nav',
               {

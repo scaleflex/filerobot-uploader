@@ -76,7 +76,7 @@ var SearchBar = function (_Component) {
           }),
           React.createElement(
             ButtonSearch,
-            { onClick: onSearch },
+            { className: 'ae-btn', onClick: onSearch },
             'Search'
           )
         ),
