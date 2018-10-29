@@ -115,7 +115,7 @@ class AirstoreUploader extends Component {
                   role="menuitem"
                   id={`tab-${tab.id}`}
                   key={`tab-${tab.id}`}
-                  className="tab-header-item selected"
+                  className={`tab-header-item selected ${activeTab && activeTab.id === tab.id ? 'active' : ''}`}
                   style={[
                     CSS.tabs.header.container.item,
                     activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected
