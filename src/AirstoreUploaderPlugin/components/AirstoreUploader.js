@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import { CSS } from '../assets/styles';
-import { IconTab, BackgroundTab, UserUploaderTab, SearchTab, UploadedImagesTab } from './index';
+import { IconTab, BackgroundTab, UserUploaderTab, UploadedImagesTab } from './index';
 import { Dialog } from '../styledComponents';
 import { Modal } from 'scaleflex-react-ui-kit/dist';
 import FocusLock from 'react-focus-lock';
@@ -103,8 +103,8 @@ class AirstoreUploader extends Component {
 
     return (
       <FocusLock>
-        <Dialog role="dialog">
-          <div style={[CSS.tabs.header]}>
+        <Dialog role="dialog" className="ae-dialog">
+          <div style={[CSS.tabs.header]} className="ae-tabs-header">
             <nav
               ref={node => this._nav = node} className="airstore-uploader-navigation"
               style={[CSS.tabs.header.container]}

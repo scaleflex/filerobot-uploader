@@ -147,6 +147,7 @@ class UserUploaderTab extends Component {
                       />
                       <ButtonSearch
                         key="ok"
+                        className="ae-btn"
                         onClick={this.uploadFromWeb}
                       >Upload</ButtonSearch>
                     </SearchGroup>
@@ -161,7 +162,7 @@ class UserUploaderTab extends Component {
                   </div>
                 </div>
 
-                <div ref="submitBtn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">Upload</div>
+                <div ref="submitBtn" className="ae-btn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">Upload</div>
               </div>
             }
 

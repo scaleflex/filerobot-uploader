@@ -127,6 +127,7 @@ class UploadedImagesTab extends Component {
           {this.renderNavigation()}
 
           <ButtonSearch
+            className="ae-btn"
             fullBr={'4px'}
             onClick={() => { this.fileInput.click() }}
           >Upload images</ButtonSearch>

@@ -35,7 +35,7 @@ class SearchBar extends Component {
             onChange={onChangeSearchPhrase}
             onKeyDown={ev => { isEnterClick(ev) && onSearch() }}
           />
-          <ButtonSearch onClick={onSearch}>Search</ButtonSearch>
+          <ButtonSearch className="ae-btn" onClick={onSearch}>Search</ButtonSearch>
         </SearchGroup>
 
         <AmountIcons empty={isEmptyIcons}>Found: {count}</AmountIcons>
