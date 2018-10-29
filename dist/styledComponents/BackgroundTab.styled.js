@@ -1,7 +1,7 @@
 var _templateObject = _taggedTemplateLiteral(['\n  width: 160px;\n  border-right: 1px solid rgb(221, 221, 221);\n  position: relative;\n'], ['\n  width: 160px;\n  border-right: 1px solid rgb(221, 221, 221);\n  position: relative;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow: auto;\n  height: 100%;\n  top: 0;\n  position: absolute;\n  width: 100%;\n  padding-top: 5px;\n  box-sizing: border-box;\n'], ['\n  overflow: auto;\n  height: 100%;\n  top: 0;\n  position: absolute;\n  width: 100%;\n  padding-top: 5px;\n  box-sizing: border-box;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  margin-bottom: 15px;\n  margin-top: 15px;\n'], ['\n  margin-bottom: 15px;\n  margin-top: 15px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  position: relative\n  padding: 10px 5px;\n  border-left: ', ';\n  font-size: 12px;\n  color: #1e262c;\n  text-transform: capitalize;\n  display: flex;\n  cursor: pointer;\n  background: ', '\n  \n  :hover {\n    background: #fff;\n  }\n'], ['\n  position: relative\n  padding: 10px 5px;\n  border-left: ', ';\n  font-size: 12px;\n  color: #1e262c;\n  text-transform: capitalize;\n  display: flex;\n  cursor: pointer;\n  background: ', '\n  \n  :hover {\n    background: #fff;\n  }\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  padding: 10px 5px;\n  border-left: ', ';\n  font-size: 12px;\n  color: #1e262c;\n  text-transform: capitalize;\n  display: flex;\n  cursor: pointer;\n  background: ', ';\n  \n  :hover {\n    background: #fff;\n  }\n'], ['\n  position: relative;\n  padding: 10px 5px;\n  border-left: ', ';\n  font-size: 12px;\n  color: #1e262c;\n  text-transform: capitalize;\n  display: flex;\n  cursor: pointer;\n  background: ', ';\n  \n  :hover {\n    background: #fff;\n  }\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  margin-left: 5px;\n'], ['\n  margin-left: 5px;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: flex;\n  height: 100%;\n'], ['\n  display: flex;\n  height: 100%;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: ', 'px;\n  vertical-align: middle;\n  overflow: hidden;\n  position: relative;\n  transition: all 200ms ease-in;\n  cursor: pointer;\n  \n  :hover img {\n    transform: scale(1.1);\n  }\n  \n  :after {\n    visibility: hidden;\n    position: absolute;\n    content: \'\';\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(255, 255, 255, 0);\n    z-index: 1;\n    transition: all 200ms ease-in;\n  }\n  \n  :hover:after {\n    visibility: visible;\n    /*background: rgba(255, 255, 255, 0.3);*/\n  }\n'], ['\n  width: 100%;\n  height: ', 'px;\n  vertical-align: middle;\n  overflow: hidden;\n  position: relative;\n  transition: all 200ms ease-in;\n  cursor: pointer;\n  \n  :hover img {\n    transform: scale(1.1);\n  }\n  \n  :after {\n    visibility: hidden;\n    position: absolute;\n    content: \'\';\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(255, 255, 255, 0);\n    z-index: 1;\n    transition: all 200ms ease-in;\n  }\n  \n  :hover:after {\n    visibility: visible;\n    /*background: rgba(255, 255, 255, 0.3);*/\n  }\n']),
@@ -28,7 +28,9 @@ export var SideBar = styled.div(_templateObject2);
 
 export var ColorType = styled.div(_templateObject3);
 
-export var ColorItem = styled.div(_templateObject4, function (props) {
+export var ColorItem = styled.div.attrs({ className: function className(props) {
+    return props.active ? 'ae-color-item' : '';
+  } })(_templateObject4, function (props) {
   return props.active ? '6px solid #00707c' : '6px solid transparent';
 }, function (props) {
   return props.active ? '#fff' : 'transparent';

@@ -23,8 +23,8 @@ export const ColorType = styled.div`
   margin-top: 15px;
 `;
 
-export const ColorItem = styled.div`
-  position: relative
+export const ColorItem = styled.div.attrs({ className: props => props.active ? 'ae-color-item' : '' })`
+  position: relative;
   padding: 10px 5px;
   border-left: ${props => props.active ? '6px solid #00707c' : '6px solid transparent'};
   font-size: 12px;
@@ -32,7 +32,7 @@ export const ColorItem = styled.div`
   text-transform: capitalize;
   display: flex;
   cursor: pointer;
-  background: ${props => props.active ? '#fff' : 'transparent'}
+  background: ${props => props.active ? '#fff' : 'transparent'};
   
   :hover {
     background: #fff;

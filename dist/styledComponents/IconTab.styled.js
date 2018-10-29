@@ -71,7 +71,9 @@ export var SearchTitle = styled.h3(_templateObject7, function (props) {
 
 export var TagsWrapper = styled.div(_templateObject8);
 
-export var Tag = styled.div(_templateObject9, function (props) {
+export var Tag = styled.div.attrs({ className: function className(props) {
+    return props.active ? 'ae-tag-active' : '';
+  } })(_templateObject9, function (props) {
   return props.active && '\n    background: #00707c;\n    color: #fff;\n    padding: 6px 21px 6px 9px;\n  ';
 }, function (props) {
   return props.hide && 'display: none;';

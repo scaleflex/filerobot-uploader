@@ -120,7 +120,7 @@ export const TagsWrapper = styled.div`
   }
 `;
 
-export const Tag = styled.div`
+export const Tag = styled.div.attrs({ className: props => props.active ? 'ae-tag-active' : '' })`
   display: inline-block;
   padding: 6px 12px;
   border: 1px solid #ccc;
