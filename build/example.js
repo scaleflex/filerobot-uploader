@@ -12,7 +12,9 @@
   };
 
   let options = {
-    MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'],   // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+    MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'],   // optional default: 'UPLOAD',
+                                                                                 // 'UPLOADED_IMAGES', 'ICONS_GALLERY',
+                                                                                 // 'IMAGES_GALLERY'
     UPLOAD_PARAMS: {                 // optional default: {}
       dir: '/company_test/project_test'
     },
@@ -31,7 +33,7 @@
     onUpload: onUploadHandler,                      // required
   };
 
-  window.onload = function() {
+  window.onload = function () {
     if (window.AirstoreUploader) {
       window.AirstoreUploader.init(options);
 
