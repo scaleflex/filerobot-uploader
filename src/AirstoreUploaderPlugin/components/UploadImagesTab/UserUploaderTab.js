@@ -121,6 +121,7 @@ class UserUploaderTab extends Component {
                   data-multiple-caption="{count} files selected"
                   defaultValue={''}
                   tabIndex={-1}
+                  multiple={true}
                   onChange={this.fileChangeHandler}
                 />
 
