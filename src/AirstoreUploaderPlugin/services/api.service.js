@@ -75,7 +75,13 @@ export const uploadFiles = (
           //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
           resolve([file]);
-        } else
+        }
+
+        else if (status === 'success' && files) {
+          resolve(files);
+        }
+
+        else
           reject(response);
 
         //if (status === 'success' && files && files.length)

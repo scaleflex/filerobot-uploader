@@ -1,13 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import configureStore from '../module.hot';
 import AirstoreUploader from './AirstoreUploader';
 import { getReducers } from '../reducers';
 
 
-export default ({ initialOptions, opened = false, onClose = null, initialTab = null, AirstoreUploaderStore, ...otherProps }) => {
-  AirstoreUploaderStore = AirstoreUploaderStore || configureStore();
-
+export default ({ initialOptions, opened = false, onClose = null, initialTab = null, ...otherProps }) => {
   return (
     <AirstoreUploader
       opened={opened}

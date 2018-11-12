@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { ThemeProvider } from 'styled-components';
 import { getDesignSystem } from 'scaleflex-react-ui-kit/dist';
 import 'scaleflex-react-ui-kit/dist/styledComponents/assets/styles/scaleflex-icon-font.css';
+import { Provider } from 'react-redux';
 
 
 window.AirstoreUploader = window.AirstoreUploader || {};
@@ -22,15 +23,18 @@ function init(options = {}, isOpened = false) {
   options.onUpload = options.onUpload || function() {};
 
   window.AirstoreUploader.component = Component => {
+
     return render(
       <AppContainer>
         <ThemeProvider theme={getDesignSystem('dark')}>
-          <Component
-            opened={isOpened}
-            initialOptions={options}
-            initialTab={options.INITIAL_TAB}
-            AirstoreUploaderStore={AirstoreUploaderStore}
-          />
+          <Provider store={AirstoreUploaderStore}>
+            <Component
+              opened={isOpened}
+              initialOptions={options}
+              initialTab={options.INITIAL_TAB}
+              AirstoreUploaderStore={AirstoreUploaderStore}
+            />
+          </Provider>
         </ThemeProvider>
       </AppContainer>,
       editor,
