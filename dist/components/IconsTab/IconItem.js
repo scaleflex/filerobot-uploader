@@ -1,4 +1,18 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('../../styledComponents');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -7,9 +21,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import { Icon, HoverWrapper, AddTagBtn, NotRelevantBtn, ActionsIconWrapper, IconBoxWrapperInner, IconWrapper } from '../../styledComponents';
 
 var IconItem = function (_Component) {
   _inherits(IconItem, _Component);
@@ -51,8 +62,8 @@ var IconItem = function (_Component) {
           isHover = _state$isHover === undefined ? false : _state$isHover;
 
 
-      return React.createElement(
-        IconBoxWrapperInner,
+      return _react2.default.createElement(
+        _styledComponents.IconBoxWrapperInner,
         {
           onClick: function onClick() {
             onIconClick(icon);
@@ -65,21 +76,21 @@ var IconItem = function (_Component) {
           onMouseLeave: this.hoverToggle.bind(this, 'isHover', false),
           tabIndex: index
         },
-        React.createElement(
-          HoverWrapper,
+        _react2.default.createElement(
+          _styledComponents.HoverWrapper,
           { isShow: isHover },
-          React.createElement(
-            ActionsIconWrapper,
+          _react2.default.createElement(
+            _styledComponents.ActionsIconWrapper,
             null,
-            isShowAddTagBtn && React.createElement(
-              AddTagBtn,
+            isShowAddTagBtn && _react2.default.createElement(
+              _styledComponents.AddTagBtn,
               { tabIndex: -1, sm: true, themeColor: true, onClick: function onClick(event) {
                   addTag(event, icon);
                 } },
               '+'
             ),
-            isShowNotRelevantBtn && React.createElement(
-              NotRelevantBtn,
+            isShowNotRelevantBtn && _react2.default.createElement(
+              _styledComponents.NotRelevantBtn,
               { tabIndex: -1, sm: true, danger: true, onClick: function onClick(event) {
                   setAsNotRelevant(event, icon);
                 } },
@@ -87,10 +98,10 @@ var IconItem = function (_Component) {
             )
           )
         ),
-        React.createElement(
-          IconWrapper,
+        _react2.default.createElement(
+          _styledComponents.IconWrapper,
           { width: columnWidth, height: columnWidth },
-          React.createElement(Icon, {
+          _react2.default.createElement(_styledComponents.Icon, {
             isHover: isHover,
             src: icon.src,
             alt: icon.desc,
@@ -105,6 +116,6 @@ var IconItem = function (_Component) {
   }]);
 
   return IconItem;
-}(Component);
+}(_react.Component);
 
-export default IconItem;
+exports.default = IconItem;

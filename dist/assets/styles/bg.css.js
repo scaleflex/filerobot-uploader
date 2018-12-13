@@ -1,4 +1,9 @@
-export default {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
   container: {
     display: 'flex',
     flexWrap: 'wrap',

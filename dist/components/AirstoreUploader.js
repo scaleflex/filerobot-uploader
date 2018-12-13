@@ -1,4 +1,42 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _styles = require('../assets/styles');
+
+var _index = require('./index');
+
+var _styledComponents = require('../styledComponents');
+
+var _dist = require('scaleflex-react-ui-kit/dist');
+
+var _reactFocusLock = require('react-focus-lock');
+
+var _reactFocusLock2 = _interopRequireDefault(_reactFocusLock);
+
+var _actions = require('../actions');
+
+var _config2 = require('../config');
+
+var _config3 = _interopRequireDefault(_config2);
+
+var _reactRedux = require('react-redux');
+
+var _reactToastr = require('react-toastr');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6,19 +44,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium';
-import { CSS } from '../assets/styles';
-import { IconTab, BackgroundTab, UserUploaderTab, UploadedImagesTab } from './index';
-import { Dialog } from '../styledComponents';
-import { Modal } from 'scaleflex-react-ui-kit/dist';
-import FocusLock from 'react-focus-lock';
-import { modalClose, modalOpen, activateTab, setUploaderConfig, setActiveModules, setUploadHandler, setTabs } from '../actions';
-import config from '../config';
-import { connect } from 'react-redux';
-import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
-
-var ToastMessageFactory = React.createFactory(ToastMessageAnimated);
+var ToastMessageFactory = _react2.default.createFactory(_reactToastr.ToastMessageAnimated);
 
 var AirstoreUploader = function (_Component) {
   _inherits(AirstoreUploader, _Component);
@@ -40,7 +66,7 @@ var AirstoreUploader = function (_Component) {
       shortName: 'Upload',
       iconClass: 'sfi-airstore-upload',
       getContent: function getContent(props) {
-        return React.createElement(UserUploaderTab, props);
+        return _react2.default.createElement(_index.UserUploaderTab, props);
       }
     }, {
       id: 'UPLOADED_IMAGES',
@@ -48,7 +74,7 @@ var AirstoreUploader = function (_Component) {
       shortName: 'Uploaded Images',
       iconClass: 'sfi-airstore-uploaded-images',
       getContent: function getContent(props) {
-        return React.createElement(UploadedImagesTab, props);
+        return _react2.default.createElement(_index.UploadedImagesTab, props);
       }
     }, {
       id: 'ICONS_GALLERY',
@@ -56,7 +82,7 @@ var AirstoreUploader = function (_Component) {
       shortName: 'Icons Gallery',
       iconClass: 'sfi-airstore-gallery',
       getContent: function getContent(props) {
-        return React.createElement(IconTab, props);
+        return _react2.default.createElement(_index.IconTab, props);
       }
     }, {
       id: 'IMAGES_GALLERY',
@@ -64,7 +90,7 @@ var AirstoreUploader = function (_Component) {
       shortName: 'Images Gallery',
       iconClass: 'sfi-airstore-image-gallery',
       getContent: function getContent(props) {
-        return React.createElement(BackgroundTab, props);
+        return _react2.default.createElement(_index.BackgroundTab, props);
       }
     }], _this.openModal = function (initialTab) {
       _this.props.onModalOpen(initialTab || _this.props.initialTab);
@@ -94,8 +120,8 @@ var AirstoreUploader = function (_Component) {
           initialTab = _props.initialTab;
 
 
-      this.props.onSetUploaderConfig(initialOptions || config || {});
-      this.props.onSetActiveModules(initialOptions.MODULES || config.MODULES || []);
+      this.props.onSetUploaderConfig(initialOptions || _config3.default || {});
+      this.props.onSetActiveModules(initialOptions.MODULES || _config3.default.MODULES || []);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);
       this.props.onSetTabs(this.tabs);
       if (this.props.opened) this.openModal(initialTab);
@@ -110,11 +136,11 @@ var AirstoreUploader = function (_Component) {
     value: function render() {
       if (!this.props.isVisible) return null;
 
-      return React.createElement(
-        Modal,
+      return _react2.default.createElement(
+        _dist.Modal,
         { noBorder: true, fullScreen: 'md', onClose: this.closeModal, style: { borderRadius: 5 } },
-        React.createElement(
-          StyleRoot,
+        _react2.default.createElement(
+          _radium.StyleRoot,
           { className: 'airstore-root-box', style: { width: '100%', height: '100%' } },
           this.renderModalContent()
         )
@@ -133,25 +159,25 @@ var AirstoreUploader = function (_Component) {
 
       var contentProps = { showAlert: this.showAlert, themeColors: initialOptions.themeColors };
 
-      return React.createElement(
-        FocusLock,
+      return _react2.default.createElement(
+        _reactFocusLock2.default,
         null,
-        React.createElement(
-          Dialog,
+        _react2.default.createElement(
+          _styledComponents.Dialog,
           { role: 'dialog', className: 'ae-dialog' },
-          React.createElement(
+          _react2.default.createElement(
             'div',
-            { style: [CSS.tabs.header], className: 'ae-tabs-header' },
-            React.createElement(
+            { style: [_styles.CSS.tabs.header], className: 'ae-tabs-header' },
+            _react2.default.createElement(
               'nav',
               {
                 ref: function ref(node) {
                   return _this2._nav = node;
                 }, className: 'airstore-uploader-navigation',
-                style: [CSS.tabs.header.container]
+                style: [_styles.CSS.tabs.header.container]
               },
               filteredTabs.map(function (tab, index) {
-                return React.createElement(
+                return _react2.default.createElement(
                   'a',
                   {
                     href: 'javascript:void(0)',
@@ -159,31 +185,31 @@ var AirstoreUploader = function (_Component) {
                     id: 'tab-' + tab.id,
                     key: 'tab-' + tab.id,
                     className: 'tab-header-item selected ' + (activeTab && activeTab.id === tab.id ? 'active' : ''),
-                    style: [CSS.tabs.header.container.item, activeTab && activeTab.id === tab.id && CSS.tabs.header.container.item.selected],
+                    style: [_styles.CSS.tabs.header.container.item, activeTab && activeTab.id === tab.id && _styles.CSS.tabs.header.container.item.selected],
                     onClick: function onClick(event) {
                       event.preventDefault();
                       _this2.props.onActivateTab(tab);
                     }
                   },
-                  React.createElement('i', { className: tab.iconClass, style: [CSS.tabs.header.container.item.i] }),
-                  React.createElement(
+                  _react2.default.createElement('i', { className: tab.iconClass, style: [_styles.CSS.tabs.header.container.item.i] }),
+                  _react2.default.createElement(
                     'span',
-                    { title: tab.fullName, style: CSS.tabs.header.container.item.text },
+                    { title: tab.fullName, style: _styles.CSS.tabs.header.container.item.text },
                     tab.shortName
                   )
                 );
               })
             )
           ),
-          React.createElement(
+          _react2.default.createElement(
             'div',
-            { style: [CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
-            activeTab && React.createElement(
+            { style: [_styles.CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
+            activeTab && _react2.default.createElement(
               'div',
               { style: [{ width: '100%', minWidth: 540, overflow: 'auto' }] },
               activeTab.getContent.call(this, contentProps)
             ),
-            React.createElement(ToastContainer, {
+            _react2.default.createElement(_reactToastr.ToastContainer, {
               ref: 'container',
               toastMessageFactory: ToastMessageFactory,
               className: 'toast-top-right'
@@ -195,9 +221,9 @@ var AirstoreUploader = function (_Component) {
   }]);
 
   return AirstoreUploader;
-}(Component);
+}(_react.Component);
 
-export default connect(function (_ref2) {
+exports.default = (0, _reactRedux.connect)(function (_ref2) {
   var _ref2$uploader = _ref2.uploader,
       backgrounds = _ref2$uploader.backgrounds,
       isVisible = _ref2$uploader.isVisible,
@@ -210,25 +236,25 @@ export default connect(function (_ref2) {
 }, function (dispatch) {
   return {
     onModalOpen: function onModalOpen(tabName) {
-      return dispatch(modalOpen(tabName));
+      return dispatch((0, _actions.modalOpen)(tabName));
     },
     onModalClose: function onModalClose() {
-      return dispatch(modalClose());
+      return dispatch((0, _actions.modalClose)());
     },
     onActivateTab: function onActivateTab(active) {
-      return dispatch(activateTab(active));
+      return dispatch((0, _actions.activateTab)(active));
     },
     onSetUploaderConfig: function onSetUploaderConfig(_config) {
-      return dispatch(setUploaderConfig(_config));
+      return dispatch((0, _actions.setUploaderConfig)(_config));
     },
     onSetActiveModules: function onSetActiveModules(modules) {
-      return dispatch(setActiveModules(modules));
+      return dispatch((0, _actions.setActiveModules)(modules));
     },
     onSetUploadHandler: function onSetUploadHandler(handler) {
-      return dispatch(setUploadHandler(handler));
+      return dispatch((0, _actions.setUploadHandler)(handler));
     },
     onSetTabs: function onSetTabs(tabs) {
-      return dispatch(setTabs(tabs));
+      return dispatch((0, _actions.setTabs)(tabs));
     }
   };
-})(Radium(AirstoreUploader));
+})((0, _radium2.default)(AirstoreUploader));

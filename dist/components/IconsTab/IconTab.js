@@ -1,6 +1,42 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../../actions');
+
+var _styledComponents = require('../../styledComponents');
+
+var _dist = require('scaleflex-react-ui-kit/dist');
+
+var _ = require('../');
+
+var _config = require('../../config');
+
+var _iconsApi = require('../../services/iconsApi.service');
+
+var _imageGrid = require('../../services/imageGrid.service');
+
+var ImageGridService = _interopRequireWildcard(_imageGrid);
+
+var _VirtualizedImagesGrid = require('../VirtualizedImagesGrid');
+
+var _VirtualizedImagesGrid2 = _interopRequireDefault(_VirtualizedImagesGrid);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -9,17 +45,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { uploadFilesFromUrls, getIconsTags, activateIconsCategory, fetchIcons, modalClose } from '../../actions';
-import { IconsWrapper, IconTabWrapper, IconMain, IconBoxWrapper, ShowMoreResultsSpinner } from '../../styledComponents';
-import { Spinner } from 'scaleflex-react-ui-kit/dist';
-import { IconItem, IconSidebar, SearchBar, IconTags, IconMonoColorSettings, IconAddTagModal } from '../';
-import { DEFAULT_ICON_SIZE } from '../../config';
-import { setAsNotRelevant, sendSelectionData } from '../../services/iconsApi.service';
-import * as ImageGridService from '../../services/imageGrid.service';
-import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 
 var IconTab = function (_Component) {
   _inherits(IconTab, _Component);
@@ -45,7 +70,7 @@ var IconTab = function (_Component) {
       activePresetTag: '',
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
-      imageGrid: { columnWidth: 0, gutterSize: 4, minColumnWidth: DEFAULT_ICON_SIZE },
+      imageGrid: { columnWidth: 0, gutterSize: 4, minColumnWidth: _config.DEFAULT_ICON_SIZE },
       isShowMoreImages: false,
 
       activeTags: {}
@@ -79,7 +104,7 @@ var IconTab = function (_Component) {
           activePresetTag = _this$state.activePresetTag;
 
 
-      sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, _this.loadedIcons);
+      (0, _iconsApi.sendSelectionData)({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, _this.loadedIcons);
       var self = _this.props;
       _this.props.onFileUpload(icon.src, _this.props.uploaderConfig).then(function (files) {
         _this.uploadStop();
@@ -211,7 +236,7 @@ var IconTab = function (_Component) {
 
       var relevantActiveTags = _this.getRelevantActiveTags(activeTags, active.related_tags);
       event.stopPropagation();
-      setAsNotRelevant({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, activeIcon.uid);
+      (0, _iconsApi.setAsNotRelevant)({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, activeIcon.uid);
       showAlert('Set icon as not relevant', '', 'info');
     }, _this.onLoadImage = function (target, icon) {
       _this.loadedIcons.push(icon);
@@ -274,19 +299,19 @@ var IconTab = function (_Component) {
       var isSearch = active && active.slug && active.slug === 'custom-search';
       var isVisibleLoadingBlock = !(active && active.isLastPage || isSearch && !this.state.searchPhrase);
 
-      return React.createElement(
-        IconTabWrapper,
+      return _react2.default.createElement(
+        _styledComponents.IconTabWrapper,
         null,
-        React.createElement(IconSidebar, {
+        _react2.default.createElement(_.IconSidebar, {
           activePresetTag: activePresetTag,
           onActivatePresetTag: this.onActivatePresetTag,
           toggleColorType: this.toggleColorType,
           activeColorType: activeColorType
         }),
-        React.createElement(
-          IconMain,
+        _react2.default.createElement(
+          _styledComponents.IconMain,
           null,
-          React.createElement(SearchBar, {
+          _react2.default.createElement(_.SearchBar, {
             title: "You can search icons here",
             items: active.icons,
             isLoading: isLoading,
@@ -298,13 +323,13 @@ var IconTab = function (_Component) {
             onChangeSearchPhrase: this.onChangeSearchPhrase,
             count: count
           }),
-          React.createElement(IconTags, {
+          _react2.default.createElement(_.IconTags, {
             tagsList: active.related_tags,
             searchPhrase: searchPhrase,
             activeTags: activeTags,
             toggleTag: this.toggleTag
           }),
-          isShowMonoIconSettings && React.createElement(IconMonoColorSettings, {
+          isShowMonoIconSettings && _react2.default.createElement(_.IconMonoColorSettings, {
             themeColors: themeColors,
             upload: this.upload,
             activeIconSrc: activeIconSrc,
@@ -312,7 +337,7 @@ var IconTab = function (_Component) {
               _this2.setState({ isShowMonoIconSettings: false });
             }
           }),
-          isShowIconAddTagModal && React.createElement(IconAddTagModal, {
+          isShowIconAddTagModal && _react2.default.createElement(_.IconAddTagModal, {
             isShowIconAddTagModal: isShowIconAddTagModal,
             activeIcon: activeIcon,
             upload: this.upload,
@@ -323,15 +348,15 @@ var IconTab = function (_Component) {
               _this2.setState({ isShowIconAddTagModal: false });
             }
           }),
-          React.createElement(
-            IconsWrapper,
+          _react2.default.createElement(
+            _styledComponents.IconsWrapper,
             {
               innerRef: function innerRef(node) {
                 return _this2.imageGridWrapperRef = node;
               },
               id: 'airstore-uploader-icons-box'
             },
-            active.icons.length && !isLoading && columnWidth ? React.createElement(VirtualizedImagesGrid, {
+            active.icons.length && !isLoading && columnWidth ? _react2.default.createElement(_VirtualizedImagesGrid2.default, {
               imageGridWrapperWidth: imageGridWrapperWidth,
               imageContainerHeight: imageContainerHeight,
               columnWidth: columnWidth,
@@ -346,10 +371,10 @@ var IconTab = function (_Component) {
                     columnWidth = _ref4.columnWidth,
                     item = _ref4.item,
                     index = _ref4.index;
-                return React.createElement(
-                  IconBoxWrapper,
+                return _react2.default.createElement(
+                  _styledComponents.IconBoxWrapper,
                   { style: _extends({}, style, { width: Math.floor(columnWidth) }) },
-                  React.createElement(IconItem, {
+                  _react2.default.createElement(_.IconItem, {
                     columnWidth: Math.floor(columnWidth),
                     icon: item,
                     index: index,
@@ -364,18 +389,18 @@ var IconTab = function (_Component) {
                 );
               }
             }) : null,
-            React.createElement(ShowMoreResultsSpinner, { show: isShowMoreImages && active.icons.length })
+            _react2.default.createElement(_styledComponents.ShowMoreResultsSpinner, { show: isShowMoreImages && active.icons.length })
           ),
-          React.createElement(Spinner, { overlay: true, show: isLoading })
+          _react2.default.createElement(_dist.Spinner, { overlay: true, show: isLoading })
         )
       );
     }
   }]);
 
   return IconTab;
-}(Component);
+}(_react.Component);
 
-export default connect(function (_ref5) {
+exports.default = (0, _reactRedux.connect)(function (_ref5) {
   var uploaderConfig = _ref5.uploader.uploaderConfig,
       _ref5$icons = _ref5.icons,
       tags = _ref5$icons.tags,
@@ -386,23 +411,23 @@ export default connect(function (_ref5) {
 }, {
   onGetTags: function onGetTags() {
     return function (dispatch) {
-      return dispatch(getIconsTags());
+      return dispatch((0, _actions.getIconsTags)());
     };
   },
   onActivateCategory: function onActivateCategory(category, onSuccess) {
     return function (dispatch) {
-      return dispatch(activateIconsCategory(category, onSuccess));
+      return dispatch((0, _actions.activateIconsCategory)(category, onSuccess));
     };
   },
   onFileUpload: function onFileUpload(file, uploaderConfig) {
     return function (dispatch) {
-      return dispatch(uploadFilesFromUrls([file], uploaderConfig));
+      return dispatch((0, _actions.uploadFilesFromUrls)([file], uploaderConfig));
     };
   },
   onSearchIcons: function onSearchIcons(searchParams, relevantActiveTags, done) {
     return function (dispatch) {
-      return dispatch(fetchIcons(searchParams, relevantActiveTags, done));
+      return dispatch((0, _actions.fetchIcons)(searchParams, relevantActiveTags, done));
     };
   },
-  modalClose: modalClose
+  modalClose: _actions.modalClose
 })(IconTab);

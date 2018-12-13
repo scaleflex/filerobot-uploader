@@ -1,6 +1,48 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _index = require('../../actions/index');
+
+var _reactRedux = require('react-redux');
+
+var _styledComponents = require('../../styledComponents');
+
+var _ = require('../');
+
+var _VirtualizedImagesGrid = require('../VirtualizedImagesGrid');
+
+var _VirtualizedImagesGrid2 = _interopRequireDefault(_VirtualizedImagesGrid);
+
+var _imageGrid = require('../../services/imageGrid.service');
+
+var ImageGridService = _interopRequireWildcard(_imageGrid);
+
+var _dist = require('scaleflex-react-ui-kit/dist');
+
+var _actions = require('../../actions');
+
+var _reactColor = require('react-color');
+
+var _hoc = require('../hoc');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -9,19 +51,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import Radium from 'radium';
-import { getBackgrounds, uploadFilesFromUrls, modalClose } from '../../actions/index';
-import { connect } from 'react-redux';
-import { SidebarWrap, ColorItem, ColorItemName, TabWrap, SideBar, AddColorBtn, ImageContainer, ImagesListContainer, Label, SketchPickerWrapper, SketchPickerOverlay, ColorFilterItem, ShowMoreResultsSpinner, Img, ImageWrapper, ApplyColorBtn, CountTag } from '../../styledComponents';
-import { SearchBar, IconTags } from '../';
-import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
-import * as ImageGridService from '../../services/imageGrid.service';
-import { Spinner } from 'scaleflex-react-ui-kit/dist';
-import { fetchImages, getImagesTags } from '../../actions';
-import { SketchPicker } from 'react-color';
-import { Aux } from '../hoc';
 
 var ImagesTab = function (_Component) {
   _inherits(ImagesTab, _Component);
@@ -274,22 +303,22 @@ var ImagesTab = function (_Component) {
           backgrounds = _this$props2.backgrounds;
 
 
-      return React.createElement(
-        SidebarWrap,
+      return _react2.default.createElement(
+        _styledComponents.SidebarWrap,
         null,
-        React.createElement(
-          SideBar,
+        _react2.default.createElement(
+          _styledComponents.SideBar,
           null,
-          React.createElement(
-            Label,
+          _react2.default.createElement(
+            _styledComponents.Label,
             { fs: '16px', color: 'black' },
             'Color filter'
           ),
-          React.createElement(
+          _react2.default.createElement(
             'div',
             { style: { margin: '0 10px' } },
             activeColorFilters.map(function (colorFilter, index) {
-              return React.createElement(ColorFilterItem, {
+              return _react2.default.createElement(_styledComponents.ColorFilterItem, {
                 index: index,
                 key: 'colorFilter-' + index,
                 color: colorFilter.value,
@@ -298,11 +327,11 @@ var ImagesTab = function (_Component) {
               });
             })
           ),
-          React.createElement(
+          _react2.default.createElement(
             'div',
             { style: { padding: '5px 10px 12px' } },
-            React.createElement(
-              AddColorBtn,
+            _react2.default.createElement(
+              _styledComponents.AddColorBtn,
               {
                 onClick: _this.addColorFilter,
                 onKeyDown: function onKeyDown(event) {
@@ -314,13 +343,13 @@ var ImagesTab = function (_Component) {
               '+ add color'
             )
           ),
-          React.createElement(
-            Label,
+          _react2.default.createElement(
+            _styledComponents.Label,
             { fs: '16px', color: 'black' },
             'Categories'
           ),
-          tags.length && React.createElement(
-            ColorItem,
+          tags.length && _react2.default.createElement(
+            _styledComponents.ColorItem,
             {
               key: 'category-background',
               active: 'backgrounds' === activePresetTag,
@@ -330,13 +359,13 @@ var ImagesTab = function (_Component) {
               tabIndex: 0,
               role: 'button'
             },
-            React.createElement(
-              ColorItemName,
+            _react2.default.createElement(
+              _styledComponents.ColorItemName,
               null,
               'Backgrounds '
             ),
-            React.createElement(
-              CountTag,
+            _react2.default.createElement(
+              _styledComponents.CountTag,
               null,
               '(',
               backgrounds.length,
@@ -346,7 +375,7 @@ var ImagesTab = function (_Component) {
           tags.slice(0, 20).map(function (item, index) {
             return _this.renderItem(item, index);
           }),
-          !tags.length ? React.createElement(Spinner, { black: true, show: true, style: { fontSize: 8, top: 10, opacity: 0.4 } }) : null
+          !tags.length ? _react2.default.createElement(_dist.Spinner, { black: true, show: true, style: { fontSize: 8, top: 10, opacity: 0.4 } }) : null
         )
       );
     };
@@ -358,8 +387,8 @@ var ImagesTab = function (_Component) {
       var activePresetTag = _this.state.activePresetTag;
 
 
-      return React.createElement(
-        ColorItem,
+      return _react2.default.createElement(
+        _styledComponents.ColorItem,
         {
           key: 'category-' + tag,
           active: tag === activePresetTag,
@@ -372,13 +401,13 @@ var ImagesTab = function (_Component) {
           tabIndex: 0,
           role: 'button'
         },
-        React.createElement(
-          ColorItemName,
+        _react2.default.createElement(
+          _styledComponents.ColorItemName,
           null,
           label || tag.replace(/_/g, ' ').trim()
         ),
-        React.createElement(
-          CountTag,
+        _react2.default.createElement(
+          _styledComponents.CountTag,
           null,
           '(',
           count,
@@ -418,10 +447,10 @@ var ImagesTab = function (_Component) {
       var isBackground = activePresetTag === 'backgrounds';
       var imagesList = isBackground ? [].concat(_toConsumableArray(backgrounds), _toConsumableArray(images)) : images;
 
-      return React.createElement(
-        ImageContainer,
+      return _react2.default.createElement(
+        _styledComponents.ImageContainer,
         null,
-        React.createElement(SearchBar, {
+        _react2.default.createElement(_.SearchBar, {
           title: "You can search images here",
           items: images,
           isLoading: isLoading,
@@ -433,19 +462,19 @@ var ImagesTab = function (_Component) {
           onChangeSearchPhrase: _this.onChangeSearchPhrase,
           count: count
         }),
-        React.createElement(IconTags, {
+        _react2.default.createElement(_.IconTags, {
           tagsList: related_tags,
           searchPhrase: searchPhrase,
           activeTags: activeTags,
           toggleTag: _this.toggleTag
         }),
-        React.createElement(
-          ImagesListContainer,
+        _react2.default.createElement(
+          _styledComponents.ImagesListContainer,
           { innerRef: _this.imageGridWrapperRef },
-          imagesList.length && imageContainerHeight && columnWidth && !isLoading ? React.createElement(
-            Aux,
+          imagesList.length && imageContainerHeight && columnWidth && !isLoading ? _react2.default.createElement(
+            _hoc.Aux,
             null,
-            React.createElement(VirtualizedImagesGrid, {
+            _react2.default.createElement(_VirtualizedImagesGrid2.default, {
               imageGridWrapperWidth: imageGridWrapperWidth,
               imageContainerHeight: imageContainerHeight,
               columnWidth: columnWidth,
@@ -460,8 +489,8 @@ var ImagesTab = function (_Component) {
                     columnWidth = _ref4.columnWidth,
                     item = _ref4.item,
                     index = _ref4.index;
-                return React.createElement(
-                  ImageWrapper,
+                return _react2.default.createElement(
+                  _styledComponents.ImageWrapper,
                   {
                     style: _extends({}, style, { width: columnWidth }),
                     onClick: function onClick() {
@@ -472,14 +501,14 @@ var ImagesTab = function (_Component) {
                       _this.onKeyDown(event, item);
                     }
                   },
-                  React.createElement(Img, {
+                  _react2.default.createElement(_styledComponents.Img, {
                     height: columnWidth / (item.ratio || 1.6),
                     src: ImageGridService.getCropImageUrl(item.src, columnWidth, columnWidth / (item.ratio || 1.6))
                   })
                 );
               }
             }),
-            React.createElement(ShowMoreResultsSpinner, { show: isShowMoreImages })
+            _react2.default.createElement(_styledComponents.ShowMoreResultsSpinner, { show: isShowMoreImages })
           ) : null
         )
       );
@@ -502,7 +531,7 @@ var ImagesTab = function (_Component) {
       activeColorFilterIndex: null,
       isShowMoreImages: false
     };
-    _this.imageGridWrapperRef = React.createRef();
+    _this.imageGridWrapperRef = _react2.default.createRef();
     return _this;
   }
 
@@ -529,18 +558,18 @@ var ImagesTab = function (_Component) {
 
       var colorFilter = activeColorFilters[activeColorFilterIndex] || {};
 
-      return React.createElement(
-        TabWrap,
+      return _react2.default.createElement(
+        _styledComponents.TabWrap,
         null,
         this.renderSidebar(),
         this.renderContent(),
-        displayColorPicker && React.createElement(
-          SketchPickerWrapper,
+        displayColorPicker && _react2.default.createElement(
+          _styledComponents.SketchPickerWrapper,
           null,
-          React.createElement(SketchPickerOverlay, { onClick: this.handleClose }),
-          React.createElement(SketchPicker, { color: colorFilter.value, onChange: this.handleChange }),
-          React.createElement(
-            ApplyColorBtn,
+          _react2.default.createElement(_styledComponents.SketchPickerOverlay, { onClick: this.handleClose }),
+          _react2.default.createElement(_reactColor.SketchPicker, { color: colorFilter.value, onChange: this.handleChange }),
+          _react2.default.createElement(
+            _styledComponents.ApplyColorBtn,
             {
               sm: true,
               themeColor: true,
@@ -550,15 +579,15 @@ var ImagesTab = function (_Component) {
             'Apply'
           )
         ),
-        React.createElement(Spinner, { overlay: true, show: isLoading })
+        _react2.default.createElement(_dist.Spinner, { overlay: true, show: isLoading })
       );
     }
   }]);
 
   return ImagesTab;
-}(Component);
+}(_react.Component);
 
-export default connect(function (_ref5) {
+exports.default = (0, _reactRedux.connect)(function (_ref5) {
   var _ref5$uploader = _ref5.uploader,
       backgrounds = _ref5$uploader.backgrounds,
       uploaderConfig = _ref5$uploader.uploaderConfig,
@@ -572,23 +601,23 @@ export default connect(function (_ref5) {
 }, {
   onGetImagesTags: function onGetImagesTags() {
     return function (dispatch) {
-      return dispatch(getImagesTags());
+      return dispatch((0, _actions.getImagesTags)());
     };
   },
   onFileUpload: function onFileUpload(file, uploaderConfig) {
     return function (dispatch) {
-      return dispatch(uploadFilesFromUrls([file], uploaderConfig));
+      return dispatch((0, _index.uploadFilesFromUrls)([file], uploaderConfig));
     };
   },
   onGetBackgrounds: function onGetBackgrounds() {
     return function (dispatch) {
-      return dispatch(getBackgrounds());
+      return dispatch((0, _index.getBackgrounds)());
     };
   },
   onSearchImages: function onSearchImages(searchParams, relevantActiveTags) {
     return function (dispatch) {
-      return dispatch(fetchImages(searchParams, relevantActiveTags));
+      return dispatch((0, _actions.fetchImages)(searchParams, relevantActiveTags));
     };
   },
-  modalClose: modalClose
-})(Radium(ImagesTab));
+  modalClose: _index.modalClose
+})((0, _radium2.default)(ImagesTab));

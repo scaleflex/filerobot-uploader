@@ -1,3 +1,10 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ThemeColors = exports.CountTag = exports.Icon = exports.IconWrapper = exports.IconBoxWrapperInner = exports.IconBoxWrapper = exports.Input = exports.IconMain = exports.IconTabWrapper = exports.IconsWrapper = exports.MonoActionBlock = exports.SettingsIconWrapper = exports.SettingsIcon = exports.ColorIcon = exports.ColorsWrapper = exports.Opacity = exports.IconAddTagInner = exports.MonoIconSettings = exports.ControlIcon = exports.NotRelevantBtn = exports.ActionsIconWrapper = exports.AddTagBtn = exports.HoverWrapper = exports.CloseIcon = exports.ColorWrapper = exports.Tag = exports.TagsWrapper = exports.SearchTitle = exports.SearchWrapper = exports.ButtonSearch = exports.InputSearch = exports.Label = exports.AmountIcons = exports.SearchGroup = undefined;
+
 var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10px;\n  justify-content: left;\n'], ['\n  display: flex;\n  padding: 10px;\n  justify-content: left;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: ', ';\n  align-items: center;\n  padding: 10px;\n  font-size: 13px;\n  color: #3f3f3f;\n'], ['\n  display: ', ';\n  align-items: center;\n  padding: 10px;\n  font-size: 13px;\n  color: #3f3f3f;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n'], ['\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n']),
@@ -33,17 +40,25 @@ var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10
     _templateObject33 = _taggedTemplateLiteral(['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n'], ['\n  margin-left: 6px;\n  color: rgb(112, 118, 126);\n']),
     _templateObject34 = _taggedTemplateLiteral(['\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  margin-bottom: 20px;\n'], ['\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  margin-bottom: 20px;\n']);
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _dist = require('scaleflex-react-ui-kit/dist');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React from 'react';
-import styled from 'styled-components';
-import { CloseBtn, Button } from 'scaleflex-react-ui-kit/dist';
-
-export var SearchGroup = styled.div(_templateObject);
-export var AmountIcons = styled.div(_templateObject2, function (props) {
+var SearchGroup = exports.SearchGroup = _styledComponents2.default.div(_templateObject);
+var AmountIcons = exports.AmountIcons = _styledComponents2.default.div(_templateObject2, function (props) {
   return props.empty ? 'none' : 'flex';
 });
-export var Label = styled.div(_templateObject3, function (props) {
+var Label = exports.Label = _styledComponents2.default.div(_templateObject3, function (props) {
   return props.p ? props.p : '10px 8px';
 }, function (props) {
   return props.fs ? props.fs : 'inherit';
@@ -54,24 +69,24 @@ export var Label = styled.div(_templateObject3, function (props) {
 }, function (props) {
   return props.mr ? props.mr : 0;
 });
-export var InputSearch = styled.input.attrs({
+var InputSearch = exports.InputSearch = _styledComponents2.default.input.attrs({
   autoFocus: true
 })(_templateObject4);
-export var ButtonSearch = styled.button(_templateObject5, function (props) {
+var ButtonSearch = exports.ButtonSearch = _styledComponents2.default.button(_templateObject5, function (props) {
   return props.fullBr ? props.fullBr : '0 4px 4px 0';
 });
 
-export var SearchWrapper = styled.div(_templateObject6, function (props) {
+var SearchWrapper = exports.SearchWrapper = _styledComponents2.default.div(_templateObject6, function (props) {
   return props.empty && '\n    height: 100%;\n    justify-content: center;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n  ';
 });
 
-export var SearchTitle = styled.h3(_templateObject7, function (props) {
+var SearchTitle = exports.SearchTitle = _styledComponents2.default.h3(_templateObject7, function (props) {
   return props.show && '\n    display: block;\n  ';
 });
 
-export var TagsWrapper = styled.div(_templateObject8);
+var TagsWrapper = exports.TagsWrapper = _styledComponents2.default.div(_templateObject8);
 
-export var Tag = styled.div.attrs({ className: function className(props) {
+var Tag = exports.Tag = _styledComponents2.default.div.attrs({ className: function className(props) {
     return props.active ? 'ae-tag-active' : '';
   } })(_templateObject9, function (props) {
   return props.active && '\n    background: #00707c;\n    color: #fff;\n    padding: 6px 21px 6px 9px;\n  ';
@@ -79,23 +94,23 @@ export var Tag = styled.div.attrs({ className: function className(props) {
   return props.hide && 'display: none;';
 });
 
-export var ColorWrapper = styled.div(_templateObject10);
+var ColorWrapper = exports.ColorWrapper = _styledComponents2.default.div(_templateObject10);
 
-export var CloseIcon = styled(CloseBtn)(_templateObject11, function (props) {
+var CloseIcon = exports.CloseIcon = (0, _styledComponents2.default)(_dist.CloseBtn)(_templateObject11, function (props) {
   return props.active && '\n    display: block;\n  ';
 });
 
-export var HoverWrapper = styled.div(_templateObject12, function (props) {
+var HoverWrapper = exports.HoverWrapper = _styledComponents2.default.div(_templateObject12, function (props) {
   return props.isShow ? 'flex' : 'none';
 });
 
-export var AddTagBtn = styled(Button)(_templateObject13);
+var AddTagBtn = exports.AddTagBtn = (0, _styledComponents2.default)(_dist.Button)(_templateObject13);
 
-export var ActionsIconWrapper = styled.div(_templateObject14);
+var ActionsIconWrapper = exports.ActionsIconWrapper = _styledComponents2.default.div(_templateObject14);
 
-export var NotRelevantBtn = styled(Button)(_templateObject15);
+var NotRelevantBtn = exports.NotRelevantBtn = (0, _styledComponents2.default)(_dist.Button)(_templateObject15);
 
-export var ControlIcon = styled.span(_templateObject16, function (props) {
+var ControlIcon = exports.ControlIcon = _styledComponents2.default.span(_templateObject16, function (props) {
   return props.color ? props.color : '#f2f2f2';
 }, function (props) {
   return props.fs ? props.fs : 25;
@@ -103,56 +118,56 @@ export var ControlIcon = styled.span(_templateObject16, function (props) {
   return props.pb ? props.pb : '';
 });
 
-export var MonoIconSettings = styled.div(_templateObject17, function (props) {
+var MonoIconSettings = exports.MonoIconSettings = _styledComponents2.default.div(_templateObject17, function (props) {
   return props.isShow ? 'flex' : 'none';
 }, function (props) {
   return props.displayColorPicker ? 'calc(50% - 110px)' : '50%';
 });
 
-export var IconAddTagInner = styled.div(_templateObject18);
+var IconAddTagInner = exports.IconAddTagInner = _styledComponents2.default.div(_templateObject18);
 
-export var Opacity = styled.div(_templateObject19, function (props) {
+var Opacity = exports.Opacity = _styledComponents2.default.div(_templateObject19, function (props) {
   return props.isShow ? 'block' : 'none';
 });
 
-export var ColorsWrapper = styled.div(_templateObject20);
+var ColorsWrapper = exports.ColorsWrapper = _styledComponents2.default.div(_templateObject20);
 
-export var ColorIcon = styled.div(_templateObject21, function (props) {
+var ColorIcon = exports.ColorIcon = _styledComponents2.default.div(_templateObject21, function (props) {
   return props.bgColor ? props.bgColor : '';
 }, function (props) {
   return props.bgImage ? 'url(' + props.bgImage + ')' : '';
 });
 
-export var SettingsIcon = styled.img(_templateObject22);
+var SettingsIcon = exports.SettingsIcon = _styledComponents2.default.img(_templateObject22);
 
-export var SettingsIconWrapper = styled.div(_templateObject23);
+var SettingsIconWrapper = exports.SettingsIconWrapper = _styledComponents2.default.div(_templateObject23);
 
-export var MonoActionBlock = styled.div(_templateObject24);
+var MonoActionBlock = exports.MonoActionBlock = _styledComponents2.default.div(_templateObject24);
 
-export var IconsWrapper = styled.div(_templateObject25);
+var IconsWrapper = exports.IconsWrapper = _styledComponents2.default.div(_templateObject25);
 
-export var IconTabWrapper = styled.div(_templateObject26);
+var IconTabWrapper = exports.IconTabWrapper = _styledComponents2.default.div(_templateObject26);
 
-export var IconMain = styled.div(_templateObject27);
+var IconMain = exports.IconMain = _styledComponents2.default.div(_templateObject27);
 
-export var Input = styled(InputSearch)(_templateObject28);
-export var IconBoxWrapper = styled.div(_templateObject29, function (props) {
+var Input = exports.Input = (0, _styledComponents2.default)(InputSearch)(_templateObject28);
+var IconBoxWrapper = exports.IconBoxWrapper = _styledComponents2.default.div(_templateObject29, function (props) {
   return props.width;
 }, function (props) {
   return props.height;
 });
 
-export var IconBoxWrapperInner = styled.div(_templateObject30);
-export var IconWrapper = styled.div(_templateObject31, function (props) {
+var IconBoxWrapperInner = exports.IconBoxWrapperInner = _styledComponents2.default.div(_templateObject30);
+var IconWrapper = exports.IconWrapper = _styledComponents2.default.div(_templateObject31, function (props) {
   return props.width;
 }, function (props) {
   return props.height;
 });
 
-export var Icon = styled.img(_templateObject32, function (props) {
+var Icon = exports.Icon = _styledComponents2.default.img(_templateObject32, function (props) {
   return props.isHover && '\n    transform: scale(1.2);\n  ';
 });
 
-export var CountTag = styled.span(_templateObject33);
+var CountTag = exports.CountTag = _styledComponents2.default.span(_templateObject33);
 
-export var ThemeColors = styled.div(_templateObject34);
+var ThemeColors = exports.ThemeColors = _styledComponents2.default.div(_templateObject34);

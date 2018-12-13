@@ -1,3 +1,10 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ShowMoreResultsSpinner = exports.ApplyColorBtn = exports.ShowMoreResultsSpinnerWrapper = exports.ColorFilterItem = exports.ColorFilterBox = exports.ColorFilterItemWrapper = exports.SketchPickerOverlay = exports.SketchPickerWrapper = exports.AddColorBtn = exports.ImagesListContainer = exports.ImageContainer = exports.Img = exports.ImageWrapper = exports.TabWrap = exports.ColorItemName = exports.ColorItem = exports.ColorType = exports.SideBar = exports.SidebarWrap = undefined;
+
 var _templateObject = _taggedTemplateLiteral(['\n  width: 160px;\n  border-right: 1px solid rgb(221, 221, 221);\n  position: relative;\n'], ['\n  width: 160px;\n  border-right: 1px solid rgb(221, 221, 221);\n  position: relative;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow: auto;\n  height: 100%;\n  top: 0;\n  position: absolute;\n  width: 100%;\n  padding-top: 5px;\n  box-sizing: border-box;\n'], ['\n  overflow: auto;\n  height: 100%;\n  top: 0;\n  position: absolute;\n  width: 100%;\n  padding-top: 5px;\n  box-sizing: border-box;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  margin-bottom: 15px;\n  margin-top: 15px;\n'], ['\n  margin-bottom: 15px;\n  margin-top: 15px;\n']),
@@ -16,19 +23,27 @@ var _templateObject = _taggedTemplateLiteral(['\n  width: 160px;\n  border-right
     _templateObject16 = _taggedTemplateLiteral(['\n  display: ', ';\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 100px !important;\n  \n  > div:first-child {\n    opacity: 0.6;\n  }\n  \n  > div:last-child {\n    height: 1em !important;\n  }\n'], ['\n  display: ', ';\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 100px !important;\n  \n  > div:first-child {\n    opacity: 0.6;\n  }\n  \n  > div:last-child {\n    height: 1em !important;\n  }\n']),
     _templateObject17 = _taggedTemplateLiteral(['\n  margin-top: 5px;\n  width: 100%;\n  font-weight: 400;\n  text-transform: none;\n'], ['\n  margin-top: 5px;\n  width: 100%;\n  font-weight: 400;\n  text-transform: none;\n']);
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _dist = require('scaleflex-react-ui-kit/dist');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React from 'react';
-import styled from 'styled-components';
-import { CloseBtn, Spinner, Button } from 'scaleflex-react-ui-kit/dist';
+var SidebarWrap = exports.SidebarWrap = _styledComponents2.default.div(_templateObject);
 
-export var SidebarWrap = styled.div(_templateObject);
+var SideBar = exports.SideBar = _styledComponents2.default.div(_templateObject2);
 
-export var SideBar = styled.div(_templateObject2);
+var ColorType = exports.ColorType = _styledComponents2.default.div(_templateObject3);
 
-export var ColorType = styled.div(_templateObject3);
-
-export var ColorItem = styled.div.attrs({ className: function className(props) {
+var ColorItem = exports.ColorItem = _styledComponents2.default.div.attrs({ className: function className(props) {
     return props.active ? 'ae-color-item' : '';
   } })(_templateObject4, function (props) {
   return props.active ? '6px solid #00707c' : '6px solid transparent';
@@ -36,44 +51,44 @@ export var ColorItem = styled.div.attrs({ className: function className(props) {
   return props.active ? '#fff' : 'transparent';
 });
 
-export var ColorItemName = styled.span(_templateObject5);
+var ColorItemName = exports.ColorItemName = _styledComponents2.default.span(_templateObject5);
 
-export var TabWrap = styled.div(_templateObject6);
+var TabWrap = exports.TabWrap = _styledComponents2.default.div(_templateObject6);
 
-export var ImageWrapper = styled.div(_templateObject7, function (props) {
+var ImageWrapper = exports.ImageWrapper = _styledComponents2.default.div(_templateObject7, function (props) {
   return props.height;
 });
 
-export var Img = styled.img(_templateObject8, function (props) {
+var Img = exports.Img = _styledComponents2.default.img(_templateObject8, function (props) {
   return props.height;
 });
 
-export var ImageContainer = styled.div(_templateObject9);
+var ImageContainer = exports.ImageContainer = _styledComponents2.default.div(_templateObject9);
 
-export var ImagesListContainer = styled.div(_templateObject10);
+var ImagesListContainer = exports.ImagesListContainer = _styledComponents2.default.div(_templateObject10);
 
-export var AddColorBtn = styled.div(_templateObject11, function (props) {
+var AddColorBtn = exports.AddColorBtn = _styledComponents2.default.div(_templateObject11, function (props) {
   return props.hide && 'display: none;';
 });
 
-export var SketchPickerWrapper = styled.div(_templateObject12);
+var SketchPickerWrapper = exports.SketchPickerWrapper = _styledComponents2.default.div(_templateObject12);
 
-export var SketchPickerOverlay = styled.div(_templateObject13);
+var SketchPickerOverlay = exports.SketchPickerOverlay = _styledComponents2.default.div(_templateObject13);
 
-export var ColorFilterItemWrapper = styled.div(_templateObject14);
+var ColorFilterItemWrapper = exports.ColorFilterItemWrapper = _styledComponents2.default.div(_templateObject14);
 
-export var ColorFilterBox = styled.span(_templateObject15, function (props) {
+var ColorFilterBox = exports.ColorFilterBox = _styledComponents2.default.span(_templateObject15, function (props) {
   return props.color;
 });
 
-export var ColorFilterItem = function ColorFilterItem(props) {
-  return React.createElement(
+var ColorFilterItem = exports.ColorFilterItem = function ColorFilterItem(props) {
+  return _react2.default.createElement(
     ColorFilterItemWrapper,
     null,
-    React.createElement(ColorFilterBox, { color: props.color, onClick: function onClick() {
+    _react2.default.createElement(ColorFilterBox, { color: props.color, onClick: function onClick() {
         props.onChangeColorFilter(props.index);
       } }),
-    React.createElement(CloseBtn, {
+    _react2.default.createElement(_dist.CloseBtn, {
       onClick: function onClick() {
         props.onRemoveColorFilter(props.index);
       },
@@ -82,17 +97,17 @@ export var ColorFilterItem = function ColorFilterItem(props) {
   );
 };
 
-export var ShowMoreResultsSpinnerWrapper = styled.div(_templateObject16, function (props) {
+var ShowMoreResultsSpinnerWrapper = exports.ShowMoreResultsSpinnerWrapper = _styledComponents2.default.div(_templateObject16, function (props) {
   return props.show ? 'block' : 'none';
 });
 
-export var ApplyColorBtn = styled(Button)(_templateObject17);
+var ApplyColorBtn = exports.ApplyColorBtn = (0, _styledComponents2.default)(_dist.Button)(_templateObject17);
 
-export var ShowMoreResultsSpinner = function ShowMoreResultsSpinner(_ref) {
+var ShowMoreResultsSpinner = exports.ShowMoreResultsSpinner = function ShowMoreResultsSpinner(_ref) {
   var show = _ref.show;
-  return show ? React.createElement(
+  return show ? _react2.default.createElement(
     ShowMoreResultsSpinnerWrapper,
     { show: show },
-    React.createElement(Spinner, { overlay: true, show: show, style: { fontSize: 10 } })
+    _react2.default.createElement(_dist.Spinner, { overlay: true, show: show, style: { fontSize: 10 } })
   ) : null;
 };

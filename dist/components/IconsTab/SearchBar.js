@@ -1,15 +1,28 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _utils = require('../../utils');
+
+var _styledComponents = require('../../styledComponents');
+
+var _reactRedux = require('react-redux');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import { isEnterClick } from '../../utils';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, AmountIcons } from '../../styledComponents';
-import { connect } from 'react-redux';
 
 var SearchBar = function (_Component) {
   _inherits(SearchBar, _Component);
@@ -51,18 +64,18 @@ var SearchBar = function (_Component) {
 
       var isEmptyIcons = !items || !items.length;
 
-      return React.createElement(
-        SearchWrapper,
+      return _react2.default.createElement(
+        _styledComponents.SearchWrapper,
         { empty: isEmptyIcons && !isSearching },
-        React.createElement(
-          SearchTitle,
+        _react2.default.createElement(
+          _styledComponents.SearchTitle,
           { show: isEmptyIcons && !isSearching },
           title
         ),
-        React.createElement(
-          SearchGroup,
+        _react2.default.createElement(
+          _styledComponents.SearchGroup,
           null,
-          React.createElement(InputSearch, {
+          _react2.default.createElement(_styledComponents.InputSearch, {
             type: 'search',
             innerRef: function innerRef(node) {
               return _this3.searchField = node;
@@ -71,17 +84,17 @@ var SearchBar = function (_Component) {
             value: searchPhrase,
             onChange: onChangeSearchPhrase,
             onKeyDown: function onKeyDown(ev) {
-              isEnterClick(ev) && onSearch();
+              (0, _utils.isEnterClick)(ev) && onSearch();
             }
           }),
-          React.createElement(
-            ButtonSearch,
+          _react2.default.createElement(
+            _styledComponents.ButtonSearch,
             { className: 'ae-btn', onClick: onSearch },
             'Search'
           )
         ),
-        React.createElement(
-          AmountIcons,
+        _react2.default.createElement(
+          _styledComponents.AmountIcons,
           { empty: isEmptyIcons },
           'Found: ',
           count
@@ -91,6 +104,6 @@ var SearchBar = function (_Component) {
   }]);
 
   return SearchBar;
-}(Component);
+}(_react.Component);
 
-export default connect(null, null)(SearchBar);
+exports.default = (0, _reactRedux.connect)(null, null)(SearchBar);

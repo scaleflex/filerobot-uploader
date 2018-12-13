@@ -1,4 +1,9 @@
-export default {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
   MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   AIRSTORE_UPLOAD_KEY: '',
   CONTAINER: null,
@@ -7,9 +12,8 @@ export default {
   image_only: true,
   OPENPIX_KEY: null
 };
+var DEFAULT_ICON_SIZE = exports.DEFAULT_ICON_SIZE = 100;
 
-export var DEFAULT_ICON_SIZE = 100;
-
-export var COLORS = ['#96dc52', '#016df0', '#943dc5', '#feda48', '#d90028', '#ffffff', '#000000'];
+var COLORS = exports.COLORS = ['#96dc52', '#016df0', '#943dc5', '#feda48', '#d90028', '#ffffff', '#000000'];
 
 var DEFAULT_TAGS = ['accessibility', 'arrows', 'Audio & Video', 'Business', 'Charity', 'Chat', 'Chess', 'Code', 'Communication', 'Computers', 'Currency', 'Date & Time', 'Design', 'Editors', 'Files', 'Genders', 'Hands', 'Health', 'Images', 'Interfaces', 'Logistics', 'Maps', 'Medical', 'Moving', 'Objects', 'Payments & Shopping', 'Shapes', 'Spinners', 'Sports', 'Status', 'Users & People', 'Vehicles', 'Writing'];

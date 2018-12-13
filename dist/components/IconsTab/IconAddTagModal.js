@@ -1,15 +1,28 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _hoc = require('../hoc');
+
+var _iconsApi = require('../../services/iconsApi.service');
+
+var _styledComponents = require('../../styledComponents');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import { Aux } from '../hoc';
-import { addTag } from '../../services/iconsApi.service';
-import { ButtonSearch, Label, MonoIconSettings, Opacity, Input, IconAddTagInner } from '../../styledComponents';
 
 var IconAddTagModal = function (_Component) {
   _inherits(IconAddTagModal, _Component);
@@ -33,7 +46,7 @@ var IconAddTagModal = function (_Component) {
       var tagName = _this.state.tagName;
 
 
-      addTag(activeIcon.uid, tagName).then(function () {
+      (0, _iconsApi.addTag)(activeIcon.uid, tagName).then(function () {
         showAlert('New tag successfully added!');
         onClose();
       });
@@ -58,22 +71,22 @@ var IconAddTagModal = function (_Component) {
       var tagName = this.state.tagName;
 
 
-      return React.createElement(
-        Aux,
+      return _react2.default.createElement(
+        _hoc.Aux,
         null,
-        React.createElement(Opacity, { isShow: true, onClick: onClose }),
-        React.createElement(
-          MonoIconSettings,
+        _react2.default.createElement(_styledComponents.Opacity, { isShow: true, onClick: onClose }),
+        _react2.default.createElement(
+          _styledComponents.MonoIconSettings,
           { isShow: true },
-          React.createElement(
-            IconAddTagInner,
+          _react2.default.createElement(
+            _styledComponents.IconAddTagInner,
             null,
-            React.createElement(
-              Label,
+            _react2.default.createElement(
+              _styledComponents.Label,
               { color: 'black', nb: true },
               'Would you like to add tag?'
             ),
-            React.createElement(Input, {
+            _react2.default.createElement(_styledComponents.Input, {
               innerRef: function innerRef(node) {
                 return _this3._input = node;
               },
@@ -86,8 +99,8 @@ var IconAddTagModal = function (_Component) {
                 _this3.setState({ tagName: target.value });
               }
             }),
-            React.createElement(
-              ButtonSearch,
+            _react2.default.createElement(
+              _styledComponents.ButtonSearch,
               { fullBr: '4px', onClick: this.onAddTag },
               'Add tag'
             )
@@ -98,6 +111,6 @@ var IconAddTagModal = function (_Component) {
   }]);
 
   return IconAddTagModal;
-}(Component);
+}(_react.Component);
 
-export default IconAddTagModal;
+exports.default = IconAddTagModal;

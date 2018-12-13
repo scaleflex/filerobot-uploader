@@ -1,5 +1,18 @@
-import axios from 'axios';
-import { send } from './api.service';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getImagesTags = exports.searchImages = exports.getBackgrounds = undefined;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _api = require('./api.service');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var api_endpoint = 'https://www.openpix.net/v3/';
 var backgroundsAPI = 'https://jolipage-public-assets.api.airstore.io/v1/list?dir=/Backgrounds/v1';
 
@@ -10,7 +23,7 @@ var _send = function _send(url) {
   var responseType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "json";
   return new Promise(function (resolve, reject) {
 
-    axios({
+    (0, _axios2.default)({
       url: url,
       method: method,
       data: data,
@@ -38,8 +51,8 @@ var _send = function _send(url) {
   });
 };
 
-export var getBackgrounds = function getBackgrounds() {
-  return send('' + backgroundsAPI).then(function (_ref2) {
+var getBackgrounds = exports.getBackgrounds = function getBackgrounds() {
+  return (0, _api.send)('' + backgroundsAPI).then(function (_ref2) {
     var status = _ref2.status,
         _ref2$files = _ref2.files,
         files = _ref2$files === undefined ? [] : _ref2$files;
@@ -47,7 +60,7 @@ export var getBackgrounds = function getBackgrounds() {
   });
 };
 
-export var searchImages = function searchImages(searchParams) {
+var searchImages = exports.searchImages = function searchImages(searchParams) {
   var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var colorFiltersQuery = searchParams.colorFiltersQuery,
       limit = searchParams.limit,
@@ -78,7 +91,7 @@ export var searchImages = function searchImages(searchParams) {
   });
 };
 
-export var getImagesTags = function getImagesTags() {
+var getImagesTags = exports.getImagesTags = function getImagesTags() {
   return _send(api_endpoint + 'pictures/tags').then(function (_ref4) {
     var tags = _ref4.tags;
     return tags;

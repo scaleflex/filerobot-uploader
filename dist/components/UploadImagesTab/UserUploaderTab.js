@@ -1,19 +1,38 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _index = require('../../assets/styles/index');
+
+var _reactRedux = require('react-redux');
+
+var _index2 = require('../../actions/index');
+
+var _index3 = require('../../utils/index');
+
+var _index4 = require('../../styledComponents/index');
+
+var _dist = require('scaleflex-react-ui-kit/dist');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import Radium from 'radium';
-import { CSS, DragDropCss as styles } from '../../assets/styles/index';
-import { connect } from "react-redux";
-import { uploadFilesFromUrls, uploadFiles, modalClose } from '../../actions/index';
-import { isEnterClick } from '../../utils/index';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper } from '../../styledComponents/index';
-import { Spinner } from 'scaleflex-react-ui-kit/dist';
 
 var STEP = {
   DEFAULT: 'DEFAULT',
@@ -107,12 +126,12 @@ var UserUploaderTab = function (_Component) {
           _state$errorMsg = _state.errorMsg,
           errorMsg = _state$errorMsg === undefined ? '' : _state$errorMsg;
 
-      var uploadBlock_style = styles.container.uploadBlock;
+      var uploadBlock_style = _index.DragDropCss.container.uploadBlock;
 
-      return React.createElement(
+      return _react2.default.createElement(
         'div',
-        { style: [styles.container] },
-        step !== STEP.UPLOADED && React.createElement(
+        { style: [_index.DragDropCss.container] },
+        step !== STEP.UPLOADED && _react2.default.createElement(
           'div',
           {
             onDragOver: function onDragOver(e) {
@@ -136,10 +155,10 @@ var UserUploaderTab = function (_Component) {
             method: 'post',
             encType: 'multipart/form-data'
           },
-          (step === STEP.DEFAULT || step === STEP.ERROR) && React.createElement(
+          (step === STEP.DEFAULT || step === STEP.ERROR) && _react2.default.createElement(
             'div',
             { style: [uploadBlock_style.inputBox] },
-            React.createElement('input', {
+            _react2.default.createElement('input', {
               style: [uploadBlock_style.inputBox.file],
               type: 'file',
               name: 'files[]',
@@ -147,45 +166,46 @@ var UserUploaderTab = function (_Component) {
               'data-multiple-caption': '{count} files selected',
               defaultValue: '',
               tabIndex: -1,
+              multiple: true,
               onChange: this.fileChangeHandler
             }),
-            React.createElement(
+            _react2.default.createElement(
               'div',
               { style: [uploadBlock_style.inputBox.label] },
-              React.createElement(
+              _react2.default.createElement(
                 'span',
                 { style: [uploadBlock_style.inputBox.label.dragDropText] },
                 'Drag file here'
               ),
-              React.createElement(
+              _react2.default.createElement(
                 'div',
                 { style: [uploadBlock_style.inputBox.label.orText] },
                 'or'
               ),
-              React.createElement(
+              _react2.default.createElement(
                 'button',
                 {
                   key: 'browse-your-computer',
                   autoFocus: true,
-                  style: [CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }],
+                  style: [_index.CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }],
                   onClick: function onClick() {
                     _this2.refs.fileInput.click();
                   }
                 },
                 'Browse your computer'
               ),
-              React.createElement(
+              _react2.default.createElement(
                 'div',
                 { style: [uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }] },
                 'or'
               ),
-              React.createElement(
-                SearchWrapper,
+              _react2.default.createElement(
+                _index4.SearchWrapper,
                 null,
-                React.createElement(
-                  SearchGroup,
+                _react2.default.createElement(
+                  _index4.SearchGroup,
                   null,
-                  React.createElement(InputSearch, {
+                  _react2.default.createElement(_index4.InputSearch, {
                     type: 'search',
                     innerRef: function innerRef(node) {
                       return _this2._uploadFromWebField = node;
@@ -194,11 +214,11 @@ var UserUploaderTab = function (_Component) {
                     defaultValue: '',
                     placeholder: 'Enter URL to upload from web',
                     onKeyDown: function onKeyDown(ev) {
-                      return isEnterClick(ev) && _this2.uploadFromWeb();
+                      return (0, _index3.isEnterClick)(ev) && _this2.uploadFromWeb();
                     }
                   }),
-                  React.createElement(
-                    ButtonSearch,
+                  _react2.default.createElement(
+                    _index4.ButtonSearch,
                     {
                       key: 'ok',
                       className: 'ae-btn',
@@ -208,7 +228,7 @@ var UserUploaderTab = function (_Component) {
                   )
                 )
               ),
-              React.createElement(
+              _react2.default.createElement(
                 'div',
                 { style: [{
                     fontSize: "12px",
@@ -219,26 +239,26 @@ var UserUploaderTab = function (_Component) {
                 'Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.'
               )
             ),
-            React.createElement(
+            _react2.default.createElement(
               'div',
               { ref: 'submitBtn', className: 'ae-btn', style: [uploadBlock_style.inputBox.submitBtn], type: 'submit' },
               'Upload'
             )
           ),
-          step === STEP.UPLOADING && React.createElement(
+          step === STEP.UPLOADING && _react2.default.createElement(
             'div',
             { style: [uploadBlock_style.uploadingBox] },
-            React.createElement(Spinner, { overlay: true, show: true }),
-            React.createElement(
+            _react2.default.createElement(_dist.Spinner, { overlay: true, show: true }),
+            _react2.default.createElement(
               'span',
               null,
               'Uploading'
             )
           ),
-          step === STEP.ERROR && React.createElement(
+          step === STEP.ERROR && _react2.default.createElement(
             'div',
             { style: [uploadBlock_style.errorBox] },
-            React.createElement(
+            _react2.default.createElement(
               'span',
               { style: [uploadBlock_style.errorBox.errorMsg], role: 'alert' },
               errorMsg
@@ -250,13 +270,13 @@ var UserUploaderTab = function (_Component) {
   }]);
 
   return UserUploaderTab;
-}(Component);
+}(_react.Component);
 
-export default connect(function (_ref3) {
+exports.default = (0, _reactRedux.connect)(function (_ref3) {
   var uploaderConfig = _ref3.uploader.uploaderConfig;
   return { uploaderConfig: uploaderConfig };
 }, {
-  onFilesUpload: uploadFiles,
-  onFileUploadFromUrl: uploadFilesFromUrls,
-  modalClose: modalClose
-})(Radium(UserUploaderTab));
+  onFilesUpload: _index2.uploadFiles,
+  onFileUploadFromUrl: _index2.uploadFilesFromUrls,
+  modalClose: _index2.modalClose
+})((0, _radium2.default)(UserUploaderTab));

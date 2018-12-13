@@ -1,15 +1,30 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _reactRedux = require('react-redux');
+
+var _index = require('../../styledComponents/index');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import Radium from 'radium';
-import { connect } from "react-redux";
-import { SidebarWrap, SideBar, ColorWrapper, ColorItem, ColorItemName, Label, CountTag } from '../../styledComponents/index';
 
 var tags = [{ tag: 'sf-social', label: 'Social', count: '23' }, { tag: 'arrows', label: 'Arrows', count: '5414' }, { tag: 'audio', label: 'Audio & Video', count: '2716' }, { tag: 'date', label: 'Date & Time', count: '1523' }, { tag: 'currency', label: 'Currency', count: '3531' }, { tag: 'business', label: 'Business', count: '8882' }];
 
@@ -36,8 +51,8 @@ var IconSidebar = function (_Component) {
           onActivatePresetTag = _this$props.onActivatePresetTag;
 
 
-      return React.createElement(
-        ColorItem,
+      return _react2.default.createElement(
+        _index.ColorItem,
         {
           key: 'category-' + tag,
           active: tag === activePresetTag,
@@ -50,13 +65,13 @@ var IconSidebar = function (_Component) {
           tabIndex: 0,
           role: 'button'
         },
-        React.createElement(
-          ColorItemName,
+        _react2.default.createElement(
+          _index.ColorItemName,
           null,
           label || tag.replace(/_/g, ' ').trim()
         ),
-        React.createElement(
-          CountTag,
+        _react2.default.createElement(
+          _index.CountTag,
           null,
           '(',
           count,
@@ -76,22 +91,22 @@ var IconSidebar = function (_Component) {
           activeColorType = _props.activeColorType;
 
 
-      return React.createElement(
-        SidebarWrap,
+      return _react2.default.createElement(
+        _index.SidebarWrap,
         null,
-        React.createElement(
-          SideBar,
+        _react2.default.createElement(
+          _index.SideBar,
           { id: 'airstore-uploader-tags-box' },
-          React.createElement(
-            Label,
+          _react2.default.createElement(
+            _index.Label,
             { fs: '16px', color: 'black' },
             'Color filter'
           ),
-          React.createElement(
-            ColorWrapper,
+          _react2.default.createElement(
+            _index.ColorWrapper,
             null,
-            React.createElement(
-              ColorItem,
+            _react2.default.createElement(
+              _index.ColorItem,
               {
                 key: 'all-color-wrapper',
                 active: activeColorType === 'all',
@@ -104,14 +119,14 @@ var IconSidebar = function (_Component) {
                 tabIndex: 0,
                 role: 'button'
               },
-              React.createElement(
-                ColorItemName,
+              _react2.default.createElement(
+                _index.ColorItemName,
                 null,
                 'All'
               )
             ),
-            React.createElement(
-              ColorItem,
+            _react2.default.createElement(
+              _index.ColorItem,
               {
                 active: activeColorType === 'multi',
                 key: 'multi-color-wrapper',
@@ -124,14 +139,14 @@ var IconSidebar = function (_Component) {
                 tabIndex: 0,
                 role: 'button'
               },
-              React.createElement(
-                ColorItemName,
+              _react2.default.createElement(
+                _index.ColorItemName,
                 null,
                 'Multi color'
               )
             ),
-            React.createElement(
-              ColorItem,
+            _react2.default.createElement(
+              _index.ColorItem,
               {
                 active: activeColorType === 'mono',
                 key: 'mono-color-wrapper',
@@ -144,15 +159,15 @@ var IconSidebar = function (_Component) {
                 tabIndex: 0,
                 role: 'button'
               },
-              React.createElement(
-                ColorItemName,
+              _react2.default.createElement(
+                _index.ColorItemName,
                 null,
                 'Mono color'
               )
             )
           ),
-          React.createElement(
-            Label,
+          _react2.default.createElement(
+            _index.Label,
             { fs: '16px', color: 'black' },
             'Categories'
           ),
@@ -167,11 +182,11 @@ var IconSidebar = function (_Component) {
   }]);
 
   return IconSidebar;
-}(Component);
+}(_react.Component);
 
-export default connect(function (_ref3) {
+exports.default = (0, _reactRedux.connect)(function (_ref3) {
   var _ref3$icons = _ref3.icons,
       tags = _ref3$icons.tags,
       active = _ref3$icons.active;
   return { tags: tags, active: active };
-}, null)(Radium(IconSidebar));
+}, null)((0, _radium2.default)(IconSidebar));

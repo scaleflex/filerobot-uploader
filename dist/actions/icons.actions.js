@@ -1,8 +1,19 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchIcons = exports.activateIconsCategory = exports.getIconsTags = undefined;
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-import * as IconAPI from '../services/iconsApi.service';
+var _iconsApi = require('../services/iconsApi.service');
 
-export var getIconsTags = function getIconsTags() {
+var IconAPI = _interopRequireWildcard(_iconsApi);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var getIconsTags = exports.getIconsTags = function getIconsTags() {
   return function (dispatch) {
     return IconAPI.getTags().then(function (tags) {
       dispatch({ type: 'ICONS_FETCH_TAGS_SUCCESS', payload: tags });
@@ -10,7 +21,7 @@ export var getIconsTags = function getIconsTags() {
   };
 };
 
-export var activateIconsCategory = function activateIconsCategory(category, onSuccess) {
+var activateIconsCategory = exports.activateIconsCategory = function activateIconsCategory(category, onSuccess) {
   return function (dispatch) {
     dispatch({ type: 'ICONS_ACTIVATE_CATEGORY', payload: category });
 
@@ -20,7 +31,7 @@ export var activateIconsCategory = function activateIconsCategory(category, onSu
   };
 };
 
-export var fetchIcons = function fetchIcons(searchParams, relevantActiveTags) {
+var fetchIcons = exports.fetchIcons = function fetchIcons(searchParams, relevantActiveTags) {
   var onSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
   return function (dispatch) {
     var successHandler = !searchParams.offset ? function (response) {

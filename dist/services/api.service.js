@@ -1,19 +1,33 @@
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+'use strict';
 
-import axios from 'axios';
-import config from '../config';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getListFiles = exports.uploadFiles = exports.send = undefined;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _config = require('../config');
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var independentProtocolRegex = /^[https|http]+\:\/\//g;
 var getBaseUrl = function getBaseUrl(container) {
   return 'https://' + container + '.api.airstore.io/v1/';
 };
 
-export var send = function send(url) {
+var send = exports.send = function send(url) {
   var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
   var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
   var responseType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "json";
-  return axios({
+  return (0, _axios2.default)({
     url: url,
     method: method,
     data: data,
@@ -47,7 +61,7 @@ export var send = function send(url) {
  * @param dir     {string}  = directory to upload files
  * @returns {Promise}
  */
-export var uploadFiles = function uploadFiles() {
+var uploadFiles = exports.uploadFiles = function uploadFiles() {
   var files = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var _ref3 = arguments[1];
   var _ref3$uploadPath = _ref3.uploadPath,
@@ -64,7 +78,7 @@ export var uploadFiles = function uploadFiles() {
   var jsonData = { files_urls: [] };
   var isJson = data_type === 'application/json';
 
-  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
+  uploadParams = Object.assign({}, _config2.default.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
 
   // generate params string
   var paramsStr = Object.keys(uploadParams).filter(function (paramName) {
@@ -85,7 +99,7 @@ export var uploadFiles = function uploadFiles() {
   }); // fill FormData
 
   return new Promise(function (resolve, reject) {
-    send(url, 'POST', isJson ? jsonData : ajaxData, { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY,
+    send(url, 'POST', isJson ? jsonData : ajaxData, { 'X-Airstore-Secret-Key': uploadKey || _config2.default.AIRSTORE_UPLOAD_KEY,
       'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
     }).then(function (response) {
       var _response$status = response.status,
@@ -99,6 +113,8 @@ export var uploadFiles = function uploadFiles() {
         //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
         resolve([file]);
+      } else if (status === 'success' && files) {
+        resolve(files);
       } else reject(response);
 
       //if (status === 'success' && files && files.length)
@@ -121,7 +137,7 @@ export var uploadFiles = function uploadFiles() {
   });
 };
 
-export var getListFiles = function getListFiles(_ref4) {
+var getListFiles = exports.getListFiles = function getListFiles(_ref4) {
   var _ref4$dir = _ref4.dir,
       dir = _ref4$dir === undefined ? '' : _ref4$dir,
       _ref4$container = _ref4.container,

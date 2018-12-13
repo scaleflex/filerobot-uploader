@@ -1,8 +1,19 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchImages = exports.getImagesTags = undefined;
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-import * as ImagesAPI from '../services/imagesApi.service';
+var _imagesApi = require('../services/imagesApi.service');
 
-export var getImagesTags = function getImagesTags() {
+var ImagesAPI = _interopRequireWildcard(_imagesApi);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var getImagesTags = exports.getImagesTags = function getImagesTags() {
   return function (dispatch) {
     return ImagesAPI.getImagesTags().then(function (tags) {
       dispatch({ type: 'IMAGES_FETCH_TAGS_SUCCESS', payload: tags });
@@ -10,7 +21,7 @@ export var getImagesTags = function getImagesTags() {
   };
 };
 
-export var fetchImages = function fetchImages(searchParams, relevantActiveTags) {
+var fetchImages = exports.fetchImages = function fetchImages(searchParams, relevantActiveTags) {
   var onSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
   return function (dispatch) {
     var successHandler = !searchParams.offset ? function (response) {

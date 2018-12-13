@@ -1,4 +1,9 @@
-export default {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
   fa: {
     display: 'inline-block',
     font: 'normal normal normal 14px/1 FontAwesome',

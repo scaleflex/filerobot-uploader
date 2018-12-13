@@ -1,8 +1,13 @@
-export var deepCopy = function deepCopy(object) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var deepCopy = exports.deepCopy = function deepCopy(object) {
   return JSON.parse(JSON.stringify(object));
 };
 
-export var cursorToEnd = function cursorToEnd(contentEditableElement) {
+var cursorToEnd = exports.cursorToEnd = function cursorToEnd(contentEditableElement) {
   var range, selection;
   if (document.createRange) // Firefox, Chrome, Opera, Safari, IE 9+
     {
@@ -21,6 +26,6 @@ export var cursorToEnd = function cursorToEnd(contentEditableElement) {
     }
 };
 
-export var isEnterClick = function isEnterClick(event) {
+var isEnterClick = exports.isEnterClick = function isEnterClick(event) {
   return event && (event.which || event.keyCode) === 13;
 };

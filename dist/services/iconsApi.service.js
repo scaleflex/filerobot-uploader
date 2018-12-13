@@ -1,4 +1,15 @@
-import axios from 'axios';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.sendSelectionData = exports.setAsNotRelevant = exports.addTag = exports.searchIcons = exports.getTags = undefined;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var api_endpoint = 'https://www.openpix.net/v3/icons';
 
@@ -9,7 +20,7 @@ var _send = function _send(url) {
   var responseType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "json";
   return new Promise(function (resolve, reject) {
 
-    axios({
+    (0, _axios2.default)({
       url: url,
       method: method,
       data: data,
@@ -37,7 +48,7 @@ var _send = function _send(url) {
   });
 };
 
-export var getTags = function getTags() {
+var getTags = exports.getTags = function getTags() {
   return _send(api_endpoint + 'tags').then(function (_ref2) {
     var _ref2$tags = _ref2.tags,
         tags = _ref2$tags === undefined ? [] : _ref2$tags;
@@ -45,7 +56,7 @@ export var getTags = function getTags() {
   });
 };
 
-export var searchIcons = function searchIcons(searchParams) {
+var searchIcons = exports.searchIcons = function searchIcons(searchParams) {
   var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var typeQuery = searchParams.typeQuery,
       offset = searchParams.offset,
@@ -72,11 +83,11 @@ export var searchIcons = function searchIcons(searchParams) {
   });
 };
 
-export var addTag = function addTag(uid, tagName) {
+var addTag = exports.addTag = function addTag(uid, tagName) {
   return _send(api_endpoint + 'retag?uid=' + uid + '&op=ADD&tag=' + tagName);
 };
 
-export var setAsNotRelevant = function setAsNotRelevant(searchParams) {
+var setAsNotRelevant = exports.setAsNotRelevant = function setAsNotRelevant(searchParams) {
   var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var uid = arguments[2];
 
@@ -91,7 +102,7 @@ export var setAsNotRelevant = function setAsNotRelevant(searchParams) {
   return _send(api_endpoint + 'improve/relevancy?' + value + tags + '&uid=' + uid);
 };
 
-export var sendSelectionData = function sendSelectionData(searchParams) {
+var sendSelectionData = exports.sendSelectionData = function sendSelectionData(searchParams) {
   var relevantActiveTags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var uid = arguments[2];
   var shownIcons = arguments[3];

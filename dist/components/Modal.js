@@ -1,15 +1,32 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _styles = require('../assets/styles');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Radium from 'radium';
-import { ModalCss as styles } from '../assets/styles';
 
 var Modal = function (_Component) {
   _inherits(Modal, _Component);
@@ -32,7 +49,7 @@ var Modal = function (_Component) {
           _this$props$height = _this$props.height,
           height = _this$props$height === undefined ? null : _this$props$height;
 
-      var modal = ReactDOM.findDOMNode(_this.refs.modal);
+      var modal = _reactDom2.default.findDOMNode(_this.refs.modal);
       var customStyles = { width: width, height: height };
 
       if (!modal) return;
@@ -43,8 +60,8 @@ var Modal = function (_Component) {
     }, _this.close = function (_ref2) {
       var target = _ref2.target;
 
-      var container = ReactDOM.findDOMNode(_this.refs.container);
-      var removeBtn = ReactDOM.findDOMNode(_this.refs.removeBtn);
+      var container = _reactDom2.default.findDOMNode(_this.refs.container);
+      var removeBtn = _reactDom2.default.findDOMNode(_this.refs.removeBtn);
       var onClose = _this.props.onClose;
 
 
@@ -67,29 +84,29 @@ var Modal = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var StyleRoot = Radium.StyleRoot;
+      var StyleRoot = _radium2.default.StyleRoot;
       var _props = this.props,
           content = _props.content,
           _props$style = _props.style,
           style = _props$style === undefined ? {} : _props$style;
 
 
-      return React.createElement(
+      return _react2.default.createElement(
         StyleRoot,
         {
           ref: 'container',
-          style: [styles.container, { display: 'block', opacity: 1 }, style],
+          style: [_styles.ModalCss.container, { display: 'block', opacity: 1 }, style],
           onClick: this.close
         },
-        React.createElement(
+        _react2.default.createElement(
           StyleRoot,
-          { ref: 'modal', style: [styles.container.modal] },
-          React.createElement(
+          { ref: 'modal', style: [_styles.ModalCss.container.modal] },
+          _react2.default.createElement(
             'div',
-            { style: [styles.container.modal.content] },
-            React.createElement(
+            { style: [_styles.ModalCss.container.modal.content] },
+            _react2.default.createElement(
               'div',
-              { ref: 'removeBtn', style: [styles.container.modal.removeBtn], onClick: this.close },
+              { ref: 'removeBtn', style: [_styles.ModalCss.container.modal.removeBtn], onClick: this.close },
               '\xD7'
             ),
             content
@@ -100,6 +117,6 @@ var Modal = function (_Component) {
   }]);
 
   return Modal;
-}(Component);
+}(_react.Component);
 
-export default Radium(Modal);
+exports.default = (0, _radium2.default)(Modal);

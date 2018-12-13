@@ -1,5 +1,16 @@
-import React from 'react';
-import { TagsWrapper, Tag, CloseIcon } from '../../styledComponents';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('../../styledComponents');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var IconTags = function IconTags(props) {
   var tagsList = props.tagsList,
@@ -10,14 +21,14 @@ var IconTags = function IconTags(props) {
 
   if (!(tagsList.length > 0)) return null;
 
-  return React.createElement(
-    TagsWrapper,
+  return _react2.default.createElement(
+    _styledComponents.TagsWrapper,
     null,
     tagsList.filter(function (item) {
       return item.tag && !item.tag.includes('sf-');
     }).map(function (item) {
-      return React.createElement(
-        Tag,
+      return _react2.default.createElement(
+        _styledComponents.Tag,
         {
           hide: searchPhrase.includes(item.tag),
           key: item.tag,
@@ -27,10 +38,10 @@ var IconTags = function IconTags(props) {
           }
         },
         item.tag,
-        React.createElement(CloseIcon, { active: activeTags[item.tag] })
+        _react2.default.createElement(_styledComponents.CloseIcon, { active: activeTags[item.tag] })
       );
     })
   );
 };
 
-export default IconTags;
+exports.default = IconTags;

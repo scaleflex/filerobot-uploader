@@ -1,7 +1,21 @@
-import * as BgAPI from '../services/imagesApi.service';
-import * as API from "../services/api.service";
+'use strict';
 
-export var getBackgrounds = function getBackgrounds() {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.uploadFilesFromUrls = exports.uploadFilesToDir = exports.uploadFiles = exports.setUploadHandler = exports.setTabs = exports.setActiveModules = exports.setUploaderConfig = exports.activateTab = exports.modalClose = exports.modalOpen = exports.getBackgrounds = undefined;
+
+var _imagesApi = require('../services/imagesApi.service');
+
+var BgAPI = _interopRequireWildcard(_imagesApi);
+
+var _api = require('../services/api.service');
+
+var API = _interopRequireWildcard(_api);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var getBackgrounds = exports.getBackgrounds = function getBackgrounds() {
   return function (dispatch) {
     return BgAPI.getBackgrounds().then(function (files) {
       if (files) {
@@ -11,49 +25,49 @@ export var getBackgrounds = function getBackgrounds() {
   };
 };
 
-export var modalOpen = function modalOpen(tabName) {
+var modalOpen = exports.modalOpen = function modalOpen(tabName) {
   return function (dispatch) {
     return dispatch({ type: 'MODAL_OPEN', payload: tabName });
   };
 };
 
-export var modalClose = function modalClose() {
+var modalClose = exports.modalClose = function modalClose() {
   return function (dispatch) {
     return dispatch({ type: 'MODAL_CLOSE', payload: null });
   };
 };
 
-export var activateTab = function activateTab(activeTab) {
+var activateTab = exports.activateTab = function activateTab(activeTab) {
   return function (dispatch) {
     return dispatch({ type: 'ACTIVATE_TAB', payload: activeTab });
   };
 };
 
-export var setUploaderConfig = function setUploaderConfig(config) {
+var setUploaderConfig = exports.setUploaderConfig = function setUploaderConfig(config) {
   return function (dispatch) {
     return dispatch({ type: 'SET_UPLOADER_CONFIG', payload: config });
   };
 };
 
-export var setActiveModules = function setActiveModules(modules) {
+var setActiveModules = exports.setActiveModules = function setActiveModules(modules) {
   return function (dispatch) {
     return dispatch({ type: 'SET_ACTIVE_MODULES', payload: modules });
   };
 };
 
-export var setTabs = function setTabs(tabs) {
+var setTabs = exports.setTabs = function setTabs(tabs) {
   return function (dispatch) {
     return dispatch({ type: 'SET_TABS', payload: tabs });
   };
 };
 
-export var setUploadHandler = function setUploadHandler(handler) {
+var setUploadHandler = exports.setUploadHandler = function setUploadHandler(handler) {
   return function (dispatch) {
     return dispatch({ type: 'SET_UPLOAD_HANDLER', payload: handler });
   };
 };
 
-export var uploadFiles = function uploadFiles(files, uploaderConfig) {
+var uploadFiles = exports.uploadFiles = function uploadFiles(files, uploaderConfig) {
   var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
   var dir = arguments[3];
   return function (dispatch) {
@@ -65,7 +79,7 @@ export var uploadFiles = function uploadFiles(files, uploaderConfig) {
   };
 };
 
-export var uploadFilesToDir = function uploadFilesToDir(files, uploaderConfig) {
+var uploadFilesToDir = exports.uploadFilesToDir = function uploadFilesToDir(files, uploaderConfig) {
   var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
   var dir = arguments[3];
   return function (dispatch) {
@@ -77,7 +91,7 @@ export var uploadFilesToDir = function uploadFilesToDir(files, uploaderConfig) {
   };
 };
 
-export var uploadFilesFromUrls = function uploadFilesFromUrls() {
+var uploadFilesFromUrls = exports.uploadFilesFromUrls = function uploadFilesFromUrls() {
   var filesUrls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var uploaderConfig = arguments[1];
   var dataType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'application/json';

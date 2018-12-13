@@ -1,6 +1,34 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _index = require('../../styledComponents/index');
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../../actions');
+
+var _VirtualizedImagesGrid = require('../VirtualizedImagesGrid');
+
+var _VirtualizedImagesGrid2 = _interopRequireDefault(_VirtualizedImagesGrid);
+
+var _imageGrid = require('../../services/imageGrid.service');
+
+var ImageGridService = _interopRequireWildcard(_imageGrid);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -9,13 +37,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import React, { Component } from 'react';
-import { Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img } from '../../styledComponents/index';
-import { connect } from 'react-redux';
-import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
-import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
-import * as ImageGridService from '../../services/imageGrid.service';
 
 var UploadedImagesContent = function (_Component) {
   _inherits(UploadedImagesContent, _Component);
@@ -63,8 +84,8 @@ var UploadedImagesContent = function (_Component) {
           item = _ref.item,
           index = _ref.index;
 
-      return React.createElement(
-        ImageWrapper,
+      return _react2.default.createElement(
+        _index.ImageWrapper,
         {
           style: _extends({}, style, { width: columnWidth }),
           onClick: function onClick() {
@@ -76,7 +97,7 @@ var UploadedImagesContent = function (_Component) {
             _this.onKeyDown(event, item);
           }
         },
-        React.createElement(Img, {
+        _react2.default.createElement(_index.Img, {
           src: ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, columnWidth / (item.ratio || 1.6)),
           height: columnWidth / (item.ratio || 1.6)
         })
@@ -94,8 +115,8 @@ var UploadedImagesContent = function (_Component) {
       var isDragOver = _this.state.isDragOver;
 
 
-      return React.createElement(
-        UploadBoxWrapper,
+      return _react2.default.createElement(
+        _index.UploadBoxWrapper,
         {
           onDrop: fileDropHandler,
           method: 'post',
@@ -104,12 +125,12 @@ var UploadedImagesContent = function (_Component) {
           columnWidth: columnWidth,
           height: columnWidth / (item.ratio || 1.6)
         },
-        React.createElement(
-          UploadBox,
+        _react2.default.createElement(
+          _index.UploadBox,
           { isDragOver: isDragOver },
-          React.createElement(UploadBoxIcon, { className: 'sfi-airstore-image' }),
-          React.createElement(
-            Label,
+          _react2.default.createElement(_index.UploadBoxIcon, { className: 'sfi-airstore-image' }),
+          _react2.default.createElement(
+            _index.Label,
             null,
             'Drag images here'
           )
@@ -122,7 +143,7 @@ var UploadedImagesContent = function (_Component) {
       imageContainerHeight: 0,
       imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 }
     };
-    _this.imageGridWrapperRef = React.createRef();
+    _this.imageGridWrapperRef = _react2.default.createRef();
     return _this;
   }
 
@@ -154,8 +175,8 @@ var UploadedImagesContent = function (_Component) {
 
       var imagesList = [{ id: 'uploaderBox' }].concat(_toConsumableArray(files));
 
-      return React.createElement(
-        Content,
+      return _react2.default.createElement(
+        _index.Content,
         {
           innerRef: this.imageGridWrapperRef,
           onDragOver: function onDragOver(event) {
@@ -172,7 +193,7 @@ var UploadedImagesContent = function (_Component) {
           },
           isDragOver: isDragOver
         },
-        files.length ? React.createElement(VirtualizedImagesGrid, {
+        files.length ? _react2.default.createElement(_VirtualizedImagesGrid2.default, {
           imageGridWrapperWidth: imageGridWrapperWidth,
           imageContainerHeight: imageContainerHeight,
           columnWidth: columnWidth,
@@ -190,15 +211,15 @@ var UploadedImagesContent = function (_Component) {
   }]);
 
   return UploadedImagesContent;
-}(Component);
+}(_react.Component);
 
-export default connect(function (_ref3) {
+exports.default = (0, _reactRedux.connect)(function (_ref3) {
   var uploaderConfig = _ref3.uploader.uploaderConfig;
   return { uploaderConfig: uploaderConfig };
 }, function (dispatch) {
   return {
     onModalClose: function onModalClose() {
-      return dispatch(modalClose());
+      return dispatch((0, _actions.modalClose)());
     }
   };
 })(UploadedImagesContent);
