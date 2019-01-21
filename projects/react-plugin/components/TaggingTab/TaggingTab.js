@@ -88,7 +88,7 @@ class TaggingTab extends Component {
   }
 
   goBack = () => {
-    this.props.setPostUpload(false, 'UPLOAD');
+    this.props.setPostUpload(false);
   }
 
   render() {

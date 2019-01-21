@@ -16,7 +16,6 @@ import Loadable from 'react-loadable';
 import { I18n } from 'react-i18nify';
 
 
-
 export const UploadedImagesTab = Loadable({
   loader: () => import(/* webpackChunkName: "gallery" */ './UploadedImagesTab/UploadedImagesTab'),
   loading: () => null,
@@ -83,6 +82,7 @@ class AirstoreUploader extends Component {
     this.state = {
       activeModules: initialOptions.MODULES || config.MODULES || ["UPLOAD"],
       postUpload: false,
+      prevTab: 'UPLOAD',
       files: []
       //files: [
       //  {
@@ -118,9 +118,9 @@ class AirstoreUploader extends Component {
       });
   }
 
-  setPostUpload = (value, tabId) => {
-    this.setState({ postUpload: value });
-    this.props.activateTab(tabId);
+  setPostUpload = (value, tabId = '', prevTab = '') => {
+    this.setState({ postUpload: value, prevTab });
+    this.props.activateTab(tabId || this.state.prevTab);
   }
 
   saveUploadedFiles = (files = []) => { this.setState({ files }); }
