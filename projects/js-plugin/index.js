@@ -4,7 +4,7 @@ import config from '../react-plugin/config';
 import { AppContainer } from 'react-hot-loader';
 import AirstoreUploaderWrapper, { createAirstoreUploaderStore } from '../react-plugin/components/AirstoreUploaderWrapper';
 import { ThemeProvider } from 'styled-components';
-import 'scaleflex-react-ui-kit/dist/styledComponents/assets/styles/scaleflex-icon-font.css';
+import '../react-plugin/assets/fonts/scaleflex-icon-font.css';
 import { Provider } from 'react-redux';
 import { MODAL_OPEN } from '../react-plugin/reducers';
 import { dark } from './design';

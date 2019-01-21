@@ -64,10 +64,11 @@ export const uploadFiles = (
       url,
       'POST',
       isJson ? jsonData : ajaxData,
-      { 'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY,
+      {
+        'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY,
         'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
       }
-      ).then(
+    ).then(
       response => {
         const { status = 'success', files = [], file } = response;
 
@@ -116,3 +117,24 @@ export const getListFiles = ({ dir = '', container = '' }) => {
 
   return send(url).then((response = {}) => response.files);
 };
+
+export const generateTags = (url, { key = '', provider = 'google', language = 'en', confidence = 60, limit = 10 }) => {
+  const base = '//beta-process.scaleflex.cloud/'
+
+  return send(
+    `${base}?key=${key}&url=${url}&provider=${provider}&language=${language}&confidence=${confidence}&limit=${limit}`
+  )
+    .then((response = {}) => response);
+}
+
+export const saveMetaData = (id, properties) => {
+  const base = '//scaleflex.api.airstore.io/file/'
+  const data = { properties };
+
+  return send(
+    `${base}${id}/properties`,
+    'PUT',
+    data
+  )
+    .then((response = {}) => response);
+}

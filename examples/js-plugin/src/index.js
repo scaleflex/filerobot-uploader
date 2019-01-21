@@ -17,10 +17,14 @@ let options = {
   INITIAL_TAB: 'UPLOAD',                          // optional   default first module
   TAGGING: {
     active: true,
-    provider: 'google', // google|imagga
-    confidence: 80 //  [0..100]
+    auto_tagging: true,
+    provider: 'imagga', // google|imagga
+    confidence: 60, //  [0..100]
+    limit: 10,
+    key: 'aaaa'
   },
-  onUpload: (img) => { console.log(img) },                      // required
+  LANGUAGE: 'en',
+  onUpload: (img, tags, desc) => { console.log(img, tags, desc) },                      // required
 };
 
 window.addEventListener('load', function() {

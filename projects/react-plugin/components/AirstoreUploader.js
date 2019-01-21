@@ -16,6 +16,7 @@ import Loadable from 'react-loadable';
 import { I18n } from 'react-i18nify';
 
 
+
 export const UploadedImagesTab = Loadable({
   loader: () => import(/* webpackChunkName: "gallery" */ './UploadedImagesTab/UploadedImagesTab'),
   loading: () => null,
@@ -78,11 +79,25 @@ class AirstoreUploader extends Component {
     super();
 
     const { initialOptions } = props;
-    const activeModules = initialOptions.MODULES || config.MODULES || [];
 
     this.state = {
-      filteredTabs: tabs.filter(tab => tab.id && activeModules.indexOf(tab.id) !== -1),
-      postUpload: false
+      activeModules: initialOptions.MODULES || config.MODULES || ["UPLOAD"],
+      postUpload: false,
+      files: []
+      //files: [
+      //  {
+      //    "name": "7604fded-7c2d-527d-8d01-fd29bcc8e72f",
+      //    "url_permalink": "https://example.api.airstore.io/v1/get/_/f3a71ce1-a0ea-55f3-acc0-8fac56157168/7604fded-7c2d-527d-8d01-fd29bcc8e72f",
+      //    "overwrite": true,
+      //    "properties": {},
+      //    "type": "image/jpeg",
+      //    "size": 5409531,
+      //    "uuid": "f3a71ce1-a0ea-55f3-acc0-8fac56157168",
+      //    "sha1": "28d984bdb40c82e434cd008a1ee9b7042d525dea",
+      //    "meta": {},
+      //    "url_public": "https://example.airstore.io/your/directory/7604fded-7c2d-527d-8d01-fd29bcc8e72f"
+      //  }
+      //]
     }
   }
 
@@ -90,7 +105,8 @@ class AirstoreUploader extends Component {
     const { initialOptions, initialTab } = this.props;
     const options = initialOptions || config || {};
 
-    this.props.onSetUploaderConfig(options);
+    I18n.setLocale(options.LANGUAGE);
+    this.props.setUploaderConfig(options);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
 
     if (this.props.opened) this.openModal(initialTab);
@@ -102,6 +118,13 @@ class AirstoreUploader extends Component {
       });
   }
 
+  setPostUpload = (value, tabId) => {
+    this.setState({ postUpload: value });
+    this.props.activateTab(tabId);
+  }
+
+  saveUploadedFiles = (files = []) => { this.setState({ files }); }
+
   openModal = (initialTab) => {
     this.props.modalOpen(initialTab || this.props.initialTab);
   }
@@ -109,7 +132,7 @@ class AirstoreUploader extends Component {
   closeModal = () => {
     const { onClose } = this.props;
     if (onClose) onClose();
-    this.props.onModalClose();
+    this.props.modalClose();
   }
 
   showAlert = (title, msg, type = 'success', timeOut = 4000) => {
@@ -132,10 +155,18 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.isVisible) return null;
 
-    const { filteredTabs, postUpload } = this.state;
+    const { activeModules, postUpload, files } = this.state;
     const { activeTabId, initialOptions } = this.props;
-    const activeTab = tabs.find(tab => tab.id === activeTabId);
-    const contentProps = { showAlert: this.showAlert, themeColors: initialOptions.themeColors };
+    const contentProps = {
+      files,
+
+      showAlert: this.showAlert,
+      themeColors: initialOptions.themeColors,
+      setPostUpload: this.setPostUpload,
+      saveUploadedFiles: this.saveUploadedFiles
+    };
+    const filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
+    const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
 
     return (
       <Modal noBorder fullScreen={'md'} onClose={this.closeModal} style={{ borderRadius: 5 }}>
@@ -176,9 +207,9 @@ export default connect(
      uploader: { backgrounds, isVisible, activeTabId, uploaderConfig, activeModules }
    }) => ({ backgrounds, isVisible, activeTabId, uploaderConfig, activeModules }),
   {
-    onModalClose: modalClose,
-    onSetUploaderConfig: setUploaderConfig,
     onSetUploadHandler: setUploadHandler,
+    modalClose,
+    setUploaderConfig,
     modalOpen,
     activateTab
   }

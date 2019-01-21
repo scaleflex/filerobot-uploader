@@ -6,10 +6,12 @@ export default {
   onUpload: null, // handler
   image_only: true,
   OPENPIX_KEY: null,
+  LANGUAGE: 'en',
   TAGGING: {
     active: false,
     provider: 'google',
-    confidence: 80
+    confidence: 80,
+    limit: 10
   }
 };
 

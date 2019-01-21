@@ -1,6 +1,6 @@
 import * as BgAPI from '../services/imagesApi.service';
 import * as API from "../services/api.service";
-import { MODAL_OPEN, ACTIVATE_TAB } from '../reducers';
+import { MODAL_OPEN, ACTIVATE_TAB, SET_UPLOADER_CONFIG } from '../reducers';
 
 
 export const getBackgrounds = () => dispatch =>
@@ -16,7 +16,7 @@ export const modalClose = () => dispatch => dispatch({ type: 'MODAL_CLOSE', payl
 
 export const activateTab = tabId => dispatch => dispatch({ type: ACTIVATE_TAB, tabId });
 
-export const setUploaderConfig = (config) => dispatch => dispatch({ type: 'SET_UPLOADER_CONFIG', payload: config });
+export const setUploaderConfig = config => dispatch => dispatch({ type: SET_UPLOADER_CONFIG, config });
 
 export const setUploadHandler = (handler) => dispatch => dispatch({ type: 'SET_UPLOAD_HANDLER', payload: handler });
 

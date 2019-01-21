@@ -6,6 +6,7 @@ const initialState = {
   uploadHandler: (files = []) => console.warn('Uploaded!', files)
 };
 
+export const SET_UPLOADER_CONFIG = 'airstore-uploader/uploader/SET_UPLOADER_CONFIG';
 export const MODAL_OPEN = 'airstore-uploader/uploader/MODAL_OPEN';
 export const ACTIVATE_TAB = 'airstore-uploader/uploader/ACTIVATE_TAB';
 
@@ -14,6 +15,8 @@ const uploader = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case SET_UPLOADER_CONFIG:
+      return _setUploaderConfig(state, action.config);
     case MODAL_OPEN:
       return _visibilityOpen(state, action.tabId);
     case ACTIVATE_TAB:
@@ -22,8 +25,6 @@ const uploader = (state = initialState, action) => {
       return _visibilityClose(state, payload);
     case 'FETCH_BACKGROUNDS_SUCCESS':
       return _fetchBgSuccess(state, payload);
-    case 'SET_UPLOADER_CONFIG':
-      return _setUploaderConfig(state, payload);
     case 'SET_UPLOAD_HANDLER':
       return _setUploadHandler(state, payload);
     case 'FILES_UPLOADED':
@@ -41,7 +42,7 @@ const _fetchBgSuccess = (state, { files = [] }) => {
     alt: ''
   }));
 
-  return {...state, backgrounds };
+  return { ...state, backgrounds };
 };
 
 const _visibilityOpen = (state, activeTabId) => {
@@ -52,14 +53,15 @@ const _visibilityOpen = (state, activeTabId) => {
   //  if (link && link.focus) link.focus();
   //})
 
-  return {...state, isVisible: true, activeTabId };
+  return { ...state, isVisible: true, activeTabId };
 };
 
-const _visibilityClose = state => ({...state, isVisible: false, activeTabId: null });
+const _visibilityClose = state => ({ ...state, isVisible: false, activeTabId: null });
 
-const _activateTab = (state, activeTabId) => ({...state, activeTabId });
+const _activateTab = (state, activeTabId) => ({ ...state, activeTabId });
 
 const _setUploaderConfig = (state, config = {}) => {
+  config.TAGGING = config.TAGGING || {};
 
   const uploaderConfig = {
     uploadPath: `https://${config.CONTAINER}.api.airstore.io/v1/upload`,
@@ -71,14 +73,19 @@ const _setUploaderConfig = (state, config = {}) => {
     isShowNotRelevantBtn: config.IS_SHOW_NOT_RELEVANT_BTN,
     limit: config.LIMIT_IMAGES_PER_RESPONSE || 100,
     folders: config.UPLOADED_FOLDERS || [{ dir: '/', label: 'All' }],
+    language: config.LANGUAGE || 'en',
+    tagging: {
+      active: !!config.TAGGING.active,
+      ...config.TAGGING
+    },
     uploadHandler: config.onUpload || (() => {})
   };
 
-  return {...state, uploaderConfig };
+  return { ...state, uploaderConfig };
 };
 
 const _setUploadHandler = (state, onUpload = null) =>
-  ({...state, uploadHandler: typeof onUpload === 'function' ? onUpload : state.uploadHandler});
+  ({ ...state, uploadHandler: typeof onUpload === 'function' ? onUpload : state.uploadHandler });
 
 const _filesUploaded = (state, files = []) => {
   if (typeof state.uploadHandler === 'function')
@@ -86,7 +93,7 @@ const _filesUploaded = (state, files = []) => {
   else
     console.warn('onUpload() is not defined!');
 
-  return {...state};
+  return { ...state };
 };
 
 export default uploader;

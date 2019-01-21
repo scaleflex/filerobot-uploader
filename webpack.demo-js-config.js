@@ -34,6 +34,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"]
   },
+  devtool: "sourcemap",
   devServer: {
     port: 3001
   }

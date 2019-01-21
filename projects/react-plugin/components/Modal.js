@@ -129,10 +129,10 @@ const ModalFullScreen = styled.div`
   word-spacing: 0;
   position: fixed;
   padding: ${props => props.p || props.padding || '0'};
-  top: ${props => getFullScreenSize(props.fullScreen)};
-  left: ${props => getFullScreenSize(props.fullScreen)};
-  right: ${props => getFullScreenSize(props.fullScreen)};
-  bottom: ${props => getFullScreenSize(props.fullScreen)};
+  top: 5%;
+  left: 15%;
+  right: 15%;
+  bottom: 5%;
   color: ${props => props.theme.colors.text.base || '#3d3d3d'};
   overflow: hidden;
   z-index: ${props => props.zIndex || '999999995'};

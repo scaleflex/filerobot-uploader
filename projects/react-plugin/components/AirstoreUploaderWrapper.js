@@ -6,7 +6,6 @@ import { I18n } from 'react-i18nify';
 import * as translations from '../assets/translations';
 
 I18n.setTranslations(translations);
-I18n.setLocale('en');
 
 export default ({ initialOptions, opened = false, onClose = null, initialTab = null, ...otherProps }) => {
   return (
