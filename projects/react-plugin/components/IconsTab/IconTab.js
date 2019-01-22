@@ -69,15 +69,23 @@ class IconTab extends Component {
 
     sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, this.loadedIcons);
     const self = this.props;
+
     this.props.onFileUpload(icon.src, this.props.uploaderConfig)
       .then((files) => {
         this.uploadStop();
-        self.modalClose();
+
+        if (this.props.uploaderConfig.tagging.active) {
+          this.props.saveUploadedFiles(files);
+          this.props.setPostUpload(true, 'TAGGING', 'ICONS_GALLERY');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
+        self.modalClose();
       })
       .catch(() => {
         this.uploadStop();
-      })
+      });
   };
 
   addTag = (event, activeIcon) => {
