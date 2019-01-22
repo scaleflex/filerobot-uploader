@@ -14,21 +14,28 @@ import { modalClose } from '../../actions';
 
 
 class TaggingTab extends Component {
-  constructor() {
+  constructor(props) {
     super();
 
+    const { language = 'en', files = {} } = props;
+    const [file = {}] = files;
     const date = new Date();
     const options = {
       weekday: "long", year: "numeric", month: "short",
       day: "numeric", hour: "2-digit", minute: "2-digit"
     };
 
+    file.properties = file.properties || {};
+    file.properties.tags = file.properties.tags || [];
+
     this.state = {
-      tags: [],
-      description: '',
+      tags: file.properties.tags.map(tag => tag[language]) || [],
+      description: file.properties.description || '',
       isLoading: false,
       errorMessage: '',
-      currentTime: date.toLocaleTimeString("en-us", options)
+      currentTime: (date).toLocaleTimeString("en-us", options),
+      firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString("en-us", options) : currentTime,
+      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime
     };
   }
 
