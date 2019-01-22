@@ -6,7 +6,6 @@ import AirstoreUploaderWrapper, { createAirstoreUploaderStore } from '../react-p
 import { ThemeProvider } from 'styled-components';
 import '../react-plugin/assets/fonts/scaleflex-icon-font.css';
 import { Provider } from 'react-redux';
-import { MODAL_OPEN } from '../react-plugin/reducers';
 import { dark } from './design';
 
 
@@ -16,8 +15,6 @@ window.AirstoreUploader.init = init;
 function init(options = {}, isOpened = false) {
   const editor = document.getElementById(options.ELEMENT_ID || 'airstore-uploader');
   const AirstoreUploaderStore = createAirstoreUploaderStore();
-  window.AirstoreUploader.open = tabId =>
-    AirstoreUploaderStore.dispatch({ type: MODAL_OPEN, tabId: tabId || options.INITIAL_TAB });
 
   options = Object.assign(config || {}, options || {});
   options.onUpload = options.onUpload || function() {};

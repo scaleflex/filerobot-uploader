@@ -42,11 +42,11 @@ class TaggingTab extends Component {
 
   saveMetadata = () => {
     const { description, tags } = this.state;
-    const { files, uploadHandler, language } = this.props;
+    const { files, uploadHandler, language, config } = this.props;
     const [file = {}] = this.props.files;
     const nextTags = tags.map(tagName => ({ [language]: tagName }))
 
-    saveMetaData(file.uuid, { description, tags: nextTags })
+    saveMetaData(file.uuid, { description, tags: nextTags }, config)
       .then(response => {
         if (response.status === 'success') {
           uploadHandler(files, nextTags, description);
@@ -94,14 +94,15 @@ class TaggingTab extends Component {
 
   render() {
     const { isLoading, errorMessage, currentTime } = this.state;
-    const { autoTagging } = this.props;
+    const { autoTagging, prevTab } = this.props;
     const [file = {}] = this.props.files;
     const generateTagInfo = 'will automatically generate tags based on image recognition technology';
 
     return (
       <TaggingTabWrapper>
         <TaggingContent>
-          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>Go back</GoBack>
+          {prevTab &&
+          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>Go back</GoBack>}
 
           <FileWrapper>
             <UploadedImageWrapper>
@@ -178,7 +179,8 @@ const mapStateToProps = state => ({
   uploadHandler: state.uploader.uploaderConfig.uploadHandler,
   autoTagging: state.uploader.uploaderConfig.tagging.auto_tagging,
   taggingConfig: state.uploader.uploaderConfig.tagging,
-  language: state.uploader.uploaderConfig.language
+  language: state.uploader.uploaderConfig.language,
+  config: state.uploader.uploaderConfig
 })
 
 export default connect(

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {
-  UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox
+  UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox,
+  SearchGroup, InputSearch, SearchWrapper
 } from '../../styledComponents/index';
-import { getListFiles } from '../../services/api.service';
+import { getListFiles, searchFiles } from '../../services/api.service';
 import { connect } from 'react-redux';
 import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
 import { Spinner } from '../Spinner';
 import UploadedImagesContent from './UploadedImagesContent';
+import { isEnterClick } from '../../utils'
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
@@ -17,8 +19,10 @@ class UploadedImagesTab extends Component {
     super();
 
     this.state = {
+      searchPhrase: '',
       activeFolder: null,
       isLoading: false,
+      imagesIndex: 0,
       files: []
     };
   }
@@ -41,7 +45,7 @@ class UploadedImagesTab extends Component {
     const { container } = uploaderConfig;
 
     getListFiles({ dir, container }).then(files => {
-      this.setState({ files, isLoading: false });
+      this.setState({ files, isLoading: false, imagesIndex: this.state.imagesIndex + 1 });
     })
   }
 
@@ -114,8 +118,19 @@ class UploadedImagesTab extends Component {
     this.setState({ [field]: value });
   }
 
+  search = () => {
+    this.setState({ isLoading: true });
+    const { searchPhrase = '', imagesIndex } = this.state;
+    const { uploaderConfig } = this.props;
+    const { container } = uploaderConfig;
+
+    searchFiles({ query: searchPhrase, container }).then(files => {
+      this.setState({ files, isLoading: false, imagesIndex: imagesIndex + 1 });
+    })
+  }
+
   render() {
-    const { isLoading, step, files, isDragOver } = this.state;
+    const { isLoading, step, files, isDragOver, imagesIndex } = this.state;
 
     return (
       <UploadedImages>
@@ -133,6 +148,24 @@ class UploadedImagesTab extends Component {
         <HeaderWrap>
           {this.renderNavigation()}
 
+          <SearchWrapper>
+            <SearchGroup padding={'0px'}>
+              <InputSearch
+                type="search"
+                innerRef={node => this._searchInput = node}
+                autoFocus={true}
+                defaultValue={''}
+                placeholder={'search by file name, tag or description'}
+                onKeyDown={ev => isEnterClick(ev) && this.search()}
+              />
+              <ButtonSearch
+                key="ok"
+                className="ae-btn"
+                onClick={this.search}
+              >Search</ButtonSearch>
+            </SearchGroup>
+          </SearchWrapper>
+
           <ButtonSearch
             className="ae-btn"
             fullBr={'4px'}
@@ -141,6 +174,7 @@ class UploadedImagesTab extends Component {
         </HeaderWrap>
 
         <UploadedImagesContent
+          imagesIndex={imagesIndex}
           onDragEvent={this.onDragEvent}
           fileDropHandler={this.fileDropHandler}
           isDragOver={isDragOver}

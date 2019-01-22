@@ -84,21 +84,10 @@ class AirstoreUploader extends Component {
       postUpload: false,
       prevTab: 'UPLOAD',
       files: []
-      //files: [
-      //  {
-      //    "name": "7604fded-7c2d-527d-8d01-fd29bcc8e72f",
-      //    "url_permalink": "https://example.api.airstore.io/v1/get/_/f3a71ce1-a0ea-55f3-acc0-8fac56157168/7604fded-7c2d-527d-8d01-fd29bcc8e72f",
-      //    "overwrite": true,
-      //    "properties": {},
-      //    "type": "image/jpeg",
-      //    "size": 5409531,
-      //    "uuid": "f3a71ce1-a0ea-55f3-acc0-8fac56157168",
-      //    "sha1": "28d984bdb40c82e434cd008a1ee9b7042d525dea",
-      //    "meta": {},
-      //    "url_public": "https://example.airstore.io/your/directory/7604fded-7c2d-527d-8d01-fd29bcc8e72f"
-      //  }
-      //]
-    }
+    };
+
+    window.AirstoreUploader = window.AirstoreUploader || {};
+    window.AirstoreUploader.open = this.openModal;
   }
 
   componentDidMount() {
@@ -125,8 +114,16 @@ class AirstoreUploader extends Component {
 
   saveUploadedFiles = (files = []) => { this.setState({ files }); }
 
-  openModal = (initialTab) => {
-    this.props.modalOpen(initialTab || this.props.initialTab);
+  openModal = (initialTab, { file } = {}) => {
+    if (file) {
+      this.setState({ files: [file], postUpload: true, prevTab: '' }, () => {
+        this.props.modalOpen(initialTab || this.props.initialTab);
+      });
+    } else {
+      this.setState({ postUpload: false }, () => {
+        this.props.modalOpen(initialTab || this.props.initialTab);
+      });
+    }
   }
 
   closeModal = () => {
@@ -155,10 +152,11 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.isVisible) return null;
 
-    const { activeModules, postUpload, files } = this.state;
+    const { activeModules, postUpload, files, prevTab } = this.state;
     const { activeTabId, initialOptions } = this.props;
     const contentProps = {
       files,
+      prevTab,
 
       showAlert: this.showAlert,
       themeColors: initialOptions.themeColors,

@@ -6,7 +6,7 @@ import { Button } from '../components/Button';
 
 export const SearchGroup = styled.div`
   display: flex;
-  padding: 10px;
+  padding: ${props => props.padding ? props.padding : '10px'};
   justify-content: left;
 `;
 export const AmountIcons = styled.div`

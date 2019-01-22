@@ -70,7 +70,7 @@ class UploadedImagesContent extends Component {
   }
 
   render() {
-    const { files, onDragEvent, isDragOver } = this.props;
+    const { files, onDragEvent, isDragOver, imagesIndex } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = [{ id: 'uploaderBox' }, ...files];
@@ -86,6 +86,7 @@ class UploadedImagesContent extends Component {
       >
         {files.length ?
           <VirtualizedImagesGrid
+            key={imagesIndex}
             imageGridWrapperWidth={imageGridWrapperWidth}
             imageContainerHeight={imageContainerHeight}
             columnWidth={columnWidth}

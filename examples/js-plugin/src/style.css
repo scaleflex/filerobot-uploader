@@ -1,0 +1,39 @@
+.uploaded-image-container {
+  padding: 20px 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.image-container {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+
+.image-container img {
+  width: 100%;
+}
+
+#image-description {
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+  padding: 20px;
+}
+
+#image-description ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#image-description ul li {
+  margin-bottom: 10px;
+}
+
+#image-description ul li span:first-child {
+  display: inline-block;
+  font-weight: bold;
+}

@@ -12,9 +12,9 @@ export const UploadedImages = styled.div`
 export const HeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   padding-bottom: 15px;
-  min-height: 36px;
+  min-height: 50px;
 `;
 
 export const Nav = styled.nav`

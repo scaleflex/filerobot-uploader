@@ -118,6 +118,14 @@ export const getListFiles = ({ dir = '', container = '' }) => {
   return send(url).then((response = {}) => response.files);
 };
 
+export const searchFiles = ({ query = '', container = '' }) => {
+  const baseUrl = getBaseUrl(container);
+  const apiPath = 'search?';
+  const url = [baseUrl, apiPath, `q=${query}`].join('');
+
+  return send(url).then((response = {}) => response.files);
+};
+
 export const generateTags = (url, { key = '', provider = 'google', language = 'en', confidence = 60, limit = 10 }) => {
   const base = '//beta-process.scaleflex.cloud/'
 
@@ -127,8 +135,8 @@ export const generateTags = (url, { key = '', provider = 'google', language = 'e
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (id, properties) => {
-  const base = '//scaleflex.api.airstore.io/file/'
+export const saveMetaData = (id, properties, { container }) => {
+  const base = `https://${container}.api.airstore.io/file/`;
   const data = { properties };
 
   return send(
