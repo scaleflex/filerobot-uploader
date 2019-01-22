@@ -27,7 +27,7 @@ let options = {
     limit: 10,
     key: 'aaaa'
   },
-  LANGUAGE: 'en',
+  LANGUAGE: 'ru',
   onUpload: (files) => {
     const img = files[0];
     const image = document.getElementById('image-box');

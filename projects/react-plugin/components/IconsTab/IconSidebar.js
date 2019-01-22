@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   SidebarWrap, SideBar, ColorWrapper, ColorItem, ColorItemName, Label, CountTag
 } from '../../styledComponents/index';
+import { I18n } from 'react-i18nify';
 
 const tags = [
   { tag: 'sf-social', label: 'Social', count: '23' },
@@ -22,7 +23,7 @@ class IconSidebar extends Component {
     return (
       <SidebarWrap>
         <SideBar id="airstore-uploader-tags-box">
-          <Label fs={'16px'} color={'black'}>Color filter</Label>
+          <Label fs={'16px'} color={'black'}>{I18n.t('icons.color_filter')}</Label>
           <ColorWrapper>
             <ColorItem
               key="all-color-wrapper"
@@ -32,7 +33,7 @@ class IconSidebar extends Component {
               tabIndex={0}
               role="button"
             >
-              <ColorItemName>All</ColorItemName>
+              <ColorItemName>{I18n.t('icons.all')}</ColorItemName>
             </ColorItem>
 
             <ColorItem
@@ -43,7 +44,7 @@ class IconSidebar extends Component {
               tabIndex={0}
               role="button"
             >
-              <ColorItemName>Multi color</ColorItemName>
+              <ColorItemName>{I18n.t('icons.multi_color')}</ColorItemName>
             </ColorItem>
 
             <ColorItem
@@ -54,11 +55,11 @@ class IconSidebar extends Component {
               tabIndex={0}
               role="button"
             >
-              <ColorItemName>Mono color</ColorItemName>
+              <ColorItemName>{I18n.t('icons.mono_color')}</ColorItemName>
             </ColorItem>
           </ColorWrapper>
 
-          <Label fs={'16px'} color={'black'}>Categories</Label>
+          <Label fs={'16px'} color={'black'}>{I18n.t('upload.categories')}</Label>
           {tags && tags
             .sort((a, b) => a.tag > b.tag ? 1 : -1)
             .map(tag => this.renderTag(tag))

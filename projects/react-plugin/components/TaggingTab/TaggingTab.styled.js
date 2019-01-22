@@ -281,7 +281,9 @@ const GoBack = styled.a`
   padding: 4px 8px;
   border-radius: 4px;
   
-  :hover {
+  :hover, :focus, :active {
+    text-decoration: none;
+    color: #1e262c;
     background: gainsboro;
   }
 `;

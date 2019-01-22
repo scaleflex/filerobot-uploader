@@ -15,6 +15,7 @@ import { Spinner } from '../Spinner';
 import { fetchImages, getImagesTags } from '../../actions';
 import { SketchPicker } from 'react-color';
 import { Aux } from '../hoc';
+import { I18n } from 'react-i18nify';
 
 
 class ImagesTab extends Component {
@@ -153,7 +154,7 @@ class ImagesTab extends Component {
     const onSuccess = (response) => {
       const { payload = {} } = response;
       const { images = [] } = payload;
-      if (!images.length) this.props.showAlert('0 images was found :(', '', 'warning');
+      if (!images.length) this.props.showAlert(I18n.t('images.zero_images_was_found'), '', 'warning');
       self.setState({ isSearching: false });
       typeof resizeOnSuccess === 'function' && resizeOnSuccess();
     }
@@ -254,7 +255,7 @@ class ImagesTab extends Component {
             themeColor
             onClick={this.handleClose}
             style={{ zIndex: 5555, position: 'relative' }}
-          >Apply</ApplyColorBtn>
+          >{I18n.t('upload.apply')}</ApplyColorBtn>
         </SketchPickerWrapper>}
 
         <Spinner overlay show={isLoading}/>
@@ -269,7 +270,7 @@ class ImagesTab extends Component {
     return (
       <SidebarWrap>
         <SideBar>
-          <Label fs={'16px'} color={'black'}>Color filter</Label>
+          <Label fs={'16px'} color={'black'}>{I18n.t('images.color_filter')}</Label>
 
           <div style={{ margin: '0 10px' }}>
             {activeColorFilters.map((colorFilter, index) => (
@@ -289,10 +290,10 @@ class ImagesTab extends Component {
               onKeyDown={event => { event.keyCode === 13 && this.addColorFilter(); }}
               tabIndex={0}
               role="button"
-            >+ add color</AddColorBtn>
+            >+ {I18n.t('images.add_color')}</AddColorBtn>
           </div>
 
-          <Label fs={'16px'} color={'black'}>Categories</Label>
+          <Label fs={'16px'} color={'black'}>{I18n.t('upload.categories')}</Label>
 
           {tags.length &&
           <ColorItem
@@ -302,7 +303,7 @@ class ImagesTab extends Component {
             tabIndex={0}
             role="button"
           >
-            <ColorItemName>Backgrounds </ColorItemName>
+            <ColorItemName>{I18n.t('images.backgrounds')} </ColorItemName>
             <CountTag>({backgrounds.length})</CountTag>
           </ColorItem>}
           {tags.slice(0, 20).map((item, index) => this.renderItem(item, index))}
@@ -352,7 +353,7 @@ class ImagesTab extends Component {
     return (
       <ImageContainer>
         <SearchBar
-          title={"You can search images here"}
+          title={I18n.t('images.you_can_search_images_here')}
           items={images}
           isLoading={isLoading}
           onSearch={() => { this.onSearch() }}

@@ -6,6 +6,7 @@ import { uploadFilesFromUrls, uploadFiles, modalClose } from '../../actions/inde
 import { isEnterClick } from '../../utils/index';
 import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper } from '../../styledComponents/index';
 import { Spinner } from '../Spinner';
+import { I18n } from 'react-i18nify';
 
 
 const STEP = {
@@ -47,7 +48,7 @@ class UserUploaderTab extends Component {
   uploadStart = () => this.setState({ step: STEP.UPLOADING });
   uploadSuccess = uploadedFiles => this.setState({ step: STEP.UPLOADED, uploadedFiles });
   uploadError = (msg, timer = null) => {
-    this.setState({ step: STEP.ERROR, errorMsg: msg || 'Error' });
+    this.setState({ step: STEP.ERROR, errorMsg: msg || I18n.t('upload.error') });
     if (timer) setTimeout(() => this.changeStep(STEP.DEFAULT), timer);
   };
 
@@ -83,7 +84,7 @@ class UserUploaderTab extends Component {
     const isValid = value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
 
     if (isValid) this.upload(true, value);
-    else this.uploadError(value ? 'URL not valid!' : 'Empty URL!', 4000);
+    else this.uploadError(value ? I18n.t('upload.url_not_valid') : I18n.t('upload.empty_url'), 4000);
   };
 
   render() {
@@ -133,16 +134,20 @@ class UserUploaderTab extends Component {
                 />
 
                 <div style={[uploadBlock_style.inputBox.label]}>
-                  <span style={[uploadBlock_style.inputBox.label.dragDropText]}>Drag file here</span>
-                  <div style={[uploadBlock_style.inputBox.label.orText]}>or</div>
+                  <span style={[uploadBlock_style.inputBox.label.dragDropText]}>
+                     {I18n.t('upload.drag_file_here')}
+                  </span>
+                  <div style={[uploadBlock_style.inputBox.label.orText]}>{I18n.t('upload.or')}</div>
                   <button
                     key="browse-your-computer"
                     autoFocus={true}
                     style={[CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }]}
                     onClick={() => { this.refs.fileInput.click() }}
-                  >Browse your computer
+                  >{I18n.t('upload.browse_your_computer')}
                   </button>
-                  <div style={[uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }]}>or</div>
+                  <div style={[uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }]}>
+                    {I18n.t('upload.or')}
+                  </div>
                   <SearchWrapper>
                     <SearchGroup>
                       <InputSearch
@@ -150,14 +155,14 @@ class UserUploaderTab extends Component {
                         innerRef={node => this._uploadFromWebField = node}
                         autoFocus={true}
                         defaultValue={''}
-                        placeholder={'Enter URL to upload from web'}
+                        placeholder={I18n.t('upload.enter_url_to_upload_from_web')}
                         onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
                       />
                       <ButtonSearch
                         key="ok"
                         className="ae-btn"
                         onClick={this.uploadFromWeb}
-                      >Upload</ButtonSearch>
+                      >{I18n.t('upload.upload_btn')}</ButtonSearch>
                     </SearchGroup>
                   </SearchWrapper>
                   <div style={[{
@@ -166,18 +171,20 @@ class UserUploaderTab extends Component {
                     fontWeight: "200",
                     marginTop: "5px"
                   }]}>
-                    Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.
+                    {I18n.t('upload.accepted_file_types')}
                   </div>
                 </div>
 
-                <div ref="submitBtn" className="ae-btn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">Upload</div>
+                <div ref="submitBtn" className="ae-btn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">
+                  {I18n.t('upload.upload_btn')}
+                </div>
               </div>
             }
 
             {step === STEP.UPLOADING &&
             <div style={[uploadBlock_style.uploadingBox]}>
               <Spinner overlay show={true}/>
-              <span>Uploading</span>
+              <span>{I18n.t('upload.uploading')}</span>
             </div>}
 
             {step === STEP.ERROR &&

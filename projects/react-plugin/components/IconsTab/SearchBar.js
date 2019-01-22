@@ -3,7 +3,8 @@ import { isEnterClick } from '../../utils'
 import {
   SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, AmountIcons
 } from '../../styledComponents';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { I18n } from 'react-i18nify';
 
 
 class SearchBar extends Component {
@@ -35,10 +36,10 @@ class SearchBar extends Component {
             onChange={onChangeSearchPhrase}
             onKeyDown={ev => { isEnterClick(ev) && onSearch() }}
           />
-          <ButtonSearch className="ae-btn" onClick={onSearch}>Search</ButtonSearch>
+          <ButtonSearch className="ae-btn" onClick={onSearch}>{I18n.t('upload.search')}</ButtonSearch>
         </SearchGroup>
 
-        <AmountIcons empty={isEmptyIcons}>Found: {count}</AmountIcons>
+        <AmountIcons empty={isEmptyIcons}>{I18n.t('upload.found')}: {count}</AmountIcons>
       </SearchWrapper>
     );
   }

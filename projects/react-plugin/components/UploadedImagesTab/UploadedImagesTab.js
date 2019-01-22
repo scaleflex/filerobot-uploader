@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
 import { Spinner } from '../Spinner';
 import UploadedImagesContent from './UploadedImagesContent';
-import { isEnterClick } from '../../utils'
+import { isEnterClick } from '../../utils';
+import { I18n } from 'react-i18nify';
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
@@ -104,7 +105,7 @@ class UploadedImagesTab extends Component {
   }
 
   uploadError = (msg, timer = null) => {
-    this.setState({ step: STEP.ERROR, errorMsg: msg || 'Error' });
+    this.setState({ step: STEP.ERROR, errorMsg: msg || I18n.t('upload.error') });
     if (timer) setTimeout(() => this.changeStep(STEP.DEFAULT), timer);
   };
 
@@ -155,14 +156,14 @@ class UploadedImagesTab extends Component {
                 innerRef={node => this._searchInput = node}
                 autoFocus={true}
                 defaultValue={''}
-                placeholder={'search by file name, tag or description'}
+                placeholder={I18n.t('file_manager.search_by_file_name_tag_desc')}
                 onKeyDown={ev => isEnterClick(ev) && this.search()}
               />
               <ButtonSearch
                 key="ok"
                 className="ae-btn"
                 onClick={this.search}
-              >Search</ButtonSearch>
+              >{I18n.t('upload.search')}</ButtonSearch>
             </SearchGroup>
           </SearchWrapper>
 
@@ -170,7 +171,7 @@ class UploadedImagesTab extends Component {
             className="ae-btn"
             fullBr={'4px'}
             onClick={() => { this.fileInput.click() }}
-          >Upload images</ButtonSearch>
+          >{I18n.t('file_manager.upload_images')}</ButtonSearch>
         </HeaderWrap>
 
         <UploadedImagesContent

@@ -11,6 +11,7 @@ import {
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
 import { modalClose } from '../../actions';
+import { I18n } from 'react-i18nify';
 
 
 class TaggingTab extends Component {
@@ -24,6 +25,7 @@ class TaggingTab extends Component {
       weekday: "long", year: "numeric", month: "short",
       day: "numeric", hour: "2-digit", minute: "2-digit"
     };
+    const currentTime = (date).toLocaleTimeString("en-us", options);
 
     file.properties = file.properties || {};
     file.properties.tags = file.properties.tags || [];
@@ -33,7 +35,7 @@ class TaggingTab extends Component {
       description: file.properties.description || '',
       isLoading: false,
       errorMessage: '',
-      currentTime: (date).toLocaleTimeString("en-us", options),
+      currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString("en-us", options) : currentTime,
       lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime
     };
@@ -64,7 +66,7 @@ class TaggingTab extends Component {
           });
         } else {
           this.setState({
-            errorMessage: response.msg || response.message || 'something went wrong, try again',
+            errorMessage: response.msg || response.message || I18n.t('tagging.something_went_wrong_try_again'),
             isLoading: false
           })
         }
@@ -77,7 +79,7 @@ class TaggingTab extends Component {
     const { taggingConfig, language } = this.props;
     const [file = {}] = this.props.files;
 
-    generateTags(file.url_permalink, taggingConfig).then(({ tags, ...props } = {}) => {
+    generateTags(file.url_permalink, taggingConfig, language).then(({ tags, ...props } = {}) => {
       if (tags) {
         this.setState({
           tags: tags.map(item => item && item.tag && item.tag[language]),
@@ -86,7 +88,7 @@ class TaggingTab extends Component {
       } else {
         this.setState({
             isLoading: false,
-            errorMessage: props.msg || props.message || 'something went wrong, try again'
+            errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
           }
         );
       }
@@ -103,13 +105,13 @@ class TaggingTab extends Component {
     const { isLoading, errorMessage, currentTime } = this.state;
     const { autoTagging, prevTab } = this.props;
     const [file = {}] = this.props.files;
-    const generateTagInfo = 'will automatically generate tags based on image recognition technology';
+    const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
 
     return (
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>Go back</GoBack>}
+          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
 
           <FileWrapper>
             <UploadedImageWrapper>
@@ -119,19 +121,19 @@ class TaggingTab extends Component {
             <UploadedImageDesc>
               <ul>
                 <li>
-                  <PropName>File name:</PropName>
+                  <PropName>{I18n.t('tagging.file_name')}:</PropName>
                   <PropValue>{file.name}</PropValue>
                 </li>
                 <li>
-                  <PropName>Size:</PropName>
+                  <PropName>{I18n.t('tagging.size')}:</PropName>
                   <PropValue>{prettyBytes(file.size)}</PropValue>
                 </li>
                 <li>
-                  <PropName>First Upload:</PropName>
+                  <PropName>{I18n.t('tagging.first_upload')}:</PropName>
                   <PropValue>{currentTime}</PropValue>
                 </li>
                 <li>
-                  <PropName>Last Modified:</PropName>
+                  <PropName>{I18n.t('tagging.last_modified')}:</PropName>
                   <PropValue>{currentTime}</PropValue>
                 </li>
               </ul>
@@ -141,7 +143,7 @@ class TaggingTab extends Component {
           <InputsBlock>
             <Textarea
               value={this.state.description}
-              placeholder={'Add description'}
+              placeholder={I18n.t('tagging.add_description')}
               onChange={this.handleDescriptionChange}
             />
 
@@ -150,7 +152,7 @@ class TaggingTab extends Component {
                 value={this.state.tags}
                 onChange={this.handleTagsChange}
                 inputProps={{
-                  placeholder: 'Add a tag (separate by pressing enter)'
+                  placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
                 }}
               />
             </TagsInputWrapper>
@@ -168,9 +170,9 @@ class TaggingTab extends Component {
         <TaggingFooter>
 
           {autoTagging &&
-          <Button onClick={this.generateTags}>Generate tags <InfoIcon data-tip={generateTagInfo}/></Button>}
+          <Button onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon data-tip={generateTagInfo}/></Button>}
 
-          <Button success onClick={this.saveMetadata}>Save</Button>
+          <Button success onClick={this.saveMetadata}>{I18n.t('tagging.save')}</Button>
 
         </TaggingFooter>
 

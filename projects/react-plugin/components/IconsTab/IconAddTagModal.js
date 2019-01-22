@@ -4,6 +4,7 @@ import { addTag } from '../../services/iconsApi.service';
 import {
   ButtonSearch, Label, MonoIconSettings, Opacity, Input, IconAddTagInner
 } from '../../styledComponents';
+import { I18n } from 'react-i18nify';
 
 
 class IconAddTagModal extends Component {
@@ -20,7 +21,7 @@ class IconAddTagModal extends Component {
     const { tagName } = this.state;
 
     addTag(activeIcon.uid, tagName).then(() => {
-      showAlert('New tag successfully added!');
+      showAlert(I18n.t('icons.new_tag_successfully_added'));
       onClose();
     })
   }

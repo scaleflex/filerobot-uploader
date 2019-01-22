@@ -6,7 +6,8 @@ import {
 import { connect } from 'react-redux';
 import { modalClose } from '../../actions';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
-import * as ImageGridService from '../../services/imageGrid.service'
+import * as ImageGridService from '../../services/imageGrid.service';
+import { I18n } from 'react-i18nify';
 
 
 class UploadedImagesContent extends Component {
@@ -144,7 +145,7 @@ class UploadedImagesContent extends Component {
       >
         <UploadBox isDragOver={isDragOver}>
           <UploadBoxIcon className={'sfi-airstore-image'}/>
-          <Label>Drag images here</Label>
+          <Label center>{I18n.t('file_manager.drag_images_here')}</Label>
         </UploadBox>
       </UploadBoxWrapper>
     )

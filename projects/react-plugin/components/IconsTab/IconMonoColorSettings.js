@@ -8,6 +8,7 @@ import { COLORS } from '../../config';
 import { guid } from '../../services/helper.service';
 import { Spinner } from '../Spinner';
 import { SketchPicker } from 'react-color';
+import { I18n } from 'react-i18nify';
 
 
 class IconMonoColorSettings extends Component {
@@ -87,7 +88,7 @@ class IconMonoColorSettings extends Component {
             <Spinner overlay show={isLoading} style={{ fontSize: 10 }}/>
           </SettingsIconWrapper>
           <MonoActionBlock>
-            <Label color={'black'}>Customize your icon</Label>
+            <Label color={'black'}>{I18n.t('icons.customize_your_icon')}</Label>
             <ColorsWrapper>
               {COLORS.map((color, index) => (
                 <ColorIcon
@@ -109,7 +110,7 @@ class IconMonoColorSettings extends Component {
               />
             </ColorsWrapper>
             {themeColors && <ThemeColors>
-              <Label color={'black'} mr={'5px'} p={'0px'}>Theme colors:</Label>
+              <Label color={'black'} mr={'5px'} p={'0px'}>{I18n.t('icons.theme_colors')}:</Label>
               <ColorIcon onClick={() => { this.setColor(themeColors.primary); }} bgColor={themeColors.primary}/>
               <ColorIcon onClick={() => { this.setColor(themeColors.secondary); }} bgColor={themeColors.secondary}/>
             </ThemeColors>}
@@ -118,7 +119,7 @@ class IconMonoColorSettings extends Component {
               fullBr={'4px'}
               onClick={this.onApply}
               tabIndex={10001}
-            >Apply</ButtonSearch>
+            >{I18n.t('upload.apply')}</ButtonSearch>
           </MonoActionBlock>
           {displayColorPicker ? <div style={popover}>
             <SketchPicker color={activeColor} onChange={this.handleChange}/>

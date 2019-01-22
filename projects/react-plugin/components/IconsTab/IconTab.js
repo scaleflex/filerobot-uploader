@@ -13,6 +13,7 @@ import { DEFAULT_ICON_SIZE } from '../../config';
 import { setAsNotRelevant, sendSelectionData } from '../../services/iconsApi.service';
 import * as ImageGridService from '../../services/imageGrid.service';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
+import { I18n } from 'react-i18nify';
 
 
 class IconTab extends Component {
@@ -119,7 +120,7 @@ class IconTab extends Component {
         this.search({ value, type }, true);
         return;
       }
-      else if (!icons.length) this.props.showAlert('0 icons was found :(', '', 'warning');
+      else if (!icons.length) this.props.showAlert(I18n.t('icons.zero_icons_was_found'), '', 'warning');
 
       self.setState({ isSearching: false });
       typeof resizeOnSuccess === 'function' && resizeOnSuccess();
@@ -205,7 +206,7 @@ class IconTab extends Component {
     const relevantActiveTags = this.getRelevantActiveTags(activeTags, active.related_tags);
     event.stopPropagation();
     setAsNotRelevant({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, activeIcon.uid);
-    showAlert('Set icon as not relevant', '', 'info');
+    showAlert(I18n.t('icons.set_icon_as_not_relevant'), '', 'info');
   }
 
   onLoadImage = (target, icon) => { this.loadedIcons.push(icon); };
@@ -243,7 +244,7 @@ class IconTab extends Component {
 
         <IconMain>
           <SearchBar
-            title={"You can search icons here"}
+            title={I18n.t('icons.you_can_search_icons_here')}
             items={active.icons}
             isLoading={isLoading}
             onSearch={() => { this.onSearch(); }}

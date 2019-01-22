@@ -17,6 +17,7 @@ export const AmountIcons = styled.div`
   color: #3f3f3f;
 `;
 export const Label = styled.div`
+ text-align: ${props => props.center ? 'center' : 'left'};
   padding: ${props => props.p ? props.p : '10px 8px'};
   font-size: ${props => props.fs ? props.fs : 'inherit'};
   color: ${props => props.color === 'black' ? '#1e262c' : ''};
