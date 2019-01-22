@@ -23,7 +23,7 @@ const UploadedImageWrapper = styled.div`
 const UploadedImage = styled.div`
   width: 100%;
   height: 220px;
-  background: gainsboro url(${props => props.src}) 50% 50% / contain no-repeat;
+  background: gainsboro url('${props => props.src}') 50% 50% / contain no-repeat;
 `;
 
 const PropName = styled.div`

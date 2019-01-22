@@ -74,7 +74,14 @@ class UploadedImagesTab extends Component {
         : this.props.onFilesUpload(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', activeFolder.dir)
     )
       .then((files) => {
-        this.uploadSuccess(files)
+        this.uploadSuccess(files);
+
+        if (this.props.uploaderConfig.tagging.active) {
+          this.props.saveUploadedFiles(files);
+          this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
         self.modalClose();
       })
@@ -137,6 +144,8 @@ class UploadedImagesTab extends Component {
           onDragEvent={this.onDragEvent}
           fileDropHandler={this.fileDropHandler}
           isDragOver={isDragOver}
+          saveUploadedFiles={this.props.saveUploadedFiles}
+          setPostUpload={this.props.setPostUpload}
           files={files}
         />
 

@@ -52,6 +52,7 @@ class TaggingTab extends Component {
           uploadHandler(files, nextTags, description);
 
           this.setState({ isLoading: true }, () => {
+            this.props.setPostUpload(false);
             this.props.modalClose();
           });
         } else {

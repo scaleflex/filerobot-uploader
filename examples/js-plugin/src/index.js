@@ -4,12 +4,12 @@ import '../../../projects/js-plugin/index';
 let options = {
   MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   UPLOAD_PARAMS: {                 // optional default: {}
-    dir: '/your/directory'
+    dir: '/dima_test'
   },
   // ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
   UPLOADED_FOLDERS: [                             // required if UPLOADED_IMAGES is set
-    { dir: '/company_test', label: 'Company' },
-    { dir: '/company_test/project_test', label: 'Project' }
+    { dir: '/dima_test', label: 'All' },
+    //{ dir: '/company_test/project_test', label: 'Project' }
   ],
   AIRSTORE_UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
   OPENPIX_KEY: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
@@ -18,7 +18,7 @@ let options = {
   TAGGING: {
     active: true,
     auto_tagging: true,
-    provider: 'imagga', // google|imagga
+    provider: 'google', // google|imagga
     confidence: 60, //  [0..100]
     limit: 10,
     key: 'aaaa'

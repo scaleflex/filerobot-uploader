@@ -62,7 +62,14 @@ class UserUploaderTab extends Component {
         : this.props.onFilesUpload(this.state.files, this.props.uploaderConfig)
     )
       .then((files) => {
-        this.uploadSuccess(files)
+        this.uploadSuccess(files);
+
+        if (this.props.uploaderConfig.tagging.active) {
+          this.props.saveUploadedFiles(files);
+          this.props.setPostUpload(true, 'TAGGING', 'UPLOAD');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
         self.modalClose();
       })

@@ -50,7 +50,15 @@ class UploadedImagesContent extends Component {
   }
 
   upload = (item) => {
-    this.props.uploaderConfig.uploadHandler([{...item, public_link: item.url_permalink }]);
+    const files = [{...item, public_link: item.url_permalink }];
+
+    if (this.props.uploaderConfig.tagging.active) {
+      this.props.saveUploadedFiles(files);
+      this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+      return;
+    }
+
+    this.props.uploaderConfig.uploadHandler(files);
     this.props.onModalClose();
   }
 
