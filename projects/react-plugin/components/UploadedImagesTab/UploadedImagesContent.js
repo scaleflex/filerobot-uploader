@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img
+  Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName, EditIcon,
+  EditIconWrapper
 } from '../../styledComponents/index';
 import { connect } from 'react-redux';
-import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
+import { modalClose } from '../../actions';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service'
 
@@ -30,7 +31,7 @@ class UploadedImagesContent extends Component {
   }
 
   getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.current.getBoundingClientRect().width);
-  getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height;
+  getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height + 20;
 
   updateImageGridColumnWidth = () => {
     let { imageGrid } = this.state;
@@ -52,14 +53,20 @@ class UploadedImagesContent extends Component {
   upload = (item) => {
     const files = [{...item, public_link: item.url_permalink }];
 
-    if (this.props.uploaderConfig.tagging.active) {
-      this.props.saveUploadedFiles(files);
-      this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
-      return;
-    }
-
     this.props.uploaderConfig.uploadHandler(files);
     this.props.onModalClose();
+  }
+
+  onEditImage = (event, item) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.props.uploaderConfig.tagging.active) {
+      const files = [{...item, public_link: item.url_permalink }];
+
+      this.props.saveUploadedFiles(files);
+      this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+    }
   }
 
   render() {
@@ -96,6 +103,8 @@ class UploadedImagesContent extends Component {
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
+    const isEditImage = this.props.uploaderConfig.tagging.active;
+
     return (
       <ImageWrapper
         style={{ ...style, width: columnWidth }}
@@ -104,10 +113,17 @@ class UploadedImagesContent extends Component {
         tabIndex={index}
         onKeyDown={(event) => { this.onKeyDown(event, item); }}
       >
-        <Img
-          src={ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, columnWidth / (item.ratio || 1.6))}
-          height={columnWidth / (item.ratio || 1.6)}
-        />
+        <div style={{ overflow: 'hidden' }}>
+          <Img
+            src={ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, columnWidth / (item.ratio || 1.6))}
+            height={columnWidth / (item.ratio || 1.6)}
+          />
+        </div>
+        <ImageDescription>
+          <ImageName>{item.name}</ImageName>
+          {isEditImage &&
+          <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}><EditIcon/></EditIconWrapper>}
+        </ImageDescription>
       </ImageWrapper>
     );
   }
@@ -123,7 +139,7 @@ class UploadedImagesContent extends Component {
         encType="multipart/form-data"
         style={style}
         columnWidth={columnWidth}
-        height={columnWidth / (item.ratio || 1.6)}
+        height={(columnWidth / (item.ratio || 1.6)) + 20}
       >
         <UploadBox isDragOver={isDragOver}>
           <UploadBoxIcon className={'sfi-airstore-image'}/>

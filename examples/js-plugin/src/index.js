@@ -8,7 +8,7 @@ let options = {
   },
   // ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
   UPLOADED_FOLDERS: [                             // required if UPLOADED_IMAGES is set
-    { dir: '/dima_test', label: 'All' },
+    { dir: '/', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],
   AIRSTORE_UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required

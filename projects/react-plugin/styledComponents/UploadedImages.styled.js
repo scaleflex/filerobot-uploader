@@ -13,7 +13,8 @@ export const HeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  min-height: 36px;
 `;
 
 export const Nav = styled.nav`
