@@ -82,7 +82,6 @@ let options = {
         </li>
       </ul>
     `;
-    console.log(img)
   }
 };
 
