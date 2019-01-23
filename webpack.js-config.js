@@ -10,7 +10,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, "build"),
     filename: "filerobot-uploader-widget.main.[chunkhash].js",
-    chunkFilename: 'filerobot-uploader-widget.[name].[chunkhash].js'
+    chunkFilename: 'filerobot-uploader-widget.[name].[chunkhash].js',
+    publicPath: 'https://scaleflex.airstore.io/test/uploader/'
   },
   module: {
     rules: [

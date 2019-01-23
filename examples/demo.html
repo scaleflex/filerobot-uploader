@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script src="https://scaleflex.airstore.io/test/uploader/filerobot-uploader-widget.main.v0.2.js"></script>
+
+<script>
+  let options = {
+    container: 'example',
+    airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+    openpixKey: 'xxxxxxxxxxxxxxx',
+    onUpload: (files) => {
+      console.log('files: ', files);
+      alert('Files uploaded successfully! check the console to see the uploaded files');
+    }
+  };
+
+  window.AirstoreUploader.init(options);
+  window.AirstoreUploader.open();
+</script>
+</body>
+</html>
