@@ -8,7 +8,7 @@ module.exports = {
   entry: path.join(__dirname, "examples/react-plugin/src/index.js"),
   output: {
     path: path.join(__dirname, "examples/react-plugin/dist"),
-    filename: "airstore-uploader.js"
+    filename: "filerobot-uploader-widget.js"
   },
   module: {
     rules: [
@@ -27,7 +27,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"]
   },
-  devtool: "sourcemap",
+  //devtool: "sourcemap",
   devServer: {
     port: 3001
   }

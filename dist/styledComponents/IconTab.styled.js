@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ThemeColors = exports.CountTag = exports.Icon = exports.IconWrapper = exports.IconBoxWrapperInner = exports.IconBoxWrapper = exports.Input = exports.IconMain = exports.IconTabWrapper = exports.IconsWrapper = exports.MonoActionBlock = exports.SettingsIconWrapper = exports.SettingsIcon = exports.ColorIcon = exports.ColorsWrapper = exports.Opacity = exports.IconAddTagInner = exports.MonoIconSettings = exports.ControlIcon = exports.NotRelevantBtn = exports.ActionsIconWrapper = exports.AddTagBtn = exports.HoverWrapper = exports.CloseIcon = exports.ColorWrapper = exports.Tag = exports.TagsWrapper = exports.SearchTitle = exports.SearchWrapper = exports.ButtonSearch = exports.InputSearch = exports.Label = exports.AmountIcons = exports.SearchGroup = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: 10px;\n  justify-content: left;\n'], ['\n  display: flex;\n  padding: 10px;\n  justify-content: left;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  padding: ', ';\n  justify-content: left;\n'], ['\n  display: flex;\n  padding: ', ';\n  justify-content: left;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: ', ';\n  align-items: center;\n  padding: 10px;\n  font-size: 13px;\n  color: #3f3f3f;\n'], ['\n  display: ', ';\n  align-items: center;\n  padding: 10px;\n  font-size: 13px;\n  color: #3f3f3f;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n'], ['\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n text-align: ', ';\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n'], ['\n text-align: ', ';\n  padding: ', ';\n  font-size: ', ';\n  color: ', ';\n  border-top: ', ';\n  margin-right: ', ';\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  height: 34px;\n  width: 300px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: rgb(85, 85, 85);\n  background: rgb(255, 255, 255);\n  border-radius: 4px 0 0 4px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n  border: 1px solid transparent;\n  border-right: 0px solid transparent;\n  outline: 0;\n\n  :focus {\n    border: 1px solid #5D636B;\n    border-right: 0px solid transparent;\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n'], ['\n  height: 34px;\n  width: 300px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857;\n  color: rgb(85, 85, 85);\n  background: rgb(255, 255, 255);\n  border-radius: 4px 0 0 4px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n  border: 1px solid transparent;\n  border-right: 0px solid transparent;\n  outline: 0;\n\n  :focus {\n    border: 1px solid #5D636B;\n    border-right: 0px solid transparent;\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  font-family: Roboto, sans-serif;\n  height: 34px;\n  padding: 6px 12px;\n  line-height: 23px;\n  text-transform: uppercase;\n  color: #fff;\n  background-color: #00707C;\n  background-repeat: repeat-x;\n  border: none;\n  border-radius: ', ';\n  cursor: pointer;\n  font-weight: 300;\n  outline: 0;\n  font-size: 12px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  font-weight: 400;\n  text-transform: none;\n\n  :hover {\n    background-color: #096868;\n  }\n\n  :focus {\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n'], ['\n  font-family: Roboto, sans-serif;\n  height: 34px;\n  padding: 6px 12px;\n  line-height: 23px;\n  text-transform: uppercase;\n  color: #fff;\n  background-color: #00707C;\n  background-repeat: repeat-x;\n  border: none;\n  border-radius: ', ';\n  cursor: pointer;\n  font-weight: 300;\n  outline: 0;\n  font-size: 12px;\n  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;\n  font-weight: 400;\n  text-transform: none;\n\n  :hover {\n    background-color: #096868;\n  }\n\n  :focus {\n    outline-color: rgb(77, 144, 254);\n    outline-offset: -2px;\n    outline-style: auto;\n    outline-width: 5px;\n  }\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: space-between;\n  \n  ', '\n'], ['\n  display: flex;\n  justify-content: space-between;\n  \n  ', '\n']),
@@ -48,17 +48,23 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _CloseBtn = require('../components/CloseBtn');
+
+var _Button = require('../components/Button');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SearchGroup = exports.SearchGroup = _styledComponents2.default.div(_templateObject);
+var SearchGroup = exports.SearchGroup = _styledComponents2.default.div(_templateObject, function (props) {
+  return props.padding ? props.padding : '10px';
+});
 var AmountIcons = exports.AmountIcons = _styledComponents2.default.div(_templateObject2, function (props) {
   return props.empty ? 'none' : 'flex';
 });
 var Label = exports.Label = _styledComponents2.default.div(_templateObject3, function (props) {
+  return props.center ? 'center' : 'left';
+}, function (props) {
   return props.p ? props.p : '10px 8px';
 }, function (props) {
   return props.fs ? props.fs : 'inherit';
@@ -96,7 +102,7 @@ var Tag = exports.Tag = _styledComponents2.default.div.attrs({ className: functi
 
 var ColorWrapper = exports.ColorWrapper = _styledComponents2.default.div(_templateObject10);
 
-var CloseIcon = exports.CloseIcon = (0, _styledComponents2.default)(_dist.CloseBtn)(_templateObject11, function (props) {
+var CloseIcon = exports.CloseIcon = (0, _styledComponents2.default)(_CloseBtn.CloseBtn)(_templateObject11, function (props) {
   return props.active && '\n    display: block;\n  ';
 });
 
@@ -104,11 +110,11 @@ var HoverWrapper = exports.HoverWrapper = _styledComponents2.default.div(_templa
   return props.isShow ? 'flex' : 'none';
 });
 
-var AddTagBtn = exports.AddTagBtn = (0, _styledComponents2.default)(_dist.Button)(_templateObject13);
+var AddTagBtn = exports.AddTagBtn = (0, _styledComponents2.default)(_Button.Button)(_templateObject13);
 
 var ActionsIconWrapper = exports.ActionsIconWrapper = _styledComponents2.default.div(_templateObject14);
 
-var NotRelevantBtn = exports.NotRelevantBtn = (0, _styledComponents2.default)(_dist.Button)(_templateObject15);
+var NotRelevantBtn = exports.NotRelevantBtn = (0, _styledComponents2.default)(_Button.Button)(_templateObject15);
 
 var ControlIcon = exports.ControlIcon = _styledComponents2.default.span(_templateObject16, function (props) {
   return props.color ? props.color : '#f2f2f2';

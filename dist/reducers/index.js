@@ -5,17 +5,47 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getReducers = undefined;
 
-var _redux = require('redux');
-
 var _uploader = require('./uploader.reducer');
 
-var _uploader2 = _interopRequireDefault(_uploader);
+Object.keys(_uploader).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _uploader[key];
+    }
+  });
+});
 
 var _icons = require('./icons.reducer');
 
-var _icons2 = _interopRequireDefault(_icons);
+Object.keys(_icons).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _icons[key];
+    }
+  });
+});
 
 var _images = require('./images.reducer');
+
+Object.keys(_images).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _images[key];
+    }
+  });
+});
+
+var _redux = require('redux');
+
+var _uploader2 = _interopRequireDefault(_uploader);
+
+var _icons2 = _interopRequireDefault(_icons);
 
 var _images2 = _interopRequireDefault(_images);
 

@@ -32,7 +32,7 @@ const AIRSTORE_CONFIG = {
     limit: 10,
     key: 'aaaa'
   },
-  language: 'ru',
+  language: 'en',
   onUpload: (img) => { console.log(img) }
 }
 

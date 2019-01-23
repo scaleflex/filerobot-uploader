@@ -22,7 +22,13 @@ var _reactRedux = require('react-redux');
 
 var _styledComponents = require('../../styledComponents');
 
-var _ = require('../');
+var _SearchBar = require('../IconsTab/SearchBar');
+
+var _SearchBar2 = _interopRequireDefault(_SearchBar);
+
+var _IconTags = require('../IconsTab/IconTags');
+
+var _IconTags2 = _interopRequireDefault(_IconTags);
 
 var _VirtualizedImagesGrid = require('../VirtualizedImagesGrid');
 
@@ -32,13 +38,15 @@ var _imageGrid = require('../../services/imageGrid.service');
 
 var ImageGridService = _interopRequireWildcard(_imageGrid);
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _Spinner = require('../Spinner');
 
 var _actions = require('../../actions');
 
 var _reactColor = require('react-color');
 
 var _hoc = require('../hoc');
+
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -160,7 +168,17 @@ var ImagesTab = function (_Component) {
 
       _this.props.onFileUpload(image.src, _this.props.uploaderConfig).then(function (files) {
         _this.uploadStop();
+
+        if (_this.props.uploaderConfig.tagging.active) {
+          _this.props.saveUploadedFiles(files);
+          _this.props.setPostUpload(true, 'TAGGING', 'IMAGES_GALLERY');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
+
+        if (_this.props.onClose) _this.props.onClose();
+
         self.modalClose();
       }).catch(function () {
         _this.uploadStop();
@@ -191,7 +209,7 @@ var ImagesTab = function (_Component) {
         var _payload$images = payload.images,
             images = _payload$images === undefined ? [] : _payload$images;
 
-        if (!images.length) _this.props.showAlert('0 images was found :(', '', 'warning');
+        if (!images.length) _this.props.showAlert(_reactI18nify.I18n.t('images.zero_images_was_found'), '', 'warning');
         self.setState({ isSearching: false });
         typeof resizeOnSuccess === 'function' && resizeOnSuccess();
       };
@@ -312,7 +330,7 @@ var ImagesTab = function (_Component) {
           _react2.default.createElement(
             _styledComponents.Label,
             { fs: '16px', color: 'black' },
-            'Color filter'
+            _reactI18nify.I18n.t('images.color_filter')
           ),
           _react2.default.createElement(
             'div',
@@ -340,13 +358,14 @@ var ImagesTab = function (_Component) {
                 tabIndex: 0,
                 role: 'button'
               },
-              '+ add color'
+              '+ ',
+              _reactI18nify.I18n.t('images.add_color')
             )
           ),
           _react2.default.createElement(
             _styledComponents.Label,
             { fs: '16px', color: 'black' },
-            'Categories'
+            _reactI18nify.I18n.t('upload.categories')
           ),
           tags.length && _react2.default.createElement(
             _styledComponents.ColorItem,
@@ -362,7 +381,8 @@ var ImagesTab = function (_Component) {
             _react2.default.createElement(
               _styledComponents.ColorItemName,
               null,
-              'Backgrounds '
+              _reactI18nify.I18n.t('images.backgrounds'),
+              ' '
             ),
             _react2.default.createElement(
               _styledComponents.CountTag,
@@ -375,7 +395,7 @@ var ImagesTab = function (_Component) {
           tags.slice(0, 20).map(function (item, index) {
             return _this.renderItem(item, index);
           }),
-          !tags.length ? _react2.default.createElement(_dist.Spinner, { black: true, show: true, style: { fontSize: 8, top: 10, opacity: 0.4 } }) : null
+          !tags.length ? _react2.default.createElement(_Spinner.Spinner, { black: true, show: true, style: { fontSize: 8, top: 10, opacity: 0.4 } }) : null
         )
       );
     };
@@ -450,8 +470,8 @@ var ImagesTab = function (_Component) {
       return _react2.default.createElement(
         _styledComponents.ImageContainer,
         null,
-        _react2.default.createElement(_.SearchBar, {
-          title: "You can search images here",
+        _react2.default.createElement(_SearchBar2.default, {
+          title: _reactI18nify.I18n.t('images.you_can_search_images_here'),
           items: images,
           isLoading: isLoading,
           onSearch: function onSearch() {
@@ -462,7 +482,7 @@ var ImagesTab = function (_Component) {
           onChangeSearchPhrase: _this.onChangeSearchPhrase,
           count: count
         }),
-        _react2.default.createElement(_.IconTags, {
+        _react2.default.createElement(_IconTags2.default, {
           tagsList: related_tags,
           searchPhrase: searchPhrase,
           activeTags: activeTags,
@@ -576,10 +596,10 @@ var ImagesTab = function (_Component) {
               onClick: this.handleClose,
               style: { zIndex: 5555, position: 'relative' }
             },
-            'Apply'
+            _reactI18nify.I18n.t('upload.apply')
           )
         ),
-        _react2.default.createElement(_dist.Spinner, { overlay: true, show: isLoading })
+        _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: isLoading })
       );
     }
   }]);

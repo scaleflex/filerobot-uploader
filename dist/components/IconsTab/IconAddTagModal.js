@@ -16,6 +16,8 @@ var _iconsApi = require('../../services/iconsApi.service');
 
 var _styledComponents = require('../../styledComponents');
 
+var _reactI18nify = require('react-i18nify');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47,7 +49,7 @@ var IconAddTagModal = function (_Component) {
 
 
       (0, _iconsApi.addTag)(activeIcon.uid, tagName).then(function () {
-        showAlert('New tag successfully added!');
+        showAlert(_reactI18nify.I18n.t('icons.new_tag_successfully_added'));
         onClose();
       });
     }, _temp), _possibleConstructorReturn(_this, _ret);

@@ -18,9 +18,11 @@ var _config = require('../../config');
 
 var _helper = require('../../services/helper.service');
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _Spinner = require('../Spinner');
 
 var _reactColor = require('react-color');
+
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -120,7 +122,7 @@ var IconMonoColorSettings = function (_Component) {
             _styledComponents.SettingsIconWrapper,
             null,
             _react2.default.createElement(_styledComponents.SettingsIcon, { src: this.getIconUrl(140), onLoad: this.onLoad }),
-            _react2.default.createElement(_dist.Spinner, { overlay: true, show: isLoading, style: { fontSize: 10 } })
+            _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: isLoading, style: { fontSize: 10 } })
           ),
           _react2.default.createElement(
             _styledComponents.MonoActionBlock,
@@ -128,7 +130,7 @@ var IconMonoColorSettings = function (_Component) {
             _react2.default.createElement(
               _styledComponents.Label,
               { color: 'black' },
-              'Customize your icon'
+              _reactI18nify.I18n.t('icons.customize_your_icon')
             ),
             _react2.default.createElement(
               _styledComponents.ColorsWrapper,
@@ -164,7 +166,8 @@ var IconMonoColorSettings = function (_Component) {
               _react2.default.createElement(
                 _styledComponents.Label,
                 { color: 'black', mr: '5px', p: '0px' },
-                'Theme colors:'
+                _reactI18nify.I18n.t('icons.theme_colors'),
+                ':'
               ),
               _react2.default.createElement(_styledComponents.ColorIcon, { onClick: function onClick() {
                   _this3.setColor(themeColors.primary);
@@ -183,7 +186,7 @@ var IconMonoColorSettings = function (_Component) {
                 onClick: this.onApply,
                 tabIndex: 10001
               },
-              'Apply'
+              _reactI18nify.I18n.t('upload.apply')
             )
           ),
           displayColorPicker ? _react2.default.createElement(

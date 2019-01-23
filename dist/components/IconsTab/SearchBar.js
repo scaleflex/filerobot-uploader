@@ -16,6 +16,8 @@ var _styledComponents = require('../../styledComponents');
 
 var _reactRedux = require('react-redux');
 
+var _reactI18nify = require('react-i18nify');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -90,13 +92,14 @@ var SearchBar = function (_Component) {
           _react2.default.createElement(
             _styledComponents.ButtonSearch,
             { className: 'ae-btn', onClick: onSearch },
-            'Search'
+            _reactI18nify.I18n.t('upload.search')
           )
         ),
         _react2.default.createElement(
           _styledComponents.AmountIcons,
           { empty: isEmptyIcons },
-          'Found: ',
+          _reactI18nify.I18n.t('upload.found'),
+          ': ',
           count
         )
       );

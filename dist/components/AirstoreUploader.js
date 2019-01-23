@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.TaggingTab = exports.BackgroundTab = exports.IconTab = exports.UploadedImagesTab = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -16,11 +17,13 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _styles = require('../assets/styles');
 
-var _index = require('./index');
+var _UserUploaderTab = require('./UploadImagesTab/UserUploaderTab');
+
+var _UserUploaderTab2 = _interopRequireDefault(_UserUploaderTab);
 
 var _styledComponents = require('../styledComponents');
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _Modal = require('./Modal');
 
 var _reactFocusLock = require('react-focus-lock');
 
@@ -28,13 +31,23 @@ var _reactFocusLock2 = _interopRequireDefault(_reactFocusLock);
 
 var _actions = require('../actions');
 
-var _config2 = require('../config');
+var _config = require('../config');
 
-var _config3 = _interopRequireDefault(_config2);
+var _config2 = _interopRequireDefault(_config);
 
 var _reactRedux = require('react-redux');
 
 var _reactToastr = require('react-toastr');
+
+var _Nav = require('./nav/Nav');
+
+var _Nav2 = _interopRequireDefault(_Nav);
+
+var _reactLoadable = require('react-loadable');
+
+var _reactLoadable2 = _interopRequireDefault(_reactLoadable);
+
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,72 +57,122 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var UploadedImagesTab = exports.UploadedImagesTab = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import( /* webpackChunkName: "gallery" */'./UploadedImagesTab/UploadedImagesTab');
+  },
+  modules: ['./UploadedImagesTab/UploadedImagesTab'],
+  webpack: function webpack() {
+    return [require.resolveWeak('./UploadedImagesTab/UploadedImagesTab')];
+  },
+  loading: function loading() {
+    return null;
+  }
+});
+var IconTab = exports.IconTab = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import( /* webpackChunkName: "icons" */'./IconsTab/IconTab');
+  },
+  modules: ['./IconsTab/IconTab'],
+  webpack: function webpack() {
+    return [require.resolveWeak('./IconsTab/IconTab')];
+  },
+  loading: function loading() {
+    return null;
+  }
+});
+var BackgroundTab = exports.BackgroundTab = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import( /* webpackChunkName: "images" */'./ImagesTab/ImagesTab');
+  },
+  modules: ['./ImagesTab/ImagesTab'],
+  webpack: function webpack() {
+    return [require.resolveWeak('./ImagesTab/ImagesTab')];
+  },
+  loading: function loading() {
+    return null;
+  }
+});
+var TaggingTab = exports.TaggingTab = (0, _reactLoadable2.default)({
+  loader: function loader() {
+    return import( /* webpackChunkName: "tagging" */'./TaggingTab/TaggingTab');
+  },
+  modules: ['./TaggingTab/TaggingTab'],
+  webpack: function webpack() {
+    return [require.resolveWeak('./TaggingTab/TaggingTab')];
+  },
+  loading: function loading() {
+    return null;
+  }
+});
 var ToastMessageFactory = _react2.default.createFactory(_reactToastr.ToastMessageAnimated);
+var tabs = [{
+  id: 'UPLOAD',
+  fullName: 'Upload',
+  shortName: 'upload.tab_title',
+  iconClass: 'sfi-airstore-upload',
+  getContent: function getContent(props) {
+    return _react2.default.createElement(_UserUploaderTab2.default, props);
+  }
+}, {
+  id: 'UPLOADED_IMAGES',
+  fullName: 'Uploaded Images',
+  shortName: 'file_manager.tab_title',
+  iconClass: 'sfi-airstore-uploaded-images',
+  getContent: function getContent(props) {
+    return _react2.default.createElement(UploadedImagesTab, props);
+  }
+}, {
+  id: 'ICONS_GALLERY',
+  fullName: 'Icons Gallery',
+  shortName: 'icons.tab_title',
+  iconClass: 'sfi-airstore-gallery',
+  getContent: function getContent(props) {
+    return _react2.default.createElement(IconTab, props);
+  }
+}, {
+  id: 'IMAGES_GALLERY',
+  fullName: 'Images Gallery',
+  shortName: 'images.tab_title',
+  iconClass: 'sfi-airstore-image-gallery',
+  getContent: function getContent(props) {
+    return _react2.default.createElement(BackgroundTab, props);
+  }
+}];
+var postUploadTabs = [{
+  id: 'TAGGING',
+  fullName: 'TAGGING',
+  shortName: 'tagging.tab_title',
+  iconClass: 'sfi-airstore-tagging',
+  getContent: function getContent(props) {
+    return _react2.default.createElement(TaggingTab, props);
+  }
+}];
 
 var AirstoreUploader = function (_Component) {
   _inherits(AirstoreUploader, _Component);
 
-  function AirstoreUploader() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function AirstoreUploader(props) {
     _classCallCheck(this, AirstoreUploader);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (AirstoreUploader.__proto__ || Object.getPrototypeOf(AirstoreUploader)).call(this));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AirstoreUploader.__proto__ || Object.getPrototypeOf(AirstoreUploader)).call.apply(_ref, [this].concat(args))), _this), _this.tabs = [{
-      id: 'UPLOAD',
-      fullName: 'Upload',
-      shortName: 'Upload',
-      iconClass: 'sfi-airstore-upload',
-      getContent: function getContent(props) {
-        return _react2.default.createElement(_index.UserUploaderTab, props);
-      }
-    }, {
-      id: 'UPLOADED_IMAGES',
-      fullName: 'Uploaded Images',
-      shortName: 'Uploaded Images',
-      iconClass: 'sfi-airstore-uploaded-images',
-      getContent: function getContent(props) {
-        return _react2.default.createElement(_index.UploadedImagesTab, props);
-      }
-    }, {
-      id: 'ICONS_GALLERY',
-      fullName: 'Icons Gallery',
-      shortName: 'Icons Gallery',
-      iconClass: 'sfi-airstore-gallery',
-      getContent: function getContent(props) {
-        return _react2.default.createElement(_index.IconTab, props);
-      }
-    }, {
-      id: 'IMAGES_GALLERY',
-      fullName: 'Images Gallery',
-      shortName: 'Images Gallery',
-      iconClass: 'sfi-airstore-image-gallery',
-      getContent: function getContent(props) {
-        return _react2.default.createElement(_index.BackgroundTab, props);
-      }
-    }], _this.openModal = function (initialTab) {
-      _this.props.onModalOpen(initialTab || _this.props.initialTab);
-    }, _this.closeModal = function () {
-      var onClose = _this.props.onClose;
+    _initialiseProps.call(_this);
 
-      if (onClose) onClose();
-      _this.props.onModalClose();
-    }, _this.showAlert = function (title, msg) {
-      var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-      var timeOut = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 4000;
+    var initialOptions = props.initialOptions;
 
-      _this.refs.container[type](msg, title, {
-        timeOut: timeOut,
-        extendedTimeOut: 2000,
-        showAnimation: 'animated fadeIn',
-        hideAnimation: 'animated fadeOut'
-      });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+
+    _this.state = {
+      activeModules: initialOptions.modules || initialOptions.MODULES || _config2.default.modules || ["UPLOAD"],
+      postUpload: false,
+      prevTab: 'UPLOAD',
+      files: []
+    };
+
+    window.AirstoreUploader = window.AirstoreUploader || {};
+    window.AirstoreUploader.open = _this.openModal;
+    window.AirstoreUploader.close = _this.closeModal;
+    return _this;
   }
 
   _createClass(AirstoreUploader, [{
@@ -119,101 +182,89 @@ var AirstoreUploader = function (_Component) {
           initialOptions = _props.initialOptions,
           initialTab = _props.initialTab;
 
+      var language = initialOptions.language || initialOptions.LANGUAGE || _config2.default.language;
+      initialTab = initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || _config2.default.initialTab;
 
-      this.props.onSetUploaderConfig(initialOptions || _config3.default || {});
-      this.props.onSetActiveModules(initialOptions.MODULES || _config3.default.MODULES || []);
+      _reactI18nify.I18n.setLocale(language);
+      this.props.setUploaderConfig(initialOptions);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);
-      this.props.onSetTabs(this.tabs);
-      if (this.props.opened) this.openModal(initialTab);
 
-      if (this.props.updateState) this.props.updateState({
-        openAirstoreUploader: this.openModal.bind(this, initialTab),
-        closeAirstoreUploader: this.closeModal
-      });
+      if (this.props.opened) this.openModal(initialTab);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.opened !== prevProps.opened) {
+        if (this.props.opened) this.openModal();else this.closeModal();
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       if (!this.props.isVisible) return null;
 
+      var _state = this.state,
+          activeModules = _state.activeModules,
+          postUpload = _state.postUpload,
+          files = _state.files,
+          prevTab = _state.prevTab;
+      var _props2 = this.props,
+          activeTabId = _props2.activeTabId,
+          initialOptions = _props2.initialOptions;
+
+      var contentProps = {
+        files: files,
+        prevTab: prevTab,
+
+        showAlert: this.showAlert,
+        themeColors: initialOptions.themeColors,
+        setPostUpload: this.setPostUpload,
+        saveUploadedFiles: this.saveUploadedFiles,
+        onClose: this.props.onClose
+      };
+      var filteredTabs = tabs.filter(function (tab) {
+        return tab.id && activeModules.includes(tab.id);
+      });
+      var activeTab = (postUpload ? postUploadTabs : filteredTabs).find(function (tab) {
+        return tab.id === activeTabId;
+      });
+
       return _react2.default.createElement(
-        _dist.Modal,
+        _Modal.Modal,
         { noBorder: true, fullScreen: 'md', onClose: this.closeModal, style: { borderRadius: 5 } },
         _react2.default.createElement(
           _radium.StyleRoot,
           { className: 'airstore-root-box', style: { width: '100%', height: '100%' } },
-          this.renderModalContent()
-        )
-      );
-    }
-  }, {
-    key: 'renderModalContent',
-    value: function renderModalContent() {
-      var _this2 = this;
-
-      var _props2 = this.props,
-          activeTab = _props2.activeTab,
-          _props2$filteredTabs = _props2.filteredTabs,
-          filteredTabs = _props2$filteredTabs === undefined ? [] : _props2$filteredTabs,
-          initialOptions = _props2.initialOptions;
-
-      var contentProps = { showAlert: this.showAlert, themeColors: initialOptions.themeColors };
-
-      return _react2.default.createElement(
-        _reactFocusLock2.default,
-        null,
-        _react2.default.createElement(
-          _styledComponents.Dialog,
-          { role: 'dialog', className: 'ae-dialog' },
           _react2.default.createElement(
-            'div',
-            { style: [_styles.CSS.tabs.header], className: 'ae-tabs-header' },
+            _reactFocusLock2.default,
+            null,
             _react2.default.createElement(
-              'nav',
-              {
-                ref: function ref(node) {
-                  return _this2._nav = node;
-                }, className: 'airstore-uploader-navigation',
-                style: [_styles.CSS.tabs.header.container]
-              },
-              filteredTabs.map(function (tab, index) {
-                return _react2.default.createElement(
-                  'a',
-                  {
-                    href: 'javascript:void(0)',
-                    role: 'menuitem',
-                    id: 'tab-' + tab.id,
-                    key: 'tab-' + tab.id,
-                    className: 'tab-header-item selected ' + (activeTab && activeTab.id === tab.id ? 'active' : ''),
-                    style: [_styles.CSS.tabs.header.container.item, activeTab && activeTab.id === tab.id && _styles.CSS.tabs.header.container.item.selected],
-                    onClick: function onClick(event) {
-                      event.preventDefault();
-                      _this2.props.onActivateTab(tab);
-                    }
-                  },
-                  _react2.default.createElement('i', { className: tab.iconClass, style: [_styles.CSS.tabs.header.container.item.i] }),
-                  _react2.default.createElement(
-                    'span',
-                    { title: tab.fullName, style: _styles.CSS.tabs.header.container.item.text },
-                    tab.shortName
-                  )
-                );
-              })
+              _styledComponents.Dialog,
+              { role: 'dialog', className: 'ae-dialog' },
+              _react2.default.createElement(
+                'div',
+                { style: [_styles.CSS.tabs.header], className: 'ae-tabs-header' },
+                _react2.default.createElement(_Nav2.default, {
+                  tabs: postUpload ? postUploadTabs : filteredTabs,
+                  activeTabId: activeTabId,
+                  activateTab: this.activateTab
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                { style: [_styles.CSS.tabs.content, activeTabId === 'ICONS' && { overflow: 'hidden' }] },
+                activeTab && _react2.default.createElement(
+                  'div',
+                  { style: [{ width: '100%', minWidth: 540, overflow: 'auto' }] },
+                  activeTab.getContent.call(this, contentProps)
+                ),
+                _react2.default.createElement(_reactToastr.ToastContainer, {
+                  ref: 'container',
+                  toastMessageFactory: ToastMessageFactory,
+                  className: 'toast-top-right'
+                })
+              )
             )
-          ),
-          _react2.default.createElement(
-            'div',
-            { style: [_styles.CSS.tabs.content, activeTab && activeTab.id === 'ICONS' && { overflow: 'hidden' }] },
-            activeTab && _react2.default.createElement(
-              'div',
-              { style: [{ width: '100%', minWidth: 540, overflow: 'auto' }] },
-              activeTab.getContent.call(this, contentProps)
-            ),
-            _react2.default.createElement(_reactToastr.ToastContainer, {
-              ref: 'container',
-              toastMessageFactory: ToastMessageFactory,
-              className: 'toast-top-right'
-            })
           )
         )
       );
@@ -223,38 +274,80 @@ var AirstoreUploader = function (_Component) {
   return AirstoreUploader;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(function (_ref2) {
-  var _ref2$uploader = _ref2.uploader,
-      backgrounds = _ref2$uploader.backgrounds,
-      isVisible = _ref2$uploader.isVisible,
-      activeTab = _ref2$uploader.activeTab,
-      uploaderConfig = _ref2$uploader.uploaderConfig,
-      activeModules = _ref2$uploader.activeModules,
-      tabs = _ref2$uploader.tabs,
-      filteredTabs = _ref2$uploader.filteredTabs;
-  return { backgrounds: backgrounds, isVisible: isVisible, activeTab: activeTab, uploaderConfig: uploaderConfig, activeModules: activeModules, tabs: tabs, filteredTabs: filteredTabs };
-}, function (dispatch) {
-  return {
-    onModalOpen: function onModalOpen(tabName) {
-      return dispatch((0, _actions.modalOpen)(tabName));
-    },
-    onModalClose: function onModalClose() {
-      return dispatch((0, _actions.modalClose)());
-    },
-    onActivateTab: function onActivateTab(active) {
-      return dispatch((0, _actions.activateTab)(active));
-    },
-    onSetUploaderConfig: function onSetUploaderConfig(_config) {
-      return dispatch((0, _actions.setUploaderConfig)(_config));
-    },
-    onSetActiveModules: function onSetActiveModules(modules) {
-      return dispatch((0, _actions.setActiveModules)(modules));
-    },
-    onSetUploadHandler: function onSetUploadHandler(handler) {
-      return dispatch((0, _actions.setUploadHandler)(handler));
-    },
-    onSetTabs: function onSetTabs(tabs) {
-      return dispatch((0, _actions.setTabs)(tabs));
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.setPostUpload = function (value) {
+    var tabId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    var prevTab = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    _this2.setState({ postUpload: value, prevTab: prevTab });
+    _this2.props.activateTab(tabId || _this2.state.prevTab);
+  };
+
+  this.saveUploadedFiles = function () {
+    var files = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    _this2.setState({ files: files });
+  };
+
+  this.openModal = function (initialTab) {
+    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        file = _ref2.file;
+
+    var initialOptions = _this2.props.initialOptions;
+
+
+    initialTab = initialTab || _this2.props.initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || _config2.default.initialTab;
+
+    if (file) {
+      _this2.setState({ files: [file], postUpload: true, prevTab: '' }, function () {
+        _this2.props.modalOpen(initialTab || _this2.props.initialTab);
+      });
+    } else {
+      _this2.setState({ postUpload: false }, function () {
+        _this2.props.modalOpen(initialTab || _this2.props.initialTab);
+      });
     }
   };
+
+  this.closeModal = function () {
+    var onClose = _this2.props.onClose;
+
+    if (onClose) onClose();
+    _this2.props.modalClose();
+  };
+
+  this.showAlert = function (title, msg) {
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+    var timeOut = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 4000;
+
+    _this2.refs.container[type](msg, title, {
+      timeOut: timeOut,
+      extendedTimeOut: 2000,
+      showAnimation: 'animated fadeIn',
+      hideAnimation: 'animated fadeOut'
+    });
+  };
+
+  this.activateTab = function (event, tabId) {
+    event.preventDefault();
+
+    _this2.props.activateTab(tabId);
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(function (_ref) {
+  var _ref$uploader = _ref.uploader,
+      backgrounds = _ref$uploader.backgrounds,
+      isVisible = _ref$uploader.isVisible,
+      activeTabId = _ref$uploader.activeTabId,
+      uploaderConfig = _ref$uploader.uploaderConfig,
+      activeModules = _ref$uploader.activeModules;
+  return { backgrounds: backgrounds, isVisible: isVisible, activeTabId: activeTabId, uploaderConfig: uploaderConfig, activeModules: activeModules };
+}, {
+  onSetUploadHandler: _actions.setUploadHandler,
+  modalClose: _actions.modalClose,
+  setUploaderConfig: _actions.setUploaderConfig,
+  modalOpen: _actions.modalOpen,
+  activateTab: _actions.activateTab
 })((0, _radium2.default)(AirstoreUploader));

@@ -9,8 +9,8 @@ module.exports = {
   entry: path.join(__dirname, "projects/js-plugin/index.js"),
   output: {
     path: path.join(__dirname, "build"),
-    filename: "airstore-uploader.[chunkhash].js",
-    chunkFilename: '[name].[chunkhash].js'
+    filename: "filerobot-uploader-widget.main.[chunkhash].js",
+    chunkFilename: 'filerobot-uploader-widget.[name].[chunkhash].js'
   },
   module: {
     rules: [

@@ -4,13 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
-  MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
-  AIRSTORE_UPLOAD_KEY: '',
-  CONTAINER: null,
-  UPLOAD_PARAMS: {},
-  onUpload: null, // handler
-  image_only: true,
-  OPENPIX_KEY: null
+  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+  folders: [{ dir: '/', label: 'All' }],
+  initialTab: 'UPLOAD',
+  airstoreUploadKey: '',
+  container: 'example',
+  uploadParams: {},
+  onUpload: function onUpload() {},
+  imageOnly: true,
+  openpixKey: null,
+  language: 'en',
+  tagging: {
+    active: false,
+    provider: 'google',
+    confidence: 80,
+    limit: 10
+  }
 };
 var DEFAULT_ICON_SIZE = exports.DEFAULT_ICON_SIZE = 100;
 

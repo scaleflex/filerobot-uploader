@@ -24,7 +24,9 @@ var _index3 = require('../../utils/index');
 
 var _index4 = require('../../styledComponents/index');
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _Spinner = require('../Spinner');
+
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -87,7 +89,7 @@ var UserUploaderTab = function (_Component) {
     }, _this.uploadError = function (msg) {
       var timer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      _this.setState({ step: STEP.ERROR, errorMsg: msg || 'Error' });
+      _this.setState({ step: STEP.ERROR, errorMsg: msg || _reactI18nify.I18n.t('upload.error') });
       if (timer) setTimeout(function () {
         return _this.changeStep(STEP.DEFAULT);
       }, timer);
@@ -101,7 +103,17 @@ var UserUploaderTab = function (_Component) {
       _this.uploadStart();
       (isUploadFromUrl ? _this.props.onFileUploadFromUrl(url, _this.props.uploaderConfig) : _this.props.onFilesUpload(_this.state.files, _this.props.uploaderConfig)).then(function (files) {
         _this.uploadSuccess(files);
+
+        if (_this.props.uploaderConfig.tagging.active) {
+          _this.props.saveUploadedFiles(files);
+          _this.props.setPostUpload(true, 'TAGGING', 'UPLOAD');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
+
+        if (_this.props.onClose) _this.props.onClose();
+
         self.modalClose();
       }).catch(function (error) {
         _this.uploadError(error.msg);
@@ -110,7 +122,7 @@ var UserUploaderTab = function (_Component) {
       var value = _this._uploadFromWebField.value;
       var isValid = value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
 
-      if (isValid) _this.upload(true, value);else _this.uploadError(value ? 'URL not valid!' : 'Empty URL!', 4000);
+      if (isValid) _this.upload(true, value);else _this.uploadError(value ? _reactI18nify.I18n.t('upload.url_not_valid') : _reactI18nify.I18n.t('upload.empty_url'), 4000);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -175,12 +187,12 @@ var UserUploaderTab = function (_Component) {
               _react2.default.createElement(
                 'span',
                 { style: [uploadBlock_style.inputBox.label.dragDropText] },
-                'Drag file here'
+                _reactI18nify.I18n.t('upload.drag_file_here')
               ),
               _react2.default.createElement(
                 'div',
                 { style: [uploadBlock_style.inputBox.label.orText] },
-                'or'
+                _reactI18nify.I18n.t('upload.or')
               ),
               _react2.default.createElement(
                 'button',
@@ -192,12 +204,12 @@ var UserUploaderTab = function (_Component) {
                     _this2.refs.fileInput.click();
                   }
                 },
-                'Browse your computer'
+                _reactI18nify.I18n.t('upload.browse_your_computer')
               ),
               _react2.default.createElement(
                 'div',
                 { style: [uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }] },
-                'or'
+                _reactI18nify.I18n.t('upload.or')
               ),
               _react2.default.createElement(
                 _index4.SearchWrapper,
@@ -212,7 +224,7 @@ var UserUploaderTab = function (_Component) {
                     },
                     autoFocus: true,
                     defaultValue: '',
-                    placeholder: 'Enter URL to upload from web',
+                    placeholder: _reactI18nify.I18n.t('upload.enter_url_to_upload_from_web'),
                     onKeyDown: function onKeyDown(ev) {
                       return (0, _index3.isEnterClick)(ev) && _this2.uploadFromWeb();
                     }
@@ -224,7 +236,7 @@ var UserUploaderTab = function (_Component) {
                       className: 'ae-btn',
                       onClick: this.uploadFromWeb
                     },
-                    'Upload'
+                    _reactI18nify.I18n.t('upload.upload_btn')
                   )
                 )
               ),
@@ -236,23 +248,23 @@ var UserUploaderTab = function (_Component) {
                     fontWeight: "200",
                     marginTop: "5px"
                   }] },
-                'Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.'
+                _reactI18nify.I18n.t('upload.accepted_file_types')
               )
             ),
             _react2.default.createElement(
               'div',
               { ref: 'submitBtn', className: 'ae-btn', style: [uploadBlock_style.inputBox.submitBtn], type: 'submit' },
-              'Upload'
+              _reactI18nify.I18n.t('upload.upload_btn')
             )
           ),
           step === STEP.UPLOADING && _react2.default.createElement(
             'div',
             { style: [uploadBlock_style.uploadingBox] },
-            _react2.default.createElement(_dist.Spinner, { overlay: true, show: true }),
+            _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: true }),
             _react2.default.createElement(
               'span',
               null,
-              'Uploading'
+              _reactI18nify.I18n.t('upload.uploading')
             )
           ),
           step === STEP.ERROR && _react2.default.createElement(

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.uploadFilesFromUrls = exports.uploadFilesToDir = exports.uploadFiles = exports.setUploadHandler = exports.setTabs = exports.setActiveModules = exports.setUploaderConfig = exports.activateTab = exports.modalClose = exports.modalOpen = exports.getBackgrounds = undefined;
+exports.uploadFilesFromUrls = exports.uploadFilesToDir = exports.uploadFiles = exports.setUploadHandler = exports.setUploaderConfig = exports.activateTab = exports.modalClose = exports.modalOpen = exports.getBackgrounds = undefined;
 
 var _imagesApi = require('../services/imagesApi.service');
 
@@ -12,6 +12,8 @@ var BgAPI = _interopRequireWildcard(_imagesApi);
 var _api = require('../services/api.service');
 
 var API = _interopRequireWildcard(_api);
+
+var _reducers = require('../reducers');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -25,9 +27,9 @@ var getBackgrounds = exports.getBackgrounds = function getBackgrounds() {
   };
 };
 
-var modalOpen = exports.modalOpen = function modalOpen(tabName) {
+var modalOpen = exports.modalOpen = function modalOpen(tabId) {
   return function (dispatch) {
-    return dispatch({ type: 'MODAL_OPEN', payload: tabName });
+    return dispatch({ type: _reducers.MODAL_OPEN, tabId: tabId });
   };
 };
 
@@ -37,27 +39,15 @@ var modalClose = exports.modalClose = function modalClose() {
   };
 };
 
-var activateTab = exports.activateTab = function activateTab(activeTab) {
+var activateTab = exports.activateTab = function activateTab(tabId) {
   return function (dispatch) {
-    return dispatch({ type: 'ACTIVATE_TAB', payload: activeTab });
+    return dispatch({ type: _reducers.ACTIVATE_TAB, tabId: tabId });
   };
 };
 
 var setUploaderConfig = exports.setUploaderConfig = function setUploaderConfig(config) {
   return function (dispatch) {
-    return dispatch({ type: 'SET_UPLOADER_CONFIG', payload: config });
-  };
-};
-
-var setActiveModules = exports.setActiveModules = function setActiveModules(modules) {
-  return function (dispatch) {
-    return dispatch({ type: 'SET_ACTIVE_MODULES', payload: modules });
-  };
-};
-
-var setTabs = exports.setTabs = function setTabs(tabs) {
-  return function (dispatch) {
-    return dispatch({ type: 'SET_TABS', payload: tabs });
+    return dispatch({ type: _reducers.SET_UPLOADER_CONFIG, config: config });
   };
 };
 

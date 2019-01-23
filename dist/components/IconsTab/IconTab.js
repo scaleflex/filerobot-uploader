@@ -18,9 +18,31 @@ var _actions = require('../../actions');
 
 var _styledComponents = require('../../styledComponents');
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _Spinner = require('../Spinner');
 
-var _ = require('../');
+var _IconItem = require('../IconsTab/IconItem');
+
+var _IconItem2 = _interopRequireDefault(_IconItem);
+
+var _IconSidebar = require('../IconsTab/IconSidebar');
+
+var _IconSidebar2 = _interopRequireDefault(_IconSidebar);
+
+var _SearchBar = require('../IconsTab/SearchBar');
+
+var _SearchBar2 = _interopRequireDefault(_SearchBar);
+
+var _IconTags = require('../IconsTab/IconTags');
+
+var _IconTags2 = _interopRequireDefault(_IconTags);
+
+var _IconMonoColorSettings = require('../IconsTab/IconMonoColorSettings');
+
+var _IconMonoColorSettings2 = _interopRequireDefault(_IconMonoColorSettings);
+
+var _IconAddTagModal = require('../IconsTab/IconAddTagModal');
+
+var _IconAddTagModal2 = _interopRequireDefault(_IconAddTagModal);
 
 var _config = require('../../config');
 
@@ -33,6 +55,8 @@ var ImageGridService = _interopRequireWildcard(_imageGrid);
 var _VirtualizedImagesGrid = require('../VirtualizedImagesGrid');
 
 var _VirtualizedImagesGrid2 = _interopRequireDefault(_VirtualizedImagesGrid);
+
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -106,10 +130,21 @@ var IconTab = function (_Component) {
 
       (0, _iconsApi.sendSelectionData)({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, _this.loadedIcons);
       var self = _this.props;
+
       _this.props.onFileUpload(icon.src, _this.props.uploaderConfig).then(function (files) {
         _this.uploadStop();
-        self.modalClose();
+
+        if (_this.props.uploaderConfig.tagging.active) {
+          _this.props.saveUploadedFiles(files);
+          _this.props.setPostUpload(true, 'TAGGING', 'ICONS_GALLERY');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
+
+        if (_this.props.onClose) _this.props.onClose();
+
+        self.modalClose();
       }).catch(function () {
         _this.uploadStop();
       });
@@ -151,7 +186,7 @@ var IconTab = function (_Component) {
         if (!icons.length && relevantActiveTags.length) {
           _this.search({ value: value, type: type }, true);
           return;
-        } else if (!icons.length) _this.props.showAlert('0 icons was found :(', '', 'warning');
+        } else if (!icons.length) _this.props.showAlert(_reactI18nify.I18n.t('icons.zero_icons_was_found'), '', 'warning');
 
         self.setState({ isSearching: false });
         typeof resizeOnSuccess === 'function' && resizeOnSuccess();
@@ -237,7 +272,7 @@ var IconTab = function (_Component) {
       var relevantActiveTags = _this.getRelevantActiveTags(activeTags, active.related_tags);
       event.stopPropagation();
       (0, _iconsApi.setAsNotRelevant)({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, activeIcon.uid);
-      showAlert('Set icon as not relevant', '', 'info');
+      showAlert(_reactI18nify.I18n.t('icons.set_icon_as_not_relevant'), '', 'info');
     }, _this.onLoadImage = function (target, icon) {
       _this.loadedIcons.push(icon);
     }, _this.onShowMoreImages = function (resizeOnSuccess) {
@@ -302,7 +337,7 @@ var IconTab = function (_Component) {
       return _react2.default.createElement(
         _styledComponents.IconTabWrapper,
         null,
-        _react2.default.createElement(_.IconSidebar, {
+        _react2.default.createElement(_IconSidebar2.default, {
           activePresetTag: activePresetTag,
           onActivatePresetTag: this.onActivatePresetTag,
           toggleColorType: this.toggleColorType,
@@ -311,8 +346,8 @@ var IconTab = function (_Component) {
         _react2.default.createElement(
           _styledComponents.IconMain,
           null,
-          _react2.default.createElement(_.SearchBar, {
-            title: "You can search icons here",
+          _react2.default.createElement(_SearchBar2.default, {
+            title: _reactI18nify.I18n.t('icons.you_can_search_icons_here'),
             items: active.icons,
             isLoading: isLoading,
             onSearch: function onSearch() {
@@ -323,13 +358,13 @@ var IconTab = function (_Component) {
             onChangeSearchPhrase: this.onChangeSearchPhrase,
             count: count
           }),
-          _react2.default.createElement(_.IconTags, {
+          _react2.default.createElement(_IconTags2.default, {
             tagsList: active.related_tags,
             searchPhrase: searchPhrase,
             activeTags: activeTags,
             toggleTag: this.toggleTag
           }),
-          isShowMonoIconSettings && _react2.default.createElement(_.IconMonoColorSettings, {
+          isShowMonoIconSettings && _react2.default.createElement(_IconMonoColorSettings2.default, {
             themeColors: themeColors,
             upload: this.upload,
             activeIconSrc: activeIconSrc,
@@ -337,7 +372,7 @@ var IconTab = function (_Component) {
               _this2.setState({ isShowMonoIconSettings: false });
             }
           }),
-          isShowIconAddTagModal && _react2.default.createElement(_.IconAddTagModal, {
+          isShowIconAddTagModal && _react2.default.createElement(_IconAddTagModal2.default, {
             isShowIconAddTagModal: isShowIconAddTagModal,
             activeIcon: activeIcon,
             upload: this.upload,
@@ -374,7 +409,7 @@ var IconTab = function (_Component) {
                 return _react2.default.createElement(
                   _styledComponents.IconBoxWrapper,
                   { style: _extends({}, style, { width: Math.floor(columnWidth) }) },
-                  _react2.default.createElement(_.IconItem, {
+                  _react2.default.createElement(_IconItem2.default, {
                     columnWidth: Math.floor(columnWidth),
                     icon: item,
                     index: index,
@@ -391,7 +426,7 @@ var IconTab = function (_Component) {
             }) : null,
             _react2.default.createElement(_styledComponents.ShowMoreResultsSpinner, { show: isShowMoreImages && active.icons.length })
           ),
-          _react2.default.createElement(_dist.Spinner, { overlay: true, show: isLoading })
+          _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: isLoading })
         )
       );
     }

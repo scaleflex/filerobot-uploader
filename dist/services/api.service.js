@@ -3,15 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getListFiles = exports.uploadFiles = exports.send = undefined;
+exports.saveMetaData = exports.generateTags = exports.searchFiles = exports.getListFiles = exports.uploadFiles = exports.send = undefined;
 
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
-
-var _config = require('../config');
-
-var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,10 +34,6 @@ var send = exports.send = function send(url) {
     var _ref$data = _ref.data,
         data = _ref$data === undefined ? {} : _ref$data;
     return data;
-  }, function (_ref2) {
-    var _ref2$data = _ref2.data,
-        data = _ref2$data === undefined ? {} : _ref2$data;
-    return data;
   });
 };
 
@@ -63,13 +55,13 @@ var send = exports.send = function send(url) {
  */
 var uploadFiles = exports.uploadFiles = function uploadFiles() {
   var files = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var _ref3 = arguments[1];
-  var _ref3$uploadPath = _ref3.uploadPath,
-      uploadPath = _ref3$uploadPath === undefined ? '' : _ref3$uploadPath,
-      _ref3$uploadParams = _ref3.uploadParams,
-      uploadParams = _ref3$uploadParams === undefined ? {} : _ref3$uploadParams,
-      _ref3$uploadKey = _ref3.uploadKey,
-      uploadKey = _ref3$uploadKey === undefined ? '' : _ref3$uploadKey;
+  var _ref2 = arguments[1];
+  var _ref2$uploadPath = _ref2.uploadPath,
+      uploadPath = _ref2$uploadPath === undefined ? '' : _ref2$uploadPath,
+      _ref2$uploadParams = _ref2.uploadParams,
+      uploadParams = _ref2$uploadParams === undefined ? {} : _ref2$uploadParams,
+      _ref2$uploadKey = _ref2.uploadKey,
+      uploadKey = _ref2$uploadKey === undefined ? '' : _ref2$uploadKey;
   var data_type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'files[]';
   var dir = arguments[3];
 
@@ -78,7 +70,7 @@ var uploadFiles = exports.uploadFiles = function uploadFiles() {
   var jsonData = { files_urls: [] };
   var isJson = data_type === 'application/json';
 
-  uploadParams = Object.assign({}, _config2.default.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
+  uploadParams = Object.assign({}, uploadParams, { dir: dir || uploadParams.dir });
 
   // generate params string
   var paramsStr = Object.keys(uploadParams).filter(function (paramName) {
@@ -99,7 +91,8 @@ var uploadFiles = exports.uploadFiles = function uploadFiles() {
   }); // fill FormData
 
   return new Promise(function (resolve, reject) {
-    send(url, 'POST', isJson ? jsonData : ajaxData, { 'X-Airstore-Secret-Key': uploadKey || _config2.default.AIRSTORE_UPLOAD_KEY,
+    send(url, 'POST', isJson ? jsonData : ajaxData, {
+      'X-Airstore-Secret-Key': uploadKey,
       'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
     }).then(function (response) {
       var _response$status = response.status,
@@ -116,32 +109,24 @@ var uploadFiles = exports.uploadFiles = function uploadFiles() {
       } else if (status === 'success' && files) {
         resolve(files);
       } else reject(response);
+    }).catch(function () {
+      var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      //if (status === 'success' && files && files.length)
-      //  resolve(
-      //    files
-      //      .filter(file => file.status !== 'error')
-      //      .map(file => {
-      //        file.public_link = file.public_link.replace(independentProtocolRegex, '//');
-      //
-      //        return file;
-      //      })
-      //  );
-      //else
-      //  reject(response);
-    }, function (error) {
-      if (error.code === 'ECONNABORTED') console.warn('Network seems not good :(');
+      var data = error.response && error.response.data || {};
+      var code = data.code || '';
+      var msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
 
+      alert((code || msg ? code + ': ' + msg : '') || error.msg || error.message);
       reject(error);
     });
   });
 };
 
-var getListFiles = exports.getListFiles = function getListFiles(_ref4) {
-  var _ref4$dir = _ref4.dir,
-      dir = _ref4$dir === undefined ? '' : _ref4$dir,
-      _ref4$container = _ref4.container,
-      container = _ref4$container === undefined ? '' : _ref4$container;
+var getListFiles = exports.getListFiles = function getListFiles(_ref3) {
+  var _ref3$dir = _ref3.dir,
+      dir = _ref3$dir === undefined ? '' : _ref3$dir,
+      _ref3$container = _ref3.container,
+      container = _ref3$container === undefined ? '' : _ref3$container;
 
   var baseUrl = getBaseUrl(container);
   var apiPath = 'list?';
@@ -151,5 +136,52 @@ var getListFiles = exports.getListFiles = function getListFiles(_ref4) {
   return send(url).then(function () {
     var response = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return response.files;
+  });
+};
+
+var searchFiles = exports.searchFiles = function searchFiles(_ref4) {
+  var _ref4$query = _ref4.query,
+      query = _ref4$query === undefined ? '' : _ref4$query,
+      _ref4$container = _ref4.container,
+      container = _ref4$container === undefined ? '' : _ref4$container;
+
+  var baseUrl = getBaseUrl(container);
+  var apiPath = 'search?';
+  var url = [baseUrl, apiPath, 'q=' + query].join('');
+
+  return send(url).then(function () {
+    var response = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return response.files;
+  });
+};
+
+var generateTags = exports.generateTags = function generateTags(url, _ref5) {
+  var _ref5$key = _ref5.key,
+      key = _ref5$key === undefined ? '' : _ref5$key,
+      _ref5$provider = _ref5.provider,
+      provider = _ref5$provider === undefined ? 'google' : _ref5$provider,
+      _ref5$confidence = _ref5.confidence,
+      confidence = _ref5$confidence === undefined ? 60 : _ref5$confidence,
+      _ref5$limit = _ref5.limit,
+      limit = _ref5$limit === undefined ? 10 : _ref5$limit;
+  var language = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'en';
+
+  var base = 'https://beta-process.scaleflex.cloud/';
+
+  return send(base + '?key=' + key + '&url=' + url + '&provider=' + provider + '&language=' + language + '&confidence=' + confidence + '&limit=' + limit).then(function () {
+    var response = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return response;
+  });
+};
+
+var saveMetaData = exports.saveMetaData = function saveMetaData(id, properties, _ref6) {
+  var container = _ref6.container;
+
+  var base = 'https://' + container + '.api.airstore.io/file/';
+  var data = { properties: properties };
+
+  return send('' + base + id + '/properties', 'PUT', data).then(function () {
+    var response = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return response;
   });
 };

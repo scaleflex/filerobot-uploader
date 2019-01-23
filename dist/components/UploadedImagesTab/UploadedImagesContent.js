@@ -26,6 +26,8 @@ var _imageGrid = require('../../services/imageGrid.service');
 
 var ImageGridService = _interopRequireWildcard(_imageGrid);
 
+var _reactI18nify = require('react-i18nify');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -51,7 +53,7 @@ var UploadedImagesContent = function (_Component) {
     };
 
     _this.getImageGridWrapperHeight = function () {
-      return _this.imageGridWrapperRef.current.getBoundingClientRect().height;
+      return _this.imageGridWrapperRef.current.getBoundingClientRect().height + 20;
     };
 
     _this.updateImageGridColumnWidth = function () {
@@ -74,8 +76,25 @@ var UploadedImagesContent = function (_Component) {
     };
 
     _this.upload = function (item) {
-      _this.props.uploaderConfig.uploadHandler([_extends({}, item, { public_link: item.url_permalink })]);
+      var files = [_extends({}, item, { public_link: item.url_permalink })];
+
+      _this.props.uploaderConfig.uploadHandler(files);
+
+      if (_this.props.onClose) _this.props.onClose();
+
       _this.props.onModalClose();
+    };
+
+    _this.onEditImage = function (event, item) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (_this.props.uploaderConfig.tagging.active) {
+        var files = [_extends({}, item, { public_link: item.url_permalink })];
+
+        _this.props.saveUploadedFiles(files);
+        _this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+      }
     };
 
     _this.renderImage = function (_ref) {
@@ -83,6 +102,8 @@ var UploadedImagesContent = function (_Component) {
           columnWidth = _ref.columnWidth,
           item = _ref.item,
           index = _ref.index;
+
+      var isEditImage = _this.props.uploaderConfig.tagging.active;
 
       return _react2.default.createElement(
         _index.ImageWrapper,
@@ -97,10 +118,30 @@ var UploadedImagesContent = function (_Component) {
             _this.onKeyDown(event, item);
           }
         },
-        _react2.default.createElement(_index.Img, {
-          src: ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, columnWidth / (item.ratio || 1.6)),
-          height: columnWidth / (item.ratio || 1.6)
-        })
+        _react2.default.createElement(
+          'div',
+          { style: { overflow: 'hidden' } },
+          _react2.default.createElement(_index.Img, {
+            src: ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, columnWidth / (item.ratio || 1.6)),
+            height: columnWidth / (item.ratio || 1.6)
+          })
+        ),
+        _react2.default.createElement(
+          _index.ImageDescription,
+          null,
+          _react2.default.createElement(
+            _index.ImageName,
+            null,
+            item.name
+          ),
+          isEditImage && _react2.default.createElement(
+            _index.EditIconWrapper,
+            { onClick: function onClick(event) {
+                _this.onEditImage(event, item);
+              } },
+            _react2.default.createElement(_index.EditIcon, null)
+          )
+        )
       );
     };
 
@@ -123,7 +164,7 @@ var UploadedImagesContent = function (_Component) {
           encType: 'multipart/form-data',
           style: style,
           columnWidth: columnWidth,
-          height: columnWidth / (item.ratio || 1.6)
+          height: columnWidth / (item.ratio || 1.6) + 20
         },
         _react2.default.createElement(
           _index.UploadBox,
@@ -131,8 +172,8 @@ var UploadedImagesContent = function (_Component) {
           _react2.default.createElement(_index.UploadBoxIcon, { className: 'sfi-airstore-image' }),
           _react2.default.createElement(
             _index.Label,
-            null,
-            'Drag images here'
+            { center: true },
+            _reactI18nify.I18n.t('file_manager.drag_images_here')
           )
         )
       );
@@ -165,7 +206,8 @@ var UploadedImagesContent = function (_Component) {
       var _props = this.props,
           files = _props.files,
           onDragEvent = _props.onDragEvent,
-          isDragOver = _props.isDragOver;
+          isDragOver = _props.isDragOver,
+          imagesIndex = _props.imagesIndex;
       var _state = this.state,
           imageGrid = _state.imageGrid,
           imageContainerHeight = _state.imageContainerHeight,
@@ -194,6 +236,7 @@ var UploadedImagesContent = function (_Component) {
           isDragOver: isDragOver
         },
         files.length ? _react2.default.createElement(_VirtualizedImagesGrid2.default, {
+          key: imagesIndex,
           imageGridWrapperWidth: imageGridWrapperWidth,
           imageContainerHeight: imageContainerHeight,
           columnWidth: columnWidth,

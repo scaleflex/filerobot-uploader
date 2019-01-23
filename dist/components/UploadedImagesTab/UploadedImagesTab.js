@@ -18,11 +18,15 @@ var _reactRedux = require('react-redux');
 
 var _actions = require('../../actions');
 
-var _dist = require('scaleflex-react-ui-kit/dist');
+var _Spinner = require('../Spinner');
 
 var _UploadedImagesContent = require('./UploadedImagesContent');
 
 var _UploadedImagesContent2 = _interopRequireDefault(_UploadedImagesContent);
+
+var _utils = require('../../utils');
+
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51,7 +55,7 @@ var UploadedImagesTab = function (_Component) {
 
 
       (0, _api.getListFiles)({ dir: dir, container: container }).then(function (files) {
-        _this.setState({ files: files, isLoading: false });
+        _this.setState({ files: files, isLoading: false, imagesIndex: _this.state.imagesIndex + 1 });
       });
     };
 
@@ -91,6 +95,13 @@ var UploadedImagesTab = function (_Component) {
       _this.uploadStart();
       (isUploadFromUrl ? _this.props.onFileUploadFromUrl(url, _this.props.uploaderConfig) : _this.props.onFilesUpload(_this.state.filesToUpload, _this.props.uploaderConfig, 'files[]', activeFolder.dir)).then(function (files) {
         _this.uploadSuccess(files);
+
+        if (_this.props.uploaderConfig.tagging.active) {
+          _this.props.saveUploadedFiles(files);
+          _this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+          return;
+        }
+
         self.uploaderConfig.uploadHandler(files);
         self.modalClose();
       }).catch(function (error) {
@@ -114,7 +125,7 @@ var UploadedImagesTab = function (_Component) {
     _this.uploadError = function (msg) {
       var timer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      _this.setState({ step: STEP.ERROR, errorMsg: msg || 'Error' });
+      _this.setState({ step: STEP.ERROR, errorMsg: msg || _reactI18nify.I18n.t('upload.error') });
       if (timer) setTimeout(function () {
         return _this.changeStep(STEP.DEFAULT);
       }, timer);
@@ -128,6 +139,21 @@ var UploadedImagesTab = function (_Component) {
     _this.onDragEvent = function (event, field, value) {
       event.preventDefault();
       _this.setState(_defineProperty({}, field, value));
+    };
+
+    _this.search = function () {
+      _this.setState({ isLoading: true });
+      var _this$state = _this.state,
+          _this$state$searchPhr = _this$state.searchPhrase,
+          searchPhrase = _this$state$searchPhr === undefined ? '' : _this$state$searchPhr,
+          imagesIndex = _this$state.imagesIndex;
+      var uploaderConfig = _this.props.uploaderConfig;
+      var container = uploaderConfig.container;
+
+
+      (0, _api.searchFiles)({ query: searchPhrase, container: container }).then(function (files) {
+        _this.setState({ files: files, isLoading: false, imagesIndex: imagesIndex + 1 });
+      });
     };
 
     _this.renderNavigation = function () {
@@ -162,8 +188,10 @@ var UploadedImagesTab = function (_Component) {
     };
 
     _this.state = {
+      searchPhrase: '',
       activeFolder: null,
       isLoading: false,
+      imagesIndex: 0,
       files: []
     };
     return _this;
@@ -192,7 +220,8 @@ var UploadedImagesTab = function (_Component) {
           isLoading = _state.isLoading,
           step = _state.step,
           files = _state.files,
-          isDragOver = _state.isDragOver;
+          isDragOver = _state.isDragOver,
+          imagesIndex = _state.imagesIndex;
 
 
       return _react2.default.createElement(
@@ -215,6 +244,35 @@ var UploadedImagesTab = function (_Component) {
           null,
           this.renderNavigation(),
           _react2.default.createElement(
+            _index.SearchWrapper,
+            null,
+            _react2.default.createElement(
+              _index.SearchGroup,
+              { padding: '0px' },
+              _react2.default.createElement(_index.InputSearch, {
+                type: 'search',
+                innerRef: function innerRef(node) {
+                  return _this2._searchInput = node;
+                },
+                autoFocus: true,
+                defaultValue: '',
+                placeholder: _reactI18nify.I18n.t('file_manager.search_by_file_name_tag_desc'),
+                onKeyDown: function onKeyDown(ev) {
+                  return (0, _utils.isEnterClick)(ev) && _this2.search();
+                }
+              }),
+              _react2.default.createElement(
+                _index.ButtonSearch,
+                {
+                  key: 'ok',
+                  className: 'ae-btn',
+                  onClick: this.search
+                },
+                _reactI18nify.I18n.t('upload.search')
+              )
+            )
+          ),
+          _react2.default.createElement(
             _index.ButtonSearch,
             {
               className: 'ae-btn',
@@ -223,16 +281,20 @@ var UploadedImagesTab = function (_Component) {
                 _this2.fileInput.click();
               }
             },
-            'Upload images'
+            _reactI18nify.I18n.t('file_manager.upload_images')
           )
         ),
         _react2.default.createElement(_UploadedImagesContent2.default, {
+          imagesIndex: imagesIndex,
           onDragEvent: this.onDragEvent,
           fileDropHandler: this.fileDropHandler,
           isDragOver: isDragOver,
-          files: files
+          saveUploadedFiles: this.props.saveUploadedFiles,
+          setPostUpload: this.props.setPostUpload,
+          files: files,
+          onClose: this.props.onClose
         }),
-        _react2.default.createElement(_dist.Spinner, { overlay: true, show: isLoading || step === STEP.UPLOADING })
+        _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: isLoading || step === STEP.UPLOADING })
       );
     }
   }]);

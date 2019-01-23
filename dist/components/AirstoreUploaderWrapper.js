@@ -21,16 +21,28 @@ var _AirstoreUploader2 = _interopRequireDefault(_AirstoreUploader);
 
 var _reducers = require('../reducers');
 
+var _reactI18nify = require('react-i18nify');
+
+var _translations = require('../assets/translations');
+
+var translations = _interopRequireWildcard(_translations);
+
+require('../assets/fonts/scaleflex-icon-font.css');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+_reactI18nify.I18n.setTranslations(translations);
 
 exports.default = function (_ref) {
   var initialOptions = _ref.initialOptions,
       _ref$opened = _ref.opened,
       opened = _ref$opened === undefined ? false : _ref$opened,
       _ref$onClose = _ref.onClose,
-      onClose = _ref$onClose === undefined ? null : _ref$onClose,
+      onClose = _ref$onClose === undefined ? function () {} : _ref$onClose,
       _ref$initialTab = _ref.initialTab,
       initialTab = _ref$initialTab === undefined ? null : _ref$initialTab,
       otherProps = _objectWithoutProperties(_ref, ['initialOptions', 'opened', 'onClose', 'initialTab']);

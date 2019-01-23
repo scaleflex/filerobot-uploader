@@ -18,6 +18,8 @@ var _reactRedux = require('react-redux');
 
 var _index = require('../../styledComponents/index');
 
+var _reactI18nify = require('react-i18nify');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -100,7 +102,7 @@ var IconSidebar = function (_Component) {
           _react2.default.createElement(
             _index.Label,
             { fs: '16px', color: 'black' },
-            'Color filter'
+            _reactI18nify.I18n.t('icons.color_filter')
           ),
           _react2.default.createElement(
             _index.ColorWrapper,
@@ -122,7 +124,7 @@ var IconSidebar = function (_Component) {
               _react2.default.createElement(
                 _index.ColorItemName,
                 null,
-                'All'
+                _reactI18nify.I18n.t('icons.all')
               )
             ),
             _react2.default.createElement(
@@ -142,7 +144,7 @@ var IconSidebar = function (_Component) {
               _react2.default.createElement(
                 _index.ColorItemName,
                 null,
-                'Multi color'
+                _reactI18nify.I18n.t('icons.multi_color')
               )
             ),
             _react2.default.createElement(
@@ -162,14 +164,14 @@ var IconSidebar = function (_Component) {
               _react2.default.createElement(
                 _index.ColorItemName,
                 null,
-                'Mono color'
+                _reactI18nify.I18n.t('icons.mono_color')
               )
             )
           ),
           _react2.default.createElement(
             _index.Label,
             { fs: '16px', color: 'black' },
-            'Categories'
+            _reactI18nify.I18n.t('upload.categories')
           ),
           tags && tags.sort(function (a, b) {
             return a.tag > b.tag ? 1 : -1;

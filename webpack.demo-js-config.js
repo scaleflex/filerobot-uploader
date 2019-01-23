@@ -14,8 +14,8 @@ module.exports = {
   entry: path.join(__dirname, "examples/js-plugin/src/index.js"),
   output: {
     path: path.join(__dirname, "examples/js-plugin/dist"),
-    filename: "airstore-uploader.[chunkhash].js",
-    chunkFilename: '[name].[chunkhash].js'
+    filename: "filerobot-uploader-widget.main.[chunkhash].js",
+    chunkFilename: 'filerobot-uploader-widget.[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -34,7 +34,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"]
   },
-  devtool: "sourcemap",
+  //devtool: "sourcemap",
   devServer: {
     port: 3001
   }
