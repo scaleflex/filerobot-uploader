@@ -14,23 +14,24 @@ import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
 import Nav from './nav/Nav';
 import Loadable from 'react-loadable';
 import { I18n } from 'react-i18nify';
+import { Spinner } from '../components/Spinner';
 
 
 export const UploadedImagesTab = Loadable({
   loader: () => import(/* webpackChunkName: "gallery" */ './UploadedImagesTab/UploadedImagesTab'),
-  loading: () => null,
+  loading: () => <Spinner overlay show={true}/>,
 });
 export const IconTab = Loadable({
   loader: () => import(/* webpackChunkName: "icons" */ './IconsTab/IconTab'),
-  loading: () => null,
+  loading: () => <Spinner overlay show={true}/>,
 });
 export const BackgroundTab = Loadable({
   loader: () => import(/* webpackChunkName: "images" */ './ImagesTab/ImagesTab'),
-  loading: () => null,
+  loading: () => <Spinner overlay show={true}/>,
 });
 export const TaggingTab = Loadable({
   loader: () => import(/* webpackChunkName: "tagging" */ './TaggingTab/TaggingTab'),
-  loading: () => null,
+  loading: () => <Spinner overlay show={true}/>,
 });
 const ToastMessageFactory = React.createFactory(ToastMessageAnimated);
 const tabs = [
@@ -97,6 +98,7 @@ class AirstoreUploader extends Component {
     initialTab = initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || config.initialTab;
 
     I18n.setLocale(language);
+    initialOptions.modules = this.state.activeModules;
     this.props.setUploaderConfig(initialOptions);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
 
