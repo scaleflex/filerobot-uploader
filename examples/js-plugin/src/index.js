@@ -1,12 +1,17 @@
 import '../../../projects/js-plugin/index';
 import './style.css';
 import prettyBytes from 'pretty-bytes';
+import hljs from 'highlight.js/lib/highlight';
+import javascript from 'highlight.js/lib/languages/javascript';
+import 'highlight.js/styles/github.css';
+hljs.registerLanguage('javascript', javascript);
+hljs.initHighlightingOnLoad();
 
 let loadedImage = null;
 
 // Configuration
 let options = {
-  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   uploadParams: {                 // optional default: {}
     dir: '/dima_test_2'
   },
@@ -20,7 +25,6 @@ let options = {
   container: 'example',                           // required
   initialTab: 'UPLOAD',                          // optional   default first module
   tagging: {
-    active: true,
     auto_tagging: true,
     provider: 'google', // google|imagga
     confidence: 60, //  [0..100]
