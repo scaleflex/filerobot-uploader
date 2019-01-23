@@ -59,9 +59,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 var UploadedImagesTab = exports.UploadedImagesTab = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return import( /* webpackChunkName: "gallery" */'./UploadedImagesTab/UploadedImagesTab');
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./UploadedImagesTab/UploadedImagesTab'));
+    });
   },
   modules: ['./UploadedImagesTab/UploadedImagesTab'],
   webpack: function webpack() {
@@ -73,7 +77,9 @@ var UploadedImagesTab = exports.UploadedImagesTab = (0, _reactLoadable2.default)
 });
 var IconTab = exports.IconTab = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return import( /* webpackChunkName: "icons" */'./IconsTab/IconTab');
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./IconsTab/IconTab'));
+    });
   },
   modules: ['./IconsTab/IconTab'],
   webpack: function webpack() {
@@ -85,7 +91,9 @@ var IconTab = exports.IconTab = (0, _reactLoadable2.default)({
 });
 var BackgroundTab = exports.BackgroundTab = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return import( /* webpackChunkName: "images" */'./ImagesTab/ImagesTab');
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./ImagesTab/ImagesTab'));
+    });
   },
   modules: ['./ImagesTab/ImagesTab'],
   webpack: function webpack() {
@@ -97,7 +105,9 @@ var BackgroundTab = exports.BackgroundTab = (0, _reactLoadable2.default)({
 });
 var TaggingTab = exports.TaggingTab = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return import( /* webpackChunkName: "tagging" */'./TaggingTab/TaggingTab');
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./TaggingTab/TaggingTab'));
+    });
   },
   modules: ['./TaggingTab/TaggingTab'],
   webpack: function webpack() {
