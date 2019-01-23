@@ -17,4 +17,8 @@ export const Dialog = styled.div`
     background: rgb(221,221,221);
     border-radius: 5px;
   }
+  
+  * {
+      box-sizing: border-box;
+  }
 `;
