@@ -37,7 +37,8 @@ class TaggingTab extends Component {
       errorMessage: '',
       currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString("en-us", options) : currentTime,
-      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime
+      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime,
+      tagsGenerated: false
     };
   }
 
@@ -58,6 +59,7 @@ class TaggingTab extends Component {
     saveMetaData(file.uuid, { description, tags: nextTags }, config)
       .then(response => {
         if (response.status === 'success') {
+          files[0].properties = response.properties;
           uploadHandler(files, nextTags, description);
 
           this.setState({ isLoading: true }, () => {
@@ -79,17 +81,24 @@ class TaggingTab extends Component {
   }
 
   generateTags = () => {
+    if (this.state.tagsGenerated) return;
+
     const { taggingConfig, language } = this.props;
     const [file = {}] = this.props.files;
 
     generateTags(file.url_permalink, taggingConfig, language).then(({ tags, ...props } = {}) => {
       if (tags) {
+        if (!tags.length) {
+          alert(I18n.t('tagging.asset_could_not_be_automatically_tagged'));
+        }
+
         this.setState({
-          tags: {
+          tags: [
             ...this.state.tags,
             ...tags.map(item => item && item.tag && item.tag[language])
-          },
-          isLoading: false
+          ],
+          isLoading: false,
+          tagsGenerated: true
         });
       } else {
         this.setState({
@@ -176,7 +185,9 @@ class TaggingTab extends Component {
         <TaggingFooter>
 
           {autoTagging &&
-          <Button onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon data-tip={generateTagInfo}/></Button>}
+          <Button
+            disabled={this.state.tagsGenerated}
+            onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon data-tip={generateTagInfo}/></Button>}
 
           <Button success onClick={this.saveMetadata}>{I18n.t('tagging.save')}</Button>
 
@@ -184,7 +195,7 @@ class TaggingTab extends Component {
 
         <Spinner show={isLoading} overlay/>
 
-        <ReactTooltip/>
+        <ReactTooltip offset={{top: 0, right: 2}} effect="solid"/>
       </TaggingTabWrapper>
     )
   }

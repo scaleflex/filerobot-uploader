@@ -56,6 +56,7 @@ export default {
     add_description: 'Добавить описание',
     add_a_tag_separate_by_pressing_enter: 'Добавить тег (отделите нажатием Enter)',
     generate_tags: 'Создать теги',
-    save: 'Сохранить'
+    save: 'Сохранить',
+    asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged'
   }
 };

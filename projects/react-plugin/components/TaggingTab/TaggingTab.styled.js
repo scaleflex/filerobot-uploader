@@ -190,7 +190,7 @@ const Button = styled.button`
   background-repeat: repeat-x;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   font-weight: 300;
   outline: 0;
   font-size: 12px;
@@ -198,9 +198,11 @@ const Button = styled.button`
   font-weight: 400;
   text-transform: none;
   min-width: 140px;
+  
+  opacity: ${props => props.disabled ? 0.6 : 1};
 
   :hover {
-    background-color: #096868;
+    background-color: ${props => props.disabled ? '#00707C' : '#096868'};
   }
 
   :focus {
