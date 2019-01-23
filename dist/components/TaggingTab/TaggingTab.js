@@ -38,6 +38,8 @@ var _reactI18nify = require('react-i18nify');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -86,7 +88,8 @@ var TaggingTab = function (_Component) {
       errorMessage: '',
       currentTime: currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString("en-us", options) : currentTime,
-      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime
+      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime,
+      tagsGenerated: false
     };
     return _this;
   }
@@ -232,7 +235,9 @@ var TaggingTab = function (_Component) {
           null,
           autoTagging && _react2.default.createElement(
             _TaggingTabStyled.Button,
-            { onClick: this.generateTags },
+            {
+              disabled: this.state.tagsGenerated,
+              onClick: this.generateTags },
             _reactI18nify.I18n.t('tagging.generate_tags'),
             ' ',
             _react2.default.createElement(_TaggingTabStyled.InfoIcon, { 'data-tip': generateTagInfo })
@@ -244,7 +249,7 @@ var TaggingTab = function (_Component) {
           )
         ),
         _react2.default.createElement(_Spinner.Spinner, { show: isLoading, overlay: true }),
-        _react2.default.createElement(_reactTooltip2.default, null)
+        _react2.default.createElement(_reactTooltip2.default, { offset: { top: 0, right: 2 }, effect: 'solid' })
       );
     }
   }]);
@@ -283,6 +288,7 @@ var _initialiseProps = function _initialiseProps() {
 
     (0, _api.saveMetaData)(file.uuid, { description: description, tags: nextTags }, config).then(function (response) {
       if (response.status === 'success') {
+        files[0].properties = response.properties;
         uploadHandler(files, nextTags, description);
 
         _this2.setState({ isLoading: true }, function () {
@@ -304,6 +310,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.generateTags = function () {
+    if (_this2.state.tagsGenerated) return;
+
     var _props3 = _this2.props,
         taggingConfig = _props3.taggingConfig,
         language = _props3.language;
@@ -319,11 +327,16 @@ var _initialiseProps = function _initialiseProps() {
           props = _objectWithoutProperties(_ref2, ['tags']);
 
       if (tags) {
+        if (!tags.length) {
+          alert(_reactI18nify.I18n.t('tagging.asset_could_not_be_automatically_tagged'));
+        }
+
         _this2.setState({
-          tags: tags.map(function (item) {
+          tags: [].concat(_toConsumableArray(_this2.state.tags), _toConsumableArray(tags.map(function (item) {
             return item && item.tag && item.tag[language];
-          }),
-          isLoading: false
+          }))),
+          isLoading: false,
+          tagsGenerated: true
         });
       } else {
         _this2.setState({

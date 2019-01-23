@@ -60,6 +60,7 @@ exports.default = {
     add_description: 'Add description',
     add_a_tag_separate_by_pressing_enter: 'Add a tag (separate by pressing enter)',
     generate_tags: 'Generate tags',
-    save: 'Save'
+    save: 'Save',
+    asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged'
   }
 };
