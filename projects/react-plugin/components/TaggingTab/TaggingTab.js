@@ -85,7 +85,10 @@ class TaggingTab extends Component {
     generateTags(file.url_permalink, taggingConfig, language).then(({ tags, ...props } = {}) => {
       if (tags) {
         this.setState({
-          tags: tags.map(item => item && item.tag && item.tag[language]),
+          tags: {
+            ...this.state.tags,
+            ...tags.map(item => item && item.tag && item.tag[language])
+          },
           isLoading: false
         });
       } else {
