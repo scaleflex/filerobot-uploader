@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/airstore-uploader-react.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/dmitry.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -37,7 +46,11 @@
       </file>
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
@@ -386,14 +399,7 @@
       <workItem from="1547659427804" duration="2859000" />
       <workItem from="1547791744693" duration="3279000" />
       <workItem from="1548001111325" duration="9462000" />
-      <workItem from="1548159774522" duration="21828000" />
-    </task>
-    <task id="LOCAL-00036" summary="run dist">
-      <created>1525595763705</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1525595763705</updated>
+      <workItem from="1548159774522" duration="22105000" />
     </task>
     <task id="LOCAL-00037" summary="run dist">
       <created>1532672100499</created>
@@ -731,11 +737,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548224758528</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="remove idea files from git">
+      <created>1548225230011</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1548225230011</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398859000" />
+    <option name="totallyTimeSpent" value="399136000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -752,7 +765,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32913166" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51231134" side_tool="true" weight="0.2012987" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" visible="true" weight="0.26339287" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" visible="true" weight="0.4627976" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" weight="0.22470239" />
@@ -837,7 +850,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="extract redux store for dist component" />
     <MESSAGE value="npm run dist" />
     <MESSAGE value="refactor .extend to styled()" />
     <MESSAGE value="add classes" />
@@ -862,7 +874,8 @@
     <MESSAGE value="refactor config" />
     <MESSAGE value="refactor config; fix error handling; refactor logic of close/open modal" />
     <MESSAGE value="fix unmount error when go to tagging tab" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix unmount error when go to tagging tab" />
+    <MESSAGE value="remove idea files from git" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove idea files from git" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -877,13 +890,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/webpack.react-config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/react-tagsinput/react-tagsinput.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="828">
@@ -1274,8 +1280,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/.idea/airstore-uploader-react.iml">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="hg4idea.settings">
