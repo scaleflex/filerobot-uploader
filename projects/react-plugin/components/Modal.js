@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { CloseBtn } from './CloseBtn';
+import { variables } from '../styledComponents/styleUtils';
 
 
 const ModalOverlay = styled.div`
@@ -11,7 +12,7 @@ const ModalOverlay = styled.div`
   height: 100%;
   overflow: hidden;
   position: fixed;
-  background: ${props => props.theme.colors.background.base || '#000'};
+  background: ${props => variables.colors.background.base || '#000'};
   opacity: .4;
   z-index: 999999992;
 `;
@@ -67,13 +68,13 @@ const ModalContent = styled.div`
   flex-direction: column;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  border: ${props => props.noBorder ? 0 : '1px'} solid ${props => props.noBorder ? 'transparent' : props.theme.colors.border.base || '#B0B0B0'};
-  border-radius: ${props => props.noBorder ? 0 : props.theme.radii[3]};
+  border: ${props => props.noBorder ? 0 : '1px'} solid ${props => props.noBorder ? 'transparent' : variables.colors.border.base || '#B0B0B0'};
+  border-radius: ${props => props.noBorder ? 0 : variables.radii[3]};
   overflow: hidden;
   outline: 0;
   height: ${props => props.h || props.height || 'auto'};
-  background: ${props => props.theme.colors.background.base || '#fff'};
-  color: ${props => props.theme.colors.text.base || '#3d3d3d'};
+  background: ${props => variables.colors.background.base || '#fff'};
+  color: ${props => variables.colors.text.base || '#3d3d3d'};
   
   ${ModalHeader} {
     ${props => (props.tac || props.textAlignCenter) && `
@@ -133,7 +134,7 @@ const ModalFullScreen = styled.div`
   left: 15%;
   right: 15%;
   bottom: 5%;
-  color: ${props => props.theme.colors.text.base || '#3d3d3d'};
+  color: ${props => variables.colors.text.base || '#3d3d3d'};
   overflow: hidden;
   z-index: ${props => props.zIndex || '999999995'};
   display: block;

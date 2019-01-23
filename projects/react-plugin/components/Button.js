@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { getWithOpacity } from '../styledComponents/styleUtils';
+import { getWithOpacity, variables } from '../styledComponents/styleUtils';
 
 
 const Button = styled.button`
-  text-transform: ${props => props.tt || (props.theme.button && props.theme.button.tt) || 'none'};
+  text-transform: ${props => props.tt || (variables.button && variables.button.tt) || 'none'};
   display: ${props => props.hide ? 'none': 'inline-block'};
   padding: ${props => getElementStylesBySize(props, 'button', 'padding')};
   font-size: ${props => getElementStylesBySize(props, 'button', 'fontSize')};
@@ -45,7 +45,7 @@ function getElementStylesBySize(props, type, field) {
   const { sm, lg } = props;
   const size = sm ? 'sm' : lg ? 'lg' : 'md';
 
-  return props.theme[type] && props.theme[type][size] && props.theme[type][size][field];
+  return variables[type] && variables[type][size] && variables[type][size][field];
 }
 
 function isDisabled(props) {
@@ -390,18 +390,18 @@ function getButtonStyles(props) {
 }
 
 function getColor(props, type, field = 'base', isThemeOverlay, isSupreme) {
-  const themeOverlay = isThemeOverlay ? props.theme.colors.base : null;
+  const themeOverlay = isThemeOverlay ? variables.colors.base : null;
 
-  return props.theme.colors[type][themeOverlay ? (themeOverlay + (isSupreme ? 'er' : '')) : field];
+  return variables.colors[type][themeOverlay ? (themeOverlay + (isSupreme ? 'er' : '')) : field];
 }
 
 function getLinkColor(props, type = 'base') {
   const forcedColor = props.light ? 'light' : props.dark ? 'dark' : null;
   const isOver = type !== 'base';
-  const themeType = props.theme.colors.base;
+  const themeType = variables.colors.base;
 
-  if (forcedColor) return props.theme.colors[forcedColor][isOver ? themeType : 'base'];
-  else return props.theme.colors.link[type];
+  if (forcedColor) return variables.colors[forcedColor][isOver ? themeType : 'base'];
+  else return variables.colors.link[type];
 }
 
 export { Button }
