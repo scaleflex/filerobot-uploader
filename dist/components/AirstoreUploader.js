@@ -49,6 +49,8 @@ var _reactLoadable2 = _interopRequireDefault(_reactLoadable);
 
 var _reactI18nify = require('react-i18nify');
 
+var _Spinner = require('../components/Spinner');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66,7 +68,7 @@ var UploadedImagesTab = exports.UploadedImagesTab = (0, _reactLoadable2.default)
     return [require.resolveWeak('./UploadedImagesTab/UploadedImagesTab')];
   },
   loading: function loading() {
-    return null;
+    return _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: true });
   }
 });
 var IconTab = exports.IconTab = (0, _reactLoadable2.default)({
@@ -78,7 +80,7 @@ var IconTab = exports.IconTab = (0, _reactLoadable2.default)({
     return [require.resolveWeak('./IconsTab/IconTab')];
   },
   loading: function loading() {
-    return null;
+    return _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: true });
   }
 });
 var BackgroundTab = exports.BackgroundTab = (0, _reactLoadable2.default)({
@@ -90,7 +92,7 @@ var BackgroundTab = exports.BackgroundTab = (0, _reactLoadable2.default)({
     return [require.resolveWeak('./ImagesTab/ImagesTab')];
   },
   loading: function loading() {
-    return null;
+    return _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: true });
   }
 });
 var TaggingTab = exports.TaggingTab = (0, _reactLoadable2.default)({
@@ -102,7 +104,7 @@ var TaggingTab = exports.TaggingTab = (0, _reactLoadable2.default)({
     return [require.resolveWeak('./TaggingTab/TaggingTab')];
   },
   loading: function loading() {
-    return null;
+    return _react2.default.createElement(_Spinner.Spinner, { overlay: true, show: true });
   }
 });
 var ToastMessageFactory = _react2.default.createFactory(_reactToastr.ToastMessageAnimated);
@@ -186,6 +188,7 @@ var AirstoreUploader = function (_Component) {
       initialTab = initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || _config2.default.initialTab;
 
       _reactI18nify.I18n.setLocale(language);
+      initialOptions.modules = this.state.activeModules;
       this.props.setUploaderConfig(initialOptions);
       this.props.onSetUploadHandler(initialOptions.onUpload || null);
 

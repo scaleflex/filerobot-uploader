@@ -97,6 +97,7 @@ var _setUploaderConfig = function _setUploaderConfig(state) {
   var container = config.container || config.CONTAINER || _config2.default.container || '';
 
   config.tagging = config.tagging || config.TAGGING || _config2.default.tagging || {};
+  config.modules = config.modules || [];
 
   var uploaderConfig = {
     container: container,
@@ -110,7 +111,7 @@ var _setUploaderConfig = function _setUploaderConfig(state) {
     folders: config.folders || config.UPLOADED_FOLDERS || _config2.default.folders || [{ dir: '/', label: 'All' }],
     language: config.language || config.LANGUAGE || _config2.default.language || 'en',
     tagging: _extends({
-      active: !!config.tagging.active
+      active: config.modules.includes('TAGGING')
     }, config.tagging),
     uploadHandler: config.onUpload || function () {}
   };

@@ -8,7 +8,8 @@ module.exports = {
   entry: path.join(__dirname, "examples/react-plugin/src/index.js"),
   output: {
     path: path.join(__dirname, "examples/react-plugin/dist"),
-    filename: "filerobot-uploader-widget.js"
+    filename: "filerobot-uploader-widget.[chunkhash].js",
+    chunkFilename: 'filerobot-uploader-widget.[name].[chunkhash].js'
   },
   module: {
     rules: [

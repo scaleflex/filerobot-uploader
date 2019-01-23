@@ -8,7 +8,7 @@ module.exports = {
   entry: path.join(__dirname, "projects/react-plugin/index.js"),
   output: {
     path: path.join(__dirname, "dist/"),
-    filename: "filerobot-uploader-widget.js"
+    filename: "filerobot-uploader-widget.js",
   },
   module: {
     rules: [
