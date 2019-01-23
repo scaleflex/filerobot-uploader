@@ -18,6 +18,10 @@ export const Dialog = styled.div`
     border-radius: 5px;
   }
   
+  input[type="search"] {
+    box-sizing: border-box !important;
+  }
+  
   * {
       box-sizing: border-box;
   }
