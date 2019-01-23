@@ -128,7 +128,7 @@ class UserUploaderTab extends Component {
                   style={[uploadBlock_style.inputBox.file]}
                   type="file"
                   name="files[]"
-                  ref="fileInput"
+                  ref={node => this.fileInput = node}
                   data-multiple-caption="{count} files selected"
                   defaultValue={''}
                   tabIndex={-1}
@@ -145,7 +145,7 @@ class UserUploaderTab extends Component {
                     key="browse-your-computer"
                     autoFocus={true}
                     style={[CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }]}
-                    onClick={() => { this.refs.fileInput.click() }}
+                    onClick={() => { this.fileInput.click() }}
                   >{I18n.t('upload.browse_your_computer')}
                   </button>
                   <div style={[uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }]}>

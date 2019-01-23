@@ -128,11 +128,11 @@ var ImagesTab = function (_Component) {
     };
 
     _this.getImageGridWrapperWidth = function () {
-      return Math.floor(_this.imageGridWrapperRef.current.getBoundingClientRect().width - 20);
+      return Math.floor(_this.imageGridWrapperRef.getBoundingClientRect().width - 20);
     };
 
     _this.getImageGridWrapperHeight = function () {
-      return _this.imageGridWrapperRef.current.getBoundingClientRect().height;
+      return _this.imageGridWrapperRef.getBoundingClientRect().height;
     };
 
     _this.updateImageGridColumnWidth = function () {
@@ -490,7 +490,9 @@ var ImagesTab = function (_Component) {
         }),
         _react2.default.createElement(
           _styledComponents.ImagesListContainer,
-          { innerRef: _this.imageGridWrapperRef },
+          { innerRef: function innerRef(node) {
+              return _this.imageGridWrapperRef = node;
+            } },
           imagesList.length && imageContainerHeight && columnWidth && !isLoading ? _react2.default.createElement(
             _hoc.Aux,
             null,
@@ -551,7 +553,6 @@ var ImagesTab = function (_Component) {
       activeColorFilterIndex: null,
       isShowMoreImages: false
     };
-    _this.imageGridWrapperRef = _react2.default.createRef();
     return _this;
   }
 
@@ -565,7 +566,7 @@ var ImagesTab = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
-      if (this.imageGridWrapperRef.current && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth) this.updateImageGridColumnWidth();
+      if (this.imageGridWrapperRef && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth) this.updateImageGridColumnWidth();
     }
   }, {
     key: 'render',

@@ -25,7 +25,6 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
       overscanByPixels: 0,
       windowScrollerEnabled: false
     };
-    this.child = React.createRef();
   }
 
   render() {
@@ -91,7 +90,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
     return (
       <AutoSizer
-        ref={this.child}
+        ref={node => this.child = node}
         disableHeight
         height={height}
         onResize={this._onResize}
@@ -116,7 +115,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
         if (resizeTriggers.style.paddingRight === '9px') resizeTriggers.style.paddingRight = '10px';
         else resizeTriggers.style.paddingRight = '9px';
 
-        self.child.current._onResize();
+        self.child._onResize();
       });
     }
   }
@@ -139,7 +138,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
         cellRenderer={this._cellRenderer}
         height={windowScrollerEnabled ? this._height : height}
         overscanByPixels={overscanByPixels}
-        ref={ref => this._setMasonryRef = ref}
+        ref={node => this._setMasonryRef = node}
         scrollTop={this._scrollTop}
         width={width}
         onScroll={this.onScroll}
@@ -158,8 +157,8 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     });
   };
 
-  _setMasonryRef = (ref) => {
-    this._masonry = ref;
+  _setMasonryRef = (node) => {
+    this._masonry = node;
   };
 }
 

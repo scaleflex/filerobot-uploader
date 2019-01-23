@@ -39,7 +39,6 @@ class ImagesTab extends Component {
       activeColorFilterIndex: null,
       isShowMoreImages: false
     };
-    this.imageGridWrapperRef = React.createRef();
   }
 
   componentDidMount() {
@@ -49,7 +48,7 @@ class ImagesTab extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.imageGridWrapperRef.current && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth)
+    if (this.imageGridWrapperRef && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth)
       this.updateImageGridColumnWidth();
   }
 
@@ -99,8 +98,8 @@ class ImagesTab extends Component {
     this.setState({ activeColorFilters });
   };
 
-  getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.current.getBoundingClientRect().width - 20);
-  getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height;
+  getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.getBoundingClientRect().width - 20);
+  getImageGridWrapperHeight = () => this.imageGridWrapperRef.getBoundingClientRect().height;
 
   updateImageGridColumnWidth = () => {
     let { imageGrid } = this.state;
@@ -372,7 +371,7 @@ class ImagesTab extends Component {
           activeTags={activeTags}
           toggleTag={this.toggleTag}
         />
-        <ImagesListContainer innerRef={this.imageGridWrapperRef}>
+        <ImagesListContainer innerRef={node => this.imageGridWrapperRef = node}>
           {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
             <Aux>
               <VirtualizedImagesGrid

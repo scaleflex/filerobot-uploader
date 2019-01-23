@@ -43,6 +43,97 @@
       </ul>
     </div>
   </div>
+
+  <section class="">
+    <h2>Install</h2>
+
+    <p>Use latest CDNized plugin version</p>
+    <figure class="highlight">
+      <pre>&lt;script src="https://js.filerobot.com/airstore-uploader.last.js"&gt;&lt;/script&gt;</pre>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Quick start</h2>
+
+    <figure class="highlight">
+<pre>
+&lt;script&gt;
+  let options = {
+    container: 'example',
+    airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+    openpixKey: 'xxxxxxxxxxxxxxx',
+    onUpload: (files) => {
+      console.log('files: ', files);
+      alert('Files uploaded successfully! check the console to see the uploaded files');
+    }
+  };
+
+  window.AirstoreUploader.init(options);
+  window.AirstoreUploader.open();
+&lt;/script&gt;
+</pre>
+    </figure>
+  </section>
+
+  <section class="">
+    <h2>Usage</h2>
+
+    <p>We provide easy way to integrate image uploader in your applications.</p>
+    <p><strong><code>window.AirstoreUploader.init(options)</code></strong></p>
+
+    <div>
+      {`// Configuration
+      let options = {
+      MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD',
+      'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+      UPLOAD_PARAMS: { // optional default: {}
+      dir: '/your/directory'
+      },
+      // ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
+      UPLOADED_FOLDERS: [ // required if UPLOADED_IMAGES is set
+      { dir: '/company_test', label: 'Company' },
+      { dir: '/company_test/project_test', label: 'Project' }
+      ],
+      AIRSTORE_UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
+      OPENPIX_KEY: 'xxxxxxxxxxxxxxx', // required if ICONS_GALLERY et IMAGES_GALLERY
+      CONTAINER: 'example', // required
+      INITIAL_TAB: 'UPLOAD', // optional default first module
+      onUpload: onUploadHandler, // required
+      };
+
+      window.addEventListener('load', function() {
+      if (window.AirstoreUploader) {
+      window.AirstoreUploader.init(options);
+      const openBtn = document.querySelector('.open-modal-btn');
+      if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open();
+      }
+      });`}
+    </div>
+
+    <p><strong>options.AIRSTORE_UPLOAD_KEY</strong>: string (required)</p>
+    <p>Unique upload key for Airstore.</p>
+    <p><strong>options.CONTAINER</strong>: string (required)</p>
+    <p>Airstore Container name.</p>
+    <p><strong>options.onUpload(files: file[])</strong>: function (required)</p>
+    <p>Function to handle uploaded files.</p>
+    <p><strong>options.ELEMENT_ID</strong>: string</p>
+    <p>Id of element in DOM.</p>
+    <p>Default: <code>airstore-uploader</code></p>
+    <p><strong>options.INITIAL_TAB</strong>: string</p>
+    <p>Allow to choose the initial tab. Should be one of enable Module. By default the first module choosen is
+      select.</p>
+    <p><strong>options.MODULES</strong>: string[]</p>
+    <p>Modules (tabs) in file uploader modal.</p>
+    <p>Available modules: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'.</p>
+    <p><strong>options.UPLOAD_PARAMS</strong>: object</p>
+    <p><strong>options.UPLOAD_PARAMS.dir</strong>: string - Directory of upload.</p>
+    <p><strong>options.UPLOADED_FOLDERS: </strong>array</p>
+    <p><strong>options.UPLOADED_FOLDERS[X].dir: </strong>text - Directory where to fetch the image</p>
+    <p><strong>options.UPLOADED_FOLDERS[X].label: </strong>text - Label display for the folder</p>
+    <p><strong>options.OPENPIX_KEY: </strong>text</p>
+    <p>Key for Openpix. Required if you are using 'ICONS_GALLERY', 'IMAGES_GALLERY'</p>
+  </section>
 </div>
 
 

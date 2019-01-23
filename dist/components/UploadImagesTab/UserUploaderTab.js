@@ -174,7 +174,9 @@ var UserUploaderTab = function (_Component) {
               style: [uploadBlock_style.inputBox.file],
               type: 'file',
               name: 'files[]',
-              ref: 'fileInput',
+              ref: function ref(node) {
+                return _this2.fileInput = node;
+              },
               'data-multiple-caption': '{count} files selected',
               defaultValue: '',
               tabIndex: -1,
@@ -201,7 +203,7 @@ var UserUploaderTab = function (_Component) {
                   autoFocus: true,
                   style: [_index.CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }],
                   onClick: function onClick() {
-                    _this2.refs.fileInput.click();
+                    _this2.fileInput.click();
                   }
                 },
                 _reactI18nify.I18n.t('upload.browse_your_computer')

@@ -143,7 +143,7 @@ class AirstoreUploader extends Component {
   }
 
   showAlert = (title, msg, type = 'success', timeOut = 4000) => {
-    this.refs.container[type](
+    this.container[type](
       msg,
       title, {
         timeOut,
@@ -197,7 +197,7 @@ class AirstoreUploader extends Component {
                   {activeTab.getContent.call(this, contentProps)}
                 </div>}
                 <ToastContainer
-                  ref="container"
+                  ref={node => this.container = node}
                   toastMessageFactory={ToastMessageFactory}
                   className="toast-top-right"
                 />

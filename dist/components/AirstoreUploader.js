@@ -201,6 +201,8 @@ var AirstoreUploader = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       if (!this.props.isVisible) return null;
 
       var _state = this.state,
@@ -259,7 +261,9 @@ var AirstoreUploader = function (_Component) {
                   activeTab.getContent.call(this, contentProps)
                 ),
                 _react2.default.createElement(_reactToastr.ToastContainer, {
-                  ref: 'container',
+                  ref: function ref(node) {
+                    return _this2.container = node;
+                  },
                   toastMessageFactory: ToastMessageFactory,
                   className: 'toast-top-right'
                 })
@@ -275,53 +279,53 @@ var AirstoreUploader = function (_Component) {
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
+  var _this3 = this;
 
   this.setPostUpload = function (value) {
     var tabId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var prevTab = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    _this2.setState({ postUpload: value, prevTab: prevTab });
-    _this2.props.activateTab(tabId || _this2.state.prevTab);
+    _this3.setState({ postUpload: value, prevTab: prevTab });
+    _this3.props.activateTab(tabId || _this3.state.prevTab);
   };
 
   this.saveUploadedFiles = function () {
     var files = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    _this2.setState({ files: files });
+    _this3.setState({ files: files });
   };
 
   this.openModal = function (initialTab) {
     var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
         file = _ref2.file;
 
-    var initialOptions = _this2.props.initialOptions;
+    var initialOptions = _this3.props.initialOptions;
 
 
-    initialTab = initialTab || _this2.props.initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || _config2.default.initialTab;
+    initialTab = initialTab || _this3.props.initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || _config2.default.initialTab;
 
     if (file) {
-      _this2.setState({ files: [file], postUpload: true, prevTab: '' }, function () {
-        _this2.props.modalOpen(initialTab || _this2.props.initialTab);
+      _this3.setState({ files: [file], postUpload: true, prevTab: '' }, function () {
+        _this3.props.modalOpen(initialTab || _this3.props.initialTab);
       });
     } else {
-      _this2.setState({ postUpload: false }, function () {
-        _this2.props.modalOpen(initialTab || _this2.props.initialTab);
+      _this3.setState({ postUpload: false }, function () {
+        _this3.props.modalOpen(initialTab || _this3.props.initialTab);
       });
     }
   };
 
   this.closeModal = function () {
-    var onClose = _this2.props.onClose;
+    var onClose = _this3.props.onClose;
 
     if (onClose) onClose();
-    _this2.props.modalClose();
+    _this3.props.modalClose();
   };
 
   this.showAlert = function (title, msg) {
     var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
     var timeOut = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 4000;
 
-    _this2.refs.container[type](msg, title, {
+    _this3.container[type](msg, title, {
       timeOut: timeOut,
       extendedTimeOut: 2000,
       showAnimation: 'animated fadeIn',
@@ -332,7 +336,7 @@ var _initialiseProps = function _initialiseProps() {
   this.activateTab = function (event, tabId) {
     event.preventDefault();
 
-    _this2.props.activateTab(tabId);
+    _this3.props.activateTab(tabId);
   };
 };
 

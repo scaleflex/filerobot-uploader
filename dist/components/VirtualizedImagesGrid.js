@@ -100,7 +100,9 @@ var ReactVirtualizedImagesGrid = function (_React$PureComponent) {
       return React.createElement(
         _reactVirtualized.AutoSizer,
         {
-          ref: _this.child,
+          ref: function ref(node) {
+            return _this.child = node;
+          },
           disableHeight: true,
           height: height,
           onResize: _this._onResize,
@@ -129,7 +131,7 @@ var ReactVirtualizedImagesGrid = function (_React$PureComponent) {
           if (resizeTriggers.style.paddingLeft === '9px') resizeTriggers.style.paddingLeft = '10px';else resizeTriggers.style.paddingLeft = '9px';
           if (resizeTriggers.style.paddingRight === '9px') resizeTriggers.style.paddingRight = '10px';else resizeTriggers.style.paddingRight = '9px';
 
-          self.child.current._onResize();
+          self.child._onResize();
         });
       }
     };
@@ -157,8 +159,8 @@ var ReactVirtualizedImagesGrid = function (_React$PureComponent) {
         cellRenderer: _this._cellRenderer,
         height: windowScrollerEnabled ? _this._height : height,
         overscanByPixels: overscanByPixels,
-        ref: function ref(_ref6) {
-          return _this._setMasonryRef = _ref6;
+        ref: function ref(node) {
+          return _this._setMasonryRef = node;
         },
         scrollTop: _this._scrollTop,
         width: width,
@@ -180,8 +182,8 @@ var ReactVirtualizedImagesGrid = function (_React$PureComponent) {
       });
     };
 
-    _this._setMasonryRef = function (ref) {
-      _this._masonry = ref;
+    _this._setMasonryRef = function (node) {
+      _this._masonry = node;
     };
 
     _this._columnWidth = props.columnWidth || 200;
@@ -201,7 +203,6 @@ var ReactVirtualizedImagesGrid = function (_React$PureComponent) {
       overscanByPixels: 0,
       windowScrollerEnabled: false
     };
-    _this.child = React.createRef();
     return _this;
   }
 
