@@ -127,7 +127,7 @@ export const searchFiles = ({ query = '', container = '' }) => {
 };
 
 export const generateTags = (url, { key = '', provider = 'google', confidence = 60, limit = 10 }, language = 'en') => {
-  const base = '//beta-process.scaleflex.cloud/'
+  const base = 'https://beta-process.scaleflex.cloud/'
 
   return send(
     `${base}?key=${key}&url=${url}&provider=${provider}&language=${language}&confidence=${confidence}&limit=${limit}`
