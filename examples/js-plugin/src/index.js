@@ -6,20 +6,20 @@ let loadedImage = null;
 
 // Configuration
 let options = {
-  MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
-  UPLOAD_PARAMS: {                 // optional default: {}
-    dir: '/dima_test'
+  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+  uploadParams: {                 // optional default: {}
+    dir: '/dima_test_2'
   },
-  // ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
-  UPLOADED_FOLDERS: [                             // required if UPLOADED_IMAGES is set
-    { dir: '/dima_test', label: 'All' },
+  // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
+  folders: [                             // required if UPLOADED_IMAGES is set
+    { dir: '/dima_test_2', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],
-  AIRSTORE_UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
-  OPENPIX_KEY: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
-  CONTAINER: 'example',                           // required
-  INITIAL_TAB: 'UPLOAD',                          // optional   default first module
-  TAGGING: {
+  airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', // required
+  openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
+  container: 'example',                           // required
+  initialTab: 'UPLOAD',                          // optional   default first module
+  tagging: {
     active: true,
     auto_tagging: true,
     provider: 'google', // google|imagga
@@ -27,7 +27,7 @@ let options = {
     limit: 10,
     key: 'aaaa'
   },
-  LANGUAGE: 'en',
+  language: 'ru',
   onUpload: (files) => {
     const img = files[0];
     const image = document.getElementById('image-box');

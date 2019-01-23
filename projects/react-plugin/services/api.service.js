@@ -1,5 +1,4 @@
 import axios from 'axios';
-import config from '../config';
 
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
@@ -43,7 +42,7 @@ export const uploadFiles = (
   const jsonData = { files_urls: [] };
   const isJson = data_type === 'application/json';
 
-  uploadParams = Object.assign({}, config.UPLOAD_PARAMS = {}, uploadParams, { dir: dir || uploadParams.dir });
+  uploadParams = Object.assign({}, uploadParams, { dir: dir || uploadParams.dir });
 
   // generate params string
   const paramsStr = Object.keys(uploadParams)
@@ -65,7 +64,7 @@ export const uploadFiles = (
       'POST',
       isJson ? jsonData : ajaxData,
       {
-        'X-Airstore-Secret-Key': uploadKey || config.AIRSTORE_UPLOAD_KEY,
+        'X-Airstore-Secret-Key': uploadKey,
         'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
       }
     ).then(

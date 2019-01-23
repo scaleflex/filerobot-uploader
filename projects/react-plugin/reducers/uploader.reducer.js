@@ -1,3 +1,5 @@
+import CONFIG from '../config';
+
 const initialState = {
   isVisible: false,
   backgrounds: [],
@@ -61,22 +63,24 @@ const _visibilityClose = state => ({ ...state, isVisible: false, activeTabId: nu
 const _activateTab = (state, activeTabId) => ({ ...state, activeTabId });
 
 const _setUploaderConfig = (state, config = {}) => {
-  config.TAGGING = config.TAGGING || {};
+  const container = config.container || config.CONTAINER || CONFIG.container || '';
+
+  config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
 
   const uploaderConfig = {
-    uploadPath: `https://${config.CONTAINER}.api.airstore.io/v1/upload`,
-    uploadParams: config.UPLOAD_PARAMS,
-    uploadKey: config.AIRSTORE_UPLOAD_KEY,
-    openpixKey: config.OPENPIX_KEY,
-    container: config.CONTAINER,
-    isShowAddTagBtn: config.IS_SHOW_ADD_TAG_BTN,
-    isShowNotRelevantBtn: config.IS_SHOW_NOT_RELEVANT_BTN,
-    limit: config.LIMIT_IMAGES_PER_RESPONSE || 100,
-    folders: config.UPLOADED_FOLDERS || [{ dir: '/', label: 'All' }],
-    language: config.LANGUAGE || 'en',
+    container,
+    uploadPath: `https://${container}.api.airstore.io/v1/upload`,
+    uploadParams: config.uploadParams || config.UPLOAD_PARAMS || CONFIG.uploadParams,
+    uploadKey: config.airstoreUploadKey || config.AIRSTORE_UPLOAD_KEY || CONFIG.airstoreUploadKey,
+    openpixKey: config.openpixKey || config.OPENPIX_KEY || CONFIG.openpixKey,
+    isShowAddTagBtn: config.isShowAddTagBtn || config.IS_SHOW_ADD_TAG_BTN || CONFIG.isShowAddTagBtn,
+    isShowNotRelevantBtn: config.isShowNotRelevantBtn || config.IS_SHOW_NOT_RELEVANT_BTN || CONFIG.isShowNotRelevantBtn,
+    limit: config.limitImagesPerResponse || config.LIMIT_IMAGES_PER_RESPONSE || CONFIG.limitImagesPerResponse || 100,
+    folders: config.folders || config.UPLOADED_FOLDERS || CONFIG.folders || [{ dir: '/', label: 'All' }],
+    language: config.language || config.LANGUAGE || CONFIG.language || 'en',
     tagging: {
-      active: !!config.TAGGING.active,
-      ...config.TAGGING
+      active: !!config.tagging.active,
+      ...config.tagging
     },
     uploadHandler: config.onUpload || (() => {})
   };

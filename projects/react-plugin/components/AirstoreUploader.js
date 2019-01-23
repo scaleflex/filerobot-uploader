@@ -80,7 +80,7 @@ class AirstoreUploader extends Component {
     const { initialOptions } = props;
 
     this.state = {
-      activeModules: initialOptions.MODULES || config.MODULES || ["UPLOAD"],
+      activeModules: initialOptions.modules || initialOptions.MODULES || config.modules || ["UPLOAD"],
       postUpload: false,
       prevTab: 'UPLOAD',
       files: []
@@ -88,18 +88,20 @@ class AirstoreUploader extends Component {
 
     window.AirstoreUploader = window.AirstoreUploader || {};
     window.AirstoreUploader.open = this.openModal;
+    window.AirstoreUploader.close = this.closeModal;
   }
 
   componentDidMount() {
     const { initialOptions, initialTab } = this.props;
-    const options = initialOptions || config || {};
+    const language = initialOptions.language || initialOptions.LANGUAGE || config.language;
 
-    I18n.setLocale(options.LANGUAGE);
-    this.props.setUploaderConfig(options);
+    I18n.setLocale(language);
+    this.props.setUploaderConfig(initialOptions);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
 
     if (this.props.opened) this.openModal(initialTab);
 
+    // todo check if we need it
     if (this.props.updateState)
       this.props.updateState({
         openAirstoreUploader: this.openModal.bind(this, initialTab),
