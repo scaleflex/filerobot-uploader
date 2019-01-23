@@ -66,6 +66,7 @@ const _setUploaderConfig = (state, config = {}) => {
   const container = config.container || config.CONTAINER || CONFIG.container || '';
 
   config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
+  config.modules = config.modules || [];
 
   const uploaderConfig = {
     container,
@@ -79,7 +80,7 @@ const _setUploaderConfig = (state, config = {}) => {
     folders: config.folders || config.UPLOADED_FOLDERS || CONFIG.folders || [{ dir: '/', label: 'All' }],
     language: config.language || config.LANGUAGE || CONFIG.language || 'en',
     tagging: {
-      active: !!config.tagging.active,
+      active: config.modules.includes('TAGGING'),
       ...config.tagging
     },
     uploadHandler: config.onUpload || (() => {})

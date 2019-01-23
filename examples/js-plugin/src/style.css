@@ -48,3 +48,8 @@
 .highlight pre {
   margin: 0;
 }
+
+.see-doc {
+  font-size: 14px;
+  margin-left: 10px;
+}
