@@ -1,6 +1,7 @@
 export default {
   modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   folders: [{ dir: '/', label: 'All' }],
+  initialTab: 'UPLOAD',
   airstoreUploadKey: '',
   container: 'example',
   uploadParams: {},

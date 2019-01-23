@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: path.join(__dirname, "examples/js-plugin/src/index.html"),
+  template: path.join(__dirname, "examples/react-plugin/src/index.html"),
   filename: "./index.html"
 });
 module.exports = {
@@ -27,6 +27,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"]
   },
+  devtool: "sourcemap",
   devServer: {
     port: 3001
   }

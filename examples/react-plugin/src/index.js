@@ -3,25 +3,28 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore, { injectAsyncReducer } from './store';
 import { getReducers, AirstoreUploader } from '../../../projects/react-plugin';
-import 'scaleflex-react-ui-kit/dist/styledComponents/assets/styles/scaleflex-icon-font.css';
+
 
 export const store = configureStore();
+const AsyncReducer = getReducers();
+
+injectAsyncReducer(store, AsyncReducer);
 
 const AIRSTORE_CONFIG = {
-  MODULES: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
-  UPLOAD_PARAMS: {                 // optional default: {}
-    dir: '/dima_test'
+  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+  uploadParams: {                 // optional default: {}
+    dir: '/dima_test_2'
   },
-  // ELEMENT_ID: 'airstore-uploader', // optional default : 'airstore-uploader'
-  UPLOADED_FOLDERS: [                             // required if UPLOADED_IMAGES is set
-    { dir: '/dima_test', label: 'All' },
+  // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
+  folders: [                             // required if UPLOADED_IMAGES is set
+    { dir: '/dima_test_2', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],
-  AIRSTORE_UPLOAD_KEY: '0cbe9ccc4f164bf8be26bd801d53b132', // required
-  OPENPIX_KEY: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
-  CONTAINER: 'example',                           // required
-  INITIAL_TAB: 'UPLOAD',                          // optional   default first module
-  TAGGING: {
+  airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', // required
+  openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
+  container: 'example',                           // required
+  initialTab: 'UPLOAD',                          // optional   default first module
+  tagging: {
     active: true,
     auto_tagging: true,
     provider: 'google', // google|imagga
@@ -29,7 +32,7 @@ const AIRSTORE_CONFIG = {
     limit: 10,
     key: 'aaaa'
   },
-  LANGUAGE: 'ru',         // optional   default first module
+  language: 'ru',
   onUpload: (img) => { console.log(img) }
 }
 
@@ -42,25 +45,21 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    const AsyncReducer = getReducers();
-    injectAsyncReducer(store, AsyncReducer);
-  }
-
   render() {
     return (
       <Provider store={store}>
         <div>
           <h1>React Example</h1>
           <button onClick={() => { this.setState({ isShow: true }); }}>Click</button>
-          {this.state.isShow ? <AirstoreUploader
-            opened={true}
+          <AirstoreUploader
+            opened={this.state.isShow}
             initialOptions={AIRSTORE_CONFIG}
-          /> : null}
+            onClose={() => { this.setState({ isShow: false }); }}
+          />
         </div>
       </Provider>
     )
   }
 }
 
-render(<App/>, document.getElementById('airstore-uploader'));
+render(<App/>, document.getElementById('app'));

@@ -12,10 +12,7 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
     responseType: responseType,
     headers: headers,
     timeout: 30000
-  }).then(
-    ({ data = {} }) => data,
-    ({ data = {} }) => data
-  );
+  }).then(({ data = {} }) => data);
 
 
 /**
@@ -83,28 +80,16 @@ export const uploadFiles = (
 
         else
           reject(response);
-
-        //if (status === 'success' && files && files.length)
-        //  resolve(
-        //    files
-        //      .filter(file => file.status !== 'error')
-        //      .map(file => {
-        //        file.public_link = file.public_link.replace(independentProtocolRegex, '//');
-        //
-        //        return file;
-        //      })
-        //  );
-        //else
-        //  reject(response);
-      },
-
-      error => {
-        if (error.code === 'ECONNABORTED')
-          console.warn('Network seems not good :(');
-
-        reject(error);
       }
-    );
+    )
+      .catch((error = {}) => {
+        const data = (error.response && error.response.data) || {};
+        const code = data.code || '';
+        const msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
+
+        alert(((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message);
+        reject(error);
+      });
   });
 };
 

@@ -92,21 +92,24 @@ class AirstoreUploader extends Component {
   }
 
   componentDidMount() {
-    const { initialOptions, initialTab } = this.props;
+    let { initialOptions, initialTab } = this.props;
     const language = initialOptions.language || initialOptions.LANGUAGE || config.language;
+    initialTab = initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || config.initialTab;
 
     I18n.setLocale(language);
     this.props.setUploaderConfig(initialOptions);
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
 
     if (this.props.opened) this.openModal(initialTab);
+  }
 
-    // todo check if we need it
-    if (this.props.updateState)
-      this.props.updateState({
-        openAirstoreUploader: this.openModal.bind(this, initialTab),
-        closeAirstoreUploader: this.closeModal
-      });
+  componentDidUpdate(prevProps) {
+    if (this.props.opened !== prevProps.opened) {
+      if (this.props.opened)
+        this.openModal();
+      else
+        this.closeModal();
+    }
   }
 
   setPostUpload = (value, tabId = '', prevTab = '') => {
@@ -117,6 +120,11 @@ class AirstoreUploader extends Component {
   saveUploadedFiles = (files = []) => { this.setState({ files }); }
 
   openModal = (initialTab, { file } = {}) => {
+    let { initialOptions } = this.props;
+
+    initialTab = initialTab || this.props.initialTab ||
+      initialOptions.initialTab || initialOptions.INITIAL_TAB || config.initialTab;
+
     if (file) {
       this.setState({ files: [file], postUpload: true, prevTab: '' }, () => {
         this.props.modalOpen(initialTab || this.props.initialTab);
@@ -163,7 +171,8 @@ class AirstoreUploader extends Component {
       showAlert: this.showAlert,
       themeColors: initialOptions.themeColors,
       setPostUpload: this.setPostUpload,
-      saveUploadedFiles: this.saveUploadedFiles
+      saveUploadedFiles: this.saveUploadedFiles,
+      onClose: this.props.onClose
     };
     const filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
     const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);

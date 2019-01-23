@@ -136,6 +136,9 @@ class ImagesTab extends Component {
         }
 
         self.uploaderConfig.uploadHandler(files);
+
+        if (this.props.onClose) this.props.onClose();
+
         self.modalClose();
       })
       .catch(() => {

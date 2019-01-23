@@ -62,6 +62,9 @@ class TaggingTab extends Component {
 
           this.setState({ isLoading: true }, () => {
             this.props.setPostUpload(false);
+
+            if (this.props.onClose) this.props.onClose();
+
             this.props.modalClose();
           });
         } else {

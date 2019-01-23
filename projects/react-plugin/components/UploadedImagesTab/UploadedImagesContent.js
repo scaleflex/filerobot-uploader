@@ -55,6 +55,9 @@ class UploadedImagesContent extends Component {
     const files = [{...item, public_link: item.url_permalink }];
 
     this.props.uploaderConfig.uploadHandler(files);
+
+    if (this.props.onClose) this.props.onClose();
+
     this.props.onModalClose();
   }
 

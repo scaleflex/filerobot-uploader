@@ -73,8 +73,6 @@ class IconTab extends Component {
 
     this.props.onFileUpload(icon.src, this.props.uploaderConfig)
       .then((files) => {
-        this.uploadStop();
-
         if (this.props.uploaderConfig.tagging.active) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'ICONS_GALLERY');
@@ -82,9 +80,12 @@ class IconTab extends Component {
         }
 
         self.uploaderConfig.uploadHandler(files);
+
+        if (this.props.onClose) this.props.onClose();
+
         self.modalClose();
       })
-      .catch(() => {
+      .finally(() => {
         this.uploadStop();
       });
   };

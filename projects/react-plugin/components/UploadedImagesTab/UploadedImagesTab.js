@@ -182,6 +182,7 @@ class UploadedImagesTab extends Component {
           saveUploadedFiles={this.props.saveUploadedFiles}
           setPostUpload={this.props.setPostUpload}
           files={files}
+          onClose={this.props.onClose}
         />
 
         <Spinner overlay show={isLoading || (step === STEP.UPLOADING)}/>
