@@ -28,7 +28,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"]
   },
-  //devtool: "sourcemap",
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : "sourcemap",
   devServer: {
     port: 3001
   }
