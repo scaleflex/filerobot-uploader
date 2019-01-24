@@ -5,20 +5,21 @@ import TagsInput from 'react-tagsinput'
 import { Spinner } from '../Spinner';
 import {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
-  InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon,
+  InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon,
   ErrorWrapper, ErrorParagraph, GoBack, BackIcon
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
 import { modalClose } from '../../actions';
 import { I18n } from 'react-i18nify';
+import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 
 
 class TaggingTab extends Component {
   constructor(props) {
     super();
 
-    const { language = 'en', files = {} } = props;
+    const { files = {} } = props;
     const [file = {}] = files;
     const date = new Date();
     const options = {
@@ -31,7 +32,7 @@ class TaggingTab extends Component {
     file.properties.tags = file.properties.tags || [];
 
     this.state = {
-      tags: file.properties.tags.map(tag => tag[language]) || [],
+      tags: file.properties.tags || [],
       description: file.properties.description || '',
       isLoading: false,
       errorMessage: '',
@@ -54,13 +55,17 @@ class TaggingTab extends Component {
     const { description, tags } = this.state;
     const { files, uploadHandler, language, config } = this.props;
     const [file = {}] = this.props.files;
-    const nextTags = tags.map(tagName => ({ [language]: tagName }))
 
-    saveMetaData(file.uuid, { description, tags: nextTags }, config)
+    saveMetaData(file.uuid, {
+      description,
+      tags: uniqueArrayOfStrings(tags),
+      lang: language,
+      search: `${description} ${tags.join(' ')}`
+    }, config)
       .then(response => {
         if (response.status === 'success') {
           files[0].properties = response.properties;
-          uploadHandler(files, nextTags, description);
+          uploadHandler(files);
 
           this.setState({ isLoading: true }, () => {
             this.props.setPostUpload(false);
@@ -92,11 +97,13 @@ class TaggingTab extends Component {
           this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
         }
 
+        let nextTags = [
+          ...this.state.tags,
+          ...tags.map(item => item && item.tag && item.tag[language])
+        ];
+
         this.setState({
-          tags: [
-            ...this.state.tags,
-            ...tags.map(item => item && item.tag && item.tag[language])
-          ],
+          tags: uniqueArrayOfStrings(nextTags),
           isLoading: false,
           tagsGenerated: true
         });

@@ -1,7 +1,7 @@
-export const deepCopy = object => JSON.parse(JSON.stringify(object));
+const deepCopy = object => JSON.parse(JSON.stringify(object));
 
-export const cursorToEnd = contentEditableElement => {
-  var range, selection;
+const cursorToEnd = contentEditableElement => {
+  let range, selection;
   if (document.createRange) // Firefox, Chrome, Opera, Safari, IE 9+
   {
     range = document.createRange(); // Create a range (a range is a like the selection but invisible)
@@ -20,4 +20,13 @@ export const cursorToEnd = contentEditableElement => {
   }
 };
 
-export const isEnterClick = event => event && (event.which || event.keyCode) === 13;
+const isEnterClick = event => event && (event.which || event.keyCode) === 13;
+
+const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) === i);
+
+export {
+  uniqueArrayOfStrings,
+  isEnterClick,
+  cursorToEnd,
+  deepCopy
+}

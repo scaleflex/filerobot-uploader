@@ -31,7 +31,7 @@ let options = {
     limit: 10,
     key: 'aaaa'
   },
-  language: 'en',
+  language: 'fr',
   onUpload: (files) => {
     const img = files[0];
     const image = document.getElementById('image-box');
@@ -82,7 +82,7 @@ let options = {
         </li>
         <li>
           <span>Tags: </span>
-          <span>${img.properties.tags.map(tag => tag['en']).join(', ')}</span>
+          <span>${img.properties.tags.join(', ')}</span>
         </li>
       </ul>
     `;

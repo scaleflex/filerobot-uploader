@@ -123,9 +123,9 @@ class UploadedImagesTab extends Component {
     this.setState({ isLoading: true });
     const { searchPhrase = '', imagesIndex } = this.state;
     const { uploaderConfig } = this.props;
-    const { container } = uploaderConfig;
+    const { container, language } = uploaderConfig;
 
-    searchFiles({ query: searchPhrase, container }).then(files => {
+    searchFiles({ query: searchPhrase, language, container }).then(files => {
       this.setState({ files, isLoading: false, imagesIndex: imagesIndex + 1 });
     })
   }
