@@ -89,7 +89,7 @@ class TaggingTab extends Component {
     generateTags(file.url_permalink, taggingConfig, language).then(({ tags, ...props } = {}) => {
       if (tags) {
         if (!tags.length) {
-          alert(I18n.t('tagging.asset_could_not_be_automatically_tagged'));
+          this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
         }
 
         this.setState({
