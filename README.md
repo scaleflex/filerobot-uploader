@@ -52,8 +52,6 @@ We provide easy way to integrate image uploader in your applications.
 
 Initialization of Airstore Uploader plugin.
 
-```window.AirstoreUploader.init(options);```
-
 #### `window.AirstoreUploader.open(tab : string, options: {})`: function
 
 Open uploader modal.
@@ -62,19 +60,13 @@ Open uploader modal.
 
 * **options**: {} (optional) - options for tabs
 
-```window.AirstoreUploader.open();```
-
 #### `window.AirstoreUploader.close()`: function
 
 Close uploader modal.
 
-```window.AirstoreUploader.close();```
-
 #### `window.AirstoreUploader.unmount()`: function
 
 Destroy uploader
-
-```window.AirstoreUploader.unmount();```
 
 ## <a name="react_component"></a>React component
 
