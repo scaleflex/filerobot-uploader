@@ -128,11 +128,11 @@ let options = {
 
 #### `modules`: string[]
 
-**default**: ["UPLOAD", "UPLOADED_IMAGES", "ICONS_GALLERY", "IMAGES_GALLERY"]
+**default**: ["UPLOAD", "MY_GALLERY", "ICONS_GALLERY", "IMAGES_GALLERY"]
 
 Modules (tabs) in file uploader modal.
 
-**Available modules**: **UPLOAD**, **UPLOADED_IMAGES**, **ICONS_GALLERY**, **IMAGES_GALLERY**, **TAGGING**
+**Available modules**: **UPLOAD**, **MY_GALLERY**, **ICONS_GALLERY**, **IMAGES_GALLERY**, **TAGGING**
 
 ```
 let options = {

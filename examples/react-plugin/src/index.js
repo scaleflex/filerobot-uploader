@@ -11,12 +11,12 @@ const AsyncReducer = getReducers();
 injectAsyncReducer(store, AsyncReducer);
 
 const AIRSTORE_CONFIG = {
-  modules: ['UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'UPLOADED_IMAGES', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   uploadParams: {                 // optional default: {}
     dir: '/dima_test_2'
   },
   // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
-  folders: [                             // required if UPLOADED_IMAGES is set
+  folders: [                             // required if MY_GALLERY is set
     { dir: '/dima_test_2', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],

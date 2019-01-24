@@ -69,7 +69,7 @@ class UploadedImagesContent extends Component {
       const files = [{...item, public_link: item.url_permalink }];
 
       this.props.saveUploadedFiles(files);
-      this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+      this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
     }
   }
 

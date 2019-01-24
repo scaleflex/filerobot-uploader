@@ -43,8 +43,8 @@ const tabs = [
     getContent: (props) => <UserUploaderTab {...props}/>
   },
   {
-    id: 'UPLOADED_IMAGES',
-    fullName: 'Uploaded Images',
+    id: 'MY_GALLERY',
+    fullName: 'My Gallery',
     shortName: 'file_manager.tab_title',
     iconClass: 'sfi-airstore-uploaded-images',
     getContent: (props) => <UploadedImagesTab {...props}/>
@@ -80,8 +80,13 @@ class AirstoreUploader extends Component {
 
     const { initialOptions } = props;
 
+    // support old config
+    let activeModules = initialOptions.modules || initialOptions.MODULES || config.modules || ["UPLOAD"];
+    activeModules = activeModules.join('|').replace('UPLOADED_IMAGES', 'MY_GALLERY').split('|');
+    // end
+
     this.state = {
-      activeModules: initialOptions.modules || initialOptions.MODULES || config.modules || ["UPLOAD"],
+      activeModules,
       postUpload: false,
       prevTab: 'UPLOAD',
       files: []

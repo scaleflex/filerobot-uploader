@@ -83,7 +83,7 @@ class UploadedImagesTab extends Component {
 
         if (this.props.uploaderConfig.tagging.active) {
           this.props.saveUploadedFiles(files);
-          this.props.setPostUpload(true, 'TAGGING', 'UPLOADED_IMAGES');
+          this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
           return;
         }
 
