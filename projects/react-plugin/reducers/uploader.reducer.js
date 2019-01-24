@@ -68,11 +68,15 @@ const _setUploaderConfig = (state, config = {}) => {
   config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
   config.modules = config.modules || [];
 
+  // supporting old config
+  const uploadKey = config.filerobotUploadKey || config.airstoreUploadKey || config.AIRSTORE_UPLOAD_KEY;
+
+
   const uploaderConfig = {
     container,
     uploadPath: `https://${container}.api.airstore.io/v1/upload`,
     uploadParams: config.uploadParams || config.UPLOAD_PARAMS || CONFIG.uploadParams,
-    uploadKey: config.airstoreUploadKey || config.AIRSTORE_UPLOAD_KEY || CONFIG.airstoreUploadKey,
+    uploadKey: uploadKey || CONFIG.airstoreUploadKey,
     openpixKey: config.openpixKey || config.OPENPIX_KEY || CONFIG.openpixKey,
     isShowAddTagBtn: config.isShowAddTagBtn || config.IS_SHOW_ADD_TAG_BTN || CONFIG.isShowAddTagBtn,
     isShowNotRelevantBtn: config.isShowNotRelevantBtn || config.IS_SHOW_NOT_RELEVANT_BTN || CONFIG.isShowNotRelevantBtn,

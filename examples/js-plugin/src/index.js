@@ -20,7 +20,7 @@ let options = {
     { dir: '/dima_test_2', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],
-  airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', // required
+  filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
   openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
   container: 'example',                           // required
   initialTab: 'UPLOAD',                          // optional   default first module
