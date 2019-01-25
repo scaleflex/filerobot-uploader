@@ -15,7 +15,10 @@ export default {
     found: 'Found',
     apply: 'Apply',
     categories: 'Categories',
-    file_already_exists: 'File already exists in your gallery'
+    file_already_exists: 'File already exists in your gallery',
+    all: 'All',
+    too_small: 'The Uploader is not available on mobile, please use it on a Desktop',
+    close: 'Close'
   },
   file_manager: {
     tab_title: 'My gallery',

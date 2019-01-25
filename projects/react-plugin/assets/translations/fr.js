@@ -15,7 +15,10 @@ export default {
     found: 'Trouvé',
     apply: 'Appliquer',
     categories: 'Catégories',
-    file_already_exists: 'Le fichier existe déjà dans votre galerie'
+    file_already_exists: 'Le fichier existe déjà dans votre galerie',
+    all: 'Tout afficher',
+    too_small: 'Le téléchargement de fichier n\'est pas disponible sur mobile.',
+    close: 'Fermer'
   },
   file_manager: {
     tab_title: 'Ma galerie',
@@ -54,7 +57,7 @@ export default {
     first_upload: 'Ajouté le',
     last_modified: 'Modifié le',
     add_description: 'Ajouter description',
-    add_a_tag_separate_by_pressing_enter: 'Ajouter un tag (séparer les tags en appuyant sur « Entrée »)',
+    add_a_tag_separate_by_pressing_enter: 'Ajouter un tag (séparer par ENTRÉE)',
     generate_tags: 'Taggage auto',
     save: 'Sauvegarder',
     asset_could_not_be_automatically_tagged : 'L\'image n\'a pas pu être tagguée automatiquement'
