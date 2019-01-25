@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <style>.on-load { display: none }</style>
   <title>Airstore Uploader</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
   <button class="btn btn-success" id="open-modal-btn">Upload Image</button>
   <button class="btn btn-primary" disabled id="edit-image-btn">Edit Image</button>
 
-  <div class="uploaded-image-container">
+  <div class="uploaded-image-container on-load">
     <div class="image-container">
       <img id="image-box" src="https://via.placeholder.com/600x400" alt="placeholder">
     </div>
@@ -44,7 +45,7 @@
     </div>
   </div>
 
-  <section class="">
+  <section class="on-load">
     <h2>Install</h2>
     <hr>
 
@@ -54,7 +55,7 @@
     </figure>
   </section>
 
-  <section>
+  <section class="on-load">
     <h2>Quick start</h2>
     <hr>
     <p>We provide easy way to integrate image uploader in your applications.</p>
@@ -78,7 +79,7 @@
     </figure>
   </section>
 
-  <section>
+  <section class="on-load">
     <h2>Config params</h2>
     <hr>
 
@@ -185,7 +186,7 @@
   </section>
 
 
-  <section>
+  <section class="on-load">
     <h2>Callbacks</h2>
     <hr>
 
@@ -203,7 +204,7 @@
 
   </section>
 
-  <section style="margin-bottom: 60px">
+  <section class="on-load" style="margin-bottom: 60px">
     <h2>Methods</h2>
     <hr>
 

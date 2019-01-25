@@ -9,8 +9,8 @@ const SpinnerOverlay = styled.div`
   height: 100%;
   overflow: hidden;
   position: ${props => props.fullScreen ? 'fixed' : 'absolute' };
-  background: #0b0b0b;
-  opacity: ${props => props.overlay ? '0.25' : '0'};
+  background: ${props => props.overlay ? 'rgba(10,10,10,0.26)' : 'transparent'} !important;
+  //opacity: ${props => props.overlay ? '0.25' : '0'} !important;
   z-index: 1042;
 `;
 

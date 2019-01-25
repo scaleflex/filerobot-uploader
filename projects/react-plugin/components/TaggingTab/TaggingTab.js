@@ -19,14 +19,14 @@ class TaggingTab extends Component {
   constructor(props) {
     super();
 
-    const { files = {} } = props;
+    const { files = {}, language } = props;
     const [file = {}] = files;
     const date = new Date();
     const options = {
       weekday: "long", year: "numeric", month: "short",
       day: "numeric", hour: "2-digit", minute: "2-digit"
     };
-    const currentTime = (date).toLocaleTimeString("en-us", options);
+    const currentTime = (date).toLocaleTimeString(language, options);
 
     file.properties = file.properties || {};
     file.properties.tags = file.properties.tags || [];
@@ -37,8 +37,8 @@ class TaggingTab extends Component {
       isLoading: false,
       errorMessage: '',
       currentTime,
-      firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString("en-us", options) : currentTime,
-      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString("en-us", options) : currentTime,
+      firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : currentTime,
+      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : currentTime,
       tagsGenerated: false
     };
   }
@@ -95,6 +95,9 @@ class TaggingTab extends Component {
       if (tags) {
         if (!tags.length) {
           this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
+          this.setState({ isLoading: false });
+
+          return;
         }
 
         let nextTags = [

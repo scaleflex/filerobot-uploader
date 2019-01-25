@@ -53,3 +53,7 @@
   font-size: 14px;
   margin-left: 10px;
 }
+
+.on-load {
+  display: block !important;
+}

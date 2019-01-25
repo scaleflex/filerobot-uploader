@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const UploadedImages = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 15px;
+  padding: 0 15px;
   height: 100%;
   box-sizing: border-box;
 `;
@@ -12,8 +12,8 @@ export const UploadedImages = styled.div`
 export const HeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 15px;
+  align-items: center;
+  padding: 0;
   min-height: 50px;
 `;
 

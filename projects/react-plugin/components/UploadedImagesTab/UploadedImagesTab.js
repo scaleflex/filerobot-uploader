@@ -5,7 +5,7 @@ import {
 } from '../../styledComponents/index';
 import { getListFiles, searchFiles } from '../../services/api.service';
 import { connect } from 'react-redux';
-import { uploadFilesToDir, uploadFilesFromUrls, modalClose } from '../../actions';
+import { uploadFiles, uploadFilesFromUrls, modalClose } from '../../actions';
 import { Spinner } from '../Spinner';
 import UploadedImagesContent from './UploadedImagesContent';
 import { isEnterClick } from '../../utils';
@@ -75,10 +75,14 @@ class UploadedImagesTab extends Component {
     this.uploadStart();
     (
       isUploadFromUrl
-        ? this.props.onFileUploadFromUrl(url, this.props.uploaderConfig)
-        : this.props.onFilesUpload(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', activeFolder.dir)
+        ? uploadFilesFromUrls(url, this.props.uploaderConfig)
+        : uploadFiles(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', activeFolder.dir)
     )
-      .then((files) => {
+      .then(([files, isDuplicate, isReplacingData]) => {
+        if (isReplacingData || isDuplicate) {
+          this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
+        }
+
         this.uploadSuccess(files);
 
         if (this.props.uploaderConfig.tagging.active) {
@@ -214,11 +218,11 @@ class UploadedImagesTab extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  uploaderConfig: state.uploader.uploaderConfig
+});
+
 export default connect(
-  ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
-  {
-    onFilesUpload: uploadFilesToDir,
-    onFileUploadFromUrl: uploadFilesFromUrls,
-    modalClose
-  }
+  mapStateToProps,
+  { modalClose }
 )(UploadedImagesTab);

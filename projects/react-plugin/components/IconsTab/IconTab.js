@@ -36,7 +36,7 @@ class IconTab extends Component {
   loadedIcons = [];
 
   componentDidMount() {
-    this.props.onGetTags().then(() => {});
+    this.props.getIconsTags();
     this.updateImageGridColumnWidth();
   }
 
@@ -64,16 +64,19 @@ class IconTab extends Component {
   };
 
   upload = (icon = null) => {
-    this.setState({ isLoading: true });
     this.uploadStart();
     const { relevantActiveTags, searchPhrase, activePresetTag } = this.state;
 
     sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, this.loadedIcons);
     const self = this.props;
 
-    this.props.onFileUpload(icon.src, this.props.uploaderConfig)
-      .then((files) => {
+    uploadFilesFromUrls([icon.src], this.props.uploaderConfig)
+      .then(([files, isDuplicate, isReplacingData]) => {
         this.uploadStop();
+
+        if (isReplacingData || isDuplicate) {
+          this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
+        }
 
         if (this.props.uploaderConfig.tagging.active) {
           this.props.saveUploadedFiles(files);
@@ -106,7 +109,7 @@ class IconTab extends Component {
 
     this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
-    return this.props.onSearchIcons({ ...searchParams, openpixKey }, relevantActiveTags, done)
+    return this.props.fetchIcons({ ...searchParams, openpixKey }, relevantActiveTags, done)
     //.then(done, done);
   };
 
@@ -160,7 +163,7 @@ class IconTab extends Component {
 
   activateCategory = (_c) => {
     this.setState({ [_c.slug]: !this.state[_c.slug], isSearching: true });
-    this.props.onActivateCategory(_c, () => {
+    this.props.activateIconsCategory(_c, () => {
       //const iconBox = document
       //  .querySelector('#airstore-uploader-icons-box .airstore-uploader-icon-item:first-child');
       //if (iconBox) iconBox.focus();
@@ -325,14 +328,20 @@ class IconTab extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  uploaderConfig: state.uploader.uploaderConfig,
+  tags: state.icons.tags,
+  active: state.icons.active,
+  searchParams: state.icons.searchParams,
+  count: state.icons.count
+});
+
 export default connect(
-  ({ uploader: { uploaderConfig }, icons: { tags, active, searchParams, count } }) =>
-    ({ uploaderConfig, tags, active, count, searchParams }),
+  mapStateToProps,
   {
-    onGetTags: () => dispatch => dispatch(getIconsTags()),
-    onActivateCategory: (category, onSuccess) => dispatch => dispatch(activateIconsCategory(category, onSuccess)),
-    onFileUpload: (file, uploaderConfig) => dispatch => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
-    onSearchIcons: (searchParams, relevantActiveTags, done) => dispatch => dispatch(fetchIcons(searchParams, relevantActiveTags, done)),
+    getIconsTags,
+    activateIconsCategory,
+    fetchIcons,
     modalClose
   }
 )(IconTab);

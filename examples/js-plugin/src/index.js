@@ -13,16 +13,18 @@ let loadedImage = null;
 let options = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'], // optional default: 'UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   uploadParams: {                 // optional default: {}
-    dir: '/dima_test_2'
+    dir: '/'
   },
   // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
   folders: [                             // required if MY_GALLERY is set
-    { dir: '/dima_test_2', label: 'All' },
+    { dir: '/', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],
-  filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+  //filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
   openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
-  container: 'example',                           // required
+  //container: 'example',                           // required
+  container: 'scaleflex-tests-v5a',                           // required
   initialTab: 'UPLOAD',                          // optional   default first module
   tagging: {
     auto_tagging: true,
@@ -41,8 +43,8 @@ let options = {
       weekday: "long", year: "numeric", month: "short",
       day: "numeric", hour: "2-digit", minute: "2-digit"
     };
-    const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("en-us", options);
-    const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("en-us", options);
+    const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("fr", options);
+    const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("fr", options);
 
     img.properties.tags = img.properties.tags || [];
 

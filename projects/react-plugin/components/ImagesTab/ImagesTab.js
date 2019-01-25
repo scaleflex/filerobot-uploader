@@ -124,9 +124,13 @@ class ImagesTab extends Component {
 
     const self = this.props;
 
-    this.props.onFileUpload(image.src, this.props.uploaderConfig)
-      .then((files) => {
+    uploadFilesFromUrls([image.src], this.props.uploaderConfig)
+      .then(([files, isDuplicate, isReplacingData]) => {
         this.uploadStop();
+
+        if (isReplacingData || isDuplicate) {
+          this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
+        }
 
         if (this.props.uploaderConfig.tagging.active) {
           this.props.saveUploadedFiles(files);
@@ -202,7 +206,7 @@ class ImagesTab extends Component {
 
     this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
-    return this.props.onSearchImages({...searchParams, openpixKey }, relevantActiveTags).then(done, done);
+    return this.props.onSearchImages({ ...searchParams, openpixKey }, relevantActiveTags).then(done, done);
   };
 
   toggleTag = (tag) => {
@@ -410,9 +414,8 @@ class ImagesTab extends Component {
 export default connect(
   ({ uploader: { backgrounds, uploaderConfig }, images: { images, related_tags, tags, count, searchParams } }) =>
     ({ backgrounds, uploaderConfig, images, related_tags, tags, count, searchParams }),
-   {
+  {
     onGetImagesTags: () => dispatch => dispatch(getImagesTags()),
-    onFileUpload: (file, uploaderConfig) => dispatch => dispatch(uploadFilesFromUrls([file], uploaderConfig)),
     onGetBackgrounds: () => dispatch => dispatch(getBackgrounds()),
     onSearchImages: (searchParams, relevantActiveTags) => dispatch => dispatch(fetchImages(searchParams, relevantActiveTags)),
     modalClose

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { DUPLICATE_CODE, REPLACING_DATA_CODE } from '../config';
 
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
@@ -29,6 +30,7 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
  * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
  *   uploadPath)
  * @param dir     {string}  = directory to upload files
+ * @param showAlert     {function}  = show alert
  * @returns {Promise}
  */
 export const uploadFiles = (
@@ -66,16 +68,22 @@ export const uploadFiles = (
       }
     ).then(
       response => {
-        const { status = 'success', files = [], file } = response;
+        const { status = 'success', files = [], file, upload = {} } = response;
+        const isDuplicate = upload.state === DUPLICATE_CODE;
+        const isReplacingData = upload.state === REPLACING_DATA_CODE;
 
         if (status === 'success' && file) {
           //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
-          resolve([file]);
+          resolve([[file], isDuplicate, isReplacingData]);
         }
 
         else if (status === 'success' && files) {
-          resolve(files);
+          resolve([files, isDuplicate, isReplacingData]);
+        }
+
+        else if (status === 'error') {
+          throw new Error(response.msg + ' ' + response.hint);
         }
 
         else

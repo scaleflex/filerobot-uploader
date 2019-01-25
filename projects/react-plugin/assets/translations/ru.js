@@ -15,6 +15,7 @@ export default {
     found: 'Найдено',
     apply: 'Применить',
     categories: 'Категории',
+    file_already_exists: 'Файл уже существует в галерее'
   },
   file_manager: {
     tab_title: 'Галерея',

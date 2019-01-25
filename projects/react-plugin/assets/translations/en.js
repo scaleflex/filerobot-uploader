@@ -14,7 +14,8 @@ export default {
     search: 'Search',
     found: 'Found',
     apply: 'Apply',
-    categories: 'Categories'
+    categories: 'Categories',
+    file_already_exists: 'File already exists in your gallery'
   },
   file_manager: {
     tab_title: 'My gallery',

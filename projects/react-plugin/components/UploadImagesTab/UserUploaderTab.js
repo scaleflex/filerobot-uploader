@@ -57,12 +57,17 @@ class UserUploaderTab extends Component {
     const self = this.props;
 
     this.uploadStart();
+
     (
       isUploadFromUrl
-        ? this.props.onFileUploadFromUrl(url, this.props.uploaderConfig)
-        : this.props.onFilesUpload(this.state.files, this.props.uploaderConfig)
+        ? uploadFilesFromUrls(url, this.props.uploaderConfig)
+        : uploadFiles(this.state.files, this.props.uploaderConfig)
     )
-      .then((files) => {
+      .then(([files, isDuplicate, isReplacingData]) => {
+        if (isReplacingData || isDuplicate) {
+          this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
+        }
+
         this.uploadSuccess(files);
 
         if (this.props.uploaderConfig.tagging.active) {
@@ -201,11 +206,11 @@ class UserUploaderTab extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  uploaderConfig: state.uploader.uploaderConfig
+});
+
 export default connect(
-  ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
-  {
-    onFilesUpload: uploadFiles,
-    onFileUploadFromUrl: uploadFilesFromUrls,
-    modalClose
-  }
+  mapStateToProps,
+  { modalClose }
 )(Radium(UserUploaderTab));

@@ -32,7 +32,7 @@ class UploadedImagesContent extends Component {
   }
 
   getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.current.getBoundingClientRect().width);
-  getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height + 20;
+  getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height;
 
   updateImageGridColumnWidth = () => {
     let { imageGrid } = this.state;
@@ -144,7 +144,7 @@ class UploadedImagesContent extends Component {
         encType="multipart/form-data"
         style={style}
         columnWidth={columnWidth}
-        height={(columnWidth / (item.ratio || 1.6)) + 20}
+        height={(columnWidth / (item.ratio || 1.6)) + 24}
       >
         <UploadBox isDragOver={isDragOver}>
           <UploadBoxIcon className={'sfi-airstore-image'}/>

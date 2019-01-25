@@ -236,8 +236,8 @@ export const Opacity = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #000;
-  opacity: .5;
+  background: rgba(10,10,10,0.26) !important;
+  //opacity: 0.25 !important;
   z-index: 1;
 `;
 
