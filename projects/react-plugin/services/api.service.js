@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DUPLICATE_CODE, REPLACING_DATA_CODE } from '../config';
+import { DUPLICATE_CODE, REPLACING_DATA_CODE, GALLERY_IMAGES_LIMIT } from '../config';
 
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
@@ -101,21 +101,25 @@ export const uploadFiles = (
   });
 };
 
-export const getListFiles = ({ dir = '', container = '' }) => {
+export const getListFiles = ({ dir = '', container = '', offset }) => {
   const baseUrl = getBaseUrl(container);
   const apiPath = 'list?';
   const directoryPath = dir ? 'dir=' + dir : '';
-  const url = [baseUrl, apiPath, directoryPath].join('')
+  const offsetQuery = `&offset=${offset}`;
+  const limit = `&limit=${GALLERY_IMAGES_LIMIT}`;
+  const url = [baseUrl, apiPath, directoryPath, offsetQuery, limit].join('');
 
-  return send(url).then((response = {}) => response.files);
+  return send(url).then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
-export const searchFiles = ({ query = '', container = '' }) => {
+export const searchFiles = ({ query = '', container = '', language = 'en', offset = 0 }) => {
   const baseUrl = getBaseUrl(container);
   const apiPath = 'search?';
-  const url = [baseUrl, apiPath, `q=${query}`].join('');
+  const searchQuery = `q=${query}`;
+  const offsetQuery = `&offset=${offset}`;
+  const url = [baseUrl, apiPath, searchQuery, offsetQuery, ].join('');
 
-  return send(url).then((response = {}) => response.files);
+  return send(url).then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
 export const generateTags = (url, { key = '', provider = 'google', confidence = 60, limit = 10 }, language = 'en') => {

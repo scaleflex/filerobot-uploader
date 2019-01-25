@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName, EditIcon,
-  EditIconWrapper
-} from '../../styledComponents/index';
+  EditIconWrapper, ShowMoreResultsSpinner
+} from '../../styledComponents';
 import { connect } from 'react-redux';
 import { modalClose } from '../../actions';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
@@ -17,7 +17,7 @@ class UploadedImagesContent extends Component {
     this.state = {
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
-      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 },
+      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 }
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -74,7 +74,7 @@ class UploadedImagesContent extends Component {
   }
 
   render() {
-    const { files, onDragEvent, isDragOver, imagesIndex } = this.props;
+    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = [{ id: 'uploaderBox' }, ...files];
@@ -98,11 +98,14 @@ class UploadedImagesContent extends Component {
             count={imagesList.length}
             list={imagesList}
             upload={this.upload}
-            onShowMoreImages={this.onShowMoreImages}
+            onShowMoreImages={this.props.onShowMoreImages}
+            isShowMoreImages={isShowMoreImages}
             cellContent={(props) =>
               props.item.id !== 'uploaderBox' ? this.renderImage(props) : this.renderUploadBox(props)
             }
           /> : this.renderUploadBox({})}
+
+        <ShowMoreResultsSpinner show={isShowMoreImages && imagesList.length > 1}/>
       </Content>
     )
   }

@@ -110,7 +110,6 @@ class IconTab extends Component {
     this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
 
     return this.props.fetchIcons({ ...searchParams, openpixKey }, relevantActiveTags, done)
-    //.then(done, done);
   };
 
   search = ({ value = '', type, offset = 0 }, refreshTags, resizeOnSuccess) => {
@@ -148,6 +147,17 @@ class IconTab extends Component {
       true,
       resizeOnSuccess
     );
+  }
+
+  onShowMoreImages = (resizeOnSuccess) => {
+    if (this.state.isShowMoreImages) return;
+
+    let { searchParams, count } = this.props;
+
+    if (count > (searchParams.offset + 250)) {
+      searchParams.offset = searchParams.offset + 250;
+      return this.onSearch(searchParams.offset, resizeOnSuccess);
+    }
   }
 
   getRelevantActiveTags = (activeTags, related_tags) => {
@@ -216,17 +226,6 @@ class IconTab extends Component {
   }
 
   onLoadImage = (target, icon) => { this.loadedIcons.push(icon); };
-
-  onShowMoreImages = (resizeOnSuccess) => {
-    if (this.state.isShowMoreImages) return;
-
-    let { searchParams, count } = this.props;
-
-    if (count > (searchParams.offset + 250)) {
-      searchParams.offset = searchParams.offset + 250;
-      return this.onSearch(searchParams.offset, resizeOnSuccess);
-    }
-  }
 
   render() {
     const { active = {}, uploaderConfig, showAlert, count, themeColors } = this.props;

@@ -18,7 +18,7 @@ export default {
 };
 
 export const DEFAULT_ICON_SIZE = 100;
-
+export const GALLERY_IMAGES_LIMIT = 50;
 export const DUPLICATE_CODE = 'SHA1_CONFLICT_STOP_UPLOAD';
 export const REPLACING_DATA_CODE = 'FILE_EXISTS_REPLACING_DATA';
 
