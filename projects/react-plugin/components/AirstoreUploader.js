@@ -89,7 +89,8 @@ class AirstoreUploader extends Component {
       activeModules,
       postUpload: false,
       prevTab: 'UPLOAD',
-      files: []
+      files: [],
+      isTooSmall: window.innerWidth < 685
     };
 
     window.AirstoreUploader = window.AirstoreUploader || {};
@@ -108,6 +109,14 @@ class AirstoreUploader extends Component {
     this.props.onSetUploadHandler(initialOptions.onUpload || null);
 
     if (this.props.opened) this.openModal(initialTab);
+
+    window.onresize = () => {
+      const isTooSmall = window.innerWidth < 685;
+
+      if (isTooSmall !== this.state.isTooSmall) {
+        this.setState({ isTooSmall });
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -169,7 +178,7 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.isVisible) return null;
 
-    const { activeModules, postUpload, files, prevTab } = this.state;
+    const { activeModules, postUpload, files, prevTab, isTooSmall } = this.state;
     const { activeTabId, initialOptions } = this.props;
     const contentProps = {
       files,
@@ -185,33 +194,38 @@ class AirstoreUploader extends Component {
     const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
 
     return (
-      <Modal noBorder fullScreen={'md'} onClose={this.closeModal} style={{ borderRadius: 5 }}>
-        <StyleRoot className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
-          <FocusLock>
-            <Dialog role="dialog" className="ae-dialog">
-              <div style={[CSS.tabs.header]} className="ae-tabs-header">
+      <Modal isTooSmall={isTooSmall} noBorder fullScreen={'md'} onClose={this.closeModal} style={{ borderRadius: 5 }}>
+        {!isTooSmall ?
+          <StyleRoot className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
+            <FocusLock>
+              <Dialog role="dialog" className="ae-dialog">
+                <div style={[CSS.tabs.header]} className="ae-tabs-header">
 
-                <Nav
-                  tabs={postUpload ? postUploadTabs : filteredTabs}
-                  activeTabId={activeTabId}
-                  activateTab={this.activateTab}
-                />
+                  <Nav
+                    tabs={postUpload ? postUploadTabs : filteredTabs}
+                    activeTabId={activeTabId}
+                    activateTab={this.activateTab}
+                  />
 
-              </div>
-              <div style={[CSS.tabs.content, activeTabId === 'ICONS' && { overflow: 'hidden' }]}>
-                {activeTab &&
-                <div style={[{ width: '100%', minWidth: 540, overflow: 'auto' }]}>
-                  {activeTab.getContent.call(this, contentProps)}
-                </div>}
-                <ToastContainer
-                  ref={node => this.container = node}
-                  toastMessageFactory={ToastMessageFactory}
-                  className="toast-top-right"
-                />
-              </div>
-            </Dialog>
-          </FocusLock>
-        </StyleRoot>
+                </div>
+                <div style={[CSS.tabs.content, activeTabId === 'ICONS' && { overflow: 'hidden' }]}>
+                  {activeTab &&
+                  <div style={[{ width: '100%', minWidth: 540, overflow: 'auto' }]}>
+                    {activeTab.getContent.call(this, contentProps)}
+                  </div>}
+                  <ToastContainer
+                    ref={node => this.container = node}
+                    toastMessageFactory={ToastMessageFactory}
+                    className="toast-top-right"
+                  />
+                </div>
+              </Dialog>
+            </FocusLock>
+          </StyleRoot>
+          :
+          <div>
+            {I18n.t('upload.too_small')} <a href="javascript:void(0)" onClick={this.closeModal}>{I18n.t('upload.close')}</a>
+          </div>}
       </Modal>
     );
   }

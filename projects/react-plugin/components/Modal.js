@@ -141,18 +141,40 @@ const ModalFullScreen = styled.div`
   animation: scaleflexFadeInAnimation 350ms ease-in-out both;
   font-family: 'Roboto', 'Arial', sans-serif;
   
+  ${props => props.isTooSmall ? getSmallModalStyle() : ''};
+  
   @keyframes scaleflexFadeInAnimation {
     from {opacity: 0;}
     to {opacity: 1;}
   }
   
-  @media (max-width: 500px) {
+  @media (max-width: 900px) {
     top: 20px;
     left: 20px;
     bottom: 20px;
     right: 20px;
   }
 `;
+
+function getSmallModalStyle() {
+  return `
+    top: 20% !important;
+    left: 15px !important;
+    right: 15px !important;
+    bottom: auto !important;
+    color: black !important;
+    text-align: center !important;
+    font-size: 18px;
+    
+    > div {
+      padding: 40px !important;
+    }
+    
+    * {
+      color: black !important;
+    }
+  `
+}
 
 function getFullScreenSize(size) {
   switch(size) {
