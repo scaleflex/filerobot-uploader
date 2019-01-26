@@ -74,7 +74,7 @@ class UploadedImagesContent extends Component {
   }
 
   render() {
-    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex } = this.props;
+    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = [{ id: 'uploaderBox' }, ...files];
@@ -103,7 +103,9 @@ class UploadedImagesContent extends Component {
             cellContent={(props) =>
               props.item.id !== 'uploaderBox' ? this.renderImage(props) : this.renderUploadBox(props)
             }
-          /> : this.renderUploadBox({})}
+          /> : ''}
+
+        {!files.length && !isLoading && this.renderUploadBox({})}
 
         <ShowMoreResultsSpinner show={isShowMoreImages && imagesList.length > 1}/>
       </Content>

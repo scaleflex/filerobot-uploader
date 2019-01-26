@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-  UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox,
-  SearchGroup, InputSearch, SearchWrapper
+  UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox, SearchGroup, InputSearch, SearchWrapper,
 } from '../../styledComponents';
 import { getListFiles, searchFiles } from '../../services/api.service';
 import { connect } from 'react-redux';
@@ -11,40 +10,37 @@ import UploadedImagesContent from './UploadedImagesContent';
 import { isEnterClick } from '../../utils';
 import { I18n } from 'react-i18nify';
 import { GALLERY_IMAGES_LIMIT } from '../../config';
+import FolderManager from './folderManager/FolderManager';
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
 
 
 class UploadedImagesTab extends Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
       searchPhrase: '',
-      activeFolder: null,
       isLoading: false,
       imagesIndex: 0,
       files: [],
-      isShowMoreImages: false
+      directories: [],
+      isShowMoreImages: false,
+      showFileManager: false,
+      path: props.uploaderConfig.uploadParams.dir
     };
   }
 
   componentDidMount() {
-    const { uploaderConfig } = this.props;
-    const { folders } = uploaderConfig;
+    const { path } = this.state;
 
-    if (!folders.length) return;
-
-    const activeFolder = folders[0];
-
-    this.setState({ activeFolder });
-    this.onGetListFiles(activeFolder.dir);
+    this.onGetListFiles(path);
   }
 
-  activateFolder = activeFolder => {
-    this.setState({ activeFolder, files: [] });
-    this.onGetListFiles(activeFolder.dir);
+  activateFolder = (path) => {
+    this.setState({ files: [], path });
+    this.onGetListFiles(path);
   }
 
   fileChangeHandler = ({ target }) => { this.changeFile(target.files); };
@@ -61,14 +57,14 @@ class UploadedImagesTab extends Component {
 
   upload = (isUploadFromUrl = false, url = null) => {
     // if (this.state.isLoading) return;
-    const { activeFolder } = this.state;
+    const { path } = this.state;
     const self = this.props;
 
     this.uploadStart();
     (
       isUploadFromUrl
         ? uploadFilesFromUrls(url, this.props.uploaderConfig)
-        : uploadFiles(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', activeFolder.dir)
+        : uploadFiles(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', path)
     )
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
@@ -97,7 +93,7 @@ class UploadedImagesTab extends Component {
 
   uploadSuccess = uploadedFiles => {
     this.setState({ step: STEP.UPLOADED, uploadedFiles, isDragOver: false });
-    this.onGetListFiles(this.state.activeFolder.dir);
+    this.onGetListFiles(this.state.path);
   }
 
   uploadError = (msg, timer = null) => {
@@ -125,11 +121,12 @@ class UploadedImagesTab extends Component {
 
     this.setState({ isShowMoreImages: !!offset, isLoading: !offset });
 
-    getListFiles({ dir, container, offset }).then(([files, totalFilesCount]) => {
+    getListFiles({ dir, container, offset }).then(([files, directories, totalFilesCount]) => {
       const prevFiles = !offset ? [] : this.state.files;
 
       this.setState({
         files: [...prevFiles, ...files],
+        directories: !offset ? directories : this.state.directories,
         isLoading: false,
         isShowMoreImages: false,
         offset,
@@ -183,18 +180,27 @@ class UploadedImagesTab extends Component {
     }
 
     else {
-      let { totalFilesCount, offset, activeFolder } = this.state;
+      let { totalFilesCount, offset, path } = this.state;
 
       if (totalFilesCount > (offset + GALLERY_IMAGES_LIMIT)) {
         offset = offset + GALLERY_IMAGES_LIMIT;
 
-        return this.onGetListFiles(activeFolder.dir, offset, resizeOnSuccess);
+        return this.onGetListFiles(path, offset, resizeOnSuccess);
       }
     }
   }
 
+  goToLevelUpFolder = () => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const { path } = this.state;
+
+    this.activateFolder(path.slice(0, path.lastIndexOf('/')));
+  }
+
   render() {
-    const { isLoading, step, files, isDragOver, imagesIndex } = this.state;
+    const { isLoading, step, files, isDragOver, imagesIndex, directories, path } = this.state;
 
     return (
       <UploadedImages>
@@ -210,7 +216,14 @@ class UploadedImagesTab extends Component {
         />
 
         <HeaderWrap>
-          {this.renderNavigation()}
+          <Nav>
+            <FolderManager
+              path={path}
+              folders={directories}
+              goToLevelUpFolder={this.goToLevelUpFolder}
+              changeFolder={this.activateFolder}
+            />
+          </Nav>
 
           <SearchWrapper>
             <SearchGroup padding={'0px'}>
@@ -249,33 +262,11 @@ class UploadedImagesTab extends Component {
           onClose={this.props.onClose}
           onShowMoreImages={this.onShowMoreImages}
           isShowMoreImages={this.state.isShowMoreImages}
+          isLoading={isLoading}
         />
 
         <Spinner overlay show={isLoading || (step === STEP.UPLOADING)}/>
       </UploadedImages>
-    )
-  }
-
-  renderNavigation = () => {
-    const { uploaderConfig } = this.props;
-    const { activeFolder = {} } = this.state;
-    const { folders } = uploaderConfig;
-
-    if (!folders.length) return;
-
-    return (
-      <Nav>
-        {folders.map(folder => (
-          <NavItem
-            role="menuitem"
-            tabIndex={0}
-            onKeyDown={event => { event.keyCode === 13 && this.activateFolder(folder); }}
-            onClick={this.activateFolder.bind(this, folder)}
-            active={folder.dir === (activeFolder && activeFolder.dir)}
-            key={folder.dir}
-          >{folder.label === 'All' ? I18n.t(`upload.${folder.label.toLowerCase()}`) : folder.label}</NavItem>
-        ))}
-      </Nav>
     )
   }
 }

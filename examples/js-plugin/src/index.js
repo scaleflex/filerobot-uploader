@@ -14,10 +14,12 @@ let options = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'], // optional default: 'UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'
   uploadParams: {                 // optional default: {}
     dir: '/demo_nice-matin'
+   // dir: '/demo_filerobot_en'
   },
   // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
   folders: [                             // required if MY_GALLERY is set
     { dir: '/demo_nice-matin', label: 'All' },
+   // { dir: '/demo_filerobot_en', label: 'All' },
     //{ dir: '/company_test/project_test', label: 'Project' }
   ],
   //filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',

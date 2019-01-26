@@ -1,6 +1,9 @@
 export default {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'],
-  folders: [{ dir: '/', label: 'All' }],
+  folders: [
+    { dir: '/', label: 'All' },
+    { name: "journal 1", path: "/demo_nice-matin/journal 1" }
+  ],
   initialTab: 'UPLOAD',
   airstoreUploadKey: '',
   container: 'example',
