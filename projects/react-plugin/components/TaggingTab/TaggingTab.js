@@ -213,7 +213,7 @@ class TaggingTab extends Component {
 
 const mapStateToProps = state => ({
   uploadHandler: state.uploader.uploaderConfig.uploadHandler,
-  autoTagging: state.uploader.uploaderConfig.tagging.auto_tagging,
+  autoTagging: state.uploader.uploaderConfig.tagging.autoTaggingButton,
   taggingConfig: state.uploader.uploaderConfig.tagging,
   language: state.uploader.uploaderConfig.language,
   config: state.uploader.uploaderConfig

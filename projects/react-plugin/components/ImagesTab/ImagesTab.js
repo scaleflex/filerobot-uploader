@@ -390,14 +390,14 @@ class ImagesTab extends Component {
                 isShowMoreImages={isShowMoreImages}
                 cellContent={({ style, columnWidth, item, index }) => (
                   <ImageWrapper
-                    style={{ ...style, width: columnWidth }}
+                    style={{ ...style, width: Math.floor(columnWidth) }}
                     onClick={() => { this.upload(item); }}
                     tabIndex={index}
                     onKeyDown={(event) => { this.onKeyDown(event, item); }}
                   >
                     <Img
-                      height={columnWidth / (item.ratio || 1.6)}
-                      src={ImageGridService.getCropImageUrl(item.src, columnWidth, columnWidth / (item.ratio || 1.6))}
+                      height={Math.floor(columnWidth / (item.ratio || 1.6))}
+                      src={ImageGridService.getCropImageUrl(item.src, columnWidth, Math.floor(columnWidth / (item.ratio || 1.6)))}
                     />
                   </ImageWrapper>
                 )}

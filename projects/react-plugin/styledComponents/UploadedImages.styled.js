@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CloseBtn } from '../components/CloseBtn'
 
 export const UploadedImages = styled.div`
   display: flex;
@@ -70,4 +71,10 @@ export const UploadInputBox = styled.input`
   overflow: hidden;
   position: absolute;
   zIndex: -1;
+`;
+
+export const ButtonClose = styled(CloseBtn)`
+  left: 280px;
+  width: 20px;
+  top: 8px;
 `;

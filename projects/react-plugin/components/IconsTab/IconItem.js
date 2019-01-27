@@ -13,6 +13,7 @@ class IconItem extends Component {
       onLoadImage, columnWidth, index
     } = this.props;
     const { isHover = false } = this.state;
+    const resultWidth = Math.floor(columnWidth);
 
     return (
       <IconBoxWrapperInner
@@ -32,7 +33,7 @@ class IconItem extends Component {
           </ActionsIconWrapper>
         </HoverWrapper>
 
-        <IconWrapper width={columnWidth} height={columnWidth}>
+        <IconWrapper width={resultWidth} height={resultWidth}>
           <Icon
             isHover={isHover}
             src={icon.src}

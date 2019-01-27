@@ -94,8 +94,12 @@ class AirstoreUploader extends Component {
     };
 
     window.AirstoreUploader = window.AirstoreUploader || {};
+    window.FilerobotUploader = window.FilerobotUploader || {};
     window.AirstoreUploader.open = this.openModal;
     window.AirstoreUploader.close = this.closeModal;
+
+    window.FilerobotUploader.open = window.AirstoreUploader.open;
+    window.FilerobotUploader.close = window.AirstoreUploader.close;
   }
 
   componentDidMount() {

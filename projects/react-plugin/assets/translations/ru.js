@@ -24,7 +24,10 @@ export default {
     tab_title: 'Галерея',
     search_by_file_name_tag_desc: 'поиск по имени файла, тегу или описанию',
     upload_images: 'Загрузить изображения',
-    drag_images_here: 'Перетащите изображения сюда'
+    drag_images_here: 'Перетащите изображения сюда',
+    change_folder: 'Изменить папку',
+    media_library: 'Медиагалерея',
+    go_back: 'Назад'
   },
   icons: {
     tab_title: 'Иконки',

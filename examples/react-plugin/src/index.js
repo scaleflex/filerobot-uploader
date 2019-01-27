@@ -16,10 +16,6 @@ const AIRSTORE_CONFIG = {
     dir: '/dima_test_2'
   },
   // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
-  folders: [                             // required if MY_GALLERY is set
-    { dir: '/dima_test_2', label: 'All' },
-    //{ dir: '/company_test/project_test', label: 'Project' }
-  ],
   airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', // required
   openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
   container: 'example',                           // required

@@ -6,7 +6,9 @@ import { Provider } from 'react-redux';
 
 
 window.AirstoreUploader = window.AirstoreUploader || {};
+window.FilerobotUploader = window.FilerobotUploader || {};
 window.AirstoreUploader.init = init;
+window.FilerobotUploader.init = init;
 
 function init(options = {}, isOpened = false) {
   const elementId = options.elementId || options.ELEMENT_ID || 'airstore-uploader';
@@ -40,8 +42,14 @@ function init(options = {}, isOpened = false) {
     )
   };
 
+
   window.AirstoreUploader.component(AirstoreUploaderWrapper);
   window.AirstoreUploader.unmount = () => unmountComponentAtNode(container);
+
+  window.FilerobotUploader.component = window.AirstoreUploader.component;
+  window.FilerobotUploader.unmount = window.AirstoreUploader.unmount;
+
+  return window.AirstoreUploader;
 }
 
 

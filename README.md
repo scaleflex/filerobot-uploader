@@ -1,8 +1,8 @@
-# Airstore Uploader
+# Filerobot Uploader
 
 Plugin to upload images.
 
-> 🤖 **Airstore Uploader is currently in beta**. Its core API is useable now, but you might need to pull request a fix or two for advanced use cases. Some of its APIs are not "finalized" and will (breaking) change over time as we discover better solutions.
+> 🤖 **Filerobot Uploader is currently in beta**. Some of its APIs are not "finalized" and will (breaking) change over time as we discover better solutions.
 
 ## Table of contents
 
@@ -27,13 +27,13 @@ Use latest CDNized plugin version
 
 ### <a name="quick_start"></a>Quick start
 
-We provide easy way to integrate image uploader in your applications.
+We provide easy way to integrate image uploader in your applications
 
 ```
 <script>
   let options = {
     container: 'example',
-    airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+    filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
     openpixKey: 'xxxxxxxxxxxxxxx',
     onUpload: (files) => {
         console.log('files: ', files);
@@ -41,18 +41,19 @@ We provide easy way to integrate image uploader in your applications.
     }
   };
 
-  window.AirstoreUploader.init(options);
-  window.AirstoreUploader.open();
+  let uploader = FilerobotUploader.init(options);
+
+  uploader.open();
 </script>
 ```
 
 ### <a name="methods"></a>Methods
 
-#### `window.AirstoreUploader.init(options: {})`: function
+#### `window.FilerobotUploader.init(options: {})`: function
 
-Initialization of Airstore Uploader plugin.
+Initialization of Filerobot Uploader plugin.
 
-#### `window.AirstoreUploader.open(tab : string, options: {})`: function
+#### `window.FilerobotUploader.open(tab : string, options: {})`: function
 
 Open uploader modal.
 
@@ -60,11 +61,11 @@ Open uploader modal.
 
 * **options**: {} (optional) - options for tabs
 
-#### `window.AirstoreUploader.close()`: function
+#### `window.FilerobotUploader.close()`: function
 
 Close uploader modal.
 
-#### `window.AirstoreUploader.unmount()`: function
+#### `window.FilerobotUploader.unmount()`: function
 
 Destroy uploader
 
@@ -76,7 +77,7 @@ Destroy uploader
 
 #### `container`: string (required)
 
-Airstore Container name.
+Filerobot Container name.
 
 ```
 let options = {
@@ -86,15 +87,15 @@ let options = {
 };
 ```
 
-#### `airstoreUploadKey`: string (required)
+#### `filerobotUploadKey`: string (required)
 
-Unique upload key for Airstore.
+Unique upload key for Filerobot.
 
 ```
 let options = {
     ...,
 
-    airstoreUploadKey: 'xxxxxxxxxxxx'
+    filerobotUploadKey: 'xxxxxxxxxxxx'
 };
 ```
 
@@ -173,11 +174,25 @@ let options = {
 };
 ```
 
+#### `folderBrowser`: bool
+
+**default**: true
+
+Aside menu to browse folders in your container.
+
+```
+let options = {
+    ...,
+
+    folderBrowser: true
+};
+```
+
 #### `tagging`: object
 
 * `key`: string (require) - key to use image recognition technology
 
-* `auto_tagging`: bool - will automatically generate tags based on image recognition technology
+* `autoTaggingButton`: bool - adds button which will automatically generate tags based on image recognition technology
 
 * `provider`: string [google|imagga] - recognition provider
 
@@ -190,7 +205,7 @@ let options = {
     ...,
 
     tagging: {
-        auto_tagging: true,
+        autoTaggingButton: true,
         provider: 'google',
         confidence: 60,
         limit: 10,

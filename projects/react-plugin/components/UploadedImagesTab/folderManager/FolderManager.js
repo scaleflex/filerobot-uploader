@@ -4,6 +4,7 @@ import {
   CloseManagerBtn, Folder, Overlay
 } from './folderManager.styled';
 import FolderItem from './FolderItem';
+import { I18n } from 'react-i18nify';
 
 
 class FolderManager extends Component {
@@ -30,14 +31,14 @@ class FolderManager extends Component {
         <FolderToggleWrapper onClick={this.toggleSideMenu}>
           <FolderIcon/>
           <FolderTitle>
-            Change folder
+            {I18n.t('file_manager.change_folder')}
           </FolderTitle>
         </FolderToggleWrapper>
 
         <FolderManagerWrapper showFileManager={showFileManager}>
           <ManagerHeader>
             <ManagerHeaderTitle>
-              Media Library
+              {I18n.t('file_manager.media_library')}
             </ManagerHeaderTitle>
             <CloseManagerBtn onClick={this.toggleSideMenu}/>
           </ManagerHeader>
@@ -45,7 +46,7 @@ class FolderManager extends Component {
           {path &&
           <Folder onClick={this.props.goToLevelUpFolder}>
             <span className="btn-back"/>
-            <Folder.Name title={"Go back"}>{'../'}</Folder.Name>
+            <Folder.Name title={I18n.t('file_manager.go_back')}>{'../'}</Folder.Name>
           </Folder>}
 
           {folders.map(folder => (

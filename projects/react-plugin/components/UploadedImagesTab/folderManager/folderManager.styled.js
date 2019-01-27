@@ -7,11 +7,12 @@ export const FolderTitle = styled.div`
   vertical-align: middle;
   color: #5D636B;
   margin-left: 10px;
+  font-size: 14px;
 `;
 
 export const FolderIcon = styled.div`
-  width: ${props => props.small ? '14px' : '20px'};
-  height: ${props => props.small ? '10px' : '15px'};
+  width: ${props => props.small ? '14px' : '17px'};
+  height: ${props => props.small ? '10px' : '12px'};
   margin: 0 auto;
   position: relative;
   display: inline-block;
@@ -76,11 +77,12 @@ export const ManagerHeader = styled.div`
 
 export const ManagerHeaderTitle = styled.div`
   line-height: 50px;
+  font-size: 14px;
 `;
 
 export const CloseManagerBtn = styled(CloseBtn)`
-  font-size: 22px;
-  top: 14px;
+  font-size: 18px;
+  top: 16px;
   
   :hover {
     color: #7b8189;
@@ -91,6 +93,7 @@ export const Folder = styled.div`
   position: relative;
   padding: 5px 20px 5px 10px;
   cursor: pointer;
+  font-size: 14px;
   
   :hover {
     background: rgba(0, 0, 0, 0.1);

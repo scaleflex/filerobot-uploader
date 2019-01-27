@@ -117,7 +117,7 @@ class UploadedImagesContent extends Component {
 
     return (
       <ImageWrapper
-        style={{ ...style, width: columnWidth }}
+        style={{ ...style, width: Math.floor(columnWidth) }}
         onClick={() => { this.upload(item); }}
         role="button"
         tabIndex={index}
@@ -125,8 +125,8 @@ class UploadedImagesContent extends Component {
       >
         <div style={{ overflow: 'hidden' }}>
           <Img
-            src={ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, columnWidth / (item.ratio || 1.6))}
-            height={columnWidth / (item.ratio || 1.6)}
+            src={ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, Math.floor(columnWidth / (item.ratio || 1.6)))}
+            height={Math.floor(columnWidth / (item.ratio || 1.6))}
           />
         </div>
         <ImageDescription>
@@ -149,7 +149,7 @@ class UploadedImagesContent extends Component {
         encType="multipart/form-data"
         style={style}
         columnWidth={columnWidth}
-        height={(columnWidth / (item.ratio || 1.6)) + 24}
+        height={Math.floor((columnWidth / (item.ratio || 1.6)) + 24)}
       >
         <UploadBox isDragOver={isDragOver}>
           <UploadBoxIcon className={'sfi-airstore-image'}/>

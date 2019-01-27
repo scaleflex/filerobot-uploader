@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox, SearchGroup, InputSearch, SearchWrapper,
+  ButtonClose
 } from '../../styledComponents';
 import { getListFiles, searchFiles } from '../../services/api.service';
 import { connect } from 'react-redux';
@@ -24,11 +25,13 @@ class UploadedImagesTab extends Component {
       searchPhrase: '',
       isLoading: false,
       imagesIndex: 0,
+      searchInputIndex: 0,
       files: [],
       directories: [],
       isShowMoreImages: false,
       showFileManager: false,
-      path: props.uploaderConfig.uploadParams.dir
+      path: props.initialDir,
+      folderBrowser: props.uploaderConfig.folderBrowser
     };
   }
 
@@ -45,18 +48,15 @@ class UploadedImagesTab extends Component {
 
   fileChangeHandler = ({ target }) => { this.changeFile(target.files); };
 
-  isFilesValid = filesToUpload => true;
-
   changeFile = (filesToUpload = []) => {
     this.setState({ filesToUpload });
 
     setTimeout(() => {
-      if (filesToUpload && this.isFilesValid(filesToUpload)) this.upload();
+      if (filesToUpload) this.upload();
     });
   };
 
   upload = (isUploadFromUrl = false, url = null) => {
-    // if (this.state.isLoading) return;
     const { path } = this.state;
     const self = this.props;
 
@@ -190,7 +190,7 @@ class UploadedImagesTab extends Component {
     }
   }
 
-  goToLevelUpFolder = () => {
+  goToLevelUpFolder = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -199,8 +199,22 @@ class UploadedImagesTab extends Component {
     this.activateFolder(path.slice(0, path.lastIndexOf('/')));
   }
 
+  goToDefaultFolder = () => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.setState({
+      searchPhrase: '',
+      searchInputIndex: this.state.searchInputIndex + 1
+    }, () => {
+      this.activateFolder(this.props.initialDir);
+    })
+  }
+
   render() {
-    const { isLoading, step, files, isDragOver, imagesIndex, directories, path } = this.state;
+    const {
+      isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase
+    } = this.state;
 
     return (
       <UploadedImages>
@@ -217,25 +231,28 @@ class UploadedImagesTab extends Component {
 
         <HeaderWrap>
           <Nav>
+            {folderBrowser &&
             <FolderManager
               path={path}
               folders={directories}
               goToLevelUpFolder={this.goToLevelUpFolder}
               changeFolder={this.activateFolder}
-            />
+            />}
           </Nav>
 
           <SearchWrapper>
             <SearchGroup padding={'0px'}>
               <InputSearch
+                searchInputIndex={this.state.searchInputIndex}
                 type="search"
                 innerRef={node => this._searchInput = node}
                 autoFocus={true}
-                defaultValue={''}
+                value={searchPhrase}
                 placeholder={I18n.t('file_manager.search_by_file_name_tag_desc')}
                 onChange={this.onSearchChange}
                 onKeyDown={ev => isEnterClick(ev) && this.search()}
               />
+              {searchPhrase && <ButtonClose onClick={this.goToDefaultFolder}/>}
               <ButtonSearch
                 key="ok"
                 className="ae-btn"
@@ -272,7 +289,8 @@ class UploadedImagesTab extends Component {
 }
 
 const mapStateToProps = state => ({
-  uploaderConfig: state.uploader.uploaderConfig
+  uploaderConfig: state.uploader.uploaderConfig,
+  initialDir: state.uploader.uploaderConfig.uploadParams.dir
 });
 
 export default connect(

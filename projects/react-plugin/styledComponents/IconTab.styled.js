@@ -8,6 +8,7 @@ export const SearchGroup = styled.div`
   display: flex;
   padding: ${props => props.padding ? props.padding : '10px'};
   justify-content: left;
+  position: relative;
 `;
 export const AmountIcons = styled.div`
   display: ${props => props.empty ? 'none' : 'flex'};

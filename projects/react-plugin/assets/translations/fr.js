@@ -24,7 +24,10 @@ export default {
     tab_title: 'Ma galerie',
     search_by_file_name_tag_desc: 'Recherche par nom, tag ou description',
     upload_images: 'Télécharger',
-    drag_images_here: 'Glisser-déposer mon fichier ici'
+    drag_images_here: 'Glisser-déposer mon fichier ici',
+    change_folder: 'Changer de répertoire',
+    media_library: 'Bibliothèque des médias',
+    go_back: 'Retour'
   },
   icons: {
     tab_title: 'Icônes gratuites',

@@ -1,23 +1,23 @@
 export default {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'],
-  folders: [
-    { dir: '/', label: 'All' },
-    { name: "journal 1", path: "/demo_nice-matin/journal 1" }
-  ],
   initialTab: 'UPLOAD',
-  airstoreUploadKey: '',
   container: 'example',
-  uploadParams: {},
-  onUpload: () => {},
-  imageOnly: true,
+  elementID: 'airstore-uploader',
+  filerobotUploadKey: '',
+  uploadParams: {
+    dir: '/'
+  },
   openpixKey: null,
   language: 'en',
+  folderBrowser: true,
   tagging: {
-    active: false,
+    autoTaggingButton: false,
     provider: 'google',
     confidence: 80,
-    limit: 10
-  }
+    limit: 10,
+    key: ''
+  },
+  onUpload: () => {},
 };
 
 export const DEFAULT_ICON_SIZE = 100;

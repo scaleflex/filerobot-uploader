@@ -24,7 +24,10 @@ export default {
     tab_title: 'My gallery',
     search_by_file_name_tag_desc: 'search by file name, tag or description',
     upload_images: 'Upload images',
-    drag_images_here: 'Drag images here'
+    drag_images_here: 'Drag images here',
+    change_folder: 'Change folder',
+    media_library: 'Media Library',
+    go_back: 'Go back'
   },
   icons: {
     tab_title: 'Free icons',

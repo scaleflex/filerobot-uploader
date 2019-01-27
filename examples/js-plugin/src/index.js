@@ -11,54 +11,58 @@ let loadedImage = null;
 
 // Configuration
 let options = {
-  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'], // optional default: 'UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'
-  uploadParams: {                 // optional default: {}
-    dir: '/demo_nice-matin'
+  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'],
+  uploadParams: {
+    dir: '/'
    // dir: '/demo_filerobot_en'
   },
-  // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
-  folders: [                             // required if MY_GALLERY is set
-    { dir: '/demo_nice-matin', label: 'All' },
-   // { dir: '/demo_filerobot_en', label: 'All' },
-    //{ dir: '/company_test/project_test', label: 'Project' }
-  ],
+
   //filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
   filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
-  openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
-  //container: 'example',                           // required
-  container: 'scaleflex-tests-v5a',                           // required
-  initialTab: 'UPLOAD',                          // optional   default first module
+
+  //container: 'example',
+  container: 'scaleflex-tests-v5a',
+
+  openpixKey: 'xxxxxxxxxxxxxxx',
+  initialTab: 'UPLOAD',
+
+  folderBrowser: true,
+
   tagging: {
-    auto_tagging: true,
-    provider: 'google', // google|imagga
-    confidence: 60, //  [0..100]
+    autoTaggingButton: true,
+    provider: 'google',
+    confidence: 60,
     limit: 10,
     key: 'aaaa'
   },
   language: 'fr',
-  onUpload: (files) => {
-    const img = files[0];
-    const image = document.getElementById('image-box');
-    const editBtn = document.getElementById('edit-image-btn');
-    const description = document.getElementById('image-description');
-    const options = {
-      weekday: "long", year: "numeric", month: "short",
-      day: "numeric", hour: "2-digit", minute: "2-digit"
-    };
-    const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("fr", options);
-    const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("fr", options);
 
-    img.properties.tags = img.properties.tags || [];
+  onUpload: onUploadHandler
+};
 
-    loadedImage = img;
-    editBtn.removeAttribute('disabled');
+function onUploadHandler(files) {
+  const img = files[0];
+  const image = document.getElementById('image-box');
+  const editBtn = document.getElementById('edit-image-btn');
+  const description = document.getElementById('image-description');
+  const options = {
+    weekday: "long", year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+  };
+  const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("fr", options);
+  const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("fr", options);
 
-    editBtn.onclick = function() {
-      window.AirstoreUploader.open('TAGGING', { file: loadedImage });
-    }
+  img.properties.tags = img.properties.tags || [];
 
-    image.src = img.url_public;
-    description.innerHTML = `
+  loadedImage = img;
+  editBtn.removeAttribute('disabled');
+
+  editBtn.onclick = function() {
+    window.FilerobotUploader.open('TAGGING', { file: loadedImage });
+  }
+
+  image.src = img.url_public;
+  description.innerHTML = `
     <ul>
         <li>
           <span>File name: </span>
@@ -90,13 +94,11 @@ let options = {
         </li>
       </ul>
     `;
-  }
-};
+}
 
 window.addEventListener('load', function() {
-  if (window.AirstoreUploader) {
-    window.AirstoreUploader.init(options);
-    const openBtn = document.getElementById('open-modal-btn');
-    if (openBtn) openBtn.onclick = () => window.AirstoreUploader.open();
-  }
+  const FilerobotUploaderInstance = FilerobotUploader.init(options);
+  const openBtn = document.getElementById('open-modal-btn');
+
+  openBtn.onclick = () => FilerobotUploaderInstance.open();
 });
