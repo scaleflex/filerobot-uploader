@@ -148,7 +148,7 @@ const ModalFullScreen = styled.div`
     to {opacity: 1;}
   }
   
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     top: 20px;
     left: 20px;
     bottom: 20px;

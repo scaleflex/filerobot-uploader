@@ -13,7 +13,7 @@ let loadedImage = null;
 let options = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'],
   uploadParams: {
-    dir: '/'
+    dir: '/demo_filerobot_en'
    // dir: '/demo_filerobot_en'
   },
 
@@ -35,7 +35,7 @@ let options = {
     limit: 10,
     key: 'aaaa'
   },
-  language: 'fr',
+  language: 'en',
 
   onUpload: onUploadHandler
 };
