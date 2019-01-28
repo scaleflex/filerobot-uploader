@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  UploadedImages, HeaderWrap, Nav, NavItem, ButtonSearch, UploadInputBox, SearchGroup, InputSearch, SearchWrapper,
+  UploadedImages, HeaderWrap, Nav, ButtonSearch, UploadInputBox, SearchGroup, InputSearch, SearchWrapper,
   ButtonClose
 } from '../../styledComponents';
 import { getListFiles, searchFiles } from '../../services/api.service';
@@ -244,7 +244,7 @@ class UploadedImagesTab extends Component {
             <SearchGroup padding={'0px'}>
               <InputSearch
                 searchInputIndex={this.state.searchInputIndex}
-                type="search"
+                type="text"
                 innerRef={node => this._searchInput = node}
                 autoFocus={true}
                 value={searchPhrase}
