@@ -234,6 +234,7 @@ class UploadedImagesTab extends Component {
             {folderBrowser &&
             <FolderManager
               path={path}
+              rootDir={this.props.initialDir}
               folders={directories}
               goToLevelUpFolder={this.goToLevelUpFolder}
               changeFolder={this.activateFolder}

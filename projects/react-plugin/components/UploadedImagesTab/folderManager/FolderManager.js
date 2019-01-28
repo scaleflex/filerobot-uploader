@@ -24,7 +24,7 @@ class FolderManager extends Component {
 
   render() {
     const { showFileManager } = this.state;
-    const { folders = [], path } = this.props;
+    const { folders = [], path, rootDir } = this.props;
 
     return (
       <Fragment>
@@ -43,7 +43,7 @@ class FolderManager extends Component {
             <CloseManagerBtn onClick={this.toggleSideMenu}/>
           </ManagerHeader>
 
-          {path &&
+          {path && (path !== rootDir) &&
           <Folder onClick={this.props.goToLevelUpFolder}>
             <span className="btn-back"/>
             <Folder.Name title={I18n.t('file_manager.go_back')}>{'../'}</Folder.Name>
