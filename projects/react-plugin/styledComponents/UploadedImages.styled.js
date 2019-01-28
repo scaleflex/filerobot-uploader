@@ -77,4 +77,8 @@ export const ButtonClose = styled(CloseBtn)`
   left: 280px;
   width: 20px;
   top: 8px;
+  
+  :hover {
+    color: #00707C;
+  }
 `;
