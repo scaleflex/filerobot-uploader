@@ -70,7 +70,7 @@ export const UploadInputBox = styled.input`
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  zIndex: -1;
+  z-index: -1;
 `;
 
 export const ButtonClose = styled(CloseBtn)`
