@@ -56,7 +56,7 @@ export const FolderManagerWrapper = styled.div`
   bottom: 0;
   top: 0;
   color: #5D636B;
-  margin: ${props => props.showFileManager ? '0px' : '-200px'};
+  margin-left: ${props => props.showFileManager ? '0px' : '-200px'};
   //visibility: ${props => props.showFileManager ? 'visible' : 'hidden'};;
   width: 200px;
   background: rgb(245, 245, 245);
