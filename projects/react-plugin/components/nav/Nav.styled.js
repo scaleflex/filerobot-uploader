@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const Tab = styled.a`
   font-family: Roboto, sans-serif;
-  color: ${props => props.selected ? '#fff' : '#c0c1c1'};
-  background-color: ${props => props.selected ? 'rgb(64, 84, 91)' : 'transparent'};
+  color: ${props => props.selected ? props.theme.activeTabTextColor : props.theme.tabTextColor};
+  background-color: ${props => props.selected ? props.theme.activeTabBackground : 'transparent'};
   text-decoration: none;
   font-size: 12px;
   line-height: 21px;

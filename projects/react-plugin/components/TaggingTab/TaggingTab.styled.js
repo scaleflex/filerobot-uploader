@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const TaggingTabWrapper = styled.div`
   padding: 15px;
-  color: #1e262c;
+  color: ${p => p.theme.text || '#1e262c'};
   box-sizing: border-box;
   height: 100%;
   
@@ -81,8 +81,8 @@ const Textarea = styled.textarea.attrs({
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
-  color: rgb(85, 85, 85);
-  background: rgb(255, 255, 255);
+  color: ${p => p.theme.inputTextColor || 'rgb(85, 85, 85)'};
+  background: ${p => p.theme.inputBackground || 'rgb(255, 255, 255)'};
   border-radius: 4px 0 0 4px;
   box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -93,7 +93,7 @@ const Textarea = styled.textarea.attrs({
   :focus {
     border: 1px solid #5D636B;
     border-right: 0px solid transparent;
-    outline-color: rgb(77, 144, 254);
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
     outline-offset: -2px;
     outline-style: auto;
     outline-width: 5px;
@@ -110,8 +110,8 @@ const TagsInputWrapper = styled.div`
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857;
-    color: rgb(85, 85, 85);
-    background: rgb(255, 255, 255);
+    color: ${p => p.theme.inputTextColor || 'rgb(85, 85, 85)'};
+    background: ${p => p.theme.inputBackground || 'rgb(255, 255, 255)'};
     border-radius: 4px 0 0 4px;
     box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -122,7 +122,7 @@ const TagsInputWrapper = styled.div`
     :focus {
       border: 1px solid #5D636B;
       border-right: 0px solid transparent;
-      outline-color: rgb(77, 144, 254);
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
       outline-offset: -2px;
       outline-style: auto;
       outline-width: 5px;
@@ -132,17 +132,17 @@ const TagsInputWrapper = styled.div`
   .react-tagsinput--focused {
     border: 1px solid #5D636B;
     border-right: 0px solid transparent;
-    outline-color: rgb(77, 144, 254);
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
     outline-offset: -2px;
     outline-style: auto;
     outline-width: 5px;
   }
   
   .react-tagsinput-tag {
-    background-color: #cde69c;
+    background-color: ${p => p.theme.activeTabBackground || '#cde69c'};
     border-radius: 2px;
-    border: 1px solid #a5d24a;
-    color: #638421;
+    border: 1px solid ${p => p.theme.activeTabBackground || '#cde69c'};
+    color: ${p => p.theme.activeTabTextColor || '#638421'};
     display: inline-block;
     font-family: sans-serif;
     font-size: 13px;
@@ -185,8 +185,8 @@ const Button = styled.button`
   padding: 6px 12px;
   line-height: 23px;
   text-transform: uppercase;
-  color: #fff;
-  background-color: #00707C;
+  color: ${p => p.theme.buttonTextColor || '#fff'};
+  background-color: ${p => p.theme.buttonBackground || '#00707C'};
   background-repeat: repeat-x;
   border: none;
   border-radius: 4px;
@@ -202,11 +202,11 @@ const Button = styled.button`
   opacity: ${props => props.disabled ? 0.6 : 1};
 
   :hover {
-    background-color: ${props => props.disabled ? '#00707C' : '#096868'};
+    background-color: ${props => props.disabled ? props.theme.buttonBackground : '#096868'};
   }
 
   :focus {
-    outline-color: rgb(77, 144, 254);
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
     outline-offset: -2px;
     outline-style: auto;
     outline-width: 5px;
@@ -217,13 +217,13 @@ const Button = styled.button`
 
 function getSuccessStyles() {
   return `
-    color: #fff;
-    background-color: #28a745;
-    border-color: ##28a745;
+    color: ${p => p.theme.buttonTextColor || '#fff'};
+    background-color: ${p => p.theme.buttonBackground || '#28a745'};
+    border-color: ${p => p.theme.buttonBackground || '#28a745'};
     
     :hover {
-      color: #fff;
-      background-color: #218838;
+      color: ${p => p.theme.buttonTextColor || '#fff'};
+      background-color: ${p => p.theme.hoverButtonBackground || '#28a745'};
       border-color: #1e7e34;
     }
     
@@ -234,7 +234,7 @@ function getSuccessStyles() {
     
     :active {
       color: #fff;
-      background-color: #1e7e34;
+      background-color: ${p => p.theme.buttonBackground || '#1e7e34'};
       background-image: none;
       border-color: #1c7430;
     }`

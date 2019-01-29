@@ -23,7 +23,7 @@ class IconSidebar extends Component {
     return (
       <SidebarWrap>
         <SideBar id="airstore-uploader-tags-box">
-          <Label fs={'16px'} color={'black'}>{I18n.t('icons.color_filter')}</Label>
+          <Label fs={'16px'}>{I18n.t('icons.color_filter')}</Label>
           <ColorWrapper>
             <ColorItem
               key="all-color-wrapper"

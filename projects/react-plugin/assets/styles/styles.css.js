@@ -101,7 +101,6 @@ export default {
       // "left": "0",
       // "top": "50px",
       "border": "1px solid #ddd", // "borderTop": "1px solid #ddd",
-      "background": "rgb(245, 245, 245)",
       "overflow": "auto",
       "WebkitTransition": "all .3s cubic-bezier(.25,.46,.45,.94)",
       "transition": "all .3s cubic-bezier(.25,.46,.45,.94)",

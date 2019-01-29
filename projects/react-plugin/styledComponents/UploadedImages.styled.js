@@ -79,6 +79,6 @@ export const ButtonClose = styled(CloseBtn)`
   top: 8px;
   
   :hover {
-    color: #00707C;
+    color: ${p => p.theme.buttonBackground || '#00707C'};
   }
 `;

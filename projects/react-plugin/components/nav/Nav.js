@@ -1,14 +1,10 @@
 import React from 'react';
-import { CSS } from '../../assets/styles';
 import { Tab } from './Nav.styled';
 import { I18n } from 'react-i18nify';
-
+import { Nav } from '../UploadImagesTab/UserUploaderTab.styled';
 
 export default ({ tabs, activeTabId, ...props }) => (
-  <nav
-    className="airstore-uploader-navigation"
-    style={CSS.tabs.header.container}
-  >
+  <Nav className="airstore-uploader-navigation">
     {tabs.map((tab) => (
       <Tab
         selected={activeTabId === tab.id}
@@ -23,5 +19,5 @@ export default ({ tabs, activeTabId, ...props }) => (
         <span title={tab.fullName}>{I18n.t(tab.shortName)}</span>
       </Tab>
     ))}
-  </nav>
+  </Nav>
 );

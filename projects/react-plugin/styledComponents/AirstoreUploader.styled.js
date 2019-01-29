@@ -6,7 +6,7 @@ export const Dialog = styled.div`
   flex-direction: column;
   height: 100%;
   fontFamily: Roboto, sans-serif;
-  background: #181830;
+  background: ${p => p.theme.mainBackground || '#181830'};
             
   ::-webkit-scrollbar {
     height: 6px !important;

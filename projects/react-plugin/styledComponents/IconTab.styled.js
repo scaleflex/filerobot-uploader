@@ -21,7 +21,7 @@ export const Label = styled.div`
  text-align: ${props => props.center ? 'center' : 'left'};
   padding: ${props => props.p ? props.p : '10px 8px'};
   font-size: ${props => props.fs ? props.fs : 'inherit'};
-  color: ${props => props.color === 'black' ? '#1e262c' : ''};
+  color: ${props => props.theme.title || '#1e262c'};
   border-top: ${ props => props.bt ? '1px solid rgb(221, 221, 221)' : 'none'};
   margin-right: ${props => props.mr ? props.mr : 0};
 `;
@@ -33,8 +33,8 @@ export const InputSearch = styled.input.attrs({
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
-  color: rgb(85, 85, 85);
-  background: rgb(255, 255, 255);
+  color: ${p => p.theme.inputTextColor || 'rgb(85, 85, 85)'};
+  background: ${p => p.theme.inputBackground || 'rgb(255, 255, 255)'};
   border-radius: 4px 0 0 4px;
   box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -45,7 +45,7 @@ export const InputSearch = styled.input.attrs({
   :focus {
     border: 1px solid #5D636B;
     border-right: 0px solid transparent;
-    outline-color: rgb(77, 144, 254);
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
     outline-offset: -2px;
     outline-style: auto;
     outline-width: 5px;
@@ -57,8 +57,8 @@ export const ButtonSearch = styled.button`
   padding: 6px 12px;
   line-height: 23px;
   text-transform: uppercase;
-  color: #fff;
-  background-color: #00707C;
+  color: ${p => p.theme.buttonTextColor || '#fff'};
+  background-color: ${p => p.theme.buttonBackground || '#00707C'};
   background-repeat: repeat-x;
   border: none;
   border-radius: ${props => props.fullBr ? props.fullBr : '0 4px 4px 0'};
@@ -73,11 +73,11 @@ export const ButtonSearch = styled.button`
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
   :hover {
-    background-color: #096868;
+    background-color: ${p => p.theme.hoverButtonBackground || '#096868'};
   }
 
   :focus {
-    outline-color: rgb(77, 144, 254);
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
     outline-offset: -2px;
     outline-style: auto;
     outline-width: 5px;
@@ -102,7 +102,7 @@ export const SearchTitle = styled.h3`
   margin-top: -10%;
   font-weight: 200;
   display: none;
-  color: rgb(93, 99, 107);
+  color: ${p => p.theme.text || 'rgb(93, 99, 107)'};
   
   ${props => props.show && `
     display: block;
@@ -145,7 +145,7 @@ export const Tag = styled.div.attrs({ className: props => props.active ? 'ae-tag
   }
   
   ${props => props.active && `
-    background: #00707c;
+    background: ${props.theme.buttonBackground || '#00707C'};
     color: #fff;
     padding: 6px 21px 6px 9px;
   `}
@@ -368,7 +368,7 @@ export const Icon = styled.img`
 
 export const CountTag = styled.span`
   margin-left: 6px;
-  color: rgb(112, 118, 126);
+  color: ${p => p.theme.text || 'rgb(112, 118, 126)'};
 `;
 
 export const ThemeColors = styled.div`

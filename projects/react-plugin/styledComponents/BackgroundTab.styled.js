@@ -28,9 +28,9 @@ export const ColorType = styled.div`
 export const ColorItem = styled.div.attrs({ className: props => props.active ? 'ae-color-item' : '' })`
   position: relative;
   padding: 10px 5px;
-  border-left: ${props => props.active ? '6px solid #00707c' : '6px solid transparent'};
+  border-left: ${props => props.active ? '6px solid ' + props.theme.buttonBackground : '6px solid transparent'};
   font-size: 12px;
-  color: #1e262c;
+  color: ${p => p.theme.text || '#1e262c'};
   text-transform: capitalize;
   display: flex;
   cursor: pointer;
@@ -150,11 +150,11 @@ export const AddColorBtn = styled.div`
   font-size: 13px;
   //width: calc(100% - 32px);
   //text-align: center;
-  color: #00707b;
+  color: ${p => p.theme.buttonBackground || '#00707b'};
   
   :hover {
     //border: 1px solid #7f7f7f;
-    color: #00505b;
+    color: ${p => p.theme.hoverButtonBackground || '#00505b'};
   }
     
   ${props => props.hide && `display: none;`}

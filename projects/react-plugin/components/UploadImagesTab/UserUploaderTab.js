@@ -4,7 +4,8 @@ import { CSS, DragDropCss as styles } from '../../assets/styles/index';
 import { connect } from "react-redux";
 import { uploadFilesFromUrls, uploadFiles, modalClose } from '../../actions/index';
 import { isEnterClick } from '../../utils/index';
-import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper } from '../../styledComponents/index';
+import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
+import { Container, ItemName, BrowseButton } from './UserUploaderTab.styled';
 import { Spinner } from '../Spinner';
 import { I18n } from 'react-i18nify';
 
@@ -103,7 +104,7 @@ class UserUploaderTab extends Component {
       <div style={[styles.container]}>
         {
           step !== STEP.UPLOADED &&
-          <div
+          <Container
             onDragOver={e => {
               e.preventDefault();
               this.setState({ isDragOver: true })
@@ -121,7 +122,7 @@ class UserUploaderTab extends Component {
               this.setState({ isDragOver: false })
             }}
             onDrop={this.fileDropHandler}
-            style={[uploadBlock_style, this.state.isDragOver && { background: "rgba(210, 253, 207, 0.5)" }]}
+            isDragOver={this.state.isDragOver}
             method={'post'}
             encType="multipart/form-data"
           >
@@ -142,20 +143,17 @@ class UserUploaderTab extends Component {
                 />
 
                 <div style={[uploadBlock_style.inputBox.label]}>
-                  <span style={[uploadBlock_style.inputBox.label.dragDropText]}>
-                     {I18n.t('upload.drag_file_here')}
-                  </span>
-                  <div style={[uploadBlock_style.inputBox.label.orText]}>{I18n.t('upload.or')}</div>
-                  <button
+                  <SearchTitle show={true}>{I18n.t('upload.drag_file_here')}</SearchTitle>
+                  <ItemName >{I18n.t('upload.or')}</ItemName>
+                  <BrowseButton
                     key="browse-your-computer"
                     autoFocus={true}
-                    style={[CSS.button, { margin: 'auto', fontWeight: 400, textTransform: 'none' }]}
                     onClick={() => { this.fileInput.click() }}
                   >{I18n.t('upload.browse_your_computer')}
-                  </button>
-                  <div style={[uploadBlock_style.inputBox.label.orText, { paddingBottom: 0 }]}>
+                  </BrowseButton>
+                  <ItemName pb={'0'}>
                     {I18n.t('upload.or')}
-                  </div>
+                  </ItemName>
                   <SearchWrapper>
                     <SearchGroup>
                       <InputSearch
@@ -173,14 +171,9 @@ class UserUploaderTab extends Component {
                       >{I18n.t('upload.upload_btn')}</ButtonSearch>
                     </SearchGroup>
                   </SearchWrapper>
-                  <div style={[{
-                    fontSize: "12px",
-                    color: '#5D636B',
-                    fontWeight: "200",
-                    marginTop: "5px"
-                  }]}>
+                  <ItemName pt={'0'}>
                     {I18n.t('upload.accepted_file_types')}
-                  </div>
+                  </ItemName>
                 </div>
 
                 <div ref="submitBtn" className="ae-btn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">
@@ -199,7 +192,7 @@ class UserUploaderTab extends Component {
             <div style={[uploadBlock_style.errorBox]}>
               <span style={[uploadBlock_style.errorBox.errorMsg]} role="alert">{errorMsg}</span>
             </div>}
-          </div>
+          </Container>
         }
       </div>
     );

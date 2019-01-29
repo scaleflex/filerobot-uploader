@@ -17,7 +17,7 @@ export const FolderIcon = styled.div`
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  background-color: ${props => props.small ? '#00707C' : ' #708090'};
+  background-color: ${props => props.small ? props.theme.buttonBackground : ' #708090'};
   border-radius: ${props => props.small ? '0 1px 1px 1px' : '0 2px 2px 2px'};
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.39);
   margin-right: ${props => props.mr ? props.mr : 'auto'};
@@ -27,7 +27,7 @@ export const FolderIcon = styled.div`
     width: 50%;
     height: ${props => props.small ? '2px' : '3px'};
     border-radius: ${props => props.small ? '0 1px 0 0' : '0 2px 0 0'};
-    background-color: ${props => props.small ? '#00707C' : ' #708090'};
+    background-color: ${props => props.small ? props.theme.buttonBackground : ' #708090'};
     position: absolute;
     top: ${props => props.small ? '-2px' : '-3px'};
     left: 0px;
@@ -38,15 +38,15 @@ export const FolderToggleWrapper = styled.div`
   cursor: pointer;
   
   :hover ${FolderIcon} {
-    background-color: #00707C;
+    background-color: ${p => p.theme.buttonBackground || '#00707C'};
     
     :before {
-      background-color: #00707C;
+      background-color: ${p => p.theme.buttonBackground || '#00707C'};
     }
   }
   
   :hover ${FolderTitle} {
-    color: #00707C;
+    color: ${p => p.theme.buttonBackground || '#00707C'};
   }
 `;
 

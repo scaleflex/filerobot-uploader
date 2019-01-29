@@ -42,7 +42,7 @@ let options = {
     active: 'custom',
 
     custom: {
-      mainBackground: '',
+      mainBackground: '#f5f5f5',
       navBackground: '#181830',
       buttonBackground: '#00707C',
       hoverButtonBackground: '#096868',
@@ -50,10 +50,12 @@ let options = {
       inputOutlineColor: '#4d90fe',
       activeTabBackground: '#40545b',
       text: '#5d636b',
+      title: '#1e262c',
       inputTextColor: '#555555',
       tabTextColor: '#c0c1c1',
       activeTabTextColor: '#fff',
       buttonTextColor: '#fff',
+      border: '#d8d8d8'
     }
   },
 

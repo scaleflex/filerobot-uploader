@@ -88,7 +88,7 @@ class IconMonoColorSettings extends Component {
             <Spinner overlay show={isLoading} style={{ fontSize: 10 }}/>
           </SettingsIconWrapper>
           <MonoActionBlock>
-            <Label color={'black'}>{I18n.t('icons.customize_your_icon')}</Label>
+            <Label>{I18n.t('icons.customize_your_icon')}</Label>
             <ColorsWrapper>
               {COLORS.map((color, index) => (
                 <ColorIcon
@@ -110,7 +110,7 @@ class IconMonoColorSettings extends Component {
               />
             </ColorsWrapper>
             {themeColors && <ThemeColors>
-              <Label color={'black'} mr={'5px'} p={'0px'}>{I18n.t('icons.theme_colors')}:</Label>
+              <Label mr={'5px'} p={'0px'}>{I18n.t('icons.theme_colors')}:</Label>
               <ColorIcon onClick={() => { this.setColor(themeColors.primary); }} bgColor={themeColors.primary}/>
               <ColorIcon onClick={() => { this.setColor(themeColors.secondary); }} bgColor={themeColors.secondary}/>
             </ThemeColors>}
