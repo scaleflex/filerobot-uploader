@@ -38,6 +38,39 @@ let options = {
   },
   language: 'fr',
 
+  colorScheme: {
+    active: 'custom',
+    custom: {
+      mainBackground: '',
+      navBackground: '#181830',
+      buttonBackground: '#00707C',
+      hoverButtonBackground: '#096868',
+      inputBackground: '#fff',
+      inputOutlineColor: '#4d90fe',
+      activeTabBackground: '#40545b',
+      text: '#5d636b',
+      inputTextColor: '#555555',
+      tabTextColor: '#c0c1c1',
+      activeTabTextColor: '#fff',
+      buttonTextColor: '#fff',
+    },
+
+    test: {
+      mainBackground: '',
+      navBackground: 'orange',
+      buttonBackground: 'green',
+      hoverButtonBackground: 'lightgreen',
+      inputBackground: 'yellow',
+      inputOutlineColor: 'black',
+      activeTabBackground: 'red',
+      text: 'pink',
+      inputTextColor: 'grey',
+      tabTextColor: 'green',
+      activeTabTextColor: 'yellow',
+      buttonTextColor: 'black',
+    }
+  },
+
   onUpload: onUploadHandler
 };
 
