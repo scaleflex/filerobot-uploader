@@ -28,7 +28,10 @@ export default {
     drag_images_here: 'Glisser-déposer mon fichier ici',
     change_folder: 'Changer de répertoire',
     media_library: 'Bibliothèque des médias',
-    go_back: 'Retour'
+    go_back: 'Retour',
+    select: 'Sélectionner',
+    tag_image: 'Tagguer l\'image',
+    edit_image: 'Editer l\'image'
   },
   icons: {
     tab_title: 'Icônes gratuites',

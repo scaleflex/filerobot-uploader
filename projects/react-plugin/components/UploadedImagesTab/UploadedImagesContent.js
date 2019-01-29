@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName, EditIcon,
-  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, EditLabel, SelectIconWrapper, SelectIcon
+  Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
+  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, SelectIconWrapper, EditButton
 } from '../../styledComponents';
 import { connect } from 'react-redux';
 import { modalClose } from '../../actions';
@@ -148,17 +148,14 @@ class UploadedImagesContent extends Component {
 
         {isEditImage &&
         <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-          <EditIcon/>
-          <EditLabel>Edit image</EditLabel>
+          <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
         </EditIconWrapper>}
         {isTagImage &&
         <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
-          <EditIcon/>
-          <EditLabel>Edit info</EditLabel>
+          <EditButton fullBr={'4px'}>{I18n.t('file_manager.tag_image')}</EditButton>
         </TagIconWrapper>}
         <SelectIconWrapper onClick={() => { this.upload(item); }}>
-          <SelectIcon/>
-          <EditLabel>Select</EditLabel>
+          <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
         </SelectIconWrapper>
 
         <Overlay/>

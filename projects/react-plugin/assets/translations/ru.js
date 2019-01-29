@@ -28,7 +28,10 @@ export default {
     drag_images_here: 'Перетащите изображения сюда',
     change_folder: 'Изменить папку',
     media_library: 'Медиагалерея',
-    go_back: 'Назад'
+    go_back: 'Назад',
+    select: 'Выбрать',
+    tag_image: 'Изменить теги',
+    edit_image: 'Редактировать'
   },
   icons: {
     tab_title: 'Иконки',

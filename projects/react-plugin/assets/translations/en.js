@@ -28,7 +28,10 @@ export default {
     drag_images_here: 'Drag images here',
     change_folder: 'Change folder',
     media_library: 'Media Library',
-    go_back: 'Go back'
+    go_back: 'Go back',
+    select: 'Select',
+    tag_image: 'Tag image',
+    edit_image: 'Edit image'
   },
   icons: {
     tab_title: 'Free icons',
