@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName, EditIcon,
-  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper
+  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, EditLabel, SelectIconWrapper, SelectIcon
 } from '../../styledComponents';
 import { connect } from 'react-redux';
 import { modalClose } from '../../actions';
@@ -132,7 +132,6 @@ class UploadedImagesContent extends Component {
     return (
       <ImageWrapper
         style={{ ...style, width: Math.floor(columnWidth) }}
-        onClick={() => { this.upload(item); }}
         role="button"
         tabIndex={index}
         onKeyDown={(event) => { this.onKeyDown(event, item); }}
@@ -145,11 +144,24 @@ class UploadedImagesContent extends Component {
         </div>
         <ImageDescription>
           <ImageName>{item.name}</ImageName>
-          {isEditImage &&
-          <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}><EditIcon/></EditIconWrapper>}
-          {isTagImage &&
-          <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}><EditIcon/></TagIconWrapper>}
         </ImageDescription>
+
+        {isEditImage &&
+        <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
+          <EditIcon/>
+          <EditLabel>Edit image</EditLabel>
+        </EditIconWrapper>}
+        {isTagImage &&
+        <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
+          <EditIcon/>
+          <EditLabel>Edit info</EditLabel>
+        </TagIconWrapper>}
+        <SelectIconWrapper onClick={() => { this.upload(item); }}>
+          <SelectIcon/>
+          <EditLabel>Select</EditLabel>
+        </SelectIconWrapper>
+
+        <Overlay/>
       </ImageWrapper>
     );
   }
