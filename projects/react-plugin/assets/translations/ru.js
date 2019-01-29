@@ -18,7 +18,8 @@ export default {
     file_already_exists: 'Файл уже существует в галерее',
     all: 'Все',
     too_small: 'Нет поддержки на мобильных устройствах',
-    close: 'Закрыть'
+    close: 'Закрыть',
+    image_editor: 'Image Editor'
   },
   file_manager: {
     tab_title: 'Галерея',

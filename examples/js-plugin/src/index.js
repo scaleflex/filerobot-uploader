@@ -40,6 +40,7 @@ let options = {
 
   colorScheme: {
     active: 'custom',
+
     custom: {
       mainBackground: '',
       navBackground: '#181830',
@@ -53,21 +54,6 @@ let options = {
       tabTextColor: '#c0c1c1',
       activeTabTextColor: '#fff',
       buttonTextColor: '#fff',
-    },
-
-    test: {
-      mainBackground: '',
-      navBackground: 'orange',
-      buttonBackground: 'green',
-      hoverButtonBackground: 'lightgreen',
-      inputBackground: 'yellow',
-      inputOutlineColor: 'black',
-      activeTabBackground: 'red',
-      text: 'pink',
-      inputTextColor: 'grey',
-      tabTextColor: 'green',
-      activeTabTextColor: 'yellow',
-      buttonTextColor: 'black',
     }
   },
 

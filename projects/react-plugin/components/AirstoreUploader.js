@@ -33,6 +33,10 @@ export const TaggingTab = Loadable({
   loader: () => import(/* webpackChunkName: "tagging" */ './TaggingTab/TaggingTab'),
   loading: () => <Spinner overlay show={true}/>,
 });
+export const ImageEditor = Loadable({
+  loader: () => import(/* webpackChunkName: "image-editor" */ './imageEditor/ImageEditorWrapper'),
+  loading: () => <Spinner overlay show={true}/>
+});
 const ToastMessageFactory = React.createFactory(ToastMessageAnimated);
 const tabs = [
   {
@@ -71,6 +75,13 @@ const postUploadTabs = [
     shortName: 'tagging.tab_title',
     iconClass: 'sfi-airstore-tagging',
     getContent: (props) => <TaggingTab {...props}/>
+  },
+  {
+    id: 'IMAGE_EDITOR',
+    fullName: 'IMAGE EDITOR',
+    shortName: 'upload.image_editor',
+    iconClass: 'sfi-airstore-image-editor',
+    getContent: (props) => <ImageEditor {...props}/>
   }
 ]
 

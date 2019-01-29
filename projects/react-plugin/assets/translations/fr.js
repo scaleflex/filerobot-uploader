@@ -18,7 +18,8 @@ export default {
     file_already_exists: 'Le fichier existe déjà dans votre galerie',
     all: 'Tout afficher',
     too_small: 'Le téléchargement de fichier n\'est pas disponible sur mobile.',
-    close: 'Fermer'
+    close: 'Fermer',
+    image_editor: 'Image Editor'
   },
   file_manager: {
     tab_title: 'Ma galerie',

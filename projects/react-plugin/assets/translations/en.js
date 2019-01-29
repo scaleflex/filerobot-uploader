@@ -18,7 +18,8 @@ export default {
     file_already_exists: 'File already exists in your gallery',
     all: 'All',
     too_small: 'The Uploader is not available on mobile, please use it on a Desktop',
-    close: 'Close'
+    close: 'Close',
+    image_editor: 'Image Editor'
   },
   file_manager: {
     tab_title: 'My gallery',
