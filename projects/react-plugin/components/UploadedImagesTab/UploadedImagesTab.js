@@ -142,6 +142,8 @@ class UploadedImagesTab extends Component {
     const { uploaderConfig } = this.props;
     const { container, language } = uploaderConfig;
 
+    if (searchPhrase.length < 2) { this.goToDefaultFolder(); }
+
     this.setState({
       isShowMoreImages: !!offset,
       isLoading: !offset
@@ -211,10 +213,19 @@ class UploadedImagesTab extends Component {
     })
   }
 
+  onKeyDownSearch = (event) => {
+    if (isEnterClick(event) && (this.state.searchPhrase.length > 1))
+      this.search();
+
+    else if (isEnterClick(event) && (this.state.searchPhrase.length === 0))
+      this.goToDefaultFolder();
+  }
+
   render() {
     const {
-      isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase
+      isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = ''
     } = this.state;
+    const isTooShortSearchPhrase = searchPhrase.length < 2;
 
     return (
       <UploadedImages>
@@ -251,11 +262,12 @@ class UploadedImagesTab extends Component {
                 value={searchPhrase}
                 placeholder={I18n.t('file_manager.search_by_file_name_tag_desc')}
                 onChange={this.onSearchChange}
-                onKeyDown={ev => isEnterClick(ev) && this.search()}
+                onKeyDown={this.onKeyDownSearch}
               />
               {searchPhrase && <ButtonClose onClick={this.goToDefaultFolder}/>}
               <ButtonSearch
                 key="ok"
+                disabled={isTooShortSearchPhrase}
                 className="ae-btn"
                 onClick={() => { this.search(); }}
               >{I18n.t('upload.search')}</ButtonSearch>
