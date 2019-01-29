@@ -82,6 +82,10 @@ const _setUploaderConfig = (state, config = {}) => {
     limit: config.limitImagesPerResponse || config.LIMIT_IMAGES_PER_RESPONSE || CONFIG.limitImagesPerResponse || 100,
     folderBrowser: isDefined(config.folderBrowser) ? config.folderBrowser : CONFIG.folderBrowser,
     language: isDefined(config.language) ? config.language : CONFIG.language,
+    imageEditor: {
+      active: config.modules.includes('IMAGE_EDITOR'),
+      ...config.imageEditor
+    },
     tagging: {
       active: config.modules.includes('TAGGING'),
       ...config.tagging

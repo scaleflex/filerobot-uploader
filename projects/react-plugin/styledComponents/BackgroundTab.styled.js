@@ -63,6 +63,10 @@ export const EditIconWrapper = styled.div`
   }
 `;
 
+export const TagIconWrapper = styled(EditIconWrapper)`
+
+`;
+
 export const ImageWrapper = styled.div`
   width: 100%;
   height: ${props => props.height}px;
@@ -257,7 +261,7 @@ export const ImageName = styled.div`
   display: inline-block;
   vertical-align: middle;
   line-height: 20px;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

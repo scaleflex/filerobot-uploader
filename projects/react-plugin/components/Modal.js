@@ -222,14 +222,13 @@ export class Modal extends Component {
   }
 
   render() {
-    let { onClose = () => {}, ...otherProps } = this.props;
-    const isCloseBtn = !!this.props.onClose;
+    let { onClose = () => {}, isHideCloseBtn, ...otherProps } = this.props;
 
     return createPortal(
       <Fragment>
         <ModalOverlay onClick={onClose}/>
         <ModalFullScreen {...this.props} innerRef={node => this._modal = node}>
-          {isCloseBtn && <CloseBtn onClick={onClose}/>}
+          {!isHideCloseBtn && <CloseBtn onClick={onClose}/>}
           <ModalContent h="100%" {...otherProps}>
             {this.props.children}
           </ModalContent>

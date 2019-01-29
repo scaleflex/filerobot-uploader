@@ -249,6 +249,7 @@ class UploadedImagesTab extends Component {
               folders={directories}
               goToLevelUpFolder={this.goToLevelUpFolder}
               changeFolder={this.activateFolder}
+              isLoading={isLoading}
             />}
           </Nav>
 
@@ -293,6 +294,7 @@ class UploadedImagesTab extends Component {
           onShowMoreImages={this.onShowMoreImages}
           isShowMoreImages={this.state.isShowMoreImages}
           isLoading={isLoading}
+          path={path}
         />
 
         <Spinner overlay show={isLoading || (step === STEP.UPLOADING)}/>

@@ -1,27 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ImageEditor } from 'image-editor-reactjs/dist';
+import { connect } from 'react-redux'
+import { modalClose } from '../../actions';
 
-const IMAGE_EDITOR_CONFIG = {
-  UPLOAD_KEY: '197779631d2d46c4b67ff9757720391d',
-  AIRSTORE_UPLOAD_KEY: '197779631d2d46c4b67ff9757720391d',
-  CONTAINER: 'jolipage002-global',
-  UPLOAD_CONTAINER: 'jolipage002-global',
-  PROCESS_WITH_CLOUDIMAGE: false,
-  CLOUDIMAGE_TOKEN: 'scaleflex'
+
+class ImageEditorWrapper extends Component {
+  goBack = () => {
+    this.props.setPostUpload(false);
+  }
+
+  render() {
+    const { files: [ file = {} ] = {}, path } = this.props;
+    const { uploadKey, container, uploadParams } = this.props.config
+
+    return (
+      <ImageEditor
+        config={{
+          UPLOAD_KEY: uploadKey,
+          AIRSTORE_UPLOAD_KEY: uploadKey,
+          CONTAINER: container,
+          UPLOAD_CONTAINER: container,
+          PROCESS_WITH_CLOUDIMAGE: false,
+          HIDE_CLOUDIMAGE_PROCESS: true,
+          UPLOAD_PARAMS: {
+            ...uploadParams,
+            dir: path || uploadParams.dir
+          }
+        }}
+        src={file.url_permalink}
+        onUpload={this.goBack}
+        onClose={this.goBack}
+      />
+    )
+  }
 }
 
 
-const ImageEditorWrapper = ({ src = '', }) => {
+const mapStateToProps = state => ({
+  uploadHandler: state.uploader.uploaderConfig.uploadHandler,
+  editorConfig: state.uploader.uploaderConfig.imageEditor,
+  language: state.uploader.uploaderConfig.language,
+  config: state.uploader.uploaderConfig
+})
 
-  return (
-    <ImageEditor
-      config={IMAGE_EDITOR_CONFIG}
-      src={`https://${src}`}
-      onUpload={(boom) => { console.log('boom', boom); }}
-      onClose={() => {}}
-    />
-  );
-}
-
-
-export default ImageEditorWrapper;
+export default connect(
+  mapStateToProps,
+  { modalClose }
+)(ImageEditorWrapper);

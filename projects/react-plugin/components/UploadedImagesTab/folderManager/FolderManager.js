@@ -24,7 +24,7 @@ class FolderManager extends Component {
 
   render() {
     const { showFileManager } = this.state;
-    const { folders = [], path, rootDir } = this.props;
+    const { folders = [], path, rootDir, isLoading } = this.props;
 
     return (
       <Fragment>
@@ -43,13 +43,13 @@ class FolderManager extends Component {
             <CloseManagerBtn onClick={this.toggleSideMenu}/>
           </ManagerHeader>
 
-          {path && (path !== rootDir) &&
+          {path && (path !== rootDir) && !isLoading &&
           <Folder onClick={this.props.goToLevelUpFolder}>
             <span className="btn-back"/>
             <Folder.Name title={I18n.t('file_manager.go_back')}>{'../'}</Folder.Name>
           </Folder>}
 
-          {folders.map(folder => (
+          {!isLoading && folders.map(folder => (
             <FolderItem
               key={folder.uuid}
               folder={folder}

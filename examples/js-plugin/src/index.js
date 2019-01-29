@@ -11,7 +11,7 @@ let loadedImage = null;
 
 // Configuration
 let options = {
-  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'],
+  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: {
     dir: '/demo_filerobot_fr'
    // dir: '/demo_filerobot_en'

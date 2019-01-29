@@ -101,7 +101,8 @@ class AirstoreUploader extends Component {
       postUpload: false,
       prevTab: 'UPLOAD',
       files: [],
-      isTooSmall: window.innerWidth < 685
+      isTooSmall: window.innerWidth < 685,
+      path: ''
     };
 
     window.AirstoreUploader = window.AirstoreUploader || {};
@@ -143,8 +144,8 @@ class AirstoreUploader extends Component {
     }
   }
 
-  setPostUpload = (value, tabId = '', prevTab = '') => {
-    this.setState({ postUpload: value, prevTab });
+  setPostUpload = (value, tabId = '', prevTab = '', nextStateProps) => {
+    this.setState({ postUpload: value, prevTab, ...nextStateProps });
     this.props.activateTab(tabId || this.state.prevTab);
   }
 
@@ -193,11 +194,12 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.isVisible) return null;
 
-    const { activeModules, postUpload, files, prevTab, isTooSmall } = this.state;
+    const { activeModules, postUpload, files, prevTab, isTooSmall, path } = this.state;
     const { activeTabId, initialOptions } = this.props;
     const contentProps = {
       files,
       prevTab,
+      path,
 
       showAlert: this.showAlert,
       themeColors: initialOptions.themeColors,
@@ -206,14 +208,23 @@ class AirstoreUploader extends Component {
       onClose: this.props.onClose
     };
     const filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
-    const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
+    const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId) || {};
+    const isHideHeader = activeTab.id === 'IMAGE_EDITOR';
 
     return (
-      <Modal isTooSmall={isTooSmall} noBorder fullScreen={'md'} onClose={this.closeModal} style={{ borderRadius: 5 }}>
+      <Modal
+        isTooSmall={isTooSmall}
+        noBorder
+        fullScreen={'md'}
+        onClose={this.closeModal}
+        style={{ borderRadius: 5 }}
+        isHideCloseBtn={isHideHeader}
+      >
         {!isTooSmall ?
           <StyleRoot className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
             <FocusLock>
               <Dialog role="dialog" className="ae-dialog">
+                {!isHideHeader &&
                 <div style={[CSS.tabs.header]} className="ae-tabs-header">
 
                   <Nav
@@ -222,7 +233,7 @@ class AirstoreUploader extends Component {
                     activateTab={this.activateTab}
                   />
 
-                </div>
+                </div>}
                 <div style={[CSS.tabs.content, activeTabId === 'ICONS' && { overflow: 'hidden' }]}>
                   {activeTab &&
                   <div style={[{ width: '100%', minWidth: 540, overflow: 'auto' }]}>

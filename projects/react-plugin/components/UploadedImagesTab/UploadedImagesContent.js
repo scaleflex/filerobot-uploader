@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName, EditIcon,
-  EditIconWrapper, ShowMoreResultsSpinner
+  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper
 } from '../../styledComponents';
 import { connect } from 'react-redux';
 import { modalClose } from '../../actions';
@@ -61,7 +61,7 @@ class UploadedImagesContent extends Component {
     this.props.onModalClose();
   }
 
-  onEditImage = (event, item) => {
+  onTagImage = (event, item) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -70,6 +70,19 @@ class UploadedImagesContent extends Component {
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
+    }
+  }
+
+  onEditImage = (event, item) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.props.uploaderConfig.imageEditor.active) {
+      const { path } = this.props;
+      const files = [{...item, public_link: item.url_permalink }];
+
+      this.props.saveUploadedFiles(files);
+      this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path });
     }
   }
 
@@ -113,7 +126,8 @@ class UploadedImagesContent extends Component {
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
-    const isEditImage = this.props.uploaderConfig.tagging.active;
+    const isTagImage = this.props.uploaderConfig.tagging.active;
+    const isEditImage = this.props.uploaderConfig.imageEditor.active;
 
     return (
       <ImageWrapper
@@ -133,6 +147,8 @@ class UploadedImagesContent extends Component {
           <ImageName>{item.name}</ImageName>
           {isEditImage &&
           <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}><EditIcon/></EditIconWrapper>}
+          {isTagImage &&
+          <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}><EditIcon/></TagIconWrapper>}
         </ImageDescription>
       </ImageWrapper>
     );
