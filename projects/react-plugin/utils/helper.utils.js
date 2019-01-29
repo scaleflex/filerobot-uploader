@@ -22,11 +22,14 @@ const cursorToEnd = contentEditableElement => {
 
 const isEnterClick = event => event && (event.which || event.keyCode) === 13;
 
+const isEsc= event => event && (event.which || event.keyCode) === 27;
+
 const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) === i);
 
 export {
   uniqueArrayOfStrings,
   isEnterClick,
   cursorToEnd,
-  deepCopy
+  deepCopy,
+  isEsc
 }
