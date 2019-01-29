@@ -11,8 +11,8 @@ import theme, { colorSchemes } from '../assets/styles/colorScheme';
 I18n.setTranslations(translations);
 
 export default ({ initialOptions, opened = false, onClose = () => {}, initialTab = null, ...otherProps }) => {
-  const colorTheme = initialOptions.colorScheme.active;
-  const colors = colorTheme === 'custom' ? initialOptions.colorScheme[colorTheme] : colorSchemes[colorTheme];
+  const colorTheme = colorSchemes.active;
+  const colors = colorTheme === 'default' ? initialOptions.colorScheme[colorTheme] : colorSchemes[colorTheme];
   const resultTheme = {
     ...theme,
     ...colors
