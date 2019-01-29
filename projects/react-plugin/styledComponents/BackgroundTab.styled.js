@@ -53,8 +53,6 @@ export const TabWrap = styled.div`
 
 export const EditIconWrapper = styled.div`
   display: none;
-  position: absolute;
-  top: 22px;
   width: 100%;
   padding: 4px;
   z-index: 50;
@@ -62,21 +60,11 @@ export const EditIconWrapper = styled.div`
 `;
 
 export const TagIconWrapper = styled(EditIconWrapper)`
-  top: 60px;
+
 `;
 
 export const SelectIconWrapper = styled(EditIconWrapper)`
-  top: 98px;
-`;
 
-export const Overlay = styled.div`
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.8);
 `;
 
 export const ImageWrapper = styled.div`
@@ -90,10 +78,6 @@ export const ImageWrapper = styled.div`
   
   :hover img {
     transform: scale(1.1);
-  }
-  
-  :hover ${Overlay} {
-    display: block;
   }
   
   :hover ${EditIconWrapper} {
@@ -116,6 +100,23 @@ export const ImageWrapper = styled.div`
   :hover:after {
     visibility: visible;
     /*background: rgba(255, 255, 255, 0.3);*/
+  }
+`;
+
+export const Overlay = styled.div`
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 25px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+  
+  ${ImageWrapper}:hover & {
+    display: flex;
   }
 `;
 

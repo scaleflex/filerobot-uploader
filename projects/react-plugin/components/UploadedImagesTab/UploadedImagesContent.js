@@ -146,19 +146,19 @@ class UploadedImagesContent extends Component {
           <ImageName>{item.name}</ImageName>
         </ImageDescription>
 
-        {isEditImage &&
-        <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-          <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
-        </EditIconWrapper>}
-        {isTagImage &&
-        <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
-          <EditButton fullBr={'4px'}>{I18n.t('file_manager.tag_image')}</EditButton>
-        </TagIconWrapper>}
-        <SelectIconWrapper onClick={() => { this.upload(item); }}>
-          <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
-        </SelectIconWrapper>
-
-        <Overlay/>
+        <Overlay>
+          {isEditImage &&
+          <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
+            <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
+          </EditIconWrapper>}
+          {isTagImage &&
+          <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
+            <EditButton fullBr={'4px'}>{I18n.t('file_manager.tag_image')}</EditButton>
+          </TagIconWrapper>}
+          <SelectIconWrapper onClick={() => { this.upload(item); }}>
+            <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
+          </SelectIconWrapper>
+        </Overlay>
       </ImageWrapper>
     );
   }
