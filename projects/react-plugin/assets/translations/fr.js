@@ -63,6 +63,7 @@ export default {
     add_a_tag_separate_by_pressing_enter: 'Ajouter un tag (séparer par ENTRÉE)',
     generate_tags: 'Taggage auto',
     save: 'Sauvegarder',
-    asset_could_not_be_automatically_tagged : 'L\'image n\'a pas pu être tagguée automatiquement'
+    asset_could_not_be_automatically_tagged : 'L\'image n\'a pas pu être tagguée automatiquement',
+    auto_tagging_processing: 'Auto-tagging en cours...'
   }
 };

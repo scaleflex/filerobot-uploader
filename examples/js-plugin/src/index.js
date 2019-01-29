@@ -13,7 +13,7 @@ let loadedImage = null;
 let options = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING'],
   uploadParams: {
-    dir: '/demo_filerobot_en'
+    dir: '/demo_filerobot_fr'
    // dir: '/demo_filerobot_en'
   },
 
@@ -29,13 +29,14 @@ let options = {
   folderBrowser: true,
 
   tagging: {
+    executeAfterUpload: true,
     autoTaggingButton: true,
     provider: 'google',
     confidence: 60,
     limit: 10,
     key: 'aaaa'
   },
-  language: 'en',
+  language: 'fr',
 
   onUpload: onUploadHandler
 };

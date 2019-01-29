@@ -6,7 +6,7 @@ import { Spinner } from '../Spinner';
 import {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon,
-  ErrorWrapper, ErrorParagraph, GoBack, BackIcon
+  ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
@@ -19,7 +19,7 @@ class TaggingTab extends Component {
   constructor(props) {
     super();
 
-    const { files = {}, language } = props;
+    const { files = {}, language, autoTaggingButton, executeAfterUpload } = props;
     const [file = {}] = files;
     const date = new Date();
     const options = {
@@ -35,12 +35,25 @@ class TaggingTab extends Component {
       tags: file.properties.tags || [],
       description: file.properties.description || '',
       isLoading: false,
+      isGeneratingTags: false,
       errorMessage: '',
       currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : currentTime,
       lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : currentTime,
       tagsGenerated: false
     };
+
+    this.isAutoTaggingButton = autoTaggingButton && !executeAfterUpload;
+  }
+
+  componentDidMount() {
+    const { executeAfterUpload } = this.props;
+
+    if (executeAfterUpload && !this.state.tags.length) {
+      this.setState({ isGeneratingTags: true });
+
+      this.generateTags();
+    }
   }
 
   handleDescriptionChange = event => {
@@ -95,7 +108,7 @@ class TaggingTab extends Component {
       if (tags) {
         if (!tags.length) {
           this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
-          this.setState({ isLoading: false });
+          this.setState({ isLoading: false, isGeneratingTags: false });
 
           return;
         }
@@ -108,18 +121,20 @@ class TaggingTab extends Component {
         this.setState({
           tags: uniqueArrayOfStrings(nextTags),
           isLoading: false,
+          isGeneratingTags: false,
           tagsGenerated: true
         });
       } else {
         this.setState({
             isLoading: false,
+            isGeneratingTags: false,
             errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
           }
         );
       }
     });
 
-    this.setState({ isLoading: true, errorMessage: '' });
+    this.setState({ isLoading: true, isGeneratingTags: true, errorMessage: '' });
   }
 
   goBack = () => {
@@ -127,8 +142,8 @@ class TaggingTab extends Component {
   }
 
   render() {
-    const { isLoading, errorMessage, currentTime } = this.state;
-    const { autoTagging, prevTab } = this.props;
+    const { isLoading, errorMessage, currentTime, isGeneratingTags } = this.state;
+    const { prevTab } = this.props;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
 
@@ -194,7 +209,7 @@ class TaggingTab extends Component {
 
         <TaggingFooter>
 
-          {autoTagging &&
+          {this.isAutoTaggingButton &&
           <Button
             disabled={this.state.tagsGenerated}
             onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon data-tip={generateTagInfo}/></Button>}
@@ -205,6 +220,8 @@ class TaggingTab extends Component {
 
         <Spinner show={isLoading} overlay/>
 
+        {isGeneratingTags && <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
+
         <ReactTooltip offset={{top: 0, right: 2}} effect="solid"/>
       </TaggingTabWrapper>
     )
@@ -213,7 +230,8 @@ class TaggingTab extends Component {
 
 const mapStateToProps = state => ({
   uploadHandler: state.uploader.uploaderConfig.uploadHandler,
-  autoTagging: state.uploader.uploaderConfig.tagging.autoTaggingButton,
+  autoTaggingButton: state.uploader.uploaderConfig.tagging.autoTaggingButton,
+  executeAfterUpload: state.uploader.uploaderConfig.tagging.executeAfterUpload,
   taggingConfig: state.uploader.uploaderConfig.tagging,
   language: state.uploader.uploaderConfig.language,
   config: state.uploader.uploaderConfig

@@ -64,6 +64,7 @@ export default {
     add_a_tag_separate_by_pressing_enter: 'Добавить тег (отделите нажатием Enter)',
     generate_tags: 'Создать теги',
     save: 'Сохранить',
-    asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged'
+    asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged',
+    auto_tagging_processing: 'Auto-tagging processing...'
   }
 };

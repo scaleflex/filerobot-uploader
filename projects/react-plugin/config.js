@@ -11,6 +11,7 @@ export default {
   language: 'en',
   folderBrowser: true,
   tagging: {
+    executeAfterUpload: false,
     autoTaggingButton: false,
     provider: 'google',
     confidence: 80,
