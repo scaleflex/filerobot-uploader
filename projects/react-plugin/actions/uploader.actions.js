@@ -14,7 +14,12 @@ export const modalOpen = tabId => dispatch => dispatch({ type: MODAL_OPEN, tabId
 
 export const modalClose = () => dispatch => dispatch({ type: 'MODAL_CLOSE', payload: null });
 
-export const activateTab = tabId => dispatch => dispatch({ type: ACTIVATE_TAB, tabId });
+export const activateTab = tabId => dispatch => {
+  dispatch({ type: ACTIVATE_TAB, tabId });
+
+  return Promise.resolve();
+}
+
 
 export const setUploaderConfig = config => dispatch => dispatch({ type: SET_UPLOADER_CONFIG, config });
 

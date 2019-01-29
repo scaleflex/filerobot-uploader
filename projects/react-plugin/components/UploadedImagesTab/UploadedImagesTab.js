@@ -30,7 +30,7 @@ class UploadedImagesTab extends Component {
       directories: [],
       isShowMoreImages: false,
       showFileManager: false,
-      path: props.initialDir,
+      path: props.path || props.initialDir,
       folderBrowser: props.uploaderConfig.folderBrowser
     };
   }

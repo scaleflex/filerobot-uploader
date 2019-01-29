@@ -144,9 +144,14 @@ class AirstoreUploader extends Component {
     }
   }
 
-  setPostUpload = (value, tabId = '', prevTab = '', nextStateProps) => {
-    this.setState({ postUpload: value, prevTab, ...nextStateProps });
-    this.props.activateTab(tabId || this.state.prevTab);
+  componentWillUnmount() {
+    this.setState({ path: '' });
+  }
+
+  setPostUpload = (value, tabId = '', prevTab = '', nextStateProps = {}) => {
+    this.props.activateTab(tabId || this.state.prevTab).then(() => {
+      this.setState({ postUpload: value, prevTab, ...nextStateProps });
+    });
   }
 
   saveUploadedFiles = (files = []) => { this.setState({ files }); }
@@ -208,8 +213,8 @@ class AirstoreUploader extends Component {
       onClose: this.props.onClose
     };
     const filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
-    const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId) || {};
-    const isHideHeader = activeTab.id === 'IMAGE_EDITOR';
+    const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
+    const isHideHeader = activeTab && (activeTab.id === 'IMAGE_EDITOR');
 
     return (
       <Modal

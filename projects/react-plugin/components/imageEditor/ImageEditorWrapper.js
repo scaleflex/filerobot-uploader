@@ -27,6 +27,7 @@ class ImageEditorWrapper extends Component {
             dir: path || uploadParams.dir
           }
         }}
+        closeOnLoad={false}
         src={file.url_permalink}
         onUpload={this.goBack}
         onClose={this.goBack}
