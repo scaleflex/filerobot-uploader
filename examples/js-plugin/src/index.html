@@ -325,6 +325,7 @@
           key: 'aaaa'
         },
         language: 'en',
+
         colorScheme: {
           active: 'custom',
           custom: {
@@ -344,12 +345,19 @@
             border: '#d8d8d8'
           }
         },
-        onUpload: onUploadHandler
+
+        onUpload: (files) => {
+          console.log('files: ', files);
+          alert('Files uploaded successfully! check the console to see the uploaded files');
+        }
       };
 
       let uploader = FilerobotUploader.init(options);
+      let button = document.createElement('button');
 
-      uploader.open();
+      button.onclick = () => { uploader.open(); }
+      button.innerText = 'Open Uploader';
+      document.body.appendChild(button);
     &lt;/script&gt;</code></pre>
     </figure>
   </section>

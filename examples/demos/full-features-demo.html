@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Uploader</title>
+</head>
+<body>
+
+<script src="https://js.filerobot.com/airstore-uploader.last.js"></script>
+
+<script>
+  let options = {
+    modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
+    uploadParams: {
+      dir: '/your_root_folder'
+    },
+
+    filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+
+    container: 'example',
+
+    openpixKey: 'xxxxxxxxxxxxxxx',
+    initialTab: 'UPLOAD',
+
+    folderBrowser: true,
+
+    tagging: {
+      executeAfterUpload: true,
+      autoTaggingButton: true,
+      provider: 'google',
+      confidence: 60,
+      limit: 10,
+      key: 'aaaa'
+    },
+
+    language: 'en',
+
+    colorScheme: {
+      active: 'custom',
+
+      custom: {
+        mainBackground: '#f5f5f5',
+        navBackground: '#181830',
+        buttonBackground: '#00707C',
+        hoverButtonBackground: '#096868',
+        inputBackground: '#fff',
+        inputOutlineColor: '#4d90fe',
+        activeTabBackground: '#40545b',
+        text: '#5d636b',
+        title: '#1e262c',
+        inputTextColor: '#555555',
+        tabTextColor: '#c0c1c1',
+        activeTabTextColor: '#fff',
+        buttonTextColor: '#fff',
+        border: '#d8d8d8'
+      }
+    },
+
+    onUpload: (files) => {
+      console.log('files: ', files);
+      alert('Files uploaded successfully! check the console to see the uploaded files');
+    }
+  };
+
+
+  let uploader = FilerobotUploader.init(options);
+  let button = document.createElement('button');
+
+  button.onclick = () => { uploader.open(); }
+  button.innerText = 'Open Uploader';
+  document.body.appendChild(button);
+
+</script>
+</body>
+</html>
