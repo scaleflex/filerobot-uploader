@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <style>.on-load { display: none }</style>
-  <title>Airstore Uploader</title>
+  <title>Filerobot Uploader</title>
 </head>
 <body>
 
@@ -51,7 +51,7 @@
 
     <p>Use latest CDNized plugin version</p>
     <figure class="highlight">
-      <pre><code class="javascript">&lt;script src="https://js.filerobot.com/airstore-uploader.last.js"&gt;&lt;/script&gt;</code></pre>
+      <pre><code class="javascript">&lt;script src="https://js.filerobot.com/filerobot-uploader.last.js"&gt;&lt;/script&gt;</code></pre>
     </figure>
   </section>
 
@@ -142,7 +142,7 @@
     <h5><b>modules</b>: string[]</h5>
     <p><b>default</b>: <small>["UPLOAD", "MY_GALLERY", "ICONS_GALLERY", "IMAGES_GALLERY"]</small></p>
     <p>Modules (tabs) in file uploader modal.</p>
-    <p>Available modules: <small><b>UPLOAD</b>, <b>MY_GALLERY</b>, <b>ICONS_GALLERY</b>, <b>IMAGES_GALLERY</b>, <b>TAGGING</b></small></p>
+    <p>Available modules: <small><b>UPLOAD</b>, <b>MY_GALLERY</b>, <b>ICONS_GALLERY</b>, <b>IMAGES_GALLERY</b>, <b>TAGGING</b>, <b>IMAGE_EDITOR</b></small></p>
     <figure class="highlight">
 <pre><code class="javascript">let options = {
     ...,
@@ -179,6 +179,7 @@
 
     <h5><b>tagging</b>: object</h5>
     <p>> <strong>key</strong>: string (require) - key to use image recognition technology</p>
+    <p>> <strong>executeAfterUpload</strong>: bool - will automatically generate tags on upload image based on image recognition technology</p>
     <p>> <strong>autoTaggingButton</strong>: bool - add button which will automatically generate tags based on image recognition technology</p>
     <p>> <strong>provider</strong>: string [google|imagga] - recognition provider</p>
     <p>> <strong>confidence</strong>: number [0..100] - confidence of recognition</p>
@@ -188,11 +189,47 @@
     ...,
 
     tagging: {
+      executeAfterUpload: false,
       autoTaggingButton: true,
       provider: 'google',
       confidence: 60,
       limit: 10,
       key: 'xxxxx'
+    }
+  };</code></pre>
+    </figure>
+
+    <h5><b>colorScheme</b>: object</h5>
+    <p>> <strong>active</strong>: string (default: 'default')- active theme scheme</p>
+
+    <p>> <strong>custom</strong>: object - custom color scheme</p>
+
+    <p>> <strong>custom.mainBackground</strong>: color - main background</p>
+    <p>> <strong>custom.navBackground</strong>: color - nav background</p>
+
+    <figure class="highlight">
+<pre><code class="javascript">let options = {
+    ...,
+
+    colorScheme: {
+      active: 'custom',
+
+      custom: {
+        mainBackground: '#f5f5f5',
+        navBackground: '#181830',
+        buttonBackground: '#00707C',
+        hoverButtonBackground: '#096868',
+        inputBackground: '#fff',
+        inputOutlineColor: '#4d90fe',
+        activeTabBackground: '#40545b',
+        text: '#5d636b',
+        title: '#1e262c',
+        inputTextColor: '#555555',
+        tabTextColor: '#c0c1c1',
+        activeTabTextColor: '#fff',
+        buttonTextColor: '#fff',
+        border: '#d8d8d8'
+      }
     }
   };</code></pre>
     </figure>
@@ -225,7 +262,7 @@
     <h5><b>window.FilerobotUploader.init(options: {})</b>: function</h5>
     <p>Initialization of Filerobot Uploader plugin.</p>
     <figure class="highlight">
-<pre><code class="javascript">window.AirstoreUploader.init(options);</code></pre>
+<pre><code class="javascript">window.FilerobotUploader.init(options);</code></pre>
     </figure>
 
     <h5><b>window.FilerobotUploader.open(tab : string, options: {})</b>: function</h5>
