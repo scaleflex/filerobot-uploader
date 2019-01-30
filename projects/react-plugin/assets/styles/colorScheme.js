@@ -47,7 +47,6 @@ export default {
 }
 
 export const colorSchemes = {
-  active: 'default',
   default: {
     mainBackground: '#f5f5f5',
     navBackground: '#181830',
@@ -56,6 +55,8 @@ export const colorSchemes = {
     inputBackground: '#fff',
     inputOutlineColor: '#4d90fe',
     activeTabBackground: '#40545b',
+    tagsBackground: '#28a745',
+    tagsColor: '#fff',
     text: '#5d636b',
     title: '#1e262c',
     inputTextColor: '#555555',

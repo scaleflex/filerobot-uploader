@@ -193,7 +193,11 @@ class AirstoreUploader extends Component {
   activateTab = (event, tabId) => {
     event.preventDefault();
 
-    this.props.activateTab(tabId);
+    this.setState({
+      prevTab: this.props.activeTabId
+    }, () => {
+      this.props.activateTab(tabId);
+    });
   }
 
   render() {

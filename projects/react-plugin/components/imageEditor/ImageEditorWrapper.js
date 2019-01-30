@@ -6,7 +6,27 @@ import { modalClose } from '../../actions';
 
 class ImageEditorWrapper extends Component {
   goBack = () => {
-    this.props.setPostUpload(false);
+    const { prevTab } = this.props;
+
+    if (prevTab === 'TAGGING')
+      this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
+    else
+      this.props.setPostUpload(false);
+  }
+
+  onUpload = (url, file) => {
+    const { prevTab } = this.props;
+
+    if (prevTab === 'TAGGING') {
+      const files = [{...file, public_link: file.url_permalink }];
+
+      this.props.saveUploadedFiles(files);
+
+      this.props.setPostUpload(true, 'TAGGING');
+    }
+
+    else
+      this.props.setPostUpload(false);
   }
 
   render() {
@@ -29,8 +49,9 @@ class ImageEditorWrapper extends Component {
         }}
         closeOnLoad={false}
         src={file.url_permalink}
-        onUpload={this.goBack}
+        onUpload={this.onUpload}
         onClose={this.goBack}
+        showGoBackBtn={true}
       />
     )
   }

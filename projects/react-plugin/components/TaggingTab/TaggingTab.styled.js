@@ -139,10 +139,10 @@ const TagsInputWrapper = styled.div`
   }
   
   .react-tagsinput-tag {
-    background-color: ${p => p.theme.activeTabBackground || '#cde69c'};
+    background-color: ${p => p.theme.tagsBackground || '#cde69c'};
     border-radius: 2px;
-    border: 1px solid ${p => p.theme.activeTabBackground || '#cde69c'};
-    color: ${p => p.theme.activeTabTextColor || '#638421'};
+    border: 1px solid ${p => p.theme.tagsBackground || '#cde69c'};
+    color: ${p => p.theme.tagsColor || '#638421'};
     display: inline-block;
     font-family: sans-serif;
     font-size: 13px;

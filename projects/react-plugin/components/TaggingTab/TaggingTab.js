@@ -104,35 +104,44 @@ class TaggingTab extends Component {
     const { taggingConfig, language } = this.props;
     const [file = {}] = this.props.files;
 
-    generateTags(file.url_permalink, taggingConfig, language).then(({ tags, ...props } = {}) => {
-      if (tags) {
-        if (!tags.length) {
-          this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
-          this.setState({ isLoading: false, isGeneratingTags: false });
+    generateTags(file.url_permalink, taggingConfig, language)
+      .then(({ tags, ...props } = {}) => {
+        if (tags) {
+          if (!tags.length) {
+            this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
+            this.setState({ isLoading: false, isGeneratingTags: false });
 
-          return;
+            return;
+          }
+
+          let nextTags = [
+            ...this.state.tags,
+            ...tags.map(item => item && item.tag && item.tag[language])
+          ];
+
+          this.setState({
+            tags: uniqueArrayOfStrings(nextTags),
+            isLoading: false,
+            isGeneratingTags: false,
+            tagsGenerated: true
+          });
+        } else {
+          this.setState({
+              isLoading: false,
+              isGeneratingTags: false,
+              errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
+            }
+          );
         }
-
-        let nextTags = [
-          ...this.state.tags,
-          ...tags.map(item => item && item.tag && item.tag[language])
-        ];
-
-        this.setState({
-          tags: uniqueArrayOfStrings(nextTags),
-          isLoading: false,
-          isGeneratingTags: false,
-          tagsGenerated: true
-        });
-      } else {
+      })
+      .catch(e => {
         this.setState({
             isLoading: false,
             isGeneratingTags: false,
-            errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
+            errorMessage: e.msg || e.message || I18n.t('tagging.something_went_wrong_try_again')
           }
         );
-      }
-    });
+      })
 
     this.setState({ isLoading: true, isGeneratingTags: true, errorMessage: '' });
   }
@@ -212,7 +221,8 @@ class TaggingTab extends Component {
           {this.isAutoTaggingButton &&
           <Button
             disabled={this.state.tagsGenerated}
-            onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon data-tip={generateTagInfo}/></Button>}
+            onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon
+            data-tip={generateTagInfo}/></Button>}
 
           <Button success onClick={this.saveMetadata}>{I18n.t('tagging.save')}</Button>
 
@@ -220,9 +230,10 @@ class TaggingTab extends Component {
 
         <Spinner show={isLoading} overlay/>
 
-        {isGeneratingTags && <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
+        {isGeneratingTags &&
+        <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
 
-        <ReactTooltip offset={{top: 0, right: 2}} effect="solid"/>
+        <ReactTooltip offset={{ top: 0, right: 2 }} effect="solid"/>
       </TaggingTabWrapper>
     )
   }

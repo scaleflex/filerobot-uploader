@@ -19,7 +19,7 @@ export default {
     all: 'Tout afficher',
     too_small: 'Le téléchargement de fichier n\'est pas disponible sur mobile.',
     close: 'Fermer',
-    image_editor: 'Image Editor'
+    image_editor: 'Editeur d\'image'
   },
   file_manager: {
     tab_title: 'Ma galerie',
@@ -30,7 +30,7 @@ export default {
     media_library: 'Bibliothèque des médias',
     go_back: 'Retour',
     select: 'Sélectionner',
-    tag_image: 'Tagguer l\'image',
+    tag_image: 'Taguer l\'image',
     edit_image: 'Editer l\'image'
   },
   icons: {
