@@ -206,6 +206,18 @@
 
     <p>> <strong>custom.mainBackground</strong>: color - main background</p>
     <p>> <strong>custom.navBackground</strong>: color - nav background</p>
+    <p>> <strong>custom.buttonBackground</strong>: color - button background</p>
+    <p>> <strong>custom.hoverButtonBackground</strong>: color - button background on hover</p>
+    <p>> <strong>custom.inputBackground</strong>: color - search field background</p>
+    <p>> <strong>custom.inputOutlineColor</strong>: color - search field outline</p>
+    <p>> <strong>custom.activeTabBackground</strong>: color - current nav tab background</p>
+    <p>> <strong>custom.text</strong>: color - text</p>
+    <p>> <strong>custom.title</strong>: color - title</p>
+    <p>> <strong>custom.inputTextColor</strong>: color - search field text</p>
+    <p>> <strong>custom.tabTextColor</strong>: color - nav tab text</p>
+    <p>> <strong>custom.activeTabTextColor</strong>: color - current nav tab text</p>
+    <p>> <strong>custom.buttonTextColor</strong>: color - button text</p>
+    <p>> <strong>custom.border</strong>: color - draggable boundaries border</p>
 
     <figure class="highlight">
 <pre><code class="javascript">let options = {
@@ -285,6 +297,61 @@
       <pre><code class="javascript">window.FilerobotUploader.unmount();</code></pre>
     </figure>
 
+  </section>
+
+  <section class="on-load" style="margin-bottom: 60px">
+    <h2>Full features config example</h2>
+    <hr>
+
+    <figure class="highlight">
+<pre><code class="javascript">
+    &lt;script&gt;
+      let options = {
+        modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
+        uploadParams: {
+          dir: '/your_root_folder'
+        },
+        filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+        container: 'example',
+        openpixKey: 'xxxxxxxxxxxxxxx',
+        initialTab: 'UPLOAD',
+        folderBrowser: true,
+        tagging: {
+          executeAfterUpload: true,
+          autoTaggingButton: true,
+          provider: 'google',
+          confidence: 60,
+          limit: 10,
+          key: 'aaaa'
+        },
+        language: 'en',
+        colorScheme: {
+          active: 'custom',
+          custom: {
+            mainBackground: '#f5f5f5',
+            navBackground: '#181830',
+            buttonBackground: '#00707C',
+            hoverButtonBackground: '#096868',
+            inputBackground: '#fff',
+            inputOutlineColor: '#4d90fe',
+            activeTabBackground: '#40545b',
+            text: '#5d636b',
+            title: '#1e262c',
+            inputTextColor: '#555555',
+            tabTextColor: '#c0c1c1',
+            activeTabTextColor: '#fff',
+            buttonTextColor: '#fff',
+            border: '#d8d8d8'
+          }
+        },
+        onUpload: onUploadHandler
+      };
+
+      let uploader = FilerobotUploader.init(options);
+
+      uploader.open();
+    &lt;/script&gt;</code></pre>
+    </figure>
   </section>
 
 </div>
