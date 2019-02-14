@@ -33,6 +33,8 @@ class ImageEditorWrapper extends Component {
     const { files: [ file = {} ] = {}, path } = this.props;
     const { uploadKey, container, uploadParams } = this.props.config
 
+    const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
+
     return (
       <ImageEditor
         config={{
@@ -40,8 +42,10 @@ class ImageEditorWrapper extends Component {
           AIRSTORE_UPLOAD_KEY: uploadKey,
           CONTAINER: container,
           UPLOAD_CONTAINER: container,
-          PROCESS_WITH_CLOUDIMAGE: false,
+          PROCESS_WITH_CLOUDIMAGE: isGif,
           HIDE_CLOUDIMAGE_PROCESS: true,
+          UPLOAD_CLOUDIMAGE_IMAGE: true,
+          CLOUDIMAGE_TOKEN: 'demo',
           UPLOAD_PARAMS: {
             ...uploadParams,
             dir: path || uploadParams.dir

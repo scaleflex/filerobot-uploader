@@ -13,15 +13,14 @@ let loadedImage = null;
 let options = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: {
-    dir: '/demo_filerobot_fr'
-   // dir: '/demo_filerobot_en'
+    dir: '/your_root_folder/1'
   },
 
-  //filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
-  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
+  //filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', //7cc1f659309c480cbc8a608dc6ba5f03
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03', //7cc1f659309c480cbc8a608dc6ba5f03
 
-  //container: 'example',
-  container: 'scaleflex-tests-v5a',
+  //container: 'example', //scaleflex-tests-v5a
+  container: 'scaleflex-tests-v5a', //scaleflex-tests-v5a
 
   openpixKey: 'xxxxxxxxxxxxxxx',
   initialTab: 'UPLOAD',
@@ -36,7 +35,29 @@ let options = {
     limit: 10,
     key: 'aaaa'
   },
-  language: 'fr',
+
+  language: 'en',
+
+  colorScheme: {
+    active: 'custom',
+
+    custom: {
+      mainBackground: '#f5f5f5',
+      navBackground: '#181830',
+      buttonBackground: '#00707C',
+      hoverButtonBackground: '#096868',
+      inputBackground: '#fff',
+      inputOutlineColor: '#4d90fe',
+      activeTabBackground: '#40545b',
+      text: '#5d636b',
+      title: '#1e262c',
+      inputTextColor: '#555555',
+      tabTextColor: '#c0c1c1',
+      activeTabTextColor: '#fff',
+      buttonTextColor: '#fff',
+      border: '#d8d8d8'
+    }
+  },
 
   onUpload: onUploadHandler
 };
