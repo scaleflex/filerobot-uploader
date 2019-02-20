@@ -10,8 +10,8 @@ module.exports = {
   entry: path.join(__dirname, "../projects/js-plugin/index.js"),
   output: {
     path: path.join(__dirname, "../build"),
-    filename: `filerobot-uploader.${VERSION}.js`,
-    chunkFilename: `filerobot-uploader.[name].${VERSION}.js`,
+    filename: `main.min.js`,
+    chunkFilename: `[name].min.js`,
     jsonpFunction: 'webpackJsonp' + Date.now(),
     publicPath: 'https://js.filerobot.com/airstore-uploader/'
   },
