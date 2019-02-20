@@ -1,5 +1,6 @@
 const path = require('path');
 const { ReactLoadablePlugin } = require('react-loadable/webpack');
+const VERSION = require("../package.json").version;
 
 const reactLoadablePlugin =  new ReactLoadablePlugin({
   filename: '../build/react-loadable.json'
@@ -8,9 +9,9 @@ const reactLoadablePlugin =  new ReactLoadablePlugin({
 module.exports = {
   entry: path.join(__dirname, "../projects/js-plugin/index.js"),
   output: {
-    path: path.join(__dirname, "build"),
-    filename: "filerobot-uploader-widget.main.[chunkhash].js",
-    chunkFilename: 'filerobot-uploader-widget.[name].[chunkhash].js',
+    path: path.join(__dirname, "../build"),
+    filename: `filerobot-uploader.${VERSION}.js`,
+    chunkFilename: `filerobot-uploader.[name].${VERSION}.js`,
     jsonpFunction: 'webpackJsonp' + Date.now(),
     publicPath: 'https://js.filerobot.com/airstore-uploader/'
   },
