@@ -1,6 +1,6 @@
 # Filerobot Uploader
 
-Plugin to upload images.
+The Filerobot Uploader is a multi-function Uploader that will make your uploads super easy. Quickly integrated in your web applications it allows end users to upload media, files and any assets via Filerobot's reverse CDN into scalable and flexible Cloud storage. Features include inline image editing, auto-tagging, auto-cropping and many more.
 
 [See demo](https://scaleflex.github.io/filerobot-uploader/)
 
