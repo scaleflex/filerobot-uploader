@@ -1,6 +1,6 @@
 {
   "name": "filerobot-uploader",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "description": "The Filerobot Uploader is a multi-function Uploader that will make your uploads super easy. Quickly integrated in your web applications it allows end users to upload media, files and any assets via Filerobot's reverse CDN into scalable and flexible Cloud storage. Features include inline image editing, auto-tagging, auto-cropping and many more.",
   "author": "scaleflex",

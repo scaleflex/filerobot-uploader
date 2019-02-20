@@ -15,7 +15,7 @@ The Filerobot Uploader is a multi-function Uploader that will make your uploads 
     * [Quick start](#quick_start_react)
     * [Methods/Properties](#methods_react)
 * [Configuration](#configuration)
-* [Callbacks](#callbacks)
+* [Full features config example](#full_example)
 * [Contributing](#contributing)
 
 ## <a name="standalone_usage"></a>Standalone usage
@@ -291,6 +291,124 @@ let config = {
 };
 ```
 
+#### `colorScheme`: object
+
+* `active` string (default: 'default')- active theme scheme
+
+* `custom`: object - custom color scheme
+
+* `custom.mainBackground`: color - main background
+
+* `custom.navBackground`: color - nav background
+
+* `custom.buttonBackground`: color - button background
+
+* `custom.hoverButtonBackground`: color - button background on hover
+
+* `custom.inputBackground`: color - search field background
+
+* `custom.inputOutlineColor`: color - search field outline
+
+* `custom.activeTabBackground`: color - current nav tab background
+
+* `custom.text`: color - text
+
+* `custom.title`: color - title
+
+* `custom.inputTextColor`: color - search field text
+
+* `custom.tabTextColor`: color - nav tab text
+
+* `custom.activeTabTextColor`: color - current nav tab text
+
+* `custom.buttonTextColor`: color - button text
+
+* `custom.border`: color - draggable boundaries border
+
+
+```
+let config = {
+    ...,
+
+    colorScheme: {
+       active: 'custom',
+
+       custom: {
+         mainBackground: '#f5f5f5',
+         navBackground: '#181830',
+         buttonBackground: '#00707C',
+         hoverButtonBackground: '#096868',
+         inputBackground: '#fff',
+         inputOutlineColor: '#4d90fe',
+         activeTabBackground: '#40545b',
+         text: '#5d636b',
+         title: '#1e262c',
+         inputTextColor: '#555555',
+         tabTextColor: '#c0c1c1',
+         activeTabTextColor: '#fff',
+         buttonTextColor: '#fff',
+         border: '#d8d8d8'
+       }
+    }
+};
+```
+
+## <a name="full_example"></a>Full features config example
+
+```
+<script>
+  let config = {
+    modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
+    uploadParams: {
+      dir: '/your_root_folder'
+    },
+    filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
+    container: 'example',
+    openpixKey: 'xxxxxxxxxxxxxxx',
+    initialTab: 'UPLOAD',
+    folderBrowser: true,
+    tagging: {
+      executeAfterUpload: true,
+      autoTaggingButton: true,
+      provider: 'google',
+      confidence: 60,
+      limit: 10,
+      key: 'aaaa'
+    },
+    language: 'en',
+
+    colorScheme: {
+      active: 'custom',
+      custom: {
+        mainBackground: '#f5f5f5',
+        navBackground: '#181830',
+        buttonBackground: '#00707C',
+        hoverButtonBackground: '#096868',
+        inputBackground: '#fff',
+        inputOutlineColor: '#4d90fe',
+        activeTabBackground: '#40545b',
+        text: '#5d636b',
+        title: '#1e262c',
+        inputTextColor: '#555555',
+        tabTextColor: '#c0c1c1',
+        activeTabTextColor: '#fff',
+        buttonTextColor: '#fff',
+        border: '#d8d8d8'
+      }
+    }
+  };
+  let onUpload = (files) => {
+    console.log('files: ', files);
+    alert('Files uploaded successfully! check the console to see the uploaded files');
+  };
+  let uploader = FilerobotUploader.init(config, onUpload);
+  let button = document.createElement('button');
+
+  button.onclick = () => { uploader.open(); }
+  button.innerText = 'Open Uploader';
+  document.body.appendChild(button);
+</script>
+```
 
 ## <a name="contributing"></a>Contributing!
 

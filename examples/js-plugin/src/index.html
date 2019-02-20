@@ -13,7 +13,17 @@
 <body>
 
 <div class="container">
-  <h1 style="margin-top: 30px">Filerobot Uploader plugin</h1>
+  <div class="title-wrapper">
+    <h1 style="margin-top: 30px; margin-right: 150px;">Filerobot Uploader plugin</h1>
+    <a href="https://github.com/scaleflex/filerobot-uploader" class="github-logo-wrapper">
+      <img class="github-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFNTE3OEEzMjk5QTAxMUUyOUExNUJDMTA0NkE4OTA0RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQTQxNEFCQzk5QTExMUUyOUExNUJDMTA0NkE4OTA0RCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU1MTc4QTMwOTlBMDExRTI5QTE1QkMxMDQ2QTg5MDREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU1MTc4QTMxOTlBMDExRTI5QTE1QkMxMDQ2QTg5MDREIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+R7ClIwAADR5JREFUeNrsnQuw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" alt=""/>
+      see on github
+    </a>
+  </div>
+
+
+
+  <p>The Filerobot Uploader is a multi-function Uploader that will make your uploads super easy. Quickly integrated in your web applications it allows end users to upload media, files and any assets via Filerobot's reverse CDN into scalable and flexible Cloud storage. Features include inline image editing, auto-tagging, auto-cropping and many more.</p>
   <p>Click on "Upload Image" to upload from your computer, link, or find image in free galleries</p>
 
   <button class="btn btn-success" id="open-modal-btn">Upload Image</button>
@@ -45,27 +55,16 @@
     </div>
   </div>
 
-  <section class="on-load">
-    <h2>Table of content</h2>
+
+  <section id="standalone_usage" class="on-load">
+    <h2>Standalone usage</h2>
     <hr>
 
-    <ul>
-      <li><a href="#install">Installation</a></li>
-      <li><a href="#quick_start">Quick start</a></li>
-      <li><a href="#config_params">Config params</a></li>
-      <li><a href="#callbacks">Callbacks</a></li>
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#features">Full features example</a></li>
-    </ul>
-  </section>
-
-  <section id="install" class="on-load">
-    <h2>Install</h2>
-    <hr>
+    <h3 id="installation">Installation</h3>
 
     <p>Use latest CDNized plugin version</p>
     <figure class="highlight">
-      <pre><code class="javascript">&lt;script src="https://js.filerobot.com/filerobot-uploader.last.js"&gt;&lt;/script&gt;</code></pre>
+      <pre><code class="javascript">&lt;script src="https://scaleflex.airstore.io/filerobot/uploader/1.0.0/main.min.js"&gt;&lt;/script&gt;</code></pre>
     </figure>
   </section>
 
@@ -76,305 +75,88 @@
 
     <figure class="highlight">
 <pre><code class="javascript">&lt;script&gt;
-  let options = {
+  let config = {
     container: 'example',
     filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
-    openpixKey: 'xxxxxxxxxxxxxxx',
-    onUpload: (files) => {
-      console.log('files: ', files);
-      alert('Files uploaded successfully! check the console to see the uploaded files');
-    }
+    openpixKey: 'xxxxxxxxxxxxxxx'
   };
-
-  let uploader = FilerobotUploader.init(options);
+  let onUpload = (files) => {
+    console.log('files: ', files);
+    alert('Files uploaded successfully! check the console to see the uploaded files');
+  };
+  let uploader = FilerobotUploader.init(config, onUpload);
 
   uploader.open();
 &lt;/script&gt;
 </code></pre>
     </figure>
-
-    <!--see <a href="https://scaleflex.airstore.io/airstore/demo/demo.html">full example with source code</a>-->
   </section>
 
-  <section id="config_params" class="on-load">
-    <h2>Config params</h2>
-    <hr>
-
-    <h5><b>container</b>: string (required)</h5>
-    <p>Filerobot Container name.</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    container: 'example'
-  };</code></pre>
-    </figure>
-
-    <h5><b>filerobotUploadKey</b>: string (required)</h5>
-    <p>Unique upload key for Filerobot.</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    filerobotUploadKey: 'xxxxxxxxxxxx'
-  };</code></pre>
-    </figure>
-
-    <h5><b>openpixKey</b>: string (required)</h5>
-    <p>Key for Openpix. Required if you are using <small><b>"ICONS_GALLERY"</b>, <b>"IMAGES_GALLERY"</b></small></p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    openpixKey: 'xxxxxxxxxxxx'
-  };</code></pre>
-    </figure>
-
-    <h5><b>language</b>: string</h5>
-    <p><b>default</b>: 'en'</p>
-    <p>Language of uploader</p>
-    <p>available languages: <b>en</b>, <b>fr</b>, <b>de</b>, <b>ru</b></p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    language: 'en'
-  };</code></pre>
-    </figure>
-
-    <h5><b>folderBrowser</b>: bool</h5>
-    <p><b>default</b>: true</p>
-    <p>Aside menu to browse folders in your container</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    folderBrowser: true
-  };</code></pre>
-    </figure>
-
-    <h5><b>modules</b>: string[]</h5>
-    <p><b>default</b>: <small>["UPLOAD", "MY_GALLERY", "ICONS_GALLERY", "IMAGES_GALLERY"]</small></p>
-    <p>Modules (tabs) in file uploader modal.</p>
-    <p>Available modules: <small><b>UPLOAD</b>, <b>MY_GALLERY</b>, <b>ICONS_GALLERY</b>, <b>IMAGES_GALLERY</b>, <b>TAGGING</b>, <b>IMAGE_EDITOR</b></small></p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    modules: ['UPLOAD', 'ICONS_GALLERY', 'TAGGING']
-  };</code></pre>
-    </figure>
-
-
-    <h5><b>uploadParams</b>: object <a class="see-doc" target="_blank" href="https://docs.airstore.io/go/airstore-public-documentation/en/airstore-api-reference/upload-files/#od_9911d3cb">see documentation</a></h5>
-    <p>> <strong>dir</strong>: string (default: '/') - specify the folder where you want to upload the file. If the folder doesn't exist, it will be created.</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    uploadParams: {
-      dir: '/folder_name',
-      ...
-    }
-  };</code></pre>
-    </figure>
-
-    <h5><b>initialTab</b>: string</h5>
-    <p><b>default</b>: 'UPLOAD'</p>
-    <p>Allow to choose the initial tab. Should be one of enabled modules.</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    initialTab: 'UPLOAD'
-  };</code></pre>
-    </figure>
-
-
-    <h5><b>tagging</b>: object</h5>
-    <p>> <strong>key</strong>: string (require) - key to use image recognition technology</p>
-    <p>> <strong>executeAfterUpload</strong>: bool - will automatically generate tags on upload image based on image recognition technology</p>
-    <p>> <strong>autoTaggingButton</strong>: bool - add button which will automatically generate tags based on image recognition technology</p>
-    <p>> <strong>provider</strong>: string [google|imagga] - recognition provider</p>
-    <p>> <strong>confidence</strong>: number [0..100] - confidence of recognition</p>
-    <p>> <strong>limit</strong>: number - limit of tags generated by image recognition technology</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    tagging: {
-      executeAfterUpload: false,
-      autoTaggingButton: true,
-      provider: 'google',
-      confidence: 60,
-      limit: 10,
-      key: 'xxxxx'
-    }
-  };</code></pre>
-    </figure>
-
-    <h5><b>colorScheme</b>: object</h5>
-    <p>> <strong>active</strong>: string (default: 'default')- active theme scheme</p>
-
-    <p>> <strong>custom</strong>: object - custom color scheme</p>
-
-    <p>> <strong>custom.mainBackground</strong>: color - main background</p>
-    <p>> <strong>custom.navBackground</strong>: color - nav background</p>
-    <p>> <strong>custom.buttonBackground</strong>: color - button background</p>
-    <p>> <strong>custom.hoverButtonBackground</strong>: color - button background on hover</p>
-    <p>> <strong>custom.inputBackground</strong>: color - search field background</p>
-    <p>> <strong>custom.inputOutlineColor</strong>: color - search field outline</p>
-    <p>> <strong>custom.activeTabBackground</strong>: color - current nav tab background</p>
-    <p>> <strong>custom.text</strong>: color - text</p>
-    <p>> <strong>custom.title</strong>: color - title</p>
-    <p>> <strong>custom.inputTextColor</strong>: color - search field text</p>
-    <p>> <strong>custom.tabTextColor</strong>: color - nav tab text</p>
-    <p>> <strong>custom.activeTabTextColor</strong>: color - current nav tab text</p>
-    <p>> <strong>custom.buttonTextColor</strong>: color - button text</p>
-    <p>> <strong>custom.border</strong>: color - draggable boundaries border</p>
-
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
-
-    colorScheme: {
-      active: 'custom',
-
-      custom: {
-        mainBackground: '#f5f5f5',
-        navBackground: '#181830',
-        buttonBackground: '#00707C',
-        hoverButtonBackground: '#096868',
-        inputBackground: '#fff',
-        inputOutlineColor: '#4d90fe',
-        activeTabBackground: '#40545b',
-        text: '#5d636b',
-        title: '#1e262c',
-        inputTextColor: '#555555',
-        tabTextColor: '#c0c1c1',
-        activeTabTextColor: '#fff',
-        buttonTextColor: '#fff',
-        border: '#d8d8d8'
-      }
-    }
-  };</code></pre>
-    </figure>
-
+  <section style="margin-bottom: 40px;">
+    The full documentation see on <a href="https://github.com/scaleflex/filerobot-uploader">github</a>
   </section>
 
 
-  <section id="callbacks" class="on-load">
-    <h2>Callbacks</h2>
-    <hr>
+  <!--<section id="features" class="on-load" style="margin-bottom: 60px">-->
+    <!--<h2>Full features config example</h2>-->
+    <!--<hr>-->
 
-    <h5><b>onUpload(files: file[])</b>: function (required)</h5>
-    <p>Function to handle uploaded files.</p>
-    <figure class="highlight">
-<pre><code class="javascript">let options = {
-    ...,
+    <!--<figure class="highlight">-->
+<!--<pre><code class="javascript">-->
+    <!--&lt;script&gt;-->
+      <!--let config = {-->
+        <!--modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],-->
+        <!--uploadParams: {-->
+          <!--dir: '/your_root_folder'-->
+        <!--},-->
+        <!--filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',-->
+        <!--container: 'example',-->
+        <!--openpixKey: 'xxxxxxxxxxxxxxx',-->
+        <!--initialTab: 'UPLOAD',-->
+        <!--folderBrowser: true,-->
+        <!--tagging: {-->
+          <!--executeAfterUpload: true,-->
+          <!--autoTaggingButton: true,-->
+          <!--provider: 'google',-->
+          <!--confidence: 60,-->
+          <!--limit: 10,-->
+          <!--key: 'aaaa'-->
+        <!--},-->
+        <!--language: 'en',-->
 
-    onUpload: (files) => {
-      // do something
-    }
-  };</code></pre>
-    </figure>
+        <!--colorScheme: {-->
+          <!--active: 'custom',-->
+          <!--custom: {-->
+            <!--mainBackground: '#f5f5f5',-->
+            <!--navBackground: '#181830',-->
+            <!--buttonBackground: '#00707C',-->
+            <!--hoverButtonBackground: '#096868',-->
+            <!--inputBackground: '#fff',-->
+            <!--inputOutlineColor: '#4d90fe',-->
+            <!--activeTabBackground: '#40545b',-->
+            <!--text: '#5d636b',-->
+            <!--title: '#1e262c',-->
+            <!--inputTextColor: '#555555',-->
+            <!--tabTextColor: '#c0c1c1',-->
+            <!--activeTabTextColor: '#fff',-->
+            <!--buttonTextColor: '#fff',-->
+            <!--border: '#d8d8d8'-->
+          <!--}-->
+        <!--}-->
+      <!--};-->
+      <!--let onUpload = (files) => {-->
+        <!--console.log('files: ', files);-->
+        <!--alert('Files uploaded successfully! check the console to see the uploaded files');-->
+      <!--};-->
+      <!--let uploader = FilerobotUploader.init(config, onUpload);-->
+      <!--let button = document.createElement('button');-->
 
-  </section>
-
-  <section id="methods" class="on-load" style="margin-bottom: 60px">
-    <h2>Methods</h2>
-    <hr>
-
-    <h5><b>window.FilerobotUploader.init(options: {})</b>: function</h5>
-    <p>Initialization of Filerobot Uploader plugin.</p>
-    <figure class="highlight">
-<pre><code class="javascript">window.FilerobotUploader.init(options);</code></pre>
-    </figure>
-
-    <h5><b>window.FilerobotUploader.open(tab : string, options: {})</b>: function</h5>
-    <p>Open uploader modal.</p>
-    <p><strong>tab</strong> :string (optional, default: 'UPLOAD') - allow to choose the initial tab (should be one of enabled modules)</p>
-    <p><strong>options</strong> :{}</p> - options for tabs
-    <figure class="highlight">
-      <pre><code class="javascript">window.FilerobotUploader.open();</code></pre>
-    </figure>
-
-    <h5><b>window.FilerobotUploader.close()</b>: function</h5>
-    <p>Close uploader modal.</p>
-    <figure class="highlight">
-      <pre><code class="javascript">window.FilerobotUploader.close();</code></pre>
-    </figure>
-
-    <h5><b>window.FilerobotUploader.unmount()</b>: function</h5>
-    <p>Destroy uploader</p>
-    <figure class="highlight">
-      <pre><code class="javascript">window.FilerobotUploader.unmount();</code></pre>
-    </figure>
-
-  </section>
-
-  <section id="features" class="on-load" style="margin-bottom: 60px">
-    <h2>Full features config example</h2>
-    <hr>
-
-    <figure class="highlight">
-<pre><code class="javascript">
-    &lt;script&gt;
-      let options = {
-        modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
-        uploadParams: {
-          dir: '/your_root_folder'
-        },
-        filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
-        container: 'example',
-        openpixKey: 'xxxxxxxxxxxxxxx',
-        initialTab: 'UPLOAD',
-        folderBrowser: true,
-        tagging: {
-          executeAfterUpload: true,
-          autoTaggingButton: true,
-          provider: 'google',
-          confidence: 60,
-          limit: 10,
-          key: 'aaaa'
-        },
-        language: 'en',
-
-        colorScheme: {
-          active: 'custom',
-          custom: {
-            mainBackground: '#f5f5f5',
-            navBackground: '#181830',
-            buttonBackground: '#00707C',
-            hoverButtonBackground: '#096868',
-            inputBackground: '#fff',
-            inputOutlineColor: '#4d90fe',
-            activeTabBackground: '#40545b',
-            text: '#5d636b',
-            title: '#1e262c',
-            inputTextColor: '#555555',
-            tabTextColor: '#c0c1c1',
-            activeTabTextColor: '#fff',
-            buttonTextColor: '#fff',
-            border: '#d8d8d8'
-          }
-        },
-
-        onUpload: (files) => {
-          console.log('files: ', files);
-          alert('Files uploaded successfully! check the console to see the uploaded files');
-        }
-      };
-
-      let uploader = FilerobotUploader.init(options);
-      let button = document.createElement('button');
-
-      button.onclick = () => { uploader.open(); }
-      button.innerText = 'Open Uploader';
-      document.body.appendChild(button);
-    &lt;/script&gt;</code></pre>
-    </figure>
-  </section>
+      <!--button.onclick = () => { uploader.open(); }-->
+      <!--button.innerText = 'Open Uploader';-->
+      <!--document.body.appendChild(button);-->
+    <!--&lt;/script&gt;</code></pre>-->
+    <!--</figure>-->
+  <!--</section>-->
 
 </div>
 

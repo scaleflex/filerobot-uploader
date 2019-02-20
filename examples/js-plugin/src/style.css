@@ -57,3 +57,18 @@
 .on-load {
   display: block !important;
 }
+
+.github-logo-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.github-logo-wrapper .github-logo {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.title-wrapper {
+  position: relative;
+}
