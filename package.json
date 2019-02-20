@@ -1,6 +1,6 @@
 {
   "name": "filerobot-uploader",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "description": "Fully customisable Uploader",
   "author": "scaleflex",
@@ -63,6 +63,7 @@
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "css-loader": "0.28.7",
+    "gh-pages": "^2.0.1",
     "highlight.js": "^9.13.1",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.6.1",
