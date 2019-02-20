@@ -12,21 +12,12 @@ let loadedImage = null;
 // Configuration
 let options = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
-  uploadParams: {
-    dir: '/your_root_folder/1'
-  },
-
-  //filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', //7cc1f659309c480cbc8a608dc6ba5f03
-  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03', //7cc1f659309c480cbc8a608dc6ba5f03
-
-  //container: 'example', //scaleflex-tests-v5a
-  container: 'scaleflex-tests-v5a', //scaleflex-tests-v5a
-
+  uploadParams: { dir:"/demo_filerobot_en" },
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
+  container: 'scaleflex-tests-v5a',
   openpixKey: 'xxxxxxxxxxxxxxx',
   initialTab: 'UPLOAD',
-
   folderBrowser: true,
-
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,
@@ -35,12 +26,9 @@ let options = {
     limit: 10,
     key: 'aaaa'
   },
-
   language: 'en',
-
   colorScheme: {
     active: 'custom',
-
     custom: {
       mainBackground: '#f5f5f5',
       navBackground: '#181830',

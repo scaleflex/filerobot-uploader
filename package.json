@@ -1,7 +1,30 @@
 {
-  "name": "airstore-uploader-react",
+  "name": "filerobot-uploader",
   "version": "0.6.0",
-  "private": true,
+  "main": "dist/index.js",
+  "description": "Fully customisable Uploader",
+  "author": "scaleflex",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleflex/filerobot-uploader"
+  },
+  "homepage": "https://github.com/scaleflex/filerobot-uploader#readme",
+  "keywords": [
+    "uploader",
+    "reverse CDN",
+    "asset management",
+    "file manager",
+    "file uploader",
+    "image management",
+    "image compression",
+    "image resizing",
+    "image acceleration",
+    "fast uploader",
+    "file listing",
+    "image tagging",
+    "image editor"
+  ],
   "dependencies": {
     "cropperjs": "^1.4.3",
     "image-editor-reactjs": "git+ssh://git@code.scaleflex.cloud:airstore/image-editor-reactjs.git",
@@ -24,6 +47,7 @@
     "react-dom": "^16.3.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.3",
@@ -59,6 +83,8 @@
     "clean-build": "rm -rf build",
     "build": "npm run clean-build && webpack --mode production --config config/webpack.js-config.js",
     "clean-dist": "rm -rf dist",
-    "dist": "npm run clean-dist && NODE_ENV=production babel projects/react-plugin --out-dir dist --copy-files"
+    "dist": "npm run clean-dist && npx babel projects/react-plugin --out-dir dist --copy-files",
+    "deploy": "gh-pages -d examples/js-plugin/dist",
+    "publish-demo": "npm run build-demo-js && npm run deploy"
   }
 }
