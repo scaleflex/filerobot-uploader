@@ -1,5 +1,0 @@
-{
-  "private": true,
-  "name": "airstore-uploader-plugin",
-  "main": "./index.js"
-}
