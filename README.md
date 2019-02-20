@@ -2,6 +2,8 @@
 
 Plugin to upload images.
 
+[See demo](https://scaleflex.github.io/filerobot-uploader/)
+
 ## Table of contents
 
 * [Standalone usage](#standalone_usage)
