@@ -5,7 +5,7 @@ import { Dialog } from '../styledComponents';
 import { Modal } from './Modal';
 import FocusLock from 'react-focus-lock';
 import { prepareConfig } from '../utils/global.utils';
-import config from '../config';
+import CONFIG from '../config';
 import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
 import Nav from './nav/Nav';
 import { I18n } from 'react-i18nify';
@@ -29,20 +29,20 @@ class AirstoreUploader extends Component {
   }
 
   componentDidMount() {
-    let { initialOptions, initialTab } = this.props;
-    const language = initialOptions.language || initialOptions.LANGUAGE || config.language;
+    let { config, initialTab, onUpload } = this.props;
+    const language = config.language || config.LANGUAGE || CONFIG.language;
 
     // support old config
-    let activeModules = initialOptions.modules || initialOptions.MODULES || config.modules || ["UPLOAD"];
+    let activeModules = config.modules || config.MODULES || CONFIG.modules || ["UPLOAD"];
     activeModules = activeModules.join('|').replace('UPLOADED_IMAGES', 'MY_GALLERY').split('|');
     // end
-    initialTab = initialTab || initialOptions.initialTab || initialOptions.INITIAL_TAB || config.initialTab;
+    initialTab = initialTab || config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
 
     I18n.setLocale(language);
-    initialOptions.modules = activeModules;
+    config.modules = activeModules;
 
     this.props.setAppState(() => ({
-      config: prepareConfig(initialOptions),
+      config: prepareConfig(config, onUpload),
       activeModules
     }));
 
@@ -78,10 +78,10 @@ class AirstoreUploader extends Component {
   saveUploadedFiles = (files = []) => { this.props.setAppState(() => ({ files })); }
 
   openModal = (initialTab, { file } = {}) => {
-    let { initialOptions } = this.props;
+    let { config } = this.props;
 
     initialTab = initialTab || this.props.initialTab ||
-      initialOptions.initialTab || initialOptions.INITIAL_TAB || config.initialTab;
+      config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
 
     this.props.setAppState((prevState) => ({
       ...(file ? { files: [file], postUpload: true } : { postUpload: false }),
@@ -125,14 +125,14 @@ class AirstoreUploader extends Component {
     if (!this.props.appState.isVisible) return null;
 
     const { isTooSmall, activeTabId, activeModules, postUpload, files, path } = this.props.appState;
-    const { initialOptions } = this.props;
+    const { config } = this.props;
     const contentProps = {
       files,
       path,
       appState: this.props.appState,
       setAppState: this.props.setAppState,
       showAlert: this.showAlert,
-      themeColors: initialOptions.themeColors,
+      themeColors: config.themeColors,
       setPostUpload: this.setPostUpload,
       saveUploadedFiles: this.saveUploadedFiles,
       closeModal: this.closeModal

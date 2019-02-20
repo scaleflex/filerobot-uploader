@@ -9,9 +9,9 @@ window.FilerobotUploader = window.FilerobotUploader || {};
 window.AirstoreUploader.init = init;
 window.FilerobotUploader.init = init;
 
-function init(options = {}, isOpened = false) {
-  const elementId = options.elementId || options.ELEMENT_ID || 'airstore-uploader';
-  const initialTab = options.initialTab || options.INITIAL_TAB || 'UPLOAD';
+function init(config = {}, onUpload = null, isOpened = false) {
+  const elementId = config.elementId || config.ELEMENT_ID || 'airstore-uploader';
+  const initialTab = config.initialTab || config.INITIAL_TAB || 'UPLOAD';
   let container = document.getElementById(elementId);
 
   if (!container) {
@@ -21,7 +21,7 @@ function init(options = {}, isOpened = false) {
     document.body.appendChild(container);
   }
 
-  options.onUpload = options.onUpload || function() {};
+  config.onUpload = config.onUpload || function() {};
 
   window.AirstoreUploader.component = Component => {
 
@@ -29,8 +29,9 @@ function init(options = {}, isOpened = false) {
       <AppContainer>
           <Component
             opened={isOpened}
-            initialOptions={options}
+            config={config}
             initialTab={initialTab}
+            onUpload={onUpload || config.onUpload}
           />
       </AppContainer>,
       container,

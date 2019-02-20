@@ -3,26 +3,11 @@ import { render } from 'react-dom';
 import AirstoreUploader from '../../../projects/react-plugin';
 
 
-const AIRSTORE_CONFIG = {
-  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'],
-  uploadParams: {                 // optional default: {}
-    dir: '/dima_test_2'
-  },
-  // elementID: 'airstore-uploader', // optional default : 'airstore-uploader'
-  airstoreUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132', // required
-  openpixKey: 'xxxxxxxxxxxxxxx',                          // required if ICONS_GALLERY et IMAGES_GALLERY
-  container: 'example',                           // required
-  initialTab: 'UPLOAD',                          // optional   default first module
-  tagging: {
-    active: true,
-    auto_tagging: true,
-    provider: 'google', // google|imagga
-    confidence: 60, //  [0..100]
-    limit: 10,
-    key: 'aaaa'
-  },
-  language: 'en',
-  onUpload: (img) => { console.log(img) }
+const config = {
+  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
+  uploadParams: { dir:"/demo_filerobot_en" },
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
+  container: 'scaleflex-tests-v5a'
 }
 
 class App extends Component {
@@ -41,8 +26,9 @@ class App extends Component {
         <button onClick={() => { this.setState({ isShow: true }); }}>Click</button>
         <AirstoreUploader
           opened={this.state.isShow}
-          initialOptions={AIRSTORE_CONFIG}
+          config={config}
           onClose={() => { this.setState({ isShow: false }); }}
+          onUpload={(img) => { console.log(img) }}
         />
       </div>
     )

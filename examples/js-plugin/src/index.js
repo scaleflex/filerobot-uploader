@@ -10,7 +10,7 @@ hljs.initHighlightingOnLoad();
 let loadedImage = null;
 
 // Configuration
-let options = {
+let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: { dir:"/demo_filerobot_en" },
   filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
@@ -45,10 +45,15 @@ let options = {
       buttonTextColor: '#fff',
       border: '#d8d8d8'
     }
-  },
-
-  onUpload: onUploadHandler
+  }
 };
+
+window.addEventListener('load', function() {
+  const FilerobotUploaderInstance = FilerobotUploader.init(config, onUploadHandler);
+  const openBtn = document.getElementById('open-modal-btn');
+
+  openBtn.onclick = () => FilerobotUploaderInstance.open();
+});
 
 function onUploadHandler(files) {
   const img = files[0];
@@ -105,10 +110,3 @@ function onUploadHandler(files) {
       </ul>
     `;
 }
-
-window.addEventListener('load', function() {
-  const FilerobotUploaderInstance = FilerobotUploader.init(options);
-  const openBtn = document.getElementById('open-modal-btn');
-
-  openBtn.onclick = () => FilerobotUploaderInstance.open();
-});

@@ -11,12 +11,15 @@ import theme, { colorSchemes } from '../assets/styles/colorScheme';
 
 I18n.setTranslations(translations);
 
-export default ({ initialOptions = {}, opened = false, onClose = () => {}, initialTab = null, ...otherProps }) => {
-  initialOptions.colorScheme = initialOptions.colorScheme || {};
+export default (props) => {
+  const {
+    config = {}, opened = false, onClose = () => {}, initialTab = null, onUpload = () => {}, ...otherProps
+  } = props;
+  config.colorScheme = config.colorScheme || {};
 
-  const colorTheme = initialOptions.colorScheme.active;
+  const colorTheme = config.colorScheme.active;
   const colors = colorTheme === 'custom' ?
-    initialOptions.colorScheme[colorTheme] : colorSchemes[colorTheme || 'default'];
+    config.colorScheme[colorTheme] : colorSchemes[colorTheme || 'default'];
 
   return (
     <ThemeProvider theme={{ ...theme, ...colors }}>
@@ -24,8 +27,9 @@ export default ({ initialOptions = {}, opened = false, onClose = () => {}, initi
         <AirstoreUploader
           opened={opened}
           onClose={onClose}
+          onUpload={onUpload}
           initialTab={initialTab}
-          initialOptions={initialOptions}
+          config={config}
           {...otherProps}
         />
       </AppState>

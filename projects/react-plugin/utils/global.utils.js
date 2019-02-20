@@ -2,7 +2,7 @@ import CONFIG from '../config';
 import { isDefined } from './helper.utils';
 
 
-const prepareConfig = (config = {}) => {
+const prepareConfig = (config = {}, onUpload = () => {}) => {
   const container = config.container || config.CONTAINER || CONFIG.container || '';
 
   config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
@@ -31,7 +31,7 @@ const prepareConfig = (config = {}) => {
       ...config.tagging
     },
 
-    uploadHandler: config.onUpload || (() => {})
+    uploadHandler: onUpload
   };
 };
 

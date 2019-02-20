@@ -17,8 +17,7 @@ export default {
     confidence: 80,
     limit: 10,
     key: ''
-  },
-  onUpload: () => {},
+  }
 };
 
 export const DEFAULT_ICON_SIZE = 100;

@@ -11,6 +11,9 @@ The Filerobot Uploader is a multi-function Uploader that will make your uploads 
     * [Quick start](#quick_start)
     * [Methods](#methods)
 * [React component usage](#react_component)
+    * [Installation](#installation_react)
+    * [Quick start](#quick_start_react)
+    * [Methods/Properties](#methods_react)
 * [Configuration](#configuration)
 * [Callbacks](#callbacks)
 * [Contributing](#contributing)
@@ -22,7 +25,7 @@ The Filerobot Uploader is a multi-function Uploader that will make your uploads 
 Use latest CDNized plugin version
 
 ```
-<script src="https://js.filerobot.com/airstore-uploader.last.js"></script>
+<script src="https://scaleflex.airstore.io/filerobot/uploader/1.0.0/main.min.js"></script>
 ```
 
 ### <a name="quick_start"></a>Quick start
@@ -31,17 +34,16 @@ We provide easy way to integrate image uploader in your applications
 
 ```
 <script>
-  let options = {
+  let config = {
     container: 'example',
     filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
-    openpixKey: 'xxxxxxxxxxxxxxx',
-    onUpload: (files) => {
-        console.log('files: ', files);
-        alert('Files uploaded successfully! check the console to see the uploaded files');
-    }
+    openpixKey: 'xxxxxxxxxxxxxxx'
   };
-
-  let uploader = FilerobotUploader.init(options);
+  let onUpload = (files) => {
+     console.log('files: ', files);
+     alert('Files uploaded successfully! check the console to see the uploaded files');
+  };
+  let uploader = FilerobotUploader.init(config, onUpload);
 
   uploader.open();
 </script>
@@ -49,7 +51,7 @@ We provide easy way to integrate image uploader in your applications
 
 ### <a name="methods"></a>Methods
 
-#### `window.FilerobotUploader.init(options: {})`: function
+#### `window.FilerobotUploader.init(config: {}, uploadHandler: callback)`: function
 
 Initialization of Filerobot Uploader plugin.
 
@@ -69,9 +71,84 @@ Close uploader modal.
 
 Destroy uploader
 
-## <a name="react_component"></a>React component
+## <a name="react_component"></a>React component usage
 
-> in progress
+### <a name="installation_react"></a>Installation
+
+```
+$ npm install --save filerobot-uploader
+```
+
+### <a name="quick_start_react"></a>Quick start
+
+We provide easy way to integrate image uploader in your applications
+
+```
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import FilerobotUploader from '../../../projects/react-plugin';
+
+
+const config = {
+  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
+  uploadParams: { dir:"/demo_filerobot_en" },
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
+  container: 'scaleflex-tests-v5a'
+}
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isShow: false
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>React Example</h1>
+        <button onClick={() => { this.setState({ isShow: true }); }}>Click</button>
+        <FilerobotUploader
+          opened={this.state.isShow}
+          config={config}
+          onClose={() => { this.setState({ isShow: false }); }}
+          onUpload={(img) => { console.log(img) }}
+        />
+      </div>
+    )
+  }
+}
+
+render(<App/>, document.getElementById('app'));
+```
+
+### <a name="methods_react"></a>Methods/Properties
+
+#### `opened`: bool (required)
+
+**default**: false
+
+Trigger to display the uploader widget.
+
+#### `initialTab`: string (optional)
+
+**default**: 'UPLOAD'
+
+Allow to choose the initial tab. Should be one of enabled modules.
+
+#### `config`: object (required)
+
+Uploader config.
+
+#### `onClose()`: function (required)
+
+Close uploader widget.
+
+#### `onUpload(files: file[])`: function (required)
+
+Function to handle uploaded files.
 
 ## <a name="configuration"></a>Configuration
 
@@ -80,7 +157,7 @@ Destroy uploader
 Filerobot Container name.
 
 ```
-let options = {
+let config = {
     ...,
 
     container: 'example'
@@ -92,7 +169,7 @@ let options = {
 Unique upload key for Filerobot.
 
 ```
-let options = {
+let config = {
     ...,
 
     filerobotUploadKey: 'xxxxxxxxxxxx'
@@ -104,7 +181,7 @@ let options = {
 Key for Openpix. Required if you are using "ICONS_GALLERY", "IMAGES_GALLERY"
 
 ```
-let options = {
+let config = {
     ...,
 
     openpixKey: 'xxxxxxxxxxxx'
@@ -120,7 +197,7 @@ Language of uploader
 available languages: en, fr, de, ru
 
 ```
-let options = {
+let config = {
     ...,
 
     language: 'en'
@@ -133,10 +210,10 @@ let options = {
 
 Modules (tabs) in file uploader modal.
 
-**Available modules**: **UPLOAD**, **MY_GALLERY**, **ICONS_GALLERY**, **IMAGES_GALLERY**, **TAGGING**
+**Available modules**: **UPLOAD**, **MY_GALLERY**, **ICONS_GALLERY**, **IMAGES_GALLERY**, **TAGGING**, **IMAGE_EDITOR**
 
 ```
-let options = {
+let config = {
     ...,
 
     modules: ['UPLOAD', 'ICONS_GALLERY', 'TAGGING']
@@ -150,7 +227,7 @@ let options = {
 * **dir**: string (default: '/') - specify the folder where you want to upload the file. If the folder doesn't exist, it will be created.
 
 ```
-let options = {
+let config = {
     ...,
 
     uploadParams: {
@@ -167,7 +244,7 @@ let options = {
 Allow to choose the initial tab. Should be one of enabled modules.
 
 ```
-let options = {
+let config = {
     ...,
 
     initialTab: 'UPLOAD'
@@ -181,7 +258,7 @@ let options = {
 Aside menu to browse folders in your container.
 
 ```
-let options = {
+let config = {
     ...,
 
     folderBrowser: true
@@ -201,7 +278,7 @@ let options = {
 * `limit`: number - limit of tags generated by image recognition technology
 
 ```
-let options = {
+let config = {
     ...,
 
     tagging: {
@@ -214,21 +291,6 @@ let options = {
 };
 ```
 
-## <a name="callbacks"></a>Callbacks
-
-#### `onUpload(files: file[])`: function (required)
-
-Function to handle uploaded files.
-
-```
-let options = {
-    ...,
-
-    onUpload: (files) => {
-        // do something
-    }
-};
-```
 
 ## <a name="contributing"></a>Contributing!
 
