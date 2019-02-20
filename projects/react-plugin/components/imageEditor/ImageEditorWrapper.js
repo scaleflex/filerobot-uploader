@@ -1,75 +1,54 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ImageEditor } from 'image-editor-reactjs/dist';
-import { connect } from 'react-redux'
-import { modalClose } from '../../actions';
 
 
-class ImageEditorWrapper extends Component {
-  goBack = () => {
-    const { prevTab } = this.props;
+const goBack = (prevTab, setPostUpload) => {
+  if (prevTab === 'TAGGING')
+    setPostUpload(true, 'TAGGING', 'MY_GALLERY');
+  else
+    setPostUpload(false);
+};
 
-    if (prevTab === 'TAGGING')
-      this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
-    else
-      this.props.setPostUpload(false);
+const onUpload = (prevTab, url, file, saveUploadedFiles, setPostUpload) => {
+  if (prevTab === 'TAGGING') {
+    const files = [{...file, public_link: file.url_permalink }];
+
+    saveUploadedFiles(files);
+
+    setPostUpload(true, 'TAGGING');
   }
 
-  onUpload = (url, file) => {
-    const { prevTab } = this.props;
-
-    if (prevTab === 'TAGGING') {
-      const files = [{...file, public_link: file.url_permalink }];
-
-      this.props.saveUploadedFiles(files);
-
-      this.props.setPostUpload(true, 'TAGGING');
-    }
-
-    else
-      this.props.setPostUpload(false);
-  }
-
-  render() {
-    const { files: [ file = {} ] = {}, path } = this.props;
-    const { uploadKey, container, uploadParams } = this.props.config
-
-    const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
-
-    return (
-      <ImageEditor
-        config={{
-          UPLOAD_KEY: uploadKey,
-          AIRSTORE_UPLOAD_KEY: uploadKey,
-          CONTAINER: container,
-          UPLOAD_CONTAINER: container,
-          PROCESS_WITH_CLOUDIMAGE: isGif,
-          HIDE_CLOUDIMAGE_PROCESS: true,
-          UPLOAD_CLOUDIMAGE_IMAGE: true,
-          CLOUDIMAGE_TOKEN: 'demo',
-          UPLOAD_PARAMS: {
-            ...uploadParams,
-            dir: path || uploadParams.dir
-          }
-        }}
-        closeOnLoad={false}
-        src={file.url_permalink}
-        onUpload={this.onUpload}
-        onClose={this.goBack}
-        showGoBackBtn={true}
-      />
-    )
-  }
+  else
+    setPostUpload(false);
 }
 
+export default ({ appState, files: [ file = {} ] = {}, path, saveUploadedFiles, setPostUpload }) => {
+  const { prevTab, config } = appState;
+  const { uploadKey, container, uploadParams } = config;
+  const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
+  const imageEditorConfig = {
+    UPLOAD_KEY: uploadKey,
+    AIRSTORE_UPLOAD_KEY: uploadKey,
+    CONTAINER: container,
+    UPLOAD_CONTAINER: container,
+    PROCESS_WITH_CLOUDIMAGE: isGif,
+    HIDE_CLOUDIMAGE_PROCESS: true,
+    UPLOAD_CLOUDIMAGE_IMAGE: true,
+    CLOUDIMAGE_TOKEN: 'demo',
+    UPLOAD_PARAMS: {
+      ...uploadParams,
+      dir: path || uploadParams.dir
+    }
+  };
 
-const mapStateToProps = state => ({
-  uploadHandler: state.uploader.uploaderConfig.uploadHandler,
-  editorConfig: state.uploader.uploaderConfig.imageEditor,
-  language: state.uploader.uploaderConfig.language,
-  config: state.uploader.uploaderConfig
-})
-
-export default connect(
-  mapStateToProps,
-  { modalClose }
-)(ImageEditorWrapper);
+  return (
+    <ImageEditor
+      config={imageEditorConfig}
+      closeOnLoad={false}
+      src={file.url_permalink}
+      onUpload={(url, file) => { onUpload(prevTab, url, file, saveUploadedFiles, setPostUpload); }}
+      onClose={() => { goBack(prevTab, setPostUpload); }}
+      showGoBackBtn={true}
+    />
+  );
+}

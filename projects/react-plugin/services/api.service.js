@@ -41,7 +41,7 @@ export const uploadFiles = (
   const jsonData = { files_urls: [] };
   const isJson = data_type === 'application/json';
 
-  uploadParams = Object.assign({}, uploadParams, { dir: dir || uploadParams.dir });
+  uploadParams = {...uploadParams, ...{ dir: dir || uploadParams.dir }};
 
   // generate params string
   const paramsStr = Object.keys(uploadParams)

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
-import { CSS, DragDropCss as styles } from '../../assets/styles/index';
-import { connect } from "react-redux";
-import { uploadFilesFromUrls, uploadFiles, modalClose } from '../../actions/index';
+import { DragDropCss as styles } from '../../assets/styles/index';
 import { isEnterClick } from '../../utils/index';
 import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
 import { Container, ItemName, BrowseButton } from './UserUploaderTab.styled';
 import { Spinner } from '../Spinner';
 import { I18n } from 'react-i18nify';
+import * as API from '../../services/api.service'
 
 
 const STEP = {
@@ -56,14 +54,13 @@ class UserUploaderTab extends Component {
   upload = (isUploadFromUrl = false, url = null) => {
     // if (this.state.isLoading) return;
     const self = this.props;
+    const { config } = this.props.appState;
+    const files = isUploadFromUrl ? [url] : this.state.files;
+    const dataType = isUploadFromUrl ? 'application/json' : 'files[]';
 
     this.uploadStart();
 
-    (
-      isUploadFromUrl
-        ? uploadFilesFromUrls(url, this.props.uploaderConfig)
-        : uploadFiles(this.state.files, this.props.uploaderConfig)
-    )
+    API.uploadFiles(files, config, dataType)
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
@@ -71,17 +68,14 @@ class UserUploaderTab extends Component {
 
         this.uploadSuccess(files);
 
-        if (this.props.uploaderConfig.tagging.active) {
+        if (config.tagging.active) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'UPLOAD');
           return;
         }
 
-        self.uploaderConfig.uploadHandler(files);
-
-        if (this.props.onClose) this.props.onClose();
-
-        self.modalClose();
+        config.uploadHandler(files);
+        self.closeModal();
       })
       .catch((error) => {
         this.uploadError(error.msg)
@@ -96,31 +90,29 @@ class UserUploaderTab extends Component {
     else this.uploadError(value ? I18n.t('upload.url_not_valid') : I18n.t('upload.empty_url'), 4000);
   };
 
+  setDragOverOn = e => {
+    e.preventDefault();
+    this.setState({ isDragOver: true })
+  }
+
+  setDragOverOff = e => {
+    e.preventDefault();
+    this.setState({ isDragOver: false })
+  }
+
   render() {
-    const { step, uploadedFiles = [], errorMsg = '' } = this.state;
+    const { step, errorMsg = '' } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
 
     return (
-      <div style={[styles.container]}>
+      <div style={styles.container}>
         {
           step !== STEP.UPLOADED &&
           <Container
-            onDragOver={e => {
-              e.preventDefault();
-              this.setState({ isDragOver: true })
-            }}
-            onDragEnter={e => {
-              e.preventDefault();
-              this.setState({ isDragOver: true })
-            }}
-            onDragLeave={e => {
-              e.preventDefault();
-              this.setState({ isDragOver: false })
-            }}
-            onDragEnd={e => {
-              e.preventDefault();
-              this.setState({ isDragOver: false })
-            }}
+            onDragOver={this.setDragOverOn}
+            onDragEnter={this.setDragOverOn}
+            onDragLeave={this.setDragOverOff}
+            onDragEnd={this.setDragOverOff}
             onDrop={this.fileDropHandler}
             isDragOver={this.state.isDragOver}
             method={'post'}
@@ -129,9 +121,9 @@ class UserUploaderTab extends Component {
 
             {
               (step === STEP.DEFAULT || step === STEP.ERROR) &&
-              <div style={[uploadBlock_style.inputBox]}>
+              <div style={uploadBlock_style.inputBox}>
                 <input
-                  style={[uploadBlock_style.inputBox.file]}
+                  style={uploadBlock_style.inputBox.file}
                   type="file"
                   name="files[]"
                   ref={node => this.fileInput = node}
@@ -142,9 +134,9 @@ class UserUploaderTab extends Component {
                   onChange={this.fileChangeHandler}
                 />
 
-                <div style={[uploadBlock_style.inputBox.label]}>
+                <div style={uploadBlock_style.inputBox.label}>
                   <SearchTitle show={true}>{I18n.t('upload.drag_file_here')}</SearchTitle>
-                  <ItemName >{I18n.t('upload.or')}</ItemName>
+                  <ItemName>{I18n.t('upload.or')}</ItemName>
                   <BrowseButton
                     key="browse-your-computer"
                     autoFocus={true}
@@ -176,21 +168,21 @@ class UserUploaderTab extends Component {
                   </ItemName>
                 </div>
 
-                <div ref="submitBtn" className="ae-btn" style={[uploadBlock_style.inputBox.submitBtn]} type="submit">
+                <div ref="submitBtn" className="ae-btn" style={uploadBlock_style.inputBox.submitBtn} type="submit">
                   {I18n.t('upload.upload_btn')}
                 </div>
               </div>
             }
 
             {step === STEP.UPLOADING &&
-            <div style={[uploadBlock_style.uploadingBox]}>
+            <div style={uploadBlock_style.uploadingBox}>
               <Spinner overlay show={true}/>
               <span>{I18n.t('upload.uploading')}</span>
             </div>}
 
             {step === STEP.ERROR &&
-            <div style={[uploadBlock_style.errorBox]}>
-              <span style={[uploadBlock_style.errorBox.errorMsg]} role="alert">{errorMsg}</span>
+            <div style={uploadBlock_style.errorBox}>
+              <span style={uploadBlock_style.errorBox.errorMsg} role="alert">{errorMsg}</span>
             </div>}
           </Container>
         }
@@ -199,11 +191,4 @@ class UserUploaderTab extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  uploaderConfig: state.uploader.uploaderConfig
-});
-
-export default connect(
-  mapStateToProps,
-  { modalClose }
-)(Radium(UserUploaderTab));
+export default UserUploaderTab;

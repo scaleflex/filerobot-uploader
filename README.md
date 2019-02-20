@@ -2,8 +2,6 @@
 
 Plugin to upload images.
 
-> 🤖 **Filerobot Uploader is currently in beta**. Some of its APIs are not "finalized" and will (breaking) change over time as we discover better solutions.
-
 ## Table of contents
 
 * [Standalone usage](#standalone_usage)

@@ -26,10 +26,13 @@ const isEsc= event => event && (event.which || event.keyCode) === 27;
 
 const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) === i);
 
+const isDefined = param => typeof param !== 'undefined';
+
 export {
   uniqueArrayOfStrings,
   isEnterClick,
   cursorToEnd,
   deepCopy,
-  isEsc
+  isEsc,
+  isDefined
 }

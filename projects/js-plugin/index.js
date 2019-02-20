@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import AirstoreUploaderWrapper, { createAirstoreUploaderStore } from '../react-plugin/components/AirstoreUploaderWrapper';
-import { Provider } from 'react-redux';
+import AirstoreUploaderWrapper  from '../react-plugin/components/AirstoreUploaderWrapper';
 
 
 window.AirstoreUploader = window.AirstoreUploader || {};
@@ -14,7 +13,6 @@ function init(options = {}, isOpened = false) {
   const elementId = options.elementId || options.ELEMENT_ID || 'airstore-uploader';
   const initialTab = options.initialTab || options.INITIAL_TAB || 'UPLOAD';
   let container = document.getElementById(elementId);
-  const AirstoreUploaderStore = createAirstoreUploaderStore();
 
   if (!container) {
     container = document.createElement('div');
@@ -29,14 +27,11 @@ function init(options = {}, isOpened = false) {
 
     return render(
       <AppContainer>
-        <Provider store={AirstoreUploaderStore}>
           <Component
             opened={isOpened}
             initialOptions={options}
             initialTab={initialTab}
-            AirstoreUploaderStore={AirstoreUploaderStore}
           />
-        </Provider>
       </AppContainer>,
       container,
     )

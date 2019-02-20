@@ -1,1 +1,3 @@
-export { default as AirstoreUploader, getReducers } from './components/AirstoreUploaderWrapper';
+import AirstoreUploader from './components/AirstoreUploaderWrapper';
+
+export default AirstoreUploader;

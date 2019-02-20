@@ -2,11 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/assets/translations/fr.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/assets/translations/fr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/components/AirstoreUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/components/AirstoreUploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/babel.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/components/AppState.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImageBox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesColorPicker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesSidebar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/components/loadable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/utils/global.utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/utils/icons.utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/react-plugin/utils/images.utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.gallery.29da638ee59df48b7aa9.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.icons.cf6b9b98df53c5d00c9e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.image-editor.38f7908f4492406fbc38.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.images.d86b9e0281f612e4ec58.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.main.6387fea72e65e3dbf577.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.tagging.a75699f71a4cd4428bae.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.vendors~gallery~icons~images.d610dabae5cdd2857119.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.vendors~icons~images.7c4f218fbf217608fae0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.vendors~image-editor.bed0c9e98c358df5fda7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/filerobot-uploader-widget.vendors~tagging.0bb27e7bd2417b25cc46.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/react-loadable.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/react-loadable.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/react-plugin/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/react-plugin/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/react-plugin/src/store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/js-plugin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/js-plugin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/actions/icons.actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/actions/images.actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/actions/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/actions/uploader.actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploaderWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploaderWrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconSidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconSidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/SearchBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/UploadImagesTab/UserUploaderTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/UploadImagesTab/UserUploaderTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/imageEditor/ImageEditorWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/imageEditor/ImageEditorWrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/components/nav/Nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/components/nav/Nav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/module.hot.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/reducers/icons.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/reducers/images.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/reducers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/reducers/uploader.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/services/api.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/services/api.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/services/imagesApi.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/services/imagesApi.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/react-plugin/utils/helper.utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/projects/react-plugin/utils/helper.utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.demo-js-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.demo-js-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.demo-react-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.demo-react-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.js-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.js-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.react-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.react-config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -26,125 +77,40 @@
     <fileColor scope="Non-Project Files (Material Palenight)" color="4E5579" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simple-demo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/demos/simple-demo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fr.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/fr.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="en.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/en.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ru.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/ru.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fr.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dist/assets/translations/fr.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Drag file here</find>
-      <find>.search</find>
-      <find>I18n</find>
-      <find>categorie</find>
-      <find>apply</find>
-      <find>errorMsg</find>
-      <find>categories</find>
-      <find>http://</find>
-      <find>getElementStylesBySize</find>
-      <find>props.theme</find>
-      <find>modal</find>
-      <find>theme.</find>
-      <find>theme</find>
-      <find>.theme</find>
-      <find>mainThemeColor</find>
-      <find>image_only</find>
-      <find>setUploaderConfig</find>
-      <find>config'</find>
-      <find>config&quot;</find>
-      <find>uploadFiles(</find>
-      <find>config</find>
-      <find>openpixKey</find>
-      <find>options</find>
-      <find>container</find>
-      <find>opened</find>
-      <find>initialTab</find>
-      <find>closeModal</find>
-      <find>modalClose</find>
-      <find>upload</find>
-      <find>onFileUpload</find>
+      <find>generateTags</find>
+      <find>react-re</find>
+      <find>Radium(</find>
+      <find>object-assign</find>
+      <find>url-loader</find>
+      <find>whatwg-fetch</find>
+      <find>webpack-manifest-plugin</find>
+      <find>react-loadable</find>
+      <find>i18next</find>
+      <find>react-toastr</find>
+      <find>react-tooltip</find>
+      <find>autoprefixer</find>
+      <find>css-loader</find>
+      <find>extract-text-webpack-plugin</find>
+      <find>file-loader</find>
+      <find>highlight.js</find>
+      <find>html-webpack-plugin</find>
+      <find>promise</find>
+      <find>react-i18next</find>
+      <find>react-hot-loader</find>
+      <find>style-loader</find>
+      <find>uploadedFiles</find>
+      <find>ImagesTab</find>
+      <find>'</find>
+      <find>=&gt;``</find>
+      <find>Number.isFinite</find>
+      <find>=&gt;</find>
+      <find>Object.assign</find>
+      <find>plugin-syntax-dynamic-import</find>
+      <find>ThemeProvider</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -161,6 +127,8 @@
       <replace>onSearchImages</replace>
       <replace>this.imageGridWrapperRef</replace>
       <replace>AIRSTORE_UPLOAD_KEY</replace>
+      <replace>&quot;</replace>
+      <replace>getImages</replace>
     </replaceStrings>
     <dirStrings>
       <dir>D:\Work\Projects\airstore-uploader-react\src</dir>
@@ -170,13 +138,15 @@
       <dir>$PROJECT_DIR$/node_modules</dir>
       <dir>$PROJECT_DIR$/build</dir>
       <dir>$PROJECT_DIR$/src/AirstoreUploaderPlugin</dir>
-      <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/src</dir>
-      <dir>$PROJECT_DIR$/projects/react-plugin/components</dir>
       <dir>$PROJECT_DIR$/projects/react-plugin/components/IconsTab</dir>
       <dir>$PROJECT_DIR$/projects/react-plugin/components/ImagesTab</dir>
+      <dir>$PROJECT_DIR$/projects/react-plugin/components</dir>
       <dir>$PROJECT_DIR$/projects/react-plugin</dir>
+      <dir>$PROJECT_DIR$/examples</dir>
+      <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/projects</dir>
+      <dir>$PROJECT_DIR$/examples/js-plugin/dist</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -190,57 +160,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/webpack.example-config.js" />
-        <option value="$PROJECT_DIR$/projects/js-plugin/i18n.js" />
-        <option value="$PROJECT_DIR$/projects/js-plugin/i18n-it-backend.js" />
-        <option value="$PROJECT_DIR$/examples/react-plugin/src/store.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/reducers/index.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/nav/Nav.styled.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/nav/Nav.js" />
-        <option value="$PROJECT_DIR$/.babelrc" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/index.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/Spinner.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/projects/js-plugin/design.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/actions/tagging.actions.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/actions/index.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/styledComponents/BackgroundTab.styled.js" />
-        <option value="$PROJECT_DIR$/examples/js-plugin/src/style.css" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/styledComponents/UploadedImages.styled.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/styledComponents/IconTab.styled.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/SearchBar.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconSidebar.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconAddTagModal.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconMonoColorSettings.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/assets/translations/en.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/assets/translations/ru.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.styled.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/assets/translations/index.js" />
-        <option value="$PROJECT_DIR$/examples/js-plugin/src/index.html" />
         <option value="$PROJECT_DIR$/projects/react-plugin/styledComponents/styleUtils.js" />
         <option value="$PROJECT_DIR$/projects/react-plugin/components/Button.js" />
         <option value="$PROJECT_DIR$/projects/react-plugin/components/CloseBtn.js" />
         <option value="$PROJECT_DIR$/projects/react-plugin/components/Modal.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/reducers/uploader.reducer.js" />
-        <option value="$PROJECT_DIR$/projects/js-plugin/index.js" />
         <option value="$PROJECT_DIR$/examples/react-plugin/src/index.html" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploaderWrapper.js" />
         <option value="$PROJECT_DIR$/projects/react-plugin/config.js" />
+        <option value="$PROJECT_DIR$/examples/demos/full-features-demo.html" />
+        <option value="$PROJECT_DIR$/examples/js-plugin/src/index.html" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/examples/js-plugin/src/index.js" />
+        <option value="$PROJECT_DIR$/upload_via_canvas.txt" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/utils/helper.utils.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/utils/global.utils.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/imageEditor/ImageEditorWrapper.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/nav/Nav.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesContent.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/utils/icons.utils.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/utils/images.utils.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/services/imagesApi.service.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/actions/uploader.actions.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/actions/images.actions.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/reducers/images.reducer.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesColorPicker.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesSidebar.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImageBox.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/reducers/icons.reducer.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/actions/icons.actions.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/reducers/index.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/reducers/uploader.reducer.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesTab.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTab.js" />
+        <option value="$PROJECT_DIR$/projects/js-plugin/index.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/loadable.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/AppState.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/SearchBar.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploader.js" />
         <option value="$PROJECT_DIR$/projects/react-plugin/components/UploadImagesTab/UserUploaderTab.js" />
         <option value="$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesTab.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesContent.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesTab.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/actions/uploader.actions.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/services/api.service.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploader.js" />
-        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTab.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconSidebar.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/index.js" />
+        <option value="$PROJECT_DIR$/.babelrc" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/webpack.demo-js-config.js" />
         <option value="$PROJECT_DIR$/webpack.demo-react-config.js" />
-        <option value="$PROJECT_DIR$/examples/js-plugin/src/index.js" />
-        <option value="$PROJECT_DIR$/examples/react-plugin/src/index.js" />
         <option value="$PROJECT_DIR$/webpack.js-config.js" />
         <option value="$PROJECT_DIR$/webpack.react-config.js" />
-        <option value="$PROJECT_DIR$/webpack.demo-js-config.js" />
+        <option value="$PROJECT_DIR$/babel.config.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/services/api.service.js" />
+        <option value="$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploaderWrapper.js" />
+        <option value="$PROJECT_DIR$/examples/react-plugin/src/index.js" />
       </list>
     </option>
   </component>
@@ -268,15 +238,17 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="42" />
-    <option name="width" value="1440" />
-    <option name="height" value="792" />
+    <option name="x" value="66" />
+    <option name="y" value="139" />
+    <option name="width" value="2072" />
+    <option name="height" value="1025" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -284,11 +256,58 @@
               <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="js-plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="js-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="react-plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="react-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+              <item name="js-plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
+              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+              <item name="react-plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -304,19 +323,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/examples/demos" />
+      <recent name="$PROJECT_DIR$/projects/react-plugin/assets/translations" />
+      <recent name="$PROJECT_DIR$/projects/react-plugin/assets/fonts" />
+      <recent name="$PROJECT_DIR$/projects/react-plugin/components" />
+      <recent name="$PROJECT_DIR$/projects/react-plugin/styledComponents" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/projects/react-plugin/assets/fonts" />
       <recent name="$PROJECT_DIR$/examples/js-plugin/src" />
       <recent name="$PROJECT_DIR$/projects/react-plugin" />
       <recent name="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components/UploadImagesTab" />
       <recent name="$PROJECT_DIR$/src/AirstoreUploaderPlugin/components" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/projects/react-plugin/assets/translations" />
-      <recent name="$PROJECT_DIR$/projects/react-plugin/assets/fonts" />
-      <recent name="$PROJECT_DIR$/projects/react-plugin/components" />
-      <recent name="$PROJECT_DIR$/projects/react-plugin/styledComponents" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -331,15 +350,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html (1)">
+  <component name="RunManager" selected="JavaScript Debug.full-features-demo.html">
+    <configuration name="full-features-demo.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/airstore-uploader-react/examples/demos/full-features-demo.html" />
     <configuration name="index.html (1)" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/airstore-uploader-react/examples/js-plugin/dist/index.html" />
     <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/airstore-uploader-react/examples/js-plugin/src/index.html" />
     <list>
       <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="JavaScript Debug.index.html (1)" />
+      <item itemvalue="JavaScript Debug.full-features-demo.html" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.full-features-demo.html" />
+        <item itemvalue="JavaScript Debug.index.html (1)" />
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html (1)" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
@@ -417,34 +441,10 @@
       <workItem from="1547791744693" duration="3279000" />
       <workItem from="1548001111325" duration="9462000" />
       <workItem from="1548159774522" duration="22105000" />
-    </task>
-    <task id="LOCAL-00037" summary="run dist">
-      <created>1532672100499</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1532672100500</updated>
-    </task>
-    <task id="LOCAL-00038" summary="change to /v1 in config">
-      <created>1533388695732</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1533388695732</updated>
-    </task>
-    <task id="LOCAL-00039" summary="run build and dist">
-      <created>1533388795735</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1533388795735</updated>
-    </task>
-    <task id="LOCAL-00040" summary="change to v1">
-      <created>1533393191899</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1533393191899</updated>
+      <workItem from="1549622812792" duration="2637000" />
+      <workItem from="1549640469169" duration="2487000" />
+      <workItem from="1550046369221" duration="22032000" />
+      <workItem from="1550417973877" duration="35878000" />
     </task>
     <task id="LOCAL-00041" summary="run build run dist">
       <created>1533393270880</created>
@@ -761,11 +761,39 @@
       <option name="project" value="LOCAL" />
       <updated>1548225230011</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="run build">
+      <created>1548830534224</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1548830534224</updated>
+    </task>
+    <task id="LOCAL-00087" summary="update doc">
+      <created>1548834819135</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1548834819135</updated>
+    </task>
+    <task id="LOCAL-00088" summary="update doc">
+      <created>1548838704880</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1548838704880</updated>
+    </task>
+    <task id="LOCAL-00089" summary="working on image editor">
+      <created>1550144875044</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1550144875045</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="399917000" />
+    <option name="totallyTimeSpent" value="467346000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -777,49 +805,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="31" width="1440" height="834" extended-state="6" />
+    <frame x="66" y="139" width="2072" height="1025" extended-state="0" />
     <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17844954" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32913166" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49964765" weight="0.32913166" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.516561" side_tool="true" visible="true" weight="0.36834735" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48343903" visible="true" weight="0.36834735" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48696265" weight="0.26330534" />
-      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32886904" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28118393" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51231134" side_tool="true" weight="0.2012987" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32913166" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" visible="true" weight="0.08618785" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" weight="0.36134455" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32913166" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19661734" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32913166" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" visible="true" weight="0.4627976" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51231134" side_tool="true" weight="0.2012987" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" weight="0.22470239" />
-      <window_info id="Favorites" order="3" side_tool="true" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" weight="0.23109244" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18604651" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -827,12 +841,12 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32913166" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" visible="true" weight="0.12605043" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51231134" side_tool="true" weight="0.2012987" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" weight="0.23109244" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info id="Favorites" order="3" side_tool="true" />
     </layout-to-restore>
@@ -881,9 +895,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="npm run dist" />
-    <MESSAGE value="refactor .extend to styled()" />
-    <MESSAGE value="add classes" />
     <MESSAGE value="add class for styling" />
     <MESSAGE value="fix bug with redux store and and add possibility to upload several files" />
     <MESSAGE value="make build" />
@@ -906,7 +917,10 @@
     <MESSAGE value="refactor config; fix error handling; refactor logic of close/open modal" />
     <MESSAGE value="fix unmount error when go to tagging tab" />
     <MESSAGE value="remove idea files from git" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove idea files from git" />
+    <MESSAGE value="run build" />
+    <MESSAGE value="update doc" />
+    <MESSAGE value="working on image editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on image editor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -916,356 +930,409 @@
           <line>1</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/projects/react-plugin/config.js</url>
+          <line>3</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/index.js">
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesColorPicker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        <state relative-caret-position="251">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/ru.js">
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesSidebar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        <state relative-caret-position="144">
+          <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/assets/translations/fr.js">
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImageBox.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/tagging.actions.js" />
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/styledComponents/BackgroundTab.styled.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4374">
-          <caret line="247" column="5" lean-forward="true" selection-start-line="247" selection-start-column="5" selection-end-line="247" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/js-plugin/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/VirtualizedImagesGrid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2115">
-          <caret line="2" column="55" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/nav/Nav.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="57" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/styledComponents/IconTab.styled.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/styledComponents/UploadedImages.styled.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/SearchBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="41" column="63" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconSidebar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-243">
-          <caret line="61" column="70" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
+        <state relative-caret-position="198">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconAddTagModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconMonoColorSettings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="119" column="36" lean-forward="true" selection-start-line="119" selection-start-column="36" selection-end-line="119" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/ru.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.styled.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1914">
-          <caret line="280" column="17" lean-forward="true" selection-start-line="280" selection-start-column="17" selection-end-line="280" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/en.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/translations/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/Button.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="309" column="22" selection-start-line="309" selection-start-column="16" selection-end-line="309" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/styledComponents/styleUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1692">
-          <caret line="94" column="22" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/CloseBtn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/js-plugin/design.js" />
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/Modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2448">
-          <caret line="136" column="29" selection-start-line="136" selection-start-column="29" selection-end-line="136" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/js-plugin/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="15" column="100" selection-start-line="15" selection-start-column="100" selection-end-line="15" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/reducers/uploader.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="69" column="26" lean-forward="true" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/fonts/scaleflex-icon-font.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/index.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="85" lean-forward="true" selection-start-column="85" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/js-plugin/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/reducers/images.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-125">
-          <caret line="117" column="2" selection-start-line="117" selection-start-column="2" selection-end-line="117" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/uploader.actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/UploadImagesTab/UserUploaderTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/services/api.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-129">
-          <caret line="59" column="10" lean-forward="true" selection-start-line="59" selection-start-column="10" selection-end-line="59" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploaderWrapper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="207" column="14" lean-forward="true" selection-start-line="207" selection-start-column="14" selection-end-line="207" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/js-plugin/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconMonoColorSettings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
+        <state relative-caret-position="-2027">
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.react-config.js">
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTags.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/reducers/icons.reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/services/imagesApi.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/reducers/uploader.reducer.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/icons.actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-start-column="2" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/images.actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="45" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/UploadedImagesTab/UploadedImagesTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/actions/uploader.actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="97" lean-forward="true" selection-start-line="6" selection-start-column="79" selection-end-line="6" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTab.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/module.hot.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/styles/styles.css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-94">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/loadable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/TaggingTab/TaggingTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="236" column="3" selection-start-line="236" selection-start-column="3" selection-end-line="236" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/SearchBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/assets/styles/main.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/UploadImagesTab/UserUploaderTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-58">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconSidebar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/AppState.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2952">
+          <caret line="164" selection-start-line="164" selection-end-line="164" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/Spinner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="160" column="42" selection-start-line="160" selection-start-column="42" selection-end-line="160" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/js-plugin/dist/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/js-plugin/dist/filerobot-uploader-widget.main.5b0c58111c6d4484e920.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="16" column="197358" lean-forward="true" selection-start-line="16" selection-start-column="197358" selection-end-line="16" selection-end-column="197358" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/pretty-bytes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="17" column="71" selection-start-line="17" selection-start-column="71" selection-end-line="17" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.demo-react-config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webpack.js-config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
+        <state relative-caret-position="114">
+          <caret line="21" column="73" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.demo-react-config.js">
+    <entry file="file://$PROJECT_DIR$/webpack.react-config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        <state relative-caret-position="235">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babel.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/services/api.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webpack.demo-js-config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        <state relative-caret-position="422">
+          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/AirstoreUploaderWrapper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Changelog.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/react-plugin/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/js-plugin/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-740">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/react-plugin/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="71" selection-start-line="6" selection-start-column="71" selection-end-line="6" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/js-plugin/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-535">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

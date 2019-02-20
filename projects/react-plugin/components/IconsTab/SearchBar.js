@@ -3,7 +3,6 @@ import { isEnterClick } from '../../utils'
 import {
   SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle, AmountIcons
 } from '../../styledComponents';
-import { connect } from 'react-redux';
 import { I18n } from 'react-i18nify';
 
 
@@ -45,4 +44,4 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, null)(SearchBar);
+export default SearchBar;

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { uploadFilesFromUrls, getIconsTags, activateIconsCategory, fetchIcons, modalClose } from '../../actions';
 import { IconsWrapper, IconTabWrapper, IconMain, IconBoxWrapper, ShowMoreResultsSpinner } from '../../styledComponents';
 import { Spinner } from '../Spinner';
 import IconItem from '../IconsTab/IconItem';
@@ -14,6 +12,14 @@ import { setAsNotRelevant, sendSelectionData } from '../../services/iconsApi.ser
 import * as ImageGridService from '../../services/imageGrid.service';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import { I18n } from 'react-i18nify';
+import * as IconAPI from '../../services/iconsApi.service';
+import * as API from '../../services/api.service';
+
+
+const defaultTags = [
+  { slug: 'custom-famous', cat: 'Famous' },
+  { slug: 'custom-search', cat: 'Search', count: 0 }
+];
 
 
 class IconTab extends Component {
@@ -30,14 +36,22 @@ class IconTab extends Component {
     imageGrid: { columnWidth: 0, gutterSize: 4, minColumnWidth: DEFAULT_ICON_SIZE },
     isShowMoreImages: false,
 
-    activeTags: {}
+    activeTags: {},
+
+    active: {
+      slug: 'custom-search',
+      icons: [],
+      related_tags: []
+    },
+    tags: [...defaultTags]
   };
 
   loadedIcons = [];
 
   componentDidMount() {
-    this.props.getIconsTags();
-    this.updateImageGridColumnWidth();
+    IconAPI.getTags().then(tags => {
+      this.setState({ tags: [...defaultTags, ...tags] }, this.updateImageGridColumnWidth);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -70,7 +84,7 @@ class IconTab extends Component {
     sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, this.loadedIcons);
     const self = this.props;
 
-    uploadFilesFromUrls([icon.src], this.props.uploaderConfig)
+    API.uploadFiles([icon.src], this.props.appState.config, 'application/json')
       .then(([files, isDuplicate, isReplacingData]) => {
         this.uploadStop();
 
@@ -78,17 +92,14 @@ class IconTab extends Component {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
         }
 
-        if (this.props.uploaderConfig.tagging.active) {
+        if (this.props.appState.config.tagging.active) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'ICONS_GALLERY');
           return;
         }
 
-        self.uploaderConfig.uploadHandler(files);
-
-        if (this.props.onClose) this.props.onClose();
-
-        self.modalClose();
+        self.appState.config.uploadHandler(files);
+        self.closeModal();
       })
       .catch(() => {
         this.uploadStop();
@@ -100,38 +111,63 @@ class IconTab extends Component {
     this.setState({ isShowIconAddTagModal: true, activeIcon });
   }
 
-  loadIcons = (searchParams, relevantActiveTags, cb = null) => {
-    const { openpixKey } = this.props.uploaderConfig;
-    const done = (response) => {
-      typeof cb === 'function' && cb(response);
-      this.setState({ isLoading: false, isShowMoreImages: false });
-    };
-
-    this.setState({ isLoading: !searchParams.offset, isShowMoreImages: searchParams.offset });
-
-    return this.props.fetchIcons({ ...searchParams, openpixKey }, relevantActiveTags, done)
-  };
-
   search = ({ value = '', type, offset = 0 }, refreshTags, resizeOnSuccess) => {
-    const self = this;
-    const { related_tags } = this.props.active;
+    const { active } = this.state;
+    const { related_tags } = active;
     const activeTags = refreshTags ? {} : this.state.activeTags;
     const relevantActiveTags = this.getRelevantActiveTags(activeTags, related_tags);
-    this.setState({ isSearching: true, activeTags, relevantActiveTags });
-    const onSuccess = (response) => {
-      const { payload = {} } = response;
-      const { icons = [] } = payload;
-      if (!icons.length && relevantActiveTags.length) {
-        this.search({ value, type }, true);
-        return;
-      }
-      else if (!icons.length) this.props.showAlert(I18n.t('icons.zero_icons_was_found'), '', 'warning');
+    const { openpixKey } = this.props.appState.config;
+    const isShowMore = !offset;
+    let searchParams = { value, type, offset };
 
-      self.setState({ isSearching: false });
-      typeof resizeOnSuccess === 'function' && resizeOnSuccess();
+    this.setState({
+      isSearching: true,
+      activeTags,
+      relevantActiveTags,
+      isLoading: !searchParams.offset,
+      isShowMoreImages: searchParams.offset
+    });
+
+    switch (searchParams.type) {
+      case 'all':
+        searchParams.typeQuery = '&style[]=FLAT&style[]=MONOCOLOR';
+        break;
+      case 'multi':
+        searchParams.typeQuery = '&style[]=FLAT';
+        break;
+      case 'mono':
+        searchParams.typeQuery = '&style[]=MONOCOLOR';
+        break;
     }
 
-    this.loadIcons({ value, type, offset }, relevantActiveTags, onSuccess);
+    if (!searchParams.value) return;
+
+    IconAPI.searchIcons({ ...searchParams, openpixKey }, relevantActiveTags)
+      .then((response = {}) => {
+        let { count = 0, icons = [], related_tags = [], searchParams = {} } = response;
+
+        if (!icons.length && relevantActiveTags.length) {
+          this.search({ value, type }, true);
+          return;
+        }
+        else if (!icons.length) this.props.showAlert(I18n.t('icons.zero_icons_was_found'), '', 'warning');
+
+        this.setState({
+          isSearching: false,
+          active: {
+            icons: isShowMore ? [active.icons, ...icons] : icons,
+            related_tags
+          },
+          count,
+          searchParams
+        });
+
+        typeof resizeOnSuccess === 'function' && resizeOnSuccess();
+      })
+      .finally(() => {
+        this.setState({ isLoading: false, isShowMoreImages: false });
+      });
+
     this.loadedIcons = [];
   };
 
@@ -152,7 +188,7 @@ class IconTab extends Component {
   onShowMoreImages = (resizeOnSuccess) => {
     if (this.state.isShowMoreImages) return;
 
-    let { searchParams, count } = this.props;
+    let { searchParams, count } = this.state;
 
     if (count > (searchParams.offset + 250)) {
       searchParams.offset = searchParams.offset + 250;
@@ -169,16 +205,6 @@ class IconTab extends Component {
     }
 
     return result;
-  }
-
-  activateCategory = (_c) => {
-    this.setState({ [_c.slug]: !this.state[_c.slug], isSearching: true });
-    this.props.activateIconsCategory(_c, () => {
-      //const iconBox = document
-      //  .querySelector('#airstore-uploader-icons-box .airstore-uploader-icon-item:first-child');
-      //if (iconBox) iconBox.focus();
-      this.setState({ isSearching: false });
-    });
   }
 
   toggleColorType = (type) => {
@@ -217,8 +243,8 @@ class IconTab extends Component {
   }
 
   setAsNotRelevant = (event, activeIcon) => {
-    const { active, showAlert } = this.props
-    const { searchPhrase, activeTags, activePresetTag } = this.state;
+    const { showAlert } = this.props
+    const { searchPhrase, activeTags, activePresetTag, active } = this.state;
     const relevantActiveTags = this.getRelevantActiveTags(activeTags, active.related_tags);
     event.stopPropagation();
     setAsNotRelevant({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, activeIcon.uid);
@@ -228,60 +254,50 @@ class IconTab extends Component {
   onLoadImage = (target, icon) => { this.loadedIcons.push(icon); };
 
   render() {
-    const { active = {}, uploaderConfig, showAlert, count, themeColors } = this.props;
+    const { tags, active = {}, count } = this.state;
+    const { appState, showAlert, themeColors } = this.props;
+    const { isShowAddTagBtn, isShowNotRelevantBtn } = appState;
     const {
       isLoading, isSearching, activeTags, isShowMonoIconSettings, activeIconSrc, searchPhrase, activeColorType,
       isShowIconAddTagModal, activeIcon, activePresetTag, imageGridWrapperWidth, imageContainerHeight, imageGrid,
       isShowMoreImages
     } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
-    const isSearch = active && active.slug && active.slug === 'custom-search';
-    let isVisibleLoadingBlock = !(active && active.isLastPage || isSearch && !this.state.searchPhrase);
 
     return (
       <IconTabWrapper>
         <IconSidebar
-          activePresetTag={activePresetTag}
+          {...{ activePresetTag, activeColorType, tags, active }}
           onActivatePresetTag={this.onActivatePresetTag}
           toggleColorType={this.toggleColorType}
-          activeColorType={activeColorType}
         />
 
         <IconMain>
           <SearchBar
+            {...{ isLoading, isSearching, searchPhrase, count }}
             title={I18n.t('icons.you_can_search_icons_here')}
             items={active.icons}
-            isLoading={isLoading}
-            onSearch={() => { this.onSearch(); }}
-            isSearching={isSearching}
-            searchPhrase={searchPhrase}
+            onSearch={this.onSearch}
             onChangeSearchPhrase={this.onChangeSearchPhrase}
-            count={count}
           />
 
           <IconTags
+            {...{ searchPhrase, activeTags }}
             tagsList={active.related_tags}
-            searchPhrase={searchPhrase}
-            activeTags={activeTags}
             toggleTag={this.toggleTag}
           />
 
           {isShowMonoIconSettings &&
           <IconMonoColorSettings
-            themeColors={themeColors}
+            {...{ themeColors, activeIconSrc }}
             upload={this.upload}
-            activeIconSrc={activeIconSrc}
             onClose={() => { this.setState({ isShowMonoIconSettings: false }); }}
           />}
 
           {isShowIconAddTagModal &&
           <IconAddTagModal
-            isShowIconAddTagModal={isShowIconAddTagModal}
-            activeIcon={activeIcon}
+            {...{ isShowIconAddTagModal, activeIcon, showAlert, activeIconSrc, isShowMonoIconSettings }}
             upload={this.upload}
-            showAlert={showAlert}
-            activeIconSrc={activeIconSrc}
-            isShowMonoIconSettings={isShowMonoIconSettings}
             onClose={() => { this.setState({ isShowIconAddTagModal: false }); }}
           />}
 
@@ -291,26 +307,20 @@ class IconTab extends Component {
           >
             {active.icons.length && !isLoading && columnWidth ?
               <VirtualizedImagesGrid
-                imageGridWrapperWidth={imageGridWrapperWidth}
-                imageContainerHeight={imageContainerHeight}
-                columnWidth={columnWidth}
-                gutterSize={gutterSize}
+                {...{ imageGridWrapperWidth, imageContainerHeight, columnWidth, gutterSize, isShowMoreImages }}
                 count={active.icons.length}
                 list={active.icons}
                 upload={this.upload}
                 onShowMoreImages={this.onShowMoreImages}
-                isShowMoreImages={isShowMoreImages}
                 cellContent={({ style, columnWidth, item, index }) => (
                   <IconBoxWrapper style={{ ...style, width: Math.floor(columnWidth) }}>
                     <IconItem
+                      {...{ index, isShowAddTagBtn, isShowNotRelevantBtn }}
                       columnWidth={Math.floor(columnWidth)}
                       icon={item}
-                      index={index}
                       onIconClick={this.onIconClick}
                       upload={this.upload}
                       addTag={this.addTag}
-                      isShowAddTagBtn={uploaderConfig.isShowAddTagBtn}
-                      isShowNotRelevantBtn={uploaderConfig.isShowNotRelevantBtn}
                       setAsNotRelevant={this.setAsNotRelevant}
                       onLoadImage={this.onLoadImage}
                     />
@@ -327,20 +337,5 @@ class IconTab extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  uploaderConfig: state.uploader.uploaderConfig,
-  tags: state.icons.tags,
-  active: state.icons.active,
-  searchParams: state.icons.searchParams,
-  count: state.icons.count
-});
 
-export default connect(
-  mapStateToProps,
-  {
-    getIconsTags,
-    activateIconsCategory,
-    fetchIcons,
-    modalClose
-  }
-)(IconTab);
+export default IconTab;

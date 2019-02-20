@@ -4,14 +4,13 @@ import {
   ButtonClose
 } from '../../styledComponents';
 import { getListFiles, searchFiles } from '../../services/api.service';
-import { connect } from 'react-redux';
-import { uploadFiles, uploadFilesFromUrls, modalClose } from '../../actions';
 import { Spinner } from '../Spinner';
 import UploadedImagesContent from './UploadedImagesContent';
 import { isEnterClick } from '../../utils';
 import { I18n } from 'react-i18nify';
 import { GALLERY_IMAGES_LIMIT } from '../../config';
 import FolderManager from './folderManager/FolderManager';
+import * as API from '../../services/api.service'
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
@@ -30,8 +29,8 @@ class UploadedImagesTab extends Component {
       directories: [],
       isShowMoreImages: false,
       showFileManager: false,
-      path: props.path || props.initialDir,
-      folderBrowser: props.uploaderConfig.folderBrowser
+      path: props.path || props.appState.config.uploadParams.dir,
+      folderBrowser: props.appState.config.folderBrowser
     };
   }
 
@@ -59,13 +58,14 @@ class UploadedImagesTab extends Component {
   upload = (isUploadFromUrl = false, url = null) => {
     const { path } = this.state;
     const self = this.props;
+    const config = this.props.appState.config;
+    const files = isUploadFromUrl ? [url] : this.state.filesToUpload;
+    const dataType = isUploadFromUrl ? 'application/json' : 'files[]';
+    const dir = isUploadFromUrl ? false : path;
 
     this.uploadStart();
-    (
-      isUploadFromUrl
-        ? uploadFilesFromUrls(url, this.props.uploaderConfig)
-        : uploadFiles(this.state.filesToUpload, this.props.uploaderConfig, 'files[]', path)
-    )
+
+    API.uploadFiles(files, config, dataType, dir)
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
@@ -73,14 +73,14 @@ class UploadedImagesTab extends Component {
 
         this.uploadSuccess(files);
 
-        if (this.props.uploaderConfig.tagging.active) {
+        if (config.tagging.active) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
           return;
         }
 
-        self.uploaderConfig.uploadHandler(files);
-        self.modalClose();
+        config.uploadHandler(files);
+        self.closeModal();
       })
       .catch((error) => {
         this.uploadError(error.msg)
@@ -116,8 +116,7 @@ class UploadedImagesTab extends Component {
   }
 
   onGetListFiles = (dir, offset = 0, resizeOnSuccess) => {
-    const { uploaderConfig } = this.props;
-    const { container } = uploaderConfig;
+    const { container } = this.props.appState.config;
 
     this.setState({ isShowMoreImages: !!offset, isLoading: !offset });
 
@@ -139,8 +138,7 @@ class UploadedImagesTab extends Component {
 
   search = (offset = 0, resizeOnSuccess) => {
     const { searchPhrase = '', imagesIndex } = this.state;
-    const { uploaderConfig } = this.props;
-    const { container, language } = uploaderConfig;
+    const { container, language } = this.props.appState.config;
 
     if (searchPhrase.length < 2) { this.goToDefaultFolder(); }
 
@@ -209,7 +207,7 @@ class UploadedImagesTab extends Component {
       searchPhrase: '',
       searchInputIndex: this.state.searchInputIndex + 1
     }, () => {
-      this.activateFolder(this.props.initialDir);
+      this.activateFolder(this.props.appState.config.uploadParams.dir);
     })
   }
 
@@ -245,7 +243,7 @@ class UploadedImagesTab extends Component {
             {folderBrowser &&
             <FolderManager
               path={path}
-              rootDir={this.props.initialDir}
+              rootDir={this.props.appState.config.uploadParams.dir}
               folders={directories}
               goToLevelUpFolder={this.goToLevelUpFolder}
               changeFolder={this.activateFolder}
@@ -283,6 +281,8 @@ class UploadedImagesTab extends Component {
         </HeaderWrap>
 
         <UploadedImagesContent
+          appState={this.props.appState}
+          setAppState={this.props.setAppState}
           imagesIndex={imagesIndex}
           onDragEvent={this.onDragEvent}
           fileDropHandler={this.fileDropHandler}
@@ -290,7 +290,7 @@ class UploadedImagesTab extends Component {
           saveUploadedFiles={this.props.saveUploadedFiles}
           setPostUpload={this.props.setPostUpload}
           files={files}
-          onClose={this.props.onClose}
+          closeModal={this.props.closeModal}
           onShowMoreImages={this.onShowMoreImages}
           isShowMoreImages={this.state.isShowMoreImages}
           isLoading={isLoading}
@@ -303,12 +303,4 @@ class UploadedImagesTab extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  uploaderConfig: state.uploader.uploaderConfig,
-  initialDir: state.uploader.uploaderConfig.uploadParams.dir
-});
-
-export default connect(
-  mapStateToProps,
-  { modalClose }
-)(UploadedImagesTab);
+export default UploadedImagesTab;

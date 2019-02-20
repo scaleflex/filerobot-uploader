@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
-import { connect } from "react-redux";
 import {
   SidebarWrap, SideBar, ColorWrapper, ColorItem, ColorItemName, Label, CountTag
 } from '../../styledComponents/index';
@@ -88,7 +86,4 @@ class IconSidebar extends Component {
   }
 }
 
-export default connect(
-  ({ icons: { tags, active } }) => ({ tags, active }),
-  null
-)(Radium(IconSidebar));
+export default IconSidebar;

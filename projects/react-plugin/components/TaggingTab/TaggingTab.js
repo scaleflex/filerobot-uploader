@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import prettyBytes from 'pretty-bytes';
 import TagsInput from 'react-tagsinput'
 import { Spinner } from '../Spinner';
@@ -10,7 +9,6 @@ import {
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
-import { modalClose } from '../../actions';
 import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 
@@ -19,7 +17,8 @@ class TaggingTab extends Component {
   constructor(props) {
     super();
 
-    const { files = {}, language, autoTaggingButton, executeAfterUpload } = props;
+    const { appState, files = {} } = props;
+    const { tagging: { autoTaggingButton, executeAfterUpload } = {}, language } = appState.config;
     const [file = {}] = files;
     const date = new Date();
     const options = {
@@ -47,7 +46,7 @@ class TaggingTab extends Component {
   }
 
   componentDidMount() {
-    const { executeAfterUpload } = this.props;
+    const { tagging: { executeAfterUpload } = {} } = this.props.appState.config;
 
     if (executeAfterUpload && !this.state.tags.length) {
       this.setState({ isGeneratingTags: true });
@@ -66,7 +65,8 @@ class TaggingTab extends Component {
 
   saveMetadata = () => {
     const { description, tags } = this.state;
-    const { files, uploadHandler, language, config } = this.props;
+    const { appState, files } = this.props;
+    const { uploadHandler, language } = appState.config;
     const [file = {}] = this.props.files;
 
     saveMetaData(file.uuid, {
@@ -74,7 +74,7 @@ class TaggingTab extends Component {
       tags: uniqueArrayOfStrings(tags),
       lang: language,
       search: `${description} ${tags.join(' ')}`
-    }, config)
+    }, appState.config)
       .then(response => {
         if (response.status === 'success') {
           files[0].properties = response.properties;
@@ -82,10 +82,7 @@ class TaggingTab extends Component {
 
           this.setState({ isLoading: true }, () => {
             this.props.setPostUpload(false);
-
-            if (this.props.onClose) this.props.onClose();
-
-            this.props.modalClose();
+            this.props.closeModal();
           });
         } else {
           this.setState({
@@ -101,10 +98,11 @@ class TaggingTab extends Component {
   generateTags = () => {
     if (this.state.tagsGenerated) return;
 
-    const { taggingConfig, language } = this.props;
+    const { appState } = this.props;
+    const { tagging, language } = appState.config;
     const [file = {}] = this.props.files;
 
-    generateTags(file.url_permalink, taggingConfig, language)
+    generateTags(file.url_permalink, tagging, language)
       .then(({ tags, ...props } = {}) => {
         if (tags) {
           if (!tags.length) {
@@ -152,7 +150,7 @@ class TaggingTab extends Component {
 
   render() {
     const { isLoading, errorMessage, currentTime, isGeneratingTags } = this.state;
-    const { prevTab } = this.props;
+    const { prevTab } = this.props.appState;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
 
@@ -239,16 +237,4 @@ class TaggingTab extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  uploadHandler: state.uploader.uploaderConfig.uploadHandler,
-  autoTaggingButton: state.uploader.uploaderConfig.tagging.autoTaggingButton,
-  executeAfterUpload: state.uploader.uploaderConfig.tagging.executeAfterUpload,
-  taggingConfig: state.uploader.uploaderConfig.tagging,
-  language: state.uploader.uploaderConfig.language,
-  config: state.uploader.uploaderConfig
-})
-
-export default connect(
-  mapStateToProps,
-  { modalClose, generateTags }
-)(TaggingTab);
+export default TaggingTab;

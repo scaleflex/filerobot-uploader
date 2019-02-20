@@ -3,8 +3,6 @@ import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
   EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, SelectIconWrapper, EditButton
 } from '../../styledComponents';
-import { connect } from 'react-redux';
-import { modalClose } from '../../actions';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import * as ImageGridService from '../../services/imageGrid.service';
 import { I18n } from 'react-i18nify';
@@ -54,18 +52,15 @@ class UploadedImagesContent extends Component {
   upload = (item) => {
     const files = [{...item, public_link: item.url_permalink }];
 
-    this.props.uploaderConfig.uploadHandler(files);
-
-    if (this.props.onClose) this.props.onClose();
-
-    this.props.onModalClose();
+    this.props.appState.config.uploadHandler(files);
+    this.props.closeModal();
   }
 
   onTagImage = (event, item) => {
     event.preventDefault();
     event.stopPropagation();
 
-    if (this.props.uploaderConfig.tagging.active) {
+    if (this.props.appState.config.tagging.active) {
       const files = [{...item, public_link: item.url_permalink }];
 
       this.props.saveUploadedFiles(files);
@@ -77,7 +72,7 @@ class UploadedImagesContent extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    if (this.props.uploaderConfig.imageEditor.active) {
+    if (this.props.appState.config.imageEditor.active) {
       const { path } = this.props;
       const files = [{...item, public_link: item.url_permalink }];
 
@@ -126,8 +121,9 @@ class UploadedImagesContent extends Component {
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
-    const isTagImage = this.props.uploaderConfig.tagging.active;
-    const isEditImage = this.props.uploaderConfig.imageEditor.active;
+    const { tagging, imageEditor } = this.props.appState.config;
+    const isTagImage = tagging.active;
+    const isEditImage = imageEditor.active;
 
     return (
       <ImageWrapper
@@ -185,9 +181,4 @@ class UploadedImagesContent extends Component {
   }
 }
 
-export default connect(
-  ({ uploader: { uploaderConfig } }) => ({ uploaderConfig }),
-  dispatch => ({
-    onModalClose: () => dispatch(modalClose())
-  })
-)(UploadedImagesContent);
+export default UploadedImagesContent;

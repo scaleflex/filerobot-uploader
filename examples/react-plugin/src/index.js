@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore, { injectAsyncReducer } from './store';
-import { getReducers, AirstoreUploader } from '../../../projects/react-plugin';
+import AirstoreUploader from '../../../projects/react-plugin';
 
-
-export const store = configureStore();
-const AsyncReducer = getReducers();
-
-injectAsyncReducer(store, AsyncReducer);
 
 const AIRSTORE_CONFIG = {
-  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'], // optional default: 'UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'
+  modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY'],
   uploadParams: {                 // optional default: {}
     dir: '/dima_test_2'
   },
@@ -43,17 +36,15 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <div>
-          <h1>React Example</h1>
-          <button onClick={() => { this.setState({ isShow: true }); }}>Click</button>
-          <AirstoreUploader
-            opened={this.state.isShow}
-            initialOptions={AIRSTORE_CONFIG}
-            onClose={() => { this.setState({ isShow: false }); }}
-          />
-        </div>
-      </Provider>
+      <div>
+        <h1>React Example</h1>
+        <button onClick={() => { this.setState({ isShow: true }); }}>Click</button>
+        <AirstoreUploader
+          opened={this.state.isShow}
+          initialOptions={AIRSTORE_CONFIG}
+          onClose={() => { this.setState({ isShow: false }); }}
+        />
+      </div>
     )
   }
 }
