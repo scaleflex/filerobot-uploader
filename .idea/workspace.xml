@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="573568f7-c69c-4124-8f9c-253c0420a200" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/airstore-uploader-react.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/dmitry.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -40,8 +49,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="414">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -217,7 +226,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -225,58 +233,11 @@
               <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
               <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-              <item name="js-plugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-              <item name="js-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-              <item name="react-plugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-              <item name="react-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="js-plugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="airstore-uploader-react" type="b2602c69:ProjectViewProjectNode" />
-              <item name="airstore-uploader-react" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="react-plugin" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -415,13 +376,7 @@
       <workItem from="1550046369221" duration="22032000" />
       <workItem from="1550417973877" duration="36767000" />
       <workItem from="1550666859906" duration="13000" />
-    </task>
-    <task id="LOCAL-00042" summary="update to v1">
-      <created>1533396866177</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1533396866177</updated>
+      <workItem from="1550666901828" duration="313000" />
     </task>
     <task id="LOCAL-00043" summary="run dist">
       <created>1533396902646</created>
@@ -759,11 +714,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550658516942</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="remove idea files">
+      <created>1550667027858</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1550667027859</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="468248000" />
+    <option name="totallyTimeSpent" value="468561000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -775,17 +737,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="160" y="23" width="1263" height="834" extended-state="0" />
+    <frame x="0" y="23" width="2304" height="1230" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.294686" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16031538" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32913166" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51231134" side_tool="true" weight="0.2012987" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" visible="true" weight="0.5308123" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" visible="true" weight="0.34144145" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" weight="0.36134455" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" weight="0.36126125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32913166" />
@@ -799,11 +761,11 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.32913166" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" weight="0.23109244" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18604651" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -811,12 +773,12 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32913166" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48768863" visible="true" weight="0.12605043" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51231134" side_tool="true" weight="0.2012987" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.48468643" weight="0.23109244" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info id="Favorites" order="3" side_tool="true" />
     </layout-to-restore>
@@ -865,7 +827,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix bug with redux store and and add possibility to upload several files" />
     <MESSAGE value="make build" />
     <MESSAGE value="add possibility to select several items in browser search" />
     <MESSAGE value="make dist" />
@@ -890,7 +851,8 @@
     <MESSAGE value="update doc" />
     <MESSAGE value="working on image editor" />
     <MESSAGE value="refactoring; updating libs" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring; updating libs" />
+    <MESSAGE value="remove idea files" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove idea files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -929,6 +891,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="36">
+            <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/ImagesTab/ImagesSidebar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -943,19 +924,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconAddTagModal.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconItem.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconMonoColorSettings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2027" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/react-plugin/components/IconsTab/IconTags.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/react-plugin/reducers/icons.reducer.js" />
     <entry file="file://$PROJECT_DIR$/projects/react-plugin/services/imagesApi.service.js">
@@ -1178,8 +1150,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="414">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
