@@ -86,7 +86,7 @@ We provide easy way to integrate image uploader in your applications
 ```
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FilerobotUploader from '../../../projects/react-plugin';
+import FilerobotUploader from 'filerobot-uploader';
 
 
 const config = {
