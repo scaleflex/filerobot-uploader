@@ -25,7 +25,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 Use latest CDNized plugin version
 
 ```
-<script src="https://scaleflex.airstore.io/filerobot/uploader/1.0.6/main.min.js"></script>
+<script src="https://scaleflex.airstore.io/filerobot/uploader/1.0.7/main.min.js"></script>
 ```
 
 ### <a name="quick_start"></a>Quick start
