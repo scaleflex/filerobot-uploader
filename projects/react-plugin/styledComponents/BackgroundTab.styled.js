@@ -69,7 +69,7 @@ export const SelectIconWrapper = styled(EditIconWrapper)`
 
 export const ImageWrapper = styled.div`
   width: 100%;
-  height: ${props => props.height}px;
+  height: ${props => props.height || 158}px !important;
   vertical-align: middle;
   overflow: hidden;
   position: relative;
