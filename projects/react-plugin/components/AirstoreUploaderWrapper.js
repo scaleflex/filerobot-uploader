@@ -1,5 +1,3 @@
-import "@babel/polyfill";
-
 import React from 'react';
 import AirstoreUploader from './AirstoreUploader';
 import AppState from './AppState';
