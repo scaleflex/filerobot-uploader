@@ -159,12 +159,14 @@ class IconTab extends Component {
             related_tags
           },
           count,
-          searchParams
+          searchParams,
+          isLoading: false,
+          isShowMoreImages: false
         });
 
         typeof resizeOnSuccess === 'function' && resizeOnSuccess();
       })
-      .finally(() => {
+      .catch(() => {
         this.setState({ isLoading: false, isShowMoreImages: false });
       });
 

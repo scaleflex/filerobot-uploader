@@ -112,7 +112,7 @@ export const getListFiles = ({ dir = '', container = '', offset }) => {
   return send(url).then((response = {}) => ([
     response.files,
     response.directories,
-    response.info && response.info.total_files_count
+    response.current_directory && response.current_directory.files_count
   ]));
 };
 

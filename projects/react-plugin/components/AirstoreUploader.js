@@ -29,25 +29,15 @@ class AirstoreUploader extends Component {
   }
 
   componentDidMount() {
-    let { config, initialTab, onUpload } = this.props;
-    const language = config.language || config.LANGUAGE || CONFIG.language;
+    let { initialTab } = this.props;
 
-    // support old config
-    let activeModules = config.modules || config.MODULES || CONFIG.modules || ["UPLOAD"];
-    activeModules = activeModules.join('|').replace('UPLOADED_IMAGES', 'MY_GALLERY').split('|');
-    // end
     initialTab = initialTab || config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
 
-    I18n.setLocale(language);
-    config.modules = activeModules;
-
-    this.props.setAppState(() => ({
-      config: prepareConfig(config, onUpload),
-      activeModules
-    }));
-
-
-    if (this.props.opened) this.openModal(initialTab);
+    if (this.props.opened) {
+      this.init(() => { this.openModal(initialTab); });
+    } else {
+      this.init();
+    }
 
     window.onresize = () => {
       const isTooSmall = window.innerWidth < 685;
@@ -60,15 +50,33 @@ class AirstoreUploader extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.opened !== prevProps.opened) {
-      if (this.props.opened)
-        this.openModal();
-      else
+      if (this.props.opened) {
+        this.init(this.openModal);
+      } else
         this.closeModal();
     }
   }
 
+  init(callback = () => {}) {
+    let { config, onUpload } = this.props;
+    const language = config.language || config.LANGUAGE || CONFIG.language;
+
+    // support old config
+    let activeModules = config.modules || config.MODULES || CONFIG.modules || ["UPLOAD"];
+    activeModules = activeModules.join('|').replace('UPLOADED_IMAGES', 'MY_GALLERY').split('|');
+    // end
+
+    I18n.setLocale(language);
+    config.modules = activeModules;
+
+    this.props.setAppState(() => ({
+      config: prepareConfig(config, onUpload),
+      activeModules
+    }), callback);
+  }
+
   setPostUpload = (value, tabId = '', prevTab = '', nextStateProps = {}) => {
-    const activeTabId = tabId || this.props.appState.prevTab;
+    const activeTabId = tabId || this.props.appState.prevTab || 'MY_GALLERY';
 
     this.props.setAppState(() => ({
       activeTabId, prevTab, postUpload: value, ...nextStateProps
@@ -82,6 +90,12 @@ class AirstoreUploader extends Component {
 
     initialTab = initialTab || this.props.initialTab ||
       config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
+    file = file || this.props.file;
+
+    const isPostUploadTabs = initialTab === 'TAGGING' || initialTab === 'IMAGE_EDITOR';
+
+    initialTab = (isPostUploadTabs && file) ? initialTab : 'UPLOAD';
+    file = (isPostUploadTabs && file) ? file : null;
 
     this.props.setAppState((prevState) => ({
       ...(file ? { files: [file], postUpload: true } : { postUpload: false }),

@@ -13,7 +13,7 @@ module.exports = {
     filename: `main.min.js`,
     chunkFilename: `[name].min.js`,
     jsonpFunction: 'webpackJsonp' + Date.now(),
-    publicPath: 'https://scaleflex.airstore.io/filerobot/uploader/1.0.0/'
+    publicPath: `https://scaleflex.airstore.io/filerobot/uploader/${VERSION}/`
   },
   module: {
     rules: [
@@ -32,6 +32,7 @@ module.exports = {
   resolve: {
     extensions: ["*", ".js", ".jsx"]
   },
+  devtool: "sourcemap",
   devServer: {
     port: 3001
   }
