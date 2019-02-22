@@ -134,7 +134,7 @@ class UserUploaderTab extends Component {
                   onChange={this.fileChangeHandler}
                 />
 
-                <div style={uploadBlock_style.inputBox.label}>
+                <div>
                   <SearchTitle show={true}>{I18n.t('upload.drag_file_here')}</SearchTitle>
                   <ItemName>{I18n.t('upload.or')}</ItemName>
                   <BrowseButton
