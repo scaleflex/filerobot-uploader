@@ -46,14 +46,19 @@ class UploadedImagesContent extends Component {
   onKeyDown = (event, item) => {
     if (event !== 13) return;
     event.stopPropagation();
-    this.upload(item);
+    this.select(item);
   }
 
-  upload = (item) => {
-    const files = [{...item, public_link: item.url_permalink }];
+  select = (item) => {
+    const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
 
-    this.props.appState.config.uploadHandler(files);
-    this.props.closeModal();
+    if (isForceUpload) {
+      this.props.upload(true, item.url_permalink);
+    } else {
+      const files = [{...item, public_link: item.url_permalink }];
+      this.props.appState.config.uploadHandler(files);
+      this.props.closeModal();
+    }
   }
 
   onTagImage = (event, item) => {
@@ -105,7 +110,7 @@ class UploadedImagesContent extends Component {
             gutterSize={gutterSize}
             count={imagesList.length}
             list={imagesList}
-            upload={this.upload}
+            upload={this.select}
             onShowMoreImages={this.props.onShowMoreImages}
             isShowMoreImages={isShowMoreImages}
             cellContent={(props) =>
@@ -151,7 +156,7 @@ class UploadedImagesContent extends Component {
           <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
             <EditButton fullBr={'4px'}>{I18n.t('file_manager.tag_image')}</EditButton>
           </TagIconWrapper>}
-          <SelectIconWrapper onClick={() => { this.upload(item); }}>
+          <SelectIconWrapper onClick={() => { this.select(item); }}>
             <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
           </SelectIconWrapper>
         </Overlay>

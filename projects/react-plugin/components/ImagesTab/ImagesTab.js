@@ -192,10 +192,12 @@ class ImagesTab extends Component {
           images: isShowMore ? [...this.state.images, ...images] : images,
           count,
           related_tags,
-          related_top_colors
+          related_top_colors,
+          isLoading: false,
+          isShowMoreImages: false
         }, () => { typeof resizeOnSuccess === 'function' && resizeOnSuccess(); });
       })
-      .finally(() => {
+      .catch(() => {
         this.setState({ isLoading: false, isShowMoreImages: false });
       });
   };
