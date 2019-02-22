@@ -13,14 +13,14 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     this._columnCount = 0;
 
     this._cache = new CellMeasurerCache({
-      defaultHeight: props.imageContainerHeight || 300,
-      defaultWidth: this._columnWidth,
+      defaultHeight: Math.floor(props.imageContainerHeight) || 300,
+      defaultWidth: Math.floor(this._columnWidth),
       fixedWidth: false,
     });
 
     this.state = {
-      columnWidth: this._columnWidth,
-      height: props.imageContainerHeight || 300,
+      columnWidth: Math.floor(this._columnWidth),
+      height: Math.floor(props.imageContainerHeight) || 300,
       gutterSize: this._gutterSize,
       overscanByPixels: 0,
       windowScrollerEnabled: false
@@ -120,13 +120,26 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     }
   }
 
+  getCoordinates = (index) => {
+    const { imageGridWrapperWidth, ratio, additionalImageHeight = 0 } = this.props;
+    const { columnWidth, gutterSize } = this.state;
+    const perRow = this._columnCount || Math.floor(imageGridWrapperWidth / columnWidth);
+    const row = Math.floor(index / perRow);
+    const indexInRow = index % perRow;
+
+    return {
+      top: Math.floor((columnWidth / ratio) + gutterSize + additionalImageHeight) * row,
+      left: (columnWidth + gutterSize) * indexInRow
+    };
+  }
+
   _renderMasonry = ({ width }) => {
     this._width = width;
 
     this._calculateColumnCount();
     this._initCellPositioner();
 
-    const { count } = this.props;
+    const { count, customPositionHandler } = this.props;
     const { height, overscanByPixels, windowScrollerEnabled } = this.state;
 
     return (
@@ -134,7 +147,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
         autoHeight={windowScrollerEnabled}
         cellCount={count}
         cellMeasurerCache={this._cache}
-        cellPositioner={this._cellPositioner}
+        cellPositioner={customPositionHandler ? this.getCoordinates : this._cellPositioner}
         cellRenderer={this._cellRenderer}
         height={windowScrollerEnabled ? this._height : height}
         overscanByPixels={overscanByPixels}
