@@ -113,6 +113,9 @@ class UploadedImagesContent extends Component {
             upload={this.select}
             onShowMoreImages={this.props.onShowMoreImages}
             isShowMoreImages={isShowMoreImages}
+            ratio={1.6}
+            additionalImageHeight={20}
+            customPositionHandler={true}
             cellContent={(props) =>
               props.item.id !== 'uploaderBox' ? this.renderImage(props) : this.renderUploadBox(props)
             }
@@ -136,6 +139,7 @@ class UploadedImagesContent extends Component {
         role="button"
         tabIndex={index}
         onKeyDown={(event) => { this.onKeyDown(event, item); }}
+        height={Math.floor((columnWidth / (item.ratio || 1.6)) + 21)}
       >
         <div style={{ overflow: 'hidden' }}>
           <Img
@@ -175,7 +179,7 @@ class UploadedImagesContent extends Component {
         encType="multipart/form-data"
         style={style}
         columnWidth={columnWidth}
-        height={Math.floor((columnWidth / (item.ratio || 1.6)) + 24)}
+        height={Math.floor((columnWidth / (item.ratio || 1.6)) + 20)}
       >
         <UploadBox isDragOver={isDragOver}>
           <UploadBoxIcon className={'sfi-airstore-image'}/>

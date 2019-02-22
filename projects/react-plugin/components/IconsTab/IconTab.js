@@ -313,6 +313,8 @@ class IconTab extends Component {
                 count={active.icons.length}
                 list={active.icons}
                 upload={this.upload}
+                ratio={1}
+                customPositionHandler={true}
                 onShowMoreImages={this.onShowMoreImages}
                 cellContent={({ style, columnWidth, item, index }) => (
                   <IconBoxWrapper style={{ ...style, width: Math.floor(columnWidth) }}>
