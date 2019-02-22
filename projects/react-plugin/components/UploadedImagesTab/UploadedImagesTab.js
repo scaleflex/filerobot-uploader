@@ -282,6 +282,7 @@ class UploadedImagesTab extends Component {
 
         <UploadedImagesContent
           appState={this.props.appState}
+          upload={this.upload}
           setAppState={this.props.setAppState}
           imagesIndex={imagesIndex}
           onDragEvent={this.onDragEvent}
