@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import AirstoreUploader from '../../../projects/react-plugin';
+import prettyBytes from 'pretty-bytes';
 
 
 const config = {
@@ -15,20 +16,54 @@ class App extends Component {
     super();
 
     this.state = {
-      isShow: false
+      isShow: false,
+      initialTab: 'UPLOAD',
+      img: null
     }
   }
 
   render() {
+    const { img, initialTab } = this.state;
+
     return (
       <div>
         <h1>React Example</h1>
-        <button onClick={() => { this.setState({ isShow: true }); }}>Click</button>
+        <button onClick={() => { this.setState({ isShow: true, initialTab: 'UPLOAD' }); }}>Upload</button>
+        <button onClick={() => { this.setState({ isShow: true, initialTab: 'TAGGING' }); }}>Edit</button>
+
+        {img &&
+        <div>
+          <ul>
+            <li>
+              <span>File name: </span>
+              <span>{img.name}</span>
+            </li>
+            <li>
+              <span>Public link: </span>
+              <span>{img.url_public}</span>
+            </li>
+            <li>
+              <span>Size: </span>
+              <span>{prettyBytes(img.size || 0)}</span>
+            </li>
+            <li>
+              <span>Description: </span>
+              <span>{img.properties.description || ''}</span>
+            </li>
+            <li>
+              <span>Tags: </span>
+              <span>{img.properties.tags && img.properties.tags.join(', ')}</span>
+            </li>
+          </ul>
+        </div>}
+
         <AirstoreUploader
           opened={this.state.isShow}
+          initialTab={initialTab}
+          file={img}
           config={config}
           onClose={() => { this.setState({ isShow: false }); }}
-          onUpload={(img) => { console.log(img) }}
+          onUpload={(images) => { this.setState({ img: images[0] }) }}
         />
       </div>
     )
