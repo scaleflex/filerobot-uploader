@@ -139,7 +139,6 @@ class UploadedImagesContent extends Component {
         role="button"
         tabIndex={index}
         onKeyDown={(event) => { this.onKeyDown(event, item); }}
-        height={Math.floor((columnWidth / (item.ratio || 1.6)) + 21)}
       >
         <div style={{ overflow: 'hidden' }}>
           <Img

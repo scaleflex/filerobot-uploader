@@ -21,7 +21,7 @@ export const Nav = styled.nav`
   background-color: ${p => p.theme.navBackground};
 `;
 
-export const ItemName = styled.span`
+export const ItemName = styled.div`
   padding: 10px;
   padding-top: ${p => p.pt ? p.pt : 10}px;
   padding-bottom: ${p => p.pb ? p.pb : 10}px;
