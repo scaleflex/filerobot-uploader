@@ -39,8 +39,7 @@ We provide easy way to integrate image uploader in your applications
 <script>
   let config = {
     container: 'example',
-    filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132',
-    openpixKey: 'xxxxxxxxxxxxxxx'
+    filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132'
   };
   let onUpload = (files) => {
      console.log('files: ', files);
