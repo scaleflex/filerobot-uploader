@@ -3,11 +3,11 @@ export default {
   initialTab: 'UPLOAD',
   container: 'example',
   elementID: 'airstore-uploader',
+  openpixKey: 'xxxxxxxxxxxxxxx',
   filerobotUploadKey: '',
   uploadParams: {
     dir: '/'
   },
-  openpixKey: null,
   language: 'en',
   folderBrowser: true,
   tagging: {
