@@ -9,7 +9,7 @@ const config = {
   uploadParams: { dir:"/demo_filerobot_en" },
   filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
   container: 'scaleflex-tests-v5a'
-}
+};
 
 class App extends Component {
   constructor() {

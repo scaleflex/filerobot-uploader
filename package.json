@@ -26,8 +26,9 @@
     "image editor"
   ],
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "cropperjs": "^1.4.3",
-    "image-editor-reactjs": "git+ssh://git@code.scaleflex.cloud:airstore/image-editor-reactjs.git",
+    "filerobot-image-editor": "^1.0.1",
     "lodash.debounce": "^4.0.8",
     "lodash.find": "^4.6.0",
     "pretty-bytes": "^5.1.0",
@@ -39,8 +40,7 @@
     "react-toastr": "^3.0.0",
     "react-tooltip": "^3.9.2",
     "react-virtualized": "^9.21.0",
-    "styled-components": "^3.1.6",
-    "@babel/polyfill": "^7.2.5"
+    "styled-components": "^3.1.6"
   },
   "peerDependencies": {
     "axios": "^0.17.1",
