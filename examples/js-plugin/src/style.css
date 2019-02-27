@@ -1,5 +1,96 @@
+body, html {
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+.home {
+  position: relative;
+  border-top: 1px solid transparent;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.home .logo {
+  font-weight: normal;
+  font-size: 24px;
+  color: #fff;
+}
+
+.home .logo:hover, .home .logo:active, .home .logo:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+.home .fork-me-on-github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.home h1 {
+  font-size: 48px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-weight: lighter;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.home h2 {
+  font-weight: lighter;
+  color: #a7a7a7;
+  line-height: 1.5em;
+  font-size: 18px;
+  max-width: 770px;
+  display: inline-block;
+}
+
+.home .actions-wrapper {
+  margin-top: 20px;
+}
+
+.ready-to-start {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.ready-to-start h2 {
+  font-weight: lighter;
+  font-size: 40px;
+  max-width: 770px;
+  margin: 0 auto 30px auto;
+}
+
+.ready-to-start p {
+  display: block;
+  max-width: 850px;
+  margin: 0 auto;
+  font-weight: lighter;
+  line-height: 1.5em;
+  font-size: 18px;
+}
+
 .uploaded-image-container {
   padding: 20px 0;
+}
+
+.filerobot-uploader-view-wrapper {
+  position: relative;
+  margin: 0 auto -20px;
+  top: 30px;
+  padding: 0;
+  max-width: 800px;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.filerobot-uploader-view-wrapper .filerobot-uploader-view {
+  width: 100%;
 }
 
 * {
@@ -12,19 +103,21 @@
   vertical-align: top;
   width: 50%;
   height: 400px;
-  background-color: #f8f9fa;
+  background-color: #222222;
+  border-radius: 5px;
+  transition: 0.3s all;
 }
 
 .image-container img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: calc(100% - 30px);
+  max-height: calc(100% - 30px);
   width: auto;
   height: auto;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 15px;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
   margin: auto;
 }
 
@@ -33,6 +126,7 @@
   width: 45%;
   vertical-align: top;
   padding: 20px;
+  font-size: 18px;
 }
 
 #image-description ul {
@@ -48,6 +142,7 @@
 #image-description ul li span:first-child {
   display: inline-block;
   font-weight: bold;
+  color: #6d6d6d;
 }
 
 .highlight {
@@ -83,4 +178,97 @@
 
 .title-wrapper {
   position: relative;
+}
+
+.wrapper {
+  transition: 0.3s all;
+  opacity: 0;
+}
+
+.wrapper.active {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#edit-btn {
+  position: relative;
+}
+
+.arrow {
+  background: url('https://scaleflex.airstore.io/filerobot/assets/arrow_1.png') 50% 50% / contain no-repeat;
+  width: 100px;
+  height: 250px;
+  position: absolute;
+  top: -42px;
+  left: -97px;
+  transform: rotate(38deg);
+}
+
+
+.action-wrapper {
+  text-align: left;
+  position: relative;
+  background-color: #fff;
+  margin: 0 0 70px 0px;
+  padding: 40px 40px 40px 60px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 1;
+  -webkit-transition: all 0.6s ease-in-out 0s;
+  -moz-transition: all 0.6s ease-in-out 0s;
+  -o-transition: all 0.6s ease-in-out 0s;
+  transition: all 0.6s ease-in-out 0s;
+}
+
+.action-wrapper:after {
+  width: 58px;
+  height: 58px;
+  line-height: 58px;
+  background-color: #327fc7;
+  border-radius: 200px;
+  font-size: 30px;
+  font-weight: 300;
+  color: #fff;
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+  z-index: 100;
+}
+
+.action-wrapper.first-action:after {
+  content: '1';
+}
+
+.action-wrapper.second-action:after {
+  content: '2';
+}
+
+.action-wrapper.third-action:after {
+  content: '3';
+}
+
+.action-wrapper.forth-action:after {
+  content: '4';
+}
+
+.action-wrapper p {
+  font-weight: lighter;
+}
+
+.plugin-version-switcher {
+  padding-bottom: 30px;
+  display: inline-block;
+}
+
+.inner-spinner {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  background: #fff;
+  padding-bottom: 60px;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import AirstoreUploader from '../../../projects/react-plugin';
+import FilerobotUploader from '../../../projects/react-plugin';
 import prettyBytes from 'pretty-bytes';
 
 
@@ -57,7 +57,7 @@ class App extends Component {
           </ul>
         </div>}
 
-        <AirstoreUploader
+        <FilerobotUploader
           opened={this.state.isShow}
           initialTab={initialTab}
           file={img}

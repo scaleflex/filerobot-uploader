@@ -4,10 +4,43 @@ import prettyBytes from 'pretty-bytes';
 import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/github.css';
+import './assets/fonts/helvetica-neue.css';
 hljs.registerLanguage('javascript', javascript);
 hljs.initHighlightingOnLoad();
 
 let loadedImage = null;
+const spinner = document.getElementById('spinner');
+const wrapper = document.getElementById('main');
+const jsBtn = document.getElementById('js-btn');
+const reactBtn = document.getElementById('react-btn');
+const jsBox = document.getElementById('js-version-box');
+const reactBox = document.getElementById('react-version-box');
+const innerSpinner = document.getElementById('inner-spinner');
+const imageContainer = document.getElementById('image-container');
+
+jsBtn.onclick = function() {
+  if (jsBtn.className.indexOf('btn-primary') === -1) {
+    jsBtn.classList.remove('btn-light');
+    jsBtn.classList.add('btn-primary');
+    reactBtn.classList.remove('btn-primary');
+    reactBtn.classList.add('btn-light');
+
+    reactBox.style.display = 'none';
+    jsBox.style.display = 'block';
+  }
+}
+
+reactBtn.onclick = function() {
+  if (reactBtn.className.indexOf('btn-primary') === -1) {
+    reactBtn.classList.remove('btn-light');
+    reactBtn.classList.add('btn-primary');
+    jsBtn.classList.remove('btn-primary');
+    jsBtn.classList.add('btn-light');
+
+    jsBox.style.display = 'none'
+    reactBox.style.display = 'block';
+  }
+}
 
 // Configuration
 let config = {
@@ -50,33 +83,33 @@ let config = {
 
 window.addEventListener('load', function() {
   const FilerobotUploaderInstance = FilerobotUploader.init(config, onUploadHandler);
-  const openBtn = document.getElementById('open-modal-btn');
+  const homeOpenBtn = document.getElementById('edit-btn');
 
-  openBtn.onclick = () => FilerobotUploaderInstance.open();
+  homeOpenBtn.onclick = () => FilerobotUploaderInstance.open();
 });
 
 function onUploadHandler(files) {
   const img = files[0];
   const image = document.getElementById('image-box');
-  const editBtn = document.getElementById('edit-image-btn');
   const description = document.getElementById('image-description');
   const options = {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
   };
-  const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("fr", options);
-  const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("fr", options);
+  const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("en", options);
+  const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("en", options);
 
   img.properties.tags = img.properties.tags || [];
 
   loadedImage = img;
-  editBtn.removeAttribute('disabled');
 
-  editBtn.onclick = function() {
-    window.FilerobotUploader.open('TAGGING', { file: loadedImage });
-  }
-
+  innerSpinner.style.display = 'block';
+  imageContainer.style.opacity = '0.5';
   image.src = img.url_public;
+  image.onload = () => {
+    innerSpinner.style.display = 'none';
+    imageContainer.style.opacity = '1';
+  }
   description.innerHTML = `
     <ul>
         <li>
@@ -101,12 +134,17 @@ function onUploadHandler(files) {
         </li>
         <li>
           <span>Description: </span>
-          <span>${img.properties.description || ''}</span>
+          <span>${img.properties.description || 'not specified'}</span>
         </li>
         <li>
           <span>Tags: </span>
-          <span>${img.properties.tags.join(', ')}</span>
+          <span>${img.properties.tags.join(', ') || 'not specified'}</span>
         </li>
       </ul>
     `;
 }
+
+setTimeout(() => {
+  wrapper.classList.add('active');
+  spinner.style.display = 'none';
+}, 400);
