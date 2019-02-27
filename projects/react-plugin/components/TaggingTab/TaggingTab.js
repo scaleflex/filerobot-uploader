@@ -162,7 +162,7 @@ class TaggingTab extends Component {
 
           <FileWrapper>
             <UploadedImageWrapper>
-              <UploadedImage src={`https://demo.cloudimg.io/width/800/q80.foil1/${file.url_permalink}`}/>
+              <UploadedImage src={`https://demo.cloudimg.io/width/800/n/${file.url_permalink}`}/>
             </UploadedImageWrapper>
 
             <UploadedImageDesc>
