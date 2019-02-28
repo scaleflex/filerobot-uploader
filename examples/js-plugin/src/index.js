@@ -17,6 +17,10 @@ const jsBox = document.getElementById('js-version-box');
 const reactBox = document.getElementById('react-version-box');
 const innerSpinner = document.getElementById('inner-spinner');
 const imageContainer = document.getElementById('image-container');
+const buttonEdit = document.getElementById('edit-btn');
+const image = document.getElementById('image-box');
+const description = document.getElementById('image-description');
+const robotIcon = document.getElementById('robot-icon');
 
 jsBtn.onclick = function() {
   if (jsBtn.className.indexOf('btn-primary') === -1) {
@@ -86,12 +90,11 @@ window.addEventListener('load', function() {
   const homeOpenBtn = document.getElementById('edit-btn');
 
   homeOpenBtn.onclick = () => FilerobotUploaderInstance.open();
+  image.onclick = () => FilerobotUploaderInstance.open();
 });
 
 function onUploadHandler(files) {
   const img = files[0];
-  const image = document.getElementById('image-box');
-  const description = document.getElementById('image-description');
   const options = {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
@@ -148,3 +151,17 @@ setTimeout(() => {
   wrapper.classList.add('active');
   spinner.style.display = 'none';
 }, 400);
+
+image.onmouseenter = onMouseEnter;
+buttonEdit.onmouseenter = onMouseEnter;
+
+image.onmouseleave = onMouseLeave;
+buttonEdit.onmouseleave = onMouseLeave;
+
+function onMouseEnter() {
+  robotIcon.src = 'https://demo.cloudimg.io/width/500/q35.foil1/https://scaleflex.airstore.io/filerobot/assets/robot-with-smile-left.png';
+}
+
+function onMouseLeave() {
+  robotIcon.src = 'https://demo.cloudimg.io/width/500/q35.foil1/https://scaleflex.airstore.io/filerobot/assets/robot-icon-left.png';
+}
