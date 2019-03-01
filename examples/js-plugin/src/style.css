@@ -239,6 +239,7 @@ body, html {
   top: -42px;
   left: -97px;
   transform: rotate(38deg);
+  cursor: pointer;
 }
 
 
