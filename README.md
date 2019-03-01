@@ -1,13 +1,39 @@
-# Filerobot Uploader
+![Release](https://img.shields.io/badge/release-v1.2.1-blue.svg)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+<p align="center">
+	<img
+		height="175"
+		alt="The Lounge"
+		src="https://scaleflex.airstore.io/filerobot/assets/robot-icon-left.png?sanitize=true">
+</p>
+
+<h1 align="center">
+   Filerobot Uploader
+</h1>
+
+<p align="center">
+	<strong>
+		<a href="#table_of_contents">Docs</a>
+		•
+		<a href="https://scaleflex.github.io/filerobot-uploader/">Demo</a>
+	</strong>
+</p>
 
 The Filerobot Uploader is a multi-function Uploader that will make uploads super easy in your web sites and apps. It is fast to integrate allows end users to upload media, files and any assets via Filerobot's reverse CDN. Files are stored into scalable and flexible Cloud storage, optimised and delivered over CDN to your end users rocekt fast. Features include inline image editing, auto-tagging, auto-cropping and many more.
 
-![Filerobot Uploader View](https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png)
+<p align="center">
+	<img
+		width="800"
+		alt="The Lounge"
+		src="https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png?sanitize=true">
+</p>
 
 
 [See demo](https://scaleflex.github.io/filerobot-uploader/)
 
-## Table of contents
+## <a name="table_of_contents"></a>Table of contents
 
 * [Standalone usage](#standalone_usage)
     * [Installation](#installation)
@@ -20,6 +46,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 * [Configuration](#configuration)
 * [Full features config example](#full_example)
 * [Contributing](#contributing)
+* [License](#license)
 
 ## <a name="standalone_usage"></a>Standalone usage
 
@@ -415,3 +442,7 @@ let config = {
 ## <a name="contributing"></a>Contributing!
 
 All contributions are super welcome!
+
+
+## <a name="license"></a>License
+Filerobot Uploader is provided under the [MIT License](https://opensource.org/licenses/MIT)
