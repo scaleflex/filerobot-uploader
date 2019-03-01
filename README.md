@@ -17,7 +17,7 @@
 	<strong>
 		<a href="#table_of_contents">Docs</a>
 		•
-		<a href="https://scaleflex.github.io/filerobot-uploader/">Demo</a>
+		<a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">Demo</a>
 	</strong>
 </p>
 
@@ -31,7 +31,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 </p>
 
 
-[See demo](https://scaleflex.github.io/filerobot-uploader/)
+<a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">See demo</a>
 
 ## <a name="table_of_contents"></a>Table of contents
 
