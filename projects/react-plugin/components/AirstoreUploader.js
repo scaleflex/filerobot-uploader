@@ -139,10 +139,11 @@ class AirstoreUploader extends Component {
     if (!this.props.appState.isVisible) return null;
 
     const { isTooSmall, activeTabId, activeModules, postUpload, files, path } = this.props.appState;
-    const { config } = this.props;
+    const { config, options } = this.props;
     const contentProps = {
       files,
       path,
+      options,
       appState: this.props.appState,
       setAppState: this.props.setAppState,
       showAlert: this.showAlert,

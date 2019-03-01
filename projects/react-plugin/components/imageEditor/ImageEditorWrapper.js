@@ -2,16 +2,28 @@ import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
 
 
-const goBack = (prevTab, setPostUpload) => {
+const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
+  if (options.closeOnEdit) {
+    closeModal();
+
+    return;
+  }
+
   if (prevTab === 'TAGGING')
     setPostUpload(true, 'TAGGING', 'MY_GALLERY');
   else
     setPostUpload(false);
 };
 
-const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload) => {
+const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, options = {}, closeModal) => {
+  if (options.closeOnEdit) {
+    closeModal();
+
+    return;
+  }
+
   if (prevTab === 'TAGGING') {
-    const files = [{...file, public_link: file.url_permalink }];
+    const files = [{ ...file, public_link: file.url_permalink }];
 
     saveUploadedFiles(files);
 
@@ -22,7 +34,7 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload) => {
     setPostUpload(false);
 }
 
-export default ({ appState, files: [ file = {} ] = {}, path, saveUploadedFiles, setPostUpload }) => {
+export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
   const { uploadKey, container, uploadParams } = config;
   const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
@@ -44,8 +56,10 @@ export default ({ appState, files: [ file = {} ] = {}, path, saveUploadedFiles, 
       config={imageEditorConfig}
       closeOnLoad={false}
       src={file.url_permalink}
-      onComplete={(url, file) => { onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload); }}
-      onClose={() => { goBack(prevTab, setPostUpload); }}
+      onComplete={(url, file) => {
+        onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal);
+      }}
+      onClose={() => { goBack(prevTab, setPostUpload, options, closeModal); }}
       showGoBackBtn={true}
       showInModal={false}
     />
