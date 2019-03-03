@@ -59,7 +59,7 @@ Use latest CDNized plugin version
 
 ### <a name="quick_start"></a>Quick start
 
-To use the Filerobot Uploader in your application, you need to first create a free Filerobot account <a href="https://www.filerobot.com/en/register_page">here</a>. Once registered, you will obtain your **container** name and **filerobotUploadKey* to configure the Uploader in your application:
+To use the Filerobot Uploader in your application, you need to first create a free Filerobot account <a href="https://www.filerobot.com/en/register_page">here</a>. Once registered, you will obtain your **container** name and **filerobotUploadKey** to configure the Uploader in your application:
 
 ```
 <script>
