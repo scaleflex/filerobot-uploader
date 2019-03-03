@@ -30,7 +30,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 		src="https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png?sanitize=true">
 </p>
 
-[See demo](https://scaleflex.github.io/filerobot-uploader/)
+<p align="center">[See demo](https://scaleflex.github.io/filerobot-uploader/)</p>
 
 ## <a name="table_of_contents"></a>Table of contents
 
