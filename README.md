@@ -1,7 +1,8 @@
 ![Release](https://img.shields.io/badge/release-v1.2.1-blue.svg)
 ![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)
-![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Scaleflex team](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-the%20Scaleflex%20team-6986fa.svg)](https://www.scaleflex.it/en/home)
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Manage%20and%20Accelerate%20your%20images%20and%20Digital%20Assets%20with%20Filerobot&url=https://scaleflex.github.io/filerobot-uploader/&via=filerobot&hashtags=uploader,reverse_CDN,image_resizing,image_editor,image_tagging,image_acceleration,image_compression,file_manager,asset_management)
 
