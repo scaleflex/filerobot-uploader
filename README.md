@@ -453,7 +453,7 @@ let config = {
 
 ## <a name="ui_family"></a>Filerobot UI Familiy
 
-* <a name="https://github.com/scaleflex/filerobot-image-editor">Image Editor</a>
+* [Image Editor](https://github.com/scaleflex/filerobot-image-editor)
 
 ## <a name="contributing"></a>Contributing!
 
