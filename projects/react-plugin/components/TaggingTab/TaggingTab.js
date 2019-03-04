@@ -65,7 +65,7 @@ class TaggingTab extends Component {
 
   saveMetadata = () => {
     const { description, tags } = this.state;
-    const { appState, files } = this.props;
+    const { appState, files, options = {} } = this.props;
     const { uploadHandler, language } = appState.config;
     const [file = {}] = this.props.files;
 
@@ -82,7 +82,9 @@ class TaggingTab extends Component {
 
           this.setState({ isLoading: true }, () => {
             this.props.setPostUpload(false);
-            this.props.closeModal();
+
+            if (options.closeOnEdit)
+              this.props.closeModal();
           });
         } else {
           this.setState({
@@ -145,7 +147,12 @@ class TaggingTab extends Component {
   }
 
   goBack = () => {
+    const { options = {} } = this.props;
+
     this.props.setPostUpload(false);
+
+    if (options.closeOnEdit)
+      this.props.closeModal();
   }
 
   render() {

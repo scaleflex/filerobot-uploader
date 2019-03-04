@@ -18,18 +18,19 @@ class App extends Component {
     this.state = {
       isShow: false,
       initialTab: 'UPLOAD',
-      img: null
+      img: null,
+      closeOnEdit: false
     }
   }
 
   render() {
-    const { img, initialTab } = this.state;
+    const { img, initialTab, closeOnEdit } = this.state;
 
     return (
       <div>
         <h1>React Example</h1>
-        <button onClick={() => { this.setState({ isShow: true, initialTab: 'UPLOAD' }); }}>Upload</button>
-        <button onClick={() => { this.setState({ isShow: true, initialTab: 'TAGGING' }); }}>Edit</button>
+        <button onClick={() => { this.setState({ isShow: true, initialTab: 'UPLOAD', closeOnEdit: false }); }}>Upload</button>
+        <button onClick={() => { this.setState({ isShow: true, initialTab: 'TAGGING', closeOnEdit: true }); }}>Edit</button>
 
         {img &&
         <div>
@@ -62,6 +63,7 @@ class App extends Component {
           initialTab={initialTab}
           file={img}
           config={config}
+          options={closeOnEdit}
           onClose={() => { this.setState({ isShow: false }); }}
           onUpload={(images) => { this.setState({ img: images[0] }) }}
         />
