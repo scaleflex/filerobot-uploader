@@ -91,6 +91,10 @@ Open uploader modal.
 
 * **options**: {} (optional) - options for tabs
 
+* **options.file**: {} (optional) - open Uploader to Tag or Edit specified file
+
+* **options.closeOnEdit**: bool (optional) - close Uploader on complete Tagging or Editing
+
 #### `window.FilerobotUploader.close()`: function
 
 Close uploader modal.
@@ -169,6 +173,10 @@ Allow to choose the initial tab. Should be one of enabled modules.
 #### `config`: object (required)
 
 Uploader config.
+
+#### `options`: object (optional)
+
+* **options.closeOnEdit**: bool (optional) - close Uploader on complete Tagging or Editing
 
 #### `onClose()`: function (required)
 
