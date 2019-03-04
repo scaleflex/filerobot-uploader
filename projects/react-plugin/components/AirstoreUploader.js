@@ -85,8 +85,13 @@ class AirstoreUploader extends Component {
 
   saveUploadedFiles = (files = []) => { this.props.setAppState(() => ({ files })); }
 
-  openModal = (initialTab, { file } = {}) => {
+  openModal = (initialTab, { file, closeOnEdit } = {}) => {
     let { config } = this.props;
+    let options = {
+      ...this.props.options
+    };
+
+    options.closeOnEdit = closeOnEdit || options.closeOnEdit || false;
 
     initialTab = initialTab || this.props.initialTab ||
       config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
@@ -101,7 +106,8 @@ class AirstoreUploader extends Component {
       ...(file ? { files: [file], postUpload: true } : { postUpload: false }),
       activeTabId: initialTab || this.props.initialTab,
       isVisible: true,
-      prevTab: file ? '' : prevState.prevTab
+      prevTab: file ? '' : prevState.prevTab,
+      options
     }));
   }
 
@@ -138,8 +144,8 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.appState.isVisible) return null;
 
-    const { isTooSmall, activeTabId, activeModules, postUpload, files, path } = this.props.appState;
-    const { config, options } = this.props;
+    const { isTooSmall, activeTabId, activeModules, postUpload, files, path, options } = this.props.appState;
+    const { config } = this.props;
     const contentProps = {
       files,
       path,

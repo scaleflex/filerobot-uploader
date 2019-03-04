@@ -63,7 +63,7 @@ class App extends Component {
           initialTab={initialTab}
           file={img}
           config={config}
-          options={closeOnEdit}
+          options={{ closeOnEdit }}
           onClose={() => { this.setState({ isShow: false }); }}
           onUpload={(images) => { this.setState({ img: images[0] }) }}
         />
