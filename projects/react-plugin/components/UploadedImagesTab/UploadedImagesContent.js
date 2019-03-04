@@ -160,7 +160,7 @@ class UploadedImagesContent extends Component {
         </ImageDescription>
 
         <Overlay>
-          {isEditImage &&
+          {isEditImage && isImageType &&
           <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
             <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
           </EditIconWrapper>}

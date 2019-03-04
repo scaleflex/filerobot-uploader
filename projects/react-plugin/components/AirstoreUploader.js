@@ -10,6 +10,7 @@ import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
 import Nav from './nav/Nav';
 import { I18n } from 'react-i18nify';
 import { getInitialState } from './AppState';
+import { isImage } from '../utils/icons.utils';
 import { UploadedImagesTab, IconTab, BackgroundTab, TaggingTab, ImageEditor } from './loadable';
 
 
@@ -141,6 +142,17 @@ class AirstoreUploader extends Component {
     );
   }
 
+  getPostUploadTabs = () => {
+    const { files = [] } = this.props.appState;
+    const fileType = files[0] && files[0].type;
+    const isImageType = isImage(fileType);
+
+    if (!isImageType)
+      return postUploadTabs.filter(tab => tab.id !== 'IMAGE_EDITOR');
+    else
+      return postUploadTabs;
+  }
+
   render() {
     if (!this.props.appState.isVisible) return null;
 
@@ -158,8 +170,9 @@ class AirstoreUploader extends Component {
       saveUploadedFiles: this.saveUploadedFiles,
       closeModal: this.closeModal
     };
+    const filteredPostUploadTabs = postUpload ? this.getPostUploadTabs() : [];
     const filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
-    const activeTab = (postUpload ? postUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
+    const activeTab = (postUpload ? filteredPostUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
     const isHideHeader = activeTab && (activeTab.id === 'IMAGE_EDITOR');
 
     return (
@@ -179,7 +192,7 @@ class AirstoreUploader extends Component {
                 <div style={CSS.tabs.header} className="ae-tabs-header">
 
                   <Nav
-                    tabs={postUpload ? postUploadTabs : filteredTabs}
+                    tabs={postUpload ? filteredPostUploadTabs : filteredTabs}
                     activeTabId={activeTabId}
                     activateTab={this.activateTab}
                   />
