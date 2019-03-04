@@ -1,4 +1,4 @@
-![Release](https://img.shields.io/badge/release-v1.2.1-blue.svg)
+[![Release](https://img.shields.io/badge/release-v1.3.2-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
 ![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
