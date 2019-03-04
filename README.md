@@ -450,6 +450,10 @@ let config = {
 </script>
 ```
 
+## <a name="ui_family"></a>Filerobot UI Familiy
+
+* <a name="https://github.com/scaleflex/filerobot-image-editor"></a>Image Editor
+
 ## <a name="contributing"></a>Contributing!
 
 All contributions are super welcome!
