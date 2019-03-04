@@ -4,7 +4,8 @@ import {
   EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, SelectIconWrapper, EditButton
 } from '../../styledComponents';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
-import * as ImageGridService from '../../services/imageGrid.service';
+import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/imageGrid.service';
+import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 
 
@@ -38,7 +39,7 @@ class UploadedImagesContent extends Component {
     const imageGridWrapperWidth = this.getImageGridWrapperWidth();
     const imageContainerHeight = this.getImageGridWrapperHeight();
 
-    imageGrid.columnWidth = ImageGridService.getActualColumnWidth(imageGridWrapperWidth, minColumnWidth, gutterSize);
+    imageGrid.columnWidth = getActualColumnWidth(imageGridWrapperWidth, minColumnWidth, gutterSize);
 
     this.setState({ imageGridWrapperWidth, imageGrid, imageContainerHeight });
   };
@@ -132,17 +133,25 @@ class UploadedImagesContent extends Component {
     const { tagging, imageEditor } = this.props.appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
+    const isImageType = isImage(item.type);
+    const icon = getFitResizeImageUrl(
+      isImageType ? item.url_permalink : getFileIconSrcByType(item.type),
+      columnWidth,
+      Math.floor(columnWidth / (item.ratio || 1.6))
+    );
 
     return (
       <ImageWrapper
         style={{ ...style, width: Math.floor(columnWidth) }}
         role="button"
         tabIndex={index}
+        isNotImage={!isImageType}
         onKeyDown={(event) => { this.onKeyDown(event, item); }}
       >
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ overflow: 'hidden', background: 'rgba(155,155,155,.15)' }}>
           <Img
-            src={ImageGridService.getFitResizeImageUrl(item.url_permalink, columnWidth, Math.floor(columnWidth / (item.ratio || 1.6)))}
+            src={icon}
+            isNotImage={!isImageType}
             height={Math.floor(columnWidth / (item.ratio || 1.6))}
           />
         </div>

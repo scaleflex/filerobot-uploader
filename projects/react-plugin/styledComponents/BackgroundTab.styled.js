@@ -76,7 +76,7 @@ export const ImageWrapper = styled.div`
   cursor: pointer;
   
   :hover img {
-    transform: scale(1.1);
+    transform: scale(${props => props.isNotImage ? 0.85 : 1.1});
   }
   
   :hover ${EditIconWrapper} {
@@ -125,8 +125,7 @@ export const Img = styled.img`
   height: ${props => props.height}px;
   opacity: 1;
   transition: all 0.3s;
-  background: rgba(155, 155, 155, .15);
-  -moz-transform: scale(1);
+  transform: scale(${props => props.isNotImage ? 0.75 : 1});
   transition: all 200ms ease-in;
   cursor: pointer;
 `;

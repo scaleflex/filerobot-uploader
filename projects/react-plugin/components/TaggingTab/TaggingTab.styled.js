@@ -18,12 +18,14 @@ const UploadedImageWrapper = styled.div`
   display: inline-block;
   vertical-align: top;
   width: 50%;
+  background: gainsboro;
 `;
 
 const UploadedImage = styled.div`
   width: 100%;
   height: 220px;
-  background: gainsboro url('${props => props.src}') 50% 50% / contain no-repeat;
+  background: url('${props => props.src}') 50% 50% / contain no-repeat;
+  ${props => props.isNotImage ? 'transform: scale(0.6)' : ''};
 `;
 
 const PropName = styled.div`

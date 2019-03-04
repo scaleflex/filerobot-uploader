@@ -11,6 +11,7 @@ import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
 import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
+import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 
 
 class TaggingTab extends Component {
@@ -160,6 +161,8 @@ class TaggingTab extends Component {
     const { prevTab } = this.props.appState;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
+    const isImageType = isImage(file.type);
+    const icon = isImageType ? file.url_permalink : getFileIconSrcByType(file.type);
 
     return (
       <TaggingTabWrapper>
@@ -169,7 +172,7 @@ class TaggingTab extends Component {
 
           <FileWrapper>
             <UploadedImageWrapper>
-              <UploadedImage src={`https://demo.cloudimg.io/width/800/n/${file.url_permalink}`}/>
+              <UploadedImage isNotImage={!isImageType} src={`https://demo.cloudimg.io/width/800/n/${icon}`}/>
             </UploadedImageWrapper>
 
             <UploadedImageDesc>
