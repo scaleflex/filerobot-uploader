@@ -48,6 +48,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
     * [Methods/Properties](#methods_react)
 * [Configuration](#configuration)
 * [Full features config example](#full_example)
+* [Filerobot UI Family](#ui_family)
 * [Contributing](#contributing)
 * [License](#license)
 
