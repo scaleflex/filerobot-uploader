@@ -4,14 +4,15 @@ import TagsInput from 'react-tagsinput'
 import { Spinner } from '../Spinner';
 import {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
-  InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon,
-  ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel
+  InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ToggleCropMenu,
+  ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel,
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
 import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
+import CropsBox from './CropsBox';
 
 
 class TaggingTab extends Component {
@@ -40,7 +41,8 @@ class TaggingTab extends Component {
       currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : currentTime,
       lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : currentTime,
-      tagsGenerated: false
+      tagsGenerated: false,
+      isCropsBoxShow: false
     };
 
     this.isAutoTaggingButton = autoTaggingButton && !executeAfterUpload;
@@ -102,10 +104,10 @@ class TaggingTab extends Component {
     if (this.state.tagsGenerated) return;
 
     const { appState } = this.props;
-    const { tagging, language } = appState.config;
+    const { tagging, language, container, filerobotUploadKey, cloudimageToken } = appState.config;
     const [file = {}] = this.props.files;
 
-    generateTags(file.url_permalink, tagging, language)
+    generateTags(file.url_permalink, tagging, language, container, filerobotUploadKey, cloudimageToken)
       .then(({ tags, ...props } = {}) => {
         if (tags) {
           if (!tags.length) {
@@ -156,9 +158,14 @@ class TaggingTab extends Component {
       this.props.closeModal();
   }
 
+  toggleCropMenu = () => {
+    this.setState({ isCropsBoxShow: !this.state.isCropsBoxShow });
+  }
+
   render() {
-    const { isLoading, errorMessage, currentTime, isGeneratingTags } = this.state;
-    const { prevTab } = this.props.appState;
+    const { isLoading, errorMessage, currentTime, isGeneratingTags, isCropsBoxShow } = this.state;
+    const { prevTab, config } = this.props.appState;
+    const { autoCropSuggestions } = config;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
@@ -169,6 +176,8 @@ class TaggingTab extends Component {
         <TaggingContent>
           {prevTab &&
           <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
+          {autoCropSuggestions &&
+          <ToggleCropMenu onClick={this.toggleCropMenu}>Auto Crop</ToggleCropMenu>}
 
           <FileWrapper>
             <UploadedImageWrapper>
@@ -235,6 +244,13 @@ class TaggingTab extends Component {
           <Button success onClick={this.saveMetadata}>{I18n.t('tagging.save')}</Button>
 
         </TaggingFooter>
+
+        {autoCropSuggestions &&
+        <CropsBox
+          show={isCropsBoxShow}
+          src={`https://demo.cloudimg.io/width/800/n/${icon}`}
+          toggleCropMenu={this.toggleCropMenu}
+        />}
 
         <Spinner show={isLoading} overlay/>
 

@@ -41,7 +41,7 @@ export const uploadFiles = (
   const jsonData = { files_urls: [] };
   const isJson = data_type === 'application/json';
 
-  uploadParams = {...uploadParams, ...{ dir: dir || uploadParams.dir }};
+  uploadParams = { ...uploadParams, ...{ dir: dir || uploadParams.dir } };
 
   // generate params string
   const paramsStr = Object.keys(uploadParams)
@@ -126,11 +126,26 @@ export const searchFiles = ({ query = '', container = '', language = 'en', offse
   return send(url).then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
-export const generateTags = (url, { key = '', provider = 'google', confidence = 60, limit = 10 }, language = 'en') => {
-  const base = 'https://beta-process.scaleflex.cloud/'
+export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', filerobotUploadKey = '', cloudimageToken = 'demo') => {
+  const { key = '', provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
+  const base = 'https://eu-ms-371.elastic-v2.airstore.scal3fl3x.com/post-process/autotagging'
 
   return send(
-    `${base}?key=${key}&url=${url}&provider=${provider}&language=${language}&confidence=${confidence}&limit=${limit}`
+    `${base}?${[
+      `key=${key}`,
+      `image_url=${url}`,
+      `provider=${provider}`,
+      `language=${language}`,
+      `confidence=${confidence}`,
+      `limit=${limit}`,
+      `ci=${cloudimageToken}`
+    ].join('&')}`,
+    'GET',
+    null,
+    {
+      'X-Airstore-Domain': container + '.api.airstore.io',
+      'X-Airstore-Secret-Key': filerobotUploadKey
+    }
   )
     .then((response = {}) => response);
 }
