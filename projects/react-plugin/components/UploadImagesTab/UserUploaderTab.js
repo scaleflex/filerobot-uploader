@@ -5,7 +5,7 @@ import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } fr
 import { Container, ItemName, BrowseButton } from './UserUploaderTab.styled';
 import { Spinner } from '../Spinner';
 import { I18n } from 'react-i18nify';
-import * as API from '../../services/api.service'
+import * as API from '../../services/api.service';
 
 
 const STEP = {

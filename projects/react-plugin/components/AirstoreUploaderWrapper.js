@@ -6,6 +6,7 @@ import { I18n } from 'react-i18nify';
 import * as translations from '../assets/translations';
 import '../assets/fonts/scaleflex-icon-font.css';
 import theme, { colorSchemes } from '../assets/styles/colorScheme';
+import '../utils/md5';
 
 I18n.setTranslations(translations);
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
+import { encodePermalink } from '../../utils';
 
 
 const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
@@ -55,7 +56,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
       show={true}
       config={imageEditorConfig}
       closeOnLoad={false}
-      src={file.url_permalink}
+      src={`${encodePermalink(file.url_permalink)}?${window.md5(file.modified_at || '').split(0, 5)}`}
       onComplete={(url, file) => {
         onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal);
       }}

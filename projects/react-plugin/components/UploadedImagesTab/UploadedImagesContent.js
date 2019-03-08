@@ -7,6 +7,7 @@ import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/imageGrid.service';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
+import { encodePermalink } from '../../utils';
 
 
 class UploadedImagesContent extends Component {
@@ -135,7 +136,7 @@ class UploadedImagesContent extends Component {
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
     const icon = getFitResizeImageUrl(
-      isImageType ? item.url_permalink : getFileIconSrcByType(item.type),
+      isImageType ? encodePermalink(item.url_permalink) : getFileIconSrcByType(item.type),
       columnWidth,
       Math.floor(columnWidth / (item.ratio || 1.6))
     );
@@ -150,7 +151,7 @@ class UploadedImagesContent extends Component {
       >
         <div style={{ overflow: 'hidden', background: 'rgba(155,155,155,.15)' }}>
           <Img
-            src={icon}
+            src={`${icon}?${window.md5(item.modified_at || '').split(0, 5)}`}
             isNotImage={!isImageType}
             height={Math.floor(columnWidth / (item.ratio || 1.6))}
           />

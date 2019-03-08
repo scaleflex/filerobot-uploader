@@ -55,7 +55,7 @@ let config = {
   openpixKey: 'xxxxxxxxxxxxxxx',
   initialTab: 'UPLOAD',
   folderBrowser: true,
-  autoCropSuggestions: false,
+  autoCropSuggestions: true,
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,
