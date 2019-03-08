@@ -1,5 +1,6 @@
 import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
+import { encodePermalink } from '../../utils';
 
 
 const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
@@ -36,14 +37,14 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
-  const { uploadKey, container, uploadParams } = config;
+  const { uploadKey, container, uploadParams, cloudimageToken } = config;
   const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
   const imageEditorConfig = {
     filerobotUploadKey: uploadKey,
     filerobotContainer: container,
     processWithCloudimage: isGif,
     uploadWithCloudimageLink: true,
-    cloudimageToken: 'demo',
+    cloudimageToken: cloudimageToken,
     uploadParams: {
       ...uploadParams,
       dir: path || uploadParams.dir
@@ -55,7 +56,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
       show={true}
       config={imageEditorConfig}
       closeOnLoad={false}
-      src={file.url_permalink}
+      src={`${encodePermalink(file.url_permalink)}?${window.md5(file.modified_at || '').split(0, 5)}`}
       onComplete={(url, file) => {
         onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal);
       }}

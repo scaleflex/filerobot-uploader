@@ -276,7 +276,7 @@ const ErrorWrapper = styled.div`
 
 const ErrorParagraph = styled.p``;
 
-const GoBack = styled.a`
+const GoBack = styled.div`
   color: #1e262c;
   text-decoration: none;
   font-size: 18px;
@@ -284,6 +284,7 @@ const GoBack = styled.a`
   display: inline-block;
   padding: 4px 8px;
   border-radius: 4px;
+  cursor: pointer;
   
   :hover, :focus, :active {
     text-decoration: none;
@@ -319,10 +320,65 @@ export const AutoTaggingProcessLabel = styled.div`
   z-index: 1050;
 `;
 
+const CropsBoxWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  bottom: 0;
+  background: white;
+  border-left: 1px solid lightgray;
+  padding: 10px;
+  overflow: hidden;
+  overflow-y: auto;
+  visibility: ${props => props.show ? 'visible' : 'hidden'};
+  margin-right: ${props => props.show ? '0' : '-50%' };
+  transition: all 0.3s;
+`;
+
+const Group = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  
+  canvas {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+`;
+
+const GroupLabel = styled.div`
+  
+`;
+
+const ToggleCropMenu = styled(GoBack)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  
+  :before {
+    display: inline-block;
+    vertical-align: middle;
+    content: '';
+    width: 22px;
+    height: 22px;
+    margin-right: 5px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjk3IDI5NyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjk3IDI5NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIj48Zz48cGF0aCBkPSJNMjk0LjE4MiwyMjEuMjc1Yy0yLjk2NS00LjM4OS03Ljk4Ny03LjI3NS0xMy42ODItNy4yNzVoLTMzLjMzM1Y4MmwwLDBsMCwwVjYwLjU4NGw0MS43MDgtNDEuNSAgYzAuNDAzLTAuNDAzLDAuODU5LTAuODM3LDEuMTYxLTEuMjk0YzEuODEyLTIuNzQ1LDEuODY0LTYuMzM0LDAuMDUyLTkuMDc5Yy0wLjMwMi0wLjQ1Ny0wLjYyOC0wLjg5MS0xLjAzMS0xLjI5NCAgYy0wLjIwMS0wLjIwMS0wLjM5OC0wLjM5LTAuNjE0LTAuNTY2Yy0wLjcwNC0wLjU3NC0xLjQ3Ni0xLjAwOC0yLjI5Mi0xLjMxNGMtMC42ODYtMC4yNTgtMS4zOTQtMC40MjktMi4xMTUtMC40OTggIGMtMC4yNjMtMC4wMjUtMC41MjUtMC4wMzgtMC43ODktMC4wMzhjLTAuMjY0LDAtMC41MjcsMC4wMTMtMC43OSwwLjAzOGMtMC43MjEsMC4wNjktMS40MzIsMC4yNC0yLjExNywwLjQ5OCAgYy0wLjgxNiwwLjMwNy0xLjU5NCwwLjc0LTIuMjk4LDEuMzE0Yy0wLjIxNiwwLjE3Ni0wLjQyNSwwLjM2NS0wLjYyNiwwLjU2NkwyMzUuODMzLDQ5SDIxNC41SDgyLjE2N1YxNi41ICBjMC0zLjQxNy0wLjg3Mi02LjU5Mi0yLjY1MS05LjIyNUM3Ni41NSwyLjg4Niw3MS42MTIsMCw2NS45MTcsMGMtMy40MTcsMC02LjU1LDEuMDM5LTkuMTg0LDIuODE4ICBjLTEuNzU2LDEuMTg2LTMuNDE3LDIuNzAxLTQuNjAzLDQuNDU3Yy0xLjc3OSwyLjYzMy0yLjk2NCw1LjgwOC0yLjk2NCw5LjIyNVY0OUgxNi41aDBjLTMuNDE3LDAtNi41OTIsMS4wMzktOS4yMjUsMi44MTggIGMtMS4zMTcsMC44OS0yLjQ5OCwxLjk2NC0zLjUwNywzLjE4N0MxLjQxNCw1Ny44NTcsMCw2MS41MTMsMCw2NS41czEuNDE0LDcuNjQzLDMuNzY4LDEwLjQ5NmMwLjMzNiwwLjQwNywwLjY5MiwwLjc5OCwxLjA2NSwxLjE3MiAgQzcuODE5LDgwLjE1MywxMS45NDQsODIsMTYuNSw4MmgwaDMyLjY2N3YxNDguMTY1YzAsMC4wMjksMC4wMDQsMC4wNTYsMC4wMDQsMC4wODVjMCwwLjAyNy0wLjAwNCwwLjA1NC0wLjAwNCwwLjA4MSAgYzAsMC4wMDEsMCwwLjAwMywwLDAuMDA0djB2MC4zM2MwLDMuMzgzLDEuMTk1LDYuNTI2LDIuOTU2LDkuMTMzYzEuNDY4LDIuMTczLDMuNTI4LDMuOTczLDUuODQyLDUuMjMgIGMyLjMxNSwxLjI1Nyw1LjA1LDEuOTcyLDcuODcsMS45NzJoMTQ4LjMzMnYzMy41YzAsOS4xMTMsNy4zODcsMTYuNSwxNi41LDE2LjVzMTYuNS03LjM4NywxNi41LTE2LjVWMjQ3SDI4MC41ICBjOS4xMTMsMCwxNi41LTcuMzg3LDE2LjUtMTYuNUMyOTcsMjI3LjA4MywyOTUuOTYxLDIyMy45MDgsMjk0LjE4MiwyMjEuMjc1eiBNMjAyLjgzMyw4Mkw4Mi4xNjcsMjAyLjMzM1Y4MkgyMDIuODMzeiBNOTQuMTY3LDIxNCAgTDIxNC4xNjcsOTMuNjY3VjIxNEg5NC4xNjd6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIj48L3BhdGg+PC9nPiA8L3N2Zz4=) 50% 50% / contain no-repeat;
+  }
+`;
+
+const Overlay = styled.div`
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+`;
 
 
 export {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ErrorWrapper,
-  ErrorParagraph, GoBack, BackIcon
+  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay
 };

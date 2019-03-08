@@ -1,4 +1,4 @@
-[![Release](https://img.shields.io/badge/release-v1.3.2-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
+[![Release](https://img.shields.io/badge/release-v1.3.3-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
 [![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)](https://www.filerobot.com/en/home#2de3fb9f-dd4a-457a-999a-025ad9bd5f3b)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -59,7 +59,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 Use latest CDNized plugin version
 
 ```
-<script src="https://scaleflex.airstore.io/filerobot/uploader/1.3.2/main.min.js"></script>
+<script src="https://scaleflex.airstore.io/filerobot/uploader/1.3.3/main.min.js"></script>
 ```
 
 ### <a name="quick_start"></a>Quick start

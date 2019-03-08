@@ -28,11 +28,14 @@ const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) ===
 
 const isDefined = param => typeof param !== 'undefined';
 
+const encodePermalink = link => link.replace(/\?/g, '%3F');
+
 export {
   uniqueArrayOfStrings,
   isEnterClick,
   cursorToEnd,
   deepCopy,
   isEsc,
-  isDefined
+  isDefined,
+  encodePermalink
 }

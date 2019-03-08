@@ -4,6 +4,7 @@ export default {
   container: 'example',
   elementID: 'airstore-uploader',
   openpixKey: 'xxxxxxxxxxxxxxx',
+  cloudimageToken: 'demo',
   filerobotUploadKey: '',
   uploadParams: {
     dir: '/'
