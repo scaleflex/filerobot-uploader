@@ -418,6 +418,9 @@ let config = {
 ## <a name="ui_family"></a>Filerobot UI Familiy
 
 * [Image Editor](https://github.com/scaleflex/filerobot-image-editor)
+* [JS Cloudimage Responsive](https://github.com/scaleflex/js-cloudimage-responsive)
+* [React Cloudimage Responsive](https://github.com/scaleflex/react-cloudimage-responsive)
+* [Angular Cloudimage Responsive](https://github.com/scaleflex/ng-cloudimage-responsive)
 
 ## <a name="contributing"></a>Contributing!
 
