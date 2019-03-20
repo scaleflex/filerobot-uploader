@@ -158,7 +158,7 @@ class App extends Component {
           opened={this.state.isShow}
           config={config}
           onClose={() => { this.setState({ isShow: false }); }}
-          onUpload={(img) => { console.log(img) }}
+          onUpload={(img) => { console.log(img); }}
         />
       </div>
     )
@@ -167,6 +167,8 @@ class App extends Component {
 
 render(<App/>, document.getElementById('app'));
 ```
+
+<a href="https://codesandbox.io/s/x9x94lyr54"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit on codesandbox"/></a>
 
 ### <a name="methods_react"></a>Methods/Properties
 
