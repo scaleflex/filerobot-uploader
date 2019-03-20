@@ -1,3 +1,5 @@
+> Repository includes React version and JS wrapper for standalone usage
+
 [![Release](https://img.shields.io/badge/release-v1.3.3-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
 [![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)](https://www.filerobot.com/en/home#2de3fb9f-dd4a-457a-999a-025ad9bd5f3b)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
@@ -22,16 +24,20 @@
 		<a href="#table_of_contents">Docs</a>
 		•
 		<a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">Demo</a>
+		•
+		<a href="https://codesandbox.io/s/k29w0m48r" target="_blank">CodeSandbox</a>
 	</strong>
 </p>
 
 The Filerobot Uploader is a multi-function Uploader that will make uploads super easy on your web and mobile applications. With few lines of code, you will get a state of the art Uploader and enable your users to upload media, files and any assets via Filerobot's reverse CDN. Files are stored into scalable and flexible Cloud storage, optimized and delivered over CDN to your end users rocket fast. Features include inline image editing, auto-tagging, auto-cropping and many more.
 
 <p align="center">
-	<img
-		width="800"
-		alt="The Lounge"
-		src="https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png?sanitize=true">
+	<a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">
+		<img
+			width="800"
+			alt="The Lounge"
+			src="https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png?sanitize=true">
+	</a>
 </p>
 
 <p align="center"><a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">Demo</a></p>
@@ -81,6 +87,7 @@ To use the Filerobot Uploader in your application, you need to first create a fr
   uploader.open();
 </script>
 ```
+<a href="https://codesandbox.io/s/k29w0m48r"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit on codesandbox"/></a>
 
 ### <a name="methods"></a>Methods
 
