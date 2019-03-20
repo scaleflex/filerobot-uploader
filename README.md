@@ -30,10 +30,12 @@
 The Filerobot Uploader is a multi-function Uploader that will make uploads super easy on your web and mobile applications. With few lines of code, you will get a state of the art Uploader and enable your users to upload media, files and any assets via Filerobot's reverse CDN. Files are stored into scalable and flexible Cloud storage, optimized and delivered over CDN to your end users rocket fast. Features include inline image editing, auto-tagging, auto-cropping and many more.
 
 <p align="center">
-	<img
-		width="800"
-		alt="The Lounge"
-		src="https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png?sanitize=true">
+	<a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">
+		<img
+			width="800"
+			alt="The Lounge"
+			src="https://scaleflex.airstore.io/filerobot/assets/filerobot-uploader.png?sanitize=true">
+	</a>
 </p>
 
 <p align="center"><a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">Demo</a></p>
