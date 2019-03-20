@@ -22,6 +22,8 @@
 		<a href="#table_of_contents">Docs</a>
 		•
 		<a href="https://scaleflex.github.io/filerobot-uploader/" target="_blank">Demo</a>
+		•
+		<a href="https://codesandbox.io/s/k29w0m48r" target="_blank">CodeSandbox</a>
 	</strong>
 </p>
 
@@ -81,6 +83,7 @@ To use the Filerobot Uploader in your application, you need to first create a fr
   uploader.open();
 </script>
 ```
+<a href="https://codesandbox.io/s/k29w0m48r"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit on codesandbox"/></a>
 
 ### <a name="methods"></a>Methods
 
