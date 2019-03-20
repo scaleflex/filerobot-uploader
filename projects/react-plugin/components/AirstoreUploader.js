@@ -30,7 +30,7 @@ class AirstoreUploader extends Component {
   }
 
   componentDidMount() {
-    let { initialTab } = this.props;
+    let { config, initialTab } = this.props;
 
     initialTab = initialTab || config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
 
