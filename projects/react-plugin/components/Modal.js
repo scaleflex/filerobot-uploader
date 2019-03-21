@@ -158,21 +158,10 @@ const ModalFullScreen = styled.div`
 
 function getSmallModalStyle() {
   return `
-    top: 20% !important;
+    top: 15px !important;
     left: 15px !important;
     right: 15px !important;
-    bottom: auto !important;
-    color: black !important;
-    text-align: center !important;
-    font-size: 18px;
-    
-    > div {
-      padding: 40px !important;
-    }
-    
-    * {
-      color: black !important;
-    }
+    bottom: 15px !important;
   `
 }
 

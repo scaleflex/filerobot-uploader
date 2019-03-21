@@ -156,8 +156,9 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.appState.isVisible) return null;
 
-    const { isTooSmall, activeTabId, activeModules, postUpload, files, path, options } = this.props.appState;
+    const { activeTabId, activeModules, postUpload, files, path, options } = this.props.appState;
     const { config } = this.props;
+    const isMobile = this.props.appState.config.mobile;
     const contentProps = {
       files,
       path,
@@ -168,55 +169,54 @@ class AirstoreUploader extends Component {
       themeColors: config.themeColors,
       setPostUpload: this.setPostUpload,
       saveUploadedFiles: this.saveUploadedFiles,
-      closeModal: this.closeModal
+      closeModal: this.closeModal,
+      isMobile
     };
-    const filteredPostUploadTabs = postUpload ? this.getPostUploadTabs() : [];
-    const filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
+    const filteredPostUploadTabs = postUpload && !isMobile ? this.getPostUploadTabs() : [];
+    let filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
     const activeTab = (postUpload ? filteredPostUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
     const isHideHeader = activeTab && (activeTab.id === 'IMAGE_EDITOR');
 
+    if (isMobile) {
+      filteredTabs = [tabs.find(tab => tab.id === 'UPLOAD')];
+    }
+
     return (
       <Modal
-        isTooSmall={isTooSmall}
+        isTooSmall={isMobile}
         noBorder
         fullScreen={'md'}
         onClose={this.closeModal}
         style={{ borderRadius: 5 }}
         isHideCloseBtn={isHideHeader}
       >
-        {!isTooSmall ?
-          <div className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
-            <FocusLock>
-              <Dialog role="dialog" className="ae-dialog">
-                {!isHideHeader &&
-                <div style={CSS.tabs.header} className="ae-tabs-header">
+        <div className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
+          <FocusLock>
+            <Dialog role="dialog" className="ae-dialog">
+              {!isHideHeader &&
+              <div style={CSS.tabs.header} className="ae-tabs-header">
 
-                  <Nav
-                    tabs={postUpload ? filteredPostUploadTabs : filteredTabs}
-                    activeTabId={activeTabId}
-                    activateTab={this.activateTab}
-                  />
+                <Nav
+                  tabs={postUpload ? filteredPostUploadTabs : filteredTabs}
+                  activeTabId={activeTabId}
+                  activateTab={this.activateTab}
+                />
 
+              </div>}
+              <div style={{ ...CSS.tabs.content, ...(activeTabId === 'ICONS' && { overflow: 'hidden' }) }}>
+                {activeTab &&
+                <div style={{ width: '100%', minWidth: isMobile ? 'auto' : 540, overflow: 'auto' }}>
+                  {activeTab.getContent.call(this, contentProps)}
                 </div>}
-                <div style={{ ...CSS.tabs.content, ...(activeTabId === 'ICONS' && { overflow: 'hidden' }) }}>
-                  {activeTab &&
-                  <div style={{ width: '100%', minWidth: 540, overflow: 'auto' }}>
-                    {activeTab.getContent.call(this, contentProps)}
-                  </div>}
-                  <ToastContainer
-                    ref={node => this.container = node}
-                    toastMessageFactory={ToastMessageFactory}
-                    className="toast-top-right"
-                  />
-                </div>
-              </Dialog>
-            </FocusLock>
-          </div>
-          :
-          <div>
-            {I18n.t('upload.too_small')} <a href="javascript:void(0)"
-                                            onClick={this.closeModal}>{I18n.t('upload.close')}</a>
-          </div>}
+                <ToastContainer
+                  ref={node => this.container = node}
+                  toastMessageFactory={ToastMessageFactory}
+                  className="toast-top-right"
+                />
+              </div>
+            </Dialog>
+          </FocusLock>
+        </div>
       </Modal>
     );
   }

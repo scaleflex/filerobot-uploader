@@ -164,6 +164,8 @@ body, html {
   vertical-align: top;
   padding: 20px;
   font-size: 18px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 #image-description ul {
@@ -180,6 +182,16 @@ body, html {
   display: inline-block;
   font-weight: bold;
   color: #6d6d6d;
+}
+
+@media all and (max-width: 776px) {
+  .image-container   {
+    width: 100%;
+  }
+
+  #image-description {
+    width: 100%;
+  }
 }
 
 .highlight {

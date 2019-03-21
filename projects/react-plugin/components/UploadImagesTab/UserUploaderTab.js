@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { DragDropCss as styles } from '../../assets/styles/index';
 import { isEnterClick } from '../../utils/index';
 import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
@@ -23,6 +23,14 @@ class UserUploaderTab extends Component {
     files: [],
     uploadedFiles: []
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      if (this.props.isMobile) {
+        this.fileInput.click();
+      }
+    });
+  }
 
   isFilesValid = files => true;
 
@@ -68,7 +76,7 @@ class UserUploaderTab extends Component {
 
         this.uploadSuccess(files);
 
-        if (config.tagging.active) {
+        if (config.tagging.active && !self.isMobile) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'UPLOAD');
           return;
@@ -101,6 +109,7 @@ class UserUploaderTab extends Component {
   }
 
   render() {
+    const { isMobile } = this.props;
     const { step, errorMsg = '' } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
 
@@ -135,34 +144,40 @@ class UserUploaderTab extends Component {
                 />
 
                 <div>
-                  <SearchTitle show={true}>{I18n.t('upload.drag_file_here')}</SearchTitle>
-                  <ItemName>{I18n.t('upload.or')}</ItemName>
+                  {!isMobile &&
+                  <Fragment>
+                    <SearchTitle show={true}>{I18n.t('upload.drag_file_here')}</SearchTitle>
+                    <ItemName>{I18n.t('upload.or')}</ItemName>
+                  </Fragment>}
                   <BrowseButton
                     key="browse-your-computer"
                     autoFocus={true}
                     onClick={() => { this.fileInput.click() }}
-                  >{I18n.t('upload.browse_your_computer')}
+                  >{isMobile ? 'Make a photo or choose from your gallery' : I18n.t('upload.browse_your_computer')}
                   </BrowseButton>
-                  <ItemName pb={'0'}>
-                    {I18n.t('upload.or')}
-                  </ItemName>
-                  <SearchWrapper>
-                    <SearchGroup>
-                      <InputSearch
-                        type="search"
-                        innerRef={node => this._uploadFromWebField = node}
-                        autoFocus={true}
-                        defaultValue={''}
-                        placeholder={I18n.t('upload.enter_url_to_upload_from_web')}
-                        onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
-                      />
-                      <ButtonSearch
-                        key="ok"
-                        className="ae-btn"
-                        onClick={this.uploadFromWeb}
-                      >{I18n.t('upload.upload_btn')}</ButtonSearch>
-                    </SearchGroup>
-                  </SearchWrapper>
+                  {!isMobile &&
+                  <Fragment>
+                    <ItemName pb={'0'}>
+                      {I18n.t('upload.or')}
+                    </ItemName>
+                    <SearchWrapper>
+                      <SearchGroup>
+                        <InputSearch
+                          type="search"
+                          innerRef={node => this._uploadFromWebField = node}
+                          autoFocus={true}
+                          defaultValue={''}
+                          placeholder={I18n.t('upload.enter_url_to_upload_from_web')}
+                          onKeyDown={ev => isEnterClick(ev) && this.uploadFromWeb()}
+                        />
+                        <ButtonSearch
+                          key="ok"
+                          className="ae-btn"
+                          onClick={this.uploadFromWeb}
+                        >{I18n.t('upload.upload_btn')}</ButtonSearch>
+                      </SearchGroup>
+                    </SearchWrapper>
+                  </Fragment>}
                   <ItemName pt={'0'}>
                     {I18n.t('upload.accepted_file_types')}
                   </ItemName>

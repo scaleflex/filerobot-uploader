@@ -1,5 +1,6 @@
 import CONFIG from '../config';
 import { isDefined } from './helper.utils';
+import MobileDetect from 'mobile-detect';
 
 
 const prepareConfig = (config = {}, onUpload = () => {}) => {
@@ -10,8 +11,10 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
 
   // supporting old config
   const uploadKey = config.filerobotUploadKey || config.airstoreUploadKey || config.AIRSTORE_UPLOAD_KEY;
+  const md = new MobileDetect(window.navigator.userAgent);
 
   return {
+    mobile: md.mobile(),
     container,
     uploadPath: `https://${container}.api.airstore.io/v1/upload`,
     uploadParams: config.uploadParams || config.UPLOAD_PARAMS || CONFIG.uploadParams,
