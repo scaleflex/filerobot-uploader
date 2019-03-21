@@ -95,6 +95,33 @@ To use the Filerobot Uploader in your application, you need to first create a fr
 
 Initialization of Filerobot Uploader plugin.
 
+#### `uploadHandler(files: file[])`: function
+
+Function to handle uploaded files.
+
+example response:
+
+```json
+[{
+  "uuid": "a955877f-c79d-5b7c-8f70-18e7a2950000",
+  "name": "Screen Shot 2019-02-28 at 10.03.43 PM.png",
+  "type": "image/png",
+  "size": 102069,
+  "sha1": "a91c1e7aea6aed05a22b42bc3f46326820e4275e",
+  "meta": { "img_type": "PNG", "img_h": 320, "img_w": 816 },
+  "url_permalink": "https://scaleflex-tests-v5a.api.airstore.io/v1/get/_/a955877f-c79d-5b7c-8f70-18e7a2950000/Screen Shot 2019-02-28 at 10.03.43 PM.png",
+  "url_public": "https://scaleflex-tests-v5a.airstore.io/demo_filerobot_en/Screen Shot 2019-02-28 at 10.03.43 PM.png",
+  "properties": {
+    "description": "",
+    "tags": ["Text", "Blue", "Font", "White", "Logo", "Azure", "Line", "Product", "Aqua", "Brand"],
+    "lang": "en",
+    "search": " Text Blue Font White Logo Azure Line Product Aqua Brand"
+  },
+  "overwrite": false
+}]
+```
+
+
 #### `window.FilerobotUploader.open(tab : string, options: {})`: function
 
 Open uploader modal.
@@ -199,6 +226,28 @@ Close uploader widget.
 #### `onUpload(files: file[])`: function (required)
 
 Function to handle uploaded files.
+
+example response:
+
+```json
+[{
+  "uuid": "a955877f-c79d-5b7c-8f70-18e7a2950000",
+  "name": "Screen Shot 2019-02-28 at 10.03.43 PM.png",
+  "type": "image/png",
+  "size": 102069,
+  "sha1": "a91c1e7aea6aed05a22b42bc3f46326820e4275e",
+  "meta": { "img_type": "PNG", "img_h": 320, "img_w": 816 },
+  "url_permalink": "https://scaleflex-tests-v5a.api.airstore.io/v1/get/_/a955877f-c79d-5b7c-8f70-18e7a2950000/Screen Shot 2019-02-28 at 10.03.43 PM.png",
+  "url_public": "https://scaleflex-tests-v5a.airstore.io/demo_filerobot_en/Screen Shot 2019-02-28 at 10.03.43 PM.png",
+  "properties": {
+    "description": "",
+    "tags": ["Text", "Blue", "Font", "White", "Logo", "Azure", "Line", "Product", "Aqua", "Brand"],
+    "lang": "en",
+    "search": " Text Blue Font White Logo Azure Line Product Aqua Brand"
+  },
+  "overwrite": false
+}]
+```
 
 ## <a name="configuration"></a>Configuration
 
