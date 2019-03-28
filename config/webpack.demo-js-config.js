@@ -12,7 +12,7 @@ const reactLoadablePlugin = new ReactLoadablePlugin({
 });
 
 module.exports = (env, options) => {
-  return {
+  const config = {
     entry: path.join(__dirname, "../examples/js-plugin/src/index.js"),
     output: {
       path: path.join(__dirname, "../examples/js-plugin/dist"),
@@ -41,4 +41,11 @@ module.exports = (env, options) => {
       port: 3001
     }
   };
+
+  //if (options.mode === 'production') {
+  //  config.output.jsonpFunction = 'webpackJsonp' + Date.now();
+  //  config.output.publicPath = 'https://scaleflex.ultrafast.io/https://scaleflex.airstore.io/filerobot/dev/uploader/';
+  //}
+
+  return config;
 }
