@@ -26,25 +26,28 @@ export const ProgressCircle = ({ status, color }) => (
 
 
 const ProgressCircleWrapper = styled.div`
-  position: absolute;
-  
   svg {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -100px; 
     width: 200px;
     height: 200px;
-    position: relative;
     z-index: 10000;
   }
 `;
 
 const Status = styled.div`
   position: absolute;
+  margin: auto;
+  top: 50%;
   left: 0;
   right: 0;
-  margin: auto;
   margin-top: -10px;
-  top: 50%;
   z-index: 11111;
   color: #fff;
+  text-align: center;
 `;
 
 const Overlay = styled.div`
