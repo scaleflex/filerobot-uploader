@@ -5,14 +5,15 @@ import { DUPLICATE_CODE, REPLACING_DATA_CODE, GALLERY_IMAGES_LIMIT } from '../co
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
 const getBaseUrl = (container) => `https://${container}.api.airstore.io/v1/`;
 
-export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
+export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json", onUploadProgress) =>
   axios({
     url: url,
     method: method,
     data: data,
     responseType: responseType,
     headers: headers,
-    timeout: 30000
+    timeout: 30000,
+    onUploadProgress
   }).then(({ data = {} }) => data);
 
 
@@ -34,7 +35,7 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
  * @returns {Promise}
  */
 export const uploadFiles = (
-  files = [], { uploadPath = '', uploadParams = {}, uploadKey = '' }, data_type = 'files[]', dir
+  files = [], { uploadPath = '', uploadParams = {}, uploadKey = '', onUploadProgress }, data_type = 'files[]', dir
 ) => {
   let url = (uploadPath || ''); // use independent protocol
   const ajaxData = new FormData();
@@ -65,7 +66,9 @@ export const uploadFiles = (
       {
         'X-Airstore-Secret-Key': uploadKey,
         'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
-      }
+      },
+      'json',
+      onUploadProgress
     ).then(
       response => {
         const { status = 'success', files = [], file, upload = {} } = response;

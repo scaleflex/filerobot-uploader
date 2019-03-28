@@ -1,6 +1,6 @@
 {
   "name": "filerobot-uploader",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "dist/index.js",
   "description": "The Filerobot Uploader is a multi-function Uploader that will make uploads super easy in your web sites and apps. It is fast to integrate allows end users to upload media, files and any assets via Filerobot's reverse CDN. Files are stored into scalable and flexible Cloud storage, optimised and delivered over CDN to your end users rocekt fast. Features include inline image editing, auto-tagging, auto-cropping and many more.",
   "author": "scaleflex",
@@ -33,6 +33,7 @@
     "lodash.find": "^4.6.0",
     "mobile-detect": "^1.4.3",
     "pretty-bytes": "^5.1.0",
+    "rc-progress": "^2.3.0",
     "react-color": "^2.14.1",
     "react-focus-lock": "^1.17.6",
     "react-i18nify": "^1.11.14",

@@ -10,7 +10,8 @@ import { isEnterClick } from '../../utils';
 import { I18n } from 'react-i18nify';
 import { GALLERY_IMAGES_LIMIT } from '../../config';
 import FolderManager from './folderManager/FolderManager';
-import * as API from '../../services/api.service'
+import * as API from '../../services/api.service';
+import { ProgressCircle, PROGRESS_COLORS } from '../ProgressCircle';
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
@@ -30,7 +31,11 @@ class UploadedImagesTab extends Component {
       isShowMoreImages: false,
       showFileManager: false,
       path: props.path || props.appState.config.uploadParams.dir,
-      folderBrowser: props.appState.config.folderBrowser
+      folderBrowser: props.appState.config.folderBrowser,
+      progressBar: {
+        color: PROGRESS_COLORS.DEFAULT,
+        status: 0
+      }
     };
   }
 
@@ -65,7 +70,7 @@ class UploadedImagesTab extends Component {
 
     this.uploadStart();
 
-    API.uploadFiles(files, config, dataType, dir)
+    API.uploadFiles(files, {...config, onUploadProgress: this.onUploadProgress }, dataType, dir)
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
@@ -219,9 +224,21 @@ class UploadedImagesTab extends Component {
       this.goToDefaultFolder();
   }
 
+  onUploadProgress = (progressEvent) => {
+    const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+
+    this.setState({
+      progressBar: {
+        status: percentCompleted,
+        color: percentCompleted > 99 ? PROGRESS_COLORS.SUCCESS : PROGRESS_COLORS.DEFAULT
+      }
+    });
+  }
+
   render() {
     const {
-      isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = ''
+      isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = '',
+      progressBar: { color, status }
     } = this.state;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
 
@@ -298,7 +315,9 @@ class UploadedImagesTab extends Component {
           path={path}
         />
 
-        <Spinner overlay show={isLoading || (step === STEP.UPLOADING)}/>
+        {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}
+
+        <Spinner overlay show={isLoading && !step === STEP.UPLOADING}/>
       </UploadedImages>
     )
   }

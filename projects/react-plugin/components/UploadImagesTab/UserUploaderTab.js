@@ -3,7 +3,7 @@ import { DragDropCss as styles } from '../../assets/styles/index';
 import { isEnterClick } from '../../utils/index';
 import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
 import { Container, ItemName, BrowseButton } from './UserUploaderTab.styled';
-import { Spinner } from '../Spinner';
+import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
 import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
 
@@ -21,7 +21,11 @@ class UserUploaderTab extends Component {
     errorMsg: '',
     isDragOver: false,
     files: [],
-    uploadedFiles: []
+    uploadedFiles: [],
+    progressBar: {
+      color: PROGRESS_COLORS.DEFAULT,
+      status: 0
+    }
   };
 
   componentDidMount() {
@@ -68,7 +72,7 @@ class UserUploaderTab extends Component {
 
     this.uploadStart();
 
-    API.uploadFiles(files, config, dataType)
+    API.uploadFiles(files, { ...config, onUploadProgress: this.onUploadProgress }, dataType)
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
@@ -90,6 +94,17 @@ class UserUploaderTab extends Component {
       })
   };
 
+  onUploadProgress = (progressEvent) => {
+    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+
+    this.setState({
+      progressBar: {
+        status: percentCompleted,
+        color: percentCompleted > 99 ? PROGRESS_COLORS.SUCCESS : PROGRESS_COLORS.DEFAULT
+      }
+    });
+  }
+
   uploadFromWeb = () => {
     const value = this._uploadFromWebField.value;
     const isValid = value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
@@ -110,7 +125,7 @@ class UserUploaderTab extends Component {
 
   render() {
     const { isMobile } = this.props;
-    const { step, errorMsg = '' } = this.state;
+    const { step, errorMsg = '', progressBar: { color, status } } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
 
     return (
@@ -189,11 +204,7 @@ class UserUploaderTab extends Component {
               </div>
             }
 
-            {step === STEP.UPLOADING &&
-            <div style={uploadBlock_style.uploadingBox}>
-              <Spinner overlay show={true}/>
-              <span>{I18n.t('upload.uploading')}</span>
-            </div>}
+            {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}
 
             {step === STEP.ERROR &&
             <div style={uploadBlock_style.errorBox}>
