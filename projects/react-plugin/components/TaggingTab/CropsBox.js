@@ -5,6 +5,7 @@ import smartcrop from 'smartcrop';
 import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
 import { encodePermalink } from '../../utils';
+import md5 from '../../utils/md5';
 
 const OPTIONS_1x1 = [
   { height: 125, width: 125, debug: true, minScale: 1 },
@@ -92,7 +93,7 @@ class CropsBox extends Component {
         }
 
         const file = files[0] || {};
-        this.uploadSuccess(`${encodePermalink(file.url_permalink)}?${window.md5(file.modified_at || '').split(0, 5)}`);
+        this.uploadSuccess(`${encodePermalink(file.url_permalink)}?${md5(file.modified_at || '').split(0, 5)}`);
 
         this.props.saveUploadedFiles(files);
         this.props.setSpinner(false);

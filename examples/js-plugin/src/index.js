@@ -56,7 +56,7 @@ let config = {
   initialTab: 'UPLOAD',
   folderBrowser: true,
   autoCropSuggestions: true,
-  closeOnEdit: true,
+  closeOnEdit: false,
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,

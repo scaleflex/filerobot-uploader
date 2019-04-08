@@ -8,6 +8,7 @@ import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/image
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
+import md5 from '../../utils/md5';
 
 
 class UploadedImagesContent extends Component {
@@ -151,7 +152,7 @@ class UploadedImagesContent extends Component {
       >
         <div style={{ overflow: 'hidden', background: 'rgba(155,155,155,.15)' }}>
           <Img
-            src={`${icon}?${window.md5(item.modified_at || '').split(0, 5)}`}
+            src={`${icon}?${md5(item.modified_at || '').split(0, 5)}`}
             isNotImage={!isImageType}
             height={Math.floor(columnWidth / (item.ratio || 1.6))}
           />
