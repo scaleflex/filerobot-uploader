@@ -14,6 +14,7 @@ import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import CropsBox from './CropsBox';
 import { encodePermalink } from '../../utils';
+import md5 from '../../utils/md5';
 
 
 class TaggingTab extends Component {
@@ -100,6 +101,7 @@ class TaggingTab extends Component {
   saveMetadata = () => {
     const { description, tags } = this.state;
     const { appState, files, options = {} } = this.props;
+    const { prevTab } = appState;
     const { uploadHandler, language } = appState.config;
     const [file = {}] = this.props.files;
 
@@ -117,8 +119,9 @@ class TaggingTab extends Component {
           this.setState({ isLoading: true }, () => {
             this.props.setPostUpload(false, '', 'TAGGING');
 
-            if (options.closeOnEdit)
+            if (options.closeOnEdit || prevTab !== 'MY_GALLERY') {
               this.props.closeModal();
+            }
           });
         } else {
           this.setState({
@@ -218,7 +221,7 @@ class TaggingTab extends Component {
             <UploadedImageWrapper>
               <UploadedImage
                 isNotImage={!isImageType}
-                src={`https://demo.cloudimg.io/width/800/n/${icon}?${window.md5(file.modified_at || file.sha1).split(0, 5)}`}
+                src={`https://demo.cloudimg.io/width/800/n/${icon}?${md5(file.modified_at || file.sha1).split(0, 5)}`}
               />
             </UploadedImageWrapper>
 
@@ -290,7 +293,7 @@ class TaggingTab extends Component {
           setSpinner={this.setSpinner}
           showAlert={this.props.showAlert}
           saveUploadedFiles={this.props.saveUploadedFiles}
-          src={`${icon}?${window.md5(file.modified_at || file.sha1).split(0, 5)}`}
+          src={`${icon}?${md5(file.modified_at || file.sha1).split(0, 5)}`}
           toggleCropMenu={this.toggleCropMenu}
         />}
 

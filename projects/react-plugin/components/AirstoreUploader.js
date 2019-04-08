@@ -79,12 +79,6 @@ class AirstoreUploader extends Component {
   setPostUpload = (value, tabId = '', prevTab = '', nextStateProps = {}) => {
     const activeTabId = tabId || this.props.appState.prevTab || 'MY_GALLERY';
 
-    if (activeTabId === 'UPLOAD' && prevTab === 'TAGGING') {
-      this.closeModal();
-
-      return;
-    }
-
     this.props.setAppState(() => ({
       activeTabId, prevTab, postUpload: value, ...nextStateProps
     }));
