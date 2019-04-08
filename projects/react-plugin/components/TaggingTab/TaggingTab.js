@@ -114,7 +114,7 @@ class TaggingTab extends Component {
       .then(response => {
         if (response.status === 'success') {
           files[0].properties = response.properties;
-          uploadHandler(files);
+          uploadHandler(files, { stage: 'tagging' });
 
           this.setState({ isLoading: true }, () => {
             this.props.setPostUpload(false, '', 'TAGGING');

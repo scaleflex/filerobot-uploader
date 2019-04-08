@@ -86,7 +86,7 @@ class UserUploaderTab extends Component {
           return;
         }
 
-        config.uploadHandler(files);
+        config.uploadHandler(files, { stage: 'upload' });
         self.closeModal();
       })
       .catch((error) => {

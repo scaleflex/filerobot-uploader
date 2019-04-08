@@ -98,7 +98,7 @@ class IconTab extends Component {
           return;
         }
 
-        self.appState.config.uploadHandler(files);
+        self.appState.config.uploadHandler(files, { stage: 'upload' });
         self.closeModal();
       })
       .catch(() => {

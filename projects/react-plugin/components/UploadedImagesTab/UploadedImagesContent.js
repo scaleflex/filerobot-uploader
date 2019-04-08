@@ -59,7 +59,7 @@ class UploadedImagesContent extends Component {
       this.props.upload(true, item.url_permalink);
     } else {
       const files = [{...item, public_link: item.url_permalink }];
-      this.props.appState.config.uploadHandler(files);
+      this.props.appState.config.uploadHandler(files, { stage: 'select' });
       this.props.closeModal();
     }
   }

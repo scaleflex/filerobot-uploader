@@ -17,7 +17,11 @@ const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
     setPostUpload(false);
 };
 
-const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, options = {}, closeModal) => {
+const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, options = {}, closeModal, uploadHandler) => {
+  const files = [{ ...file, public_link: file.url_permalink }];
+
+  uploadHandler(files, { stage: 'edit' });
+
   if (options.closeOnEdit) {
     closeModal();
 
@@ -38,7 +42,7 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
-  const { uploadKey, container, uploadParams, cloudimageToken } = config;
+  const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler } = config;
   const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
   const imageEditorConfig = {
     filerobotUploadKey: uploadKey,
@@ -60,7 +64,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
       closeOnLoad={false}
       src={src}
       onComplete={(url, file) => {
-        onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal);
+        onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal, uploadHandler);
       }}
       onClose={() => { goBack(prevTab, setPostUpload, options, closeModal); }}
       showGoBackBtn={true}
