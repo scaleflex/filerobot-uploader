@@ -153,14 +153,17 @@ export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', c
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (id, properties, { container }) => {
+export const saveMetaData = (id, properties, { container, uploadKey }) => {
   const base = `https://${container}.api.airstore.io/file/`;
   const data = { properties };
 
   return send(
     `${base}${id}/properties`,
     'PUT',
-    data
+    data,
+    {
+      'X-Airstore-Secret-Key': uploadKey
+    }
   )
     .then((response = {}) => response);
 }
