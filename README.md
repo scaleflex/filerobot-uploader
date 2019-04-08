@@ -95,9 +95,11 @@ To use the Filerobot Uploader in your application, you need to first create a fr
 
 Initialization of Filerobot Uploader plugin.
 
-#### `uploadHandler(files: file[])`: function
+#### `uploadHandler(files: file[], info: {})`: function
 
 Function to handle uploaded files.
+
+* **files**: file[] - array of uploaded files
 
 example response:
 
@@ -120,7 +122,9 @@ example response:
   "overwrite": false
 }]
 ```
+* **info**: {} - additional information on upload
 
+* **info.stage**: string (upload|edit|select) - stage on which uploadHandler was triggered
 
 #### `window.FilerobotUploader.open(tab : string, options: {})`: function
 
@@ -223,9 +227,11 @@ Uploader config.
 
 Close uploader widget.
 
-#### `onUpload(files: file[])`: function (required)
+#### `onUpload(files: file[], info: {})`: function (required)
 
 Function to handle uploaded files.
+
+* **files**: file[] - array of uploaded files
 
 example response:
 
@@ -248,6 +254,10 @@ example response:
   "overwrite": false
 }]
 ```
+
+* **info**: {} - additional information on upload
+
+* **info.stage**: string (upload|edit|select) - stage on which uploadHandler was triggered
 
 ## <a name="configuration"></a>Configuration
 
