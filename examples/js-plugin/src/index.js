@@ -56,6 +56,7 @@ let config = {
   initialTab: 'UPLOAD',
   folderBrowser: true,
   autoCropSuggestions: true,
+  closeOnEdit: true,
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,
@@ -103,6 +104,7 @@ function onUploadHandler(files) {
   const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("en", options);
   const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("en", options);
 
+  img.properties = img.properties || {};
   img.properties.tags = img.properties.tags || [];
 
   loadedImage = img;

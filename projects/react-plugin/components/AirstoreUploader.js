@@ -79,6 +79,12 @@ class AirstoreUploader extends Component {
   setPostUpload = (value, tabId = '', prevTab = '', nextStateProps = {}) => {
     const activeTabId = tabId || this.props.appState.prevTab || 'MY_GALLERY';
 
+    if (activeTabId === 'UPLOAD' && prevTab === 'TAGGING') {
+      this.closeModal();
+
+      return;
+    }
+
     this.props.setAppState(() => ({
       activeTabId, prevTab, postUpload: value, ...nextStateProps
     }));
@@ -92,7 +98,7 @@ class AirstoreUploader extends Component {
       ...this.props.options
     };
 
-    options.closeOnEdit = closeOnEdit || options.closeOnEdit || false;
+    options.closeOnEdit = closeOnEdit || options.closeOnEdit || config.closeOnEdit || false;
 
     initialTab = initialTab || this.props.initialTab ||
       config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;

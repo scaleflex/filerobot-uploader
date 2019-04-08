@@ -115,7 +115,7 @@ class TaggingTab extends Component {
           uploadHandler(files);
 
           this.setState({ isLoading: true }, () => {
-            this.props.setPostUpload(false);
+            this.props.setPostUpload(false, '', 'TAGGING');
 
             if (options.closeOnEdit)
               this.props.closeModal();
