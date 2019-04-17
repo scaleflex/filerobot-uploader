@@ -115,7 +115,7 @@ class IconMonoColorSettings extends Component {
               <ColorIcon onClick={() => { this.setColor(themeColors.secondary); }} bgColor={themeColors.secondary}/>
             </ThemeColors>}
             <ButtonSearch
-              innerRef={node => this._buttonSearch = node}
+              ref={node => this._buttonSearch = node}
               fullBr={'4px'}
               onClick={this.onApply}
               tabIndex={10001}

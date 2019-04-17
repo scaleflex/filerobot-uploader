@@ -12,7 +12,6 @@ import { generateTags, saveMetaData } from "../../services/api.service";
 import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
-import CropsBox from './CropsBox';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
 
@@ -43,8 +42,7 @@ class TaggingTab extends Component {
       currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : currentTime,
       lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : currentTime,
-      tagsGenerated: false,
-      isCropsBoxShow: false
+      tagsGenerated: false
     };
 
     this.isAutoTaggingButton = autoTaggingButton && !executeAfterUpload;
@@ -84,8 +82,7 @@ class TaggingTab extends Component {
         currentTime,
         firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : '',
         lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : '',
-        tagsGenerated: false,
-        isCropsBoxShow: false
+        tagsGenerated: false
       };
     }
   }
@@ -196,14 +193,9 @@ class TaggingTab extends Component {
       this.props.closeModal();
   }
 
-  toggleCropMenu = () => {
-    this.setState({ isCropsBoxShow: !this.state.isCropsBoxShow });
-  }
-
   render() {
-    const { isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags, isCropsBoxShow } = this.state;
-    const { prevTab, config } = this.props.appState;
-    const { autoCropSuggestions } = config;
+    const { isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags } = this.state;
+    const { prevTab } = this.props.appState;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
@@ -214,8 +206,6 @@ class TaggingTab extends Component {
         <TaggingContent>
           {prevTab &&
           <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
-          {autoCropSuggestions && isImageType &&
-          <ToggleCropMenu onClick={this.toggleCropMenu}>Auto Crop</ToggleCropMenu>}
 
           <FileWrapper>
             <UploadedImageWrapper>
@@ -285,17 +275,6 @@ class TaggingTab extends Component {
           <Button success onClick={this.saveMetadata}>{I18n.t('tagging.save')}</Button>
 
         </TaggingFooter>
-
-        {autoCropSuggestions && isImageType &&
-        <CropsBox
-          appState={this.props.appState}
-          show={isCropsBoxShow}
-          setSpinner={this.setSpinner}
-          showAlert={this.props.showAlert}
-          saveUploadedFiles={this.props.saveUploadedFiles}
-          src={`${icon}?${md5(file.modified_at || file.sha1).split(0, 5)}`}
-          toggleCropMenu={this.toggleCropMenu}
-        />}
 
         <Spinner show={isLoading} overlay/>
 

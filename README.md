@@ -322,6 +322,17 @@ Allow to choose the initial tab. Should be one of enabled modules.
 config.initialTab: 'UPLOAD';
 ```
 
+#### `preUploadImageProcess`: bool
+
+**default**: false
+
+Pre-upload process which allows to transform images before uploading them to a server.
+Available operations: "smart crop", "face detection", "resize"
+
+```
+config.preUploadImageProcess: true;
+```
+
 #### `folderBrowser`: bool
 
 **default**: true

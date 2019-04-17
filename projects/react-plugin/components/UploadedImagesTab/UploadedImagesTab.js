@@ -247,7 +247,7 @@ class UploadedImagesTab extends Component {
         <UploadInputBox
           type="file"
           name="files[]"
-          innerRef={node => this.fileInput = node}
+          ref={node => this.fileInput = node}
           data-multiple-caption="{count} files selected"
           defaultValue={''}
           tabIndex={-1}
@@ -273,7 +273,7 @@ class UploadedImagesTab extends Component {
               <InputSearch
                 searchInputIndex={this.state.searchInputIndex}
                 type="text"
-                innerRef={node => this._searchInput = node}
+                ref={node => this._searchInput = node}
                 autoFocus={true}
                 value={searchPhrase}
                 placeholder={I18n.t('file_manager.search_by_file_name_tag_desc')}
@@ -317,7 +317,7 @@ class UploadedImagesTab extends Component {
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}
 
-        <Spinner overlay show={isLoading && !step === STEP.UPLOADING}/>
+        <Spinner overlay show={isLoading && step !== STEP.UPLOADING}/>
       </UploadedImages>
     )
   }

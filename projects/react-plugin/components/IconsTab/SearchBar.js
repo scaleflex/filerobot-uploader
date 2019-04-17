@@ -29,7 +29,7 @@ class SearchBar extends Component {
         <SearchGroup>
           <InputSearch
             type="search"
-            innerRef={node => this.searchField = node}
+            ref={node => this.searchField = node}
             autoFocus={true}
             value={searchPhrase}
             onChange={onChangeSearchPhrase}

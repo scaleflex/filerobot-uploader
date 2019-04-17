@@ -304,7 +304,7 @@ class IconTab extends Component {
           />}
 
           <IconsWrapper
-            innerRef={node => this.imageGridWrapperRef = node}
+            ref={node => this.imageGridWrapperRef = node}
             id="airstore-uploader-icons-box"
           >
             {active.icons.length && !isLoading && columnWidth ?

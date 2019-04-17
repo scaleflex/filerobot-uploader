@@ -38,7 +38,7 @@ class IconAddTagModal extends Component {
           <IconAddTagInner>
             <Label color={'black'} nb>Would you like to add tag?</Label>
             <Input
-              innerRef={node => this._input = node}
+              ref={node => this._input = node}
               defaultValue={tagName}
               onKeyDown={event => { event.keyCode === 13 && this.onAddTag(); }}
               onChange={({ target }) => { this.setState({ tagName: target.value }) } }

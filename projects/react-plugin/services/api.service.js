@@ -56,7 +56,7 @@ export const uploadFiles = (
   if (files && isJson) {
     [...files].forEach(file => { jsonData.files_urls.push(file); });
   } else if (files)
-    [...files].forEach(file => ajaxData.append(data_type, file)); // fill FormData
+    [...files].forEach(file => ajaxData.append(data_type, file, file.name || null)); // fill FormData
 
   return new Promise((resolve, reject) => {
     send(

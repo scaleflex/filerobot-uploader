@@ -49,7 +49,7 @@ reactBtn.onclick = function() {
 // Configuration
 let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
-  uploadParams: { dir:"/demo_filerobot_en" },
+  uploadParams: { dir:"/dima_test_7_en" },
   filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
   container: 'scaleflex-tests-v5a',
   openpixKey: 'xxxxxxxxxxxxxxx',
@@ -57,6 +57,7 @@ let config = {
   folderBrowser: true,
   autoCropSuggestions: true,
   closeOnEdit: false,
+  preUploadImageProcess: true,
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,
@@ -125,6 +126,10 @@ function onUploadHandler(files) {
         <li>
           <span>Public link: </span>
           <span>${img.url_public}</span>
+        </li>
+        <li>
+          <span>Compressed Image link (CDN): </span>
+          <span>https://demo.filerobot.com/cdno/n/q60/${img.url_public}</span>
         </li>
         <li>
           <span>Size: </span>

@@ -19,7 +19,17 @@ export default {
     all: 'Tout afficher',
     too_small: 'Le téléchargement de fichier n\'est pas disponible sur mobile.',
     close: 'Fermer',
-    image_editor: 'Editeur d\'image'
+    image_editor: 'Editeur d\'image',
+    smart_crop: 'Smart crop',
+    face_detection: 'Face detection',
+    resize: 'Resize',
+    width: 'Width',
+    height: 'Height',
+    revert: 'Revert',
+    crop: 'Crop',
+    cancel: 'Cancel',
+    selected_files: 'Selected files',
+    total_size: 'total size'
   },
   file_manager: {
     tab_title: 'Ma galerie',

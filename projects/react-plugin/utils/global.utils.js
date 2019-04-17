@@ -24,6 +24,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     isShowNotRelevantBtn:  isDefined(config.isShowNotRelevantBtn) ? config.isShowNotRelevantBtn : CONFIG.isShowNotRelevantBtn,
     limit: config.limitImagesPerResponse || config.LIMIT_IMAGES_PER_RESPONSE || CONFIG.limitImagesPerResponse || 100,
     folderBrowser: isDefined(config.folderBrowser) ? config.folderBrowser : CONFIG.folderBrowser,
+    preUploadImageProcess: isDefined(config.preUploadImageProcess) ? config.preUploadImageProcess : false,
     language: isDefined(config.language) ? config.language : CONFIG.language,
     cloudimageToken: config.cloudimageToken || CONFIG.cloudimageToken,
     imageEditor: {
