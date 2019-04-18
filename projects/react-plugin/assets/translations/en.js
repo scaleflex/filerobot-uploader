@@ -19,7 +19,17 @@ export default {
     all: 'All',
     too_small: 'The Uploader is not available on mobile, please use it on a Desktop',
     close: 'Close',
-    image_editor: 'Image Editor'
+    image_editor: 'Image Editor',
+    smart_crop: 'Smart crop',
+    face_detection: 'Face detection',
+    resize: 'Resize',
+    width: 'Width',
+    height: 'Height',
+    revert: 'Revert',
+    crop: 'Crop',
+    cancel: 'Cancel',
+    selected_files: 'Selected files',
+    total_size: 'total size'
   },
   file_manager: {
     tab_title: 'My gallery',

@@ -97,7 +97,7 @@ class UploadedImagesContent extends Component {
 
     return (
       <Content
-        innerRef={this.imageGridWrapperRef}
+        ref={this.imageGridWrapperRef}
         onDragOver={(event) => { onDragEvent(event, 'isDragOver', true); }}
         onDragEnter={(event) => { onDragEvent(event, 'isDragOver', true); }}
         onDragLeave={(event) => { onDragEvent(event, 'isDragOver', false); }}

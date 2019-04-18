@@ -301,7 +301,7 @@ class ImagesTab extends Component {
 
           <IconTags {...{searchPhrase, activeTags}} tagsList={related_tags} toggleTag={this.toggleTag}/>
 
-          <ImagesListContainer innerRef={node => this.imageGridWrapperRef = node}>
+          <ImagesListContainer ref={node => this.imageGridWrapperRef = node}>
             {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
               <Aux>
                 <VirtualizedImagesGrid

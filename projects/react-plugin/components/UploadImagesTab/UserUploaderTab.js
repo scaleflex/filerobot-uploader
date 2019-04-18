@@ -2,10 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { DragDropCss as styles } from '../../assets/styles/index';
 import { isEnterClick } from '../../utils/index';
 import { SearchGroup, InputSearch, ButtonSearch, SearchWrapper, SearchTitle } from '../../styledComponents/index';
-import { Container, ItemName, BrowseButton } from './UserUploaderTab.styled';
+import { Container, ItemName, BrowseButton, } from './UserUploaderTab.styled';
 import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
 import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
+import PreUploadProcess from './PreUploadProcess';
+
+
+const script = document.createElement('script');
+script.src = 'https://scaleflex.ultrafast.io/https://jolipage.api.airstore.io/v1/get/_/d93231a3-1e6a-5b0e-8882-342c64c5fb8f/caman.full.min.js';
+document.body.appendChild(script);
 
 
 const STEP = {
@@ -13,6 +19,7 @@ const STEP = {
   UPLOADING: 'UPLOADING',
   ERROR: 'ERROR',
   UPLOADED: 'UPLOADED',
+  PROCESS: 'PROCESS'
 };
 
 class UserUploaderTab extends Component {
@@ -22,6 +29,7 @@ class UserUploaderTab extends Component {
     isDragOver: false,
     files: [],
     uploadedFiles: [],
+    imagesToUpload: [],
     progressBar: {
       color: PROGRESS_COLORS.DEFAULT,
       status: 0
@@ -36,8 +44,6 @@ class UserUploaderTab extends Component {
     });
   }
 
-  isFilesValid = files => true;
-
   fileDropHandler = event => {
     event.preventDefault();
     this.changeFile((event.dataTransfer || event.originalEvent.dataTransfer).files);
@@ -48,23 +54,47 @@ class UserUploaderTab extends Component {
   };
 
   changeFile = (files = []) => {
-    this.setState({ files });
+    if (this.props.appState.config.preUploadImageProcess) {
+      this.setState({ files, step: STEP.PROCESS });
 
-    setTimeout(() => {
-      if (files && this.isFilesValid(files)) this.upload();
-    });
+      if (files && files[0]) {
+        [...files].forEach(file => {
+          const reader = new FileReader();
+
+          reader.onload = (event) => {
+            const { imagesToUpload } = this.state;
+
+            this.setState({
+              imagesToUpload: [
+                ...imagesToUpload,
+                {
+                  src: event.target.result,
+                  file
+                }
+              ]
+            });
+          }
+
+          reader.readAsDataURL(file);
+        });
+      }
+    } else {
+      this.setState({ files }, this.upload);
+    }
   };
 
   changeStep = step => this.setState({ step });
+
   uploadStart = () => this.setState({ step: STEP.UPLOADING });
+
   uploadSuccess = uploadedFiles => this.setState({ step: STEP.UPLOADED, uploadedFiles });
+
   uploadError = (msg, timer = null) => {
     this.setState({ step: STEP.ERROR, errorMsg: msg || I18n.t('upload.error') });
     if (timer) setTimeout(() => this.changeStep(STEP.DEFAULT), timer);
   };
 
   upload = (isUploadFromUrl = false, url = null) => {
-    // if (this.state.isLoading) return;
     const self = this.props;
     const { config } = this.props.appState;
     const files = isUploadFromUrl ? [url] : this.state.files;
@@ -80,7 +110,7 @@ class UserUploaderTab extends Component {
 
         this.uploadSuccess(files);
 
-        if (config.tagging.active && !self.isMobile) {
+        if (config.tagging.active && !self.isMobile && files.length === 1) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'UPLOAD');
           return;
@@ -123,15 +153,46 @@ class UserUploaderTab extends Component {
     this.setState({ isDragOver: false })
   }
 
+  cancelUpload = () => {
+    this.setState({
+      step: STEP.DEFAULT,
+      uploadedFiles: [],
+      imagesToUpload: [],
+      isDragOver: false
+    })
+  }
+
+  updateFilesAndUpload = (files) => {
+    this.setState({ files }, this.upload);
+  }
+
+  updateImagesToUpload = (imagesToUpload, callback) => {
+    this.setState(
+      { imagesToUpload: [] },
+      () => {
+        this.setState({ imagesToUpload }, callback)
+      }
+    );
+  }
+
   render() {
     const { isMobile } = this.props;
-    const { step, errorMsg = '', progressBar: { color, status } } = this.state;
+    const { step, errorMsg = '', progressBar: { color, status }, imagesToUpload } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
 
     return (
       <div style={styles.container}>
+
+        {step === STEP.PROCESS &&
+        <PreUploadProcess
+          {...{ imagesToUpload }}
+          cancelUpload={this.cancelUpload}
+          updateFilesAndUpload={this.updateFilesAndUpload}
+          updateImagesToUpload={this.updateImagesToUpload}
+        />}
+
         {
-          step !== STEP.UPLOADED &&
+          step !== STEP.UPLOADED && step !== STEP.PROCESS &&
           <Container
             onDragOver={this.setDragOverOn}
             onDragEnter={this.setDragOverOn}
@@ -142,7 +203,6 @@ class UserUploaderTab extends Component {
             method={'post'}
             encType="multipart/form-data"
           >
-
             {
               (step === STEP.DEFAULT || step === STEP.ERROR) &&
               <div style={uploadBlock_style.inputBox}>
@@ -179,7 +239,7 @@ class UserUploaderTab extends Component {
                       <SearchGroup>
                         <InputSearch
                           type="search"
-                          innerRef={node => this._uploadFromWebField = node}
+                          ref={node => this._uploadFromWebField = node}
                           autoFocus={true}
                           defaultValue={''}
                           placeholder={I18n.t('upload.enter_url_to_upload_from_web')}

@@ -19,7 +19,17 @@ export default {
     all: 'Все',
     too_small: 'Нет поддержки на мобильных устройствах',
     close: 'Закрыть',
-    image_editor: 'Image Editor'
+    image_editor: 'Редактор изображения',
+    smart_crop: 'Умная обрезка',
+    face_detection: 'Распознавание лиц',
+    resize: 'Изменить размер',
+    width: 'Ширина',
+    height: 'Высота',
+    revert: 'Вернуть',
+    crop: 'Обрезать',
+    cancel: 'Отменить',
+    selected_files: 'Добавленные файлы',
+    total_size: 'размер'
   },
   file_manager: {
     tab_title: 'Галерея',

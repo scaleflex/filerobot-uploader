@@ -21,7 +21,7 @@ const SpinnerInner = styled.div`
   right: 0;
   left: 0;
   margin: auto;
-  font-size: 25px;
+  font-size: ${p => p.fz ? p.fz : '25px'};
   width: 1em;
   height: 1em;
   border-radius: 50%;
