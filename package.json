@@ -28,7 +28,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "cropperjs": "^1.4.3",
-    "filerobot-image-editor": "^1.1.5",
+    "filerobot-image-editor": "^1.1.7",
     "lodash.debounce": "^4.0.8",
     "lodash.find": "^4.6.0",
     "mobile-detect": "^1.4.3",
