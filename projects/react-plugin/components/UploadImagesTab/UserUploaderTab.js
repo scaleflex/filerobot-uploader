@@ -186,6 +186,7 @@ class UserUploaderTab extends Component {
         {step === STEP.PROCESS &&
         <PreUploadProcess
           {...{ imagesToUpload }}
+          upload={this.upload}
           cancelUpload={this.cancelUpload}
           updateFilesAndUpload={this.updateFilesAndUpload}
           updateImagesToUpload={this.updateImagesToUpload}

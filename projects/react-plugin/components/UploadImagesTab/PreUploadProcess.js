@@ -347,6 +347,12 @@ class PreUploadProcess extends Component {
   }
 
   applyTransformationsAndUpload = () => {
+    if (!this.state.cropResizeMenu) {
+      this.props.upload();
+
+      return;
+    }
+
     const elements = [...this._previewBox.children].map(wrapper => wrapper.children[0]);
     const files = [];
     const self = this;
