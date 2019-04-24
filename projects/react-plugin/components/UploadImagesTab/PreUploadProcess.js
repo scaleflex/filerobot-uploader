@@ -357,9 +357,9 @@ class PreUploadProcess extends Component {
     elements.forEach((canvas, index) => {
       window.Caman(canvas, function () {
         this.render(function () {
-          const base64 = this.toBase64();
+          const contentType = self.props.imagesToUpload[index].file.type;
+          const base64 = canvas.toDataURL(contentType);
           const block = base64.split(";");
-          const contentType = self.props.imagesToUpload[index].file.type || block[0].split(":")[1];
           const realData = block[1].split(",")[1];
           const blob = b64toBlob(realData, contentType, null);
 
