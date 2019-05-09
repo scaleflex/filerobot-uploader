@@ -93,15 +93,17 @@ class AirstoreUploader extends Component {
     };
 
     options.closeOnEdit = closeOnEdit || options.closeOnEdit || config.closeOnEdit || false;
-
     initialTab = initialTab || this.props.initialTab ||
       config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
     file = file || this.props.file;
 
     const isPostUploadTabs = initialTab === 'TAGGING' || initialTab === 'IMAGE_EDITOR';
 
-    initialTab = (isPostUploadTabs && file) ? initialTab : 'UPLOAD';
     file = (isPostUploadTabs && file) ? file : null;
+
+    if (isPostUploadTabs && !file) {
+      initialTab = 'UPLOAD';
+    }
 
     this.props.setAppState((prevState) => ({
       ...(file ? { files: [file], postUpload: true } : { postUpload: false }),
