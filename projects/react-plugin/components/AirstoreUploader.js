@@ -87,7 +87,8 @@ class AirstoreUploader extends Component {
   saveUploadedFiles = (files = []) => { this.props.setAppState(() => ({ files })); }
 
   openModal = (initialTab, { file, closeOnEdit } = {}) => {
-    let { config } = this.props;
+    let { config, appState } = this.props;
+    const { activeModules } = appState;
     let options = {
       ...this.props.options
     };
@@ -102,7 +103,12 @@ class AirstoreUploader extends Component {
     file = (isPostUploadTabs && file) ? file : null;
 
     if (isPostUploadTabs && !file) {
-      initialTab = 'UPLOAD';
+      if (activeModules.includes('UPLOAD')) {
+        initialTab = 'UPLOAD';
+      } else {
+        alert('Cannot open Filerobot Uploader. You did not pass any file to process.');
+        return;
+      }
     }
 
     this.props.setAppState((prevState) => ({
@@ -174,13 +180,18 @@ class AirstoreUploader extends Component {
       closeModal: this.closeModal,
       isMobile
     };
-    const filteredPostUploadTabs = postUpload && !isMobile ? this.getPostUploadTabs() : [];
+    const filteredPostUploadTabs = (postUpload && !isMobile ? this.getPostUploadTabs() : [])
+      .filter(tab => tab.id && activeModules.includes(tab.id));
     let filteredTabs = tabs.filter(tab => tab.id && activeModules.includes(tab.id));
-    const activeTab = (postUpload ? filteredPostUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
+    let activeTab = (postUpload ? filteredPostUploadTabs : filteredTabs).find(tab => tab.id === activeTabId);
     const isHideHeader = activeTab && (activeTab.id === 'IMAGE_EDITOR');
 
     if (isMobile) {
       filteredTabs = [tabs.find(tab => tab.id === 'UPLOAD')];
+    }
+
+    if (!activeTab) {
+      activeTab = (postUpload ? filteredPostUploadTabs : filteredTabs)[0];
     }
 
     return (
