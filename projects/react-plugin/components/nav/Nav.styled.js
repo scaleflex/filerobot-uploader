@@ -20,9 +20,9 @@ export const Tab = styled.a`
   display: inline-block;
   vertical-align: top;
 
-  :first-child {
-    margin-left: 5px;
-  }
+  // :first-child {
+  //   margin-left: 5px;
+  // }
 
   :hover {
     color: #fff;

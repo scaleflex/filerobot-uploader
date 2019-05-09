@@ -52,7 +52,7 @@ export const BrowseButton = styled.button`
 
   :hover {
     background-color: ${p => p.theme.text || '#6D737B'};
-    color: #fff;
+    color: ${p => p.theme.text === '#fff' || p.theme.text === '#ffffff' ? '#000' : '#fff'};
   }
 
   :focus {

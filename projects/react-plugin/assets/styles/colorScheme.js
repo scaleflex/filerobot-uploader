@@ -66,18 +66,79 @@ export const colorSchemes = {
     border: '#d8d8d8'
   },
 
-  test: {
-    mainBackground: '',
-    navBackground: 'orange',
-    buttonBackground: 'green',
-    hoverButtonBackground: 'lightgreen',
-    inputBackground: 'yellow',
-    inputOutlineColor: 'black',
-    activeTabBackground: 'red',
-    text: 'pink',
-    inputTextColor: 'grey',
-    tabTextColor: 'green',
-    activeTabTextColor: 'yellow',
-    buttonTextColor: 'black',
+  light: {
+    mainBackground: '#f5f5f5',
+    navBackground: '#e2e2e2',
+    buttonBackground: '#86bc31',
+    hoverButtonBackground: '#A4E63C',
+    inputBackground: '#fff',
+    inputOutlineColor: '#86bc31',
+    activeTabBackground: '#f5f5f5',
+    tagsBackground: '#86bc31',
+    tagsColor: '#fff',
+    text: '#1a1a1a',
+    title: '#1a1a1a',
+    inputTextColor: '#999999',
+    tabTextColor: '#1a1a1a',
+    activeTabTextColor: '#1a1a1a',
+    buttonTextColor: '#fff',
+    border: '#606060'
+  },
+
+  dark: {
+    mainBackground: '#606060',
+    navBackground: '#424242',
+    buttonBackground: '#86bc31',
+    hoverButtonBackground: '#A4E63C',
+    inputBackground: '#fff',
+    inputOutlineColor: '#86bc31',
+    activeTabBackground: '#606060',
+    tagsBackground: '#86bc31',
+    tagsColor: '#fff',
+    text: '#e6e6e6',
+    title: '#e6e6e6',
+    inputTextColor: '#999999',
+    tabTextColor: '#fff',
+    activeTabTextColor: '#fff',
+    buttonTextColor: '#fff',
+    border: '#e6e6e6'
+  },
+
+  purple: {
+    mainBackground: '#6767a0',
+    navBackground: '#181743',
+    buttonBackground: '#37377a',
+    hoverButtonBackground: '#4D4DAA',
+    inputBackground: '#fff',
+    inputOutlineColor: '#37377a',
+    activeTabBackground: '#6767a0',
+    tagsBackground: '#37377a',
+    tagsColor: '#fff',
+    text: '#fff',
+    title: '#fff',
+    inputTextColor: '#999999',
+    tabTextColor: '#fff',
+    activeTabTextColor: '#fff',
+    buttonTextColor: '#fff',
+    border: '#ccc'
+  },
+
+  lilac: {
+    mainBackground: '#f7f7ff',
+    navBackground: '#402f80',
+    buttonBackground: '#402f80',
+    hoverButtonBackground: '#5B43B6',
+    inputBackground: '#fff',
+    inputOutlineColor: '#402f80',
+    activeTabBackground: '#6767a0',
+    tagsBackground: '#402f80',
+    tagsColor: '#fff',
+    text: '#606060',
+    title: '#606060',
+    inputTextColor: '#999999',
+    tabTextColor: '#fff',
+    activeTabTextColor: '#fff',
+    buttonTextColor: '#fff',
+    border: '#606060'
   }
-}
+};

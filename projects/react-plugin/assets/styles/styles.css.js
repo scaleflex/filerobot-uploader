@@ -100,7 +100,6 @@ export default {
       // "right": "0",
       // "left": "0",
       // "top": "50px",
-      "border": "1px solid #ddd", // "borderTop": "1px solid #ddd",
       "overflowY": "auto",
       "overflowX": "hidden",
       "WebkitTransition": "all .3s cubic-bezier(.25,.46,.45,.94)",
