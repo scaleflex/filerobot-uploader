@@ -10,7 +10,6 @@ export const Tab = styled.a`
   line-height: 21px;
   padding: 9px 12px;
   cursor: pointer;
-  border-radius: 3px 3px 0 0;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
   border-top: 2px solid transparent;
@@ -25,7 +24,8 @@ export const Tab = styled.a`
   // }
 
   :hover {
-    color: #fff;
+    color: ${props => props.selected ? props.theme.activeTabTextColor : props.theme.tabTextColor};
+    background-color: ${props => props.theme.activeTabBackground || 'transparent'};
   }
 
   i {
