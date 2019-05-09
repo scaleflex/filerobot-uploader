@@ -132,7 +132,7 @@ export const searchFiles = ({ query = '', container = '', language = 'en', offse
 
 export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', filerobotUploadKey = '', cloudimageToken = 'demo') => {
   const { key = '', provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
-  const base = 'https://eu-ms-371.elastic-v2.airstore.scal3fl3x.com/post-process/autotagging'
+  const base = 'https://example.api.airstore.io/post-process/autotagging';
 
   return send(
     `${base}?${[
@@ -147,7 +147,6 @@ export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', c
     'GET',
     null,
     {
-      'X-Airstore-Domain': container + '.api.airstore.io',
       'X-Airstore-Secret-Key': filerobotUploadKey
     }
   )
