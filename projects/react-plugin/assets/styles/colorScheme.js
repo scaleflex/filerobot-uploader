@@ -47,7 +47,7 @@ export default {
 }
 
 export const colorSchemes = {
-  default: {
+  solarized: {
     mainBackground: '#f5f5f5',
     navBackground: '#181830',
     buttonBackground: '#00707C',

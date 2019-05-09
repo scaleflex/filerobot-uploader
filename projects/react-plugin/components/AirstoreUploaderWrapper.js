@@ -17,7 +17,7 @@ export default (props) => {
 
   const colorTheme = config.colorScheme.active;
   const colors = colorTheme === 'custom' ?
-    config.colorScheme[colorTheme] : colorSchemes[colorTheme || 'default'];
+    config.colorScheme[colorTheme] : colorSchemes[colorTheme || 'solarized'];
 
   return (
     <ThemeProvider theme={{ ...theme, ...colors }}>
