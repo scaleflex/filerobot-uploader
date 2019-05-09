@@ -104,7 +104,7 @@ export const uploadFiles = (
   });
 };
 
-export const getListFiles = ({ dir = '', container = '', offset }) => {
+export const getListFiles = ({ dir = '', container = '', offset, uploadKey }) => {
   const baseUrl = getBaseUrl(container);
   const apiPath = 'list?';
   const directoryPath = dir ? 'dir=' + dir : '';
@@ -112,21 +112,22 @@ export const getListFiles = ({ dir = '', container = '', offset }) => {
   const limit = `&limit=${GALLERY_IMAGES_LIMIT}`;
   const url = [baseUrl, apiPath, directoryPath, offsetQuery, limit].join('');
 
-  return send(url).then((response = {}) => ([
+  return send(url, 'GET', null, { 'X-Airstore-Secret-Key': uploadKey }).then((response = {}) => ([
     response.files,
     response.directories,
     response.current_directory && response.current_directory.files_count
   ]));
 };
 
-export const searchFiles = ({ query = '', container = '', language = 'en', offset = 0 }) => {
+export const searchFiles = ({ query = '', container = '', language = 'en', offset = 0, uploadKey }) => {
   const baseUrl = getBaseUrl(container);
   const apiPath = 'search?';
   const searchQuery = `q=${query}`;
   const offsetQuery = `&offset=${offset}`;
   const url = [baseUrl, apiPath, searchQuery, offsetQuery].join('');
 
-  return send(url).then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
+  return send(url, 'GET', null, { 'X-Airstore-Secret-Key': uploadKey })
+    .then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
 export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', filerobotUploadKey = '', cloudimageToken = 'demo') => {
