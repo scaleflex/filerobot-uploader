@@ -270,7 +270,7 @@ const postUploadTabs = [
     id: 'TAGGING',
     fullName: 'TAGGING',
     shortName: 'tagging.tab_title',
-    iconClass: 'sfi-airstore-tagging',
+    iconClass: 'sfi-airstore-tags',
     getContent: (props) => <TaggingTab {...props}/>
   },
   {
