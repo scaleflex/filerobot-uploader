@@ -117,7 +117,7 @@ class IconTab extends Component {
     const activeTags = refreshTags ? {} : this.state.activeTags;
     const relevantActiveTags = this.getRelevantActiveTags(activeTags, related_tags);
     const { openpixKey } = this.props.appState.config;
-    const isShowMore = !offset;
+    const isShowMore = !!offset;
     let searchParams = { value, type, offset };
 
     this.setState({
@@ -144,7 +144,7 @@ class IconTab extends Component {
 
     IconAPI.searchIcons({ ...searchParams, openpixKey }, relevantActiveTags)
       .then((response = {}) => {
-        let { count = 0, icons = [], related_tags = [], searchParams = {} } = response;
+        let { count = 0, icons = [], related_tags = [] } = response;
 
         if (!icons.length && relevantActiveTags.length) {
           this.search({ value, type }, true);
@@ -155,7 +155,7 @@ class IconTab extends Component {
         this.setState({
           isSearching: false,
           active: {
-            icons: isShowMore ? [active.icons, ...icons] : icons,
+            icons: isShowMore ? [...active.icons, ...icons] : icons,
             related_tags
           },
           count,
