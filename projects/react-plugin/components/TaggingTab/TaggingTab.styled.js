@@ -157,6 +157,7 @@ const TagsInputWrapper = styled.div`
   .react-tagsinput-remove {
     cursor: pointer;
     font-weight: bold;
+    text-decoration: none;
   }
   
   .react-tagsinput-tag a::before {

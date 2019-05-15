@@ -4,7 +4,6 @@ import AppState from './AppState';
 import { ThemeProvider } from 'styled-components';
 import { I18n } from 'react-i18nify';
 import * as translations from '../assets/translations';
-import '../assets/fonts/scaleflex-icon-font.css';
 import theme, { colorSchemes } from '../assets/styles/colorScheme';
 
 I18n.setTranslations(translations);

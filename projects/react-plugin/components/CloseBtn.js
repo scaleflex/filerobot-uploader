@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { variables } from '../styledComponents/styleUtils';
 
 const CloseBtn = styled.span.attrs({
-  role: 'button'
+  role: 'button',
+  className: 'sfi-airstore-cross'
 })`
   cursor: pointer;
   position: absolute;
@@ -13,8 +14,7 @@ const CloseBtn = styled.span.attrs({
   bottom: ${props => props.b || 'auto'};
   font-size: ${props => props.fz || '18px'};
   z-index: 10;
-  font-family: 'scaleflex-icon-font' !important;
-  color: ${props => variables.modal.colorMuted};
+  color: ${variables.modal.colorMuted};
   speak: none;
   font-style: normal;
   font-variant: normal;
@@ -26,12 +26,8 @@ const CloseBtn = styled.span.attrs({
   -moz-osx-font-smoothing: grayscale;
   
   :hover {
-    color: ${props => variables.modal.colorMutedHover};
+    color: ${variables.modal.colorMutedHover};
   }
-  
-  :before {
-      content: '\\e90c'
-    }
 `;
 
 export { CloseBtn };

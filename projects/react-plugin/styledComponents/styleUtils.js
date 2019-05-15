@@ -246,27 +246,6 @@ function getFieldColorStyles(props) {
   `;
 }
 
-function getIconStyles(props) {
-  return `
-    font-family: 'scaleflex-icon-font' !important;
-    color: ${props.muted ? variables.colors.text.mute : variables.colors.text.base};
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-  
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    
-    :hover {
-      color: ${props.muted ? variables.colors.text.mute : variables.colors.text.base};
-    }
-  `;
-}
-
 function shadeBlendConvert(p, from, to) {
   if(typeof(p)!="number"||p<-1||p>1||typeof(from)!="string"||(from[0]!='r'&&from[0]!='#')||(typeof(to)!="string"&&typeof(to)!="undefined"))return null; //ErrorCheck
   if(!window.sbcRip)window.sbcRip=(d)=>{
@@ -341,4 +320,4 @@ export const getColor = (props, type, field = 'base', isThemeOverlay, isSupreme)
 }
 
 
-export { getModalWidth, getIconStyles, getFieldColorStyles };
+export { getModalWidth, getFieldColorStyles };
