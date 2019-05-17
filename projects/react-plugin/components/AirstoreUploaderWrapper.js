@@ -1,4 +1,5 @@
 import React from 'react';
+import '../polyfills';
 import AirstoreUploader from './AirstoreUploader';
 import AppState from './AppState';
 import { ThemeProvider } from 'styled-components';
