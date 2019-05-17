@@ -26,7 +26,6 @@
     "image editor"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
     "cropperjs": "^1.5.1",
     "filerobot-image-editor": "^1.1.9",
     "lodash.debounce": "^4.0.8",
@@ -44,7 +43,8 @@
     "react-tooltip": "^3.10.0",
     "react-virtualized": "^9.21.1",
     "smartcrop": "^2.0.3",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "core-js": "^3.0.1"
   },
   "peerDependencies": {
     "axios": "^0.17.1",
