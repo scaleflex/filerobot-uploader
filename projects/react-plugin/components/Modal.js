@@ -12,7 +12,7 @@ const ModalOverlay = styled.div`
   height: 100%;
   overflow: hidden;
   position: fixed;
-  background: ${props => variables.colors.background.base || '#000'};
+  background: ${props => props.theme.overlay || variables.colors.background.base};
   opacity: .4;
   z-index: 999999992;
 `;

@@ -64,7 +64,8 @@ export const colorSchemes = {
     tabTextColor: '#c0c1c1',
     activeTabTextColor: '#fff',
     buttonTextColor: '#fff',
-    border: '#d8d8d8'
+    border: '#d8d8d8',
+    overlay: '#787878'
   },
 
   light: {
@@ -84,7 +85,8 @@ export const colorSchemes = {
     tabTextColor: '#1a1a1a',
     activeTabTextColor: '#1a1a1a',
     buttonTextColor: '#fff',
-    border: '#606060'
+    border: '#606060',
+    overlay: '#787878'
   },
 
   dark: {
@@ -104,7 +106,8 @@ export const colorSchemes = {
     tabTextColor: '#fff',
     activeTabTextColor: '#fff',
     buttonTextColor: '#fff',
-    border: '#e6e6e6'
+    border: '#e6e6e6',
+    overlay: '#fff'
   },
 
   purple: {
@@ -124,7 +127,8 @@ export const colorSchemes = {
     tabTextColor: '#fff',
     activeTabTextColor: '#fff',
     buttonTextColor: '#fff',
-    border: '#ccc'
+    border: '#ccc',
+    overlay: '#787878'
   },
 
   lilac: {
@@ -144,6 +148,7 @@ export const colorSchemes = {
     tabTextColor: '#fff',
     activeTabTextColor: '#fff',
     buttonTextColor: '#fff',
-    border: '#606060'
+    border: '#606060',
+    overlay: '#787878'
   }
 };

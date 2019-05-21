@@ -77,13 +77,15 @@ let config = {
       inputBackground: '#fff',
       inputOutlineColor: '#4d90fe',
       activeTabBackground: '#40545b',
+      activeSidebarItemBackground: '#fff',
       text: '#5d636b',
       title: '#1e262c',
       inputTextColor: '#555555',
       tabTextColor: '#c0c1c1',
       activeTabTextColor: '#fff',
       buttonTextColor: '#fff',
-      border: '#d8d8d8'
+      border: '#d8d8d8',
+      overlay: '#787878'
     }
   }
 };
