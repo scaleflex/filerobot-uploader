@@ -49,7 +49,7 @@ const commonTheme = {
     },
 
     background: {
-      base: '#f1f1f1'
+      base: '#787878'
     },
 
     border: {

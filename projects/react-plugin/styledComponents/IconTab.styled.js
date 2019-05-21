@@ -131,7 +131,7 @@ export const Tag = styled.div.attrs({ className: props => props.active ? 'ae-tag
   border: 1px solid #ccc;
   margin: 5px 2px;
   border-radius: 4px;
-  color: #70777f;
+  color: ${props => props.theme.text || '#70777f'};
   cursor: pointer;
   position: relative;
   font-size: 13px;

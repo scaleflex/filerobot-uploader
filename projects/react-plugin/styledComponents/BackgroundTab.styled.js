@@ -35,10 +35,10 @@ export const ColorItem = styled.div.attrs({ className: props => props.active ? '
   text-transform: capitalize;
   display: flex;
   cursor: pointer;
-  background: ${props => props.active ? '#fff' : 'transparent'};
+  background: ${props => props.active ? props.theme.activeSidebarItemBackground : 'transparent'};
   
   :hover {
-    background: #fff;
+    background: ${props => props.theme.activeSidebarItemBackground || '#fff'};
   }
 `;
 
@@ -260,7 +260,7 @@ export const ShowMoreResultsSpinner = ({ show }) => show ? (
 
 export const ImageDescription = styled.div`
   box-sizing: border-box;
-  background: gainsboro;
+  background: ${p => p.theme.activeSidebarItemBackground || 'gainsboro'};
   z-index: 50;
   position: relative;
   height: 20px;
@@ -274,15 +274,15 @@ export const ImageName = styled.div`
   height: 20px; 
   font-size: 12px;
   font-weight: 300;
-  display: inline-block;
+  display: block;
   vertical-align: middle;
   line-height: 20px;
-  width: calc(100% - 40px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 0 5px 0 25px;
+  padding: 0 25px;
   text-align: center;
+  color: ${p => p.theme.text};
 `;
 
 export const EditButton = styled(ButtonSearch)`

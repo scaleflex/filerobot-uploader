@@ -73,8 +73,8 @@ const ModalContent = styled.div`
   overflow: hidden;
   outline: 0;
   height: ${props => props.h || props.height || 'auto'};
-  background: ${props => variables.colors.background.base || '#fff'};
-  color: ${props => variables.colors.text.base || '#3d3d3d'};
+  background: ${variables.colors.background.base || '#fff'};
+  color: ${variables.colors.text.base || '#3d3d3d'};
   
   ${ModalHeader} {
     ${props => (props.tac || props.textAlignCenter) && `
