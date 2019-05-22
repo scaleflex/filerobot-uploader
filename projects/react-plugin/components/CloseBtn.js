@@ -14,7 +14,7 @@ const CloseBtn = styled.span.attrs({
   bottom: ${props => props.b || 'auto'};
   font-size: ${props => props.fz || '18px'};
   z-index: 10;
-  color: ${variables.modal.colorMuted};
+  color: ${p => p.theme.tabTextColor || variables.modal.colorMuted};
   speak: none;
   font-style: normal;
   font-variant: normal;
