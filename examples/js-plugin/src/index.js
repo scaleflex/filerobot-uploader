@@ -68,7 +68,7 @@ let config = {
   },
   language: 'en',
   colorScheme: {
-    active: 'default'
+    active: 'solarized'
   }
 };
 
