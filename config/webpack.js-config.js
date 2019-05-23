@@ -14,19 +14,28 @@ const banner = `
  Date: ${now.toISOString()}
 `;
 
-const reactLoadablePlugin =  new ReactLoadablePlugin({
+const reactLoadablePlugin = new ReactLoadablePlugin({
   filename: '../build/react-loadable.json'
 });
 
-module.exports = {
+module.exports = (env = {}) => ({
   entry: path.join(__dirname, "../projects/js-plugin/index.js"),
-  output: {
-    path: path.join(__dirname, "../build"),
-    filename: `main.min.js`,
-    chunkFilename: `[name].min.js`,
-    jsonpFunction: 'webpackJsonp' + Date.now(),
-    publicPath: `https://scaleflex.ultrafast.io/https://scaleflex.airstore.io/filerobot/uploader/${pkg.version}/`
-  },
+  output: env.latest ?
+    {
+      path: path.join(__dirname, `../build/${pkg.version.split('.')[0]}`),
+      filename: `${pkg.name}.min.js`,
+      chunkFilename: `[name].min.js`,
+      jsonpFunction: 'webpackJsonp' + Date.now(),
+      publicPath: `https://cdn.scaleflex.it/filerobot/uploader/${pkg.version.split('.')[0]}/`
+    }
+    :
+    {
+      path: path.join(__dirname, `../build/${pkg.version}`),
+      filename: `${pkg.name}.min.js`,
+      chunkFilename: `[name].min.js`,
+      jsonpFunction: 'webpackJsonp' + Date.now(),
+      publicPath: `https://cdn.scaleflex.it/filerobot/uploader/${pkg.version}/`
+    },
   module: {
     rules: [
       {
@@ -51,4 +60,4 @@ module.exports = {
   devServer: {
     port: 3001
   }
-};
+});
