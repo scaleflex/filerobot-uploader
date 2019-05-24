@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'sf-airstore-uploader-font';
-  src:  url('https://scaleflex.ultrafast.io/https://scaleflex.api.airstore.io/v1/get/_/eec68f19-d1ab-5a6e-a9a6-05a0e8b50000/sf-airstore-uploader-font.eot?erlgi2');
-  src:  url('https://scaleflex.ultrafast.io/https://scaleflex.api.airstore.io/v1/get/_/eec68f19-d1ab-5a6e-a9a6-05a0e8b50000/sf-airstore-uploader-font.eot?erlgi2#iefix') format('embedded-opentype'),
-    url('https://scaleflex.ultrafast.io/https://scaleflex.api.airstore.io/v1/get/_/1631243b-a8b9-5a07-b05e-52a8e9850000/sf-airstore-uploader-font.ttf?erlgi2') format('truetype'),
-    url('https://scaleflex.ultrafast.io/https://scaleflex.api.airstore.io/v1/get/_/9eb106cb-839a-5975-9fbc-32cb3ce50000/sf-airstore-uploader-font.woff?erlgi2') format('woff'),
-    url('https://scaleflex.ultrafast.io/https://scaleflex.api.airstore.io/v1/get/_/6a17193b-2f3b-5735-ba28-93fb5d150000/sf-airstore-uploader-font.svg?erlgi2#sf-airstore-uploader-font') format('svg');
+  src:  url('https://cdn.scaleflex.it/filerobot/uploader/assets/fonts/sf-airstore-uploader-font/sf-airstore-uploader-font.eot?erlgi2');
+  src:  url('https://cdn.scaleflex.it/filerobot/uploader/assets/fonts/sf-airstore-uploader-font/sf-airstore-uploader-font.eot?erlgi2#iefix') format('embedded-opentype'),
+    url('https://cdn.scaleflex.it/filerobot/uploader/assets/fonts/sf-airstore-uploader-font/sf-airstore-uploader-font.ttf?erlgi2') format('truetype'),
+    url('https://cdn.scaleflex.it/filerobot/uploader/assets/fonts/sf-airstore-uploader-font/sf-airstore-uploader-font.woff?erlgi2') format('woff'),
+    url('https://cdn.scaleflex.it/filerobot/uploader/assets/fonts/sf-airstore-uploader-font/sf-airstore-uploader-font.svg?erlgi2#sf-airstore-uploader-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
