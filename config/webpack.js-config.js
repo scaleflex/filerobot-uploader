@@ -14,10 +14,6 @@ const banner = `
  Date: ${now.toISOString()}
 `;
 
-const reactLoadablePlugin = new ReactLoadablePlugin({
-  filename: '../build/react-loadable.json'
-});
-
 module.exports = (env = {}) => ({
   entry: path.join(__dirname, "../projects/js-plugin/index.js"),
   output: env.latest ?
@@ -50,7 +46,9 @@ module.exports = (env = {}) => ({
     ]
   },
   plugins: [
-    reactLoadablePlugin,
+    new ReactLoadablePlugin({
+      filename: path.join(__dirname, `../build/${env.latest ? pkg.version.split('.')[0] : pkg.version}/react-loadable.json`)
+    }),
     new webpack.BannerPlugin(banner),
   ],
   resolve: {

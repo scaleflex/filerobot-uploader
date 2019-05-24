@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'sf-airstore-uploader-font';
+  font-family: 'filerobot-uploader-font';
   src:  url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.eot?erlgi2');
   src:  url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.eot?erlgi2#iefix') format('embedded-opentype'),
     url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.ttf?erlgi2') format('truetype'),
     url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.woff?erlgi2') format('woff'),
-    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.svg?erlgi2#sf-airstore-uploader-font') format('svg');
+    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.svg?erlgi2#filerobot-uploader-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="sfi-airstore-"], [class*=" sfi-airstore-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'sf-airstore-uploader-font' !important;
+  font-family: 'filerobot-uploader-font' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
