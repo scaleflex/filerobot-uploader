@@ -47,7 +47,7 @@ module.exports = (env = {}) => ({
   },
   plugins: [
     new ReactLoadablePlugin({
-      filename: path.join(__dirname, `../build/${env.latest ? pkg.version.split('.')[0] : pkg.version}/react-loadable.json`)
+      filename: path.join(__dirname, `../build/react-loadable.json`)
     }),
     new webpack.BannerPlugin(banner),
   ],
