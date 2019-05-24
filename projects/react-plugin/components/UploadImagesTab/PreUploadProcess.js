@@ -35,7 +35,8 @@ class PreUploadProcess extends Component {
         height: 300
       },
       operation: OPERATION.SMART_CROP,
-      processing: false
+      processing: false,
+      camanLoaded: false
     }
   }
 
@@ -310,6 +311,10 @@ class PreUploadProcess extends Component {
     });
   }
 
+  onLoadCaman = () => {
+    this.setState({ camanLoaded: true });
+  }
+
   onOpenCVLoad = () => {
     if (window.__loadCascade) {
       this.setState({ faceDetectionLoaded: true });
@@ -514,12 +519,18 @@ class PreUploadProcess extends Component {
           </div>
         </div>
 
-        {this.state.processing && <Spinner overlay show={true}/>}
+        {(this.state.processing || !this.state.camanLoaded) && <Spinner overlay show={true}/>}
 
         <Script
           onLoad={this.onOpenCVLoad}
           url="https://unpkg.com/opencv.js@1.2.1/opencv.js"
           integrity="sha384-ucXOxPgA5tSKdaZgFD+5C0lAJeavjW31veENhNvOwsTjgx8waDD0s1QcMdUxhlxk"
+          crossorigin="anonymous"
+        />
+
+        <Script
+          onLoad={this.onLoadCaman}
+          url="https://cdn.scaleflex.it/plugins/common/libs/caman.full.min.js"
           crossorigin="anonymous"
         />
       </Container>

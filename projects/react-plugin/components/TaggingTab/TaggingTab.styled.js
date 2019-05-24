@@ -73,9 +73,9 @@ const InputLabel = styled.label`
   margin-right: ${props => props.mr ? props.mr : 0};
 `;
 
-const Textarea = styled.textarea.attrs({
+const Textarea = styled.textarea.attrs(() => ({
   autoFocus: true
-})`
+}))`
   display: block;
   min-height: 80px;
   width: 100%;

@@ -49,7 +49,7 @@ export default (props) => {
           role="button"
         >
           <ColorItemName>{I18n.t('images.backgrounds')} </ColorItemName>
-          <CountTag>({backgrounds.length})</CountTag>
+          <CountTag>({backgrounds.length ? backgrounds.length : ''})</CountTag>
         </ColorItem>}
         {tags.slice(0, 20).map(({ tag, label, count } = {}, index) => (
           <ColorItem

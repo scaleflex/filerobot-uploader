@@ -25,9 +25,9 @@ export const Label = styled.div`
   border-top: ${ props => props.bt ? '1px solid rgb(221, 221, 221)' : 'none'};
   margin-right: ${props => props.mr ? props.mr : 0};
 `;
-export const InputSearch = styled.input.attrs({
+export const InputSearch = styled.input.attrs(() => ({
   autoFocus: true
-})`
+}))`
   height: 34px;
   width: 300px;
   padding: 6px 12px;
@@ -125,7 +125,7 @@ export const TagsWrapper = styled.div`
   }
 `;
 
-export const Tag = styled.div.attrs({ className: props => props.active ? 'ae-tag-active' : '' })`
+export const Tag = styled.div.attrs(props => ({ className: props.active ? 'ae-tag-active' : '' }))`
   display: inline-block;
   padding: 6px 12px;
   border: 1px solid #ccc;

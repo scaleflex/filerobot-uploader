@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { variables } from '../styledComponents/styleUtils';
 
-const CloseBtn = styled.span.attrs({
+const CloseBtn = styled.span.attrs(() => ({
   role: 'button',
   className: 'sfi-airstore-cross'
-})`
+}))`
   cursor: pointer;
   position: absolute;
   font-weight: normal;

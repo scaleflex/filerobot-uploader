@@ -26,7 +26,7 @@ export const ColorType = styled.div`
   margin-top: 15px;
 `;
 
-export const ColorItem = styled.div.attrs({ className: props => props.active ? 'ae-color-item' : '' })`
+export const ColorItem = styled.div.attrs(props => ({ className: props.active ? 'ae-color-item' : '' }))`
   position: relative;
   padding: 10px 5px;
   border-left: ${props => props.active ? '6px solid ' + props.theme.buttonBackground : '6px solid transparent'};

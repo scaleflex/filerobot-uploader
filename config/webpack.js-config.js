@@ -26,7 +26,7 @@ module.exports = (env = {}) => ({
       filename: `${pkg.name}.min.js`,
       chunkFilename: `[name].min.js`,
       jsonpFunction: 'webpackJsonp' + Date.now(),
-      publicPath: `https://cdn.scaleflex.it/filerobot/uploader/${pkg.version.split('.')[0]}/`
+      publicPath: `https://cdn.scaleflex.it/plugins/${pkg.name}/${pkg.version.split('.')[0]}/`
     }
     :
     {
@@ -34,7 +34,7 @@ module.exports = (env = {}) => ({
       filename: `${pkg.name}.min.js`,
       chunkFilename: `[name].min.js`,
       jsonpFunction: 'webpackJsonp' + Date.now(),
-      publicPath: `https://cdn.scaleflex.it/filerobot/uploader/${pkg.version}/`
+      publicPath: `https://cdn.scaleflex.it/plugins/${pkg.name}/${pkg.version}/`
     },
   module: {
     rules: [

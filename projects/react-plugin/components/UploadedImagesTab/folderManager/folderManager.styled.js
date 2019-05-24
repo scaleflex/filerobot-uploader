@@ -108,7 +108,7 @@ export const Folder = styled.div`
   }
 `;
 
-Folder.Icon = styled.div.attrs({ className: 'ai-icon-folder' })`
+Folder.Icon = styled.div.attrs(() => ({ className: 'ai-icon-folder' }))`
   display: inline-block;
   vertical-align: middle;
   width: 20px;
