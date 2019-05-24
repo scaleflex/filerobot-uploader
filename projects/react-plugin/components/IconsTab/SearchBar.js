@@ -20,7 +20,9 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { items, isSearching, searchPhrase, onSearch, onChangeSearchPhrase, title, count = 0 } = this.props;
+    const {
+      items, isSearching, searchPhrase, onSearch, onChangeSearchPhrase, title, count = 0, presetImagesCount = 0
+    } = this.props;
     const isEmptyIcons = (!items || !items.length);
 
     return (
@@ -35,10 +37,12 @@ class SearchBar extends Component {
             onChange={onChangeSearchPhrase}
             onKeyDown={ev => { isEnterClick(ev) && onSearch() }}
           />
-          <ButtonSearch className="ae-btn" onClick={onSearch}>{I18n.t('upload.search')}</ButtonSearch>
+          <ButtonSearch className="ae-btn" onClick={() => { onSearch(); }}>{I18n.t('upload.search')}</ButtonSearch>
         </SearchGroup>
 
-        <AmountIcons empty={isEmptyIcons}>{I18n.t('upload.found')}: {count}</AmountIcons>
+        <AmountIcons empty={isEmptyIcons}>
+          {I18n.t('upload.found')}: {presetImagesCount || count ? presetImagesCount || count : ''}
+          </AmountIcons>
       </SearchWrapper>
     );
   }

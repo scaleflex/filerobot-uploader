@@ -44,24 +44,28 @@ export default (props) => {
         <ColorItem
           key={`category-background`}
           active={'backgrounds' === activePresetTag}
-          onClick={() => { onActivatePresetTag('backgrounds'); }}
+          onClick={() => { onActivatePresetTag('backgrounds', 25); }}
           tabIndex={0}
           role="button"
         >
           <ColorItemName>{I18n.t('images.backgrounds')} </ColorItemName>
-          <CountTag>({backgrounds.length ? backgrounds.length : ''})</CountTag>
+          <CountTag>(25+)</CountTag>
         </ColorItem>}
-        {tags.slice(0, 20).map(({ tag, label, count } = {}, index) => (
+        {tags.slice(0, 20).map(({ tag, label, count } = {}) => (
           <ColorItem
             key={`category-${tag}`}
             active={tag === activePresetTag}
-            onClick={() => { onActivatePresetTag(tag); }}
+            onClick={() => { onActivatePresetTag(tag, count); }}
             onKeyDown={event => { event.keyCode === 13 && onActivatePresetTag(tag); }}
             tabIndex={0}
             role="button"
           >
-            <ColorItemName>{label || tag.replace(/_/g, ' ').trim()}</ColorItemName>
-            <CountTag>({count})</CountTag>
+            <ColorItemName title={label || tag.replace(/_/g, ' ').trim()}>
+              {label || tag.replace(/_/g, ' ').trim()}
+            </ColorItemName>
+            <CountTag>
+              ({count})
+            </CountTag>
           </ColorItem>
         ))}
         {!tags.length ? <Spinner black show={true} style={{ fontSize: 8, top: 10, opacity: 0.4 }}/> : null}

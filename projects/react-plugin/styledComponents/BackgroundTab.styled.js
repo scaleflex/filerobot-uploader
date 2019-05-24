@@ -44,6 +44,9 @@ export const ColorItem = styled.div.attrs(props => ({ className: props.active ? 
 
 export const ColorItemName = styled.span`
   margin-left: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const TabWrap = styled.div`

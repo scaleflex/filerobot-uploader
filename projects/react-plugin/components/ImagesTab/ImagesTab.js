@@ -35,6 +35,7 @@ class ImagesTab extends Component {
       displayColorPicker: false,
       activeColorFilterIndex: null,
       isShowMoreImages: false,
+      presetImagesCount: null,
 
       tags: [],
       backgrounds: [],
@@ -83,7 +84,8 @@ class ImagesTab extends Component {
     this.setState({
       displayColorPicker: !this.state.displayColorPicker,
       activeColorFilters,
-      activeColorFilterIndex: activeColorFilters.length - 1
+      activeColorFilterIndex: activeColorFilters.length - 1,
+      presetImagesCount: null
     });
   };
 
@@ -215,13 +217,17 @@ class ImagesTab extends Component {
 
   onSearch = (offset = 0, resizeOnSuccess) => {
     if (!this.state.searchPhrase && !this.state.activePresetTag) return;
-    this.setState({ activePresetTag: this.state.searchPhrase ? null : this.state.activePresetTag });
+
+    this.setState({
+      activePresetTag: this.state.searchPhrase ? null : this.state.activePresetTag,
+      presetImagesCount: null
+    });
 
     return this.search(
       {
         value: (this.state.searchPhrase || this.state.activePresetTag || '').toLowerCase(),
         colorFilters: this.state.activeColorFilters,
-        offset
+        offset,
       }, true, resizeOnSuccess
     );
   }
@@ -254,9 +260,10 @@ class ImagesTab extends Component {
     return result;
   }
 
-  onActivatePresetTag = (activePresetTag) => {
+  onActivatePresetTag = (activePresetTag, count) => {
     const { activeColorFilters } = this.state;
-    this.setState({ activePresetTag, searchPhrase: '' });
+
+    this.setState({ activePresetTag, searchPhrase: '', presetImagesCount: activeColorFilters.length ? null : count });
     this.search({ value: activePresetTag, colorFilters: activeColorFilters }, true);
   }
 
@@ -273,7 +280,7 @@ class ImagesTab extends Component {
     const {
       isLoading, displayColorPicker, activeColorFilters, activeColorFilterIndex, tags, imageGrid, imageContainerHeight,
       isSearching, searchPhrase, activeTags, activePresetTag, imageGridWrapperWidth, isShowMoreImages, backgrounds,
-      related_tags, images, count
+      related_tags, images, count, presetImagesCount
     } = this.state;
     const colorFilter = activeColorFilters[activeColorFilterIndex] || {};
     const { columnWidth, gutterSize } = imageGrid;
@@ -283,7 +290,7 @@ class ImagesTab extends Component {
     return (
       <TabWrap>
         <Sidebar
-          {...{activePresetTag, activeColorFilters, tags, backgrounds}}
+          {...{ activePresetTag, activeColorFilters, tags, backgrounds }}
           onChangeColorFilter={this.onChangeColorFilter}
           onRemoveColorFilter={this.onRemoveColorFilter}
           addColorFilter={this.addColorFilter}
@@ -292,20 +299,20 @@ class ImagesTab extends Component {
 
         <ImageContainer>
           <SearchBar
-            {...{isLoading, isSearching, searchPhrase, count}}
+            {...{ isLoading, isSearching, searchPhrase, count, presetImagesCount }}
             items={images}
             title={I18n.t('images.you_can_search_images_here')}
             onSearch={this.onSearch}
             onChangeSearchPhrase={this.onChangeSearchPhrase}
           />
 
-          <IconTags {...{searchPhrase, activeTags}} tagsList={related_tags} toggleTag={this.toggleTag}/>
+          <IconTags {...{ searchPhrase, activeTags }} tagsList={related_tags} toggleTag={this.toggleTag}/>
 
           <ImagesListContainer ref={node => this.imageGridWrapperRef = node}>
             {(imagesList.length && imageContainerHeight && columnWidth && !isLoading) ?
               <Aux>
                 <VirtualizedImagesGrid
-                  {...{imageGridWrapperWidth, imageContainerHeight, columnWidth, gutterSize, isShowMoreImages}}
+                  {...{ imageGridWrapperWidth, imageContainerHeight, columnWidth, gutterSize, isShowMoreImages }}
                   count={imagesList.length}
                   list={imagesList}
                   upload={this.upload}
@@ -319,7 +326,7 @@ class ImagesTab extends Component {
         </ImageContainer>
 
         {displayColorPicker &&
-        <ColorPicker {...{colorFilter}} handleClose={this.handleClose} handleChange={this.handleChange}/>}
+        <ColorPicker {...{ colorFilter }} handleClose={this.handleClose} handleChange={this.handleChange}/>}
 
         <Spinner overlay show={isLoading}/>
       </TabWrap>
