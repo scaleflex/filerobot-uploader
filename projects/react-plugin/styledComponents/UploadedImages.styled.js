@@ -55,8 +55,8 @@ export const Content = styled.div`
   height: 100%;
   
   ${UploadBox} {
-    background: ${props => props.isDragOver ? 'rgba(210, 253, 207, 0.5) !important' : '#f5f5f5'};
-    border:  ${props => props.isDragOver ? '2px dashed #888888' : '2px dashed #d8d8d8'};
+    background: ${props => props.isDragOver ? 'rgba(210, 253, 207, 0.5) !important' : props.theme.activeSidebarItemBackground};
+    border:  ${props => props.isDragOver ? '2px dashed #888888' : `2px dashed ${props.theme.border}`};
   }
 `;
 
