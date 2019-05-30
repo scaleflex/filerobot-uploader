@@ -2,7 +2,6 @@ const path = require('path');
 const { ReactLoadablePlugin } = require('react-loadable/webpack');
 const webpack = require('webpack');
 const pkg = require('../package');
-
 const now = new Date();
 const banner = `
  ${pkg.name} v${pkg.version}
