@@ -103,7 +103,7 @@ export const uploadFiles = (props) => {
         const code = data.code || '';
         const msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
 
-        showAlert('', ((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message);
+        showAlert('', ((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message, 'error');
         reject(error);
       });
   });

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { CSS } from '../assets/styles';
 import UserUploaderTab from './UploadImagesTab/UserUploaderTab';
 import { Dialog } from '../styledComponents';
@@ -195,42 +195,43 @@ class AirstoreUploader extends Component {
     }
 
     return (
-      <Modal
-        isTooSmall={isMobile}
-        noBorder
-        fullScreen={'md'}
-        onClose={this.closeModal}
-        style={{ borderRadius: 5 }}
-        isHideCloseBtn={isHideHeader}
-      >
-        <div className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
-          <FocusLock>
-            <Dialog role="dialog" className="ae-dialog">
-              {!isHideHeader &&
-              <div style={CSS.tabs.header} className="ae-tabs-header">
-
-                <Nav
-                  tabs={postUpload ? filteredPostUploadTabs : filteredTabs}
-                  activeTabId={activeTabId}
-                  activateTab={this.activateTab}
-                />
-
-              </div>}
-              <div style={{ ...CSS.tabs.content, ...(activeTabId === 'ICONS' && { overflow: 'hidden' }) }}>
-                {activeTab &&
-                <div style={{ width: '100%', minWidth: isMobile ? 'auto' : 540, overflow: 'auto' }}>
-                  {activeTab.getContent.call(this, contentProps)}
+      <Fragment>
+        <Modal
+          isTooSmall={isMobile}
+          noBorder
+          fullScreen={'md'}
+          onClose={this.closeModal}
+          style={{ borderRadius: 5 }}
+          isHideCloseBtn={isHideHeader}
+        >
+          <div className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
+            <FocusLock>
+              <Dialog role="dialog" className="ae-dialog">
+                {!isHideHeader &&
+                <div style={CSS.tabs.header} className="ae-tabs-header">
+                  <Nav
+                    tabs={postUpload ? filteredPostUploadTabs : filteredTabs}
+                    activeTabId={activeTabId}
+                    activateTab={this.activateTab}
+                  />
                 </div>}
-                <ToastContainer
-                  ref={node => this.container = node}
-                  toastMessageFactory={ToastMessageFactory}
-                  className="toast-top-right"
-                />
-              </div>
-            </Dialog>
-          </FocusLock>
-        </div>
-      </Modal>
+                <div style={{ ...CSS.tabs.content, ...(activeTabId === 'ICONS' && { overflow: 'hidden' }) }}>
+                  {activeTab &&
+                  <div style={{ width: '100%', minWidth: isMobile ? 'auto' : 540, overflow: 'auto' }}>
+                    {activeTab.getContent.call(this, contentProps)}
+                  </div>}
+                </div>
+              </Dialog>
+            </FocusLock>
+          </div>
+        </Modal>
+
+        <ToastContainer
+          ref={node => this.container = node}
+          toastMessageFactory={ToastMessageFactory}
+          className="toast-top-right"
+        />
+      </Fragment>
     );
   }
 }
