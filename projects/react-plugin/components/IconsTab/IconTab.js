@@ -84,7 +84,12 @@ class IconTab extends Component {
     sendSelectionData({ value: searchPhrase || activePresetTag || '' }, relevantActiveTags, icon.uid, this.loadedIcons);
     const self = this.props;
 
-    API.uploadFiles([icon.src], this.props.appState.config, 'application/json')
+    API.uploadFiles({
+      files: [icon.src],
+      config: this.props.appState.config,
+      data_type: 'application/json',
+      showAlert: this.props.showAlert
+    })
       .then(([files, isDuplicate, isReplacingData]) => {
         this.uploadStop();
 

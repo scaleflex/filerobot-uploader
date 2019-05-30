@@ -7,6 +7,7 @@ import * as API from '../../services/api.service';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
 
+
 const OPTIONS_1x1 = [
   { height: 125, width: 125, debug: true, minScale: 1 },
   { height: 125, width: 125, debug: true, minScale: 0.88 },
@@ -86,7 +87,12 @@ class CropsBox extends Component {
 
     this.props.setSpinner(true);
 
-    API.uploadFiles(files, config, dataType)
+    API.uploadFiles({
+      files,
+      config,
+      data_type: dataType,
+      showAlert: this.props.showAlert
+    })
       .then(([files = [], isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');

@@ -70,7 +70,13 @@ class UploadedImagesTab extends Component {
 
     this.uploadStart();
 
-    API.uploadFiles(files, {...config, onUploadProgress: this.onUploadProgress }, dataType, dir)
+    API.uploadFiles({
+      files,
+      config: { ...config, onUploadProgress: this.onUploadProgress },
+      data_type: dataType,
+      dir,
+      showAlert: this.props.showAlert
+    })
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');
@@ -225,7 +231,7 @@ class UploadedImagesTab extends Component {
   }
 
   onUploadProgress = (progressEvent) => {
-    const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
 
     this.setState({
       progressBar: {

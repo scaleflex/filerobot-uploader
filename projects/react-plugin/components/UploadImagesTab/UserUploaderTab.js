@@ -97,7 +97,12 @@ class UserUploaderTab extends Component {
 
     this.uploadStart();
 
-    API.uploadFiles(files, { ...config, onUploadProgress: this.onUploadProgress }, dataType)
+    API.uploadFiles({
+      files,
+      config: { ...config, onUploadProgress: this.onUploadProgress },
+      data_type: dataType,
+      showAlert: this.props.showAlert
+    })
       .then(([files, isDuplicate, isReplacingData]) => {
         if (isReplacingData || isDuplicate) {
           this.props.showAlert('', I18n.t('upload.file_already_exists'), 'info');

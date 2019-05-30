@@ -24,19 +24,24 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
  *  - files from urls
  * Method understand what files we give via "data_type" attribute.
  *
- * @param uploadPath    {string}  Airstore upload url (like: "//jolipage001.api.airstore.io/upload") or custom handler
- * @param uploadParams  {object}  Params which we need to send to uploadPath
- * @param files         {array}   Array with files
- * @param uploadKey     {string}  = secret key
- * @param data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
+ * @param props.uploadPath    {string}  Airstore upload url (like: "//jolipage001.api.airstore.io/upload") or custom handler
+ * @param props.uploadParams  {object}  Params which we need to send to uploadPath
+ * @param props.files         {array}   Array with files
+ * @param props.uploadKey     {string}  = secret key
+ * @param props.data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
  *   uploadPath)
- * @param dir     {string}  = directory to upload files
- * @param showAlert     {function}  = show alert
+ * @param props.dir     {string}  = directory to upload files
+ * @param props.showAlert     {function}  = show alert
  * @returns {Promise}
  */
-export const uploadFiles = (
-  files = [], { uploadPath = '', uploadParams = {}, uploadKey = '', onUploadProgress }, data_type = 'files[]', dir
-) => {
+export const uploadFiles = (props) => {
+  let {
+    files = [],
+    config: { uploadPath = '', uploadParams = {}, uploadKey = '', onUploadProgress } = {},
+    data_type = 'files[]',
+    dir,
+    showAlert
+  } = props;
   let url = (uploadPath || ''); // use independent protocol
   const ajaxData = new FormData();
   const jsonData = { files_urls: [] };
@@ -98,7 +103,7 @@ export const uploadFiles = (
         const code = data.code || '';
         const msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
 
-        alert(((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message);
+        showAlert('', ((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message);
         reject(error);
       });
   });

@@ -133,7 +133,12 @@ class ImagesTab extends Component {
 
     const self = this.props;
 
-    API.uploadFiles([image.src], this.props.appState.config, 'application/json')
+    API.uploadFiles({
+      files: [image.src],
+      config: this.props.appState.config,
+      data_type: 'application/json',
+      showAlert: this.props.showAlert
+    })
       .then(([files, isDuplicate, isReplacingData]) => {
         this.uploadStop();
 

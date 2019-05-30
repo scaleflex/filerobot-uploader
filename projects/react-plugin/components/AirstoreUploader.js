@@ -106,7 +106,7 @@ class AirstoreUploader extends Component {
       if (activeModules.includes('UPLOAD')) {
         initialTab = 'UPLOAD';
       } else {
-        alert('Cannot open Filerobot Uploader. You did not pass any file to process.');
+        this.showAlert('Error', 'Cannot open Filerobot Uploader. You did not pass any file to process.')
         return;
       }
     }
