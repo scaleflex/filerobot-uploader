@@ -55,7 +55,8 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
       dir: path || uploadParams.dir
     }
   };
-  const src = `${encodePermalink(file.url_permalink)}?${md5(file.modified_at || '').slice(0, 6)}`;
+  //const src = `${encodePermalink(file.url_permalink)}?${md5(file.modified_at || '').slice(0, 6)}`;
+  const src = file.url_permalink;
 
   return (
     <ImageEditor
