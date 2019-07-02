@@ -3,6 +3,7 @@ import {
   UploadedImages, HeaderWrap, Nav, ButtonSearch, UploadInputBox, SearchGroup, InputSearch, SearchWrapper,
   ButtonClose
 } from '../../styledComponents';
+import * as API from '../../services/api.service';
 import { getListFiles, searchFiles } from '../../services/api.service';
 import { Spinner } from '../Spinner';
 import UploadedImagesContent from './UploadedImagesContent';
@@ -10,8 +11,7 @@ import { isEnterClick } from '../../utils';
 import { I18n } from 'react-i18nify';
 import { GALLERY_IMAGES_LIMIT } from '../../config';
 import FolderManager from './folderManager/FolderManager';
-import * as API from '../../services/api.service';
-import { ProgressCircle, PROGRESS_COLORS } from '../ProgressCircle';
+import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
@@ -131,20 +131,28 @@ class UploadedImagesTab extends Component {
 
     this.setState({ isShowMoreImages: !!offset, isLoading: !offset });
 
-    getListFiles({ dir, container, offset, uploadKey }).then(([files, directories, totalFilesCount]) => {
-      const prevFiles = !offset ? [] : this.state.files;
+    getListFiles({ dir, container, offset, uploadKey })
+      .then(([files, directories, totalFilesCount]) => {
+        const prevFiles = !offset ? [] : this.state.files;
 
-      this.setState({
-        files: [...prevFiles, ...files],
-        directories: !offset ? directories : this.state.directories,
-        isLoading: false,
-        isShowMoreImages: false,
-        offset,
-        totalFilesCount
-      }, () => {
-        typeof resizeOnSuccess === 'function' && resizeOnSuccess();
+        this.setState({
+          files: [...prevFiles, ...files],
+          directories: !offset ? directories : this.state.directories,
+          isLoading: false,
+          isShowMoreImages: false,
+          offset,
+          totalFilesCount
+        }, () => {
+          typeof resizeOnSuccess === 'function' && resizeOnSuccess();
+        })
       })
-    })
+      .catch(() => {
+        this.setState({
+          files: [],
+          isLoading: false,
+          isShowMoreImages: false
+        });
+      });
   }
 
   search = (offset = 0, resizeOnSuccess) => {
