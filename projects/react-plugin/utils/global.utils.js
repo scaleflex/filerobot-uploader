@@ -27,6 +27,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     preUploadImageProcess: isDefined(config.preUploadImageProcess) ? config.preUploadImageProcess : false,
     language: isDefined(config.language) ? config.language : CONFIG.language,
     cloudimageToken: config.cloudimageToken || CONFIG.cloudimageToken,
+    searchPhrase: config.searchPhrase,
     imageEditor: {
       active: config.modules.includes('IMAGE_EDITOR'),
       ...config.imageEditor

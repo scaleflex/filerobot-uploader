@@ -46,12 +46,20 @@ class ImagesTab extends Component {
   }
 
   componentDidMount() {
+    const { searchPhrase } = this.props.appState.config;
+
     axios.all([
       ImagesAPI.getImagesTags(),
       ImagesAPI.getBackgrounds()
     ]).then(([tags, backgrounds]) => {
-      this.setState({ tags, backgrounds }, this.updateImageGridColumnWidth);
+      this.setState({ tags, backgrounds, searchPhrase }, () => {
+        if (!searchPhrase) this.updateImageGridColumnWidth();
+      });
     });
+
+    if (searchPhrase) {
+      this.onSearch(0, true, searchPhrase);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -220,17 +228,19 @@ class ImagesTab extends Component {
     }
   }
 
-  onSearch = (offset = 0, resizeOnSuccess) => {
-    if (!this.state.searchPhrase && !this.state.activePresetTag) return;
+  onSearch = (offset = 0, resizeOnSuccess, initialSearchPhrase) => {
+    const searchPhrase = this.state.searchPhrase || initialSearchPhrase;
+
+    if (!searchPhrase && !this.state.activePresetTag) return;
 
     this.setState({
-      activePresetTag: this.state.searchPhrase ? null : this.state.activePresetTag,
+      activePresetTag: searchPhrase ? null : this.state.activePresetTag,
       presetImagesCount: null
     });
 
     return this.search(
       {
-        value: (this.state.searchPhrase || this.state.activePresetTag || '').toLowerCase(),
+        value: (searchPhrase || this.state.activePresetTag || '').toLowerCase(),
         colorFilters: this.state.activeColorFilters,
         offset,
       }, true, resizeOnSuccess
