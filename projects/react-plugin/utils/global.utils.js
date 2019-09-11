@@ -38,8 +38,6 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     },
     autoCropSuggestions: config.autoCropSuggestions || false,
 
-    customFields: config.customFields || [],
-
     uploadHandler: onUpload
   };
 };

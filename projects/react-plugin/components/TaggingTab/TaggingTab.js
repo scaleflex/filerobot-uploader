@@ -21,7 +21,7 @@ class TaggingTab extends Component {
     super();
 
     const { appState, files = {} } = props;
-    const { tagging: { autoTaggingButton, executeAfterUpload } = {}, language, customFields } = appState.config;
+    const { tagging: { autoTaggingButton, executeAfterUpload, customFields } = {}, language } = appState.config;
     const [file = {}] = files;
     const date = new Date();
     const options = {
@@ -116,7 +116,8 @@ class TaggingTab extends Component {
     const { description, tags } = this.state;
     const { appState, files, options = {} } = this.props;
     const { prevTab } = appState;
-    const { uploadHandler, language, customFields } = appState.config;
+    const { uploadHandler, language, tagging } = appState.config;
+    const { customFields } = tagging;
     const [file = {}] = this.props.files;
 
     let customFieldsProps = {};
@@ -225,7 +226,8 @@ class TaggingTab extends Component {
   render() {
     const { isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags } = this.state;
     const { prevTab, config } = this.props.appState;
-    const { customFields } = config;
+    const { tagging } = config;
+    const { customFields = [] } = tagging;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
