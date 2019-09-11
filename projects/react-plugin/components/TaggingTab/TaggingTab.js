@@ -5,7 +5,7 @@ import { Spinner } from '../Spinner';
 import {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ToggleCropMenu,
-  ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel,
+  ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel, Input
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData } from "../../services/api.service";
@@ -21,7 +21,7 @@ class TaggingTab extends Component {
     super();
 
     const { appState, files = {} } = props;
-    const { tagging: { autoTaggingButton, executeAfterUpload } = {}, language } = appState.config;
+    const { tagging: { autoTaggingButton, executeAfterUpload } = {}, language, customFields } = appState.config;
     const [file = {}] = files;
     const date = new Date();
     const options = {
@@ -33,9 +33,16 @@ class TaggingTab extends Component {
     file.properties = file.properties || {};
     file.properties.tags = file.properties.tags || [];
 
+    let customFieldsProps = {};
+
+    if (customFields && customFields.length) {
+      customFieldsProps = this.getCustomFields(customFields, file.properties);
+    }
+
     this.state = {
       tags: file.properties.tags || [],
       description: file.properties.description || '',
+      ...customFieldsProps,
       isLoading: false,
       isGeneratingTags: false,
       errorMessage: '',
@@ -95,18 +102,35 @@ class TaggingTab extends Component {
     this.setState({ tags, errorMessage: '' });
   }
 
+  getCustomFields = (customFields, properties) => {
+    const customFieldsProps = {};
+
+    customFields.forEach(field => {
+      customFieldsProps[field.metaKey] = properties[field.metaKey] || '';
+    });
+
+    return customFieldsProps;
+  }
+
   saveMetadata = () => {
     const { description, tags } = this.state;
     const { appState, files, options = {} } = this.props;
     const { prevTab } = appState;
-    const { uploadHandler, language } = appState.config;
+    const { uploadHandler, language, customFields } = appState.config;
     const [file = {}] = this.props.files;
+
+    let customFieldsProps = {};
+
+    if (customFields && customFields.length) {
+      customFieldsProps = this.getCustomFields(customFields, this.state);
+    }
 
     saveMetaData(file.uuid, {
       description,
       tags: uniqueArrayOfStrings(tags),
       lang: language,
-      search: `${description} ${tags.join(' ')}`
+      search: `${description} ${tags.join(' ')}`,
+      ...customFieldsProps
     }, appState.config)
       .then(response => {
         if (response.status === 'success') {
@@ -193,9 +217,15 @@ class TaggingTab extends Component {
       this.props.closeModal();
   }
 
+  handleCustomFieldChange = (event) => {
+    debugger;
+    this.setState({ [event.target.name]: event.target.value, errorMessage: '' });
+  }
+
   render() {
     const { isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags } = this.state;
-    const { prevTab } = this.props.appState;
+    const { prevTab, config } = this.props.appState;
+    const { customFields } = config;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
@@ -238,6 +268,8 @@ class TaggingTab extends Component {
           </FileWrapper>
 
           <InputsBlock>
+            {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
+
             <Textarea
               value={this.state.description}
               placeholder={I18n.t('tagging.add_description')}
@@ -286,5 +318,33 @@ class TaggingTab extends Component {
     )
   }
 }
+
+const renderField  = ({ type = 'text', name = '', metaKey }, value, handler) => {
+  switch (type) {
+    case 'textarea':
+      return (
+        <Textarea
+          id={metaKey}
+          key={metaKey}
+          name={metaKey}
+          placeholder={name}
+          value={value}
+          onChange={handler}
+        />
+      );
+    case 'text':
+      return (
+        <Input
+          type="text"
+          id={metaKey}
+          key={metaKey}
+          name={metaKey}
+          placeholder={name}
+          value={value}
+          onChange={handler}
+        />
+      );
+  }
+};
 
 export default TaggingTab;

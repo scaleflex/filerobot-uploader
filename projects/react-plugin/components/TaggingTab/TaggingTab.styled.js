@@ -73,6 +73,32 @@ const InputLabel = styled.label`
   margin-right: ${props => props.mr ? props.mr : 0};
 `;
 
+const Input = styled('input')`
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  color: ${p => p.theme.inputTextColor || 'rgb(85, 85, 85)'};
+  background: ${p => p.theme.inputBackground || 'rgb(255, 255, 255)'};
+  border-radius: 4px 0 0 4px;
+  box-shadow: rgba(0,0,0,0.15) 0px 2px 7px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border: 1px solid transparent;
+  border-right: 0px solid transparent;
+  outline: 0;
+
+  :focus {
+    border: 1px solid #5D636B;
+    border-right: 0px solid transparent;
+    outline-color: ${p => p.theme.inputOutlineColor || 'rgb(77, 144, 254)'};
+    outline-offset: -2px;
+    outline-style: auto;
+    outline-width: 5px;
+  }
+`;
+
 const Textarea = styled.textarea.attrs(() => ({
   autoFocus: true
 }))`
@@ -381,5 +407,5 @@ const Overlay = styled.div`
 export {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ErrorWrapper,
-  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay
+  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input
 };

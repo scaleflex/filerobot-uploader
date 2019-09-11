@@ -69,7 +69,19 @@ let config = {
   language: 'en',
   colorScheme: {
     active: 'solarized'
-  }
+  },
+  customFields: [
+    {
+      name: 'Test name 1',
+      metaKey: 'test_key',
+      type: 'text'
+    },
+    {
+      name: 'Test name 2',
+      metaKey: 'test_key_2',
+      type: 'textarea'
+    }
+  ]
 };
 
 window.addEventListener('load', function() {
