@@ -42,18 +42,25 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
-  const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler } = config;
+  const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler, language } = config;
   const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
   const imageEditorConfig = {
-    filerobotUploadKey: uploadKey,
-    filerobotContainer: container,
+    isLowQualityPreview: true,
+    colorScheme: 'dark',
+    language,
+    filerobot: {
+      uploadKey,
+      container,
+      uploadParams: {
+        ...uploadParams,
+        dir: path || uploadParams.dir
+      }
+    },
+    cloudimage: {
+      token: cloudimageToken
+    },
     processWithCloudimage: isGif,
-    uploadWithCloudimageLink: true,
-    cloudimageToken: cloudimageToken,
-    uploadParams: {
-      ...uploadParams,
-      dir: path || uploadParams.dir
-    }
+    uploadWithCloudimageLink: true
   };
   //const src = `${encodePermalink(file.url_permalink)}?${md5(file.modified_at || '').slice(0, 6)}`;
   const src = file.url_permalink;
