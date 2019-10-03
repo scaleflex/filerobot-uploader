@@ -81,6 +81,18 @@ let config = {
   language: 'en',
   colorScheme: {
     active: 'solarized'
+  },
+  imageEditorConfig: {
+    watermark: {
+      url: 'https://cdn.scaleflex.it/demo/filerobot.png',
+      urls: [
+        'https://cdn.scaleflex.it/demo/filerobot.png',
+        'https://cdn.scaleflex.it/demo/superman.png'
+      ],
+      position: 'center',
+      opacity: 0.7,
+      applyByDefault: false
+    }
   }
 };
 

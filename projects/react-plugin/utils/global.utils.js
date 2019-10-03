@@ -38,7 +38,9 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     },
     autoCropSuggestions: config.autoCropSuggestions || false,
 
-    uploadHandler: onUpload
+    uploadHandler: onUpload,
+
+    imageEditorConfig: config.imageEditorConfig || {}
   };
 };
 

@@ -42,33 +42,33 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
-  const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler, language } = config;
+  const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig } = config;
   const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
-  const imageEditorConfig = {
-    isLowQualityPreview: true,
-    colorScheme: 'dark',
-    language,
-    filerobot: {
-      uploadKey,
-      container,
-      uploadParams: {
-        ...uploadParams,
-        dir: path || uploadParams.dir
-      }
-    },
-    cloudimage: {
-      token: cloudimageToken
-    },
-    processWithCloudimage: isGif,
-    uploadWithCloudimageLink: true
-  };
   //const src = `${encodePermalink(file.url_permalink)}?${md5(file.modified_at || '').slice(0, 6)}`;
   const src = file.url_permalink;
 
   return (
     <ImageEditor
       show={true}
-      config={imageEditorConfig}
+      config={{
+        isLowQualityPreview: true,
+        colorScheme: 'dark',
+        language,
+        filerobot: {
+          uploadKey,
+          container,
+          uploadParams: {
+            ...uploadParams,
+            dir: path || uploadParams.dir
+          }
+        },
+        cloudimage: {
+          token: cloudimageToken
+        },
+        processWithCloudimage: isGif,
+        uploadWithCloudimageLink: true,
+        ...imageEditorConfig
+      }}
       closeOnLoad={false}
       src={src}
       onComplete={(url, file) => {
