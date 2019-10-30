@@ -78,6 +78,12 @@ export default {
     generate_tags: 'Generate tags',
     save: 'Save',
     asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged',
-    auto_tagging_processing: 'Auto-tagging processing...'
+    auto_tagging_processing: 'Auto-tagging processing...',
+    product_ref: 'Product ref',
+    product_position: 'Product position',
+    not_set: 'Not set',
+    update_product_ref: 'Update product ref',
+    update_product_position: 'Update product position',
+    updating: 'updating...'
   }
 };

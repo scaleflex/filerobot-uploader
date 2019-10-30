@@ -30,18 +30,22 @@ const UploadedImage = styled.div`
 
 const PropName = styled.div`
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   width: 140px;
   font-weight: bold;
 `;
 
 const PropValue = styled.div`
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: calc(100% - 140px);
+  
+  input {
+    margin: 0;
+  }
 `;
 
 const UploadedImageDesc = styled.div`
@@ -100,7 +104,7 @@ const Input = styled('input')`
 `;
 
 const Textarea = styled.textarea.attrs(() => ({
-  autoFocus: true
+  autoFocus: false
 }))`
   display: block;
   min-height: 80px;

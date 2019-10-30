@@ -4,11 +4,11 @@ import TagsInput from 'react-tagsinput'
 import { Spinner } from '../Spinner';
 import {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
-  InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ToggleCropMenu,
+  InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon,
   ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel, Input
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
-import { generateTags, saveMetaData } from "../../services/api.service";
+import { generateTags, saveMetaData, updateProduct } from "../../services/api.service";
 import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
@@ -23,6 +23,7 @@ class TaggingTab extends Component {
     const { appState, files = {} } = props;
     const { tagging: { autoTaggingButton, executeAfterUpload, customFields } = {}, language } = appState.config;
     const [file = {}] = files;
+    const { ref: productRef = '', position: productPosition = '' } = file.product || {};
     const date = new Date();
     const options = {
       weekday: "long", year: "numeric", month: "short",
@@ -49,7 +50,12 @@ class TaggingTab extends Component {
       currentTime,
       firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : currentTime,
       lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : currentTime,
-      tagsGenerated: false
+      tagsGenerated: false,
+      productRef,
+      productPosition,
+      oldProductRef: productRef,
+      oldProductPosition: productPosition,
+      isUpdatingProduct: false
     };
 
     this.isAutoTaggingButton = autoTaggingButton && !executeAfterUpload;
@@ -219,13 +225,28 @@ class TaggingTab extends Component {
   }
 
   handleCustomFieldChange = (event) => {
-    debugger;
     this.setState({ [event.target.name]: event.target.value, errorMessage: '' });
   }
 
+  updateProductProps = () => {
+    const { productRef, productPosition } = this.state;
+    const { appState, files } = this.props;
+    const [file = {}] = files;
+
+    this.setState({ isUpdatingProduct: true });
+
+    updateProduct(file.uuid, { ref: productRef, position: productPosition }, appState.config)
+      .then(() => {
+        this.setState({ oldProductPosition: productPosition, oldProductRef: productRef, isUpdatingProduct: false });
+      });
+  }
+
   render() {
-    const { isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags } = this.state;
-    const { prevTab, config } = this.props.appState;
+    const {
+      isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags, oldProductRef,
+      oldProductPosition, isUpdatingProduct
+    } = this.state;
+    const { prevTab, config, productsEnabled } = this.props.appState;
     const { tagging } = config;
     const { customFields = [] } = tagging;
     const [file = {}] = this.props.files;
@@ -265,6 +286,57 @@ class TaggingTab extends Component {
                   <PropName>{I18n.t('tagging.last_modified')}:</PropName>
                   <PropValue>{lastModified || currentTime}</PropValue>
                 </li>
+                {productsEnabled &&
+                <>
+                  <li>
+                    <PropName>{I18n.t('tagging.product_ref')}:</PropName>
+                    <PropValue>
+                      <Input
+                        type="text"
+                        id={'productRef'}
+                        key={'productRef'}
+                        name={'productRef'}
+                        placeholder={I18n.t('tagging.not_set')}
+                        value={this.state.productRef}
+                        onChange={this.handleCustomFieldChange}
+                      />
+                    </PropValue>
+                  </li>
+                  {oldProductRef !== this.state.productRef && (
+                    <li>
+                      <PropName/>
+                      <PropValue>
+                        <Button success onClick={this.updateProductProps}>
+                          {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_ref')}
+                        </Button>
+                      </PropValue>
+                    </li>
+                  )}
+                  <li>
+                    <PropName>{I18n.t('tagging.product_position')}:</PropName>
+                    <PropValue>
+                      <Input
+                        type="text"
+                        id={'productPosition'}
+                        key={'productPosition'}
+                        name={'productPosition'}
+                        placeholder={I18n.t('tagging.not_set')}
+                        value={this.state.productPosition}
+                        onChange={this.handleCustomFieldChange}
+                      />
+                    </PropValue>
+                  </li>
+                  {oldProductPosition !== this.state.productPosition && (
+                    <li>
+                      <PropName/>
+                      <PropValue>
+                        <Button success onClick={this.updateProductProps}>
+                          {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_position')}
+                        </Button>
+                      </PropValue>
+                    </li>
+                  )}
+                </>}
               </ul>
             </UploadedImageDesc>
           </FileWrapper>

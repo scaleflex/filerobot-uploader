@@ -11,6 +11,7 @@ import Nav from './nav/Nav';
 import { I18n } from 'react-i18nify';
 import { getInitialState } from './AppState';
 import { isImage } from '../utils/icons.utils';
+import { getTokenSettings } from '../services/api.service';
 import { UploadedImagesTab, IconTab, BackgroundTab, TaggingTab, ImageEditor } from './loadable';
 
 
@@ -70,8 +71,14 @@ class AirstoreUploader extends Component {
     I18n.setLocale(language);
     config.modules = activeModules;
 
+    const nextConfig = prepareConfig(config, onUpload);
+
+    getTokenSettings(nextConfig).then(settings => {
+      this.props.setAppState(() => ({ ...settings }));
+    });
+
     this.props.setAppState(() => ({
-      config: prepareConfig(config, onUpload),
+      config: nextConfig,
       activeModules
     }), callback);
   }

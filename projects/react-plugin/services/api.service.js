@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DUPLICATE_CODE, REPLACING_DATA_CODE, GALLERY_IMAGES_LIMIT } from '../config';
+import { DUPLICATE_CODE, GALLERY_IMAGES_LIMIT, REPLACING_DATA_CODE } from '../config';
 
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
@@ -24,11 +24,13 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
  *  - files from urls
  * Method understand what files we give via "data_type" attribute.
  *
- * @param props.uploadPath    {string}  Airstore upload url (like: "//jolipage001.api.airstore.io/upload") or custom handler
+ * @param props.uploadPath    {string}  Airstore upload url (like: "//jolipage001.api.airstore.io/upload") or custom
+ *   handler
  * @param props.uploadParams  {object}  Params which we need to send to uploadPath
  * @param props.files         {array}   Array with files
  * @param props.uploadKey     {string}  = secret key
- * @param props.data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom handler
+ * @param props.data_type     {string}  Available values: "files[]", "files_url[]" (or another if you use custom
+ *   handler
  *   uploadPath)
  * @param props.dir     {string}  = directory to upload files
  * @param props.showAlert     {function}  = show alert
@@ -84,17 +86,11 @@ export const uploadFiles = (props) => {
           //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
           resolve([[file], isDuplicate, isReplacingData]);
-        }
-
-        else if (status === 'success' && files) {
+        } else if (status === 'success' && files) {
           resolve([files, isDuplicate, isReplacingData]);
-        }
-
-        else if (status === 'error') {
+        } else if (status === 'error') {
           throw new Error(response.msg + ' ' + response.hint);
-        }
-
-        else
+        } else
           reject(response);
       }
     )
@@ -172,3 +168,32 @@ export const saveMetaData = (id, properties, { container, uploadKey }) => {
   )
     .then((response = {}) => response);
 }
+
+export const updateProduct = (id, product, { container, uploadKey }) => {
+  const base = getBaseUrl(container);
+  const data = { product };
+
+  return send(
+    `${base}file/${id}/product`,
+    'PUT',
+    data,
+    {
+      'X-Airstore-Secret-Key': uploadKey
+    }
+  )
+    .then((response = {}) => response);
+}
+
+export const getTokenSettings = ({ container = '', uploadKey }) => {
+  const baseUrl = getBaseUrl(container);
+
+  return send(
+    [baseUrl, 'settings'].join(''),
+    'GET',
+    null,
+    { 'X-Airstore-Secret-Key': uploadKey }
+  )
+    .then(({ settings = {} } = {}) => ({
+      productsEnabled: settings._products_enabled === 1
+    }));
+};
