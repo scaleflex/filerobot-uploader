@@ -3,9 +3,26 @@ import prettyBytes from 'pretty-bytes';
 import TagsInput from 'react-tagsinput'
 import { Spinner } from '../Spinner';
 import {
-  TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
-  InputsBlock, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon,
-  ErrorWrapper, ErrorParagraph, GoBack, BackIcon, AutoTaggingProcessLabel, Input
+  AutoTaggingProcessLabel,
+  BackIcon,
+  Button,
+  ErrorParagraph,
+  ErrorWrapper,
+  FileWrapper,
+  GoBack,
+  InfoIcon,
+  Input,
+  InputsBlock,
+  PropName,
+  PropValue,
+  TaggingContent,
+  TaggingFooter,
+  TaggingTabWrapper,
+  TagsInputWrapper,
+  Textarea,
+  UploadedImage,
+  UploadedImageDesc,
+  UploadedImageWrapper
 } from './TaggingTab.styled.js'
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData, updateProduct } from "../../services/api.service";
@@ -216,12 +233,13 @@ class TaggingTab extends Component {
   }
 
   goBack = () => {
-    const { options = {} } = this.props;
+    const { options = {}, appState } = this.props;
+    const { hasChanged } = appState;
 
     this.props.setPostUpload(false);
 
     if (options.closeOnEdit)
-      this.props.closeModal();
+      this.props.closeModal({ hasChanged });
   }
 
   handleCustomFieldChange = (event) => {
@@ -233,12 +251,24 @@ class TaggingTab extends Component {
     const { appState, files } = this.props;
     const [file = {}] = files;
 
+    this.props.setAppState({ hasChanged: true });
     this.setState({ isUpdatingProduct: true });
 
     updateProduct(file.uuid, { ref: productRef, position: productPosition }, appState.config)
       .then(() => {
-        this.setState({ oldProductPosition: productPosition, oldProductRef: productRef, isUpdatingProduct: false });
-      });
+        this.setState({
+            oldProductPosition: productPosition || '',
+            oldProductRef: productRef || '',
+            isUpdatingProduct: false
+          }
+        );
+      })
+      .catch((e) => {
+        this.setState({
+          isUpdatingProduct: false,
+          errorMessage: e.msg || e.message || I18n.t('tagging.something_went_wrong_try_again')
+        });
+      })
   }
 
   render() {
@@ -393,7 +423,7 @@ class TaggingTab extends Component {
   }
 }
 
-const renderField  = ({ type = 'text', name = '', metaKey }, value, handler) => {
+const renderField = ({ type = 'text', name = '', metaKey }, value, handler) => {
   switch (type) {
     case 'textarea':
       return (

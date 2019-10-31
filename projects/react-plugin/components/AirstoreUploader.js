@@ -54,8 +54,7 @@ class AirstoreUploader extends Component {
     if (this.props.opened !== prevProps.opened) {
       if (this.props.opened) {
         this.init(this.openModal);
-      } else
-        this.closeModal();
+      }
     }
   }
 
@@ -127,10 +126,10 @@ class AirstoreUploader extends Component {
     }));
   }
 
-  closeModal = () => {
+  closeModal = (props) => {
     const { onClose } = this.props;
 
-    if (onClose) onClose();
+    if (onClose) onClose(props);
 
     this.props.setAppState(getInitialState);
   }
@@ -171,7 +170,7 @@ class AirstoreUploader extends Component {
   render() {
     if (!this.props.appState.isVisible) return null;
 
-    const { activeTabId, activeModules, postUpload, files, path, options } = this.props.appState;
+    const { activeTabId, activeModules, postUpload, files, path, options, hasChanged } = this.props.appState;
     const { config } = this.props;
     const isMobile = this.props.appState.config.mobile;
     const contentProps = {
@@ -207,7 +206,7 @@ class AirstoreUploader extends Component {
           isTooSmall={isMobile}
           noBorder
           fullScreen={'md'}
-          onClose={this.closeModal}
+          onClose={() => { this.closeModal({ hasChanged }); }}
           style={{ borderRadius: 5 }}
           isHideCloseBtn={isHideHeader}
         >

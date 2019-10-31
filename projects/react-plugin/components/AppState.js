@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { deepCopy } from '../utils/helper.utils';
 
 export const getInitialState = () => deepCopy({
+  hasChanged: false,
   isVisible: false,
   postUpload: false,
   activeTabId: 'UPLOAD',
