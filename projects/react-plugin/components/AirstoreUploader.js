@@ -210,7 +210,7 @@ class AirstoreUploader extends Component {
           style={{ borderRadius: 5 }}
           isHideCloseBtn={isHideHeader}
         >
-          <div className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
+          <div id="filerobot-uploader" className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
             <FocusLock>
               <Dialog role="dialog" className="ae-dialog">
                 {!isHideHeader &&
