@@ -12,7 +12,6 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
     data: data,
     responseType: responseType,
     headers: headers,
-    timeout: 30000,
     onUploadProgress
   }).then(({ data = {} }) => data);
 
