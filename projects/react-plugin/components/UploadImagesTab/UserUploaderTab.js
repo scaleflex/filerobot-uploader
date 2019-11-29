@@ -49,11 +49,16 @@ class UserUploaderTab extends Component {
   };
 
   changeFile = (files = []) => {
-    if (this.props.appState.config.preUploadImageProcess) {
-      this.setState({ files, step: STEP.PROCESS });
+    const { config } = this.props.appState;
+    let count = 0;
+
+    if (config.preUploadImageProcess) {
+      if (!config.preUploadImageParams) this.setState({ files, step: STEP.PROCESS });
 
       if (files && files[0]) {
-        [...files].forEach(file => {
+        count = files.length;
+
+        [...files].forEach((file, index) => {
           const reader = new FileReader();
 
           reader.onload = (event) => {
@@ -68,6 +73,10 @@ class UserUploaderTab extends Component {
                 }
               ]
             });
+
+            if (count === index + 1) {
+              this.setState({ files, step: STEP.PROCESS });
+            }
           }
 
           reader.readAsDataURL(file);
@@ -176,7 +185,7 @@ class UserUploaderTab extends Component {
   }
 
   render() {
-    const { isMobile } = this.props;
+    const { isMobile, appState } = this.props;
     const { step, errorMsg = '', progressBar: { color, status }, imagesToUpload } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
 
@@ -186,6 +195,7 @@ class UserUploaderTab extends Component {
         {step === STEP.PROCESS &&
         <PreUploadProcess
           {...{ imagesToUpload }}
+          appState={appState}
           upload={this.upload}
           cancelUpload={this.cancelUpload}
           updateFilesAndUpload={this.updateFilesAndUpload}

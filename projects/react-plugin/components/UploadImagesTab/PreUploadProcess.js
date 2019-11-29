@@ -75,7 +75,7 @@ class PreUploadProcess extends Component {
     })
   }
 
-  resizeImages = () => {
+  resizeImages = (callback) => {
     const self = this;
     const elements = [...this._previewBox.children];
     this.elementsLength = elements.length;
@@ -92,7 +92,9 @@ class PreUploadProcess extends Component {
             width: width === 'auto' ? undefined : width,
             height: height === 'auto' ? undefined : height
           })
-          .render();
+          .render(() => {
+            if (callback) callback();
+          });
 
         if (self.elementsLength === self.processedElements) {
           self.setState({ processing: false });
@@ -312,7 +314,17 @@ class PreUploadProcess extends Component {
   }
 
   onLoadCaman = () => {
-    this.setState({ camanLoaded: true });
+    const { config } = this.props.appState;
+
+    if (config.preUploadImageParams && config.preUploadImageParams.operation === 'resize') {
+      const { width = 'auto', height = 'auto' } = config.preUploadImageParams;
+
+      this.setState({ cropResizeMenu: true, camanLoaded: true, imagesParams: { width, height }}, () => {
+        this.resizeImages(this.applyTransformationsAndUpload);
+      });
+    } else {
+      this.setState({ camanLoaded: true });
+    }
   }
 
   onOpenCVLoad = () => {
