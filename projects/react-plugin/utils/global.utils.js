@@ -25,7 +25,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     limit: config.limitImagesPerResponse || config.LIMIT_IMAGES_PER_RESPONSE || CONFIG.limitImagesPerResponse || 100,
     folderBrowser: isDefined(config.folderBrowser) ? config.folderBrowser : CONFIG.folderBrowser,
     preUploadImageProcess: isDefined(config.preUploadImageProcess) ? config.preUploadImageProcess : false,
-    processBeforeUpload: isDefined(config.preUploadImageProcess) ? config.processBeforeUpload : null,
+    processBeforeUpload: isDefined(config.processBeforeUpload) ? config.processBeforeUpload : null,
     language: isDefined(config.language) ? config.language : CONFIG.language,
     cloudimageToken: config.cloudimageToken || CONFIG.cloudimageToken,
     searchPhrase: config.searchPhrase,

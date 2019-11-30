@@ -54,7 +54,7 @@ class UserUploaderTab extends Component {
     const isAllImages = [].every.call(files, file => file.type && isImage(file.type));
     let count = 0;
 
-    if (config.preUploadImageProcess && isAllImages) {
+    if ((config.preUploadImageProcess || config.processBeforeUpload) && isAllImages) {
       if (!config.processBeforeUpload) this.setState({ files, step: STEP.PROCESS });
 
       if (files && files[0]) {
