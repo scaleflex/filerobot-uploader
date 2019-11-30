@@ -27,6 +27,7 @@ export default {
     height: 'Высота',
     revert: 'Вернуть',
     crop: 'Обрезать',
+    crop_and_resize: 'Обрезать / Изменить размер',
     cancel: 'Отменить',
     selected_files: 'Добавленные файлы',
     total_size: 'размер'

@@ -27,6 +27,7 @@ export default {
     height: 'Height',
     revert: 'Revert',
     crop: 'Crop',
+    crop_and_resize: 'Crop / Resize',
     cancel: 'Cancel',
     selected_files: 'Selected files',
     total_size: 'total size'

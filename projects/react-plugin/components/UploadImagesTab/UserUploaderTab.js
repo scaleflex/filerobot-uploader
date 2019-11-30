@@ -7,6 +7,7 @@ import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
 import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
 import PreUploadProcess from './PreUploadProcess';
+import { isImage } from '../../utils/icons.utils';
 
 
 const STEP = {
@@ -50,9 +51,10 @@ class UserUploaderTab extends Component {
 
   changeFile = (files = []) => {
     const { config } = this.props.appState;
+    const isAllImages = [].every.call(files, file => file.type && isImage(file.type));
     let count = 0;
 
-    if (config.preUploadImageProcess) {
+    if (config.preUploadImageProcess && isAllImages) {
       if (!config.preUploadImageParams) this.setState({ files, step: STEP.PROCESS });
 
       if (files && files[0]) {

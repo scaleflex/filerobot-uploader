@@ -27,6 +27,7 @@ export default {
     height: 'Hauteur',
     revert: 'Retour',
     crop: 'Rogner',
+    crop_and_resize: 'Rogner / Redimensionnement',
     cancel: 'Annuler',
     selected_files: 'Sélectionner des fichiers',
     total_size: 'Taille totale'

@@ -1,7 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import {
-  Container, PreviewFiles, PreviewFileWrapper, PreviewLabel, ButtonAction, ButtonApplyTransforms, TransformationList,
-  ActiveOperation, OperationInput
+  ActiveOperation,
+  ButtonAction,
+  ButtonApplyTransforms,
+  Container,
+  OperationInput,
+  PreviewFiles,
+  PreviewFileWrapper,
+  PreviewLabel,
+  TransformationList
 } from './UserUploaderTab.styled';
 import { I18n } from 'react-i18nify';
 import Script from 'react-load-script';
@@ -83,15 +90,27 @@ class PreUploadProcess extends Component {
 
     elements.forEach((wrapper) => {
       const { width, height } = this.state.imagesParams;
+      const image = wrapper.children[0];
 
-      window.Caman(wrapper.children[0], function () {
+      window.Caman(image, function () {
         self.processedElements += 1;
 
-        this
-          .resize({
+        const portraitImage = image.height > image.width;
+        let resizeParams = {};
+
+        if (width === 'auto' || height === 'auto') {
+          resizeParams = {
             width: width === 'auto' ? undefined : width,
             height: height === 'auto' ? undefined : height
-          })
+          };
+        } else if (portraitImage) {
+          resizeParams.height = height;
+        } else {
+          resizeParams.width = width;
+        }
+
+        this
+          .resize(resizeParams)
           .render(() => {
             if (callback) callback();
           });
@@ -317,9 +336,13 @@ class PreUploadProcess extends Component {
     const { config } = this.props.appState;
 
     if (config.preUploadImageParams && config.preUploadImageParams.operation === 'resize') {
-      const { width = 'auto', height = 'auto' } = config.preUploadImageParams;
+      const { widthLimit, heightLimit } = config.preUploadImageParams;
 
-      this.setState({ cropResizeMenu: true, camanLoaded: true, imagesParams: { width, height }}, () => {
+      this.setState({
+        cropResizeMenu: true,
+        camanLoaded: true,
+        imagesParams: { width: widthLimit, height: heightLimit }
+      }, () => {
         this.resizeImages(this.applyTransformationsAndUpload);
       });
     } else {
@@ -508,7 +531,7 @@ class PreUploadProcess extends Component {
               className="ae-btn"
               style={{ width: 300 }}
               onClick={this.showCropResizeMenu}
-            >{I18n.t(`upload.crop`)}</ButtonApplyTransforms>
+            >{I18n.t(`upload.crop_and_resize`)}</ButtonApplyTransforms>
 
             <ButtonApplyTransforms
               key="cancel"
