@@ -58,6 +58,11 @@ let config = {
   autoCropSuggestions: true,
   closeOnEdit: false,
   preUploadImageProcess: true,
+  //processBeforeUpload: {
+  //  operation: 'resize',
+  //  widthLimit: 2000,
+  //  heightLimit: 2000
+  //},
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,
@@ -105,6 +110,7 @@ window.addEventListener('load', function() {
 });
 
 function onUploadHandler(files) {
+  console.log('files: ', files);
   const img = files[0];
   const options = {
     weekday: "long", year: "numeric", month: "short",

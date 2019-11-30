@@ -64,7 +64,7 @@ export const BrowseButton = styled.button`
 `;
 
 export const PreviewFiles = styled.div`
-  width: calc(100% - 350px);
+  width: ${p => p.isAutoProcess ? '100%' : 'calc(100% - 350px)'};
   display: flex;
   vertical-align: middle;
   justify-content: flex-start;
@@ -78,7 +78,7 @@ export const PreviewFiles = styled.div`
 `;
 
 export const PreviewFileWrapper = styled.div`
-  width: ${p => p.oneImage ? '100%' : 'calc(50% - 20px)'};
+  width: ${p => p.oneImage ? '100%' : p.isAutoProcess ? 'calc(25% - 20px)' : 'calc(50% - 20px)'};
   padding: 10px 10px 25px 10px;
   margin: 10px;
   background: #f5f5f5;

@@ -55,7 +55,7 @@ class UserUploaderTab extends Component {
     let count = 0;
 
     if (config.preUploadImageProcess && isAllImages) {
-      if (!config.preUploadImageParams) this.setState({ files, step: STEP.PROCESS });
+      if (!config.processBeforeUpload) this.setState({ files, step: STEP.PROCESS });
 
       if (files && files[0]) {
         count = files.length;

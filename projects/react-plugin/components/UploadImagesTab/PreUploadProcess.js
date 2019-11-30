@@ -53,10 +53,12 @@ class PreUploadProcess extends Component {
     });
   }
 
-  getPreviewFileWrapperHeight = () => {
+  getPreviewFileWrapperHeight = ({ isAutoProcess }) => {
     if (!this._previewBox) return 'none';
 
-    return this._previewBox.offsetWidth / 2 / 1.27 - 20;
+    const columnDivider = isAutoProcess ? 4 : 2;
+
+    return this._previewBox.offsetWidth / columnDivider / 1.27 - 20;
   }
 
   onPreviewImageLoad = () => {
@@ -95,6 +97,15 @@ class PreUploadProcess extends Component {
       window.Caman(image, function () {
         self.processedElements += 1;
 
+        if (!(width < image.width || height < image.height)) {
+          if (self.elementsLength === self.processedElements) {
+            self.setState({ processing: false });
+            if (callback) callback();
+          }
+
+          return;
+        }
+
         const portraitImage = image.height > image.width;
         let resizeParams = {};
 
@@ -112,12 +123,11 @@ class PreUploadProcess extends Component {
         this
           .resize(resizeParams)
           .render(() => {
-            if (callback) callback();
+            if (self.elementsLength === self.processedElements) {
+              self.setState({ processing: false });
+              if (callback) callback();
+            }
           });
-
-        if (self.elementsLength === self.processedElements) {
-          self.setState({ processing: false });
-        }
       });
     });
   }
@@ -335,8 +345,8 @@ class PreUploadProcess extends Component {
   onLoadCaman = () => {
     const { config } = this.props.appState;
 
-    if (config.preUploadImageParams && config.preUploadImageParams.operation === 'resize') {
-      const { widthLimit, heightLimit } = config.preUploadImageParams;
+    if (config.processBeforeUpload && config.processBeforeUpload.operation === 'resize') {
+      const { widthLimit, heightLimit } = config.processBeforeUpload;
 
       this.setState({
         cropResizeMenu: true,
@@ -399,19 +409,17 @@ class PreUploadProcess extends Component {
     let imagesLength = elements.length;
     let processedImages = 0;
 
-
     elements.forEach((canvas, index) => {
       window.Caman(canvas, function () {
         this.render(function () {
           const contentType = self.props.imagesToUpload[index].file.type;
-          const base64 = canvas.toDataURL(contentType);
+          const base64 = this.canvas.toDataURL(contentType);
           const block = base64.split(";");
           const realData = block[1].split(",")[1];
           const blob = b64toBlob(realData, contentType, null);
 
           blob.name = self.props.imagesToUpload[index].file.name;
           files.push(blob);
-
           processedImages += 1;
 
           if (imagesLength === processedImages) {
@@ -438,20 +446,24 @@ class PreUploadProcess extends Component {
   }
 
   render() {
-    const { cropResizeMenu, operationOpen, operation, faceDetectionLoaded, imagesParams } = this.state;
-    const { imagesToUpload } = this.props;
-    const previewHeight = this.getPreviewFileWrapperHeight();
+    const {
+      cropResizeMenu, operationOpen, operation, faceDetectionLoaded, imagesParams, processing, camanLoaded
+    } = this.state;
+    const { imagesToUpload, appState } = this.props;
+    const isAutoProcess = appState.config.processBeforeUpload;
+    const previewHeight = this.getPreviewFileWrapperHeight({ isAutoProcess });
     const size =
       prettyBytes(imagesToUpload.reduce((accumulator, image) => accumulator + image.file.size, 0));
     const oneImage = imagesToUpload.length === 1;
 
     return (
       <Container noBorder>
-        <PreviewFiles ref={node => this._previewBox = node} oneImage={oneImage}>
+        <PreviewFiles isAutoProcess={isAutoProcess} ref={node => this._previewBox = node} oneImage={oneImage}>
           {imagesToUpload.map((image, index) =>
             <PreviewFileWrapper
               key={index}
               oneImage={oneImage}
+              isAutoProcess={isAutoProcess}
               h={previewHeight === 'none' ? 'none' : parseInt(previewHeight)}
             >
               <img src={image.src} alt="" onLoad={this.onPreviewImageLoad}/>
@@ -460,6 +472,7 @@ class PreUploadProcess extends Component {
           )}
         </PreviewFiles>
 
+        {!isAutoProcess &&
         <div style={{ width: '350px', maxHeight: '100%', overflow: 'hidden', overflowY: 'auto' }}>
 
           {cropResizeMenu &&
@@ -553,15 +566,17 @@ class PreUploadProcess extends Component {
             <p>{I18n.t('upload.selected_files')}: {imagesToUpload.length}, {I18n.t('upload.total_size')}: {size}</p>
           </div>
         </div>
+        }
 
-        {(this.state.processing || !this.state.camanLoaded) && <Spinner overlay show={true}/>}
+        {(processing || !camanLoaded || isAutoProcess) && <Spinner overlay show={true}/>}
 
+        {!isAutoProcess &&
         <Script
           onLoad={this.onOpenCVLoad}
           url="https://unpkg.com/opencv.js@1.2.1/opencv.js"
           integrity="sha384-ucXOxPgA5tSKdaZgFD+5C0lAJeavjW31veENhNvOwsTjgx8waDD0s1QcMdUxhlxk"
           crossorigin="anonymous"
-        />
+        />}
 
         <Script
           onLoad={this.onLoadCaman}
