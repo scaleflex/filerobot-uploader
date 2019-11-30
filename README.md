@@ -342,11 +342,26 @@ config.initialTab: 'UPLOAD';
 
 **default**: false
 
-Pre-upload process which allows to transform images before uploading them to a server.
+Activates Pre-upload process module which allows to transform images before uploading them to a server.
 Available operations: "smart crop", "face detection", "resize"
 
 ```
 config.preUploadImageProcess: true;
+```
+
+#### `processBeforeUpload`: object
+
+**default**: null
+
+Auto pre-upload process which allows to transform images before uploading them to a server.
+Available operations: "resize"
+
+```
+config.processBeforeUpload = {
+    operation: 'resize',
+    widthLimit: 2000,
+    heightLimit: 2000
+};
 ```
 
 #### `folderBrowser`: bool
