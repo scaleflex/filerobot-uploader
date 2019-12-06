@@ -15,7 +15,7 @@ import Script from 'react-load-script';
 import { Spinner } from '../Spinner';
 import { b64toBlob } from '../../utils/imageTransformation.utils';
 import smartcrop from 'smartcrop';
-import prettyBytes from 'pretty-bytes'
+import prettyBytes from 'pretty-bytes';
 
 
 const OPERATION = {

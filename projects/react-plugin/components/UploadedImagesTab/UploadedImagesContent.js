@@ -9,6 +9,7 @@ import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
+import { getPermalink } from '../../utils/adjustAPI.utils'
 
 
 class UploadedImagesContent extends Component {
@@ -56,9 +57,9 @@ class UploadedImagesContent extends Component {
     const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
 
     if (isForceUpload) {
-      this.props.upload(true, item.url_permalink);
+      this.props.upload(true, getPermalink(item));
     } else {
-      const files = [{...item, public_link: item.url_permalink }];
+      const files = [{...item, public_link: getPermalink(item) }];
       this.props.appState.config.uploadHandler(files, { stage: 'select' });
       this.props.closeModal();
     }
@@ -69,7 +70,7 @@ class UploadedImagesContent extends Component {
     event.stopPropagation();
 
     if (this.props.appState.config.tagging.active) {
-      const files = [{...item, public_link: item.url_permalink }];
+      const files = [{...item, public_link: getPermalink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
@@ -82,7 +83,7 @@ class UploadedImagesContent extends Component {
 
     if (this.props.appState.config.imageEditor.active) {
       const { path } = this.props;
-      const files = [{...item, public_link: item.url_permalink }];
+      const files = [{...item, public_link: getPermalink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path });
@@ -137,7 +138,7 @@ class UploadedImagesContent extends Component {
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
     const icon = getFitResizeImageUrl(
-      isImageType ? encodePermalink(item.url_permalink) : getFileIconSrcByType(item.type),
+      isImageType ? encodePermalink(getPermalink(item)) : getFileIconSrcByType(item.type),
       columnWidth,
       Math.floor(columnWidth / (item.ratio || 1.6))
     );

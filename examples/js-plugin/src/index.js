@@ -1,6 +1,5 @@
 import '../../../projects/js-plugin/index';
 import './style.css';
-import prettyBytes from 'pretty-bytes';
 import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/github.css';
@@ -46,23 +45,21 @@ reactBtn.onclick = function() {
   }
 }
 
-// Configuration
 let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: { dir:"/dima_test_7_en" },
-  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
   container: 'scaleflex-tests-v5a',
-  openpixKey: 'xxxxxxxxxxxxxxx',
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
   initialTab: 'UPLOAD',
   folderBrowser: true,
   autoCropSuggestions: true,
   closeOnEdit: false,
   preUploadImageProcess: true,
-  //processBeforeUpload: {
-  //  operation: 'resize',
-  //  widthLimit: 2000,
-  //  heightLimit: 2000
-  //},
+  processBeforeUpload: {
+    operation: 'resize',
+    widthLimit: 2000,
+    heightLimit: 2000
+  },
   tagging: {
     executeAfterUpload: true,
     autoTaggingButton: true,
@@ -86,20 +83,29 @@ let config = {
   language: 'en',
   colorScheme: {
     active: 'solarized'
-  },
-  imageEditorConfig: {
-    watermark: {
-      url: 'https://cdn.scaleflex.it/demo/filerobot.png',
-      urls: [
-        'https://cdn.scaleflex.it/demo/filerobot.png',
-        'https://cdn.scaleflex.it/demo/superman.png'
-      ],
-      position: 'center',
-      opacity: 0.7,
-      applyByDefault: false
-    }
   }
 };
+
+// Configuration
+//let config = {
+//  modules: ['UPLOAD'],
+//  uploadParams: { dir: '/images/aaa' },
+//  container: 'scaleflex-tests-v5a',
+//  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
+//  platform: 'airstore',
+//  initialTab: 'UPLOAD',
+//  folderBrowser: true,
+//    processBeforeUpload: {
+//    operation: 'resize',
+//    widthLimit: 1080,
+//      heightLimit: 1080
+//  },
+//  language: 'en',
+//  colorScheme: {
+//    active: 'solarized'
+//  }
+//
+//};
 
 window.addEventListener('load', function() {
   const FilerobotUploaderInstance = FilerobotUploader.init(config, onUploadHandler);
@@ -118,7 +124,7 @@ function onUploadHandler(files) {
   };
   const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("en", options);
   const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("en", options);
-
+  const publicURL = img.url && img.url.public ? img.url.public : img.url_public;
   img.properties = img.properties || {};
   img.properties.tags = img.properties.tags || [];
 
@@ -126,7 +132,8 @@ function onUploadHandler(files) {
 
   innerSpinner.style.display = 'block';
   imageContainer.style.opacity = '0.5';
-  image.src = img.url_public;
+
+  image.src = publicURL
   image.onload = () => {
     innerSpinner.style.display = 'none';
     imageContainer.style.opacity = '1';
@@ -139,15 +146,15 @@ function onUploadHandler(files) {
         </li>
         <li>
           <span>Public link: </span>
-          <span>${img.url_public}</span>
+          <span>${publicURL}</span>
         </li>
         <li>
           <span>Compressed Image link (CDN): </span>
-          <span>https://demo.filerobot.com/cdno/n/q60/${img.url_public}</span>
+          <span>https://demo.filerobot.com/cdno/n/q60/${publicURL}</span>
         </li>
         <li>
           <span>Size: </span>
-          <span>${prettyBytes(img.size || 0)}</span>
+          <span>${img.size.pretty}</span>
         </li>
         <li>
           <span>First Uploaded: </span>

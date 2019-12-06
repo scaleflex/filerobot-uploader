@@ -9,12 +9,12 @@ export default ({ tabs, activeTabId, ...props }) => (
     {tabs.map((tab) => (
       <Tab
         selected={activeTabId === tab.id}
-        href="javascript:void(0)"
+        href="#"
         role="menuitem"
         id={`tab-${tab.id}`}
         key={`tab-${tab.id}`}
         className={`tab-header-item selected ${activeTabId === tab.id ? 'active' : ''}`}
-        onClick={event => { props.activateTab(event, tab.id); }}
+        onClick={event => { event.preventDefault(); props.activateTab(event, tab.id); }}
       >
         <i className={tab.iconClass}/>
         <span title={tab.fullName}>{I18n.t(tab.shortName)}</span>

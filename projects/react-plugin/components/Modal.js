@@ -182,10 +182,15 @@ function getFullScreenSize(size) {
 }
 
 export class Modal extends Component {
-  componentWillMount() {
-    const { closeOnOutsideClick = true } =  this.props;
+  constructor() {
+    super();
+
     this.root = document.createElement('div');
     document.body.appendChild(this.root);
+  }
+
+  componentDidMount() {
+    const { closeOnOutsideClick = true } =  this.props;
 
     if (closeOnOutsideClick) {
       document.addEventListener('keydown', this.handleOutsideMouseClick);

@@ -2,6 +2,7 @@ import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
+import { getPermalink } from '../../utils/adjustAPI.utils'
 
 
 const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
@@ -18,7 +19,7 @@ const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
 };
 
 const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, options = {}, closeModal, uploadHandler) => {
-  const files = [{ ...file, public_link: file.url_permalink }];
+  const files = [{ ...file, public_link: getPermalink(file) }];
 
   uploadHandler(files, { stage: 'edit' });
 
@@ -29,7 +30,7 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
   }
 
   if (prevTab === 'TAGGING') {
-    const files = [{ ...file, public_link: file.url_permalink }];
+    const files = [{ ...file, public_link: getPermalink(file) }];
 
     saveUploadedFiles(files);
 
@@ -43,9 +44,9 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
   const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig } = config;
-  const isGif = file.url_permalink.slice(-3).toLowerCase() === 'gif';
-  //const src = `${encodePermalink(file.url_permalink)}?${md5(file.modified_at || '').slice(0, 6)}`;
-  const src = file.url_permalink;
+  const isGif = getPermalink(file).slice(-3).toLowerCase() === 'gif';
+  //const src = `${encodePermalink(getPermalink(file))}?${md5(file.modified_at || '').slice(0, 6)}`;
+  const src = getPermalink(file);
 
   return (
     <ImageEditor

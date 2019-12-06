@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { send } from './api.service';
+import { getBaseUrl } from './api.service';
+import { getPermalink, getPubliclink } from '../utils/adjustAPI.utils'
 
 
 const api_endpoint = 'https://www.openpix.net/v3/';
-const backgroundsAPI = 'https://jolipage-public-assets.api.airstore.io/v1/list?dir=/Backgrounds/v1';
+const backgroundsAPI = `${getBaseUrl('jolipage-public-assets')}list?dir=/Backgrounds/v1`;
 
 const _send = (url, method = 'GET', data = null, headers = {}, responseType = "json") =>
   new Promise((resolve, reject) => {
@@ -37,9 +39,9 @@ const _send = (url, method = 'GET', data = null, headers = {}, responseType = "j
 
 export const getBackgrounds = () =>
   send(`${backgroundsAPI}`)
-    .then(({ status, files = [] }) =>
+    .then(({ files = [] }) =>
       files.map((file = {}) => ({
-        src: file.url_public || file.url_permalink,
+        src: getPubliclink(file) || getPermalink(file),
         id: file.uuid,
         name: file.name,
         alt: ''

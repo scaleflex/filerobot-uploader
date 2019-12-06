@@ -13,7 +13,7 @@ class SearchBar extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!nextProps.isLoading && (nextProps.isLoading !== this.props.isLoading) &&
       this.searchField && this.searchField.focus)
       this.searchField.focus();

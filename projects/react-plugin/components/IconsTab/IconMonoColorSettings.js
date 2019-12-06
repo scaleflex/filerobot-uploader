@@ -104,7 +104,7 @@ class IconMonoColorSettings extends Component {
                 onClick={this.handleClick}
                 onKeyDown={event => { event.keyCode === 13 && this.handleClick(); }}
                 bgColor="transparent"
-                bgImage={'//example.api.airstore.io/v1/get/a842b7b1-ae10-5e27-8838-fbc7796305fb'}
+                bgImage={'//api.filerobot.com/example/v3/get/a842b7b1-ae10-5e27-8838-fbc7796305fb'}
                 tabIndex={10000}
                 role="button"
               />

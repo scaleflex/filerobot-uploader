@@ -31,6 +31,7 @@ import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
+import { getPermalink } from '../../utils/adjustAPI.utils';
 
 
 class TaggingTab extends Component {
@@ -183,10 +184,10 @@ class TaggingTab extends Component {
     if (this.state.tagsGenerated) return;
 
     const { appState } = this.props;
-    const { tagging, language, container, filerobotUploadKey, cloudimageToken } = appState.config;
+    const { tagging, language, container, platform, filerobotUploadKey, cloudimageToken } = appState.config;
     const [file = {}] = this.props.files;
 
-    generateTags(encodePermalink(file.url_permalink), tagging, language, container, filerobotUploadKey, cloudimageToken)
+    generateTags(encodePermalink(getPermalink(file)), tagging, language, container, platform, filerobotUploadKey, cloudimageToken)
       .then(({ tags, ...props } = {}) => {
         if (tags) {
           if (!tags.length) {
@@ -282,7 +283,7 @@ class TaggingTab extends Component {
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
-    const icon = isImageType ? encodePermalink(file.url_permalink) : getFileIconSrcByType(file.type);
+    const icon = isImageType ? encodePermalink(getPermalink(file)) : getFileIconSrcByType(file.type);
 
     return (
       <TaggingTabWrapper>
@@ -294,7 +295,7 @@ class TaggingTab extends Component {
             <UploadedImageWrapper>
               <UploadedImage
                 isNotImage={!isImageType}
-                src={`https://demo.cloudimg.io/width/800/n/${icon}?${md5(file.modified_at || file.sha1).split(0, 5)}`}
+                src={`https://demo.cloudimg.io/width/800/n/${icon}?${md5(file.modified_at || file.hash.sha1).split(0, 5)}`}
               />
             </UploadedImageWrapper>
 
@@ -306,7 +307,7 @@ class TaggingTab extends Component {
                 </li>
                 <li>
                   <PropName>{I18n.t('tagging.size')}:</PropName>
-                  <PropValue>{prettyBytes(file.size)}</PropValue>
+                  <PropValue>{file.size && file.size.pretty ? file.size.pretty : prettyBytes(file.size)}</PropValue>
                 </li>
                 <li>
                   <PropName>{I18n.t('tagging.first_upload')}:</PropName>

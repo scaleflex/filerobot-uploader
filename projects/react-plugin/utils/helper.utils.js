@@ -28,7 +28,7 @@ const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) ===
 
 const isDefined = param => typeof param !== 'undefined';
 
-const encodePermalink = link => link.replace(/\?/g, '%3F');
+const encodePermalink = link => link; // link.replace(/\?/g, '%3F');
 
 export {
   uniqueArrayOfStrings,

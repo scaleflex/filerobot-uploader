@@ -131,7 +131,7 @@ class UserUploaderTab extends Component {
         self.closeModal();
       })
       .catch((error) => {
-        this.uploadError(error.msg)
+        this.uploadError(error.msg || error.message);
       })
   };
 

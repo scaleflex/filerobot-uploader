@@ -3,7 +3,13 @@ import { DUPLICATE_CODE, GALLERY_IMAGES_LIMIT, REPLACING_DATA_CODE } from '../co
 
 
 const independentProtocolRegex = /^[https|http]+\:\/\//g;
-const getBaseUrl = (container) => `https://${container}.api.airstore.io/v1/`;
+
+export const getBaseUrl = (container, platform = 'filerobot') =>  platform === 'filerobot' ?
+  `https://api.filerobot.com/${container}/v3/` :
+  `https://${container}.api.airstore.io/v1/`;
+
+export const getSecretHeaderName = (platform = 'filerobot') => platform === 'filerobot' ?
+  `X-Filerobot-Key` : `X-Airstore-Secret-Key`;
 
 export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json", onUploadProgress) =>
   axios({
@@ -38,7 +44,7 @@ export const send = (url, method = 'GET', data = null, headers = {}, responseTyp
 export const uploadFiles = (props) => {
   let {
     files = [],
-    config: { uploadPath = '', uploadParams = {}, uploadKey = '', onUploadProgress } = {},
+    config: { platform, uploadPath = '', uploadParams = {}, uploadKey = '', onUploadProgress } = {},
     data_type = 'files[]',
     dir,
     showAlert
@@ -70,7 +76,7 @@ export const uploadFiles = (props) => {
       'POST',
       isJson ? jsonData : ajaxData,
       {
-        'X-Airstore-Secret-Key': uploadKey,
+        [getSecretHeaderName(platform)]: uploadKey,
         'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
       },
       'json',
@@ -104,35 +110,35 @@ export const uploadFiles = (props) => {
   });
 };
 
-export const getListFiles = ({ dir = '', container = '', offset, uploadKey }) => {
-  const baseUrl = getBaseUrl(container);
+export const getListFiles = ({ dir = '', container = '', platform, offset, uploadKey }) => {
+  const baseUrl = getBaseUrl(container, platform);
   const apiPath = 'list?';
   const directoryPath = dir ? 'dir=' + dir : '';
   const offsetQuery = `&offset=${offset}`;
   const limit = `&limit=${GALLERY_IMAGES_LIMIT}`;
   const url = [baseUrl, apiPath, directoryPath, offsetQuery, limit].join('');
 
-  return send(url, 'GET', null, { 'X-Airstore-Secret-Key': uploadKey }).then((response = {}) => ([
+  return send(url, 'GET', null, { [getSecretHeaderName(platform)]: uploadKey }).then((response = {}) => ([
     response.files,
     response.directories,
     response.current_directory && response.current_directory.files_count
   ]));
 };
 
-export const searchFiles = ({ query = '', container = '', language = 'en', offset = 0, uploadKey }) => {
-  const baseUrl = getBaseUrl(container);
+export const searchFiles = ({ query = '', container = '', platform, language = 'en', offset = 0, uploadKey }) => {
+  const baseUrl = getBaseUrl(container, platform);
   const apiPath = 'search?';
   const searchQuery = `q=${query}`;
   const offsetQuery = `&offset=${offset}`;
   const url = [baseUrl, apiPath, searchQuery, offsetQuery].join('');
 
-  return send(url, 'GET', null, { 'X-Airstore-Secret-Key': uploadKey })
+  return send(url, 'GET', null, { [getSecretHeaderName(platform)]: uploadKey })
     .then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
-export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', filerobotUploadKey = '', cloudimageToken = 'demo') => {
+export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', platform, filerobotUploadKey = '', cloudimageToken = 'demo') => {
   const { key = '', provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
-  const base = 'https://example.api.airstore.io/post-process/autotagging';
+  const base = `${getBaseUrl(container, platform)}post-process/autotagging`;
 
   return send(
     `${base}?${[
@@ -147,14 +153,14 @@ export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', c
     'GET',
     null,
     {
-      'X-Airstore-Secret-Key': filerobotUploadKey
+      [getSecretHeaderName(platform)]: filerobotUploadKey
     }
   )
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (id, properties, { container, uploadKey }) => {
-  const base = `https://${container}.api.airstore.io/file/`;
+export const saveMetaData = (id, properties, { container, platform, uploadKey }) => {
+  const base = `${getBaseUrl(container, platform)}file/`;
   const data = { properties };
 
   return send(
@@ -162,14 +168,14 @@ export const saveMetaData = (id, properties, { container, uploadKey }) => {
     'PUT',
     data,
     {
-      'X-Airstore-Secret-Key': uploadKey
+      [getSecretHeaderName(platform)]: uploadKey
     }
   )
     .then((response = {}) => response);
 }
 
-export const updateProduct = (id, product, { container, uploadKey }) => {
-  const base = getBaseUrl(container);
+export const updateProduct = (id, product, { container, platform, uploadKey }) => {
+  const base = getBaseUrl(container, platform);
   const data = { product };
 
   return send(
@@ -177,20 +183,20 @@ export const updateProduct = (id, product, { container, uploadKey }) => {
     'PUT',
     data,
     {
-      'X-Airstore-Secret-Key': uploadKey
+      [getSecretHeaderName(platform)]: uploadKey
     }
   )
     .then((response = {}) => response);
 }
 
-export const getTokenSettings = ({ container = '', uploadKey }) => {
-  const baseUrl = getBaseUrl(container);
+export const getTokenSettings = ({ container = '', platform, uploadKey }) => {
+  const baseUrl = getBaseUrl(container, platform);
 
   return send(
     [baseUrl, 'settings'].join(''),
     'GET',
     null,
-    { 'X-Airstore-Secret-Key': uploadKey }
+    { [getSecretHeaderName(platform)]: uploadKey }
   )
     .then(({ settings = {} } = {}) => ({
       productsEnabled: settings._products_enabled === 1

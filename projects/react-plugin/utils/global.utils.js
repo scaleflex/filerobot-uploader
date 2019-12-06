@@ -1,10 +1,12 @@
 import CONFIG from '../config';
 import { isDefined } from './helper.utils';
 import MobileDetect from 'mobile-detect';
+import { getBaseUrl } from '../services/api.service';
 
 
 const prepareConfig = (config = {}, onUpload = () => {}) => {
   const container = config.container || config.CONTAINER || CONFIG.container || '';
+  const platform = config.platform || 'filerobot';
 
   config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
   config.modules = config.modules || [];
@@ -16,7 +18,8 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
   return {
     mobile: md.mobile(),
     container,
-    uploadPath: `https://${container}.api.airstore.io/v1/upload`,
+    platform,
+    uploadPath: `${getBaseUrl(container, platform)}upload`,
     uploadParams: config.uploadParams || config.UPLOAD_PARAMS || CONFIG.uploadParams,
     uploadKey: uploadKey || CONFIG.airstoreUploadKey,
     openpixKey: config.openpixKey || config.OPENPIX_KEY || CONFIG.openpixKey,
