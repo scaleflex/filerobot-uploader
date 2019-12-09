@@ -136,24 +136,28 @@ export const searchFiles = ({ query = '', container = '', platform, language = '
     .then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
-export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', platform, filerobotUploadKey = '', cloudimageToken = 'demo') => {
-  const { key = '', provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
-  const base = `${getBaseUrl(container, platform)}post-process/autotagging`;
+export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', platform, uploadKey = '', cloudimageToken = 'demo') => {
+  const { provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
+  const base = `${getBaseUrl(container, platform)}process/autotag`;
 
   return send(
-    `${base}?${[
-      `key=${key}`,
-      `image_url=${url}`,
-      `provider=${provider}`,
-      `language=${language}`,
-      `confidence=${confidence}`,
-      `limit=${limit}`,
-      `ci=${cloudimageToken}`
-    ].join('&')}`,
-    'GET',
-    null,
+    `${base}`,
+    'POST',
     {
-      [getSecretHeaderName(platform)]: filerobotUploadKey
+      file: {
+        url: url,
+        uuid: ""
+      },
+      meta: {
+        languages: [language],
+        provider,
+        limit,
+        confidence
+      }
+
+    },
+    {
+      [getSecretHeaderName(platform)]: uploadKey
     }
   )
     .then((response = {}) => response);
