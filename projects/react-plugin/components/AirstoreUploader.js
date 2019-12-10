@@ -72,9 +72,15 @@ class AirstoreUploader extends Component {
 
     const nextConfig = prepareConfig(config, onUpload);
 
-    getTokenSettings(nextConfig).then(settings => {
-      this.props.setAppState(() => ({ ...settings }));
-    });
+    getTokenSettings(nextConfig)
+      .then(settings => {
+        this.props.setAppState(() => ({ ...settings }));
+      })
+      .catch(error => {
+        const response = error && error.response && error.response.data || {};
+
+        this.showAlert(response.msg, response.hint, 'error', 10000);
+      });
 
     this.props.setAppState(() => ({
       config: nextConfig,
@@ -168,7 +174,15 @@ class AirstoreUploader extends Component {
   }
 
   render() {
-    if (!this.props.appState.isVisible) return null;
+    const Toaster = () => (
+      <ToastContainer
+        ref={node => this.container = node}
+        toastMessageFactory={ToastMessageFactory}
+        className="toast-top-right"
+      />
+    );
+
+    if (!this.props.appState.isVisible) return <Toaster/>;
 
     const { activeTabId, activeModules, postUpload, files, path, options, hasChanged } = this.props.appState;
     const { config } = this.props;
@@ -232,11 +246,7 @@ class AirstoreUploader extends Component {
           </div>
         </Modal>
 
-        <ToastContainer
-          ref={node => this.container = node}
-          toastMessageFactory={ToastMessageFactory}
-          className="toast-top-right"
-        />
+        <Toaster/>
       </Fragment>
     );
   }
