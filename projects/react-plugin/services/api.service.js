@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { uploadFormDataFiles } from '../utils/files-upload';
 import { DUPLICATE_CODE, GALLERY_IMAGES_LIMIT, REPLACING_DATA_CODE } from '../config';
 
 
@@ -11,14 +12,21 @@ export const getBaseUrl = (container, platform = 'filerobot') =>  platform === '
 export const getSecretHeaderName = (platform = 'filerobot') => platform === 'filerobot' ?
   `X-Filerobot-Key` : `X-Airstore-Secret-Key`;
 
-export const send = (url, method = 'GET', data = null, headers = {}, responseType = "json", onUploadProgress) =>
+export const send = (
+  url,
+  method = 'GET',
+  data = null,
+  headers = {},
+  responseType = "json",
+  restOptions = {}
+) =>
   axios({
-    url: url,
-    method: method,
-    data: data,
-    responseType: responseType,
-    headers: headers,
-    onUploadProgress
+    url,
+    method,
+    data,
+    responseType,
+    headers,
+    ...(restOptions || {})
   }).then(({ data = {} }) => data);
 
 
@@ -50,9 +58,9 @@ export const uploadFiles = (props) => {
     showAlert
   } = props;
   let url = (uploadPath || ''); // use independent protocol
-  const ajaxData = new FormData();
   const jsonData = { files_urls: [] };
   const isJson = data_type === 'application/json';
+  const defaultHeaders = { [getSecretHeaderName(platform)]: uploadKey };
 
   uploadParams = { ...uploadParams, ...{ dir: dir || uploadParams.dir } };
 
@@ -65,49 +73,84 @@ export const uploadFiles = (props) => {
   if (paramsStr)
     url += `?${paramsStr}`
 
+  function handleError(error) {
+    const data = (error.response && error.response.data) || {};
+    const code = data.code || '';
+    const msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
+
+    showAlert('', ((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message, 'error');
+
+    return error;
+  }
+
   if (files && isJson) {
     [...files].forEach(file => { jsonData.files_urls.push(file); });
-  } else if (files)
-    [...files].forEach(file => ajaxData.append(data_type, file, file.name || null)); // fill FormData
 
-  return new Promise((resolve, reject) => {
-    send(
-      url,
-      'POST',
-      isJson ? jsonData : ajaxData,
-      {
-        [getSecretHeaderName(platform)]: uploadKey,
-        'Content-Type': isJson ? 'application/json' : 'multipart/form-data'
-      },
-      'json',
-      onUploadProgress
-    ).then(
-      response => {
-        const { status = 'success', files = [], file, upload = {} } = response;
-        const isDuplicate = upload.state === DUPLICATE_CODE;
-        const isReplacingData = upload.state === REPLACING_DATA_CODE;
+    return new Promise((resolve, reject) => {
+      send(
+        url,
+        'POST',
+        jsonData,
+        { ...defaultHeaders, 'Content-Type': 'application/json' },
+        'json',
+        { onUploadProgress }
+      )
+        .then(
+          response => {
+            const { status = 'success', files = [], file, upload = {} } = response;
+            const isDuplicate = upload.state === DUPLICATE_CODE;
+            const isReplacingData = upload.state === REPLACING_DATA_CODE;
 
-        if (status === 'success' && file) {
-          //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
+            if (status === 'success' && file) {
+              //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
 
-          resolve([[file], isDuplicate, isReplacingData]);
-        } else if (status === 'success' && files) {
-          resolve([files, isDuplicate, isReplacingData]);
-        } else if (status === 'error') {
-          throw new Error(response.msg + ' ' + response.hint);
-        } else
-          reject(response);
-      }
-    )
-      .catch((error = {}) => {
-        const data = (error.response && error.response.data) || {};
-        const code = data.code || '';
-        const msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
+              resolve([[file], isDuplicate, isReplacingData]);
+            } else if (status === 'success' && files) {
+              resolve([files, isDuplicate, isReplacingData]);
+            } else if (status === 'error') {
+              throw new Error(response.msg + ' ' + response.hint);
+            } else
+              reject(response);
+          }
+        )
+        .catch(error => {
+          handleError(error);
+          reject(error);
+        });
+    });
+  }
 
-        showAlert('', ((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message, 'error');
-        reject(error);
+  const ajaxData = new FormData();
+  [...(files || [])].forEach(file => ajaxData.append(data_type, file, file.name || null));
+
+  return uploadFormDataFiles(ajaxData, url, onUploadProgress, { headers: { ...defaultHeaders } })
+    .then(responses => {
+      let uploadedFiles = [];
+      let isDuplicate = false;
+      let isReplacingData = false;
+
+      responses.forEach(response => {
+        if (response) {
+          if (response.file) {
+            uploadedFiles.push(response.file);
+          } else if (response.files) {
+            uploadedFiles = [...uploadedFiles, ...response.files];
+          }
+
+          if (response.upload && response.upload.state) {
+            if (response.upload.state === DUPLICATE_CODE) {
+              isDuplicate = true;
+            }
+            if (response.upload.state === REPLACING_DATA_CODE) {
+              isReplacingData = true;
+            }
+          }
+        }
       });
-  });
+
+      return [uploadedFiles, isDuplicate, isReplacingData];
+    })
+    .catch(handleError);
 };
 
 export const getListFiles = ({ dir = '', container = '', platform, offset, uploadKey }) => {
