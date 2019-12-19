@@ -101,20 +101,7 @@ export const uploadFormDataFiles = (formData, url, onUploadProgress, requestOpti
     })
   ];
 
-  return Promise.all(promises)
-    // .then(responses => {
-    //   const files = [];
-
-    //   responses.forEach(response => {
-    //     if (response && response.file) {
-    //       files.push(response.file);
-    //     } else if (response && response.files) {
-    //       files.concat(response.files);
-    //     }
-    //   });
-
-    //   return { files, responses };
-    // });
+  return Promise.all(promises);
 };
 
 
