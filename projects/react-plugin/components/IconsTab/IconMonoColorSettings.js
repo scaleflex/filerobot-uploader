@@ -48,7 +48,7 @@ class IconMonoColorSettings extends Component {
     const { activeIconSrc } = this.props;
     const colorQuery = `tpng.transparentwhite.level${activeColor.replace('#', '')}`;
 
-    return `https://scaleflex.cloudimg.io/width/${width}/${colorQuery}/${activeIconSrc}&v=${guid()}`;
+    return `https://demo.cloudimg.io/width/${width}/${colorQuery}/${activeIconSrc}&v=${guid()}`;
   }
 
   onLoad = () => {
