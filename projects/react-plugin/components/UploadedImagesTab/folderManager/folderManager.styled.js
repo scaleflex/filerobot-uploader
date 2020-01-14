@@ -59,7 +59,7 @@ export const FolderManagerWrapper = styled.div`
   margin-left: ${props => props.showFileManager ? '0px' : '-200px'};
   //visibility: ${props => props.showFileManager ? 'visible' : 'hidden'};;
   width: 200px;
-  background: rgb(245, 245, 245);
+  background: ${p => p.theme.mainBackground};
   border-right: 1px solid rgb(221,221,221);
   z-index: 1045;
   transition: 0.3s margin;
