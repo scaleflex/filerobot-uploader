@@ -91,10 +91,10 @@ class UploadedImagesContent extends Component {
   }
 
   render() {
-    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading } = this.props;
+    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
-    const imagesList = [{ id: 'uploaderBox' }, ...files];
+    const imagesList = isUpload ? [{ id: 'uploaderBox' }, ...files] : [...files];
 
     return (
       <Content
@@ -125,7 +125,7 @@ class UploadedImagesContent extends Component {
             }
           /> : ''}
 
-        {!files.length && !isLoading && this.renderUploadBox({})}
+        {isUpload && !files.length && !isLoading && this.renderUploadBox({})}
 
         <ShowMoreResultsSpinner show={isShowMoreImages && imagesList.length > 1}/>
       </Content>

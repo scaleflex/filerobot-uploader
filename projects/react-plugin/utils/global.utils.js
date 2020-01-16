@@ -10,6 +10,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
 
   config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
   config.modules = config.modules || [];
+  config.myGallery = config.myGallery || {};
 
   // supporting old config
   const uploadKey = config.filerobotUploadKey || config.airstoreUploadKey || config.AIRSTORE_UPLOAD_KEY;
@@ -44,7 +45,11 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
 
     uploadHandler: onUpload,
 
-    imageEditorConfig: config.imageEditorConfig || {}
+    imageEditorConfig: config.imageEditorConfig || {},
+
+    myGallery: {
+      upload: isDefined(config.myGallery.upload) ? config.myGallery.upload : true
+    }
   };
 };
 

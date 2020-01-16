@@ -254,10 +254,13 @@ class UploadedImagesTab extends Component {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = '',
       progressBar: { color, status }
     } = this.state;
+    const { appState: { config } } = this.props;
+    const { myGallery: { upload: isUpload } } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
 
     return (
       <UploadedImages>
+        {isUpload &&
         <UploadInputBox
           type="file"
           name="files[]"
@@ -267,7 +270,7 @@ class UploadedImagesTab extends Component {
           tabIndex={-1}
           multiple
           onChange={this.fileChangeHandler}
-        />
+        />}
 
         <HeaderWrap>
           <Nav>
@@ -312,6 +315,7 @@ class UploadedImagesTab extends Component {
         </HeaderWrap>
 
         <UploadedImagesContent
+          isUpload={isUpload}
           appState={this.props.appState}
           upload={this.upload}
           setAppState={this.props.setAppState}
