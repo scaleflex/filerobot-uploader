@@ -217,11 +217,13 @@ class TaggingTab extends Component {
           );
         }
       })
-      .catch(e => {
+      .catch(event => {
+        const { response: { data = {} } = {} } = event;
+
         this.setState({
             isLoading: false,
             isGeneratingTags: false,
-            errorMessage: e.msg || e.message || I18n.t('tagging.something_went_wrong_try_again')
+            errorMessage: data.msg || event.message || I18n.t('tagging.something_went_wrong_try_again')
           }
         );
       })
