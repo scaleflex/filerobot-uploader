@@ -87,6 +87,8 @@ class TaggingTab extends Component {
 
       this.generateTags();
     }
+
+    if (this._saveMetadataBtn) this._saveMetadataBtn.focus();
   }
 
   componentDidUpdate(prevProps) {
@@ -411,7 +413,11 @@ class TaggingTab extends Component {
             onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon
             data-tip={generateTagInfo}/></Button>}
 
-          <Button success onClick={this.saveMetadata}>{I18n.t('tagging.save')}</Button>
+          <Button
+            ref={node => this._saveMetadataBtn = node}
+            success
+            onClick={this.saveMetadata}
+          >{I18n.t('tagging.save')}</Button>
 
         </TaggingFooter>
 

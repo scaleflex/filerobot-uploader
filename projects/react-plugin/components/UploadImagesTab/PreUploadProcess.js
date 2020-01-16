@@ -16,6 +16,7 @@ import { Spinner } from '../Spinner';
 import { b64toBlob } from '../../utils/imageTransformation.utils';
 import smartcrop from 'smartcrop';
 import prettyBytes from 'pretty-bytes';
+import { isEnterClick } from '../../utils';
 
 
 const OPERATION = {
@@ -345,6 +346,10 @@ class PreUploadProcess extends Component {
   onLoadCaman = () => {
     const { config } = this.props.appState;
 
+    if (this._transformAndUploadBtn) {
+      this._transformAndUploadBtn.focus();
+    }
+
     if (config.processBeforeUpload && config.processBeforeUpload.operation === 'resize') {
       const { widthLimit, heightLimit } = config.processBeforeUpload;
 
@@ -556,10 +561,13 @@ class PreUploadProcess extends Component {
           }
 
           <ButtonAction
+            ref={node => this._transformAndUploadBtn = node}
             key="ok"
             className="ae-btn"
             style={{ width: 300 }}
+            autofocus={true}
             onClick={this.applyTransformationsAndUpload}
+            onKeyDown={ev => isEnterClick(ev) && this.applyTransformationsAndUpload()}
           >{I18n.t('upload.upload_btn')}</ButtonAction>
 
           <div style={{ marginTop: '5px' }}>
