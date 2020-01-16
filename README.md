@@ -272,7 +272,7 @@ example response:
 Filerobot Container name.
 
 ```
-config.container: 'example';
+config.container = 'example';
 ```
 
 #### `filerobotUploadKey`: string (required)
@@ -280,7 +280,7 @@ config.container: 'example';
 Unique upload key for Filerobot.
 
 ```
-config.filerobotUploadKey: 'xxxxxxxxxxxx';
+config.filerobotUploadKey = 'xxxxxxxxxxxx';
 ```
 
 #### `openpixKey`: string (required)
@@ -288,7 +288,7 @@ config.filerobotUploadKey: 'xxxxxxxxxxxx';
 Key for Openpix. Required if you are using "ICONS_GALLERY", "IMAGES_GALLERY"
 
 ```
-config.openpixKey: 'xxxxxxxxxxxx';
+config.openpixKey = 'xxxxxxxxxxxx';
 ```
 
 #### `language`: string
@@ -300,7 +300,7 @@ Language of uploader
 available languages: en, fr, de, ru
 
 ```
-config.language: 'en';
+config.language = 'en';
 ```
 
 #### `modules`: string[]
@@ -312,7 +312,7 @@ Modules (tabs) in file uploader modal.
 **Available modules**: **UPLOAD**, **MY_GALLERY**, **ICONS_GALLERY**, **IMAGES_GALLERY**, **TAGGING**, **IMAGE_EDITOR**
 
 ```
-config.modules: ['UPLOAD', 'ICONS_GALLERY', 'TAGGING'];
+config.modules = ['UPLOAD', 'ICONS_GALLERY', 'TAGGING'];
 ```
 
 #### `uploadParams`: object
@@ -322,7 +322,7 @@ config.modules: ['UPLOAD', 'ICONS_GALLERY', 'TAGGING'];
 * **dir**: string (default: '/') - specify the folder where you want to upload the file. If the folder doesn't exist, it will be created.
 
 ```
-config.uploadParams: {
+config.uploadParams = {
     dir: '/folder_name',
     ...
 };
@@ -335,7 +335,7 @@ config.uploadParams: {
 Allow to choose the initial tab. Should be one of enabled modules.
 
 ```
-config.initialTab: 'UPLOAD';
+config.initialTab = 'UPLOAD';
 ```
 
 #### `preUploadImageProcess`: bool
@@ -346,7 +346,7 @@ Activates Pre-upload process module which allows to transform images before uplo
 Available operations: "smart crop", "face detection", "resize"
 
 ```
-config.preUploadImageProcess: true;
+config.preUploadImageProcess = true;
 ```
 
 #### `processBeforeUpload`: object
@@ -371,7 +371,17 @@ config.processBeforeUpload = {
 Aside menu to browse folders in your container.
 
 ```
-config.folderBrowser: true;
+config.folderBrowser = true;
+```
+
+#### `myGallery`: object
+
+* `upload`: bool | default: true - possibility to upload in my gallery tab
+
+```
+config.myGallery = {
+    upload: true
+};
 ```
 
 #### `tagging`: object
@@ -389,8 +399,8 @@ config.folderBrowser: true;
 * `customFields`: array [{ name, metaKey, type }] - custom properties for an image. Where **name** - name of the field,
 **metaKey** - key/id of the field, **type** - type of the field: 'text', 'textarea'
 
-```
-config.tagging: {
+```javascript
+config.tagging = {
     autoTaggingButton: true,
     provider: 'google',
     confidence: 60,
