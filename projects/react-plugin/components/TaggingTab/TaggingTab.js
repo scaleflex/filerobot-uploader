@@ -186,10 +186,10 @@ class TaggingTab extends Component {
     if (this.state.tagsGenerated) return;
 
     const { appState } = this.props;
-    const { tagging, language, container, platform, uploadKey, cloudimageToken } = appState.config;
+    const { tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken } = appState.config;
     const [file = {}] = this.props.files;
 
-    generateTags(encodePermalink(getPermalink(file)), tagging, language, container, platform, uploadKey, cloudimageToken)
+    generateTags(encodePermalink(getPermalink(file)), tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
       .then(({ tags, ...props } = {}) => {
         if (tags) {
           if (!tags.length) {

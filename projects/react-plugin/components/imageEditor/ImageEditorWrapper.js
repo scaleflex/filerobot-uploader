@@ -41,7 +41,7 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
-  const { uploadKey, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig } = config;
+  const { uploadKey, baseAPI, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig } = config;
   const isGif = getPubliclink(file).slice(-3).toLowerCase() === 'gif';
   const src = getPubliclink(file);
 
@@ -53,6 +53,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
         colorScheme: 'dark',
         language,
         filerobot: {
+          baseAPI,
           uploadKey,
           container,
           uploadParams: {

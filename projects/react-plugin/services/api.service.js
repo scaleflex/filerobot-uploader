@@ -3,7 +3,8 @@ import { uploadFormDataFiles } from '../utils/files-upload';
 import { DUPLICATE_CODE, GALLERY_IMAGES_LIMIT, REPLACING_DATA_CODE } from '../config';
 
 
-const independentProtocolRegex = /^[https|http]+\:\/\//g;
+export const getBaseAPI = (baseAPI, container, platform) =>
+  baseAPI ? baseAPI + '/' : getBaseUrl(container, platform);
 
 export const getBaseUrl = (container, platform = 'filerobot') =>  platform === 'filerobot' ?
   `https://api.filerobot.com/${container}/v3/` :
@@ -102,8 +103,6 @@ export const uploadFiles = (props) => {
             const isReplacingData = upload.state === REPLACING_DATA_CODE;
 
             if (status === 'success' && file) {
-              //file.public_link = file.public_link.replace(independentProtocolRegex, '//');
-
               resolve([[file], isDuplicate, isReplacingData]);
             } else if (status === 'success' && files) {
               resolve([files, isDuplicate, isReplacingData]);
@@ -153,8 +152,8 @@ export const uploadFiles = (props) => {
     .catch(handleError);
 };
 
-export const getListFiles = ({ dir = '', container = '', platform, offset, uploadKey }) => {
-  const baseUrl = getBaseUrl(container, platform);
+export const getListFiles = ({ dir = '', container = '', baseAPI, platform, offset, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
   const apiPath = 'list?';
   const directoryPath = dir ? 'dir=' + dir : '';
   const offsetQuery = `&offset=${offset}`;
@@ -168,8 +167,8 @@ export const getListFiles = ({ dir = '', container = '', platform, offset, uploa
   ]));
 };
 
-export const searchFiles = ({ query = '', container = '', platform, language = 'en', offset = 0, uploadKey }) => {
-  const baseUrl = getBaseUrl(container, platform);
+export const searchFiles = ({ query = '', container = '', platform, baseAPI, language = 'en', offset = 0, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
   const apiPath = 'search?';
   const searchQuery = `q=${query}`;
   const offsetQuery = `&offset=${offset}`;
@@ -179,9 +178,10 @@ export const searchFiles = ({ query = '', container = '', platform, language = '
     .then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
-export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', platform, uploadKey = '', cloudimageToken = 'demo') => {
+export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', baseAPI, platform, uploadKey = '', cloudimageToken = 'demo') => {
   const { provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
-  const base = `${getBaseUrl(container, platform)}process/autotag`;
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
+  const base = `${baseUrl}process/autotag`;
 
   return send(
     `${base}`,
@@ -206,8 +206,9 @@ export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', c
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (id, properties, { container, platform, uploadKey }) => {
-  const base = `${getBaseUrl(container, platform)}file/`;
+export const saveMetaData = (id, properties, { container, baseAPI, platform, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
+  const base = `${baseUrl}file/`;
   const data = { properties };
 
   return send(
@@ -221,12 +222,12 @@ export const saveMetaData = (id, properties, { container, platform, uploadKey })
     .then((response = {}) => response);
 }
 
-export const updateProduct = (id, product, { container, platform, uploadKey }) => {
-  const base = getBaseUrl(container, platform);
+export const updateProduct = (id, product, { container, baseAPI, platform, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
   const data = { product };
 
   return send(
-    `${base}file/${id}/product`,
+    `${baseUrl}file/${id}/product`,
     'PUT',
     data,
     {
@@ -236,8 +237,8 @@ export const updateProduct = (id, product, { container, platform, uploadKey }) =
     .then((response = {}) => response);
 }
 
-export const getTokenSettings = ({ container = '', platform, uploadKey }) => {
-  const baseUrl = getBaseUrl(container, platform);
+export const getTokenSettings = ({ container = '', baseAPI, platform, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
 
   return send(
     [baseUrl, 'settings'].join(''),

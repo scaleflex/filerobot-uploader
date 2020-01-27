@@ -127,11 +127,11 @@ class UploadedImagesTab extends Component {
   }
 
   onGetListFiles = (dir, offset = 0, resizeOnSuccess) => {
-    const { container, uploadKey, platform } = this.props.appState.config;
+    const { container, uploadKey, baseAPI, platform } = this.props.appState.config;
 
     this.setState({ isShowMoreImages: !!offset, isLoading: !offset });
 
-    getListFiles({ dir, container, offset, uploadKey, platform })
+    getListFiles({ dir, container, offset, uploadKey, baseAPI, platform })
       .then(([files, directories, totalFilesCount]) => {
         const prevFiles = !offset ? [] : this.state.files;
 
@@ -157,7 +157,7 @@ class UploadedImagesTab extends Component {
 
   search = (offset = 0, resizeOnSuccess) => {
     const { searchPhrase = '', imagesIndex } = this.state;
-    const { container, language, uploadKey, platform } = this.props.appState.config;
+    const { container, language, uploadKey, baseAPI, platform } = this.props.appState.config;
 
     if (searchPhrase.length < 2) { this.goToDefaultFolder(); }
 
@@ -166,7 +166,7 @@ class UploadedImagesTab extends Component {
       isLoading: !offset
     });
 
-    searchFiles({ query: searchPhrase, language, container, platform, offset, uploadKey }).then(([files, totalFilesCount]) => {
+    searchFiles({ query: searchPhrase, language, container, baseAPI, platform, offset, uploadKey }).then(([files, totalFilesCount]) => {
       const prevFiles = !offset ? [] : this.state.files;
       const nextOfset = offset;
 

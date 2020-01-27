@@ -1,12 +1,13 @@
 import CONFIG from '../config';
 import { isDefined } from './helper.utils';
 import MobileDetect from 'mobile-detect';
-import { getBaseUrl } from '../services/api.service';
+import { getBaseAPI } from '../services/api.service';
 
 
 const prepareConfig = (config = {}, onUpload = () => {}) => {
   const container = config.container || config.CONTAINER || CONFIG.container || '';
   const platform = config.platform || 'filerobot';
+  const baseAPI = config.baseAPI;
 
   config.tagging = config.tagging || config.TAGGING || CONFIG.tagging || {};
   config.modules = config.modules || [];
@@ -20,7 +21,8 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     mobile: md.mobile(),
     container,
     platform,
-    uploadPath: `${getBaseUrl(container, platform)}upload`,
+    baseAPI,
+    uploadPath: `${getBaseAPI(baseAPI, container, platform)}upload`,
     uploadParams: config.uploadParams || config.UPLOAD_PARAMS || CONFIG.uploadParams,
     uploadKey: uploadKey || CONFIG.airstoreUploadKey,
     openpixKey: config.openpixKey || config.OPENPIX_KEY || CONFIG.openpixKey,
