@@ -76,10 +76,9 @@ export const uploadFiles = (props) => {
 
   function handleError(error) {
     const data = (error.response && error.response.data) || {};
-    const code = data.code || '';
     const msg = data.msg && (data.msg.join ? data.msg.join(', ') : data.msg);
 
-    showAlert('', ((code || msg) ? `${code}: ${msg}` : '') || error.msg || error.message, 'error');
+    showAlert(msg || error.msg || error.message, data.hint || '', 'error', 8000);
 
     return error;
   }

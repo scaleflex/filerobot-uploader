@@ -95,9 +95,8 @@ class UserUploaderTab extends Component {
 
   uploadSuccess = uploadedFiles => this.setState({ step: STEP.UPLOADED, uploadedFiles });
 
-  uploadError = (msg, timer = null) => {
-    this.setState({ step: STEP.ERROR, errorMsg: msg || I18n.t('upload.error') });
-    if (timer) setTimeout(() => this.changeStep(STEP.DEFAULT), timer);
+  uploadError = () => {
+    this.changeStep(STEP.DEFAULT);
   };
 
   upload = (isUploadFromUrl = false, url = null) => {
@@ -130,8 +129,8 @@ class UserUploaderTab extends Component {
         config.uploadHandler(files, { stage: 'upload' });
         self.closeModal();
       })
-      .catch((error) => {
-        this.uploadError(error.msg || error.message);
+      .catch(() => {
+        this.uploadError();
       })
   };
 

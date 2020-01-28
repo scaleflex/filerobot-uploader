@@ -93,8 +93,8 @@ class UploadedImagesTab extends Component {
         config.uploadHandler(files, { stage: 'upload' });
         self.closeModal();
       })
-      .catch((error) => {
-        this.uploadError(error.msg)
+      .catch(() => {
+        this.uploadError();
       })
   };
 
@@ -107,9 +107,8 @@ class UploadedImagesTab extends Component {
     this.onGetListFiles(this.state.path);
   }
 
-  uploadError = (msg, timer = null) => {
-    this.setState({ step: STEP.ERROR, errorMsg: msg || I18n.t('upload.error') });
-    if (timer) setTimeout(() => this.changeStep(STEP.DEFAULT), timer);
+  uploadError = () => {
+    this.changeStep(STEP.DEFAULT);
   };
 
   fileDropHandler = event => {
@@ -308,7 +307,7 @@ class UploadedImagesTab extends Component {
           </SearchWrapper>
 
           <ButtonSearch
-            isUpload={isUpload}
+            hide={!isUpload}
             className="ae-btn"
             fullBr={'4px'}
             onClick={() => { this.fileInput.click() }}

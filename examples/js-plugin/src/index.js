@@ -49,7 +49,7 @@ let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: { dir:"/dima_test_7_en" },
   container: 'scaleflex-tests-v5a',
-  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
+  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03f',
   initialTab: 'UPLOAD',
   folderBrowser: true,
   autoCropSuggestions: true,
