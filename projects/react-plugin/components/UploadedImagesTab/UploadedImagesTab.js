@@ -308,6 +308,7 @@ class UploadedImagesTab extends Component {
           </SearchWrapper>
 
           <ButtonSearch
+            isUpload={isUpload}
             className="ae-btn"
             fullBr={'4px'}
             onClick={() => { this.fileInput.click() }}

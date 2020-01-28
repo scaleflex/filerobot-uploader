@@ -52,6 +52,7 @@ export const InputSearch = styled.input.attrs(() => ({
   }
 `;
 export const ButtonSearch = styled.button`
+  visibility: ${p => p.isUpload ? 'visible' : 'hidden'};
   font-family: Roboto, sans-serif;
   height: 34px;
   padding: 6px 12px;
