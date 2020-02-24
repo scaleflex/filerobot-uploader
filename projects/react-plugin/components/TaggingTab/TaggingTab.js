@@ -30,8 +30,7 @@ import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { encodePermalink } from '../../utils';
-import md5 from '../../utils/md5';
-import { getPermalink } from '../../utils/adjustAPI.utils';
+import { getPermalink, getCDNlink } from '../../utils/adjustAPI.utils';
 
 
 class TaggingTab extends Component {
@@ -212,10 +211,10 @@ class TaggingTab extends Component {
           });
         } else {
           this.setState({
-              isLoading: false,
-              isGeneratingTags: false,
-              errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
-            }
+            isLoading: false,
+            isGeneratingTags: false,
+            errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
+          }
           );
         }
       })
@@ -223,10 +222,10 @@ class TaggingTab extends Component {
         const { response: { data = {} } = {} } = error;
 
         this.setState({
-            isLoading: false,
-            isGeneratingTags: false,
-            errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
-          }
+          isLoading: false,
+          isGeneratingTags: false,
+          errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
+        }
         );
       })
 
@@ -262,10 +261,10 @@ class TaggingTab extends Component {
     updateProduct(file.uuid, { ref: productRef, position: productPosition }, appState.config)
       .then(() => {
         this.setState({
-            oldProductPosition: productPosition || '',
-            oldProductRef: productRef || '',
-            isUpdatingProduct: false
-          }
+          oldProductPosition: productPosition || '',
+          oldProductRef: productRef || '',
+          isUpdatingProduct: false
+        }
         );
       })
       .catch((error) => {
@@ -276,6 +275,24 @@ class TaggingTab extends Component {
           errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
         });
       })
+  }
+
+  /**
+   * @param {String} imageUrl
+   * @param {Object} queryOptions
+   * @param {Number} queryOptions.w
+   */
+  transformImage = (imageUrl = '', queryOptions = { w: 800 }) => {
+    let search = imageUrl.includes('?') ? '&' : '?';
+    const keys = Object.keys(queryOptions);
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      if (!queryOptions[key]) { continue; }
+      search += `${key}=${queryOptions[key]}${i !== keys.length - 1 ? '&' : ''}`
+    }
+
+    return `${imageUrl}${search}`;
   }
 
   render() {
@@ -289,19 +306,23 @@ class TaggingTab extends Component {
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
-    const icon = isImageType ? encodePermalink(getPermalink(file)) : getFileIconSrcByType(file.type);
+    const cdnlink = getCDNlink(file);
+    const permalink = getPermalink(file);
+    const imageSrc = isImageType
+      ? (cdnlink && this.transformImage(cdnlink)) || encodePermalink(permalink)
+      : getFileIconSrcByType(file.type);
 
     return (
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
+            <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon />{I18n.t('tagging.go_back')}</GoBack>}
 
           <FileWrapper>
             <UploadedImageWrapper>
               <UploadedImage
                 isNotImage={!isImageType}
-                src={`https://demo.cloudimg.io/width/800/n/${icon}?${md5(file.modified_at || file.hash.sha1).split(0, 5)}`}
+                src={imageSrc}
               />
             </UploadedImageWrapper>
 
@@ -324,56 +345,56 @@ class TaggingTab extends Component {
                   <PropValue>{lastModified || currentTime}</PropValue>
                 </li>
                 {productsEnabled &&
-                <>
-                  <li>
-                    <PropName>{I18n.t('tagging.product_ref')}:</PropName>
-                    <PropValue>
-                      <Input
-                        type="text"
-                        id={'productRef'}
-                        key={'productRef'}
-                        name={'productRef'}
-                        placeholder={I18n.t('tagging.not_set')}
-                        value={this.state.productRef}
-                        onChange={this.handleCustomFieldChange}
-                      />
-                    </PropValue>
-                  </li>
-                  {oldProductRef !== this.state.productRef && (
+                  <>
                     <li>
-                      <PropName/>
+                      <PropName>{I18n.t('tagging.product_ref')}:</PropName>
                       <PropValue>
-                        <Button success onClick={this.updateProductProps}>
-                          {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_ref')}
-                        </Button>
+                        <Input
+                          type="text"
+                          id={'productRef'}
+                          key={'productRef'}
+                          name={'productRef'}
+                          placeholder={I18n.t('tagging.not_set')}
+                          value={this.state.productRef}
+                          onChange={this.handleCustomFieldChange}
+                        />
                       </PropValue>
                     </li>
-                  )}
-                  <li>
-                    <PropName>{I18n.t('tagging.product_position')}:</PropName>
-                    <PropValue>
-                      <Input
-                        type="text"
-                        id={'productPosition'}
-                        key={'productPosition'}
-                        name={'productPosition'}
-                        placeholder={I18n.t('tagging.not_set')}
-                        value={this.state.productPosition}
-                        onChange={this.handleCustomFieldChange}
-                      />
-                    </PropValue>
-                  </li>
-                  {oldProductPosition !== this.state.productPosition && (
+                    {oldProductRef !== this.state.productRef && (
+                      <li>
+                        <PropName />
+                        <PropValue>
+                          <Button success onClick={this.updateProductProps}>
+                            {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_ref')}
+                          </Button>
+                        </PropValue>
+                      </li>
+                    )}
                     <li>
-                      <PropName/>
+                      <PropName>{I18n.t('tagging.product_position')}:</PropName>
                       <PropValue>
-                        <Button success onClick={this.updateProductProps}>
-                          {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_position')}
-                        </Button>
+                        <Input
+                          type="text"
+                          id={'productPosition'}
+                          key={'productPosition'}
+                          name={'productPosition'}
+                          placeholder={I18n.t('tagging.not_set')}
+                          value={this.state.productPosition}
+                          onChange={this.handleCustomFieldChange}
+                        />
                       </PropValue>
                     </li>
-                  )}
-                </>}
+                    {oldProductPosition !== this.state.productPosition && (
+                      <li>
+                        <PropName />
+                        <PropValue>
+                          <Button success onClick={this.updateProductProps}>
+                            {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_position')}
+                          </Button>
+                        </PropValue>
+                      </li>
+                    )}
+                  </>}
               </ul>
             </UploadedImageDesc>
           </FileWrapper>
@@ -400,20 +421,20 @@ class TaggingTab extends Component {
           </InputsBlock>
 
           {errorMessage &&
-          <ErrorWrapper>
-            <ErrorParagraph>
-              {errorMessage}
-            </ErrorParagraph>
-          </ErrorWrapper>}
+            <ErrorWrapper>
+              <ErrorParagraph>
+                {errorMessage}
+              </ErrorParagraph>
+            </ErrorWrapper>}
         </TaggingContent>
 
         <TaggingFooter>
 
           {this.isAutoTaggingButton &&
-          <Button
-            disabled={this.state.tagsGenerated}
-            onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon
-            data-tip={generateTagInfo}/></Button>}
+            <Button
+              disabled={this.state.tagsGenerated}
+              onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon
+                data-tip={generateTagInfo} /></Button>}
 
           <Button
             ref={node => this._saveMetadataBtn = node}
@@ -423,12 +444,12 @@ class TaggingTab extends Component {
 
         </TaggingFooter>
 
-        <Spinner show={isLoading} overlay/>
+        <Spinner show={isLoading} overlay />
 
         {isGeneratingTags &&
-        <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
+          <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
 
-        <ReactTooltip offset={{ top: 0, right: 2 }} effect="solid"/>
+        <ReactTooltip offset={{ top: 0, right: 2 }} effect="solid" />
       </TaggingTabWrapper>
     )
   }

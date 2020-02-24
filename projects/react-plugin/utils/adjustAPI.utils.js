@@ -18,3 +18,10 @@ export const getPubliclink = file => {
   else
     return '';
 }
+
+export const getCDNlink = file => {
+  if (file.url && file.url.cdn)
+    return file.url.cdn;
+  else
+    return '';
+}
