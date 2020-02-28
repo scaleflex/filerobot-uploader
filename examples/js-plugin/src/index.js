@@ -190,9 +190,9 @@ robotIcon.onmouseleave = onMouseLeave;
 buttonEdit.onmouseleave = onMouseLeave;
 
 function onMouseEnter() {
-  robotIcon.src = 'https://demo.cloudimg.io/width/500/q35.foil1/https://scaleflex.airstore.io/filerobot/assets/robot-with-smile-left.png';
+  robotIcon.src = 'https://demo.cloudimg.io/width/500/q35.foil1/https://cdn.scaleflex.it/filerobot/assets/robot-with-smile-left.png';
 }
 
 function onMouseLeave() {
-  robotIcon.src = 'https://demo.cloudimg.io/width/500/q35.foil1/https://scaleflex.airstore.io/filerobot/assets/robot-icon-left.png';
+  robotIcon.src = 'https://demo.cloudimg.io/width/500/q35.foil1/https://cdn.scaleflex.it/filerobot/assets/robot-icon-left.png';
 }
