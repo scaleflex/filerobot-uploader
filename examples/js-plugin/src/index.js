@@ -48,8 +48,8 @@ reactBtn.onclick = function() {
 let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: { dir:"/dima_test_7_en" },
-  container: 'scaleflex-tests-v5a',
-  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03f',
+  container: 'fusqadtm',
+  filerobotUploadKey: '19692813e7364ef8ad6a6504d50a12ca',
   initialTab: 'UPLOAD',
   folderBrowser: true,
   autoCropSuggestions: true,
@@ -90,7 +90,7 @@ let config = {
 //let config = {
 //  modules: ['UPLOAD'],
 //  uploadParams: { dir: '/images/aaa' },
-//  container: 'scaleflex-tests-v5a',
+//  container: 'fusqadtm',
 //  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
 //  platform: 'airstore',
 //  initialTab: 'UPLOAD',
