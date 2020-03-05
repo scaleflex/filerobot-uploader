@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
-import { getPubliclink } from '../../utils/adjustAPI.utils';
+import { getPubliclink, getCDNlink, getPermalink } from '../../utils/adjustAPI.utils';
 
 
 const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
@@ -41,9 +41,9 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
 
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
   const { prevTab, config } = appState;
-  const { uploadKey, baseAPI, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig } = config;
+  const { uploadKey, baseAPI, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig = {} } = config;
   const isGif = getPubliclink(file).slice(-3).toLowerCase() === 'gif';
-  const src = getPubliclink(file);
+  const src = getCDNlink(file);
 
   return (
     <ImageEditor
@@ -52,21 +52,27 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
         isLowQualityPreview: true,
         colorScheme: 'dark',
         language,
+        processWithCloudimage: isGif,
+        uploadWithCloudimageLink: true,
+
+        ...imageEditorConfig,
+
         filerobot: {
           baseAPI,
           uploadKey,
           container,
           uploadParams: {
             ...uploadParams,
-            dir: path || uploadParams.dir
-          }
+            dir: path || uploadParams.dir,
+            ...(imageEditorConfig.filerobot && imageEditorConfig.filerobot.uploadParams)
+          },
+          ...imageEditorConfig.filerobot
         },
+
         cloudimage: {
-          token: cloudimageToken
-        },
-        processWithCloudimage: isGif,
-        uploadWithCloudimageLink: true,
-        ...imageEditorConfig
+          token: cloudimageToken,
+          ...imageEditorConfig.cloudimage
+        }
       }}
       closeOnLoad={false}
       src={src}
