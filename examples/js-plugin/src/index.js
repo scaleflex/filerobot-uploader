@@ -83,7 +83,14 @@ let config = {
   language: 'en',
   colorScheme: {
     active: 'solarized'
-  }
+  },
+  //imageEditorConfig: {
+  //  processWithCloudimage: true,
+  //  filerobot: {
+  //    token: 'fusqadtm',
+  //    doNotPrefixURL: true
+  //  }
+  //}
 };
 
 // Configuration
@@ -133,7 +140,7 @@ function onUploadHandler(files) {
   innerSpinner.style.display = 'block';
   imageContainer.style.opacity = '0.5';
 
-  image.src = publicURL
+  image.src = img.url && img.url.cdn || publicURL
   image.onload = () => {
     innerSpinner.style.display = 'none';
     imageContainer.style.opacity = '1';
@@ -149,8 +156,8 @@ function onUploadHandler(files) {
           <span>${publicURL}</span>
         </li>
         <li>
-          <span>Compressed Image link (CDN): </span>
-          <span>https://demo.filerobot.com/cdno/n/q60/${publicURL}</span>
+          <span>CDN link: </span>
+          <span>${img.url.cdn}</span>
         </li>
         <li>
           <span>Size: </span>
