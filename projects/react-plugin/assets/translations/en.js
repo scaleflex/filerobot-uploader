@@ -30,7 +30,13 @@ export default {
     crop_and_resize: 'Crop / Resize',
     cancel: 'Cancel',
     selected_files: 'Selected files',
-    total_size: 'total size'
+    total_size: 'total size',
+    sort: 'Sort',
+    name: 'Name',
+    size: 'Size',
+    type: 'Type',
+    modified: 'Modified',
+    uploaded: 'Uploaded'
   },
   file_manager: {
     tab_title: 'My gallery',

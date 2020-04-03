@@ -30,7 +30,15 @@ export default {
     crop_and_resize: 'Rogner / Redimensionnement',
     cancel: 'Annuler',
     selected_files: 'Sélectionner des fichiers',
-    total_size: 'Taille totale'
+    total_size: 'Taille totale',
+    sort: 'Trier',
+    name: 'Nom',
+    size: 'Taille',
+    type: 'Type',
+    modified: 'Modifié',
+    uploaded: 'Uploadé',
+    product_position: 'Product position',
+    product_ref: 'Product reference'
   },
   file_manager: {
     tab_title: 'Ma galerie',

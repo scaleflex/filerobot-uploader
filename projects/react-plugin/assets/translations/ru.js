@@ -30,7 +30,15 @@ export default {
     crop_and_resize: 'Обрезать / Изменить размер',
     cancel: 'Отменить',
     selected_files: 'Добавленные файлы',
-    total_size: 'размер'
+    total_size: 'размер',
+    sort: 'Sort',
+    name: 'Name',
+    size: 'Size',
+    type: 'Type',
+    modified: 'Modified',
+    uploaded: 'Uploaded',
+    product_position: 'Product position',
+    product_ref: 'Product reference'
   },
   file_manager: {
     tab_title: 'Галерея',

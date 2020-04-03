@@ -151,13 +151,15 @@ export const uploadFiles = (props) => {
     .catch(handleError);
 };
 
-export const getListFiles = ({ dir = '', container = '', baseAPI, platform, offset, uploadKey }) => {
+export const getListFiles = ({ dir = '', container = '', baseAPI, platform, offset, uploadKey, sortParams }) => {
   const baseUrl = getBaseAPI(baseAPI, container, platform);
   const apiPath = 'list?';
   const directoryPath = dir ? 'dir=' + dir : '';
   const offsetQuery = `&offset=${offset}`;
   const limit = `&limit=${GALLERY_IMAGES_LIMIT}`;
-  const url = [baseUrl, apiPath, directoryPath, offsetQuery, limit].join('');
+  const sort = `&sort=${sortParams.field}:${sortParams.isUp ? 'asc' : 'desc'}`;
+  const url = [baseUrl, apiPath, directoryPath, offsetQuery, limit, sort].join('');
+
 
   return send(url, 'GET', null, { [getSecretHeaderName(platform)]: uploadKey }).then((response = {}) => ([
     response.files,

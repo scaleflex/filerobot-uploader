@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   UploadedImages, HeaderWrap, Nav, ButtonSearch, UploadInputBox, SearchGroup, InputSearch, SearchWrapper,
-  ButtonClose
+  ButtonClose, ActionButtonsWrapper
 } from '../../styledComponents';
 import * as API from '../../services/api.service';
 import { getListFiles, searchFiles } from '../../services/api.service';
@@ -12,10 +12,10 @@ import { I18n } from 'react-i18nify';
 import { GALLERY_IMAGES_LIMIT } from '../../config';
 import FolderManager from './folderManager/FolderManager';
 import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
+import SortDropdown from './SortDropdown';
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
-
 
 class UploadedImagesTab extends Component {
   constructor(props) {
@@ -35,8 +35,14 @@ class UploadedImagesTab extends Component {
       progressBar: {
         color: PROGRESS_COLORS.DEFAULT,
         status: 0
-      }
-    };
+      },
+      sortParams: {
+        field: 'name',
+        isUp: true,
+        backend: false // last sort, backend or local
+      },
+      totalFilesCount: 0
+    }
   }
 
   componentDidMount() {
@@ -126,11 +132,12 @@ class UploadedImagesTab extends Component {
   }
 
   onGetListFiles = (dir, offset = 0, resizeOnSuccess) => {
+    const { sortParams } = this.state;
     const { container, uploadKey, baseAPI, platform } = this.props.appState.config;
 
     this.setState({ isShowMoreImages: !!offset, isLoading: !offset });
 
-    getListFiles({ dir, container, offset, uploadKey, baseAPI, platform })
+    getListFiles({ dir, container, offset, uploadKey, baseAPI, platform, sortParams })
       .then(([files, directories, totalFilesCount]) => {
         const prevFiles = !offset ? [] : this.state.files;
 
@@ -248,10 +255,22 @@ class UploadedImagesTab extends Component {
     });
   }
 
+  applySort = (newSortParams) => {
+    const { sortParams, path  } = this.state;
+    const nextSortParams = {
+      ...(sortParams || {}),
+      ...(newSortParams || {})
+    };
+
+    this.setState({ sortParams: nextSortParams }, () => {
+      this.activateFolder(path);
+    });
+  }
+
   render() {
     const {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = '',
-      progressBar: { color, status }
+      progressBar: { color, status }, sortParams
     } = this.state;
     const { appState: { config } } = this.props;
     const { myGallery: { upload: isUpload } } = config;
@@ -306,12 +325,20 @@ class UploadedImagesTab extends Component {
             </SearchGroup>
           </SearchWrapper>
 
-          <ButtonSearch
-            hide={!isUpload}
-            className="ae-btn"
-            fullBr={'4px'}
-            onClick={() => { this.fileInput.click() }}
-          >{I18n.t('file_manager.upload_images')}</ButtonSearch>
+          <ActionButtonsWrapper>
+            <SortDropdown
+              applySort={this.applySort}
+              sortParams={sortParams}
+            />
+            <ButtonSearch
+              hide={!isUpload}
+              className="ae-btn"
+              fullBr={'4px'}
+              onClick={() => { this.fileInput.click() }}
+            >{I18n.t('file_manager.upload_images')}</ButtonSearch>
+          </ActionButtonsWrapper>
+
+
         </HeaderWrap>
 
         <UploadedImagesContent

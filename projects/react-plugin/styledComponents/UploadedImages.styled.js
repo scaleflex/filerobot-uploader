@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CloseBtn } from '../components/CloseBtn'
+import { CloseBtn } from '../components/CloseBtn';
+import { ButtonSearch } from './IconTab.styled';
+
 
 export const UploadedImages = styled.div`
   display: flex;
@@ -80,5 +82,86 @@ export const ButtonClose = styled(CloseBtn)`
   
   :hover {
     color: ${p => p.theme.buttonBackground || '#00707C'};
+  }
+`;
+
+export const ActionButtonsWrapper = styled('div')`
+  display: flex;
+  
+`;
+
+export const SortButton = styled(ButtonSearch)`
+  border-radius: 4px;
+  margin-right: 5px;
+  
+  .options-dropdown-menu {
+    position: absolute;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    border-radius: 3px;
+
+    button,
+    a {
+      padding: 4px 8px;
+      cursor: pointer;
+      margin: 0;
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: #fff;
+      text-align: left;
+      font-size: 12px;
+
+      &:hover:not([disabled]) {
+        background: #d7d7d7;
+      }
+    }
+
+    a {
+      display: block;
+      color: buttontext;
+      text-decoration: none;
+    }
+  }
+  
+  [class^="ai-icon-"],
+    .sort-tick-wrapper {
+      margin-right: 5px;
+    }
+    
+    .sort-tick {
+    display: inline-block;
+    background: transparent no-repeat;
+    background-size: cover;
+    width: 7px;
+    height: 7px;
+    border: none;
+
+    &.icon-up {
+      background-image: url("//js.filerobot.com/airstore-explorer/static/media/caret-arrow-up.svg");
+
+      &.white {
+        background-image: url("//js.filerobot.com/airstore-explorer/static/media/caret-arrow-up-white.svg");
+      }
+
+      &.dark {
+        background-image: url("//js.filerobot.com/airstore-explorer/static/media/caret-arrow-up-dark.svg");
+      }
+    }
+
+    &.icon-down {
+      background-image: url("//js.filerobot.com/airstore-explorer/static/media/caret-down.svg");
+
+      &.white {
+        background-image: url("//js.filerobot.com/airstore-explorer/static/media/caret-down-white.svg");
+      }
+
+      &.dark {
+        background-image: url("//js.filerobot.com/airstore-explorer/static/media/caret-down-dark.svg");
+      }
+    }
   }
 `;
