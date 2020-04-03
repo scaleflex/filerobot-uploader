@@ -35,8 +35,8 @@ export default {
     name: 'Nom',
     size: 'Taille',
     type: 'Type',
-    modified: 'Modifié',
-    uploaded: 'Uploadé',
+    modified: 'Date de motification',
+    uploaded: 'Date de création',
     product_position: 'Product position',
     product_ref: 'Product reference'
   },

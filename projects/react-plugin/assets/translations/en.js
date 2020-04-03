@@ -35,8 +35,8 @@ export default {
     name: 'Name',
     size: 'Size',
     type: 'Type',
-    modified: 'Modified',
-    uploaded: 'Uploaded'
+    modified: 'Modified date',
+    uploaded: 'Uploaded date'
   },
   file_manager: {
     tab_title: 'My gallery',
