@@ -41,7 +41,8 @@ class UploadedImagesTab extends Component {
         isUp: true,
         backend: false // last sort, backend or local
       },
-      totalFilesCount: 0
+      totalFilesCount: 0,
+      imagesIndexWrapper: 0
     }
   }
 
@@ -53,7 +54,7 @@ class UploadedImagesTab extends Component {
 
   activateFolder = (path) => {
     this.setState({ files: [], path });
-    this.onGetListFiles(path);
+    this.onGetListFiles(path, 0, null, true);
   }
 
   fileChangeHandler = ({ target }) => { this.changeFile(target.files); };
@@ -131,8 +132,8 @@ class UploadedImagesTab extends Component {
     this.setState({ searchPhrase: event.target.value });
   }
 
-  onGetListFiles = (dir, offset = 0, resizeOnSuccess) => {
-    const { sortParams } = this.state;
+  onGetListFiles = (dir, offset = 0, resizeOnSuccess, isSort) => {
+    const { sortParams, imagesIndex, imagesIndexWrapper } = this.state;
     const { container, uploadKey, baseAPI, platform } = this.props.appState.config;
 
     this.setState({ isShowMoreImages: !!offset, isLoading: !offset });
@@ -149,7 +150,13 @@ class UploadedImagesTab extends Component {
           offset,
           totalFilesCount
         }, () => {
-          typeof resizeOnSuccess === 'function' && resizeOnSuccess();
+          setTimeout(() => {
+            if (isSort) {
+              this.setState({ imagesIndex: imagesIndex + 1, imagesIndexWrapper: imagesIndexWrapper + 1 });
+            } else {
+              typeof resizeOnSuccess === 'function' && resizeOnSuccess();
+            }
+          })
         })
       })
       .catch(() => {
@@ -270,7 +277,7 @@ class UploadedImagesTab extends Component {
   render() {
     const {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = '',
-      progressBar: { color, status }, sortParams
+      progressBar: { color, status }, sortParams, imagesIndexWrapper
     } = this.state;
     const { appState: { config } } = this.props;
     const { myGallery: { upload: isUpload } } = config;
@@ -342,6 +349,7 @@ class UploadedImagesTab extends Component {
         </HeaderWrap>
 
         <UploadedImagesContent
+          imagesIndexWrapper={imagesIndexWrapper}
           isUpload={isUpload}
           appState={this.props.appState}
           upload={this.upload}

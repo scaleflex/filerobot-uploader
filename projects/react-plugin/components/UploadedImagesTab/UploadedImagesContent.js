@@ -91,7 +91,7 @@ class UploadedImagesContent extends Component {
   }
 
   render() {
-    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload } = this.props;
+    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = isUpload ? [{ id: 'uploaderBox' }, ...files] : [...files];
@@ -104,6 +104,7 @@ class UploadedImagesContent extends Component {
         onDragLeave={(event) => { onDragEvent(event, 'isDragOver', false); }}
         onDragEnd={(event) => { onDragEvent(event, 'isDragOver', false); }}
         isDragOver={isDragOver}
+        key={imagesIndexWrapper}
       >
         {files.length ?
           <VirtualizedImagesGrid

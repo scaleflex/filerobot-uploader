@@ -164,7 +164,7 @@ export const getListFiles = ({ dir = '', container = '', baseAPI, platform, offs
   return send(url, 'GET', null, { [getSecretHeaderName(platform)]: uploadKey }).then((response = {}) => ([
     response.files,
     response.directories,
-    response.current_directory && response.current_directory.files_count
+    response.info && response.info.total_files_count
   ]));
 };
 
