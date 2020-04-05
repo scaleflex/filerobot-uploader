@@ -26,30 +26,11 @@ class SortDropdown extends Component {
   }
 
   componentDidMount() {
-    this.updateSortCosls();
     window.addEventListener('click', this.globalClickHandler);
   }
 
   componentWillUnmount() {
     window.removeEventListener('click', this.globalClickHandler);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.isProductsEnabled !== this.props.isProductsEnabled) {
-      this.updateSortCosls();
-    }
-  }
-
-  updateSortCosls = () => {
-    this.setState({
-      sortCols: [
-        ...SORT_COLS,
-        ...(this.props.isProductsEnabled ? [
-          ['product_pos', 'Product position'],
-          ['product_ref', 'Product reference'],
-        ] : [])
-      ]
-    });
   }
 
   globalClickHandler = ({ target }) => {
