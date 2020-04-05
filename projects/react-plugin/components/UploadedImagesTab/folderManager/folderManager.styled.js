@@ -35,6 +35,7 @@ export const FolderIcon = styled.div`
 `;
 
 export const FolderToggleWrapper = styled.div`
+  padding: 5px 0; 
   cursor: pointer;
   
   :hover ${FolderIcon} {
@@ -54,13 +55,14 @@ export const FolderManagerWrapper = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-  top: 0;
+  top: 80px;
   color: #5D636B;
   margin-left: ${props => props.showFileManager ? '0px' : '-200px'};
   //visibility: ${props => props.showFileManager ? 'visible' : 'hidden'};;
   width: 200px;
   background: ${p => p.theme.mainBackground};
   border-right: 1px solid rgb(221,221,221);
+  border-top: 1px solid rgb(221,221,221);
   z-index: 1045;
   transition: 0.3s margin;
   overflow: hidden;
@@ -141,4 +143,10 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   z-index: 199;
+`;
+
+export const EmptyNote = styled('div')`
+  padding: 20px 5px;
+  opacity: 0.7;
+  text-align: center;
 `;

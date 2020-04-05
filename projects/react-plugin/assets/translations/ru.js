@@ -50,7 +50,8 @@ export default {
     go_back: 'Назад',
     select: 'Выбрать',
     tag_image: 'Изменить теги',
-    edit_image: 'Редактировать'
+    edit_image: 'Редактировать',
+    no_subfolders: 'No subfolders'
   },
   icons: {
     tab_title: 'Иконки',

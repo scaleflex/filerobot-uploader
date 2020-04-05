@@ -48,7 +48,8 @@ export default {
     go_back: 'Go back',
     select: 'Select',
     tag_image: 'Tag image',
-    edit_image: 'Edit image'
+    edit_image: 'Edit image',
+    no_subfolders: 'No subfolders'
   },
   icons: {
     tab_title: 'Free icons',

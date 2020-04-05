@@ -21,8 +21,7 @@ export const HeaderWrap = styled.div`
 `;
 
 export const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
+  display: block;
 `;
 
 export const NavItem = styled.span`
@@ -97,7 +96,7 @@ export const SortButton = styled(ButtonSearch)`
   .options-dropdown-menu {
     position: absolute;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    background: #fff;
+    background: ${p => p.theme.mainBackground};
     padding: 0;
     margin: 0;
     list-style-type: none;
@@ -111,7 +110,8 @@ export const SortButton = styled(ButtonSearch)`
       width: 100%;
       border: none;
       outline: none;
-      background-color: #fff;
+      color: ${p => p.theme.text};
+      background-color: ${p => p.theme.mainBackground};
       text-align: left;
       font-size: 12px;
 
@@ -122,7 +122,7 @@ export const SortButton = styled(ButtonSearch)`
 
     a {
       display: block;
-      color: buttontext;
+      color: ${p => p.theme.text};
       text-decoration: none;
     }
   }

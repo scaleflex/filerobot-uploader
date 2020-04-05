@@ -11,7 +11,7 @@ const SpinnerOverlay = styled.div`
   position: ${props => props.fullScreen ? 'fixed' : 'absolute' };
   background: ${props => props.overlay ? 'rgba(10,10,10,0.26)' : 'transparent'} !important;
   //opacity: ${props => props.overlay ? '0.25' : '0'} !important;
-  z-index: 1042;
+  z-index: 1046;
 `;
 
 const SpinnerInner = styled.div`
@@ -26,7 +26,7 @@ const SpinnerInner = styled.div`
   height: 1em;
   border-radius: 50%;
   text-indent: -9999em;
-  z-index: 1042;
+  z-index: 1047;
   -webkit-animation: scale-flex-loader${props => props.black ? '-black' : ''} 1.1s infinite ease;
   animation: scale-flex-loader${props => props.black ? '-black' : ''} 1.1s infinite ease;
   -webkit-transform: translateZ(0);

@@ -298,18 +298,6 @@ class UploadedImagesTab extends Component {
         />}
 
         <HeaderWrap>
-          <Nav>
-            {folderBrowser.show &&
-            <FolderManager
-              path={path}
-              rootDir={folderBrowser.rootFolder}
-              folders={directories}
-              goToLevelUpFolder={this.goToLevelUpFolder}
-              changeFolder={this.activateFolder}
-              isLoading={isLoading}
-            />}
-          </Nav>
-
           <SearchWrapper>
             <SearchGroup padding={'0px'}>
               <InputSearch
@@ -345,9 +333,19 @@ class UploadedImagesTab extends Component {
               onClick={() => { this.fileInput.click() }}
             >{I18n.t('file_manager.upload_images')}</ButtonSearch>
           </ActionButtonsWrapper>
-
-
         </HeaderWrap>
+
+        {folderBrowser.show &&
+        <Nav>
+          <FolderManager
+            path={path}
+            rootDir={folderBrowser.rootFolder}
+            folders={directories}
+            goToLevelUpFolder={this.goToLevelUpFolder}
+            changeFolder={this.activateFolder}
+            isLoading={isLoading}
+          />
+        </Nav>}
 
         <UploadedImagesContent
           imagesIndexWrapper={imagesIndexWrapper}

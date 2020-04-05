@@ -1,10 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import {
-  FolderManagerWrapper, FolderToggleWrapper, FolderIcon, FolderTitle, ManagerHeader, ManagerHeaderTitle,
-  CloseManagerBtn, Folder, Overlay
+  EmptyNote,
+  Folder,
+  FolderIcon,
+  FolderManagerWrapper,
+  FolderToggleWrapper,
+  Overlay
 } from './folderManager.styled';
 import FolderItem from './FolderItem';
 import { I18n } from 'react-i18nify';
+import BreadCrumbs from './bread-crumbs';
 
 
 class FolderManager extends Component {
@@ -30,18 +35,21 @@ class FolderManager extends Component {
       <Fragment>
         <FolderToggleWrapper onClick={this.toggleSideMenu}>
           <FolderIcon/>
-          <FolderTitle>
-            {I18n.t('file_manager.change_folder')}
-          </FolderTitle>
+
+          <BreadCrumbs {...{ path }}/>
+          {/*<FolderTitle>*/}
+          {/*  {I18n.t('file_manager.change_folder')}*/}
+          {/*</FolderTitle>*/}
         </FolderToggleWrapper>
 
         <FolderManagerWrapper showFileManager={showFileManager}>
-          <ManagerHeader>
-            <ManagerHeaderTitle>
-              {I18n.t('file_manager.media_library')}
-            </ManagerHeaderTitle>
-            <CloseManagerBtn onClick={this.toggleSideMenu}/>
-          </ManagerHeader>
+          {/*<CloseManagerBtn onClick={this.toggleSideMenu}/>*/}
+          {/*<ManagerHeader>*/}
+          {/*  <ManagerHeaderTitle>*/}
+          {/*    {I18n.t('file_manager.media_library')}*/}
+          {/*  </ManagerHeaderTitle>*/}
+          {/*  */}
+          {/*</ManagerHeader>*/}
 
           {path && (path !== rootDir) && !isLoading &&
           <Folder onClick={this.props.goToLevelUpFolder}>
@@ -56,6 +64,9 @@ class FolderManager extends Component {
               changeFolder={this.props.changeFolder}
             />
           ))}
+
+          {!isLoading && folders.length === 0 &&
+          <EmptyNote>{I18n.t('file_manager.no_subfolders')}</EmptyNote>}
         </FolderManagerWrapper>
 
         <Overlay show={showFileManager} onClick={this.toggleSideMenu}/>

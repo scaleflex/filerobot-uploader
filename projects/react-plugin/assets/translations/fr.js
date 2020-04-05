@@ -50,7 +50,8 @@ export default {
     go_back: 'Retour',
     select: 'Sélectionner',
     tag_image: 'Taguer l\'image',
-    edit_image: 'Editer l\'image'
+    edit_image: 'Editer l\'image',
+    no_subfolders: 'Pas de sous-dossier'
   },
   icons: {
     tab_title: 'Icônes gratuites',
