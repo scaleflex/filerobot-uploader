@@ -32,7 +32,6 @@ class UploadedImagesTab extends Component {
       isShowMoreImages: false,
       showFileManager: false,
       path: props.path || props.appState.config.uploadParams.dir,
-      folderBrowser: props.appState.config.folderBrowser,
       progressBar: {
         color: PROGRESS_COLORS.DEFAULT,
         status: 0
@@ -276,11 +275,11 @@ class UploadedImagesTab extends Component {
 
   render() {
     const {
-      isLoading, step, files, isDragOver, imagesIndex, directories, path, folderBrowser, searchPhrase = '',
+      isLoading, step, files, isDragOver, imagesIndex, directories, path, searchPhrase = '',
       progressBar: { color, status }, sortParams, imagesIndexWrapper
     } = this.state;
     const { appState: { config } } = this.props;
-    const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn } } = config;
+    const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn }, folderBrowser } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
 
     return (
@@ -299,10 +298,10 @@ class UploadedImagesTab extends Component {
 
         <HeaderWrap>
           <Nav>
-            {folderBrowser &&
+            {folderBrowser.show &&
             <FolderManager
               path={path}
-              rootDir={this.props.appState.config.uploadParams.dir}
+              rootDir={folderBrowser.rootFolder}
               folders={directories}
               goToLevelUpFolder={this.goToLevelUpFolder}
               changeFolder={this.activateFolder}

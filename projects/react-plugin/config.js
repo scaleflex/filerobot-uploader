@@ -10,7 +10,10 @@ export default {
     dir: '/'
   },
   language: 'en',
-  folderBrowser: true,
+  folderBrowser: {
+    show: true,
+    rootFolder: '/' // use cannot go up above rootFolder on server
+  },
   tagging: {
     executeAfterUpload: false,
     autoTaggingButton: false,

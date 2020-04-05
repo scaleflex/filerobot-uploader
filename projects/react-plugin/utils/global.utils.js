@@ -29,7 +29,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     isShowAddTagBtn: isDefined(config.isShowAddTagBtn) ? config.isShowAddTagBtn : CONFIG.isShowAddTagBtn,
     isShowNotRelevantBtn:  isDefined(config.isShowNotRelevantBtn) ? config.isShowNotRelevantBtn : CONFIG.isShowNotRelevantBtn,
     limit: config.limitImagesPerResponse || config.LIMIT_IMAGES_PER_RESPONSE || CONFIG.limitImagesPerResponse || 100,
-    folderBrowser: isDefined(config.folderBrowser) ? config.folderBrowser : CONFIG.folderBrowser,
+    folderBrowser: processFolderBrowserParams(config.folderBrowser, CONFIG.folderBrowser),
     preUploadImageProcess: isDefined(config.preUploadImageProcess) ? config.preUploadImageProcess : false,
     processBeforeUpload: isDefined(config.processBeforeUpload) ? config.processBeforeUpload : null,
     language: isDefined(config.language) ? config.language : CONFIG.language,
@@ -59,6 +59,22 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     }
   };
 };
+
+function processFolderBrowserParams(userParams, configParams) {
+  if (typeof userParams === 'object') {
+    return {
+      ...configParams,
+      ...userParams
+    }
+  } else if (typeof userParams === 'boolean') {
+    return {
+      ...configParams,
+      show: userParams
+    }
+  } else {
+    return configParams;
+  }
+}
 
 export {
   prepareConfig
