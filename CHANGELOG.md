@@ -31,11 +31,11 @@ Types of changes:
 
 ### Added
 - bread crumbs in my gallery tab
-- configurable default sort params
-- limit root folder on server
+- configurable default sort params [check the doc](https://github.com/scaleflex/filerobot-uploader#sortparams-object)
+- limit root folder on server [check the doc](https://github.com/scaleflex/filerobot-uploader#folderbrowser-object)
 
 ### Changed
-- folderBrowser *bool* to *object*. Now we can set two params:
+- folderBrowser *bool* to *object* [check the doc](https://github.com/scaleflex/filerobot-uploader#folderbrowser-object). Now we can set two params:
 **show** bool (as previously folderBrowser param was used) - show folder manager,
 **rootFolder** string - limit access to some root folder on server
 
