@@ -21,6 +21,7 @@ class UploadedImagesTab extends Component {
   constructor(props) {
     super();
 
+    const { sortParams } = props.appState.config;
     this.state = {
       searchPhrase: '',
       isLoading: false,
@@ -37,9 +38,8 @@ class UploadedImagesTab extends Component {
         status: 0
       },
       sortParams: {
-        field: 'name',
-        isUp: true,
-        backend: false // last sort, backend or local
+        field: sortParams.field,
+        isUp: sortParams.order === 'asc'
       },
       totalFilesCount: 0,
       imagesIndexWrapper: 0
@@ -280,7 +280,7 @@ class UploadedImagesTab extends Component {
       progressBar: { color, status }, sortParams, imagesIndexWrapper
     } = this.state;
     const { appState: { config } } = this.props;
-    const { myGallery: { upload: isUpload } } = config;
+    const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn } } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
 
     return (
@@ -333,10 +333,11 @@ class UploadedImagesTab extends Component {
           </SearchWrapper>
 
           <ActionButtonsWrapper>
+            {showSortBtn &&
             <SortDropdown
               applySort={this.applySort}
               sortParams={sortParams}
-            />
+            />}
             <ButtonSearch
               hide={!isUpload}
               className="ae-btn"

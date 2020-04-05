@@ -18,6 +18,11 @@ export default {
     confidence: 80,
     limit: 10,
     key: ''
+  },
+  sortParams: {
+    show: true,
+    field: 'name', // ['name', 'type', 'uploaded_at', 'modified_at'],
+    order: 'asc' // 'desc and asc'
   }
 };
 

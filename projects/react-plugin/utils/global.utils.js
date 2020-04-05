@@ -51,6 +51,11 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
 
     myGallery: {
       upload: isDefined(config.myGallery.upload) ? config.myGallery.upload : true
+    },
+
+    sortParams: {
+      ...CONFIG.sortParams,
+      ...config.sortParams
     }
   };
 };
