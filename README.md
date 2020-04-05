@@ -1,6 +1,6 @@
 > Repository includes React version and JS wrapper for standalone usage
 
-[![Release](https://img.shields.io/badge/release-v2.9.0-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
+[![Release](https://img.shields.io/badge/release-v2.10.0-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
 [![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)](https://www.filerobot.com/en/home#2de3fb9f-dd4a-457a-999a-025ad9bd5f3b)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -364,15 +364,41 @@ config.processBeforeUpload = {
 };
 ```
 
-#### `folderBrowser`: bool
+#### `folderBrowser`: object
 
-**default**: true
+**default**: { show: true, rootFolder: '/' }
 
 Aside menu to browse folders in your container.
 
+* `show`: bool - show folder manager
+
+* `rootFolder`: string - limit access to some root folder on server
+
 ```
-config.folderBrowser = true;
+config.folderBrowser = {
+    show: true,
+    rootFolder: '/'
+};
 ```
+
+#### `sortParams`: object
+
+**default**: { show: true, field: 'name', order: 'asc' }
+
+Default sorting for my gallery tab
+
+* `show`: bool - show sort module
+
+* `field`: string - sort field: ['name', 'type', 'uploaded_at', 'modified_at']
+
+* `order`: string - the sort order can be either asc (ascending/up) or desc (descending/down).
+
+```
+config.sortParams = {
+    show: true,
+    field: 'name',
+    order: 'asc'
+};
 
 #### `myGallery`: object
 

@@ -27,6 +27,23 @@ Types of changes:
 -------------
 
 
+## 2.10.0 - 2020-04-05
+
+### Added
+- bread crumbs in my gallery tab
+- configurable default sort params
+- limit root folder on server
+
+### Changed
+- folderBrowser *bool* to *object*. Now we can set two params:
+**show** bool (as previously folderBrowser param was used) - show folder manager,
+**rootFolder** string - limit access to some root folder on server
+
+## Fixed
+- after upload stay in the same directory
+- on cancel search stay in the same directory
+
+
 ## 2.9.0 - 2020-04-03
 
 ### Added
