@@ -21,7 +21,9 @@ class UploadedImagesTab extends Component {
   constructor(props) {
     super();
 
-    const { sortParams } = props.appState.config;
+    const { path, appState } = props;
+    const { path: currentPath, config } = appState;
+    const { sortParams, uploadParams } = config;
     this.state = {
       searchPhrase: '',
       isLoading: false,
@@ -31,7 +33,7 @@ class UploadedImagesTab extends Component {
       directories: [],
       isShowMoreImages: false,
       showFileManager: false,
-      path: props.path || props.appState.config.uploadParams.dir,
+      path: currentPath || path || uploadParams.dir,
       progressBar: {
         color: PROGRESS_COLORS.DEFAULT,
         status: 0
@@ -72,7 +74,6 @@ class UploadedImagesTab extends Component {
     const config = this.props.appState.config;
     const files = isUploadFromUrl ? [url] : this.state.filesToUpload;
     const dataType = isUploadFromUrl ? 'application/json' : 'files[]';
-    const dir = isUploadFromUrl ? false : path;
 
     this.uploadStart();
 
@@ -80,7 +81,7 @@ class UploadedImagesTab extends Component {
       files,
       config: { ...config, onUploadProgress: this.onUploadProgress },
       data_type: dataType,
-      dir,
+      dir: path,
       showAlert: this.props.showAlert
     })
       .then(([files, isDuplicate, isReplacingData]) => {
@@ -92,7 +93,7 @@ class UploadedImagesTab extends Component {
 
         if (config.tagging.active) {
           this.props.saveUploadedFiles(files);
-          this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
+          this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY', { path });
           return;
         }
 
@@ -238,7 +239,7 @@ class UploadedImagesTab extends Component {
       searchPhrase: '',
       searchInputIndex: this.state.searchInputIndex + 1
     }, () => {
-      this.activateFolder(this.props.appState.config.uploadParams.dir);
+      this.activateFolder(this.state.path);
     })
   }
 
