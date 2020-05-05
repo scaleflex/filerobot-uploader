@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 
@@ -6,7 +6,11 @@ function BreadCrumbs({ path }) {
 
   return (
     <Wrapper>
-      <span>Root</span> {(path || '').split('/').filter(item => item).map(item => <><span>/</span><span>{item}</span></>)}
+      <span>Root</span> {
+      (path || '').split('/')
+        .filter(item => item)
+        .map((item, index) => <Fragment key={index}><span>/</span><span>{item}</span></Fragment>)
+    }
     </Wrapper>
   )
 }
