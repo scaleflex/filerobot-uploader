@@ -49,6 +49,7 @@ export default {
     select: 'Select',
     tag_image: 'Tag image',
     edit_image: 'Edit image',
+    delete_image: 'Delete image',
     no_subfolders: 'No subfolders'
   },
   icons: {

@@ -198,6 +198,10 @@ class UploadedImagesTab extends Component {
     })
   }
 
+  forceUpdate = () => {
+    this.setState({ files: [] }, () => { this.onGetListFiles(this.state.path); })
+  };
+
   onShowMoreImages = (resizeOnSuccess) => {
     if (this.state.isShowMoreImages) return;
 
@@ -365,6 +369,7 @@ class UploadedImagesTab extends Component {
           isShowMoreImages={this.state.isShowMoreImages}
           isLoading={isLoading}
           path={path}
+          forceUpdate={this.forceUpdate}
         />
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}

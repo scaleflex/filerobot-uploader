@@ -251,3 +251,12 @@ export const getTokenSettings = ({ container = '', baseAPI, platform, uploadKey 
       productsEnabled: settings._products_enabled === 1
     }));
 };
+
+export const deleteImage = ({ item, baseAPI, container = '', platform, fileUuid, dir, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
+  const apiPath = `file/${item.uuid}`;
+  const url = [baseUrl, apiPath].join('');
+
+  return send(url, 'DELETE', null, { [getSecretHeaderName(platform)]: uploadKey })
+    .then((response = {}) => response);
+};

@@ -10,6 +10,7 @@ import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
 import { getPermalink } from '../../utils/adjustAPI.utils'
+import { deleteImage } from '../../services/api.service';
 
 
 class UploadedImagesContent extends Component {
@@ -90,6 +91,23 @@ class UploadedImagesContent extends Component {
     }
   }
 
+  onDeleteImage = (event, item) => {
+    const { forceUpdate, appState } = this.props;
+    const { container, uploadKey, baseAPI, platform } = appState.config;
+    event.preventDefault();
+    event.stopPropagation();
+
+    deleteImage({ item, container, uploadKey, baseAPI, platform })
+      .then(response => {
+        if (response.status === 'success') {
+          forceUpdate();
+        }
+      })
+      .catch(() => {
+        alert(I18n.t('tagging.something_went_wrong_try_again'));
+    });
+  };
+
   render() {
     const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
@@ -165,6 +183,9 @@ class UploadedImagesContent extends Component {
         </ImageDescription>
 
         <Overlay>
+          <EditIconWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
+            <EditButton fullBr={'4px'}>{I18n.t('file_manager.delete_image')}</EditButton>
+          </EditIconWrapper>
           {isEditImage && isImageType &&
           <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
             <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
