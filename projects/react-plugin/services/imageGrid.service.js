@@ -12,10 +12,13 @@ export const getActualColumnWidth = (containerWidth = 0, minColumnWidth = 200, g
   return getColumnWidth(containerWidth, columnCount, gutterSize);
 };
 
-export const getResizeImageUrl = (url = '', width = 300) => `https://scaleflex.cloudimg.io/width/${Math.round(width)}/s/${url}`;
+export const getResizeImageUrl = (url = '', width = 300, cloudimageToken = 'demo') =>
+  `https://${cloudimageToken}.cloudimg.io/v7/${processUrl(url)}w=${Math.round(width)}`;
 
-export const getFitResizeImageUrl = (url = '', width = 300, height = 200) =>
-  `https://scaleflex.cloudimg.io/fit/${Math.round(width)}x${Math.round(height)}/ffffff/${url}`;
+export const getFitResizeImageUrl = (url = '', width = 300, height = 200, cloudimageToken = 'demo') =>
+  `https://${cloudimageToken}.cloudimg.io/v7/${processUrl(url)}func=fit&bg_color=ffffff&w=${Math.round(width)}&h=${Math.round(height)}`;
 
-export const getCropImageUrl = (url = '', width = 300, height = 200) =>
-  `https://scaleflex.cloudimg.io/crop/${Math.round(width)}x${Math.round(height)}/s/${url}`;
+export const getCropImageUrl = (url = '', width = 300, height = 200, cloudimageToken = 'demo') =>
+  `https://${cloudimageToken}.cloudimg.io/v7/${processUrl(url)}func=crop&w=${Math.round(width)}&h=${Math.round(height)}`;
+
+const processUrl = url => url.includes('?') ? `${url}&` : `${url}?`;

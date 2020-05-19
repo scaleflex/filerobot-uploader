@@ -134,14 +134,15 @@ class UploadedImagesContent extends Component {
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
-    const { tagging, imageEditor } = this.props.appState.config;
+    const { tagging, imageEditor, cloudimageToken } = this.props.appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
     const icon = getFitResizeImageUrl(
       isImageType ? encodePermalink(getPermalink(item)) : getFileIconSrcByType(item.type),
       columnWidth,
-      Math.floor(columnWidth / (item.ratio || 1.6))
+      Math.floor(columnWidth / (item.ratio || 1.6)),
+      cloudimageToken
     );
 
     return (

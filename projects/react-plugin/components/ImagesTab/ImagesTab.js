@@ -297,6 +297,7 @@ class ImagesTab extends Component {
       isSearching, searchPhrase, activeTags, activePresetTag, imageGridWrapperWidth, isShowMoreImages, backgrounds,
       related_tags, images, count, presetImagesCount
     } = this.state;
+    const { cloudimageToken } = this.props.appState.config;
     const colorFilter = activeColorFilters[activeColorFilterIndex] || {};
     const { columnWidth, gutterSize } = imageGrid;
     const isBackground = activePresetTag === 'backgrounds';
@@ -332,7 +333,13 @@ class ImagesTab extends Component {
                   list={imagesList}
                   upload={this.upload}
                   onShowMoreImages={this.onShowMoreImages}
-                  cellContent={(props) => <ImageBox props={props} upload={this.upload} onKeyDown={this.onKeyDown}/>}
+                  cellContent={(props) =>
+                    <ImageBox
+                      props={props}
+                      upload={this.upload}
+                      onKeyDown={this.onKeyDown}
+                      cloudimageToken={cloudimageToken}
+                    />}
                 />
                 <ShowMoreResultsSpinner show={isShowMoreImages}/>
               </Aux>
