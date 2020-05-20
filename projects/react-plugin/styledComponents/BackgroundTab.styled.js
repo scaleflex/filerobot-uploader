@@ -54,20 +54,45 @@ export const TabWrap = styled.div`
   height: 100%;
 `;
 
-export const EditIconWrapper = styled.div`
+export const ControlWrapper = styled('div')`
   display: none;
-  width: 100%;
-  padding: 4px;
+  width: 33%;
+  padding: 2px;
   z-index: 50;
   text-align: center;
+  
+  :first-child {
+    padding-left: 0;
+  }
+  :last-child {
+    padding-right: 0;
+  }
 `;
 
-export const TagIconWrapper = styled(EditIconWrapper)`
+export const Control = styled('div')`
+  border-radius: 6px;
+  border: 1px solid #fff;
+  font-size: 10px;
+  color: #acacac;
+  padding: 5px;
+  text-align: center;
 
+  :hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
 `;
 
-export const SelectIconWrapper = styled(EditIconWrapper)`
+export const Icon = styled('span')`
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  font-size: 45px;
+`;
 
+export const SelectButton = styled(ControlWrapper)`
+  width: 100%;
 `;
 
 export const ImageWrapper = styled.div`
@@ -82,7 +107,7 @@ export const ImageWrapper = styled.div`
     transform: scale(${props => props.isNotImage ? 0.85 : 1.1});
   }
   
-  :hover ${EditIconWrapper} {
+  :hover ${ControlWrapper} {
     display: block;
   }
   
@@ -109,17 +134,22 @@ export const Overlay = styled.div`
   display: none;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 25px;
   position: absolute;
+  top: -20px;
   left: 0;
   right: 0;
-  top: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.8);
+  padding: 0 10px;
   
   ${ImageWrapper}:hover & {
     display: flex;
   }
+`;
+
+export const Controls = styled('div')`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const Img = styled.img`
@@ -290,7 +320,11 @@ export const ImageName = styled.div`
 
 export const EditButton = styled(ButtonSearch)`
   background-color: ${p => p.success ? '#28a745' : p.theme.buttonBackground};
-  min-width: 130px;
+  width: 100%;
+  margin-top: 5px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0;
   
   :hover {
     background-color: ${p => p.success ? '#208638' : p.theme.hoverButtonBackground};

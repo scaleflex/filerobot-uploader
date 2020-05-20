@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
-  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, SelectIconWrapper, EditButton
+  ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlWrapper, Control, Icon
 } from '../../styledComponents';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/imageGrid.service';
@@ -183,20 +183,32 @@ class UploadedImagesContent extends Component {
         </ImageDescription>
 
         <Overlay>
-          <EditIconWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
-            <EditButton fullBr={'4px'}>{I18n.t('file_manager.delete_image')}</EditButton>
-          </EditIconWrapper>
-          {isEditImage && isImageType &&
-          <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-            <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
-          </EditIconWrapper>}
-          {isTagImage &&
-          <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
-            <EditButton fullBr={'4px'}>{I18n.t('file_manager.tag_image')}</EditButton>
-          </TagIconWrapper>}
-          <SelectIconWrapper onClick={() => { this.select(item); }}>
+          <Controls>
+            {isEditImage && isImageType &&
+            <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
+              <Control>
+                <span>{I18n.t('file_manager.edit_image')}</span>
+                <Icon className="sfi-airstore-edit"/>
+              </Control>
+            </ControlWrapper>}
+            {isTagImage &&
+            <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
+              <Control>
+                <span>{I18n.t('file_manager.tag_image')}</span>
+                <Icon className="sfi-airstore-tag"/>
+              </Control>
+            </ControlWrapper>}
+            <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
+              <Control>
+                <span>{I18n.t('file_manager.delete_image')}</span>
+                <Icon className="sfi-airstore-delete"/>
+              </Control>
+            </ControlWrapper>
+          </Controls>
+
+          <SelectButton onClick={() => { this.select(item); }}>
             <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
-          </SelectIconWrapper>
+          </SelectButton>
         </Overlay>
       </ImageWrapper>
     );
