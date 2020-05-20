@@ -16,6 +16,7 @@ export default {
     apply: 'Apply',
     categories: 'Categories',
     file_already_exists: 'File already exists in your gallery',
+    invalid_file_extension: 'Invalid file extension',
     all: 'All',
     too_small: 'The Uploader is not available on mobile, please use it on a Desktop',
     close: 'Close',
