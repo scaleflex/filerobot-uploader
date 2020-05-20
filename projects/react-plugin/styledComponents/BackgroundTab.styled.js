@@ -149,7 +149,7 @@ export const Overlay = styled.div`
 
 export const Controls = styled('div')`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const Img = styled.img`
