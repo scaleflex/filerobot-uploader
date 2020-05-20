@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'filerobot-uploader-font';
-  src:  url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.eot?erlgi2');
-  src:  url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.eot?erlgi2#iefix') format('embedded-opentype'),
-    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.ttf?erlgi2') format('truetype'),
-    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.woff?erlgi2') format('woff'),
-    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.svg?erlgi2#filerobot-uploader-font') format('svg');
+  src:  url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.eot?u6lcwr');
+  src:  url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.eot?u6lcwr#iefix') format('embedded-opentype'),
+    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.ttf?u6lcwr') format('truetype'),
+    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.woff?u6lcwr') format('woff'),
+    url('https://cdn.scaleflex.it/plugins/filerobot-uploader/assets/fonts/filerobot-uploader-font/filerobot-uploader-font.svg?u6lcwr#filerobot-uploader-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sfi-airstore-edit:before {
+  content: "\e910";
+}
+.sfi-airstore-delete:before {
+  content: "\e911";
+}
+.sfi-airstore-tag:before {
+  content: "\e912";
+}
+.sfi-airstore-folder-manager:before {
+  content: "\e90f";
+}
 .sfi-airstore-image-editor:before {
   content: "\e90d";
 }
