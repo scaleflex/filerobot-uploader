@@ -56,7 +56,8 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     sortParams: {
       ...CONFIG.sortParams,
       ...config.sortParams
-    }
+    },
+    extensions: config.extensions || []
   };
 };
 

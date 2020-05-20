@@ -8,6 +8,7 @@ import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
 import PreUploadProcess from './PreUploadProcess';
 import { isImage } from '../../utils/icons.utils';
+import { checkIsValidExtension } from './UserUploaderTab.utils';
 
 
 const STEP = {
@@ -42,11 +43,16 @@ class UserUploaderTab extends Component {
 
   fileDropHandler = event => {
     event.preventDefault();
-    this.changeFile((event.dataTransfer || event.originalEvent.dataTransfer).files);
+    const files = (event.dataTransfer || event.originalEvent.dataTransfer).files;
+    const isValid = this.validateExtensions(files);
+
+    if (isValid) this.changeFile(files);
   };
 
   fileChangeHandler = ({ target }) => {
-    this.changeFile(target.files);
+    const isValid = this.validateExtensions(target.files);
+
+    if (isValid) this.changeFile(target.files);
   };
 
   changeFile = (files = []) => {
@@ -147,10 +153,25 @@ class UserUploaderTab extends Component {
 
   uploadFromWeb = () => {
     const value = this._uploadFromWebField.value;
-    const isValid = value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
+    const isValidUrl = !!value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
 
-    if (isValid) this.upload(true, value);
-    else this.uploadError(value ? I18n.t('upload.url_not_valid') : I18n.t('upload.empty_url'), 4000);
+    if (!isValidUrl) {
+      this.props.showAlert('', value ? I18n.t('upload.url_not_valid') : I18n.t('upload.empty_url'), 'warning');
+    } else {
+      const isValidExtension = this.validateExtensions(value, true);
+      if (isValidExtension) this.upload(true, value);
+    }
+  };
+
+  validateExtensions = (files, isFromWeb) => {
+    const { extensions } = this.props.appState.config;
+    const { isValid, invalidExtensions = '' } = checkIsValidExtension(files, extensions, isFromWeb);
+
+    if (isValid) return true;
+    else if (!isValid && files) {
+      this.props.showAlert('', `${I18n.t('upload.invalid_file_extension')}${invalidExtensions ? `: ${invalidExtensions}` : ''}`, 'warning');
+      return false;
+    } else return false;
   };
 
   setDragOverOn = e => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
-  EditIconWrapper, ShowMoreResultsSpinner, TagIconWrapper, Overlay, SelectIconWrapper, EditButton
+  ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlWrapper, Control, Icon
 } from '../../styledComponents';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/imageGrid.service';
@@ -10,6 +10,7 @@ import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
 import { getPermalink } from '../../utils/adjustAPI.utils'
+import { deleteImage } from '../../services/api.service';
 
 
 class UploadedImagesContent extends Component {
@@ -90,6 +91,23 @@ class UploadedImagesContent extends Component {
     }
   }
 
+  onDeleteImage = (event, item) => {
+    const { forceUpdate, appState } = this.props;
+    const { container, uploadKey, baseAPI, platform } = appState.config;
+    event.preventDefault();
+    event.stopPropagation();
+
+    deleteImage({ item, container, uploadKey, baseAPI, platform })
+      .then(response => {
+        if (response.status === 'success') {
+          forceUpdate();
+        }
+      })
+      .catch(() => {
+        alert(I18n.t('tagging.something_went_wrong_try_again'));
+    });
+  };
+
   render() {
     const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper } = this.props;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
@@ -134,14 +152,15 @@ class UploadedImagesContent extends Component {
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
-    const { tagging, imageEditor } = this.props.appState.config;
+    const { tagging, imageEditor, cloudimageToken } = this.props.appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
     const icon = getFitResizeImageUrl(
       isImageType ? encodePermalink(getPermalink(item)) : getFileIconSrcByType(item.type),
       columnWidth,
-      Math.floor(columnWidth / (item.ratio || 1.6))
+      Math.floor(columnWidth / (item.ratio || 1.6)),
+      cloudimageToken
     );
 
     return (
@@ -164,17 +183,32 @@ class UploadedImagesContent extends Component {
         </ImageDescription>
 
         <Overlay>
-          {isEditImage && isImageType &&
-          <EditIconWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-            <EditButton fullBr={'4px'}>{I18n.t('file_manager.edit_image')}</EditButton>
-          </EditIconWrapper>}
-          {isTagImage &&
-          <TagIconWrapper onClick={(event) => { this.onTagImage(event, item); }}>
-            <EditButton fullBr={'4px'}>{I18n.t('file_manager.tag_image')}</EditButton>
-          </TagIconWrapper>}
-          <SelectIconWrapper onClick={() => { this.select(item); }}>
+          <Controls>
+            {isEditImage && isImageType &&
+            <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
+              <Control>
+                <span>{I18n.t('file_manager.edit_image')}</span>
+                <Icon className="sfi-airstore-edit"/>
+              </Control>
+            </ControlWrapper>}
+            {isTagImage &&
+            <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
+              <Control>
+                <span>{I18n.t('file_manager.tag_image')}</span>
+                <Icon className="sfi-airstore-tag"/>
+              </Control>
+            </ControlWrapper>}
+            <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
+              <Control>
+                <span>{I18n.t('file_manager.delete_image')}</span>
+                <Icon className="sfi-airstore-delete"/>
+              </Control>
+            </ControlWrapper>
+          </Controls>
+
+          <SelectButton onClick={() => { this.select(item); }}>
             <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
-          </SelectIconWrapper>
+          </SelectButton>
         </Overlay>
       </ImageWrapper>
     );
