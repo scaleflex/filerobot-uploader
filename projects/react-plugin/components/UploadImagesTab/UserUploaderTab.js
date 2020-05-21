@@ -165,10 +165,12 @@ class UserUploaderTab extends Component {
 
   validateExtensions = (files, isFromWeb) => {
     const { extensions } = this.props.appState.config;
+    if (!extensions.length) return true;
     const { isValid, invalidExtensions = '' } = checkIsValidExtension(files, extensions, isFromWeb);
 
-    if (isValid) return true;
-    else if (!isValid && files) {
+    if (isValid) {
+      return true;
+    } else if (!isValid && files) {
       this.props.showAlert('', `${I18n.t('upload.invalid_file_extension')}${invalidExtensions ? `: ${invalidExtensions}` : ''}`, 'warning');
       return false;
     } else return false;

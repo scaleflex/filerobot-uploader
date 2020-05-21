@@ -9,7 +9,7 @@ export const checkIsValidExtension = (files, userExtensions, isFromWeb = false) 
     [files.split('.').pop()]
       :
     [...files].map(file => file.type.split('/').pop());
-  const isValid = filesExtensions.every(file => nextUserExtensions.includes(file));
+  const isValid = filesExtensions.every(ext => nextUserExtensions.some(userExt => ext.includes(userExt)));
 
   filesExtensions.forEach(file => {
     if (!nextUserExtensions.includes(file)) invalidExtensions.push(file);
