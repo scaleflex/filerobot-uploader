@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
-import { getPubliclink, getCDNlink, getPermalink } from '../../utils/adjustAPI.utils';
+import { getPubliclink, getCDNlink, getPubliclink } from '../../utils/adjustAPI.utils';
 
 
 const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
@@ -28,7 +28,7 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
   }
 
   if (prevTab === 'TAGGING') {
-    const files = [{ ...file, public_link: getPermalink(file) }];
+    const files = [{ ...file, public_link: getPubliclink(file) }];
 
     saveUploadedFiles(files);
 

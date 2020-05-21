@@ -6,7 +6,7 @@ import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
 import { encodePermalink } from '../../utils';
 import md5 from '../../utils/md5';
-import { getPermalink } from '../../utils/adjustAPI.utils'
+import { getPubliclink } from '../../utils/adjustAPI.utils'
 
 
 const OPTIONS_1x1 = [
@@ -100,7 +100,7 @@ class CropsBox extends Component {
         }
 
         const file = files[0] || {};
-        this.uploadSuccess(`${encodePermalink(getPermalink(file))}?${md5(file.modified_at || '').split(0, 5)}`);
+        this.uploadSuccess(encodePermalink(getPubliclink(file)));
 
         this.props.saveUploadedFiles(files);
         this.props.setSpinner(false);
