@@ -8,7 +8,6 @@ import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/image
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
-import md5 from '../../utils/md5';
 import { getPermalink } from '../../utils/adjustAPI.utils'
 import { deleteImage } from '../../services/api.service';
 
@@ -156,7 +155,7 @@ class UploadedImagesContent extends Component {
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
-    const icon = getFitResizeImageUrl(
+    const url = getFitResizeImageUrl(
       isImageType ? encodePermalink(getPermalink(item)) : getFileIconSrcByType(item.type),
       columnWidth,
       Math.floor(columnWidth / (item.ratio || 1.6)),
@@ -173,7 +172,7 @@ class UploadedImagesContent extends Component {
       >
         <div style={{ overflow: 'hidden', background: 'rgba(155,155,155,.15)' }}>
           <Img
-            src={`${icon}?${md5(item.modified_at || '').split(0, 5)}`}
+            src={url}
             isNotImage={!isImageType}
             height={Math.floor(columnWidth / (item.ratio || 1.6))}
           />
