@@ -172,7 +172,10 @@ class UserUploaderTab extends Component {
     if (isValid) {
       return true;
     } else if (!isValid && files) {
-      this.props.showAlert('', `${I18n.t('upload.invalid_file_extension')}${invalidExtensions ? `: ${invalidExtensions}` : ''}`, 'warning');
+      const alert =
+        `${I18n.t('upload.invalid_file_extension')}${invalidExtensions ? `: ${invalidExtensions}. ` +
+        `Accepted files types: ${processExtensions(extensions).join(', ')}.` : ''}`;
+      this.props.showAlert('', alert, 'warning');
       return false;
     } else return false;
   };
