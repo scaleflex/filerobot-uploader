@@ -9,6 +9,7 @@ import * as API from '../../services/api.service';
 import PreUploadProcess from './PreUploadProcess';
 import { isImage } from '../../utils/icons.utils';
 import { checkIsValidExtension } from './UserUploaderTab.utils';
+import { processExtensions } from './UserUploaderTab.utils';
 
 
 const STEP = {
@@ -212,6 +213,8 @@ class UserUploaderTab extends Component {
     const { isMobile, appState } = this.props;
     const { step, errorMsg = '', progressBar: { color, status }, imagesToUpload } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
+    const { extensions } = appState.config;
+    const isUserExtensions = !!extensions.length;
 
     return (
       <div style={styles.container}>
@@ -289,7 +292,10 @@ class UserUploaderTab extends Component {
                     </SearchWrapper>
                   </Fragment>}
                   <ItemName pt={'0'}>
-                    {I18n.t('upload.accepted_file_types')}
+                    {isUserExtensions ?
+                      `${I18n.t('upload.accepted_file_types')}: ${processExtensions(extensions).join(", ")}. ${I18n.t('upload.accepted_file_size')}`
+                      :
+                      I18n.t('upload.accepted_file_size')}
                   </ItemName>
                 </div>
 
