@@ -187,20 +187,20 @@ class UploadedImagesContent extends Component {
             {isEditImage && isImageType &&
             <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.edit_image')}</span>
+                <span>{I18n.t('file_manager.edit')}</span>
                 <Icon className="sfi-airstore-edit"/>
               </Control>
             </ControlWrapper>}
             {isTagImage &&
             <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.tag_image')}</span>
+                <span>{I18n.t('file_manager.tag')}</span>
                 <Icon className="sfi-airstore-tag"/>
               </Control>
             </ControlWrapper>}
             <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.delete_image')}</span>
+                <span>{I18n.t('file_manager.delete')}</span>
                 <Icon className="sfi-airstore-delete"/>
               </Control>
             </ControlWrapper>

@@ -48,9 +48,9 @@ export default {
     media_library: 'Media Library',
     go_back: 'Go back',
     select: 'Select',
-    tag_image: 'Tag image',
-    edit_image: 'Edit image',
-    delete_image: 'Delete image',
+    tag: 'Tag',
+    edit: 'Edit',
+    delete: 'Delete',
     no_subfolders: 'No subfolders'
   },
   icons: {

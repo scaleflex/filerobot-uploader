@@ -16,6 +16,7 @@ export default {
     apply: 'Применить',
     categories: 'Категории',
     file_already_exists: 'Файл уже существует в галерее',
+    invalid_file_extension: 'Неверное расширение файла',
     all: 'Все',
     too_small: 'Нет поддержки на мобильных устройствах',
     close: 'Закрыть',
@@ -31,13 +32,13 @@ export default {
     cancel: 'Отменить',
     selected_files: 'Добавленные файлы',
     total_size: 'размер',
-    sort: 'Sort',
-    name: 'Name',
-    size: 'Size',
-    type: 'Type',
-    modified: 'Modified',
-    uploaded: 'Uploaded',
-    product_position: 'Product position',
+    sort: 'Сортировать',
+    name: 'Имя',
+    size: 'Размер',
+    type: 'Тип',
+    modified: 'Изменен',
+    uploaded: 'Загружен',
+    product_position: 'Позиция',
     product_ref: 'Product reference'
   },
   file_manager: {
@@ -49,9 +50,10 @@ export default {
     media_library: 'Медиагалерея',
     go_back: 'Назад',
     select: 'Выбрать',
-    tag_image: 'Изменить теги',
-    edit_image: 'Редактировать',
-    no_subfolders: 'No subfolders'
+    tag: 'Изменить',
+    edit: 'Редактировать',
+    delete: 'Удалить',
+    no_subfolders: 'Нет подпапок'
   },
   icons: {
     tab_title: 'Иконки',

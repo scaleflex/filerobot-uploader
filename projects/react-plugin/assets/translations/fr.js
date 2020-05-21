@@ -16,6 +16,7 @@ export default {
     apply: 'Appliquer',
     categories: 'Catégories',
     file_already_exists: 'Le fichier existe déjà dans votre galerie',
+    invalid_file_extension: 'Extension de fichier invalide',
     all: 'Tout afficher',
     too_small: 'Le téléchargement de fichier n\'est pas disponible sur mobile.',
     close: 'Fermer',
@@ -49,8 +50,9 @@ export default {
     media_library: 'Bibliothèque des médias',
     go_back: 'Retour',
     select: 'Sélectionner',
-    tag_image: 'Taguer l\'image',
-    edit_image: 'Editer l\'image',
+    tag: 'Taguer',
+    edit: 'Editer',
+    delete: 'Delete',
     no_subfolders: 'Pas de sous-dossier'
   },
   icons: {
