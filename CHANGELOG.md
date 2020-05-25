@@ -51,3 +51,9 @@ Types of changes:
 
 ### Fixed
 - show more images on scroll
+
+## 2.11.0 - 2020-05-22
+
+### Added
+- add possibility to delete image
+- add possibility to limit files according to the extension on upload
