@@ -8,7 +8,7 @@ import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/image
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
-import { getPubliclink } from '../../utils/adjustAPI.utils'
+import { getCDNlink } from '../../utils/adjustAPI.utils';
 import { deleteImage } from '../../services/api.service';
 
 
@@ -57,9 +57,9 @@ class UploadedImagesContent extends Component {
     const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
 
     if (isForceUpload) {
-      this.props.upload(true, getPubliclink(item));
+      this.props.upload(true, getCDNlink(item));
     } else {
-      const files = [{...item, public_link: getPubliclink(item) }];
+      const files = [{...item, public_link: getCDNlink(item) }];
       this.props.appState.config.uploadHandler(files, { stage: 'select' });
       this.props.closeModal();
     }
@@ -70,7 +70,7 @@ class UploadedImagesContent extends Component {
     event.stopPropagation();
 
     if (this.props.appState.config.tagging.active) {
-      const files = [{...item, public_link: getPubliclink(item) }];
+      const files = [{...item, public_link: getCDNlink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
@@ -83,7 +83,7 @@ class UploadedImagesContent extends Component {
 
     if (this.props.appState.config.imageEditor.active) {
       const { path } = this.props;
-      const files = [{...item, public_link: getPubliclink(item) }];
+      const files = [{...item, public_link: getCDNlink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path });
@@ -108,10 +108,15 @@ class UploadedImagesContent extends Component {
   };
 
   render() {
-    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper } = this.props;
+    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper,
+    appState } = this.props;
+    const { container = '' } = appState.config;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = isUpload ? [{ id: 'uploaderBox' }, ...files] : [...files];
+    const isFilerobotToken = /^[fF]/g.test(container);
+
+    if (!isFilerobotToken) this.props.showAlert('', I18n.t('upload.invalid_token'), 'warning');
 
     return (
       <Content
@@ -123,7 +128,7 @@ class UploadedImagesContent extends Component {
         isDragOver={isDragOver}
         key={imagesIndexWrapper}
       >
-        {files.length ?
+        {files.length && isFilerobotToken ?
           <VirtualizedImagesGrid
             key={imagesIndex}
             imageGridWrapperWidth={imageGridWrapperWidth}
@@ -156,7 +161,7 @@ class UploadedImagesContent extends Component {
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
     const url = getFitResizeImageUrl(
-      isImageType ? encodePermalink(getPubliclink(item)) : getFileIconSrcByType(item.type),
+      isImageType ? encodePermalink(getCDNlink(item)) : getFileIconSrcByType(item.type),
       columnWidth,
       Math.floor(columnWidth / (item.ratio || 1.6)),
       cloudimageToken

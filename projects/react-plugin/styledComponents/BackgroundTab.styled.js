@@ -89,6 +89,7 @@ export const Icon = styled('span')`
   height: 45px;
   line-height: 45px;
   font-size: 45px;
+  width: 100%;
 `;
 
 export const SelectButton = styled(ControlWrapper)`

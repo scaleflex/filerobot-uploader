@@ -295,7 +295,7 @@ class UploadedImagesTab extends Component {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, searchPhrase = '',
       progressBar: { color, status }, sortParams, imagesIndexWrapper
     } = this.state;
-    const { appState: { config } } = this.props;
+    const { appState: { config }, showAlert } = this.props;
     const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn }, folderBrowser } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
 
@@ -382,6 +382,7 @@ class UploadedImagesTab extends Component {
           isLoading={isLoading}
           path={path}
           forceUpdate={this.forceUpdate}
+          showAlert={showAlert}
         />
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}

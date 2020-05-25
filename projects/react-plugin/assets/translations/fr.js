@@ -40,7 +40,8 @@ export default {
     modified: 'Date de motification',
     uploaded: 'Date de création',
     product_position: 'Product position',
-    product_ref: 'Product reference'
+    product_ref: 'Product reference',
+    invalid_token: 'Jeton invalide'
   },
   file_manager: {
     tab_title: 'Ma galerie',

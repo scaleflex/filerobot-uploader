@@ -38,7 +38,8 @@ export default {
     size: 'Size',
     type: 'Type',
     modified: 'Modified date',
-    uploaded: 'Uploaded date'
+    uploaded: 'Uploaded date',
+    invalid_token: 'Invalid token'
   },
   file_manager: {
     tab_title: 'My gallery',

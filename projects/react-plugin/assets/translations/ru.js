@@ -40,7 +40,8 @@ export default {
     modified: 'Изменен',
     uploaded: 'Загружен',
     product_position: 'Позиция',
-    product_ref: 'Product reference'
+    product_ref: 'Product reference',
+    invalid_token: 'Некорректный токен'
   },
   file_manager: {
     tab_title: 'Галерея',
