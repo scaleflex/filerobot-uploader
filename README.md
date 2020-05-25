@@ -447,9 +447,18 @@ config.tagging = {
 };
 ```
 
+#### `extensions`: array
+
+**default**: [ ]
+
+Allows to limit files according to the extension on upload. Extension **jpg** = **jpeg** and vice versa.
+```
+config.extensions = ['jpg', 'png', 'pdf'];
+```
+
 #### `colorScheme`: object
 
-* `active` string (default: 'default')- active theme scheme
+* `active` string (default: 'default'; available schemes: light, dark, solarized, purple, lilac)- active theme scheme
 
 * `custom`: object - custom color scheme
 

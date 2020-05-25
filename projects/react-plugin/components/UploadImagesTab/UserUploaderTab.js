@@ -8,7 +8,7 @@ import { I18n } from 'react-i18nify';
 import * as API from '../../services/api.service';
 import PreUploadProcess from './PreUploadProcess';
 import { isImage } from '../../utils/icons.utils';
-import { checkIsValidExtension } from './UserUploaderTab.utils';
+import { processExtensions, validateExtensions } from './UserUploaderTab.utils';
 
 
 const STEP = {
@@ -43,14 +43,18 @@ class UserUploaderTab extends Component {
 
   fileDropHandler = event => {
     event.preventDefault();
+    const { appState, showAlert } = this.props;
+    const { extensions } = appState.config;
     const files = (event.dataTransfer || event.originalEvent.dataTransfer).files;
-    const isValid = this.validateExtensions(files);
+    const isValid = validateExtensions(files, extensions, showAlert);
 
     if (isValid) this.changeFile(files);
   };
 
   fileChangeHandler = ({ target }) => {
-    const isValid = this.validateExtensions(target.files);
+    const { appState, showAlert } = this.props;
+    const { extensions } = appState.config;
+    const isValid = validateExtensions(target.files, extensions, showAlert);
 
     if (isValid) this.changeFile(target.files);
   };
@@ -152,26 +156,17 @@ class UserUploaderTab extends Component {
   }
 
   uploadFromWeb = () => {
+    const { appState, showAlert } = this.props;
+    const { extensions } = appState.config;
     const value = this._uploadFromWebField.value;
     const isValidUrl = !!value && /^(http:\/\/|https:\/\/|\/\/)/.test(value);
 
     if (!isValidUrl) {
       this.props.showAlert('', value ? I18n.t('upload.url_not_valid') : I18n.t('upload.empty_url'), 'warning');
     } else {
-      const isValidExtension = this.validateExtensions(value, true);
+      const isValidExtension = validateExtensions(value, extensions, showAlert, true);
       if (isValidExtension) this.upload(true, value);
     }
-  };
-
-  validateExtensions = (files, isFromWeb) => {
-    const { extensions } = this.props.appState.config;
-    const { isValid, invalidExtensions = '' } = checkIsValidExtension(files, extensions, isFromWeb);
-
-    if (isValid) return true;
-    else if (!isValid && files) {
-      this.props.showAlert('', `${I18n.t('upload.invalid_file_extension')}${invalidExtensions ? `: ${invalidExtensions}` : ''}`, 'warning');
-      return false;
-    } else return false;
   };
 
   setDragOverOn = e => {
@@ -210,6 +205,8 @@ class UserUploaderTab extends Component {
     const { isMobile, appState } = this.props;
     const { step, errorMsg = '', progressBar: { color, status }, imagesToUpload } = this.state;
     const uploadBlock_style = styles.container.uploadBlock;
+    const { extensions } = appState.config;
+    const isUserExtensions = !!extensions.length;
 
     return (
       <div style={styles.container}>
@@ -287,7 +284,10 @@ class UserUploaderTab extends Component {
                     </SearchWrapper>
                   </Fragment>}
                   <ItemName pt={'0'}>
-                    {I18n.t('upload.accepted_file_types')}
+                    {isUserExtensions ?
+                      `${I18n.t('upload.accepted_file_types')}: ${processExtensions(extensions).join(", ")}. ${I18n.t('upload.accepted_file_size')}`
+                      :
+                      I18n.t('upload.accepted_file_size')}
                   </ItemName>
                 </div>
 

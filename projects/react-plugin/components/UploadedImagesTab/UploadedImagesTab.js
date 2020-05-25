@@ -13,6 +13,7 @@ import { GALLERY_IMAGES_LIMIT } from '../../config';
 import FolderManager from './folderManager/FolderManager';
 import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
 import SortDropdown from './SortDropdown';
+import { validateExtensions } from '../UploadImagesTab/UserUploaderTab.utils';
 
 
 const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
@@ -58,7 +59,13 @@ class UploadedImagesTab extends Component {
     this.onGetListFiles(path, 0, null, true);
   }
 
-  fileChangeHandler = ({ target }) => { this.changeFile(target.files); };
+  fileChangeHandler = ({ target }) => {
+    const { appState, showAlert } = this.props;
+    const { extensions } = appState.config;
+    const isValid = validateExtensions(target.files, extensions, showAlert);
+
+    if (isValid) this.changeFile(target.files);
+  };
 
   changeFile = (filesToUpload = []) => {
     this.setState({ filesToUpload });
@@ -120,7 +127,12 @@ class UploadedImagesTab extends Component {
 
   fileDropHandler = event => {
     event.preventDefault();
-    this.changeFile((event.dataTransfer || event.originalEvent.dataTransfer).files);
+    const { appState, showAlert } = this.props;
+    const { extensions } = appState.config;
+    const files = (event.dataTransfer || event.originalEvent.dataTransfer).files;
+    const isValid = validateExtensions(files, extensions, showAlert);
+
+    if (isValid) this.changeFile(files);
   };
 
   onDragEvent = (event, field, value) => {

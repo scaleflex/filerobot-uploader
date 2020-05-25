@@ -6,7 +6,8 @@ export default {
     enter_url_to_upload_from_web: 'Enter URL to upload from web',
     upload_btn: 'Upload',
     drag_file_here: 'Drag file here',
-    accepted_file_types: 'Accepted file types: gif, jpeg, png, bmp, ico. Up to 10MB.',
+    accepted_file_types: 'Accepted file types',
+    accepted_file_size: 'Up to 10MB.',
     uploading: 'Uploading',
     error: 'Error',
     url_not_valid: 'URL not valid!',
@@ -48,9 +49,9 @@ export default {
     media_library: 'Media Library',
     go_back: 'Go back',
     select: 'Select',
-    tag_image: 'Tag image',
-    edit_image: 'Edit image',
-    delete_image: 'Delete image',
+    tag: 'Tag',
+    edit: 'Edit',
+    delete: 'Delete',
     no_subfolders: 'No subfolders'
   },
   icons: {

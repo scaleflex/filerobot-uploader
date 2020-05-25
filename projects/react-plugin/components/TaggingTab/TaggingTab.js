@@ -30,7 +30,7 @@ import { I18n } from 'react-i18nify';
 import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { encodePermalink } from '../../utils';
-import { getPermalink, getCDNlink } from '../../utils/adjustAPI.utils';
+import { getPubliclink, getCDNlink } from '../../utils/adjustAPI.utils';
 
 
 class TaggingTab extends Component {
@@ -188,7 +188,7 @@ class TaggingTab extends Component {
     const { tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken } = appState.config;
     const [file = {}] = this.props.files;
 
-    generateTags(encodePermalink(getPermalink(file)), tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
+    generateTags(encodePermalink(getPubliclink(file)), tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
       .then(({ tags, ...props } = {}) => {
         if (tags) {
           if (!tags.length) {
@@ -307,9 +307,9 @@ class TaggingTab extends Component {
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const isImageType = isImage(file.type);
     const cdnlink = getCDNlink(file);
-    const permalink = getPermalink(file);
+    const publicLink = getPubliclink(file);
     const imageSrc = isImageType
-      ? (cdnlink && this.transformImage(cdnlink)) || encodePermalink(permalink)
+      ? (cdnlink && this.transformImage(cdnlink)) || encodePermalink(publicLink)
       : getFileIconSrcByType(file.type);
 
     return (

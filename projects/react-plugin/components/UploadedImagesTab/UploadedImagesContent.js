@@ -8,8 +8,7 @@ import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/image
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
-import md5 from '../../utils/md5';
-import { getPermalink } from '../../utils/adjustAPI.utils'
+import { getPubliclink } from '../../utils/adjustAPI.utils'
 import { deleteImage } from '../../services/api.service';
 
 
@@ -58,9 +57,9 @@ class UploadedImagesContent extends Component {
     const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
 
     if (isForceUpload) {
-      this.props.upload(true, getPermalink(item));
+      this.props.upload(true, getPubliclink(item));
     } else {
-      const files = [{...item, public_link: getPermalink(item) }];
+      const files = [{...item, public_link: getPubliclink(item) }];
       this.props.appState.config.uploadHandler(files, { stage: 'select' });
       this.props.closeModal();
     }
@@ -71,7 +70,7 @@ class UploadedImagesContent extends Component {
     event.stopPropagation();
 
     if (this.props.appState.config.tagging.active) {
-      const files = [{...item, public_link: getPermalink(item) }];
+      const files = [{...item, public_link: getPubliclink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
@@ -84,7 +83,7 @@ class UploadedImagesContent extends Component {
 
     if (this.props.appState.config.imageEditor.active) {
       const { path } = this.props;
-      const files = [{...item, public_link: getPermalink(item) }];
+      const files = [{...item, public_link: getPubliclink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path });
@@ -156,8 +155,8 @@ class UploadedImagesContent extends Component {
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
-    const icon = getFitResizeImageUrl(
-      isImageType ? encodePermalink(getPermalink(item)) : getFileIconSrcByType(item.type),
+    const url = getFitResizeImageUrl(
+      isImageType ? encodePermalink(getPubliclink(item)) : getFileIconSrcByType(item.type),
       columnWidth,
       Math.floor(columnWidth / (item.ratio || 1.6)),
       cloudimageToken
@@ -173,7 +172,7 @@ class UploadedImagesContent extends Component {
       >
         <div style={{ overflow: 'hidden', background: 'rgba(155,155,155,.15)' }}>
           <Img
-            src={`${icon}?${md5(item.modified_at || '').split(0, 5)}`}
+            src={url}
             isNotImage={!isImageType}
             height={Math.floor(columnWidth / (item.ratio || 1.6))}
           />
@@ -187,20 +186,20 @@ class UploadedImagesContent extends Component {
             {isEditImage && isImageType &&
             <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.edit_image')}</span>
+                <span>{I18n.t('file_manager.edit')}</span>
                 <Icon className="sfi-airstore-edit"/>
               </Control>
             </ControlWrapper>}
             {isTagImage &&
             <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.tag_image')}</span>
+                <span>{I18n.t('file_manager.tag')}</span>
                 <Icon className="sfi-airstore-tag"/>
               </Control>
             </ControlWrapper>}
             <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.delete_image')}</span>
+                <span>{I18n.t('file_manager.delete')}</span>
                 <Icon className="sfi-airstore-delete"/>
               </Control>
             </ControlWrapper>

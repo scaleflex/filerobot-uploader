@@ -87,7 +87,7 @@ let config = {
   language: 'en',
   colorScheme: {
     active: 'solarized'
-  },
+  }
   //imageEditorConfig: {
   //  processWithCloudimage: true,
   //  filerobot: {
