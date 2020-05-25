@@ -65,7 +65,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 Use latest CDNized plugin version
 
 ```html
-<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.8.9/filerobot-uploader.min.js"></script>
+<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.11.0/filerobot-uploader.min.js"></script>
 ```
 
 You may also use major version number instead of fixed version to have the latest version available.
