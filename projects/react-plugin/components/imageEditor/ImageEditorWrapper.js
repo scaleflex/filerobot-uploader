@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageEditor from 'filerobot-image-editor';
-import { getPubliclink, getCDNlink, getPubliclink } from '../../utils/adjustAPI.utils';
+import { getPubliclink, getCDNlink } from '../../utils/adjustAPI.utils';
 
 
 const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
