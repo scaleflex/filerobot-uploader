@@ -79,9 +79,12 @@ class TaggingTab extends Component {
   }
 
   componentDidMount() {
-    const { tagging: { executeAfterUpload } = {} } = this.props.appState.config;
+    const { files = [], config } = this.props.appState;
+    const { tagging: { executeAfterUpload } = {} } = config;
+    const fileType = files[0] && files[0].type;
+    const isImageType = isImage(fileType);
 
-    if (executeAfterUpload && !this.state.tags.length) {
+    if (executeAfterUpload && !this.state.tags.length && isImageType) {
       this.setState({ isGeneratingTags: true });
 
       this.generateTags();
@@ -408,6 +411,7 @@ class TaggingTab extends Component {
               onChange={this.handleDescriptionChange}
             />
 
+            {isImageType &&
             <TagsInputWrapper>
               <TagsInput
                 value={this.state.tags}
@@ -416,7 +420,7 @@ class TaggingTab extends Component {
                   placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
                 }}
               />
-            </TagsInputWrapper>
+            </TagsInputWrapper>}
 
           </InputsBlock>
 
@@ -430,7 +434,7 @@ class TaggingTab extends Component {
 
         <TaggingFooter>
 
-          {this.isAutoTaggingButton &&
+          {this.isAutoTaggingButton && isImageType &&
             <Button
               disabled={this.state.tagsGenerated}
               onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon
