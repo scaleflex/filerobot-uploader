@@ -407,9 +407,51 @@ const Overlay = styled.div`
   position: absolute;
 `;
 
+const AutoComplete = styled('div')`
+  .react-autosuggest__suggestions-container {
+    min-width: 200px;
+  }
+  
+  .react-autosuggest__suggestions-list {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    border: 1px solid #d3d4d5;
+    transition: opacity 262ms;
+    border-radius: 4px;
+    
+    .react-autosuggest__suggestion {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-decoration: none;
+      width: auto;
+      min-height: auto;
+      overflow: hidden;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 6px 16px;
+      white-space: nowrap;
+      transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      
+      &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+    
+    .react-autosuggest__suggestion--highlighted {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+`;
 
 export {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ErrorWrapper,
-  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input
+  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input, AutoComplete
 };

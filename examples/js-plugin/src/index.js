@@ -88,7 +88,8 @@ let config = {
   colorScheme: {
     active: 'solarized'
   },
-  extensions: ['jpg', 'png']
+  extensions: ['jpg', 'png'],
+  preDefinedTags: ['Color', 'Colored', 'Coffee', 'Cobalt', 'Coral']
   //imageEditorConfig: {
   //  processWithCloudimage: true,
   //  filerobot: {

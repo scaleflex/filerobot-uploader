@@ -31,6 +31,7 @@ import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { encodePermalink } from '../../utils';
 import { getPubliclink, getCDNlink } from '../../utils/adjustAPI.utils';
+import AutocompleteInput from './AutocompleteInput';
 
 
 class TaggingTab extends Component {
@@ -301,10 +302,10 @@ class TaggingTab extends Component {
   render() {
     const {
       isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags, oldProductRef,
-      oldProductPosition, isUpdatingProduct
+      oldProductPosition, isUpdatingProduct, tags
     } = this.state;
     const { prevTab, config, productsEnabled } = this.props.appState;
-    const { tagging } = config;
+    const { tagging, preDefinedTags } = config;
     const { customFields = [] } = tagging;
     const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
@@ -414,7 +415,8 @@ class TaggingTab extends Component {
             {isImageType &&
             <TagsInputWrapper>
               <TagsInput
-                value={this.state.tags}
+                value={tags}
+                renderInput={props => <AutocompleteInput {...props} preDefinedTags={preDefinedTags} />}
                 onChange={this.handleTagsChange}
                 inputProps={{
                   placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
