@@ -31,7 +31,7 @@ import { uniqueArrayOfStrings } from '../../utils/helper.utils';
 import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { encodePermalink } from '../../utils';
 import { getPubliclink, getCDNlink } from '../../utils/adjustAPI.utils';
-import AutocompleteInput from './AutocompleteInput';
+import AutosuggestionInput from './AutosuggestionInput';
 
 
 class TaggingTab extends Component {
@@ -416,7 +416,7 @@ class TaggingTab extends Component {
             <TagsInputWrapper>
               <TagsInput
                 value={tags}
-                renderInput={props => <AutocompleteInput {...props} preDefinedTags={preDefinedTags} />}
+                renderInput={props => <AutosuggestionInput {...props} preDefinedTags={preDefinedTags} />}
                 onChange={this.handleTagsChange}
                 inputProps={{
                   placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')

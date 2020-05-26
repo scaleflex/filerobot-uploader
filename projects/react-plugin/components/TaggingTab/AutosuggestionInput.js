@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
-import { AutoComplete } from './TaggingTab.styled';
+import { Autosuggestion } from './TaggingTab.styled';
 
 
-class AutocompleteInput extends Component {
+class AutosuggestionInput extends Component {
   state = {
     cursor: 0,
     result: []
@@ -35,7 +35,7 @@ class AutocompleteInput extends Component {
     let suggestions = preDefinedTags.filter((tag) => tag.name.toLowerCase().slice(0, inputLength) === inputValue);
 
     return (
-      <AutoComplete>
+      <Autosuggestion>
         <Autosuggest
           suggestions={suggestions}
           shouldRenderSuggestions={(value) => value && value.trim().length > 0}
@@ -46,9 +46,9 @@ class AutocompleteInput extends Component {
           onSuggestionsClearRequested={() => {}}
           onSuggestionsFetchRequested={() => {}}
         />
-      </AutoComplete>
+      </Autosuggestion>
     );
   }
 };
 
-export default AutocompleteInput;
+export default AutosuggestionInput;

@@ -89,7 +89,7 @@ let config = {
     active: 'solarized'
   },
   extensions: ['jpg', 'png'],
-  preDefinedTags: ['Color', 'Colored', 'Coffee', 'Cobalt', 'Coral']
+  preDefinedTags: ['Color', 'Colored', 'Cobalt', 'Coral', 'Cobre']
   //imageEditorConfig: {
   //  processWithCloudimage: true,
   //  filerobot: {

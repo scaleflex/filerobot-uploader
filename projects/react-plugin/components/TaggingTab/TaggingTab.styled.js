@@ -407,9 +407,9 @@ const Overlay = styled.div`
   position: absolute;
 `;
 
-const AutoComplete = styled('div')`
+const Autosuggestion = styled('div')`
   .react-autosuggest__suggestions-container {
-    min-width: 200px;
+    max-width: 200px;
   }
   
   .react-autosuggest__suggestions-list {
@@ -453,5 +453,5 @@ const AutoComplete = styled('div')`
 export {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ErrorWrapper,
-  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input, AutoComplete
+  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input, Autosuggestion
 };
