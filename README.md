@@ -68,12 +68,6 @@ Use latest CDNized plugin version
 <script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.11.0/filerobot-uploader.min.js"></script>
 ```
 
-You may also use major version number instead of fixed version to have the latest version available.
-
-```html
-<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2/filerobot-uploader.min.js"></script>
-```
-
 ### <a name="quick_start"></a>Quick start
 
 To use the Filerobot Uploader in your application, you need to first create a free Filerobot account <a href="https://www.filerobot.com/en/register_page">here</a>. Once registered, you will obtain your **container** name and **filerobotUploadKey** to configure the Uploader in your application:
