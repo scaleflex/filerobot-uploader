@@ -58,7 +58,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
       ...config.sortParams
     },
     extensions: config.extensions || [],
-    preDefinedTags: [...config.preDefinedTags.map(tag => ({ name: tag }) )],
+    preDefinedTags: config.preDefinedTags && config.preDefinedTags.length ? config.preDefinedTags.map(tag => ({ name: tag }) ) : [],
   };
 };
 

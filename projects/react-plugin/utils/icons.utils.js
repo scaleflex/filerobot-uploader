@@ -43,8 +43,11 @@ const getFileIconSrcByType = type => {
 
 const isImage = type => type.indexOf('image') > -1;
 
+const isAllImages = files => files.every(file => file.type.indexOf('image') > -1);
+
 export {
   getFileIconSrcByType,
   getFileType,
-  isImage
+  isImage,
+  isAllImages
 }

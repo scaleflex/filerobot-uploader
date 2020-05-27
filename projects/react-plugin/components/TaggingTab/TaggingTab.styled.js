@@ -28,6 +28,20 @@ const UploadedImage = styled.div`
   ${props => props.isNotImage ? 'transform: scale(0.6)' : ''};
 `;
 
+const MultiplyImageWrapper = styled('div')`
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  width: 20%;
+  
+  ${UploadedImageWrapper} {
+    width: 100%;
+  }
+  ${UploadedImage} {
+    height: 120px;
+  }
+`;
+
 const PropName = styled.div`
   display: inline-block;
   vertical-align: middle;
@@ -109,7 +123,7 @@ const Textarea = styled.textarea.attrs(() => ({
   display: block;
   min-height: 80px;
   width: 100%;
-  margin-top: 15px;
+  margin: 15px 0;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
@@ -133,8 +147,6 @@ const Textarea = styled.textarea.attrs(() => ({
 `;
 
 const TagsInputWrapper = styled.div`
-  margin-top: 15px;
-
   .react-tagsinput {
     display: block;
     min-height: 80px;
@@ -453,5 +465,6 @@ const Autosuggestion = styled('div')`
 export {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ErrorWrapper,
-  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input, Autosuggestion
+  ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input, Autosuggestion,
+  MultiplyImageWrapper
 };

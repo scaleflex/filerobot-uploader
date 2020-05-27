@@ -92,13 +92,15 @@ export default {
     add_a_tag_separate_by_pressing_enter: 'Добавить тег (отделите нажатием Enter)',
     generate_tags: 'Создать теги',
     save: 'Сохранить',
-    asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged',
+    asset_could_not_be_automatically_tagged: 'Файл не может быть автоматически тегирован',
+    could_not_be_automatically_tagged: 'не может быть автоматически тегирован',
     auto_tagging_processing: 'Auto-tagging processing...',
     product_ref: 'Product ref',
     product_position: 'Product position',
     not_set: 'Not set',
     update_product_ref: 'Update product ref',
     update_product_position: 'Update product position',
-    updating: 'updating...'
+    updating: 'updating...',
+    common_tags: 'Общие тэги'
   }
 };

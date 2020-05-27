@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import prettyBytes from 'pretty-bytes';
-import TagsInput from 'react-tagsinput'
+import TagsInput from 'react-tagsinput';
 import { Spinner } from '../Spinner';
 import {
   AutoTaggingProcessLabel,
@@ -22,13 +22,14 @@ import {
   Textarea,
   UploadedImage,
   UploadedImageDesc,
-  UploadedImageWrapper
-} from './TaggingTab.styled.js'
+  UploadedImageWrapper,
+  MultiplyImageWrapper
+} from './TaggingTab.styled.js';
 import ReactTooltip from 'react-tooltip';
-import { generateTags, saveMetaData, updateProduct } from "../../services/api.service";
+import { generateTags, saveMetaData, updateProduct, generateMultiplyImagesTags } from '../../services/api.service';
 import { I18n } from 'react-i18nify';
-import { uniqueArrayOfStrings } from '../../utils/helper.utils';
-import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
+import { uniqueArrayOfStrings, nonUniqueArrayOfStrings, uniqueArrayOfStringsInObject } from '../../utils/helper.utils';
+import { getFileIconSrcByType, isImage, isAllImages } from '../../utils/icons.utils';
 import { encodePermalink } from '../../utils';
 import { getPubliclink, getCDNlink } from '../../utils/adjustAPI.utils';
 import AutosuggestionInput from './AutosuggestionInput';
@@ -40,34 +41,36 @@ class TaggingTab extends Component {
 
     const { appState, files = {} } = props;
     const { tagging: { autoTaggingButton, executeAfterUpload, customFields } = {}, language } = appState.config;
-    const [file = {}] = files;
-    const { ref: productRef = '', position: productPosition = '' } = file.product || {};
+    const firstFile = files[0];
+    const { ref: productRef = '', position: productPosition = '' } = firstFile.product || {};
     const date = new Date();
     const options = {
-      weekday: "long", year: "numeric", month: "short",
-      day: "numeric", hour: "2-digit", minute: "2-digit"
+      weekday: 'long', year: 'numeric', month: 'short',
+      day: 'numeric', hour: '2-digit', minute: '2-digit'
     };
     const currentTime = (date).toLocaleTimeString(language, options);
 
-    file.properties = file.properties || {};
-    file.properties.tags = file.properties.tags || [];
+    files.forEach(file => {
+      file.properties = file.properties || {};
+      file.properties.tags = file.properties.tags || [];
+    });
 
     let customFieldsProps = {};
 
     if (customFields && customFields.length) {
-      customFieldsProps = this.getCustomFields(customFields, file.properties);
+      customFieldsProps = this.getCustomFields(customFields, firstFile.properties);
     }
 
     this.state = {
-      tags: file.properties.tags || [],
-      description: file.properties.description || '',
+      tags: firstFile.properties.tags || [],
+      description: firstFile.properties.description || '',
       ...customFieldsProps,
       isLoading: false,
       isGeneratingTags: false,
       errorMessage: '',
       currentTime,
-      firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : currentTime,
-      lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : currentTime,
+      firstLoad: firstFile.created_at ? new Date(firstFile.created_at).toLocaleTimeString(language, options) : currentTime,
+      lastModified: firstFile.modified_at ? new Date(firstFile.modified_at).toLocaleTimeString(language, options) : currentTime,
       tagsGenerated: false,
       productRef,
       productPosition,
@@ -82,13 +85,14 @@ class TaggingTab extends Component {
   componentDidMount() {
     const { files = [], config } = this.props.appState;
     const { tagging: { executeAfterUpload } = {} } = config;
-    const fileType = files[0] && files[0].type;
-    const isImageType = isImage(fileType);
+    const firstFile = files[0];
+    const isOneFile = files.length === 1;
+    const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
 
     if (executeAfterUpload && !this.state.tags.length && isImageType) {
       this.setState({ isGeneratingTags: true });
 
-      this.generateTags();
+      this.generateTags(isOneFile);
     }
 
     if (this._saveMetadataBtn) this._saveMetadataBtn.focus();
@@ -97,27 +101,29 @@ class TaggingTab extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.files !== prevProps.files) {
       const { appState, files = {} } = this.props;
-      const [file = {}] = files;
+      const firstFile = files[0];
       const { language } = appState.config;
       const date = new Date();
       const options = {
-        weekday: "long", year: "numeric", month: "short",
-        day: "numeric", hour: "2-digit", minute: "2-digit"
+        weekday: 'long', year: 'numeric', month: 'short',
+        day: 'numeric', hour: '2-digit', minute: '2-digit'
       };
       const currentTime = (date).toLocaleTimeString(language, options);
 
-      file.properties = file.properties || {};
-      file.properties.tags = file.properties.tags || [];
+      files.forEach(file => {
+        file.properties = file.properties || {};
+        file.properties.tags = file.properties.tags || [];
+      });
 
       this.state = {
-        tags: file.properties.tags || [],
-        description: file.properties.description || '',
+        tags: firstFile.properties.tags || [],
+        description: firstFile.properties.description || '',
         isLoading: false,
         isGeneratingTags: false,
         errorMessage: '',
         currentTime,
-        firstLoad: file.created_at ? new Date(file.created_at).toLocaleTimeString(language, options) : '',
-        lastModified: file.modified_at ? new Date(file.modified_at).toLocaleTimeString(language, options) : '',
+        firstLoad: firstFile.created_at ? new Date(firstFile.created_at).toLocaleTimeString(language, options) : '',
+        lastModified: firstFile.modified_at ? new Date(firstFile.modified_at).toLocaleTimeString(language, options) : '',
         tagsGenerated: false
       };
     }
@@ -125,11 +131,11 @@ class TaggingTab extends Component {
 
   handleDescriptionChange = event => {
     this.setState({ description: event.target.value, errorMessage: '' });
-  }
+  };
 
   handleTagsChange = (tags) => {
     this.setState({ tags, errorMessage: '' });
-  }
+  };
 
   getCustomFields = (customFields, properties) => {
     const customFieldsProps = {};
@@ -139,15 +145,14 @@ class TaggingTab extends Component {
     });
 
     return customFieldsProps;
-  }
+  };
 
   saveMetadata = () => {
-    const { description, tags } = this.state;
-    const { appState, files, options = {} } = this.props;
+    const { description, tags, personalTags } = this.state;
+    const { appState, files = [], options = {} } = this.props;
     const { prevTab } = appState;
     const { uploadHandler, language, tagging } = appState.config;
     const { customFields } = tagging;
-    const [file = {}] = this.props.files;
 
     let customFieldsProps = {};
 
@@ -155,90 +160,130 @@ class TaggingTab extends Component {
       customFieldsProps = this.getCustomFields(customFields, this.state);
     }
 
-    saveMetaData(file.uuid, {
+    saveMetaData(files, {
       description,
       tags: uniqueArrayOfStrings(tags),
       lang: language,
       search: `${description} ${tags.join(' ')}`,
       ...customFieldsProps
-    }, appState.config)
-      .then(response => {
-        if (response.status === 'success') {
-          files[0].properties = response.properties;
-          uploadHandler(files, { stage: 'tagging' });
+    }, appState.config, personalTags)
+      .then(images => {
+        images.forEach(image => {
+          if (image.status === 'success') {
+            const findIndex = files.findIndex(file => file.uuid === image.file_uuid);
+            files[findIndex].properties = image.properties;
+          } else {
+            this.setState({
+              errorMessage: image.msg || image.message || I18n.t('tagging.something_went_wrong_try_again'),
+              isLoading: false
+            });
+          }
+        });
 
-          this.setState({ isLoading: true }, () => {
-            this.props.setPostUpload(false, '', 'TAGGING');
+        uploadHandler(files, { stage: 'tagging' });
+        this.setState({ isLoading: true }, () => {
+          this.props.setPostUpload(false, '', 'TAGGING');
 
-            if (options.closeOnEdit || prevTab !== 'MY_GALLERY') {
-              this.props.closeModal();
-            }
-          });
-        } else {
-          this.setState({
-            errorMessage: response.msg || response.message || I18n.t('tagging.something_went_wrong_try_again'),
-            isLoading: false
-          })
-        }
+          if (options.closeOnEdit || prevTab !== 'MY_GALLERY') {
+            this.props.closeModal();
+          }
+        });
       });
 
     this.setState({ isLoading: true });
-  }
+  };
 
-  generateTags = () => {
+  generateTags = (isOneFile) => {
     if (this.state.tagsGenerated) return;
 
-    const { appState } = this.props;
+    const { appState, files } = this.props;
     const { tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken } = appState.config;
-    const [file = {}] = this.props.files;
+    const firstFile = files[0];
 
-    generateTags(encodePermalink(getPubliclink(file)), tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
-      .then(({ tags, ...props } = {}) => {
-        if (tags) {
-          if (!tags.length) {
-            this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
-            this.setState({ isLoading: false, isGeneratingTags: false });
+    isOneFile ?
+      generateTags(firstFile.uuid, tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
+        .then(({ tags, ...props } = {}) => {
+          if (tags) {
+            if (!tags.length) {
+              this.props.showAlert(I18n.t('tagging.asset_could_not_be_automatically_tagged'), '', 'warning');
+              this.setState({ isLoading: false, isGeneratingTags: false });
 
-            return;
+              return;
+            }
+
+            let nextTags = [
+              ...this.state.tags,
+              ...tags.map(item => item && item.tag && item.tag[language])
+            ];
+
+            this.setState({
+              tags: uniqueArrayOfStrings(nextTags),
+              isLoading: false,
+              isGeneratingTags: false,
+              tagsGenerated: true
+            });
+          } else {
+            this.setState({
+                isLoading: false,
+                isGeneratingTags: false,
+                errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
+              }
+            );
           }
-
-          let nextTags = [
-            ...this.state.tags,
-            ...tags.map(item => item && item.tag && item.tag[language])
-          ];
+        })
+        .catch(error => {
+          const { response: { data = {} } = {} } = error;
 
           this.setState({
-            tags: uniqueArrayOfStrings(nextTags),
+              isLoading: false,
+              isGeneratingTags: false,
+              errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
+            }
+          );
+        })
+      :
+      generateMultiplyImagesTags(files.map(file => file.uuid), tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
+        .then((images) => {
+          const commonTags = [];
+          const personalTags = {};
+
+          images.forEach(image => {
+            if (image.tags) {
+              if (!image.tags.length) {
+                const imageName = image.meta.url.match(/[\w-]+\.(jpg|png|jpeg|svg|gif|WebP)/g)[0] || '';
+                this.props.showAlert(`${imageName} ${I18n.t('tagging.could_not_be_automatically_tagged')}`, '', 'warning');
+              } else {
+                commonTags.push(...image.tags.map(tag => tag && tag.tag && tag.tag[language]));
+                personalTags[image.meta.uuid] = [...image.tags.map(tag => tag && tag.tag && tag.tag[language])];
+              }
+            }
+          });
+
+          this.setState({
+            tags: nonUniqueArrayOfStrings(commonTags),
+            personalTags: uniqueArrayOfStringsInObject(personalTags),
             isLoading: false,
             isGeneratingTags: false,
             tagsGenerated: true
           });
-        } else {
-          this.setState({
-            isLoading: false,
-            isGeneratingTags: false,
-            errorMessage: props.msg || props.message || I18n.t('tagging.something_went_wrong_try_again')
-          }
-          );
-        }
-      })
-      .catch(error => {
-        const { response: { data = {} } = {} } = error;
+        })
+        .catch(error => {
+          const { response: { data = {} } = {} } = error;
 
-        this.setState({
-          isLoading: false,
-          isGeneratingTags: false,
-          errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
-        }
-        );
-      })
+          this.setState({
+              isLoading: false,
+              isGeneratingTags: false,
+              errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
+            }
+          );
+        });
 
     this.setState({ isLoading: true, isGeneratingTags: true, errorMessage: '' });
-  }
+  };
 
   setSpinner = (value) => {
-    this.setState({ isLoading: value })
-  }
+    this.setState({ isLoading: value });
+  };
 
   goBack = () => {
     const { options = {}, appState } = this.props;
@@ -248,27 +293,27 @@ class TaggingTab extends Component {
 
     if (options.closeOnEdit)
       this.props.closeModal({ hasChanged });
-  }
+  };
 
   handleCustomFieldChange = (event) => {
     this.setState({ [event.target.name]: event.target.value, errorMessage: '' });
-  }
+  };
 
   updateProductProps = () => {
     const { productRef, productPosition } = this.state;
     const { appState, files } = this.props;
-    const [file = {}] = files;
+    const firstFile = files[0];
 
     this.props.setAppState({ hasChanged: true });
     this.setState({ isUpdatingProduct: true });
 
-    updateProduct(file.uuid, { ref: productRef, position: productPosition }, appState.config)
+    updateProduct(firstFile.uuid, { ref: productRef, position: productPosition }, appState.config)
       .then(() => {
         this.setState({
-          oldProductPosition: productPosition || '',
-          oldProductRef: productRef || '',
-          isUpdatingProduct: false
-        }
+            oldProductPosition: productPosition || '',
+            oldProductRef: productRef || '',
+            isUpdatingProduct: false
+          }
         );
       })
       .catch((error) => {
@@ -278,8 +323,8 @@ class TaggingTab extends Component {
           isUpdatingProduct: false,
           errorMessage: data.msg || error.message || error.msg || I18n.t('tagging.something_went_wrong_try_again')
         });
-      })
-  }
+      });
+  };
 
   /**
    * @param {String} imageUrl
@@ -293,40 +338,56 @@ class TaggingTab extends Component {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
       if (!queryOptions[key]) { continue; }
-      search += `${key}=${queryOptions[key]}${i !== keys.length - 1 ? '&' : ''}`
+      search += `${key}=${queryOptions[key]}${i !== keys.length - 1 ? '&' : ''}`;
     }
 
     return `${imageUrl}${search}`;
-  }
+  };
+
+  getImageSrc = (files, isImageType) => {
+    let sources = [];
+    const isOneFile = files.length === 1;
+    const cdnLinks = files.map(file => getCDNlink(file));
+    const publicLinks = files.map(file => getPubliclink(file));
+
+    if (isImageType && isOneFile) {
+      sources = !!cdnLinks.length ? this.transformImage(cdnLinks[0]) : encodePermalink(publicLinks);
+    } else if (isImageType) {
+      sources = !!cdnLinks.length ? cdnLinks.map(file => this.transformImage(file)) : publicLinks.map(file => encodePermalink(file));
+    } else {
+      sources = getFileIconSrcByType(files[0].type);
+    }
+
+    return sources;
+  };
 
   render() {
     const {
       isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags, oldProductRef,
       oldProductPosition, isUpdatingProduct, tags
     } = this.state;
-    const { prevTab, config, productsEnabled } = this.props.appState;
-    const { tagging, preDefinedTags } = config;
+    const { files = [], appState } = this.props;
+    const { prevTab, config, productsEnabled } = appState;
+    const { tagging, preDefinedTags = [] } = config;
     const { customFields = [] } = tagging;
-    const [file = {}] = this.props.files;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
-    const isImageType = isImage(file.type);
-    const cdnlink = getCDNlink(file);
-    const publicLink = getPubliclink(file);
-    const imageSrc = isImageType
-      ? (cdnlink && this.transformImage(cdnlink)) || encodePermalink(publicLink)
-      : getFileIconSrcByType(file.type);
+    const firstFile = files[0];
+    const isOneFile = files.length === 1;
+    const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
+    const imageSources = this.getImageSrc(files, isImageType);
 
     return (
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-            <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon />{I18n.t('tagging.go_back')}</GoBack>}
+          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
 
+          {isOneFile &&
           <FileWrapper>
             <UploadedImageWrapper>
               <UploadedImage
                 isNotImage={!isImageType}
-                src={imageSrc}
+                src={imageSources}
               />
             </UploadedImageWrapper>
 
@@ -334,11 +395,11 @@ class TaggingTab extends Component {
               <ul>
                 <li>
                   <PropName>{I18n.t('tagging.file_name')}:</PropName>
-                  <PropValue>{file.name}</PropValue>
+                  <PropValue>{firstFile.name}</PropValue>
                 </li>
                 <li>
                   <PropName>{I18n.t('tagging.size')}:</PropName>
-                  <PropValue>{file.size && file.size.pretty ? file.size.pretty : prettyBytes(file.size)}</PropValue>
+                  <PropValue>{firstFile.size && firstFile.size.pretty ? firstFile.size.pretty : prettyBytes(firstFile.size)}</PropValue>
                 </li>
                 <li>
                   <PropName>{I18n.t('tagging.first_upload')}:</PropName>
@@ -349,115 +410,136 @@ class TaggingTab extends Component {
                   <PropValue>{lastModified || currentTime}</PropValue>
                 </li>
                 {productsEnabled &&
-                  <>
+                <>
+                  <li>
+                    <PropName>{I18n.t('tagging.product_ref')}:</PropName>
+                    <PropValue>
+                      <Input
+                        type="text"
+                        id={'productRef'}
+                        key={'productRef'}
+                        name={'productRef'}
+                        placeholder={I18n.t('tagging.not_set')}
+                        value={this.state.productRef}
+                        onChange={this.handleCustomFieldChange}
+                      />
+                    </PropValue>
+                  </li>
+                  {oldProductRef !== this.state.productRef && (
                     <li>
-                      <PropName>{I18n.t('tagging.product_ref')}:</PropName>
+                      <PropName/>
                       <PropValue>
-                        <Input
-                          type="text"
-                          id={'productRef'}
-                          key={'productRef'}
-                          name={'productRef'}
-                          placeholder={I18n.t('tagging.not_set')}
-                          value={this.state.productRef}
-                          onChange={this.handleCustomFieldChange}
-                        />
+                        <Button success onClick={this.updateProductProps}>
+                          {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_ref')}
+                        </Button>
                       </PropValue>
                     </li>
-                    {oldProductRef !== this.state.productRef && (
-                      <li>
-                        <PropName />
-                        <PropValue>
-                          <Button success onClick={this.updateProductProps}>
-                            {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_ref')}
-                          </Button>
-                        </PropValue>
-                      </li>
-                    )}
+                  )}
+                  <li>
+                    <PropName>{I18n.t('tagging.product_position')}:</PropName>
+                    <PropValue>
+                      <Input
+                        type="text"
+                        id={'productPosition'}
+                        key={'productPosition'}
+                        name={'productPosition'}
+                        placeholder={I18n.t('tagging.not_set')}
+                        value={this.state.productPosition}
+                        onChange={this.handleCustomFieldChange}
+                      />
+                    </PropValue>
+                  </li>
+                  {oldProductPosition !== this.state.productPosition && (
                     <li>
-                      <PropName>{I18n.t('tagging.product_position')}:</PropName>
+                      <PropName/>
                       <PropValue>
-                        <Input
-                          type="text"
-                          id={'productPosition'}
-                          key={'productPosition'}
-                          name={'productPosition'}
-                          placeholder={I18n.t('tagging.not_set')}
-                          value={this.state.productPosition}
-                          onChange={this.handleCustomFieldChange}
-                        />
+                        <Button success onClick={this.updateProductProps}>
+                          {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_position')}
+                        </Button>
                       </PropValue>
                     </li>
-                    {oldProductPosition !== this.state.productPosition && (
-                      <li>
-                        <PropName />
-                        <PropValue>
-                          <Button success onClick={this.updateProductProps}>
-                            {isUpdatingProduct ? I18n.t('tagging.updating') : I18n.t('tagging.update_product_position')}
-                          </Button>
-                        </PropValue>
-                      </li>
-                    )}
-                  </>}
+                  )}
+                </>}
               </ul>
             </UploadedImageDesc>
-          </FileWrapper>
+          </FileWrapper>}
+
+          {!isOneFile &&
+          <div>
+            {imageSources.map(source => (
+              <MultiplyImageWrapper key={source}>
+                <UploadedImageWrapper w={20}>
+                  <UploadedImage
+                    isNotImage={!isImageType}
+                    src={source}
+                  />
+                </UploadedImageWrapper>
+              </MultiplyImageWrapper>
+            ))}
+          </div>}
 
           <InputsBlock>
-            {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
+            {isOneFile &&
+            <>
+              {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
 
-            <Textarea
-              value={this.state.description}
-              placeholder={I18n.t('tagging.add_description')}
-              onChange={this.handleDescriptionChange}
-            />
+              <Textarea
+                value={this.state.description}
+                placeholder={I18n.t('tagging.add_description')}
+                onChange={this.handleDescriptionChange}
+              />
+            </>
+            }
 
             {isImageType &&
-            <TagsInputWrapper>
-              <TagsInput
-                value={tags}
-                renderInput={props => <AutosuggestionInput {...props} preDefinedTags={preDefinedTags} />}
-                onChange={this.handleTagsChange}
-                inputProps={{
-                  placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
-                }}
-              />
-            </TagsInputWrapper>}
+            <>
+              {!isOneFile &&
+              <PropName>{I18n.t('tagging.common_tags')}</PropName>}
+
+              <TagsInputWrapper>
+                <TagsInput
+                  value={tags}
+                  renderInput={props => <AutosuggestionInput {...{...props, preDefinedTags }}/>}
+                  onChange={this.handleTagsChange}
+                  inputProps={{
+                    placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
+                  }}
+                />
+              </TagsInputWrapper>
+            </>}
 
           </InputsBlock>
 
           {errorMessage &&
-            <ErrorWrapper>
-              <ErrorParagraph>
-                {errorMessage}
-              </ErrorParagraph>
-            </ErrorWrapper>}
+          <ErrorWrapper>
+            <ErrorParagraph>
+              {errorMessage}
+            </ErrorParagraph>
+          </ErrorWrapper>}
         </TaggingContent>
 
         <TaggingFooter>
-
           {this.isAutoTaggingButton && isImageType &&
-            <Button
-              disabled={this.state.tagsGenerated}
-              onClick={this.generateTags}>{I18n.t('tagging.generate_tags')} <InfoIcon
-                data-tip={generateTagInfo} /></Button>}
+          <Button disabled={this.state.tagsGenerated} onClick={() => this.generateTags(isOneFile)}>
+            {I18n.t('tagging.generate_tags')}
+            <InfoIcon data-tip={generateTagInfo}/>
+          </Button>}
 
           <Button
             ref={node => this._saveMetadataBtn = node}
             success
             onClick={this.saveMetadata}
           >{I18n.t('tagging.save')}</Button>
-
         </TaggingFooter>
 
-        <Spinner show={isLoading} overlay />
+        <Spinner show={isLoading} overlay/>
 
         {isGeneratingTags &&
-          <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
+        <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
 
-        <ReactTooltip offset={{ top: 0, right: 2 }} effect="solid" />
+        <ReactTooltip offset={{ top: 0, right: 2 }} effect="solid"/>
       </TaggingTabWrapper>
-    )
+    );
   }
 }
 

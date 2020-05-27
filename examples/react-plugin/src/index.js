@@ -7,8 +7,8 @@ import prettyBytes from 'pretty-bytes';
 const config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: { dir:"/demo_filerobot_en" },
-  filerobotUploadKey: '7cc1f659309c480cbc8a608dc6ba5f03',
-  container: 'scaleflex-tests-v5a'
+  filerobotUploadKey: '19692813e7364ef8ad6a6504d50a12ca',
+  container: 'fusqadtm'
 };
 
 class App extends Component {

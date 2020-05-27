@@ -92,12 +92,14 @@ export default {
     generate_tags: 'Taggage auto',
     save: 'Sauvegarder',
     asset_could_not_be_automatically_tagged : 'L\'image n\'a pas pu être tagguée automatiquement',
+    could_not_be_automatically_tagged : 'n\'a pas pu être tagguée automatiquement',
     auto_tagging_processing: 'Auto-tagging en cours...',
     product_ref: 'Product ref',
     product_position: 'Product position',
     not_set: 'Not set',
     update_product_ref: 'Update product ref',
     update_product_position: 'Update product position',
-    updating: 'updating...'
+    updating: 'updating...',
+    common_tags: 'Balises courantes'
   }
 };

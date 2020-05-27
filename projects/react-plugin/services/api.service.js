@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { uploadFormDataFiles } from '../utils/files-upload';
 import { DUPLICATE_CODE, GALLERY_IMAGES_LIMIT, REPLACING_DATA_CODE } from '../config';
+import { uniqueArrayOfStrings } from '../utils';
 
 
 export const getBaseAPI = (baseAPI, container, platform) =>
@@ -30,6 +31,7 @@ export const send = (
     ...(restOptions || {})
   }).then(({ data = {} }) => data);
 
+export const sendAll = requests => axios.all(requests).then(axios.spread((...responses) => responses ));
 
 /**
  * Send files to airstore storage.
@@ -179,7 +181,7 @@ export const searchFiles = ({ query = '', container = '', platform, baseAPI, lan
     .then((response = {}) => ([response.files, response.info && response.info.total_files_count]));
 };
 
-export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', container = '', baseAPI, platform, uploadKey = '', cloudimageToken = 'demo') => {
+export const generateTags = (uuid = '', autoTaggingProps = {}, language = 'en', container = '', baseAPI, platform, uploadKey = '', cloudimageToken = 'demo') => {
   const { provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
   const baseUrl = getBaseAPI(baseAPI, container, platform);
   const base = `${baseUrl}process/autotag`;
@@ -189,8 +191,7 @@ export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', c
     'POST',
     {
       file: {
-        url: url,
-        uuid: ""
+        uuid
       },
       meta: {
         languages: [language],
@@ -207,21 +208,60 @@ export const generateTags = (url = '', autoTaggingProps = {}, language = 'en', c
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (id, properties, { container, baseAPI, platform, uploadKey }) => {
+export const generateMultiplyImagesTags = (uuids = [], autoTaggingProps = {}, language = 'en', container = '', baseAPI, platform, uploadKey = '') => {
+  const { provider = 'google', confidence = 60, limit = 10 } = autoTaggingProps;
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
+  const base = `${baseUrl}process/autotag`;
+
+  return sendAll(uuids.map(uuid =>
+    send(
+      `${base}`,
+      'POST',
+      {
+        file: {
+          uuid
+        },
+        meta: {
+          languages: [language],
+          provider,
+          limit,
+          confidence
+        }
+      },
+      {
+        [getSecretHeaderName(platform)]: uploadKey
+      }
+    )
+  ))
+    .then((response = {}) => response);
+}
+
+export const saveMetaData = (files, properties, { container, baseAPI, platform, uploadKey }, personalTags = []) => {
+  const isOneFile = files.length === 1;
   const baseUrl = getBaseAPI(baseAPI, container, platform);
   const base = `${baseUrl}file/`;
   const data = { properties };
 
-  return send(
-    `${base}${id}/properties`,
-    'PUT',
-    data,
-    {
-      [getSecretHeaderName(platform)]: uploadKey
-    }
-  )
+  return sendAll(files.map(file =>
+    send(
+      `${base}${file.uuid}/properties`,
+      'PUT',
+      {
+        ...data,
+        properties: {
+          ...data.properties,
+          tags: isOneFile ?
+            data.properties.tags
+            :
+            uniqueArrayOfStrings([...data.properties.tags, ...personalTags[file.uuid]])
+        }
+      },
+      {
+        [getSecretHeaderName(platform)]: uploadKey
+      }
+    )))
     .then((response = {}) => response);
-}
+};
 
 export const updateProduct = (id, product, { container, baseAPI, platform, uploadKey }) => {
   const baseUrl = getBaseAPI(baseAPI, container, platform);

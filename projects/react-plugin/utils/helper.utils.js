@@ -24,7 +24,16 @@ const isEnterClick = event => event && (event.which || event.keyCode) === 13;
 
 const isEsc= event => event && (event.which || event.keyCode) === 27;
 
-const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) === i);
+const uniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) === i)
+
+const uniqueArrayOfStringsInObject = object => {
+  const nextObject = {};
+  Object.keys(object).forEach(key => nextObject[key] = object[key].filter((v, i, a) => a.indexOf(v) === i))
+
+  return nextObject;
+};
+
+const nonUniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) !== i);
 
 const isDefined = param => typeof param !== 'undefined';
 
@@ -32,6 +41,8 @@ const encodePermalink = link => link; // link.replace(/\?/g, '%3F');
 
 export {
   uniqueArrayOfStrings,
+  nonUniqueArrayOfStrings,
+  uniqueArrayOfStringsInObject,
   isEnterClick,
   cursorToEnd,
   deepCopy,

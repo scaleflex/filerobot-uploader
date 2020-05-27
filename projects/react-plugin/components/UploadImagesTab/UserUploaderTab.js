@@ -130,7 +130,7 @@ class UserUploaderTab extends Component {
 
         this.uploadSuccess(files);
 
-        if (config.tagging.active && !self.isMobile && files.length === 1) {
+        if (config.tagging.active && !self.isMobile) {
           this.props.saveUploadedFiles(files);
           this.props.setPostUpload(true, 'TAGGING', 'UPLOAD');
           return;
