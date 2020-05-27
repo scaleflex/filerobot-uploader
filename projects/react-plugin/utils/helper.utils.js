@@ -33,7 +33,19 @@ const uniqueArrayOfStringsInObject = object => {
   return nextObject;
 };
 
-const nonUniqueArrayOfStrings = array => array.filter((v, i, a) => a.indexOf(v) !== i);
+const nonUniqueArrayOfStrings = (tags, itemAmounts) => {
+  const commonTags = [];
+  const duplicates = tags.reduce((tag, value) => ({
+    ...tag,
+    [value]: (tag[value] || 0) + 1
+  }), {});
+
+  Object.keys(duplicates).forEach(key => {
+    if (duplicates[key] === itemAmounts) commonTags.push(key)
+  });
+
+  return commonTags;
+}
 
 const isDefined = param => typeof param !== 'undefined';
 

@@ -23,7 +23,9 @@ import {
   UploadedImage,
   UploadedImageDesc,
   UploadedImageWrapper,
-  MultiplyImageWrapper
+  MultiplyImageWrapper,
+  ContentWrapper,
+  ImagesWrapper
 } from './TaggingTab.styled.js';
 import ReactTooltip from 'react-tooltip';
 import { generateTags, saveMetaData, updateProduct, generateMultiplyImagesTags } from '../../services/api.service';
@@ -260,7 +262,7 @@ class TaggingTab extends Component {
           });
 
           this.setState({
-            tags: nonUniqueArrayOfStrings(commonTags),
+            tags: nonUniqueArrayOfStrings(commonTags, files.length),
             personalTags: uniqueArrayOfStringsInObject(personalTags),
             isLoading: false,
             isGeneratingTags: false,
@@ -464,51 +466,53 @@ class TaggingTab extends Component {
             </UploadedImageDesc>
           </FileWrapper>}
 
-          {!isOneFile &&
-          <div>
-            {imageSources.map(source => (
-              <MultiplyImageWrapper key={source}>
-                <UploadedImageWrapper w={20}>
-                  <UploadedImage
-                    isNotImage={!isImageType}
-                    src={source}
-                  />
-                </UploadedImageWrapper>
-              </MultiplyImageWrapper>
-            ))}
-          </div>}
+          <ContentWrapper>
+            {!isOneFile &&
+            <ImagesWrapper>
+              {imageSources.map(source => (
+                <MultiplyImageWrapper key={source}>
+                  <UploadedImageWrapper w={20}>
+                    <UploadedImage
+                      isNotImage={!isImageType}
+                      src={source}
+                    />
+                  </UploadedImageWrapper>
+                </MultiplyImageWrapper>
+              ))}
+            </ImagesWrapper>}
 
-          <InputsBlock>
-            {isOneFile &&
-            <>
-              {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
+            <InputsBlock isOneFile={isOneFile}>
+              {isOneFile &&
+              <>
+                {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
 
-              <Textarea
-                value={this.state.description}
-                placeholder={I18n.t('tagging.add_description')}
-                onChange={this.handleDescriptionChange}
-              />
-            </>
-            }
-
-            {isImageType &&
-            <>
-              {!isOneFile &&
-              <PropName>{I18n.t('tagging.common_tags')}</PropName>}
-
-              <TagsInputWrapper>
-                <TagsInput
-                  value={tags}
-                  renderInput={props => <AutosuggestionInput {...{...props, preDefinedTags }}/>}
-                  onChange={this.handleTagsChange}
-                  inputProps={{
-                    placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
-                  }}
+                <Textarea
+                  value={this.state.description}
+                  placeholder={I18n.t('tagging.add_description')}
+                  onChange={this.handleDescriptionChange}
                 />
-              </TagsInputWrapper>
-            </>}
+              </>
+              }
 
-          </InputsBlock>
+              {isImageType &&
+              <>
+                {!isOneFile &&
+                <PropName>{I18n.t('tagging.common_tags')}</PropName>}
+
+                <TagsInputWrapper>
+                  <TagsInput
+                    value={tags}
+                    renderInput={props => <AutosuggestionInput {...{ ...props, preDefinedTags }}/>}
+                    onChange={this.handleTagsChange}
+                    inputProps={{
+                      placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
+                    }}
+                  />
+                </TagsInputWrapper>
+              </>}
+
+            </InputsBlock>
+          </ContentWrapper>
 
           {errorMessage &&
           <ErrorWrapper>

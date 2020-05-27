@@ -32,7 +32,7 @@ const MultiplyImageWrapper = styled('div')`
   display: inline-block;
   vertical-align: top;
   padding: 10px;
-  width: 20%;
+  width: 50%;
   
   ${UploadedImageWrapper} {
     width: 100%;
@@ -80,6 +80,7 @@ const UploadedImageDesc = styled.div`
 
 const InputsBlock = styled.div`
   position: relative;
+  width: ${p => p.isOneFile ? '100%' : '50%'};
 `;
 
 const InputLabel = styled.label`
@@ -462,9 +463,17 @@ const Autosuggestion = styled('div')`
   }
 `;
 
+const ContentWrapper = styled('div')`
+  display: flex;
+`;
+
+const ImagesWrapper = styled('div')`
+  width: 50%;
+`;
+
 export {
   TaggingTabWrapper, FileWrapper, UploadedImageWrapper, UploadedImage, UploadedImageDesc, PropName, PropValue,
   InputsBlock, InputLabel, Textarea, TagsInputWrapper, Button, TaggingFooter, TaggingContent, InfoIcon, ErrorWrapper,
   ErrorParagraph, GoBack, BackIcon, CropsBoxWrapper, Group, GroupLabel, ToggleCropMenu, Overlay, Input, Autosuggestion,
-  MultiplyImageWrapper
+  MultiplyImageWrapper, ContentWrapper, ImagesWrapper
 };
