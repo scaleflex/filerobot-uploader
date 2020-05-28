@@ -292,11 +292,11 @@ export const getTokenSettings = ({ container = '', baseAPI, platform, uploadKey 
     }));
 };
 
-export const deleteImage = ({ item, baseAPI, container = '', platform, fileUuid, dir, uploadKey }) => {
+export const deleteImage = ({ uuids, baseAPI, container = '', platform, fileUuid, dir, uploadKey }) => {
   const baseUrl = getBaseAPI(baseAPI, container, platform);
-  const apiPath = `file/${item.uuid}`;
-  const url = [baseUrl, apiPath].join('');
+  const apiPath = uuids.map(uuid => `file/${uuid}`);
+  const urls = apiPath.map(path => [baseUrl, path].join(''));
 
-  return send(url, 'DELETE', null, { [getSecretHeaderName(platform)]: uploadKey })
+  return sendAll(urls.map(url => send(url, 'DELETE', null, { [getSecretHeaderName(platform)]: uploadKey })))
     .then((response = {}) => response);
 };

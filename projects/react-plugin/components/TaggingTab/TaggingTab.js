@@ -42,7 +42,8 @@ class TaggingTab extends Component {
     super();
 
     const { appState, files = {} } = props;
-    const { tagging: { autoTaggingButton, executeAfterUpload, customFields } = {}, language } = appState.config;
+    const { tagging: { customFields } = {}, language } = appState.config;
+    const isOneFile = files.length === 1;
     const firstFile = files[0];
     const { ref: productRef = '', position: productPosition = '' } = firstFile.product || {};
     const date = new Date();
@@ -51,10 +52,14 @@ class TaggingTab extends Component {
       day: 'numeric', hour: '2-digit', minute: '2-digit'
     };
     const currentTime = (date).toLocaleTimeString(language, options);
+    const commonTags = [];
+    const personalTags = [];
 
     files.forEach(file => {
       file.properties = file.properties || {};
       file.properties.tags = file.properties.tags || [];
+      commonTags.push(...file.properties.tags);
+      personalTags[file.uuid] = file.properties.tags;
     });
 
     let customFieldsProps = {};
@@ -64,7 +69,7 @@ class TaggingTab extends Component {
     }
 
     this.state = {
-      tags: firstFile.properties.tags || [],
+      tags: isOneFile ? firstFile.properties.tags : nonUniqueArrayOfStrings(commonTags, files.length),
       description: firstFile.properties.description || '',
       ...customFieldsProps,
       isLoading: false,
@@ -78,10 +83,10 @@ class TaggingTab extends Component {
       productPosition,
       oldProductRef: productRef,
       oldProductPosition: productPosition,
-      isUpdatingProduct: false
+      isUpdatingProduct: false,
+      personalTags: uniqueArrayOfStringsInObject(personalTags),
+      removedTags: []
     };
-
-    this.isAutoTaggingButton = autoTaggingButton && !executeAfterUpload;
   }
 
   componentDidMount() {
@@ -103,6 +108,7 @@ class TaggingTab extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.files !== prevProps.files) {
       const { appState, files = {} } = this.props;
+      const isOneFile = files.length === 1;
       const firstFile = files[0];
       const { language } = appState.config;
       const date = new Date();
@@ -111,14 +117,18 @@ class TaggingTab extends Component {
         day: 'numeric', hour: '2-digit', minute: '2-digit'
       };
       const currentTime = (date).toLocaleTimeString(language, options);
+      const commonTags = [];
+      const personalTags = [];
 
       files.forEach(file => {
         file.properties = file.properties || {};
         file.properties.tags = file.properties.tags || [];
+        commonTags.push(...file.properties.tags);
+        personalTags[file.uuid] = file.properties.tags;
       });
 
       this.state = {
-        tags: firstFile.properties.tags || [],
+        tags: isOneFile ? firstFile.properties.tags : nonUniqueArrayOfStrings(commonTags, files.length),
         description: firstFile.properties.description || '',
         isLoading: false,
         isGeneratingTags: false,
@@ -126,7 +136,8 @@ class TaggingTab extends Component {
         currentTime,
         firstLoad: firstFile.created_at ? new Date(firstFile.created_at).toLocaleTimeString(language, options) : '',
         lastModified: firstFile.modified_at ? new Date(firstFile.modified_at).toLocaleTimeString(language, options) : '',
-        tagsGenerated: false
+        tagsGenerated: false,
+        personalTags: uniqueArrayOfStringsInObject(personalTags),
       };
     }
   }
@@ -135,8 +146,15 @@ class TaggingTab extends Component {
     this.setState({ description: event.target.value, errorMessage: '' });
   };
 
-  handleTagsChange = (tags) => {
-    this.setState({ tags, errorMessage: '' });
+  handleTagsChange = (newTags = [], lastTag = []) => {
+    const { removedTags } = this.state;
+    const isNewAdded = newTags.includes(lastTag[0]);
+    this.setState({ tags: newTags, errorMessage: '' });
+
+    if (!isNewAdded) {
+      const nextRemovedTags = [...removedTags, ...lastTag];
+      this.setState({ removedTags: nextRemovedTags })
+    }
   };
 
   getCustomFields = (customFields, properties) => {
@@ -150,13 +168,17 @@ class TaggingTab extends Component {
   };
 
   saveMetadata = () => {
-    const { description, tags, personalTags } = this.state;
+    const { description, tags, personalTags, removedTags } = this.state;
     const { appState, files = [], options = {} } = this.props;
     const { prevTab } = appState;
     const { uploadHandler, language, tagging } = appState.config;
     const { customFields } = tagging;
-
+    const nextPersonalTags = {};
     let customFieldsProps = {};
+
+    Object.keys(personalTags).forEach(key => {
+      nextPersonalTags[key] = personalTags[key].filter(tag => !removedTags.find(removedTag => removedTag === tag))
+    });
 
     if (customFields && customFields.length) {
       customFieldsProps = this.getCustomFields(customFields, this.state);
@@ -168,7 +190,7 @@ class TaggingTab extends Component {
       lang: language,
       search: `${description} ${tags.join(' ')}`,
       ...customFieldsProps
-    }, appState.config, personalTags)
+    }, appState.config, nextPersonalTags)
       .then(images => {
         images.forEach(image => {
           if (image.status === 'success') {
@@ -196,7 +218,7 @@ class TaggingTab extends Component {
   };
 
   generateTags = (isOneFile) => {
-    if (this.state.tagsGenerated) return;
+    if (this.state && this.state.tagsGenerated) return;
 
     const { appState, files } = this.props;
     const { tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken } = appState.config;
@@ -371,7 +393,7 @@ class TaggingTab extends Component {
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
     const { tagging, preDefinedTags = [] } = config;
-    const { customFields = [] } = tagging;
+    const { customFields = [], autoTaggingButton } = tagging;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const firstFile = files[0];
     const isOneFile = files.length === 1;
@@ -523,7 +545,7 @@ class TaggingTab extends Component {
         </TaggingContent>
 
         <TaggingFooter>
-          {this.isAutoTaggingButton && isImageType &&
+          {autoTaggingButton && isImageType &&
           <Button disabled={this.state.tagsGenerated} onClick={() => this.generateTags(isOneFile)}>
             {I18n.t('tagging.generate_tags')}
             <InfoIcon data-tip={generateTagInfo}/>

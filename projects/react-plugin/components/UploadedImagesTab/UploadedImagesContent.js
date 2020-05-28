@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
-  ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlWrapper, Control, Icon
+  ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlWrapper, Control, Icon, Checkbox
 } from '../../styledComponents';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/imageGrid.service';
@@ -19,7 +19,8 @@ class UploadedImagesContent extends Component {
     this.state = {
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
-      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 }
+      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 },
+      checkedItems: []
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -51,31 +52,49 @@ class UploadedImagesContent extends Component {
     if (event !== 13) return;
     event.stopPropagation();
     this.select(item);
-  }
+  };
 
-  select = (item) => {
+  select = (image) => {
+    const { files } = this.props;
+    const { checkedItems } = this.state;
     const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
+    let nextFiles = [];
+
+    checkedItems.length ?
+      nextFiles = files
+        .filter(file => checkedItems.find(item => item === file.uuid))
+        .map(item => ({ ...item, public_link: getCDNlink(item) }))
+      :
+      nextFiles = [{ ...image, public_link: getCDNlink(image) }];
 
     if (isForceUpload) {
-      this.props.upload(true, getCDNlink(item));
+      this.props.upload(true, nextFiles.map(file => getCDNlink(file)));
     } else {
-      const files = [{...item, public_link: getCDNlink(item) }];
-      this.props.appState.config.uploadHandler(files, { stage: 'select' });
+      this.props.appState.config.uploadHandler(nextFiles, { stage: 'select' });
       this.props.closeModal();
     }
-  }
+  };
 
-  onTagImage = (event, item) => {
+  onTagImage = (event, image) => {
     event.preventDefault();
     event.stopPropagation();
+    const { checkedItems } = this.state;
+    const { files } = this.props;
 
     if (this.props.appState.config.tagging.active) {
-      const files = [{...item, public_link: getCDNlink(item) }];
+      let nextFiles = [];
 
-      this.props.saveUploadedFiles(files);
+      checkedItems.length ?
+        nextFiles = files
+          .filter(file => checkedItems.find(item => item === file.uuid))
+          .map(item => ({ ...item, public_link: getCDNlink(item) }))
+        :
+        nextFiles = [{ ...image, public_link: getCDNlink(image) }];
+
+      this.props.saveUploadedFiles(nextFiles);
       this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
     }
-  }
+  };
 
   onEditImage = (event, item) => {
     event.preventDefault();
@@ -83,35 +102,51 @@ class UploadedImagesContent extends Component {
 
     if (this.props.appState.config.imageEditor.active) {
       const { path } = this.props;
-      const files = [{...item, public_link: getCDNlink(item) }];
+      const files = [{ ...item, public_link: getCDNlink(item) }];
 
       this.props.saveUploadedFiles(files);
       this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path });
     }
-  }
+  };
 
   onDeleteImage = (event, item) => {
-    const { forceUpdate, appState } = this.props;
+    const { onDeleteFile, appState } = this.props;
+    const { checkedItems } = this.state;
     const { container, uploadKey, baseAPI, platform } = appState.config;
     event.preventDefault();
     event.stopPropagation();
 
-    deleteImage({ item, container, uploadKey, baseAPI, platform })
-      .then(response => {
-        if (response.status === 'success') {
-          forceUpdate();
-        }
+    deleteImage({ uuids: checkedItems.length ? checkedItems : [item.uuid], container, uploadKey, baseAPI, platform })
+      .then(responses => {
+        const isAllDeleted = responses.every(response => response.status === 'success');
+
+        if (isAllDeleted) {
+          this.setState({ checkedItems: [] });
+          onDeleteFile();
+        } else alert(I18n.t('tagging.something_went_wrong_try_again'));
       })
       .catch(() => {
         alert(I18n.t('tagging.something_went_wrong_try_again'));
-    });
+      });
+  };
+
+  toggleChecked = uuid => {
+    const { forceUpdate } = this.props;
+    const { checkedItems } = this.state;
+    const nextCheckedItems = [...checkedItems];
+    const index = nextCheckedItems.findIndex(item => item === uuid);
+
+    nextCheckedItems.includes(uuid) ? nextCheckedItems.splice(index, 1) : nextCheckedItems.push(uuid);
+    this.setState({ checkedItems: nextCheckedItems }, forceUpdate());
   };
 
   render() {
-    const { files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper,
-    appState } = this.props;
+    const {
+      files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper,
+      appState
+    } = this.props;
     const { container = '' } = appState.config;
-    const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
+    const { imageGrid, imageContainerHeight, imageGridWrapperWidth, checkedItems } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = isUpload ? [{ id: 'uploaderBox' }, ...files] : [...files];
     const isFilerobotToken = /^[fF]/g.test(container);
@@ -152,10 +187,11 @@ class UploadedImagesContent extends Component {
 
         <ShowMoreResultsSpinner show={isShowMoreImages && imagesList.length > 1}/>
       </Content>
-    )
+    );
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
+    const { checkedItems } = this.state;
     const { tagging, imageEditor, cloudimageToken } = this.props.appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
@@ -166,6 +202,8 @@ class UploadedImagesContent extends Component {
       Math.floor(columnWidth / (item.ratio || 1.6)),
       cloudimageToken
     );
+    const isChecked = checkedItems.includes(item.uuid);
+    const isCheckedOne = checkedItems.length === 1 || !checkedItems.length;
 
     return (
       <ImageWrapper
@@ -186,9 +224,14 @@ class UploadedImagesContent extends Component {
           <ImageName>{item.name}</ImageName>
         </ImageDescription>
 
-        <Overlay>
+        <Overlay checked={isChecked}>
+          <Checkbox
+            checked={isChecked}
+            onChange={() => this.toggleChecked(item.uuid)}
+          />
+
           <Controls>
-            {isEditImage && isImageType &&
+            {isEditImage && isImageType && isCheckedOne &&
             <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
               <Control>
                 <span>{I18n.t('file_manager.edit')}</span>
@@ -198,13 +241,13 @@ class UploadedImagesContent extends Component {
             {isTagImage &&
             <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.tag')}</span>
+                <span>{I18n.t('file_manager.tag')}{!isCheckedOne ? ` (${checkedItems.length})` : ''}</span>
                 <Icon className="sfi-airstore-tag"/>
               </Control>
             </ControlWrapper>}
             <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
               <Control>
-                <span>{I18n.t('file_manager.delete')}</span>
+                <span>{I18n.t('file_manager.delete')}{!isCheckedOne ? ` (${checkedItems.length})` : ''}</span>
                 <Icon className="sfi-airstore-delete"/>
               </Control>
             </ControlWrapper>
@@ -216,7 +259,7 @@ class UploadedImagesContent extends Component {
         </Overlay>
       </ImageWrapper>
     );
-  }
+  };
 
   renderUploadBox = ({ style = {}, columnWidth = 300, item = {} }) => {
     const { fileDropHandler } = this.props;
@@ -236,8 +279,8 @@ class UploadedImagesContent extends Component {
           <Label center>{I18n.t('file_manager.drag_images_here')}</Label>
         </UploadBox>
       </UploadBoxWrapper>
-    )
-  }
+    );
+  };
 }
 
 export default UploadedImagesContent;

@@ -129,7 +129,6 @@ window.addEventListener('load', function() {
 });
 
 function onUploadHandler(files) {
-  console.log('files: ', files);
   const img = files[0];
   const options = {
     weekday: "long", year: "numeric", month: "short",

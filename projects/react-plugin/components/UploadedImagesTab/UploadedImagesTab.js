@@ -75,11 +75,11 @@ class UploadedImagesTab extends Component {
     });
   };
 
-  upload = (isUploadFromUrl = false, url = null) => {
+  upload = (isUploadFromUrl = false, urls = null) => {
     const { path } = this.state;
     const self = this.props;
     const config = this.props.appState.config;
-    const files = isUploadFromUrl ? [url] : this.state.filesToUpload;
+    const files = isUploadFromUrl ? urls : this.state.filesToUpload;
     const dataType = isUploadFromUrl ? 'application/json' : 'files[]';
 
     this.uploadStart();
@@ -211,7 +211,12 @@ class UploadedImagesTab extends Component {
   }
 
   forceUpdate = () => {
-    this.setState({ files: [] }, () => { this.onGetListFiles(this.state.path); })
+    const files = this.state.files;
+    this.setState({ files: [] }, () => { this.setState({ files }) })
+  };
+
+  onDeleteFile = () => {
+    this.setState({ files: [] }, () => { this.onGetListFiles(this.state.path) })
   };
 
   onShowMoreImages = (resizeOnSuccess) => {
@@ -383,6 +388,7 @@ class UploadedImagesTab extends Component {
           path={path}
           forceUpdate={this.forceUpdate}
           showAlert={showAlert}
+          onDeleteFile={this.onDeleteFile}
         />
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}

@@ -74,7 +74,9 @@ export const Control = styled('div')`
   border: 1px solid #fff;
   font-size: 10px;
   color: #acacac;
-  padding: 5px;
+  padding-top: 3px;
+  
+  min-height: 70px;
   text-align: center;
 
   :hover {
@@ -132,16 +134,16 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Overlay = styled.div`
-  display: none;
+  display: ${p => p.checked ? 'flex' : 'none'};
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   position: absolute;
-  top: -20px;
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 20px;
   background-color: rgba(0,0,0,0.8);
-  padding: 0 10px;
+  padding: 5px 10px;
   
   ${ImageWrapper}:hover & {
     display: flex;
@@ -295,7 +297,7 @@ export const ShowMoreResultsSpinner = ({ show }) => show ? (
 export const ImageDescription = styled.div`
   box-sizing: border-box;
   background: ${p => p.theme.activeSidebarItemBackground || 'gainsboro'};
-  z-index: 50;
+  z-index: 45;
   position: relative;
   height: 20px;
   
@@ -322,12 +324,75 @@ export const ImageName = styled.div`
 export const EditButton = styled(ButtonSearch)`
   background-color: ${p => p.success ? '#28a745' : p.theme.buttonBackground};
   width: 100%;
-  margin-top: 5px;
   height: 28px;
   line-height: 28px;
   padding: 0;
   
   :hover {
     background-color: ${p => p.success ? '#208638' : p.theme.hoverButtonBackground};
+  }
+`;
+
+export const Checkbox = styled('input').attrs((p) => ({
+  type: p.type ? p.type : 'checkbox'
+}))`
+  align-self: flex-end;
+  appearance: none;
+  position: relative;
+  height: ${p => p.type === 'radio' ? '11px' : '15px' };
+  width: ${p => p.type === 'radio' ? '11px' : '15px' };
+  transition: all 0.15s ease-out 0s;
+  background: ${p => p.theme.buttonBackground};
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  outline: none;
+  margin-right: 2px;
+  border-radius: ${p => p.type === 'radio' ? '50%' : '2px' };
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  z-index: 50;
+  
+  :hover {
+    background: ${p => p.theme.hoverButtonBackground};
+  }
+  
+  &:checked {
+    background: ${p => p.theme.hoverButtonBackground};
+  }
+  
+  &:checked::before {
+    background-color: ${p => p.type === 'radio' ? p.theme.hoverButtonBackground : '' };
+    border-radius: 50%;
+    height: ${p => p.type === 'radio' ? '3px' : '15px' };
+    width: ${p => p.type === 'radio' ? '3px' : '15px' };
+    top: ${p => p.type === 'radio' ? '4px' : '' };
+    left: ${p => p.type === 'radio' ? '4px' : '' };
+    content: ${p => p.type === 'radio' ? "''" : "'\\e90c'" };
+    position: absolute;
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+    font-family: 'filerobot-uploader-font';
+  }
+  
+  &:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
+  }
+  
+  :focus {
+    outline: none !important;
   }
 `;
