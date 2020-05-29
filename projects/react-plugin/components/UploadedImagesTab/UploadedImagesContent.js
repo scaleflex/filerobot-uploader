@@ -233,7 +233,7 @@ class UploadedImagesContent extends Component {
             <Controls>
               {isEditImage && isImageType && isCheckedOne &&
               <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-                <Control data-tip={'hello'}>
+                <Control>
                   <span>{I18n.t('file_manager.edit')}</span>
                   <Icon className="sfi-airstore-edit"/>
                 </Control>
@@ -256,8 +256,6 @@ class UploadedImagesContent extends Component {
             <SelectButton onClick={() => { this.select(item); }}>
               <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
             </SelectButton>
-
-            <ReactTooltip effect="solid"/>
           </ControlsWrapper>
         </Overlay>
       </ImageWrapper>
