@@ -253,7 +253,7 @@ class UploadedImagesContent extends Component {
             </Controls>
 
             <SelectButton onClick={() => { this.select(item); }}>
-              <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
+              <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
             </SelectButton>
           </ControlsWrapper>
 
