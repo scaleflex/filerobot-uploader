@@ -9,6 +9,17 @@ class AutosuggestionInput extends Component {
     result: []
   };
 
+  componentDidMount() {
+    debugger
+    this.input.click();
+  }
+
+  storeInputReference = autosuggest => {
+    if (autosuggest !== null) {
+      this.input = autosuggest.input
+    }
+  };
+
   handleOnChange = (e, { newValue, method }) => {
     if (method === 'enter') e.preventDefault();
     if (method === 'up' || method === 'down') this.handleKeyDown(e);
@@ -37,11 +48,12 @@ class AutosuggestionInput extends Component {
     return (
       <Autosuggestion>
         <Autosuggest
+          ref={this.storeInputReference}
           suggestions={suggestions}
           shouldRenderSuggestions={(value) => value && value.trim().length > 0}
           getSuggestionValue={(suggestion) => suggestion.name}
           renderSuggestion={(suggestion) => <span>{suggestion.name}</span>}
-          inputProps={{ ...this.props, onChange: this.handleOnChange }}
+          inputProps={{ ...this.props, onChange: this.handleOnChange, autoFocus: true }}
           onSuggestionSelected={(e, { suggestion }) => { addTag(suggestion.name); }}
           onSuggestionsClearRequested={() => {}}
           onSuggestionsFetchRequested={() => {}}
