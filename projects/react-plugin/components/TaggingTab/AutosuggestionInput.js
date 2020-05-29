@@ -10,7 +10,6 @@ class AutosuggestionInput extends Component {
   };
 
   componentDidMount() {
-    debugger
     this.input.click();
   }
 
