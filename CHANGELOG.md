@@ -27,6 +27,23 @@ Types of changes:
 -------------
 
 
+## 2.12.0 - 2020-05-29
+
+### Added
+- add tag autocomplete/suggestions
+- possibility to auto tag multiply images
+- possibility to select/delete/tag multiply images
+- 'deselect all' button
+
+### Fixed
+- problems with cdn links
+- do not run auto tagging if file type is not image
+- problem with icons in My icons tab
+
+### Changed
+- design: update item controls structure
+
+
 ## 2.11.0 - 2020-05-22
 
 ### Added
