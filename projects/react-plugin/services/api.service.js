@@ -253,7 +253,7 @@ export const saveMetaData = (files, properties, { container, baseAPI, platform, 
           tags: isOneFile ?
             data.properties.tags
             :
-            uniqueArrayOfStrings([...data.properties.tags, ...personalTags[file.uuid]])
+            uniqueArrayOfStrings([...data.properties.tags, ...personalTags[file.uuid] || []])
         }
       },
       {

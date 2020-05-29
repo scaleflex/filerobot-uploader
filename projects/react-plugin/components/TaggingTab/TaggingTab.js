@@ -90,13 +90,14 @@ class TaggingTab extends Component {
   }
 
   componentDidMount() {
-    const { files = [], config } = this.props.appState;
+    const { files = [], config, prevTab } = this.props.appState;
     const { tagging: { executeAfterUpload } = {} } = config;
     const firstFile = files[0];
     const isOneFile = files.length === 1;
     const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
+    const isPreviousGallery = prevTab === "MY_GALLERY";
 
-    if (executeAfterUpload && !this.state.tags.length && isImageType) {
+    if ((isPreviousGallery ? false : executeAfterUpload) && !this.state.tags.length && isImageType) {
       this.setState({ isGeneratingTags: true });
 
       this.generateTags(isOneFile);
@@ -218,11 +219,12 @@ class TaggingTab extends Component {
   };
 
   generateTags = (isOneFile) => {
-    if (this.state && this.state.tagsGenerated) return;
+    if (this.state.tagsGenerated) return;
 
     const { appState, files } = this.props;
     const { tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken } = appState.config;
     const firstFile = files[0];
+    const filesWithoutTags = files.filter(file => !file.properties.tags.length).map(file => file.uuid);
 
     isOneFile ?
       generateTags(firstFile.uuid, tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
@@ -266,10 +268,12 @@ class TaggingTab extends Component {
           );
         })
       :
-      generateMultiplyImagesTags(files.map(file => file.uuid), tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
+      generateMultiplyImagesTags(filesWithoutTags, tagging, language, container, baseAPI, platform, uploadKey, cloudimageToken)
         .then((images) => {
           const commonTags = [];
           const personalTags = {};
+
+          files.forEach(image => { personalTags[image.uuid] = image.properties.tags; });
 
           images.forEach(image => {
             if (image.tags) {
@@ -399,6 +403,7 @@ class TaggingTab extends Component {
     const isOneFile = files.length === 1;
     const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
     const imageSources = this.getImageSrc(files, isImageType);
+    const isSomeImageHasNoTags = files.some(file => !file.properties.tags.length);
 
     return (
       <TaggingTabWrapper>
@@ -545,7 +550,7 @@ class TaggingTab extends Component {
         </TaggingContent>
 
         <TaggingFooter>
-          {autoTaggingButton && isImageType &&
+          {autoTaggingButton && isImageType && isSomeImageHasNoTags &&
           <Button disabled={this.state.tagsGenerated} onClick={() => this.generateTags(isOneFile)}>
             {I18n.t('tagging.generate_tags')}
             <InfoIcon data-tip={generateTagInfo}/>
