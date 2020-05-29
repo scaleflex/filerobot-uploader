@@ -55,7 +55,8 @@ export default {
     tag: 'Изменить',
     edit: 'Редактировать',
     delete: 'Удалить',
-    no_subfolders: 'Нет подпапок'
+    no_subfolders: 'Нет подпапок',
+    deselect_all: 'Отменить выделение'
   },
   icons: {
     tab_title: 'Иконки',

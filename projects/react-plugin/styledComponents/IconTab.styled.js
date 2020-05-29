@@ -72,6 +72,7 @@ export const ButtonSearch = styled.button`
   text-transform: none;
   opacity: ${props => props.disabled ? '0.6' : '1'};
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  margin-right: ${p => p.mr ? p.mr : 0}px;
 
   :hover {
     background-color: ${p => p.theme.hoverButtonBackground || '#096868'};

@@ -53,7 +53,8 @@ export default {
     tag: 'Tag',
     edit: 'Edit',
     delete: 'Delete',
-    no_subfolders: 'No subfolders'
+    no_subfolders: 'No subfolders',
+    deselect_all: 'Deselect all'
   },
   icons: {
     tab_title: 'Free icons',

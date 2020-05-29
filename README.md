@@ -409,6 +409,8 @@ config.myGallery = {
 
 * `key`: string (require) - key to use image recognition technology
 
+* `executeAfterUpload`: bool - initiates auto-tagging on upload images
+
 * `autoTaggingButton`: bool - adds button which will automatically generate tags based on image recognition technology
 
 * `provider`: string [google|imagga] - recognition provider
@@ -422,6 +424,7 @@ config.myGallery = {
 
 ```javascript
 config.tagging = {
+    executeAfterUpload: true,
     autoTaggingButton: true,
     provider: 'google',
     confidence: 60,

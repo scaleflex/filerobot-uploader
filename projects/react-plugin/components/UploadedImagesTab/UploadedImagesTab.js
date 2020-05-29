@@ -44,7 +44,8 @@ class UploadedImagesTab extends Component {
         isUp: sortParams.order === 'asc'
       },
       totalFilesCount: 0,
-      imagesIndexWrapper: 0
+      imagesIndexWrapper: 0,
+      selectedItems: []
     }
   }
 
@@ -293,12 +294,16 @@ class UploadedImagesTab extends Component {
     this.setState({ sortParams: nextSortParams }, () => {
       this.activateFolder(path);
     });
-  }
+  };
+
+  updateTabState = (props, callback) => this.setState(props, callback);
+
+  deselectItems = () => { this.setState({ selectedItems: [] }, this.forceUpdate); };
 
   render() {
     const {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, searchPhrase = '',
-      progressBar: { color, status }, sortParams, imagesIndexWrapper
+      progressBar: { color, status }, sortParams, imagesIndexWrapper, selectedItems
     } = this.state;
     const { appState: { config }, showAlert } = this.props;
     const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn }, folderBrowser } = config;
@@ -342,6 +347,14 @@ class UploadedImagesTab extends Component {
           </SearchWrapper>
 
           <ActionButtonsWrapper>
+            {selectedItems.length &&
+            <ButtonSearch
+              hide={!isUpload}
+              className="ae-btn"
+              fullBr={'4px'}
+              mr={6}
+              onClick={this.deselectItems}
+            >{I18n.t('file_manager.deselect_all')}</ButtonSearch>}
             {showSortBtn &&
             <SortDropdown
               applySort={this.applySort}
@@ -389,6 +402,8 @@ class UploadedImagesTab extends Component {
           forceUpdate={this.forceUpdate}
           showAlert={showAlert}
           onDeleteFile={this.onDeleteFile}
+          selectedItems={selectedItems}
+          updateTabState={this.updateTabState}
         />
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}

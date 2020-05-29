@@ -96,6 +96,7 @@ export const Icon = styled('span')`
 
 export const SelectButton = styled(ControlWrapper)`
   width: 100%;
+  margin-top: 5px;
 `;
 
 export const ImageWrapper = styled.div`
@@ -136,18 +137,25 @@ export const ImageWrapper = styled.div`
 export const Overlay = styled.div`
   display: ${p => p.checked ? 'flex' : 'none'};
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 20px;
+  bottom: 0;
   background-color: rgba(0,0,0,0.8);
   padding: 5px 10px;
+  z-index: 46;
   
   ${ImageWrapper}:hover & {
     display: flex;
   }
+`;
+
+export const ControlsWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Controls = styled('div')`
@@ -333,24 +341,30 @@ export const EditButton = styled(ButtonSearch)`
   }
 `;
 
+export const CheckBoxWrapper = styled('div')`
+  min-height: 15px;
+`;
+
 export const Checkbox = styled('input').attrs((p) => ({
   type: p.type ? p.type : 'checkbox'
 }))`
   align-self: flex-end;
   appearance: none;
-  position: relative;
+  position: absolute;
+  top: 10px;
+  right: 11px;
   height: ${p => p.type === 'radio' ? '11px' : '15px' };
   width: ${p => p.type === 'radio' ? '11px' : '15px' };
   transition: all 0.15s ease-out 0s;
-  background: ${p => p.theme.buttonBackground};
-  border: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fff;
   color: #fff;
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 0.5rem;
+  margin-bottom: 5px;
   outline: none;
-  margin-right: 2px;
   border-radius: ${p => p.type === 'radio' ? '50%' : '2px' };
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -358,21 +372,12 @@ export const Checkbox = styled('input').attrs((p) => ({
   -o-appearance: none;
   z-index: 50;
   
-  :hover {
-    background: ${p => p.theme.hoverButtonBackground};
-  }
-  
-  &:checked {
-    background: ${p => p.theme.hoverButtonBackground};
-  }
-  
-  &:checked::before {
-    background-color: ${p => p.type === 'radio' ? p.theme.hoverButtonBackground : '' };
+  :hover::before {
     border-radius: 50%;
     height: ${p => p.type === 'radio' ? '3px' : '15px' };
     width: ${p => p.type === 'radio' ? '3px' : '15px' };
     top: ${p => p.type === 'radio' ? '4px' : '' };
-    left: ${p => p.type === 'radio' ? '4px' : '' };
+    left: ${p => p.type === 'radio' ? '4px' : '-2px' };
     content: ${p => p.type === 'radio' ? "''" : "'\\e90c'" };
     position: absolute;
     display: inline-block;
@@ -382,7 +387,22 @@ export const Checkbox = styled('input').attrs((p) => ({
     font-family: 'filerobot-uploader-font';
   }
   
-  &:checked::after {
+  :checked::before {
+    border-radius: 50%;
+    height: ${p => p.type === 'radio' ? '3px' : '15px' };
+    width: ${p => p.type === 'radio' ? '3px' : '15px' };
+    top: ${p => p.type === 'radio' ? '4px' : '' };
+    left: ${p => p.type === 'radio' ? '4px' : '-2px' };
+    content: ${p => p.type === 'radio' ? "''" : "'\\e90c'" };
+    position: absolute;
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+    font-family: 'filerobot-uploader-font';
+  }
+  
+  :checked::after {
     -webkit-animation: click-wave 0.65s;
     -moz-animation: click-wave 0.65s;
     animation: click-wave 0.65s;

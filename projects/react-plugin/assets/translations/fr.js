@@ -55,7 +55,8 @@ export default {
     tag: 'Taguer',
     edit: 'Editer',
     delete: 'Delete',
-    no_subfolders: 'Pas de sous-dossier'
+    no_subfolders: 'Pas de sous-dossier',
+    deselect_all: 'Tout déselectionner'
   },
   icons: {
     tab_title: 'Icônes gratuites',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
-  ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlWrapper, Control, Icon, Checkbox
+  ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlsWrapper, ControlWrapper, Control, Icon,
+  Checkbox, CheckBoxWrapper
 } from '../../styledComponents';
 import VirtualizedImagesGrid from '../VirtualizedImagesGrid';
 import { getActualColumnWidth, getFitResizeImageUrl } from '../../services/imageGrid.service';
@@ -20,7 +21,6 @@ class UploadedImagesContent extends Component {
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
       imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 },
-      checkedItems: []
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -55,14 +55,13 @@ class UploadedImagesContent extends Component {
   };
 
   select = (image) => {
-    const { files } = this.props;
-    const { checkedItems } = this.state;
+    const { files, selectedItems } = this.props;
     const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
     let nextFiles = [];
 
-    checkedItems.length ?
+    selectedItems.length ?
       nextFiles = files
-        .filter(file => checkedItems.find(item => item === file.uuid))
+        .filter(file => selectedItems.find(item => item === file.uuid))
         .map(item => ({ ...item, public_link: getCDNlink(item) }))
       :
       nextFiles = [{ ...image, public_link: getCDNlink(image) }];
@@ -78,15 +77,14 @@ class UploadedImagesContent extends Component {
   onTagImage = (event, image) => {
     event.preventDefault();
     event.stopPropagation();
-    const { checkedItems } = this.state;
-    const { files } = this.props;
+    const { files, selectedItems } = this.props;
 
     if (this.props.appState.config.tagging.active) {
       let nextFiles = [];
 
-      checkedItems.length ?
+      selectedItems.length ?
         nextFiles = files
-          .filter(file => checkedItems.find(item => item === file.uuid))
+          .filter(file => selectedItems.find(item => item === file.uuid))
           .map(item => ({ ...item, public_link: getCDNlink(item) }))
         :
         nextFiles = [{ ...image, public_link: getCDNlink(image) }];
@@ -110,18 +108,17 @@ class UploadedImagesContent extends Component {
   };
 
   onDeleteImage = (event, item) => {
-    const { onDeleteFile, appState } = this.props;
-    const { checkedItems } = this.state;
+    const { onDeleteFile, appState, selectedItems } = this.props;
     const { container, uploadKey, baseAPI, platform } = appState.config;
     event.preventDefault();
     event.stopPropagation();
 
-    deleteImage({ uuids: checkedItems.length ? checkedItems : [item.uuid], container, uploadKey, baseAPI, platform })
+    deleteImage({ uuids: selectedItems.length ? selectedItems : [item.uuid], container, uploadKey, baseAPI, platform })
       .then(responses => {
         const isAllDeleted = responses.every(response => response.status === 'success');
 
         if (isAllDeleted) {
-          this.setState({ checkedItems: [] });
+          this.props.updateTabState({ selectedItems: [] });
           onDeleteFile();
         } else alert(I18n.t('tagging.something_went_wrong_try_again'));
       })
@@ -131,13 +128,12 @@ class UploadedImagesContent extends Component {
   };
 
   toggleChecked = uuid => {
-    const { forceUpdate } = this.props;
-    const { checkedItems } = this.state;
-    const nextCheckedItems = [...checkedItems];
-    const index = nextCheckedItems.findIndex(item => item === uuid);
+    const { forceUpdate, selectedItems } = this.props;
+    const nextSelectedItems = [...selectedItems];
+    const index = nextSelectedItems.findIndex(item => item === uuid);
 
-    nextCheckedItems.includes(uuid) ? nextCheckedItems.splice(index, 1) : nextCheckedItems.push(uuid);
-    this.setState({ checkedItems: nextCheckedItems }, forceUpdate());
+    nextSelectedItems.includes(uuid) ? nextSelectedItems.splice(index, 1) : nextSelectedItems.push(uuid);
+    this.props.updateTabState({ selectedItems: nextSelectedItems }, forceUpdate());
   };
 
   render() {
@@ -146,7 +142,7 @@ class UploadedImagesContent extends Component {
       appState
     } = this.props;
     const { container = '' } = appState.config;
-    const { imageGrid, imageContainerHeight, imageGridWrapperWidth, checkedItems } = this.state;
+    const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = isUpload ? [{ id: 'uploaderBox' }, ...files] : [...files];
     const isFilerobotToken = /^[fF]/g.test(container);
@@ -191,8 +187,8 @@ class UploadedImagesContent extends Component {
   }
 
   renderImage = ({ style, columnWidth, item, index }) => {
-    const { checkedItems } = this.state;
-    const { tagging, imageEditor, cloudimageToken } = this.props.appState.config;
+    const { selectedItems, appState } = this.props;
+    const { tagging, imageEditor, cloudimageToken } = appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
@@ -202,8 +198,8 @@ class UploadedImagesContent extends Component {
       Math.floor(columnWidth / (item.ratio || 1.6)),
       cloudimageToken
     );
-    const isChecked = checkedItems.includes(item.uuid);
-    const isCheckedOne = checkedItems.length === 1 || !checkedItems.length;
+    const isChecked = selectedItems.includes(item.uuid);
+    const isCheckedOne = selectedItems.length === 1 || !selectedItems.length;
 
     return (
       <ImageWrapper
@@ -225,37 +221,42 @@ class UploadedImagesContent extends Component {
         </ImageDescription>
 
         <Overlay checked={isChecked}>
-          <Checkbox
-            checked={isChecked}
-            onChange={() => this.toggleChecked(item.uuid)}
-          />
+          <CheckBoxWrapper>
+            <Checkbox
+              checked={isChecked}
+              onChange={() => this.toggleChecked(item.uuid)}
+            />
+          </CheckBoxWrapper>
 
-          <Controls>
-            {isEditImage && isImageType && isCheckedOne &&
-            <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-              <Control>
-                <span>{I18n.t('file_manager.edit')}</span>
-                <Icon className="sfi-airstore-edit"/>
-              </Control>
-            </ControlWrapper>}
-            {isTagImage &&
-            <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
-              <Control>
-                <span>{I18n.t('file_manager.tag')}{!isCheckedOne ? ` (${checkedItems.length})` : ''}</span>
-                <Icon className="sfi-airstore-tag"/>
-              </Control>
-            </ControlWrapper>}
-            <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
-              <Control>
-                <span>{I18n.t('file_manager.delete')}{!isCheckedOne ? ` (${checkedItems.length})` : ''}</span>
-                <Icon className="sfi-airstore-delete"/>
-              </Control>
-            </ControlWrapper>
-          </Controls>
+          <ControlsWrapper>
+            <Controls>
+              {isEditImage && isImageType && isCheckedOne &&
+              <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
+                <Control>
+                  <span>{I18n.t('file_manager.edit')}</span>
+                  <Icon className="sfi-airstore-edit"/>
+                </Control>
+              </ControlWrapper>}
+              {isTagImage &&
+              <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
+                <Control>
+                  <span>{I18n.t('file_manager.tag')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</span>
+                  <Icon className="sfi-airstore-tag"/>
+                </Control>
+              </ControlWrapper>}
+              <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
+                <Control>
+                  <span>{I18n.t('file_manager.delete')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</span>
+                  <Icon className="sfi-airstore-delete"/>
+                </Control>
+              </ControlWrapper>
+            </Controls>
 
-          <SelectButton onClick={() => { this.select(item); }}>
-            <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
-          </SelectButton>
+            <SelectButton onClick={() => { this.select(item); }}>
+              <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}</EditButton>
+            </SelectButton>
+          </ControlsWrapper>
+
         </Overlay>
       </ImageWrapper>
     );
