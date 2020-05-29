@@ -354,7 +354,7 @@ export const IconWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-export const Icon = styled.img`
+export const IconTabImg = styled.img`
   width: 100%;
   height: 100%;
   vertical-align: middle;

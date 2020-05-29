@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Icon, HoverWrapper, AddTagBtn, NotRelevantBtn, ActionsIconWrapper, IconBoxWrapperInner, IconWrapper
+  IconTabImg, HoverWrapper, AddTagBtn, NotRelevantBtn, ActionsIconWrapper, IconBoxWrapperInner, IconWrapper
 } from '../../styledComponents';
 
 
@@ -9,7 +9,7 @@ class IconItem extends Component {
   hoverToggle(name, isHover) { this.setState({ [name]: isHover }) }
 
   render() {
-    const { icon, onIconClick, upload, addTag, isShowAddTagBtn, isShowNotRelevantBtn, setAsNotRelevant,
+    const { icon, onIconClick, addTag, isShowAddTagBtn, isShowNotRelevantBtn, setAsNotRelevant,
       onLoadImage, columnWidth, index
     } = this.props;
     const { isHover = false } = this.state;
@@ -34,7 +34,7 @@ class IconItem extends Component {
         </HoverWrapper>
 
         <IconWrapper width={resultWidth} height={resultWidth}>
-          <Icon
+          <IconTabImg
             isHover={isHover}
             src={icon.src}
             alt={icon.desc}
