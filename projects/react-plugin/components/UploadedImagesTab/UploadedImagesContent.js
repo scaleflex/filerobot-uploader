@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
 import {
   Content, UploadBoxWrapper, UploadBox, Label, UploadBoxIcon, ImageWrapper, Img, ImageDescription, ImageName,
   ShowMoreResultsSpinner, Overlay, SelectButton, EditButton, Controls, ControlsWrapper, ControlWrapper, Control, Icon,
@@ -232,7 +233,7 @@ class UploadedImagesContent extends Component {
             <Controls>
               {isEditImage && isImageType && isCheckedOne &&
               <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-                <Control>
+                <Control data-tip={'hello'}>
                   <span>{I18n.t('file_manager.edit')}</span>
                   <Icon className="sfi-airstore-edit"/>
                 </Control>
@@ -255,8 +256,9 @@ class UploadedImagesContent extends Component {
             <SelectButton onClick={() => { this.select(item); }}>
               <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
             </SelectButton>
-          </ControlsWrapper>
 
+            <ReactTooltip effect="solid"/>
+          </ControlsWrapper>
         </Overlay>
       </ImageWrapper>
     );

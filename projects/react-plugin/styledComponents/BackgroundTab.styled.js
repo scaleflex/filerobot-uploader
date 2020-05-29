@@ -55,6 +55,7 @@ export const TabWrap = styled.div`
 `;
 
 export const ControlWrapper = styled('div')`
+  position: relative;
   display: none;
   width: 33%;
   padding: 2px;
@@ -70,6 +71,7 @@ export const ControlWrapper = styled('div')`
 `;
 
 export const Control = styled('div')`
+  position: relative;
   border-radius: 6px;
   border: 1px solid #fff;
   font-size: 10px;
