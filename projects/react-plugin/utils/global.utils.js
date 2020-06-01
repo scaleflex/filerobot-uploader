@@ -41,7 +41,8 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     },
     tagging: {
       active: config.modules.includes('TAGGING'),
-      ...config.tagging
+      ...config.tagging,
+      suggestionList: config.tagging.suggestionList && config.tagging.suggestionList.length ? config.tagging.suggestionList.map(tag => ({ name: tag }) ) : [],
     },
     autoCropSuggestions: config.autoCropSuggestions || false,
 
@@ -58,7 +59,6 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
       ...config.sortParams
     },
     extensions: config.extensions || [],
-    preDefinedTags: config.preDefinedTags && config.preDefinedTags.length ? config.preDefinedTags.map(tag => ({ name: tag }) ) : [],
   };
 };
 

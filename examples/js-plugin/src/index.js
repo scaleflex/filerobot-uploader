@@ -82,14 +82,14 @@ let config = {
         metaKey: 'test_key_2',
         type: 'textarea'
       }
-    ]
+    ],
+    suggestionList: ['Color', 'Colored', 'Cobalt', 'Coral', 'Cobre']
   },
   language: 'en',
   colorScheme: {
     active: 'solarized'
   },
-  extensions: ['jpg', 'png'],
-  preDefinedTags: ['Color', 'Colored', 'Cobalt', 'Coral', 'Cobre']
+  extensions: ['jpg', 'png']
   //imageEditorConfig: {
   //  processWithCloudimage: true,
   //  filerobot: {

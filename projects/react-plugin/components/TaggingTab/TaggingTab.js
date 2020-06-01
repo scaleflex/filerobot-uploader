@@ -396,8 +396,8 @@ class TaggingTab extends Component {
     } = this.state;
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
-    const { tagging, preDefinedTags = [] } = config;
-    const { customFields = [], autoTaggingButton } = tagging;
+    const { tagging } = config;
+    const { customFields = [], autoTaggingButton, suggestionList = [] } = tagging;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const firstFile = files[0];
     const isOneFile = files.length === 1;
@@ -529,7 +529,7 @@ class TaggingTab extends Component {
                 <TagsInputWrapper>
                   <TagsInput
                     value={tags}
-                    renderInput={props => <AutosuggestionInput {...{ ...props, preDefinedTags }}/>}
+                    renderInput={props => <AutosuggestionInput {...{ ...props, suggestionList }}/>}
                     onChange={this.handleTagsChange}
                     inputProps={{
                       placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')

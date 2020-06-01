@@ -421,6 +421,7 @@ config.myGallery = {
 
 * `customFields`: array [{ name, metaKey, type }] - custom properties for an image. Where **name** - name of the field,
 **metaKey** - key/id of the field, **type** - type of the field: 'text', 'textarea'
+* `suggestionList`: array ['string'] - activates suggestion drop-down list of tags on typing;
 
 ```javascript
 config.tagging = {
@@ -441,7 +442,8 @@ config.tagging = {
         metaKey: 'test_key_2',
         type: 'textarea'
       }
-    ]
+    ],
+    suggestionList: ['Color', 'Colored', 'Cobalt', 'Coral', 'Cobre']
 };
 ```
 
@@ -452,15 +454,6 @@ config.tagging = {
 Allows to limit files according to the extension on upload. Extension **jpg** = **jpeg** and vice versa.
 ```
 config.extensions = ['jpg', 'png', 'pdf'];
-```
-
-#### `Predefined tags`: array
-
-**default**: [ ]
-
-Activates suggestion drop-down list of tags on typing
-```
-config.preDefinedTags = ['Color', 'Colored', 'Cobalt', 'Coral', 'Cobre'];
 ```
 
 #### `colorScheme`: object

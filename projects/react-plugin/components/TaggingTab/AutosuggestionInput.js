@@ -39,10 +39,10 @@ class AutosuggestionInput extends Component {
   };
 
   render() {
-    const { value, preDefinedTags = [], addTag } = this.props;
+    const { value, suggestionList = [], addTag } = this.props;
     const inputValue = (value && value.trim().toLowerCase()) || '';
     const inputLength = inputValue.length;
-    let suggestions = preDefinedTags.filter((tag) => tag.name.toLowerCase().slice(0, inputLength) === inputValue);
+    let suggestions = suggestionList.filter((tag) => tag.name.toLowerCase().slice(0, inputLength) === inputValue);
 
     return (
       <Autosuggestion>
