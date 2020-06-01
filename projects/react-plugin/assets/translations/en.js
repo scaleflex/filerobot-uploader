@@ -100,5 +100,12 @@ export default {
     update_product_position: 'Update product position',
     updating: 'updating...',
     common_tags: 'Common tags'
+  },
+  tips: {
+    edit: 'resize, crop, adjust the image',
+    delete: 'delete {number} image',
+    tag: 'mange tags and meta properties for {number} image',
+    select: 'select {number} image',
+    select_multiply: 'select multiple images'
   }
 };

@@ -12,6 +12,7 @@ import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
 import { getCDNlink } from '../../utils/adjustAPI.utils';
 import { deleteImage } from '../../services/api.service';
+import { getContentWithNumber } from '../../assets/translations/utils';
 
 
 class UploadedImagesContent extends Component {
@@ -34,6 +35,16 @@ class UploadedImagesContent extends Component {
     if (this.imageGridWrapperRef.current && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth)
       this.updateImageGridColumnWidth();
   }
+
+  getImageGridWrapperPosition = () => {
+    const imageGridInnerWrapper = document.querySelector('#image-grid-wrapper > div');
+
+    if (imageGridInnerWrapper) {
+      const { top, left } = imageGridInnerWrapper.getBoundingClientRect();
+
+      this.setState({ top, left });
+    }
+  };
 
   getImageGridWrapperWidth = () => Math.floor(this.imageGridWrapperRef.current.getBoundingClientRect().width);
   getImageGridWrapperHeight = () => this.imageGridWrapperRef.current.getBoundingClientRect().height;
@@ -175,6 +186,7 @@ class UploadedImagesContent extends Component {
             ratio={1.6}
             additionalImageHeight={20}
             customPositionHandler={true}
+            getImageGridWrapperPosition={this.getImageGridWrapperPosition}
             cellContent={(props) =>
               props.item.id !== 'uploaderBox' ? this.renderImage(props) : this.renderUploadBox(props)
             }
@@ -189,6 +201,7 @@ class UploadedImagesContent extends Component {
 
   renderImage = ({ style, columnWidth, item, index }) => {
     const { selectedItems, appState } = this.props;
+    const { top, left } = this.state;
     const { tagging, imageEditor, cloudimageToken } = appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
@@ -224,6 +237,7 @@ class UploadedImagesContent extends Component {
         <Overlay checked={isChecked}>
           <CheckBoxWrapper>
             <Checkbox
+              data-tip={getContentWithNumber(I18n.t('tips.select_multiply'), selectedItems.length)}
               checked={isChecked}
               onChange={() => this.toggleChecked(item.uuid)}
             />
@@ -233,31 +247,36 @@ class UploadedImagesContent extends Component {
             <Controls>
               {isEditImage && isImageType && isCheckedOne &&
               <ControlWrapper onClick={(event) => { this.onEditImage(event, item); }}>
-                <Control>
+                <Control data-tip={I18n.t('tips.edit')}>
                   <span>{I18n.t('file_manager.edit')}</span>
                   <Icon className="sfi-airstore-edit"/>
                 </Control>
               </ControlWrapper>}
               {isTagImage &&
               <ControlWrapper onClick={(event) => { this.onTagImage(event, item); }}>
-                <Control>
+                <Control data-tip={getContentWithNumber(I18n.t('tips.tag'), selectedItems.length)}>
                   <span>{I18n.t('file_manager.tag')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</span>
                   <Icon className="sfi-airstore-tag"/>
                 </Control>
               </ControlWrapper>}
               <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
-                <Control>
+                <Control data-tip={getContentWithNumber(I18n.t('tips.delete'), selectedItems.length)}>
                   <span>{I18n.t('file_manager.delete')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</span>
                   <Icon className="sfi-airstore-delete"/>
                 </Control>
               </ControlWrapper>
             </Controls>
 
-            <SelectButton onClick={() => { this.select(item); }}>
+            <SelectButton
+              data-tip={getContentWithNumber(I18n.t('tips.select'), selectedItems.length)}
+              onClick={() => { this.select(item); }}
+            >
               <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
             </SelectButton>
           </ControlsWrapper>
         </Overlay>
+
+        <ReactTooltip offset={{ top, left }} effect="solid"/>
       </ImageWrapper>
     );
   };

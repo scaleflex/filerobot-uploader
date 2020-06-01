@@ -102,5 +102,12 @@ export default {
     update_product_position: 'Update product position',
     updating: 'updating...',
     common_tags: 'Balises courantes'
+  },
+  tips: {
+    edit: 'redimensionner, rogner, ajuster l\'image',
+    delete: 'supprimer {number} image',
+    tag: 'gérer les tags et lees metadata de {number} image',
+    select: 'sélectionner {number} image',
+    select_multiply: 'sélectionner plusieurs images'
   }
 };

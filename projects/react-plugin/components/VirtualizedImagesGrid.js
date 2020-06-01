@@ -106,6 +106,8 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
     const self = this;
     const { isShowMoreImages, onShowMoreImages } = this.props;
 
+    this.props.getImageGridWrapperPosition();
+
     if (!onShowMoreImages) return;
     if ((clientHeight + scrollTop + 600 >= scrollHeight) && !isShowMoreImages) {
       this.props.onShowMoreImages(() => {
@@ -144,6 +146,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
     return (
       <Masonry
+        id="image-grid-wrapper"
         autoHeight={windowScrollerEnabled}
         cellCount={count}
         cellMeasurerCache={this._cache}
@@ -156,6 +159,7 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
         width={width}
         onScroll={this.onScroll}
         tabIndex={-1}
+        onCellsRendered={this.props.getImageGridWrapperPosition}
       />
     );
   };
