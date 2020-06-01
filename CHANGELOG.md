@@ -27,6 +27,17 @@ Types of changes:
 -------------
 
 
+## 2.12.1 - 2020-06-01
+
+### Added
+- tips on hover for image controls
+- alert if changes not saved
+
+### Changed
+- config: rename predefinedTags to suggestionList
+- config: move suggestionList into tagging
+
+
 ## 2.12.0 - 2020-05-29
 
 ### Added

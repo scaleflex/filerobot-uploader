@@ -104,9 +104,9 @@ class ReactVirtualizedImagesGrid extends React.PureComponent {
 
   onScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
     const self = this;
-    const { isShowMoreImages, onShowMoreImages } = this.props;
+    const { isShowMoreImages, onShowMoreImages, getImageGridWrapperPosition } = this.props;
 
-    this.props.getImageGridWrapperPosition();
+    if (getImageGridWrapperPosition ) getImageGridWrapperPosition();
 
     if (!onShowMoreImages) return;
     if ((clientHeight + scrollTop + 600 >= scrollHeight) && !isShowMoreImages) {

@@ -145,16 +145,18 @@ class TaggingTab extends Component {
 
   handleDescriptionChange = event => {
     this.setState({ description: event.target.value, errorMessage: '' });
+    this.props.setAppState({ hasChanged: true });
   };
 
   handleTagsChange = (newTags = [], lastTag = []) => {
     const { removedTags } = this.state;
     const isNewAdded = newTags.includes(lastTag[0]);
     this.setState({ tags: newTags, errorMessage: '' });
+    this.props.setAppState({ hasChanged: true });
 
     if (!isNewAdded) {
       const nextRemovedTags = [...removedTags, ...lastTag];
-      this.setState({ removedTags: nextRemovedTags })
+      this.setState({ removedTags: nextRemovedTags });
     }
   };
 
@@ -319,12 +321,15 @@ class TaggingTab extends Component {
 
     this.props.setPostUpload(false);
 
+    if (hasChanged) alert('Do you want to leave this tab? Changes you made may not be saved');
+
     if (options.closeOnEdit)
       this.props.closeModal({ hasChanged });
   };
 
   handleCustomFieldChange = (event) => {
     this.setState({ [event.target.name]: event.target.value, errorMessage: '' });
+    this.props.setAppState({ hasChanged: true });
   };
 
   updateProductProps = () => {
