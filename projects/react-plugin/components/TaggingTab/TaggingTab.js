@@ -321,7 +321,10 @@ class TaggingTab extends Component {
 
     this.props.setPostUpload(false);
 
-    if (hasChanged) alert('Do you want to leave this tab? Changes you made may not be saved');
+    if (hasChanged) {
+      alert('Do you want to leave this tab? Changes you made may not be saved');
+      this.props.setAppState({ hasChanged: false });
+    }
 
     if (options.closeOnEdit)
       this.props.closeModal({ hasChanged });
