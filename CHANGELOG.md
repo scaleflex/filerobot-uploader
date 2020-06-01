@@ -27,17 +27,6 @@ Types of changes:
 -------------
 
 
-## 2.12.1 - 2020-06-01
-
-### Added
-- tips on hover for image controls
-- alert if changes not saved
-
-### Changed
-- config: rename predefinedTags to suggestionList
-- config: move suggestionList into tagging
-
-
 ## 2.12.0 - 2020-05-29
 
 ### Added
@@ -45,6 +34,8 @@ Types of changes:
 - possibility to auto tag multiply images
 - possibility to select/delete/tag multiply images
 - 'deselect all' button
+- tips on hover for image controls
+- alert if changes not saved
 
 ### Fixed
 - problems with cdn links
@@ -53,6 +44,8 @@ Types of changes:
 
 ### Changed
 - design: update item controls structure
+- config: rename predefinedTags to suggestionList
+- config: move suggestionList into tagging
 
 
 ## 2.11.0 - 2020-05-22
