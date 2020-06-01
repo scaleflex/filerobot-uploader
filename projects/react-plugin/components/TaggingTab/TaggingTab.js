@@ -217,6 +217,7 @@ class TaggingTab extends Component {
         });
       });
 
+    this.props.setAppState({ hasChanged: false });
     this.setState({ isLoading: true });
   };
 
@@ -319,11 +320,16 @@ class TaggingTab extends Component {
     const { options = {}, appState } = this.props;
     const { hasChanged } = appState;
 
-    this.props.setPostUpload(false);
-
     if (hasChanged) {
-      alert('Do you want to leave this tab? Changes you made may not be saved');
-      this.props.setAppState({ hasChanged: false });
+      const isGoBack = window.confirm('Do you want to leave this tab? Changes you made may not be saved');
+
+      if (isGoBack) {
+        this.props.setPostUpload(false);
+        this.props.setAppState({ hasChanged: false });
+      }
+
+    } else {
+      this.props.setPostUpload(false);
     }
 
     if (options.closeOnEdit)
