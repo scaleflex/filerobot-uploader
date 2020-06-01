@@ -27,7 +27,7 @@ Types of changes:
 -------------
 
 
-## 2.12.0 - 2020-05-29
+## 2.12.0 - 2020-06-01
 
 ### Added
 - add tag autocomplete/suggestions
