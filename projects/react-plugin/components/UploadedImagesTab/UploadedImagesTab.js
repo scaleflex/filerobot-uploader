@@ -212,8 +212,10 @@ class UploadedImagesTab extends Component {
   }
 
   forceUpdate = () => {
-    const files = this.state.files;
-    this.setState({ files: [] }, () => { this.setState({ files }) })
+    const imageGridWrapper = document.querySelector('#image-grid-wrapper');
+
+    imageGridWrapper.scrollBy(0, 1);
+    setTimeout(() => imageGridWrapper.scrollBy(0, -1), 100)
   };
 
   onDeleteFile = () => {
