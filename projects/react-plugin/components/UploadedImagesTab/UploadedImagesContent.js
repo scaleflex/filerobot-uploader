@@ -140,12 +140,12 @@ class UploadedImagesContent extends Component {
   };
 
   toggleChecked = uuid => {
-    const { forceUpdate, selectedItems } = this.props;
+    const { selectedItems } = this.props;
     const nextSelectedItems = [...selectedItems];
     const index = nextSelectedItems.findIndex(item => item === uuid);
 
     nextSelectedItems.includes(uuid) ? nextSelectedItems.splice(index, 1) : nextSelectedItems.push(uuid);
-    this.props.updateTabState({ selectedItems: nextSelectedItems }, forceUpdate());
+    this.props.updateTabState({ selectedItems: nextSelectedItems }, this.props.forceUpdate);
   };
 
   render() {
@@ -237,6 +237,7 @@ class UploadedImagesContent extends Component {
         <Overlay checked={isChecked}>
           <CheckBoxWrapper>
             <Checkbox
+              data-place="bottom"
               data-tip={getContentWithNumber(I18n.t('tips.select_multiply'), selectedItems.length)}
               checked={isChecked}
               onChange={() => this.toggleChecked(item.uuid)}

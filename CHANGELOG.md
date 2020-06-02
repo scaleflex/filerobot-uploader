@@ -26,6 +26,12 @@ Types of changes:
 
 -------------
 
+# 2.12.2 - 2020-06-02
+
+### Fixed
+- tip position for multi select checkbox;
+- bug with scroll to top on click checkbox
+
 # 2.12.1 - 2020-06-01
 
 ### Fixed
