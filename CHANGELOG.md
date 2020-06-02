@@ -26,6 +26,11 @@ Types of changes:
 
 -------------
 
+# 2.12.3 - 2020-06-02
+
+### Changed
+- delay for the controls tips
+
 # 2.12.2 - 2020-06-02
 
 ### Fixed

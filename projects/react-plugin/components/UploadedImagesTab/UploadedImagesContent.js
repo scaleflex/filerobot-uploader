@@ -277,7 +277,7 @@ class UploadedImagesContent extends Component {
           </ControlsWrapper>
         </Overlay>
 
-        <ReactTooltip offset={{ top, left }} effect="solid"/>
+        <ReactTooltip offset={{ top, left }} delayShow={700} effect="solid"/>
       </ImageWrapper>
     );
   };
