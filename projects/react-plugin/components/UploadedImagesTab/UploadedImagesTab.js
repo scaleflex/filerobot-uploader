@@ -213,9 +213,18 @@ class UploadedImagesTab extends Component {
 
   forceUpdate = () => {
     const imageGridWrapper = document.querySelector('#image-grid-wrapper');
+    const modalWrapper = document.querySelector('#modal-wrapper');
+    const modalWrapperOffsetLeft = modalWrapper.offsetLeft;
 
-    imageGridWrapper.scrollBy(0, 1);
-    setTimeout(() => imageGridWrapper.scrollBy(0, -1), 100)
+    this.setState({ isLoading: true }, () => {
+      modalWrapper.style.left = `${modalWrapperOffsetLeft - 2}px`;
+      setTimeout(() => { modalWrapper.style.left = `${modalWrapperOffsetLeft}px`; });
+
+      imageGridWrapper.scrollBy(0, 1);
+      setTimeout(() => imageGridWrapper.scrollBy(0, -1), 100);
+
+      setTimeout(() => { this.setState({ isLoading: false })}, 200)
+    });
   };
 
   onDeleteFile = () => {

@@ -48,7 +48,7 @@ reactBtn.onclick = function() {
 let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: {
-    dir:"/dima_test_7_en"
+    dir:"/dima_test_8_en"
   },
   container: 'fusqadtm',
   filerobotUploadKey: '19692813e7364ef8ad6a6504d50a12ca',
