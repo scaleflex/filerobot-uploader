@@ -14,9 +14,17 @@ import FolderManager from './folderManager/FolderManager';
 import { PROGRESS_COLORS, ProgressCircle } from '../ProgressCircle';
 import SortDropdown from './SortDropdown';
 import { validateExtensions } from '../UploadImagesTab/UserUploaderTab.utils';
+import { isImage } from '../../utils/icons.utils';
+import PreUploadProcess from '../UploadImagesTab/PreUploadProcess';
 
 
-const STEP = { DEFAULT: 'DEFAULT', UPLOADING: 'UPLOADING', ERROR: 'ERROR', UPLOADED: 'UPLOADED' };
+const STEP = {
+  DEFAULT: 'DEFAULT',
+  UPLOADING: 'UPLOADING',
+  ERROR: 'ERROR',
+  UPLOADED: 'UPLOADED',
+  PROCESS: 'PROCESS'
+};
 
 class UploadedImagesTab extends Component {
   constructor(props) {
@@ -31,6 +39,7 @@ class UploadedImagesTab extends Component {
       imagesIndex: 0,
       searchInputIndex: 0,
       files: [],
+      imagesToUpload: [],
       directories: [],
       isShowMoreImages: false,
       showFileManager: false,
@@ -68,19 +77,51 @@ class UploadedImagesTab extends Component {
     if (isValid) this.changeFile(target.files);
   };
 
-  changeFile = (filesToUpload = []) => {
-    this.setState({ filesToUpload });
+  changeFile = (files = []) => {
+    const { config } = this.props.appState;
+    const isAllImages = [].every.call(files, file => file.type && isImage(file.type));
+    let count = 0;
 
-    setTimeout(() => {
-      if (filesToUpload) this.upload();
-    });
+    if ((config.preUploadImageProcess || config.processBeforeUpload) && isAllImages) {
+      if (!config.processBeforeUpload) this.setState({ resultFiles: files, step: STEP.PROCESS });
+
+      if (files && files[0]) {
+        count = files.length;
+
+        [...files].forEach((file, index) => {
+          const reader = new FileReader();
+
+          reader.onload = (event) => {
+            const { imagesToUpload = [] } = this.state;
+
+            this.setState({
+              imagesToUpload: [
+                ...imagesToUpload,
+                {
+                  src: event.target.result,
+                  file
+                }
+              ]
+            });
+
+            if (count === index + 1) {
+              this.setState({ resultFiles: files, step: STEP.PROCESS });
+            }
+          }
+
+          reader.readAsDataURL(file);
+        });
+      }
+    } else {
+      this.setState({ resultFiles: files }, this.upload);
+    }
   };
 
   upload = (isUploadFromUrl = false, urls = null) => {
     const { path } = this.state;
     const self = this.props;
     const config = this.props.appState.config;
-    const files = isUploadFromUrl ? urls : this.state.filesToUpload;
+    const files = isUploadFromUrl ? urls : this.state.resultFiles;
     const dataType = isUploadFromUrl ? 'application/json' : 'files[]';
 
     this.uploadStart();
@@ -302,111 +343,147 @@ class UploadedImagesTab extends Component {
 
   deselectItems = () => { this.setState({ selectedItems: [] }, this.forceUpdate); };
 
+  cancelUpload = () => {
+    this.setState({
+      step: STEP.DEFAULT,
+      uploadedFiles: [],
+      imagesToUpload: [],
+      isDragOver: false
+    })
+  }
+
+  updateFilesAndUpload = (files) => {
+    this.setState({ files }, this.upload);
+  }
+
+  updateImagesToUpload = (imagesToUpload, callback) => {
+    this.setState(
+      { imagesToUpload: [] },
+      () => {
+        this.setState({ imagesToUpload }, callback)
+      }
+    );
+  }
+
   render() {
     const {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, searchPhrase = '',
-      progressBar: { color, status }, sortParams, imagesIndexWrapper, selectedItems
+      progressBar: { color, status }, sortParams, imagesIndexWrapper, selectedItems, imagesToUpload
     } = this.state;
-    const { appState: { config }, showAlert } = this.props;
+    const { appState, showAlert } = this.props;
+    const { config } = appState;
     const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn }, folderBrowser } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
 
     return (
       <UploadedImages>
-        {isUpload &&
-        <UploadInputBox
-          type="file"
-          name="files[]"
-          ref={node => this.fileInput = node}
-          data-multiple-caption="{count} files selected"
-          defaultValue={''}
-          tabIndex={-1}
-          multiple
-          onChange={this.fileChangeHandler}
+        {step === STEP.PROCESS &&
+        <PreUploadProcess
+          {...{ imagesToUpload }}
+          appState={appState}
+          upload={this.upload}
+          cancelUpload={this.cancelUpload}
+          updateFilesAndUpload={this.updateFilesAndUpload}
+          updateImagesToUpload={this.updateImagesToUpload}
         />}
 
-        <HeaderWrap>
-          <SearchWrapper>
-            <SearchGroup padding={'0px'}>
-              <InputSearch
-                searchInputIndex={this.state.searchInputIndex}
-                type="text"
-                ref={node => this._searchInput = node}
-                autoFocus={true}
-                value={searchPhrase}
-                placeholder={I18n.t('file_manager.search_by_file_name_tag_desc')}
-                onChange={this.onSearchChange}
-                onKeyDown={this.onKeyDownSearch}
-              />
-              {searchPhrase && <ButtonClose onClick={this.goToDefaultFolder}/>}
+        {step !== STEP.PROCESS &&
+        <>
+          {isUpload &&
+          <UploadInputBox
+            type="file"
+            name="files[]"
+            ref={node => this.fileInput = node}
+            data-multiple-caption="{count} files selected"
+            defaultValue={''}
+            tabIndex={-1}
+            multiple
+            onChange={this.fileChangeHandler}
+          />}
+
+          <HeaderWrap>
+            <SearchWrapper>
+              <SearchGroup padding={'0px'}>
+                <InputSearch
+                  searchInputIndex={this.state.searchInputIndex}
+                  type="text"
+                  ref={node => this._searchInput = node}
+                  autoFocus={true}
+                  value={searchPhrase}
+                  placeholder={I18n.t('file_manager.search_by_file_name_tag_desc')}
+                  onChange={this.onSearchChange}
+                  onKeyDown={this.onKeyDownSearch}
+                />
+                {searchPhrase && <ButtonClose onClick={this.goToDefaultFolder}/>}
+                <ButtonSearch
+                  key="ok"
+                  disabled={isTooShortSearchPhrase}
+                  className="ae-btn"
+                  onClick={() => { this.search(); }}
+                >{I18n.t('upload.search')}</ButtonSearch>
+              </SearchGroup>
+            </SearchWrapper>
+
+            <ActionButtonsWrapper>
+              {selectedItems.length &&
               <ButtonSearch
-                key="ok"
-                disabled={isTooShortSearchPhrase}
+                hide={!isUpload}
                 className="ae-btn"
-                onClick={() => { this.search(); }}
-              >{I18n.t('upload.search')}</ButtonSearch>
-            </SearchGroup>
-          </SearchWrapper>
+                fullBr={'4px'}
+                mr={6}
+                onClick={this.deselectItems}
+              >{I18n.t('file_manager.deselect_all')}</ButtonSearch>}
+              {showSortBtn &&
+              <SortDropdown
+                applySort={this.applySort}
+                sortParams={sortParams}
+              />}
+              <ButtonSearch
+                hide={!isUpload}
+                className="ae-btn"
+                fullBr={'4px'}
+                onClick={() => { this.fileInput.click() }}
+              >{I18n.t('file_manager.upload_images')}</ButtonSearch>
+            </ActionButtonsWrapper>
+          </HeaderWrap>
 
-          <ActionButtonsWrapper>
-            {selectedItems.length &&
-            <ButtonSearch
-              hide={!isUpload}
-              className="ae-btn"
-              fullBr={'4px'}
-              mr={6}
-              onClick={this.deselectItems}
-            >{I18n.t('file_manager.deselect_all')}</ButtonSearch>}
-            {showSortBtn &&
-            <SortDropdown
-              applySort={this.applySort}
-              sortParams={sortParams}
-            />}
-            <ButtonSearch
-              hide={!isUpload}
-              className="ae-btn"
-              fullBr={'4px'}
-              onClick={() => { this.fileInput.click() }}
-            >{I18n.t('file_manager.upload_images')}</ButtonSearch>
-          </ActionButtonsWrapper>
-        </HeaderWrap>
+          {folderBrowser.show &&
+          <Nav>
+            <FolderManager
+              path={path}
+              rootDir={folderBrowser.rootFolder}
+              folders={directories}
+              goToLevelUpFolder={this.goToLevelUpFolder}
+              changeFolder={this.activateFolder}
+              isLoading={isLoading}
+            />
+          </Nav>}
 
-        {folderBrowser.show &&
-        <Nav>
-          <FolderManager
-            path={path}
-            rootDir={folderBrowser.rootFolder}
-            folders={directories}
-            goToLevelUpFolder={this.goToLevelUpFolder}
-            changeFolder={this.activateFolder}
+          <UploadedImagesContent
+            imagesIndexWrapper={imagesIndexWrapper}
+            isUpload={isUpload}
+            appState={this.props.appState}
+            upload={this.upload}
+            setAppState={this.props.setAppState}
+            imagesIndex={imagesIndex}
+            onDragEvent={this.onDragEvent}
+            fileDropHandler={this.fileDropHandler}
+            isDragOver={isDragOver}
+            saveUploadedFiles={this.props.saveUploadedFiles}
+            setPostUpload={this.props.setPostUpload}
+            files={files}
+            closeModal={this.props.closeModal}
+            onShowMoreImages={this.onShowMoreImages}
+            isShowMoreImages={this.state.isShowMoreImages}
             isLoading={isLoading}
+            path={path}
+            forceUpdate={this.forceUpdate}
+            showAlert={showAlert}
+            onDeleteFile={this.onDeleteFile}
+            selectedItems={selectedItems}
+            updateTabState={this.updateTabState}
           />
-        </Nav>}
-
-        <UploadedImagesContent
-          imagesIndexWrapper={imagesIndexWrapper}
-          isUpload={isUpload}
-          appState={this.props.appState}
-          upload={this.upload}
-          setAppState={this.props.setAppState}
-          imagesIndex={imagesIndex}
-          onDragEvent={this.onDragEvent}
-          fileDropHandler={this.fileDropHandler}
-          isDragOver={isDragOver}
-          saveUploadedFiles={this.props.saveUploadedFiles}
-          setPostUpload={this.props.setPostUpload}
-          files={files}
-          closeModal={this.props.closeModal}
-          onShowMoreImages={this.onShowMoreImages}
-          isShowMoreImages={this.state.isShowMoreImages}
-          isLoading={isLoading}
-          path={path}
-          forceUpdate={this.forceUpdate}
-          showAlert={showAlert}
-          onDeleteFile={this.onDeleteFile}
-          selectedItems={selectedItems}
-          updateTabState={this.updateTabState}
-        />
+        </>}
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}
 
