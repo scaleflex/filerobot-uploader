@@ -29,12 +29,23 @@ class UploadedImagesContent extends Component {
 
   componentDidMount() {
     this.updateImageGridColumnWidth();
+    document.addEventListener('click', this.handleOutsideMouseClick);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideMouseClick);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.imageGridWrapperRef.current && this.getImageGridWrapperWidth() !== prevState.imageGridWrapperWidth)
       this.updateImageGridColumnWidth();
   }
+
+  handleOutsideMouseClick = e => {
+    if (this.imageGridWrapperRef && this.imageGridWrapperRef.current && !this.imageGridWrapperRef.current.contains(e.target)) {
+      this.props.updateTabState({ selectedItems: [] }, this.props.forceUpdate);
+    }
+  };
 
   getImageGridWrapperPosition = () => {
     const imageGridInnerWrapper = document.querySelector('#image-grid-wrapper > div');
