@@ -26,6 +26,11 @@ Types of changes:
 
 -------------
 
+# 2.12.3 - 2020-06-10
+
+### Fixed
+- reset selected items on outside click in my gallery
+- add preprocess logic to my gallery tab
 
 # 2.12.2 - 2020-06-02
 
