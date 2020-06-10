@@ -216,15 +216,15 @@ class UploadedImagesTab extends Component {
     const modalWrapper = document.querySelector('#modal-wrapper');
     const modalWrapperOffsetLeft = modalWrapper.offsetLeft;
 
-    this.setState({ isLoading: true }, () => {
-      modalWrapper.style.left = `${modalWrapperOffsetLeft - 2}px`;
-      setTimeout(() => { modalWrapper.style.left = `${modalWrapperOffsetLeft}px`; });
+    modalWrapper.style.left = `${modalWrapperOffsetLeft - 1}px`;
+    modalWrapper.style.transform = `translateX(1px)`;
+    setTimeout(() => {
+      modalWrapper.style.left = `${modalWrapperOffsetLeft}px`;
+      modalWrapper.style.transform = `translateX(0px)`;
+    }, 100);
 
-      imageGridWrapper.scrollBy(0, 1);
-      setTimeout(() => imageGridWrapper.scrollBy(0, -1), 100);
-
-      setTimeout(() => { this.setState({ isLoading: false })}, 200)
-    });
+    imageGridWrapper.scrollBy(0, 1);
+    setTimeout(() => imageGridWrapper.scrollBy(0, -1), 100);
   };
 
   onDeleteFile = () => {
