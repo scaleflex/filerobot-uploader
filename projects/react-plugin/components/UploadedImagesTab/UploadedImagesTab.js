@@ -362,7 +362,7 @@ class UploadedImagesTab extends Component {
   }
 
   updateFilesAndUpload = (files) => {
-    this.setState({ files }, this.upload);
+    this.setState({ resultFiles: files }, this.upload);
   }
 
   updateImagesToUpload = (imagesToUpload, callback) => {
@@ -383,6 +383,9 @@ class UploadedImagesTab extends Component {
     const { config } = appState;
     const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn }, folderBrowser } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
+
+
+    console.log("step: ", step);
 
     return (
       <UploadedImages>

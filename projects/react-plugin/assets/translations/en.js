@@ -50,6 +50,7 @@ export default {
     media_library: 'Media Library',
     go_back: 'Go back',
     select: 'Select',
+    modify: 'Modify URL',
     tag: 'Tag',
     edit: 'Edit',
     delete: 'Delete',
@@ -90,6 +91,7 @@ export default {
     add_a_tag_separate_by_pressing_enter: 'Add a tag (separate by pressing enter)',
     generate_tags: 'Generate tags',
     save: 'Save',
+    save_and_modify: 'Save and Modify URL',
     asset_could_not_be_automatically_tagged: 'Asset could not be automatically tagged',
     could_not_be_automatically_tagged: 'could not be automatically tagged',
     auto_tagging_processing: 'Auto-tagging processing...',
@@ -106,6 +108,7 @@ export default {
     delete: 'delete {number} image',
     tag: 'mange tags and meta properties for {number} image',
     select: 'select {number} image',
+    modify: 'modify url for the image',
     select_multiply: 'select multiple images'
   }
 };

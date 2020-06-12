@@ -97,6 +97,19 @@ class UploadedImagesContent extends Component {
     }
   };
 
+  modify = (event, item) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.props.appState.config.imageEditor.active) {
+      const { path } = this.props;
+      const files = [{ ...item, public_link: getCDNlink(item) }];
+
+      this.props.saveUploadedFiles(files);
+      this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path, modifyURL: true });
+    }
+  }
+
   onTagImage = (event, image) => {
     event.preventDefault();
     event.stopPropagation();
@@ -279,11 +292,23 @@ class UploadedImagesContent extends Component {
               </ControlWrapper>
             </Controls>
 
-            <SelectButton
-              data-tip={getContentWithNumber(I18n.t('tips.select'), selectedItems.length)}
-              onClick={() => { this.select(item); }}
-            >
-              <EditButton fullBr={'4px'} success={true}>{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
+
+            <SelectButton>
+              <EditButton
+                fullBr={'4px'}
+                isCheckedOne={isCheckedOne}
+                success={true}
+                onClick={() => { this.select(item); }}
+                data-tip={getContentWithNumber(I18n.t('tips.select'), selectedItems.length)}
+              >{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
+              {isCheckedOne &&
+              <EditButton
+                fullBr={'4px'}
+                isCheckedOne={true}
+                primary={true}
+                onClick={event => { this.modify(event, item); }}
+                data-tip={I18n.t('tips.modify')}
+              >{I18n.t('file_manager.modify')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>}
             </SelectButton>
           </ControlsWrapper>
         </Overlay>

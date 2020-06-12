@@ -95,7 +95,7 @@ class PreUploadProcess extends Component {
       const { width, height } = this.state.imagesParams;
       const image = wrapper.children[0];
 
-      window.Caman(image, function () {
+      new window.Caman(image, function () {
         self.processedElements += 1;
 
         if (!(width < image.width || height < image.height)) {
@@ -137,7 +137,7 @@ class PreUploadProcess extends Component {
     const { topCrop: { height, width, x, y } = {} } = result;
     const self = this;
 
-    window.Caman(img, function () {
+    new window.Caman(img, function () {
       self.processedElements += 1;
 
       this
@@ -415,7 +415,7 @@ class PreUploadProcess extends Component {
     let processedImages = 0;
 
     elements.forEach((canvas, index) => {
-      window.Caman(canvas, function () {
+      new window.Caman(canvas, function () {
         this.render(function () {
           const contentType = self.props.imagesToUpload[index].file.type;
           const base64 = this.canvas.toDataURL(contentType);
@@ -588,7 +588,7 @@ class PreUploadProcess extends Component {
 
         <Script
           onLoad={this.onLoadCaman}
-          url="https://cdn.scaleflex.it/plugins/common/libs/caman.full.min.js"
+          url="https://scaleflex.cloudimg.io/v7/plugins/caman-sfx/caman-sfx.min.js?v=ab5b69&func=proxy"
           crossorigin="anonymous"
         />
       </Container>

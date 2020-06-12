@@ -333,13 +333,18 @@ export const ImageName = styled.div`
 
 export const EditButton = styled(ButtonSearch)`
   background-color: ${p => p.success ? '#28a745' : p.theme.buttonBackground};
-  width: 100%;
+  width: ${p => !p.isCheckedOne ? '100%' : 'calc(50% - 2px)'};
   height: 28px;
   line-height: 28px;
   padding: 0;
+  display: inline-block;
   
   :hover {
     background-color: ${p => p.success ? '#208638' : p.theme.hoverButtonBackground};
+  }
+  
+  &:first-child {
+    margin-right: 4px;
   }
 `;
 

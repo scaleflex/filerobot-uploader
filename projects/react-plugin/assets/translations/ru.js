@@ -52,6 +52,7 @@ export default {
     media_library: 'Медиагалерея',
     go_back: 'Назад',
     select: 'Выбрать',
+    modify: 'Модифицировать',
     tag: 'Изменить',
     edit: 'Редактировать',
     delete: 'Удалить',
@@ -93,6 +94,7 @@ export default {
     add_a_tag_separate_by_pressing_enter: 'Добавить тег (отделите нажатием Enter)',
     generate_tags: 'Создать теги',
     save: 'Сохранить',
+    save_and_modify: 'Save and Modify URL',
     asset_could_not_be_automatically_tagged: 'Файл не может быть автоматически тегирован',
     could_not_be_automatically_tagged: 'не может быть автоматически тегирован',
     auto_tagging_processing: 'Auto-tagging processing...',
@@ -109,6 +111,7 @@ export default {
     delete: 'delete {number} image',
     tag: 'mange tags and meta properties for {number} image',
     select: 'select {number} image',
+    modify: 'modify url for the image',
     select_multiply: 'select multiple images'
   }
 };

@@ -52,6 +52,7 @@ export default {
     media_library: 'Bibliothèque des médias',
     go_back: 'Retour',
     select: 'Sélectionner',
+    modify: 'Modifer',
     tag: 'Taguer',
     edit: 'Editer',
     delete: 'Delete',
@@ -92,6 +93,7 @@ export default {
     add_a_tag_separate_by_pressing_enter: 'Ajouter un tag (séparer par ENTRÉE)',
     generate_tags: 'Taggage auto',
     save: 'Sauvegarder',
+    save_and_modify: 'Enregistrer et modifier l\'URL\n',
     asset_could_not_be_automatically_tagged : 'L\'image n\'a pas pu être tagguée automatiquement',
     could_not_be_automatically_tagged : 'n\'a pas pu être tagguée automatiquement',
     auto_tagging_processing: 'Auto-tagging en cours...',
@@ -108,6 +110,7 @@ export default {
     delete: 'supprimer {number} image',
     tag: 'gérer les tags et lees metadata de {number} image',
     select: 'sélectionner {number} image',
+    modify: 'Modifier l\'url de l\'image',
     select_multiply: 'sélectionner plusieurs images'
   }
 };

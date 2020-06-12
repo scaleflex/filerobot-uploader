@@ -128,7 +128,7 @@ window.addEventListener('load', function() {
   image.onclick = () => FilerobotUploaderInstance.open();
 });
 
-function onUploadHandler(files) {
+function onUploadHandler(files, props = {}) {
   const img = files[0];
   const options = {
     weekday: "long", year: "numeric", month: "short",
@@ -136,7 +136,7 @@ function onUploadHandler(files) {
   };
   const firstLoad = (img.created_at ? (new Date(img.created_at)) : new Date()).toLocaleTimeString("en", options);
   const lastModified = (img.modified_at ? (new Date(img.modified_at)) : new Date()).toLocaleTimeString("en", options);
-  const publicURL = img.url && img.url.public ? img.url.public : img.url_public;
+  const publicURL = props.stage === 'modify' ? img.modified_url : img.url && img.url.public ? img.url.public : img.url_public;
   img.properties = img.properties || {};
   img.properties.tags = img.properties.tags || [];
 
@@ -145,7 +145,7 @@ function onUploadHandler(files) {
   innerSpinner.style.display = 'block';
   imageContainer.style.opacity = '0.5';
 
-  image.src = img.url && img.url.cdn || publicURL
+  image.src = props.stage === 'modify' ? img.modified_url : (img.url && img.url.cdn || publicURL)
   image.onload = () => {
     innerSpinner.style.display = 'none';
     imageContainer.style.opacity = '1';
@@ -157,7 +157,7 @@ function onUploadHandler(files) {
           <span>${img.name}</span>
         </li>
         <li>
-          <span>Public link: </span>
+          <span>${props.stage === 'modify' ? 'Modified URL' : 'Public link'}: </span>
           <span>${publicURL}</span>
         </li>
         <li>

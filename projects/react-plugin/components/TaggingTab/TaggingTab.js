@@ -170,7 +170,18 @@ class TaggingTab extends Component {
     return customFieldsProps;
   };
 
-  saveMetadata = () => {
+  saveMetadataAndModify = () => {
+    this.saveMetadata(true, () => {
+      if (this.props.appState.config.imageEditor.active) {
+        const { path, files } = this.props;
+
+        this.props.saveUploadedFiles(files);
+        this.props.setPostUpload(true, 'IMAGE_EDITOR', 'MY_GALLERY', { path, modifyURL: true });
+      }
+    });
+  }
+
+  saveMetadata = (isModifyURL, callback) => {
     const { description, tags, personalTags, removedTags } = this.state;
     const { appState, files = [], options = {} } = this.props;
     const { prevTab } = appState;
@@ -211,8 +222,12 @@ class TaggingTab extends Component {
         this.setState({ isLoading: true }, () => {
           this.props.setPostUpload(false, '', 'TAGGING');
 
-          if (options.closeOnEdit || prevTab !== 'MY_GALLERY') {
+          if ((options.closeOnEdit || prevTab !== 'MY_GALLERY') && !isModifyURL) {
             this.props.closeModal();
+          }
+
+          if (typeof callback === "function") {
+            callback();
           }
         });
       });
@@ -532,8 +547,7 @@ class TaggingTab extends Component {
                   placeholder={I18n.t('tagging.add_description')}
                   onChange={this.handleDescriptionChange}
                 />
-              </>
-              }
+              </>}
 
               {isImageType &&
               <>
@@ -573,8 +587,14 @@ class TaggingTab extends Component {
           <Button
             ref={node => this._saveMetadataBtn = node}
             success
-            onClick={this.saveMetadata}
+            onClick={this.saveMetadata.bind(this, false)}
           >{I18n.t('tagging.save')}</Button>
+
+          <Button
+            success
+            style={{ marginLeft: 10 }}
+            onClick={this.saveMetadataAndModify}
+          >{I18n.t('tagging.save_and_modify')}</Button>
         </TaggingFooter>
 
         <Spinner show={isLoading} overlay/>

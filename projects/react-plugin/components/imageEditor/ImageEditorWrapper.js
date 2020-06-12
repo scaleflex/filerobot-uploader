@@ -16,7 +16,7 @@ const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
     setPostUpload(false);
 };
 
-const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, options = {}, closeModal, uploadHandler) => {
+const uploadFiles = (prevTab, url, file, saveUploadedFiles, setPostUpload, options = {}, closeModal, uploadHandler) => {
   const files = [{ ...file, public_link: getPubliclink(file) }];
 
   uploadHandler(files, { stage: 'edit' });
@@ -39,11 +39,23 @@ const onComplete = (prevTab, url, file, saveUploadedFiles, setPostUpload, option
     setPostUpload(false);
 }
 
+
+
 export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, setPostUpload, options, closeModal }) => {
-  const { prevTab, config } = appState;
+  const { prevTab, config, modifyURL } = appState;
   const { uploadKey, baseAPI, container, uploadParams, cloudimageToken, uploadHandler, language, imageEditorConfig = {} } = config;
   const isGif = getPubliclink(file).slice(-3).toLowerCase() === 'gif';
   const src = getCDNlink(file);
+
+  const onComplete = (url) => {
+    if (modifyURL) {
+      const files = [{ ...file, modified_url: url, public_link: getPubliclink(file) }];
+      uploadHandler(files, { stage: 'modify' });
+      closeModal();
+    } else {
+      uploadFiles(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal, uploadHandler);
+    }
+  }
 
   return (
     <ImageEditor
@@ -52,13 +64,14 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
         isLowQualityPreview: true,
         colorScheme: 'dark',
         language,
-        processWithCloudimage: isGif,
-        uploadWithCloudimageLink: true,
+        processWithCloudimage: isGif || modifyURL,
+        uploadWithCloudimageLink: modifyURL ? !modifyURL : isGif,
 
         ...imageEditorConfig,
 
         filerobot: {
           baseAPI,
+          token: container,
           uploadKey,
           container,
           uploadParams: {
@@ -76,9 +89,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
       }}
       closeOnLoad={false}
       src={src}
-      onComplete={(url, file) => {
-        onComplete(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal, uploadHandler);
-      }}
+      onComplete={onComplete}
       onClose={() => { goBack(prevTab, setPostUpload, options, closeModal); }}
       showGoBackBtn={true}
       showInModal={false}

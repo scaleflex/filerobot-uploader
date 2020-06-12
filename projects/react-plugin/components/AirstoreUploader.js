@@ -92,7 +92,7 @@ class AirstoreUploader extends Component {
     const activeTabId = tabId || this.props.appState.prevTab || 'MY_GALLERY';
 
     this.props.setAppState(() => ({
-      activeTabId, prevTab, postUpload: value, ...nextStateProps
+      activeTabId, prevTab, postUpload: value, ...nextStateProps, modifyURL: !!nextStateProps.modifyURL
     }));
   }
 
