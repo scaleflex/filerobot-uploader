@@ -259,12 +259,12 @@ class UploadedImagesTab extends Component {
 
     modalWrapper.style.left = `${modalWrapperOffsetLeft - 2}px`;
     modalWrapper.style.transform = `translateX(2px)`;
-    imageGridWrapper.scrollBy(0, 1);
+    if (imageGridWrapper) imageGridWrapper.scrollBy(0, 1);
 
     setTimeout(() => {
       modalWrapper.style.left = `${modalWrapperOffsetLeft}px`;
       modalWrapper.style.transform = `translateX(0px)`;
-      imageGridWrapper.scrollBy(0, -1);
+      if (imageGridWrapper) imageGridWrapper.scrollBy(0, -1);
     }, 100);
   };
 
