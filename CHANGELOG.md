@@ -26,6 +26,22 @@ Types of changes:
 
 -------------
 
+# 2.13.0 - 2020-06-14
+
+### Fixed
+- sorting
+
+### Changed
+- version of filerobot-image-editor
+
+# 2.13.0 - 2020-06-12
+
+### Fixed
+- problem with conflicting two versions for camanjs
+
+### Added
+- implement modify URL option
+
 # 2.12.3 - 2020-06-10
 
 ### Fixed
