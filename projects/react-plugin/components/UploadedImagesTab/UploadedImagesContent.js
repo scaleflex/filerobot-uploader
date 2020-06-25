@@ -174,16 +174,11 @@ class UploadedImagesContent extends Component {
 
   render() {
     const {
-      files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper,
-      appState
+      files, onDragEvent, isDragOver, isShowMoreImages, imagesIndex, isLoading, isUpload, imagesIndexWrapper
     } = this.props;
-    const { container = '' } = appState.config;
     const { imageGrid, imageContainerHeight, imageGridWrapperWidth } = this.state;
     const { columnWidth, gutterSize } = imageGrid;
     const imagesList = isUpload ? [{ id: 'uploaderBox' }, ...files] : [...files];
-    const isFilerobotToken = /^[fF]/g.test(container);
-
-    if (!isFilerobotToken) this.props.showAlert('', I18n.t('upload.invalid_token'), 'warning');
 
     return (
       <Content
@@ -195,7 +190,7 @@ class UploadedImagesContent extends Component {
         isDragOver={isDragOver}
         key={imagesIndexWrapper}
       >
-        {files.length && isFilerobotToken ?
+        {files.length ?
           <VirtualizedImagesGrid
             key={imagesIndex}
             imageGridWrapperWidth={imageGridWrapperWidth}
