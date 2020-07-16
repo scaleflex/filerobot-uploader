@@ -11,7 +11,7 @@ const goBack = (prevTab, setPostUpload, options = {}, closeModal) => {
   }
 
   if (prevTab === 'TAGGING')
-    setPostUpload(true, 'TAGGING', 'MY_GALLERY');
+    setPostUpload(true, 'TAGGING', 'IMAGE_EDITOR');
   else
     setPostUpload(false);
 };

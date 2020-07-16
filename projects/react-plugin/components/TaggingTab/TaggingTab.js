@@ -90,18 +90,22 @@ class TaggingTab extends Component {
   }
 
   componentDidMount() {
-    const { files = [], config, prevTab } = this.props.appState;
+    const { files = [], config, prevTab, uploadedImageData } = this.props.appState;
     const { tagging: { executeAfterUpload } = {} } = config;
     const firstFile = files[0];
     const isOneFile = files.length === 1;
     const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
     const isPreviousGallery = prevTab === "MY_GALLERY";
+    const isPreviousEditor = prevTab === "IMAGE_EDITOR";
 
-    if ((isPreviousGallery ? false : executeAfterUpload) && !this.state.tags.length && isImageType) {
+    if ((isPreviousGallery || isPreviousEditor ? false : executeAfterUpload) && !this.state.tags.length && isImageType) {
       this.setState({ isGeneratingTags: true });
 
       this.generateTags(isOneFile);
     }
+
+    if (isPreviousEditor)
+      this.setState(uploadedImageData);
 
     if (this._saveMetadataBtn) this._saveMetadataBtn.focus();
   }
@@ -141,6 +145,23 @@ class TaggingTab extends Component {
         personalTags: uniqueArrayOfStringsInObject(personalTags),
       };
     }
+  }
+
+  componentWillUnmount() {
+    const { productRef, productPosition, description, tags } = this.state;
+    const { tagging: { customFields } = {} } = this.props.appState.config;
+    const uploadedImageData = {
+      description,
+      productRef,
+      productPosition,
+      tags
+    };
+
+    customFields.forEach(field => {
+      uploadedImageData[field.metaKey] = this.state[field.metaKey];
+    });
+
+    this.props.setAppState({ uploadedImageData });
   }
 
   handleDescriptionChange = event => {
@@ -232,7 +253,7 @@ class TaggingTab extends Component {
         });
       });
 
-    this.props.setAppState({ hasChanged: false });
+    this.props.setAppState({ hasChanged: false, uploadedImageData: {} });
     this.setState({ isLoading: true });
   };
 
