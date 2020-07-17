@@ -26,6 +26,17 @@ Types of changes:
 
 -------------
 
+
+# 2.13.3 - 2020-07-17
+
+### Fixed
+- save data of uploaded image on switch tabs
+
+# 2.13.2 - 2020-07-17
+
+### Fixed
+- remove warning about invalid upload key
+
 # 2.13.1 - 2020-06-14
 
 ### Fixed
