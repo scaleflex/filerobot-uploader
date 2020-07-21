@@ -461,7 +461,7 @@ class TaggingTab extends Component {
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-          <GoBack type="button" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
+          <GoBack onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
 
           {isOneFile &&
           <FileWrapper>

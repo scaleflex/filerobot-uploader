@@ -320,7 +320,7 @@ const ErrorWrapper = styled.div`
 
 const ErrorParagraph = styled.p``;
 
-const GoBack = styled.div`
+const GoBack = styled.a`
   color: #1e262c;
   text-decoration: none;
   font-size: 18px;
