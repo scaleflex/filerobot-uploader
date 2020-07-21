@@ -347,6 +347,7 @@ class TaggingTab extends Component {
           );
         });
 
+    this.props.setAppState({ hasChanged: true });
     this.setState({ isLoading: true, isGeneratingTags: true, errorMessage: '' });
   };
 
