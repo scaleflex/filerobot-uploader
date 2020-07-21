@@ -27,6 +27,13 @@ Types of changes:
 -------------
 
 
+# 2.13.4 - 2020-07-21
+
+### Fixed
+- show alert modal on click 'go back' button after generating tags
+- bug if customFiled is undefined
+- delete warning in console
+
 # 2.13.3 - 2020-07-17
 
 ### Fixed
