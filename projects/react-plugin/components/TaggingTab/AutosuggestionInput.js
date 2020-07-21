@@ -39,7 +39,7 @@ class AutosuggestionInput extends Component {
   };
 
   render() {
-    const { value, suggestionList = [], addTag } = this.props;
+    const { value = '', suggestionList = [], addTag, ...rest } = this.props;
     const inputValue = (value && value.trim().toLowerCase()) || '';
     const inputLength = inputValue.length;
     let suggestions = suggestionList.filter((tag) => tag.name.toLowerCase().slice(0, inputLength) === inputValue);
@@ -52,7 +52,7 @@ class AutosuggestionInput extends Component {
           shouldRenderSuggestions={(value) => value && value.trim().length > 0}
           getSuggestionValue={(suggestion) => suggestion.name}
           renderSuggestion={(suggestion) => <span>{suggestion.name}</span>}
-          inputProps={{ ...this.props, onChange: this.handleOnChange, autoFocus: true }}
+          inputProps={{ ...rest, value, onChange: this.handleOnChange, autoFocus: true }}
           onSuggestionSelected={(e, { suggestion }) => { addTag(suggestion.name); }}
           onSuggestionsClearRequested={() => {}}
           onSuggestionsFetchRequested={() => {}}

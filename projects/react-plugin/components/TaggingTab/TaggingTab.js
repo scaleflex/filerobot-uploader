@@ -42,7 +42,7 @@ class TaggingTab extends Component {
     super();
 
     const { appState, files = {} } = props;
-    const { tagging: { customFields } = {}, language } = appState.config;
+    const { tagging: { customFields = [] } = {}, language } = appState.config;
     const isOneFile = files.length === 1;
     const firstFile = files[0];
     const { ref: productRef = '', position: productPosition = '' } = firstFile.product || {};
@@ -149,7 +149,7 @@ class TaggingTab extends Component {
 
   componentWillUnmount() {
     const { productRef, productPosition, description, tags } = this.state;
-    const { tagging: { customFields } = {} } = this.props.appState.config;
+    const { tagging: { customFields = [] } = {} }  = this.props.appState.config;
     const uploadedImageData = {
       description,
       productRef,
@@ -157,9 +157,11 @@ class TaggingTab extends Component {
       tags
     };
 
-    customFields.forEach(field => {
-      uploadedImageData[field.metaKey] = this.state[field.metaKey];
-    });
+    if (customFields.length) {
+      customFields.forEach(field => {
+        uploadedImageData[field.metaKey] = this.state[field.metaKey];
+      });
+    }
 
     this.props.setAppState({ uploadedImageData });
   }
@@ -181,7 +183,7 @@ class TaggingTab extends Component {
     }
   };
 
-  getCustomFields = (customFields, properties) => {
+  getCustomFields = (customFields = [], properties) => {
     const customFieldsProps = {};
 
     customFields.forEach(field => {
@@ -207,7 +209,7 @@ class TaggingTab extends Component {
     const { appState, files = [], options = {} } = this.props;
     const { prevTab } = appState;
     const { uploadHandler, language, tagging } = appState.config;
-    const { customFields } = tagging;
+    const { customFields = [] } = tagging;
     const nextPersonalTags = {};
     let customFieldsProps = {};
 
@@ -447,7 +449,7 @@ class TaggingTab extends Component {
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
     const { tagging } = config;
-    const { customFields = [], autoTaggingButton, suggestionList = [] } = tagging;
+    const { customFields = [], autoTaggingButton, suggestionList } = tagging;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const firstFile = files[0];
     const isOneFile = files.length === 1;
@@ -459,7 +461,7 @@ class TaggingTab extends Component {
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-          <GoBack href="javascript:void(0)" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
+          <GoBack type="button" onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
 
           {isOneFile &&
           <FileWrapper>
@@ -499,7 +501,7 @@ class TaggingTab extends Component {
                         key={'productRef'}
                         name={'productRef'}
                         placeholder={I18n.t('tagging.not_set')}
-                        value={this.state.productRef}
+                        value={this.state.productRef || ''}
                         onChange={this.handleCustomFieldChange}
                       />
                     </PropValue>
@@ -523,7 +525,7 @@ class TaggingTab extends Component {
                         key={'productPosition'}
                         name={'productPosition'}
                         placeholder={I18n.t('tagging.not_set')}
-                        value={this.state.productPosition}
+                        value={this.state.productPosition || ''}
                         onChange={this.handleCustomFieldChange}
                       />
                     </PropValue>
@@ -564,7 +566,7 @@ class TaggingTab extends Component {
                 {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
 
                 <Textarea
-                  value={this.state.description}
+                  value={this.state.description || ''}
                   placeholder={I18n.t('tagging.add_description')}
                   onChange={this.handleDescriptionChange}
                 />
@@ -629,7 +631,7 @@ class TaggingTab extends Component {
   }
 }
 
-const renderField = ({ type = 'text', name = '', metaKey }, value, handler) => {
+const renderField = ({ type = 'text', name = '', metaKey }, value = '', handler) => {
   switch (type) {
     case 'textarea':
       return (
