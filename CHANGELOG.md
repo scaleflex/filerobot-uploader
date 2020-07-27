@@ -26,6 +26,10 @@ Types of changes:
 
 -------------
 
+# 2.13.5 - 2020-07-27
+### Changed
+- update dependencies
+
 
 # 2.13.4 - 2020-07-21
 
