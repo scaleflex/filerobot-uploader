@@ -85,13 +85,13 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
         cloudimage: {
           token: cloudimageToken,
           ...imageEditorConfig.cloudimage
-        }
+        },
+        showGoBackBtn: true
       }}
       closeOnLoad={false}
       src={src}
       onComplete={onComplete}
       onClose={() => { goBack(prevTab, setPostUpload, options, closeModal); }}
-      showGoBackBtn={true}
       showInModal={false}
     />
   );
