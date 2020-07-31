@@ -518,6 +518,10 @@ let config = {
 };
 ```
 
+#### `imageEditorConfig`: object
+
+Filerobot Image Editor Configuration. https://github.com/scaleflex/filerobot-image-editor#table-of-contents
+
 ## <a name="full_example"></a>Full features config example
 
 ```html
