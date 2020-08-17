@@ -89,14 +89,26 @@ let config = {
   colorScheme: {
     active: 'solarized'
   },
-  extensions: ['jpg', 'png']
-  //imageEditorConfig: {
-  //  processWithCloudimage: true,
-  //  filerobot: {
-  //    token: 'fusqadtm',
-  //    doNotPrefixURL: true
-  //  }
-  //}
+  extensions: ['jpg', 'png'],
+  imageEditorConfig: {
+   // processWithCloudimage: true,
+   // filerobot: {
+   //   token: 'fusqadtm',
+   //   doNotPrefixURL: true
+   // }
+    watermark: {
+      url: 'https://cdn.scaleflex.it/demo/filerobot.png',
+      urls: [
+        { url: 'https://cdn.scaleflex.it/demo/filerobot.png', label: 'filerobot logo' },
+        'https://cdn.scaleflex.it/demo/superman.png'
+      ],
+      position: 'center',
+      opacity: 0.7,
+      applyByDefault: false,
+      handleOpacity: true,
+      fileUpload: true,
+    }
+  }
 };
 
 // Configuration
