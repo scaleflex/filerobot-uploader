@@ -57,7 +57,8 @@ export default {
     edit: 'Редактировать',
     delete: 'Удалить',
     no_subfolders: 'Нет подпапок',
-    deselect_all: 'Отменить выделение'
+    deselect_all: 'Отменить выделение',
+    are_you_sure: 'Вы уверены'
   },
   icons: {
     tab_title: 'Иконки',

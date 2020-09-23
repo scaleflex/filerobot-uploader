@@ -55,7 +55,8 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
     no_subfolders: 'No subfolders',
-    deselect_all: 'Deselect all'
+    deselect_all: 'Deselect all',
+    are_you_sure: 'Are you sure'
   },
   icons: {
     tab_title: 'Free icons',

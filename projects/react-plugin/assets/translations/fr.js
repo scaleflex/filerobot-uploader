@@ -57,7 +57,8 @@ export default {
     edit: 'Editer',
     delete: 'Delete',
     no_subfolders: 'Pas de sous-dossier',
-    deselect_all: 'Tout déselectionner'
+    deselect_all: 'Tout déselectionner',
+    are_you_sure: 'Êtes-vous sûr'
   },
   icons: {
     tab_title: 'Icônes gratuites',

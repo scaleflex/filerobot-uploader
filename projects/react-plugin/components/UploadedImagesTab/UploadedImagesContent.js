@@ -148,8 +148,10 @@ class UploadedImagesContent extends Component {
     const { container, uploadKey, baseAPI, platform } = appState.config;
     event.preventDefault();
     event.stopPropagation();
+    const isConfirmed = confirm(`${I18n.t('file_manager.are_you_sure')}?`);
 
-    deleteImage({ uuids: selectedItems.length ? selectedItems : [item.uuid], container, uploadKey, baseAPI, platform })
+    if (isConfirmed)
+      deleteImage({ uuids: selectedItems.length ? selectedItems : [item.uuid], container, uploadKey, baseAPI, platform })
       .then(responses => {
         const isAllDeleted = responses.every(response => response.status === 'success');
 
