@@ -1,6 +1,6 @@
 > Repository includes React version and JS wrapper for standalone usage
 
-[![Release](https://img.shields.io/badge/release-v2.14.0-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
+[![Release](https://img.shields.io/badge/release-v2.14.1-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
 [![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)](https://www.filerobot.com/en/home#2de3fb9f-dd4a-457a-999a-025ad9bd5f3b)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -65,7 +65,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 Use latest CDNized plugin version
 
 ```html
-<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.14.0/filerobot-uploader.min.js"></script>
+<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.14.1/filerobot-uploader.min.js"></script>
 ```
 
 ### <a name="quick_start"></a>Quick start
@@ -454,6 +454,16 @@ config.tagging = {
 Allows to limit files according to the extension on upload. Extension **jpg** = **jpeg** and vice versa.
 ```
 config.extensions = ['jpg', 'png', 'pdf'];
+```
+
+#### `modifyURLButton`: bool
+
+**default**: true
+
+Activate "Modify URL" button.
+
+```
+config.modifyURLButton = true;
 ```
 
 #### `colorScheme`: object

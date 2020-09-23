@@ -59,6 +59,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
       ...config.sortParams
     },
     extensions: config.extensions || [],
+    modifyURLButton: isDefined(config.modifyURLButton) ? config.modifyURLButton : true,
   };
 };
 

@@ -26,6 +26,10 @@ Types of changes:
 
 -------------
 
+# 2.14.1 - 2020-08-17
+### Changed
+- add possibility to hide 'Modify URL' button
+
 # 2.14.0 - 2020-08-17
 ### Changed
 - update dependencies

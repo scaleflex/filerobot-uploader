@@ -221,7 +221,7 @@ class UploadedImagesContent extends Component {
   renderImage = ({ style, columnWidth, item, index }) => {
     const { selectedItems, appState } = this.props;
     const { top, left } = this.state;
-    const { tagging, imageEditor, cloudimageToken } = appState.config;
+    const { tagging, imageEditor, cloudimageToken, modifyURLButton } = appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
@@ -296,7 +296,7 @@ class UploadedImagesContent extends Component {
                 onClick={() => { this.select(item); }}
                 data-tip={getContentWithNumber(I18n.t('tips.select'), selectedItems.length)}
               >{I18n.t('file_manager.select')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</EditButton>
-              {isCheckedOne &&
+              {isCheckedOne && modifyURLButton &&
               <EditButton
                 fullBr={'4px'}
                 isCheckedOne={true}

@@ -449,7 +449,7 @@ class TaggingTab extends Component {
     } = this.state;
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
-    const { tagging } = config;
+    const { tagging, modifyURLButton } = config;
     const { customFields = [], autoTaggingButton, suggestionList } = tagging;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const firstFile = files[0];
@@ -614,11 +614,12 @@ class TaggingTab extends Component {
             onClick={this.saveMetadata.bind(this, false)}
           >{I18n.t('tagging.save')}</Button>
 
+          {modifyURLButton &&
           <Button
             success
             style={{ marginLeft: 10 }}
             onClick={this.saveMetadataAndModify}
-          >{I18n.t('tagging.save_and_modify')}</Button>
+          >{I18n.t('tagging.save_and_modify')}</Button>}
         </TaggingFooter>
 
         <Spinner show={isLoading} overlay/>

@@ -108,7 +108,8 @@ let config = {
       handleOpacity: true,
       fileUpload: true,
     }
-  }
+  },
+  modifyURLButton: true
 };
 
 // Configuration
