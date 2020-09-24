@@ -35,6 +35,7 @@ import { getFileIconSrcByType, isImage, isAllImages } from '../../utils/icons.ut
 import { encodePermalink } from '../../utils';
 import { getPubliclink, getCDNlink } from '../../utils/adjustAPI.utils';
 import AutosuggestionInput from './AutosuggestionInput';
+import ConfirmPopup from '../confirm-popup';
 
 
 class TaggingTab extends Component {
@@ -85,7 +86,8 @@ class TaggingTab extends Component {
       oldProductPosition: productPosition,
       isUpdatingProduct: false,
       personalTags: uniqueArrayOfStringsInObject(personalTags),
-      removedTags: []
+      removedTags: [],
+      isOpenedPopup: false
     };
   }
 
@@ -360,16 +362,10 @@ class TaggingTab extends Component {
     const { hasChanged } = appState;
 
     if (hasChanged) {
-      const isGoBack = window.confirm('Do you want to leave this tab? Changes you made may not be saved');
-
-      if (isGoBack) {
-        this.props.setPostUpload(false);
-        this.props.setAppState({ hasChanged: false });
-      }
-
-    } else {
       this.props.setPostUpload(false);
-    }
+      this.props.setAppState({ hasChanged: false });
+    } else
+      this.props.setPostUpload(false);
 
     if (options.closeOnEdit)
       this.props.closeModal({ hasChanged });
@@ -442,10 +438,14 @@ class TaggingTab extends Component {
     return sources;
   };
 
+  togglePopup = () => {
+    this.setState({ isOpenedPopup: !this.state.isOpenedPopup });
+  };
+
   render() {
     const {
       isLoading, errorMessage, currentTime, firstLoad, lastModified, isGeneratingTags, oldProductRef,
-      oldProductPosition, isUpdatingProduct, tags
+      oldProductPosition, isUpdatingProduct, tags, isOpenedPopup
     } = this.state;
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
@@ -462,7 +462,7 @@ class TaggingTab extends Component {
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-          <GoBack onClick={this.goBack}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
+          <GoBack onClick={this.togglePopup}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
 
           {isOneFile &&
           <FileWrapper>
@@ -628,6 +628,17 @@ class TaggingTab extends Component {
         <AutoTaggingProcessLabel>{I18n.t('tagging.auto_tagging_processing')}</AutoTaggingProcessLabel>}
 
         <ReactTooltip offset={{ top: 0, right: 2 }} effect="solid"/>
+
+        {isOpenedPopup &&
+        <ConfirmPopup
+          accept={I18n.t('goBackPopup.accept')}
+          cancel={I18n.t('goBackPopup.cancel')}
+          title={`${I18n.t('goBackPopup.title')}?`}
+          msg={`${I18n.t('goBackPopup.msg')}`}
+          onClickAccept={this.goBack}
+          onClickCancel={this.togglePopup}
+        />}
+
       </TaggingTabWrapper>
     );
   }

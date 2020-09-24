@@ -116,8 +116,14 @@ export default {
     title: 'Are you sure',
     accept: 'Delete',
     cancel: 'Cancel',
-    do_you_want_to_delete: 'Do you want to delete',
+    msg: 'Do you want to delete',
     file: 'file',
     files: 'files',
+  },
+  goBackPopup: {
+    title: 'Are you sure',
+    accept: 'Leave',
+    cancel: 'Cancel',
+    msg: 'Do you want to leave this tab? Changes you made may not be saved'
   }
 };

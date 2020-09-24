@@ -538,7 +538,7 @@ class UploadedImagesTab extends Component {
           accept={I18n.t('deletePopup.accept')}
           cancel={I18n.t('deletePopup.cancel')}
           title={`${I18n.t('deletePopup.title')}?`}
-          msg={`${I18n.t('deletePopup.do_you_want_to_delete')} ${selectedItems.length || 1} ${isCheckedOne ? I18n.t('deletePopup.file') : I18n.t('deletePopup.files')}?`}
+          msg={`${I18n.t('deletePopup.msg')} ${selectedItems.length || 1} ${isCheckedOne ? I18n.t('deletePopup.file') : I18n.t('deletePopup.files')}?`}
           onClickAccept={(event) => { this.onDeleteImage(event); }}
           onClickCancel={this.togglePopup}
         />}

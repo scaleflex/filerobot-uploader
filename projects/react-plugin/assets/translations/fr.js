@@ -118,8 +118,14 @@ export default {
     title: 'Êtes-vous sûr',
     accept: 'Effacer',
     cancel: 'Annuler',
-    do_you_want_to_delete: 'Voulez-vous supprimer',
+    msg: 'Voulez-vous supprimer',
     file: 'fichier',
     files: 'fichiers',
+  },
+  goBackPopup: {
+    title: 'Êtes-vous sûr',
+    accept: 'Quitter',
+    cancel: 'Annuler',
+    msg: 'Voulez-vous quitter cet onglet? Les modifications que vous avez apportées ne seront sûrement pas sauvegardées'
   }
 };

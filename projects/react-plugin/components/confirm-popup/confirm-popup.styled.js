@@ -23,7 +23,7 @@ export const Content = styled('div')`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 50%;
+  max-width: 500px;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
@@ -93,6 +93,7 @@ export const Button = styled('button')`
   cursor: pointer;
   color: ${p => p.theme.buttonTextColor || '#fff'};
   background-color: ${p => p.theme.buttonBackground || '#00707C'};
+  min-width: 65px;
   
   :not(:last-child) {
     margin-right: .25rem;
