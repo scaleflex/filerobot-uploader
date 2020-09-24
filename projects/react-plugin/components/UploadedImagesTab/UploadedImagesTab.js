@@ -16,6 +16,8 @@ import SortDropdown from './SortDropdown';
 import { validateExtensions } from '../UploadImagesTab/UserUploaderTab.utils';
 import { isImage } from '../../utils/icons.utils';
 import PreUploadProcess from '../UploadImagesTab/PreUploadProcess';
+import ConfirmPopup from '../confirm-popup';
+import { deleteImage } from '../../services/api.service';
 
 
 const STEP = {
@@ -54,7 +56,8 @@ class UploadedImagesTab extends Component {
       },
       totalFilesCount: 0,
       imagesIndexWrapper: 0,
-      selectedItems: []
+      selectedItems: [],
+      isOpenedPopup: false
     }
   }
 
@@ -374,16 +377,46 @@ class UploadedImagesTab extends Component {
     );
   }
 
+  onClickDelete = (item) => {
+    this.setState({ activeItem: item }, this.togglePopup);
+  };
+
+  onDeleteImage = (event) => {
+    const { appState } = this.props;
+    const { selectedItems, activeItem } = this.state;
+    const { container, uploadKey, baseAPI, platform } = appState.config;
+    event.preventDefault();
+    event.stopPropagation();
+
+    deleteImage({ uuids: selectedItems.length ? selectedItems : [activeItem.uuid], container, uploadKey, baseAPI, platform })
+      .then(responses => {
+        const isAllDeleted = responses.every(response => response.status === 'success');
+
+        if (isAllDeleted) {
+          this.updateTabState({ selectedItems: [] });
+          this.onDeleteFile();
+          this.togglePopup();
+        } else alert(I18n.t('tagging.something_went_wrong_try_again'));
+      })
+      .catch(() => {
+        alert(I18n.t('tagging.something_went_wrong_try_again'));
+      });
+  };
+
+  togglePopup = () => {
+    this.setState({ isOpenedPopup: !this.state.isOpenedPopup }, this.forceUpdate);
+  };
+
   render() {
     const {
       isLoading, step, files, isDragOver, imagesIndex, directories, path, searchPhrase = '',
-      progressBar: { color, status }, sortParams, imagesIndexWrapper, selectedItems, imagesToUpload
+      progressBar: { color, status }, sortParams, imagesIndexWrapper, selectedItems, imagesToUpload, isOpenedPopup
     } = this.state;
     const { appState, showAlert } = this.props;
     const { config } = appState;
     const { myGallery: { upload: isUpload }, sortParams: { show: showSortBtn }, folderBrowser } = config;
     const isTooShortSearchPhrase = searchPhrase.length < 2;
-
+    const isCheckedOne = selectedItems.length === 1 || !selectedItems.length;
 
     console.log("step: ", step);
 
@@ -494,10 +527,21 @@ class UploadedImagesTab extends Component {
             onDeleteFile={this.onDeleteFile}
             selectedItems={selectedItems}
             updateTabState={this.updateTabState}
+            onClickDelete={this.onClickDelete}
           />
         </>}
 
         {step === STEP.UPLOADING && <ProgressCircle {...{ status, color }}/>}
+
+        {isOpenedPopup &&
+        <ConfirmPopup
+          accept={I18n.t('deletePopup.accept')}
+          cancel={I18n.t('deletePopup.cancel')}
+          title={`${I18n.t('deletePopup.title')}?`}
+          msg={`${I18n.t('deletePopup.do_you_want_to_delete')} ${selectedItems.length || 1} ${isCheckedOne ? I18n.t('deletePopup.file') : I18n.t('deletePopup.files')}?`}
+          onClickAccept={(event) => { this.onDeleteImage(event); }}
+          onClickCancel={this.togglePopup}
+        />}
 
         <Spinner overlay show={isLoading && step !== STEP.UPLOADING}/>
       </UploadedImages>

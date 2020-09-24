@@ -111,5 +111,13 @@ export default {
     select: 'select {number} image',
     modify: 'modify url for the image',
     select_multiply: 'select multiple images'
+  },
+  deletePopup: {
+    title: 'Are you sure',
+    accept: 'Delete',
+    cancel: 'Cancel',
+    do_you_want_to_delete: 'Do you want to delete',
+    file: 'file',
+    files: 'files',
   }
 };

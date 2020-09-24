@@ -11,7 +11,6 @@ import { getFileIconSrcByType, isImage } from '../../utils/icons.utils';
 import { I18n } from 'react-i18nify';
 import { encodePermalink } from '../../utils';
 import { getCDNlink } from '../../utils/adjustAPI.utils';
-import { deleteImage } from '../../services/api.service';
 import { getContentWithNumber } from '../../assets/translations/utils';
 
 
@@ -22,7 +21,7 @@ class UploadedImagesContent extends Component {
     this.state = {
       imageGridWrapperWidth: 0,
       imageContainerHeight: 0,
-      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 },
+      imageGrid: { columnWidth: 0, gutterSize: 10, minColumnWidth: 200 }
     };
     this.imageGridWrapperRef = React.createRef();
   }
@@ -143,28 +142,6 @@ class UploadedImagesContent extends Component {
     }
   };
 
-  onDeleteImage = (event, item) => {
-    const { onDeleteFile, appState, selectedItems } = this.props;
-    const { container, uploadKey, baseAPI, platform } = appState.config;
-    event.preventDefault();
-    event.stopPropagation();
-    const isConfirmed = confirm(`${I18n.t('file_manager.are_you_sure')}?`);
-
-    if (isConfirmed)
-      deleteImage({ uuids: selectedItems.length ? selectedItems : [item.uuid], container, uploadKey, baseAPI, platform })
-      .then(responses => {
-        const isAllDeleted = responses.every(response => response.status === 'success');
-
-        if (isAllDeleted) {
-          this.props.updateTabState({ selectedItems: [] });
-          onDeleteFile();
-        } else alert(I18n.t('tagging.something_went_wrong_try_again'));
-      })
-      .catch(() => {
-        alert(I18n.t('tagging.something_went_wrong_try_again'));
-      });
-  };
-
   toggleChecked = uuid => {
     const { selectedItems } = this.props;
     const nextSelectedItems = [...selectedItems];
@@ -281,7 +258,7 @@ class UploadedImagesContent extends Component {
                   <Icon className="sfi-airstore-tag"/>
                 </Control>
               </ControlWrapper>}
-              <ControlWrapper onClick={(event) => { this.onDeleteImage(event, item); }}>
+              <ControlWrapper onClick={() => this.props.onClickDelete(item)}>
                 <Control data-tip={getContentWithNumber(I18n.t('tips.delete'), selectedItems.length)}>
                   <span>{I18n.t('file_manager.delete')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</span>
                   <Icon className="sfi-airstore-delete"/>

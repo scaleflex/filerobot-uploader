@@ -114,5 +114,13 @@ export default {
     select: 'select {number} image',
     modify: 'modify url for the image',
     select_multiply: 'select multiple images'
+  },
+  deletePopup: {
+    title: 'Вы уверены',
+    accept: 'Да',
+    cancel: 'Отмена',
+    do_you_want_to_delete: 'Вы хотите удалить',
+    file: 'файл',
+    files: 'файлов',
   }
 };
