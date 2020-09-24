@@ -26,7 +26,11 @@ Types of changes:
 
 -------------
 
-# 2.14.1 - 2020-08-17
+# 2.14.2 - 2020-09-24
+### Changed
+- add confirm popup on click "Go back" and "Delete" buttons
+
+# 2.14.1 - 2020-09-23
 ### Changed
 - add possibility to hide 'Modify URL' button
 - add confirm modal on click delete image
