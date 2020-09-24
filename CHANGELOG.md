@@ -26,6 +26,11 @@ Types of changes:
 
 -------------
 
+
+# 2.14.3 - 2020-09-24
+### Changed
+- update dependencies
+
 # 2.14.2 - 2020-09-24
 ### Changed
 - add confirm popup on click "Go back" and "Delete" buttons
