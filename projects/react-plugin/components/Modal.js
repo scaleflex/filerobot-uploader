@@ -186,6 +186,8 @@ export class Modal extends Component {
     super();
 
     this.root = document.createElement('div');
+    this.root.classList.add('filerobot-uploader-root');
+
     document.body.appendChild(this.root);
   }
 
@@ -220,7 +222,7 @@ export class Modal extends Component {
 
     return createPortal(
       <Fragment>
-        <ModalOverlay onClick={onClose}/>
+        <ModalOverlay className="modal-overlay" onClick={onClose}/>
         <ModalFullScreen id="modal-wrapper" {...this.props} ref={node => this._modal = node}>
           {!isHideCloseBtn && <CloseBtn onClick={onClose}/>}
           <ModalContent h="100%" {...otherProps}>
