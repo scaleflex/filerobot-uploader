@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <style>
+    .on-load {
+      display: none
+    }
+
+    .spinner-grow {
+      color: #343a40 !important;
+      display: inline-block;
+      vertical-align: text-bottom;
+      background-color: currentColor;
+      border-radius: 50%;
+      opacity: 0;
+      -webkit-animation: spinner-grow .75s linear infinite;
+      animation: spinner-grow .75s linear infinite;
+      width: 100px;
+      height: 100px;
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+    }</style>
+  <title>Filerobot Uploader</title>
+</head>
+<body>
+
+<div id="spinner" class="spinner-grow text-dark" role="status"></div>
+
+<div id="main" class="wrapper" style="visibility: hidden;">
+  <section class="home">
+    <div class="container">
+      <a class="logo" href="https://scaleflex.github.io/filerobot-uploader/">Filerobot Uploader</a>
+      <div style="margin-top: 10px;">
+        <a class="github-button" target="_blank" href="https://github.com/Scaleflex/filerobot-uploader/subscription"
+           data-icon="octicon-eye" aria-label="Watch Scaleflex/filerobot-uploader on GitHub">Watch</a>
+        <a class="github-button" target="_blank" href="https://github.com/Scaleflex/filerobot-uploader"
+           data-icon="octicon-star" aria-label="Star Scaleflex/filerobot-uploader on GitHub">Star</a>
+        <a class="github-button" target="_blank" href="https://github.com/Scaleflex/filerobot-uploader/fork"
+           data-icon="octicon-repo-forked" aria-label="Fork Scaleflex/filerobot-uploader on GitHub">Fork</a>
+        <a class="twitter-share-button btn btn-info" target="_blank"
+           href="https://twitter.com/intent/tweet?text=Manage%20and%20Accelerate%20your%20images%20and%20Digital%20Assets%20with%20Filerobot&url=https://scaleflex.github.io/filerobot-uploader/&via=filerobot&hashtags=uploader,reverse_CDN,image_resizing,image_editor,image_tagging,image_acceleration,image_compression,file_manager,asset_management">
+          <i> </i>
+          <span>Tweet</span>
+        </a>
+        <!--<a class="github-button" href="https://github.com/Scaleflex/filerobot-uploader/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download Scaleflex/filerobot-uploader on GitHub">Download</a>-->
+      </div>
+      <h1>Share Your Images in Seconds!</h1>
+      <h2>The Filerobot Uploader is a multi-function Uploader that will make uploads super easy on your web and mobile
+        applications. With few lines of code, you will get a state of the art Uploader and enable your users to upload
+        media, files and any assets via Filerobot's reverse CDN. Files are stored into scalable and flexible Cloud
+        storage, optimized and delivered over CDN to your end users rocket fast. Features include inline image editing,
+        auto-tagging, auto-cropping and many more.</h2>
+
+      <div class="actions-wrapper">
+        <button id="edit-btn" class="btn btn-light btn-lg">Upload image <span class="arrow"></span></button>
+        <a
+           id="view-github-btn"
+           href="https://github.com/scaleflex/filerobot-uploader"
+           class="btn btn-primary btn-lg"
+           target="_blank"
+        >View on GitHub</a>
+      </div>
+    </div>
+
+    <a href="https://github.com/scaleflex/filerobot-uploader" target="_blank">
+      <img
+         class="fork-me-on-github"
+         src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"
+         alt="Fork me on GitHub">
+    </a>
+
+    <a href="https://www.filerobot.com/" class="robot-icon">
+      <img style="width:100%;" id="robot-icon"
+           src="https://demo.cloudimg.io/width/800/q35.foil1/https://cdn.scaleflex.it/filerobot/assets/robot-icon-left.png"
+           alt="">
+    </a>
+  </section>
+
+  <div style="background: #fff;">
+    <section class="ready-to-start features">
+      <div class="container">
+        <div class="uploaded-image-container on-load">
+          <div id="image-container" class="image-container">
+            <div id="inner-spinner" class="spinner-grow inner-spinner text-dark" role="status"></div>
+            <img id="image-box" src="https://cdn.scaleflex.it/filerobot/assets/no-image-icon.png"
+                 alt="placeholder">
+          </div>
+          <div id="image-description">
+            <ul>
+              <li>
+                <span>File name: </span>
+                <span>placeholder</span>
+              </li>
+              <li>
+                <span>Public link: </span>
+                <span>https://cdn.scaleflex.it/filerobot/assets/no-image-icon.png</span>
+              </li>
+              <li>
+                <span>Size: </span>
+                <span>28.8 KB</span>
+              </li>
+              <li>
+                <span>First Uploaded: </span>
+                <span>Monday, Jan 28, 2019, 7:53 PM</span>
+              </li>
+              <li>
+                <span>Last Modified: </span>
+                <span>Monday, Jan 28, 2019, 7:53 PM</span>
+              </li>
+              <li>
+                <span>Description: </span>
+                <span>Placeholder icon</span>
+              </li>
+              <li>
+                <span>Tags: </span>
+                <span>placeholder, icon, image icon</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="container ready-to-start">
+    <h2 class="text-center">Ready to get started?</h2>
+    <p>To use the plugin, you will need a Filerobot token. Don't worry, it only takes seconds to get one by registering
+      <a
+         href="https://www.filerobot.com/en/registration_temp">here</a>. Once your token is created, you can configure
+      it as
+      described below.
+      This token allows you to use 25GB of image cache and 25GB of worldwide CDN traffic per month for free.</p>
+  </section>
+
+  <section class="container">
+    <div class="text-center">
+      <div id="plugin-version-switcher" class="plugin-version-switcher btn-group btn-toggle">
+        <button id="js-btn" class="btn btn-primary">JS version</button>
+        <button id="react-btn" class="btn btn-light">React version</button>
+      </div>
+    </div>
+
+    <div id="react-version-box" style="display: none;">
+      <div class="action-wrapper first-action">
+        <p>
+          Install Filerobot Uploader via npm
+        </p>
+        <figure class="highlight">
+          <pre><code class="javascript">npm i filerobot-uploader --save</code></pre>
+        </figure>
+      </div>
+
+      <div class="action-wrapper second-action">
+        <p>
+          Simple usage
+        </p>
+        <figure class="highlight">
+        <pre><code class="javascript">import React, { Component } from 'react';
+import { render } from 'react-dom';
+import FilerobotUploader from 'filerobot-uploader';
+
+const config = {
+  container: 'example',
+  filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132'
+};
+
+class App extends Component {
+  state = {
+    isShow: false
+  }
+
+  render() {
+    return (
+      &lt;div>
+        &lt;h1>React Example&lt;/h1>
+        &lt;button onClick={() => { this.setState({ isShow: true }); }}>Upload&lt;/button>
+
+        &lt;FilerobotUploader
+          opened={this.state.isShow}
+          config={config}
+          onClose={() => { this.setState({ isShow: false }); }}
+          onUpload={(images) => { console.log(images[0]); }}
+        />
+      &lt;/div>
+    )
+  }
+}
+
+render(&lt;App/>, document.getElementById('app'));</code></pre>
+        </figure>
+        <p>
+          Get your Filerobot tokens <a href="https://www.filerobot.com/en/registration_temp">here</a>.
+        </p>
+      </div>
+
+      <div class="action-wrapper third-action">
+        <p>
+          …and you're done! <a href="https://github.com/scaleflex/filerobot-uploader">See the full documentation
+          here.</a>
+        </p>
+        <a href="https://codesandbox.io/s/x9x94lyr54" target="_blank">
+          <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit on codesandbox"/>
+        </a>
+      </div>
+    </div>
+
+    <div id="js-version-box" class="">
+      <div class="action-wrapper first-action">
+        <p>
+          Include the following script into your project
+        </p>
+        <figure class="highlight">
+          <pre><code class="javascript">&lt;script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.13.6/filerobot-uploader.min.js"/&gt;&lt;/script&gt;</code></pre>
+        </figure>
+      </div>
+
+      <div class="action-wrapper second-action">
+        <p>
+          Initialize Filerobot Uploader
+        </p>
+        <figure class="highlight">
+        <pre><code class="javascript">&lt;script/&gt;
+  const config = {
+    container: 'example',
+    filerobotUploadKey: '0cbe9ccc4f164bf8be26bd801d53b132'
+  };
+  const onUpload = (files) => {
+    console.log('files: ', files);
+    alert('Files uploaded successfully! check the console to see the uploaded files');
+  };
+  const uploader = FilerobotUploader.init(config, onUpload);
+  ...
+</code></pre>
+        </figure>
+        <p>
+          Get your Filerobot tokens <a href="https://www.filerobot.com/en/registration_temp">here</a>.
+        </p>
+      </div>
+
+      <div class="action-wrapper third-action">
+        <p>
+          Open Filerobot Uploader
+        </p>
+        <figure class="highlight">
+        <pre><code class="javascript">  ...
+  uploader.open();
+&lt;/script&gt;</code></pre>
+        </figure>
+      </div>
+
+      <div class="action-wrapper forth-action">
+        <p>
+          …and you're done!
+          <a href="https://github.com/scaleflex/filerobot-uploader" target="_blank">
+            Visit the full documentation here.
+          </a>
+        </p>
+        <a href="https://codesandbox.io/s/k29w0m48r" target="_blank">
+          <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit on codesandbox"/>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <section style="text-align: center;">
+    <div class="container ready-to-start">
+      <h2>Any questions?</h2>
+      <p>
+        Contact us at <a href="mailto:hello@filerobot.com">hello@filerobot.com</a>, our experts will be happy to help!
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div style="background: #fff">
+      <section class="container ready-to-start filerobot-ui-family">
+        <div class="row">
+          <div class="col-sm-3 filerobot-ui-family-label" style="max-width: 200px; min-width: 200px;">
+            <h5>Filerobot UI family:</h5>
+          </div>
+          <div class="col-sm-9 filerobot-ui-family-libs" style="max-width: calc(100% - 200px);">
+            <ul>
+              <li><a target="_blank" href="https://github.com/scaleflex/js-cloudimage-responsive">JS Cloudimage
+                Responsive</a></li>
+              <li><a target="_blank" href="https://github.com/scaleflex/react-cloudimage-responsive">React Cloudimage
+                Responsive</a></li>
+              <li><a target="_blank" href="https://github.com/scaleflex/ng-cloudimage-responsive">Angular Cloudimage
+                Responsive</a></li>
+              <li><a target="_blank" href="https://github.com/scaleflex/js-cloudimage-360-view">JS Cloudimage
+                360 view</a></li>
+              <li><a target="_blank" href="https://github.com/scaleflex/filerobot-image-editor">Image Editor</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+    <hr/>
+    <div class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="team-desc col-sm-8">
+            <div>Made with ❤ in 2019 in Paris, Munich and Sofia by the Scaleflex team, the guys behind <a
+               href="https://www.cloudimage.io/en/home" target="_blank">Cloudimage.io</a>.
+            </div>
+            <div style="margin-top: 10px;">Powered by <a href="https://www.filerobot.com/" target="_blank">Filerobot</a>.
+              All rights reserved.
+            </div>
+          </div>
+          <div class="footer-menu col-sm-4">
+            <ul>
+              <li><a href="https://github.com/scaleflex/filerobot-uploader" target="_blank">View GitHub</a></li>
+              <li><a href="https://github.com/scaleflex/filerobot-uploader/issues" target="_blank">Current Issues</a>
+              </li>
+              <li><a href="https://github.com/scaleflex/filerobot-uploader#table-of-contents" target="_blank">Documentation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script type="text/javascript" src="filerobot-uploader-widget.main.5794ea8eb77c6ebc828d.js"></script></body>
+</html>
