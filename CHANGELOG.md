@@ -27,6 +27,10 @@ Types of changes:
 -------------
 
 
+# 2.14.4 - 2020-10-02
+### Changed
+- add classes for wrappers
+
 # 2.14.3 - 2020-09-24
 ### Changed
 - update dependencies
