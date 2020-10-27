@@ -238,7 +238,7 @@ export const generateMultiplyImagesTags = (uuids = [], autoTaggingProps = {}, la
 
 export const saveMetaData = (files, properties, config, personalTags = []) => {
   const { container, baseAPI, platform, uploadKey, filerobotMetadataModel = {} } = config;
-  const { isEDGYMetadataVersion, isTagsField, isDescriptionField, firstFieldWithTags, firstFieldWithDescription } = filerobotMetadataModel;
+  const { isEDGYMetadataVersion, isTagsField, firstFieldWithTags } = filerobotMetadataModel;
   const isOneFile = files.length === 1;
   const baseUrl = getBaseAPI(baseAPI, container, platform);
   const base = `${baseUrl}file/`;
@@ -246,17 +246,11 @@ export const saveMetaData = (files, properties, config, personalTags = []) => {
   const getNextData = file => {
     const tags = getTags(isOneFile, file, properties.tags, personalTags);
 
-    return isEDGYMetadataVersion ?
+    return isEDGYMetadataVersion && isTagsField ?
       {
         properties: {
           ...properties,
-          description: isDescriptionField && firstFieldWithDescription.regional_variants && !!firstFieldWithDescription.regional_variants.length ?
-            {
-              [firstFieldWithDescription.regional_variants[0]]: properties.description
-            }
-            :
-            properties.description,
-          tags: isTagsField && firstFieldWithTags.regional_variants && !!firstFieldWithTags.regional_variants.length ?
+          [firstFieldWithTags.key]: firstFieldWithTags.regional_variants && !!firstFieldWithTags.regional_variants.length ?
             {
               [firstFieldWithTags.regional_variants[0]]: tags
             }
