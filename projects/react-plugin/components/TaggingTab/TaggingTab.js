@@ -455,7 +455,7 @@ class TaggingTab extends Component {
     } = this.state;
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
-    const { tagging, modifyURLButton, filerobotMetadataModel = {} } = config;
+    const { tagging, description, modifyURLButton, filerobotMetadataModel = {} } = config;
     const { isEDGYMetadataVersion, isTagsField, isDescriptionField } = filerobotMetadataModel;
     const { customFields = [], autoTaggingButton, suggestionList } = tagging;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
@@ -573,6 +573,7 @@ class TaggingTab extends Component {
               <>
                 {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
 
+                {description &&
                 <Textarea
                   value={this.state.description || ''}
                   placeholder={(isEDGYMetadataVersion && !isDescriptionField) ?
@@ -581,7 +582,7 @@ class TaggingTab extends Component {
                     I18n.t('tagging.add_description')}
                   onChange={this.handleDescriptionChange}
                   readOnly={isEDGYMetadataVersion && !isDescriptionField}
-                />
+                />}
               </>}
 
               {isImageType &&
