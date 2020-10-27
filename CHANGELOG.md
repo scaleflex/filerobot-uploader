@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.14.7 - 2020-10-27
+### Fixed
+- Fix config preparing
+
 # 2.14.6 - 2020-10-27
 ### Changed
 - change updating logic for description and tags fields. Process them depends on filerobot metadata version (M1_EDGY)
