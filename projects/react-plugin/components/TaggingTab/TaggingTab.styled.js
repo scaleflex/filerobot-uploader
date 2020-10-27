@@ -124,7 +124,7 @@ const Textarea = styled.textarea.attrs(() => ({
   display: block;
   min-height: 80px;
   width: 100%;
-  margin: 15px 0;
+  margin-top: 15px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
@@ -153,6 +153,7 @@ const TagsInputWrapper = styled.div`
     min-height: 80px;
     width: 100%;
     padding: 6px 12px;
+    margin-top: 15px;
     font-size: 14px;
     line-height: 1.42857;
     color: ${p => p.theme.inputTextColor || 'rgb(85, 85, 85)'};
