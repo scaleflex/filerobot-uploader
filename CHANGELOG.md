@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.14.10 - 2020-10-27
+### Fixed
+- fix: fix field styles
+
 # 2.14.9 - 2020-10-27
 ### Fixed
 - fix: fix tags updating logic
