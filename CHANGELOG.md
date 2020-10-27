@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.14.8 - 2020-10-27
+### Changed
+- feat: add "description" property in config. Allows hide/show description field
+
 # 2.14.7 - 2020-10-27
 ### Fixed
 - Fix config preparing
