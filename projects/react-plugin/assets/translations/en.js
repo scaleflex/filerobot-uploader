@@ -90,6 +90,8 @@ export default {
     last_modified: 'Last Modified',
     add_description: 'Add description',
     add_a_tag_separate_by_pressing_enter: 'Add a tag (separate by pressing enter)',
+    add_tags_field: 'You should add a "tags" field in your metadata model first',
+    add_description_field: 'You should add a "description" field in your metadata model first',
     generate_tags: 'Generate tags',
     save: 'Save',
     save_and_modify: 'Save and Modify URL',

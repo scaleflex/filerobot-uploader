@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { uploadFormDataFiles } from '../utils/files-upload';
 import { DUPLICATE_CODE, GALLERY_IMAGES_LIMIT, REPLACING_DATA_CODE } from '../config';
-import { uniqueArrayOfStrings } from '../utils';
+import { getTags } from '../utils';
 
 
 export const getBaseAPI = (baseAPI, container, platform) =>
@@ -236,26 +236,48 @@ export const generateMultiplyImagesTags = (uuids = [], autoTaggingProps = {}, la
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (files, properties, { container, baseAPI, platform, uploadKey }, personalTags = []) => {
+export const saveMetaData = (files, properties, config, personalTags = []) => {
+  const { container, baseAPI, platform, uploadKey, filerobotMetadataModel = {} } = config;
+  const { isEDGYMetadataVersion, isTagsField, isDescriptionField, firstFieldWithTags, firstFieldWithDescription } = filerobotMetadataModel;
   const isOneFile = files.length === 1;
   const baseUrl = getBaseAPI(baseAPI, container, platform);
   const base = `${baseUrl}file/`;
-  const data = { properties };
+
+  const getNextData = file => {
+    const tags = getTags(isOneFile, file, properties.tags, personalTags);
+
+    return isEDGYMetadataVersion ?
+      {
+        properties: {
+          ...properties,
+          description: isDescriptionField && firstFieldWithDescription.regional_variants && !!firstFieldWithDescription.regional_variants.length ?
+            {
+              [firstFieldWithDescription.regional_variants[0]]: properties.description
+            }
+            :
+            properties.description,
+          tags: isTagsField && firstFieldWithTags.regional_variants && !!firstFieldWithTags.regional_variants.length ?
+            {
+              [firstFieldWithTags.regional_variants[0]]: tags
+            }
+            :
+            tags
+        }
+      }
+      :
+      {
+        properties: {
+          ...properties,
+          tags: tags
+        }
+      };
+  };
 
   return sendAll(files.map(file =>
     send(
       `${base}${file.uuid}/properties`,
       'PUT',
-      {
-        ...data,
-        properties: {
-          ...data.properties,
-          tags: isOneFile ?
-            data.properties.tags
-            :
-            uniqueArrayOfStrings([...data.properties.tags, ...personalTags[file.uuid] || []])
-        }
-      },
+      getNextData(file),
       {
         [getSecretHeaderName(platform)]: uploadKey
       }

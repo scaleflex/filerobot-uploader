@@ -220,7 +220,7 @@ const TagsInputWrapper = styled.div`
     padding: 5px;
     min-width: 80px;
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
   }
 
 `;

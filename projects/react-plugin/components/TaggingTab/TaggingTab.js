@@ -93,14 +93,20 @@ class TaggingTab extends Component {
 
   componentDidMount() {
     const { files = [], config, prevTab, uploadedImageData } = this.props.appState;
-    const { tagging: { executeAfterUpload } = {} } = config;
+    const { tagging: { executeAfterUpload } = {}, filerobotMetadataModel = {} } = config;
+    const { isEDGYMetadataVersion, isTagsField } = filerobotMetadataModel;
     const firstFile = files[0];
     const isOneFile = files.length === 1;
     const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
     const isPreviousGallery = prevTab === "MY_GALLERY";
-    const isPreviousEditor = prevTab === "IMAGE_EDITOR";
+    const isPreviousEditor = prevTab === 'IMAGE_EDITOR';
 
-    if ((isPreviousGallery || isPreviousEditor ? false : executeAfterUpload) && !this.state.tags.length && isImageType) {
+    if (
+      (isPreviousGallery || isPreviousEditor ? false : executeAfterUpload)
+      && !this.state.tags.length
+      && isImageType
+      && (isEDGYMetadataVersion ? isTagsField : true)
+    ) {
       this.setState({ isGeneratingTags: true });
 
       this.generateTags(isOneFile);
@@ -449,7 +455,8 @@ class TaggingTab extends Component {
     } = this.state;
     const { files = [], appState } = this.props;
     const { prevTab, config, productsEnabled } = appState;
-    const { tagging, modifyURLButton } = config;
+    const { tagging, modifyURLButton, filerobotMetadataModel = {} } = config;
+    const { isEDGYMetadataVersion, isTagsField, isDescriptionField } = filerobotMetadataModel;
     const { customFields = [], autoTaggingButton, suggestionList } = tagging;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const firstFile = files[0];
@@ -568,8 +575,12 @@ class TaggingTab extends Component {
 
                 <Textarea
                   value={this.state.description || ''}
-                  placeholder={I18n.t('tagging.add_description')}
+                  placeholder={(isEDGYMetadataVersion && !isDescriptionField) ?
+                    I18n.t('tagging.add_description_field')
+                    :
+                    I18n.t('tagging.add_description')}
                   onChange={this.handleDescriptionChange}
+                  readOnly={isEDGYMetadataVersion && !isDescriptionField}
                 />
               </>}
 
@@ -584,8 +595,12 @@ class TaggingTab extends Component {
                     renderInput={props => <AutosuggestionInput {...{ ...props, suggestionList }}/>}
                     onChange={this.handleTagsChange}
                     inputProps={{
-                      placeholder: I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
+                      placeholder: (isEDGYMetadataVersion && !isTagsField) ?
+                        I18n.t('tagging.add_tags_field')
+                        :
+                        I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
                     }}
+                    disabled={isEDGYMetadataVersion && !isDescriptionField}
                   />
                 </TagsInputWrapper>
               </>}

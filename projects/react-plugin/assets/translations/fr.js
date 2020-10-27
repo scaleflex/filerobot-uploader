@@ -92,6 +92,8 @@ export default {
     last_modified: 'Modifié le',
     add_description: 'Ajouter description',
     add_a_tag_separate_by_pressing_enter: 'Ajouter un tag (séparer par ENTRÉE)',
+    add_tags_field: 'Vous devez d\'abord ajouter un champs "tags" dans votre modèle de metadata',
+    add_description_field: 'Vous devez d\'abord ajouter un champs "description" dans votre modèle de metadata.',
     generate_tags: 'Taggage auto',
     save: 'Sauvegarder',
     save_and_modify: 'Enregistrer et modifier l\'URL\n',
