@@ -60,6 +60,7 @@ const prepareConfig = (config = {}, onUpload = () => {}) => {
     },
     extensions: config.extensions || [],
     modifyURLButton: isDefined(config.modifyURLButton) ? config.modifyURLButton : true,
+    filerobotMetadataModel: config.filerobotMetadataModel || {}
   };
 };
 
