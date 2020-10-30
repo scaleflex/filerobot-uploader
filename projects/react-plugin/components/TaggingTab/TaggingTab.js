@@ -601,7 +601,7 @@ class TaggingTab extends Component {
                         :
                         I18n.t('tagging.add_a_tag_separate_by_pressing_enter')
                     }}
-                    disabled={isEDGYMetadataVersion && !isDescriptionField}
+                    disabled={isEDGYMetadataVersion && !isTagsField}
                   />
                 </TagsInputWrapper>
               </>}
