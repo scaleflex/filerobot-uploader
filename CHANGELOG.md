@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.14.11 - 2020-10-30
+### Fixed
+- fix: tags input disabling
+
 # 2.14.10 - 2020-10-27
 ### Fixed
 - fix: fix field styles
