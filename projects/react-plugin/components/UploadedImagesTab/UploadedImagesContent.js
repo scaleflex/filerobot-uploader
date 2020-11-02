@@ -77,7 +77,8 @@ class UploadedImagesContent extends Component {
   };
 
   select = (image) => {
-    const { files, selectedItems } = this.props;
+    const { files, selectedItems, appState } = this.props;
+    const { options } = appState;
     const isForceUpload = this.props.appState.config.uploadParams.opt_force_name;
     let nextFiles = [];
 
@@ -92,7 +93,7 @@ class UploadedImagesContent extends Component {
       this.props.upload(true, nextFiles.map(file => getCDNlink(file)));
     } else {
       this.props.appState.config.uploadHandler(nextFiles, { stage: 'select' });
-      this.props.closeModal();
+      if (options.closeOnSave) this.props.closeModal();
     }
   };
 
