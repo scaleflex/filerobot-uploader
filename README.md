@@ -136,7 +136,9 @@ Open uploader modal.
 
 * **options.file**: {} (optional) - open Uploader to Tag or Edit specified file
 
-* **options.closeOnEdit**: bool (optional) - close Uploader on complete Tagging or Editing
+* **options.closeOnEdit**: bool (optional) - close Uploader on complete Tagging or Editing, default false
+
+* **options.closeOnSave**: bool (optional) - close Uploader on click "save" button in Tagging tab, default true
 
 #### `window.FilerobotUploader.close()`: function
 

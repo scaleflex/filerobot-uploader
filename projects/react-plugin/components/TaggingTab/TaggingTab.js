@@ -253,8 +253,10 @@ class TaggingTab extends Component {
         this.setState({ isLoading: true }, () => {
           this.props.setPostUpload(false, '', 'TAGGING');
 
-          if ((options.closeOnEdit || prevTab !== 'MY_GALLERY') && !isModifyURL) {
-            this.props.closeModal();
+          if (options.closeOnSave) {
+            if ((options.closeOnEdit || prevTab !== 'MY_GALLERY') && !isModifyURL) {
+              this.props.closeModal();
+            }
           }
 
           if (typeof callback === "function") {

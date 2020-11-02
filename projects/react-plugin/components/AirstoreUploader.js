@@ -13,6 +13,7 @@ import { getInitialState } from './AppState';
 import { isImage } from '../utils/icons.utils';
 import { getTokenSettings } from '../services/api.service';
 import { UploadedImagesTab, IconTab, BackgroundTab, TaggingTab, ImageEditor } from './loadable';
+import { isDefined } from '../utils';
 
 
 const ToastMessageFactory = React.createFactory(ToastMessageAnimated);
@@ -98,14 +99,17 @@ class AirstoreUploader extends Component {
 
   saveUploadedFiles = (files = []) => { this.props.setAppState(() => ({ files })); }
 
-  openModal = (initialTab, { file, closeOnEdit } = {}) => {
+  openModal = (initialTab, options = {}) => {
     let { config, appState } = this.props;
     const { activeModules } = appState;
-    let options = {
-      ...this.props.options
+    let { file } = options;
+    const nextOptions = {
+      ...this.props.options,
+      ...options,
+      closeOnEdit: isDefined(options.closeOnEdit) ? options.closeOnEdit : false,
+      closeOnSave: isDefined(options.closeOnSave) ? options.closeOnSave : true
     };
 
-    options.closeOnEdit = closeOnEdit || options.closeOnEdit || config.closeOnEdit || false;
     initialTab = initialTab || this.props.initialTab ||
       config.initialTab || config.INITIAL_TAB || CONFIG.initialTab;
     file = file || this.props.file;
@@ -128,7 +132,7 @@ class AirstoreUploader extends Component {
       activeTabId: initialTab || this.props.initialTab,
       isVisible: true,
       prevTab: file ? '' : prevState.prevTab,
-      options
+      options: nextOptions
     }));
   }
 
