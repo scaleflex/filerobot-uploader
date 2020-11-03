@@ -258,17 +258,17 @@ class UploadedImagesTab extends Component {
   forceUpdate = () => {
     const imageGridWrapper = document.querySelector('#image-grid-wrapper');
     const modalWrapper = document.querySelector('#modal-wrapper');
-    const modalWrapperOffsetLeft = modalWrapper.offsetLeft;
-
-    modalWrapper.style.left = `${modalWrapperOffsetLeft - 2}px`;
-    modalWrapper.style.transform = `translateX(2px)`;
-    if (imageGridWrapper) imageGridWrapper.scrollBy(0, 1);
-
-    setTimeout(() => {
-      modalWrapper.style.left = `${modalWrapperOffsetLeft}px`;
-      modalWrapper.style.transform = `translateX(0px)`;
-      if (imageGridWrapper) imageGridWrapper.scrollBy(0, -1);
-    }, 100);
+    //const modalWrapperOffsetLeft = modalWrapper.offsetLeft;
+    //
+    //modalWrapper.style.left = `${modalWrapperOffsetLeft - 2}px`;
+    //modalWrapper.style.transform = `translateX(2px)`;
+    //if (imageGridWrapper) imageGridWrapper.scrollBy(0, 1);
+    //
+    //setTimeout(() => {
+    //  modalWrapper.style.left = `${modalWrapperOffsetLeft}px`;
+    //  modalWrapper.style.transform = `translateX(0px)`;
+    //  if (imageGridWrapper) imageGridWrapper.scrollBy(0, -1);
+    //}, 100);
   };
 
   onDeleteFile = () => {
