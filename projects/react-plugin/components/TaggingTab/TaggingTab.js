@@ -548,13 +548,13 @@ class TaggingTab extends Component {
     const { prevTab, config, productsEnabled } = appState;
     const { tagging, description, modifyURLButton } = config;
     const { customFields = [], autoTaggingButton, suggestionList } = tagging;
+    const { isEDGYMetadataVersion, isTagsField } = tokenMetadata;
     const generateTagInfo = I18n.t('tagging.will_automatically_generate_tags');
     const firstFile = files[0];
     const isOneFile = files.length === 1;
     const isImageType = isOneFile ? isImage(firstFile.type) : isAllImages(files);
     const imageSources = this.getImageSrc(files, isImageType);
     const isSomeImageHasNoTags = files.some(file => file.properties.tags && !file.properties.tags.length);
-    const { isEDGYMetadataVersion, isTagsField } = tokenMetadata;
 
     return (
       <TaggingTabWrapper>
@@ -701,7 +701,7 @@ class TaggingTab extends Component {
         </TaggingContent>
 
         <TaggingFooter>
-          {autoTaggingButton && isImageType && isSomeImageHasNoTags && (isEDGYMetadataVersion ? isTagsField : true) &&
+          {autoTaggingButton && isImageType && (isEDGYMetadataVersion ? isTagsField : true) &&
           <Button disabled={this.state.tagsGenerated} onClick={() => this.generateTags(isOneFile)}>
             {I18n.t('tagging.generate_tags')}
             <InfoIcon data-tip={generateTagInfo}/>
