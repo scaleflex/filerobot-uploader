@@ -25,6 +25,11 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.0 - 2020-11-03
+### Fixed
+- feat: process tagging according token metadata version
+- feat: add 'closeOnSave' property
+
 # 2.14.11 - 2020-10-30
 ### Fixed
 - fix: tags input disabling
