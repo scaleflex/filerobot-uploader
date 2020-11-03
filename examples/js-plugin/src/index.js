@@ -49,9 +49,16 @@ let config = {
   modules: ['UPLOAD', 'MY_GALLERY', 'ICONS_GALLERY', 'IMAGES_GALLERY', 'TAGGING', 'IMAGE_EDITOR'],
   uploadParams: {
     dir:"/dima_test_8_en"
+    //dir:"/test-folder"
+    //dir:"/test2" //frank
+    //dir:"/test2_dir" //emil
   },
-  container: 'fusqadtm',
+  container: 'fusqadtm', //M1_EDGY without tags
   filerobotUploadKey: '19692813e7364ef8ad6a6504d50a12ca',
+  //container: 'ficttndm', //M1_EDGY with Tags field //emil
+  //filerobotUploadKey: 'fc86c2afb6114856a31bcef9d299fccb',
+  //container: 'fyeonxrm', //M0_LEGACY //frank
+  //filerobotUploadKey: 'fa6d6f45f35844a7b01623c391fac260',
   initialTab: 'UPLOAD',
   folderBrowser: {
     show: true

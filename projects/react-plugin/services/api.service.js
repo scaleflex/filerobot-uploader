@@ -236,9 +236,9 @@ export const generateMultiplyImagesTags = (uuids = [], autoTaggingProps = {}, la
     .then((response = {}) => response);
 }
 
-export const saveMetaData = (files, properties, config, personalTags = []) => {
-  const { container, baseAPI, platform, uploadKey, filerobotMetadataModel = {} } = config;
-  const { isEDGYMetadataVersion, isTagsField, firstFieldWithTags } = filerobotMetadataModel;
+export const saveMetaData = ({ files, properties, config, personalTags = [], tokenMetadata = {} }) => {
+  const { container, baseAPI, platform, uploadKey } = config;
+  const { isEDGYMetadataVersion, isTagsField, firstFieldWithTags } = tokenMetadata;
   const isOneFile = files.length === 1;
   const baseUrl = getBaseAPI(baseAPI, container, platform);
   const base = `${baseUrl}file/`;
@@ -306,6 +306,18 @@ export const getTokenSettings = ({ container = '', baseAPI, platform, uploadKey 
     .then(({ settings = {} } = {}) => ({
       productsEnabled: settings._products_enabled === 1
     }));
+};
+
+export const getTokenData = ({ container = '', baseAPI, platform, uploadKey }) => {
+  const baseUrl = getBaseAPI(baseAPI, container, platform);
+
+  return send(
+    [baseUrl, 'settings'].join(''),
+    'GET',
+    null,
+    { [getSecretHeaderName(platform)]: uploadKey }
+  )
+    .then((response = {}) => response);
 };
 
 export const deleteImage = ({ uuids, baseAPI, container = '', platform, fileUuid, dir, uploadKey }) => {

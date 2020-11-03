@@ -1,3 +1,6 @@
+import { METADATA_VERSIONS } from './metadata.constants';
+
+
 const deepCopy = object => JSON.parse(JSON.stringify(object));
 
 const cursorToEnd = contentEditableElement => {
@@ -56,6 +59,11 @@ const isDefined = param => typeof param !== 'undefined';
 
 const encodePermalink = link => link; // link.replace(/\?/g, '%3F');
 
+const checkIsEDGYMetadataVersion = metadataVersion => metadataVersion ===
+  (METADATA_VERSIONS.M1_EDGY
+    ||
+    metadataVersion === METADATA_VERSIONS.DEPRECATED_V1_EDGY);
+
 export {
   uniqueArrayOfStrings,
   nonUniqueArrayOfStrings,
@@ -66,5 +74,6 @@ export {
   isEsc,
   isDefined,
   encodePermalink,
-  getTags
+  getTags,
+  checkIsEDGYMetadataVersion
 }
