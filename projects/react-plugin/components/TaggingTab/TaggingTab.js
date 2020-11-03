@@ -42,7 +42,7 @@ class TaggingTab extends Component {
   constructor(props) {
     super();
 
-    const { appState, files = {} } = props;
+    const { appState, files = [] }  = props;
     const { tagging: { customFields = [] } = {}, language } = appState.config;
     const isOneFile = files.length === 1;
     const firstFile = files[0];
