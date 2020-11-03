@@ -25,7 +25,7 @@ Types of changes:
 - ...
 
 -------------
-# 2.15.1 - 2020-11-03
+# 2.15.2 - 2020-11-03
 ### Fixed
 - fix: bug with visibility 'generate tags' button
 
