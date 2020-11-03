@@ -25,8 +25,12 @@ Types of changes:
 - ...
 
 -------------
-# 2.15.0 - 2020-11-03
+# 2.15.1 - 2020-11-03
 ### Fixed
+- fix: bug with visibility 'generate tags' button
+
+# 2.15.0 - 2020-11-03
+### Added
 - feat: process tagging according token metadata version
 - feat: add 'closeOnSave' property
 
