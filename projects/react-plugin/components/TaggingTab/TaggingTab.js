@@ -236,7 +236,8 @@ class TaggingTab extends Component {
 
         if (FILES && isTagsField) {
           FILES.groups.forEach(group => {
-            firstFieldWithTags = group.fields.find(field => field.type === 'tags');
+            const fieldWithTags = group.fields.find(field => field.type === 'tags');
+            if (fieldWithTags) firstFieldWithTags = fieldWithTags;
           });
         }
 
