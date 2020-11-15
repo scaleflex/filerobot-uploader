@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.4 - 2020-11-15
+### Changed
+- Updating filerobot-image-editor package for having latest version of image editor.
+
 # 2.15.3 - 2020-11-10
 ### Fixed
 - fix: empty field with tags
