@@ -665,7 +665,7 @@ class TaggingTab extends Component {
               <>
                 {customFields.map(field => renderField(field, this.state[field.metaKey], this.handleCustomFieldChange))}
 
-                {description && !isEDGYMetadataVersion &&
+                {description &&
                 <Textarea
                   value={this.state.description || ''}
                   placeholder={I18n.t('tagging.add_description')}
