@@ -61,7 +61,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
    * Hack for sealing token.
    * Need to figure out how to check is token support sealing
    */
-  const isTokenWithSealing = container === 'fumwdnfm';
+  const isTokenWithSealing = container === 'fyooyzbm';
   const sealingConfig = isTokenWithSealing ? {
     enabled: true,
     salt: 'test',
