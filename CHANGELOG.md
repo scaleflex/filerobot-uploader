@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.6 - 2020-11-19
+### Changed
+- refactor: show description field regardless of EDGY version
+
 # 2.15.5 - 2020-11-19
 ### Fixed
 - fix: searching bug
