@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.9 - 2020-11-19
+### Fixed
+- ImageEditor config filerobot.imageSealing issue.
+
 # 2.15.8 - 2020-11-19
 ### Changed
 - Updating filerobot-image-editor package for having latest version of image editor.
