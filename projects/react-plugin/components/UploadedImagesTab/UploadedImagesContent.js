@@ -186,8 +186,7 @@ class UploadedImagesContent extends Component {
             additionalImageHeight={20}
             customPositionHandler={true}
             getImageGridWrapperPosition={this.getImageGridWrapperPosition}
-            cellContent={(props) =>
-              props.item.id !== 'uploaderBox' ? this.renderImage(props) : this.renderUploadBox(props)
+            cellContent={(props) => props.item && (props.item.id !== 'uploaderBox') ? this.renderImage(props) : this.renderUploadBox(props)
             }
           /> : ''}
 
