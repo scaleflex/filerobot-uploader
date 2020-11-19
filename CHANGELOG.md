@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.7 - 2020-11-19
+### Added
+- feat: Modify URL add sealing support
+
 # 2.15.6 - 2020-11-19
 ### Changed
 - refactor: show description field regardless of EDGY version
