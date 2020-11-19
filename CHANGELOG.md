@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.10 - 2020-11-19
+### Changed
+- Sealing container.
+
 # 2.15.9 - 2020-11-19
 ### Fixed
 - ImageEditor config filerobot.imageSealing issue.
