@@ -94,7 +94,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
           ...imageEditorConfig.filerobot,
           imageSealing: {
             ...sealingConfig,
-            ...(imageEditorConfig.filerobot.imageSealing || {}),
+            ...((imageEditorConfig.filerobot || {}).imageSealing || {}),
           }
         },
 
