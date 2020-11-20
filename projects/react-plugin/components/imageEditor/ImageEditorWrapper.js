@@ -57,18 +57,6 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
     }
   }
 
-  /**
-   * Hack for sealing token.
-   * Need to figure out how to check is token support sealing
-   */
-  const isTokenWithSealing = container === 'fyooyzbm';
-  const sealingConfig = isTokenWithSealing ? {
-    enabled: true,
-    salt: 'test',
-    char_count: 10,
-    include_params: ['wat', 'wat_url', 'wat_opacity', 'wat_scale', 'wat_pad', 'wat_gravity'],
-  } : {};
-
   return (
     <ImageEditor
       show={true}
@@ -91,11 +79,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
             dir: path || uploadParams.dir,
             ...(imageEditorConfig.filerobot && imageEditorConfig.filerobot.uploadParams)
           },
-          ...imageEditorConfig.filerobot,
-          imageSealing: {
-            ...sealingConfig,
-            ...((imageEditorConfig.filerobot || {}).imageSealing || {}),
-          }
+          ...imageEditorConfig.filerobot
         },
 
         cloudimage: {
