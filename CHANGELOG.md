@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.11 - 2020-11-20
+### Changed
+- Clean imageSealing extra configs (everything must be configurated in user configs).
+
 # 2.15.10 - 2020-11-19
 ### Changed
 - Sealing container.
