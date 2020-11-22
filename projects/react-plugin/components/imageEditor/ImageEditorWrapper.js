@@ -57,6 +57,11 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
     }
   }
 
+  const imageEditorImageInfo = {
+    imageProperties: file.properties,
+    imageMeta: file.meta
+  }
+
   return (
     <ImageEditor
       show={true}
@@ -79,7 +84,8 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
             dir: path || uploadParams.dir,
             ...(imageEditorConfig.filerobot && imageEditorConfig.filerobot.uploadParams)
           },
-          ...imageEditorConfig.filerobot
+          ...imageEditorConfig.filerobot,
+          ...imageEditorImageInfo
         },
 
         cloudimage: {
