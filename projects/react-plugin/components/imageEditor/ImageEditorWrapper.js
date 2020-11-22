@@ -60,7 +60,7 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
   const imageEditorImageInfo = {
     imageProperties: file.properties,
     imageMeta: file.meta,
-    replacedImageName: file.name
+    imageName: file.name
   }
 
   return (
