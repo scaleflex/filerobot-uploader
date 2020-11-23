@@ -126,7 +126,7 @@ class UploadedImagesContent extends Component {
         nextFiles = [{ ...image, public_link: getCDNlink(image) }];
 
       this.props.saveUploadedFiles(nextFiles);
-      this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY');
+      this.props.setPostUpload(true, 'TAGGING', 'MY_GALLERY', { isClickedTagsBtn: true });
     }
   };
 

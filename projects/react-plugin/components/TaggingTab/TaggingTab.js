@@ -94,7 +94,7 @@ class TaggingTab extends Component {
   }
 
   componentDidMount() {
-    const { files = [], config, prevTab, uploadedImageData } = this.props.appState;
+    const { files = [], config, prevTab, uploadedImageData, isClickedTagsBtn } = this.props.appState;
     const { tagging: { executeAfterUpload } = {} } = config;
     const firstFile = files[0];
     const isOneFile = files.length === 1;
@@ -103,7 +103,7 @@ class TaggingTab extends Component {
     const isPreviousEditor = prevTab === 'IMAGE_EDITOR';
 
     this.getTokenData().then((tokenMetadata) => {
-      if (isPreviousGallery || isPreviousEditor) {
+      if ((isPreviousGallery && isClickedTagsBtn) || isPreviousEditor) {
         this.showTags(tokenMetadata);
       }
       else if (
@@ -191,7 +191,7 @@ class TaggingTab extends Component {
       files.forEach(file => {
         file.properties = file.properties || {};
         firstFieldTags = firstFieldWithTags.regional_variants && !!firstFieldWithTags.regional_variants.length ?
-          file.properties[firstFieldWithTags.key][firstFieldWithTags.regional_variants[0]]
+          file.properties[firstFieldWithTags.key] ? file.properties[firstFieldWithTags.key][firstFieldWithTags.regional_variants[0]] : []
           :
           [];
 
@@ -221,6 +221,7 @@ class TaggingTab extends Component {
 
     this.initialData["tags"] = tags;
     this.setState(nextState);
+    this.props.setAppState({ isClickedTagsBtn: false });
   };
 
   getTokenData = () => {

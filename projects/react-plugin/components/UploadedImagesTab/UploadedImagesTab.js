@@ -418,8 +418,6 @@ class UploadedImagesTab extends Component {
     const isTooShortSearchPhrase = searchPhrase.length < 2;
     const isCheckedOne = selectedItems.length === 1 || !selectedItems.length;
 
-    console.log("step: ", step);
-
     return (
       <UploadedImages>
         {step === STEP.PROCESS &&
