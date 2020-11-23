@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.12 - 2020-11-23
+### Fixed
+- fix: show confirm modal on click 'back' btn only in case of changes
+
 # 2.15.11 - 2020-11-20
 ### Changed
 - Clean imageSealing extra configs (everything must be configurated in user configs).
