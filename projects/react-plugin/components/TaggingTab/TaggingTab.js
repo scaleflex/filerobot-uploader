@@ -53,12 +53,18 @@ class TaggingTab extends Component {
       day: 'numeric', hour: '2-digit', minute: '2-digit'
     };
     const currentTime = (date).toLocaleTimeString(language, options);
-
+    this.initialData = this.initialData || {};
     let customFieldsProps = {};
 
     if (customFields && customFields.length) {
       customFieldsProps = this.getCustomFields(customFields, firstFile.properties);
+      this.initialData = { ...this.initialData, ...customFieldsProps };
     }
+
+    this.initialData["tags"] = [];
+    this.initialData["productRef"] = productRef;
+    this.initialData["productPosition"] = productPosition;
+    this.initialData["description"] = firstFile.properties.description || '';
 
     this.state = {
       tags: [],
@@ -213,6 +219,7 @@ class TaggingTab extends Component {
       isLoading: false
     };
 
+    this.initialData["tags"] = tags;
     this.setState(nextState);
   };
 
@@ -383,8 +390,10 @@ class TaggingTab extends Component {
               ...tags.map(item => item && item.tag && item.tag[language])
             ];
 
+            const tags = uniqueArrayOfStrings(nextTags);
+            this.initialData["tags"] = tags;
             this.setState({
-              tags: uniqueArrayOfStrings(nextTags),
+              tags,
               isLoading: false,
               isGeneratingTags: false,
               tagsGenerated: true
@@ -428,8 +437,10 @@ class TaggingTab extends Component {
             }
           });
 
+          const tags = nonUniqueArrayOfStrings(commonTags, files.length);
+          this.initialData["tags"] = tags;
           this.setState({
-            tags: nonUniqueArrayOfStrings(commonTags, files.length),
+            tags,
             personalTags: uniqueArrayOfStringsInObject(personalTags),
             isLoading: false,
             isGeneratingTags: false,
@@ -536,6 +547,18 @@ class TaggingTab extends Component {
     return sources;
   };
 
+  checkChanges = () => {
+    const isChanges = Object.keys(this.initialData).some(key => {
+      return key === 'tags' ?
+        (this.initialData[key].length === this.state[key].length) ? this.initialData[key].some((value, index) => value !== this.state[key][index]) : true
+        :
+        this.initialData[key] !== this.state[key];
+    });
+
+    if (isChanges) this.togglePopup();
+    else this.goBack();
+  };
+
   togglePopup = () => {
     this.setState({ isOpenedPopup: !this.state.isOpenedPopup });
   };
@@ -561,7 +584,7 @@ class TaggingTab extends Component {
       <TaggingTabWrapper>
         <TaggingContent>
           {prevTab &&
-          <GoBack onClick={this.togglePopup}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
+          <GoBack onClick={this.checkChanges}><BackIcon/>{I18n.t('tagging.go_back')}</GoBack>}
 
           {isOneFile &&
           <FileWrapper>

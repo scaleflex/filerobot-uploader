@@ -202,7 +202,7 @@ function onUploadHandler(files, props = {}) {
         </li>
         <li>
           <span>Tags: </span>
-          <span>${img.properties.tags.join(', ') || 'not specified'}</span>
+          <span>${img.properties.tags.default ? img.properties.tags.default.join(', ') : img.properties.tags.join(', ') || 'not specified'}</span>
         </li>
       </ul>
     `;
