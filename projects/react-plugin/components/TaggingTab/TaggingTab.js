@@ -390,10 +390,10 @@ class TaggingTab extends Component {
               ...tags.map(item => item && item.tag && item.tag[language])
             ];
 
-            const tags = uniqueArrayOfStrings(nextTags);
-            this.initialData["tags"] = tags;
+            const uniqueTags = uniqueArrayOfStrings(nextTags);
+            this.initialData["tags"] = uniqueTags;
             this.setState({
-              tags,
+              tags: uniqueTags,
               isLoading: false,
               isGeneratingTags: false,
               tagsGenerated: true
@@ -437,10 +437,10 @@ class TaggingTab extends Component {
             }
           });
 
-          const tags = nonUniqueArrayOfStrings(commonTags, files.length);
-          this.initialData["tags"] = tags;
+          const nonUniqueTags = nonUniqueArrayOfStrings(commonTags, files.length);
+          this.initialData["tags"] = nonUniqueTags;
           this.setState({
-            tags,
+            tags: nonUniqueTags,
             personalTags: uniqueArrayOfStringsInObject(personalTags),
             isLoading: false,
             isGeneratingTags: false,
