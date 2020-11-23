@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.13 - 2020-11-23
+### Changed
+- chore: update dependencies
+
 # 2.15.12 - 2020-11-23
 ### Fixed
 - fix: show confirm modal on click 'back' btn only in case of changes
