@@ -3,7 +3,6 @@ import { CSS } from '../assets/styles';
 import UserUploaderTab from './UploadImagesTab/UserUploaderTab';
 import { Dialog } from '../styledComponents';
 import { Modal } from './Modal';
-import FocusLock from 'react-focus-lock';
 import { prepareConfig } from '../utils/global.utils';
 import CONFIG from '../config';
 import { ToastContainer, ToastMessageAnimated } from 'react-toastr';
@@ -229,7 +228,6 @@ class AirstoreUploader extends Component {
           isHideCloseBtn={isHideHeader}
         >
           <div id="filerobot-uploader" className="airstore-root-box" style={{ width: '100%', height: '100%' }}>
-            <FocusLock>
               <Dialog role="dialog" className="ae-dialog">
                 {!isHideHeader &&
                 <div style={CSS.tabs.header} className="ae-tabs-header">
@@ -246,7 +244,6 @@ class AirstoreUploader extends Component {
                   </div>}
                 </div>
               </Dialog>
-            </FocusLock>
           </div>
         </Modal>
 
