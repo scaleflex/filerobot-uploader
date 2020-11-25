@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.15 - 2020-11-25
+### Changed
+- refactor: remove react-focus-lock lib
+
 # 2.15.14 - 2020-11-23
 ### Fixed
 - fix: bug with empty tags list on upload images via Gallery tab for M1_EDGY version
