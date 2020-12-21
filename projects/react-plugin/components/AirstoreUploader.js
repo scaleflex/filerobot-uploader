@@ -98,15 +98,15 @@ class AirstoreUploader extends Component {
 
   saveUploadedFiles = (files = []) => { this.props.setAppState(() => ({ files })); }
 
-  openModal = (initialTab, options = {}) => {
-    let { config, appState } = this.props;
+  openModal = (initialTab, uploaderOptions = {}) => {
+    let { config, appState, options = {} } = this.props;
     const { activeModules } = appState;
-    const closeOnEdit = this.props.options.closeOnEdit || options.closeOnEdit || config.closeOnEdit;
-    const closeOnSave = this.props.options.closeOnSave || options.closeOnSave || config.closeOnSave;
-    let { file } = options;
+    const closeOnEdit = options.closeOnEdit || uploaderOptions.closeOnEdit || config.closeOnEdit;
+    const closeOnSave = options.closeOnSave || uploaderOptions.closeOnSave || config.closeOnSave;
+    let { file } = uploaderOptions;
     const nextOptions = {
-      ...this.props.options,
       ...options,
+      ...uploaderOptions,
       closeOnEdit: isDefined(closeOnEdit) ? closeOnEdit : false,
       closeOnSave: isDefined(closeOnSave) ? closeOnSave : true
     };
