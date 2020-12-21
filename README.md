@@ -1,6 +1,6 @@
 > Repository includes React version and JS wrapper for standalone usage
 
-[![Release](https://img.shields.io/badge/release-v2.15.16-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
+[![Release](https://img.shields.io/badge/release-v2.15.17-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
 [![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)](https://www.filerobot.com/en/home#2de3fb9f-dd4a-457a-999a-025ad9bd5f3b)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -65,7 +65,7 @@ The Filerobot Uploader is a multi-function Uploader that will make uploads super
 Use latest CDNized plugin version
 
 ```html
-<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.15.16/filerobot-uploader.min.js"></script>
+<script src="https://cdn.scaleflex.it/plugins/filerobot-uploader/2.15.17/filerobot-uploader.min.js"></script>
 ```
 
 ### <a name="quick_start"></a>Quick start
