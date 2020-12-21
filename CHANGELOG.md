@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.18 - 2020-12-21
+### Fixed
+- fix: closeOnEdit prop bug
+
 # 2.15.17 - 2020-12-21
 ### Fixed
 - fix: add check for closeOnEdit and closeOnSave props in config
