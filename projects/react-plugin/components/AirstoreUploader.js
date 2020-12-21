@@ -101,8 +101,8 @@ class AirstoreUploader extends Component {
   openModal = (initialTab, options = {}) => {
     let { config, appState } = this.props;
     const { activeModules } = appState;
-    const closeOnEdit = options.closeOnEdit || config.closeOnEdit;
-    const closeOnSave = options.closeOnSave || config.closeOnSave;
+    const closeOnEdit = this.props.options.closeOnEdit || options.closeOnEdit || config.closeOnEdit;
+    const closeOnSave = this.props.options.closeOnSave || options.closeOnSave || config.closeOnSave;
     let { file } = options;
     const nextOptions = {
       ...this.props.options,
