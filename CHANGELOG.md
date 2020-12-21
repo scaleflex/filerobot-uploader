@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.16 - 2020-12-21
+### Fixed
+- fix: add check for closeOnEdit and closeOnSave props in config
+
 # 2.15.15 - 2020-11-25
 ### Changed
 - refactor: remove react-focus-lock lib
