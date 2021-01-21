@@ -200,7 +200,7 @@ class UploadedImagesContent extends Component {
   renderImage = ({ style, columnWidth, item, index }) => {
     const { selectedItems, appState } = this.props;
     const { top, left } = this.state;
-    const { tagging, imageEditor, cloudimageToken, modifyURLButton } = appState.config;
+    const { tagging, imageEditor, cloudimageToken, modifyURLButton, deleteButton } = appState.config;
     const isTagImage = tagging.active;
     const isEditImage = imageEditor.active;
     const isImageType = isImage(item.type);
@@ -258,12 +258,13 @@ class UploadedImagesContent extends Component {
                   <Icon className="sfi-airstore-tag"/>
                 </Control>
               </ControlWrapper>}
+              {deleteButton &&
               <ControlWrapper onClick={() => this.props.onClickDelete(item)}>
                 <Control data-tip={getContentWithNumber(I18n.t('tips.delete'), selectedItems.length)}>
                   <span>{I18n.t('file_manager.delete')}{!isCheckedOne ? ` (${selectedItems.length})` : ''}</span>
                   <Icon className="sfi-airstore-delete"/>
                 </Control>
-              </ControlWrapper>
+              </ControlWrapper>}
             </Controls>
 
 

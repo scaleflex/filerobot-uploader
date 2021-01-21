@@ -116,7 +116,8 @@ let config = {
       fileUpload: true,
     }
   },
-  modifyURLButton: true
+  modifyURLButton: true,
+  deleteButton: true
 };
 
 // Configuration
