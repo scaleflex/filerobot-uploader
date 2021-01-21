@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.19 - 2021-01-21
+### Feat
+- feat: add possibility to display/hide Delete button
+
 # 2.15.18 - 2020-12-21
 ### Fixed
 - fix: closeOnEdit prop bug
