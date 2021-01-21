@@ -475,7 +475,7 @@ config.modifyURLButton = true;
 Display/hide delete button on gallery tab.
 
 ```
-config.modifyURLButton = true;
+config.deleteButton = true;
 ```
 
 #### `colorScheme`: object
