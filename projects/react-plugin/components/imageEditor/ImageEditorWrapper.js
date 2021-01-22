@@ -47,13 +47,13 @@ export default ({ appState, files: [file = {}] = {}, path, saveUploadedFiles, se
   const isGif = getPubliclink(file).slice(-3).toLowerCase() === 'gif';
   const src = getCDNlink(file);
 
-  const onComplete = (url) => {
+  const onComplete = (url, updatedFile) => {
     if (modifyURL) {
-      const files = [{ ...file, modified_url: url, public_link: getPubliclink(file) }];
+      const files = [{ ...updatedFile, modified_url: url, public_link: getPubliclink(updatedFile) }];
       uploadHandler(files, { stage: 'modify' });
       closeModal();
     } else {
-      uploadFiles(prevTab, url, file, saveUploadedFiles, setPostUpload, options, closeModal, uploadHandler);
+      uploadFiles(prevTab, url, updatedFile, saveUploadedFiles, setPostUpload, options, closeModal, uploadHandler);
     }
   }
 
