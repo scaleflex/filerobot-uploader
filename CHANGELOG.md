@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+# 2.15.20 - 2021-01-22
+### Feat
+- fix: old image url after editing by Image editor post upload
+
 # 2.15.19 - 2021-01-21
 ### Feat
 - feat: add possibility to display/hide Delete button
