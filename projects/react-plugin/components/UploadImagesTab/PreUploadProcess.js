@@ -565,7 +565,7 @@ class PreUploadProcess extends Component {
             key="ok"
             className="ae-btn"
             style={{ width: 300 }}
-            autofocus={true}
+            autoFocus={true}
             onClick={this.applyTransformationsAndUpload}
             onKeyDown={ev => isEnterClick(ev) && this.applyTransformationsAndUpload()}
           >{I18n.t('upload.upload_btn')}</ButtonAction>
