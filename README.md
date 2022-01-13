@@ -1,3 +1,5 @@
+#### The plugin is no longer supported from [@Scaleflex](https://github.com/scaleflex) please check the [**new uploader (Filerobot Media Asset Widget)**](https://npmjs.com/package/@filerobot/readme) that has many more features for [filerobot](https://filerobot.com). 
+
 > Repository includes React version and JS wrapper for standalone usage
 
 [![Release](https://img.shields.io/badge/release-v2.15.20-blue.svg)](https://github.com/scaleflex/filerobot-uploader/releases)
